@@ -105,6 +105,9 @@ cd web && npm run e2e                          # parcours complet dans Chromium,
 uv run python scripts/make_synthetic_pdfs.py   # régénère les PDF fictifs
 ```
 
+Pour l'e2e, soit `npx playwright install chromium`, soit un Chromium déjà
+installé : `PW_CHROMIUM=/usr/bin/chromium npm run e2e`.
+
 ## État actuel
 
 - ✅ Jalon 1 : pseudonymisation locale des PDF dans le navigateur.
