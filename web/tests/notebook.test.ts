@@ -5,8 +5,8 @@ import { CloudRefused, type CloudPolicy } from "../src/cloud/guard";
 import type { PageText } from "../src/core/types";
 import type { Manifest } from "../src/core/verify";
 import { repeatedLines } from "../src/notebook/lines";
-import { assembleTimeline } from "../src/notebook/timeline";
-import { repairObservations, segmentDocument } from "../src/notebook/segment";
+import { assembleTimeline, TIMELINE_SCHEMA } from "../src/notebook/timeline";
+import { repairObservations, SEGMENT_SCHEMA, segmentDocument } from "../src/notebook/segment";
 
 const policy: CloudPolicy = { kind: "openrouter-zdr", apiKey: "sk-test", model: "test/model" };
 const verified = { verified: true, reviewedByHuman: true, leaks: [] } as unknown as Manifest;
@@ -118,5 +118,21 @@ describe("timeline assembly", () => {
     const t = assembleTimeline([raw({}), raw({ observation_ids: ["d:o2"] })], new Set(["d:o1", "d:o2"]));
     expect(t.events).toHaveLength(1);
     expect(t.events[0].observationIds).toEqual(["d:o1", "d:o2"]);
+  });
+});
+
+describe("response schemas", () => {
+  // Strict structured outputs (Anthropic in particular) reject an enum declared
+  // under a union type such as ["string", "null"]: such a field must use anyOf.
+  function enumsUnderUnionTypes(node: unknown, path = "$"): string[] {
+    if (!node || typeof node !== "object") return [];
+    const obj = node as Record<string, unknown>;
+    const here = "enum" in obj && Array.isArray(obj.type) ? [path] : [];
+    return here.concat(Object.entries(obj).flatMap(([k, v]) => enumsUnderUnionTypes(v, `${path}.${k}`)));
+  }
+
+  it("never mixes an enum with a union type", () => {
+    expect(enumsUnderUnionTypes(TIMELINE_SCHEMA)).toEqual([]);
+    expect(enumsUnderUnionTypes(SEGMENT_SCHEMA)).toEqual([]);
   });
 });

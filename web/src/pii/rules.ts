@@ -27,6 +27,18 @@ export function isValidNir(raw: string): boolean {
   return 97 - Number(BigInt(body) % 97n) === key;
 }
 
+/** Luhn check, used by SIRET, SIREN and FINESS numbers. */
+export function isLuhnValid(raw: string): boolean {
+  const digits = raw.replace(/\D/g, "");
+  let sum = 0;
+  for (let i = 0; i < digits.length; i++) {
+    let d = Number(digits[digits.length - 1 - i]);
+    if (i % 2 === 1) d = d * 2 > 9 ? d * 2 - 9 : d * 2;
+    sum += d;
+  }
+  return digits.length > 0 && sum % 10 === 0;
+}
+
 interface Rule {
   category: Category;
   re: RegExp;
@@ -50,6 +62,19 @@ const RULES: Rule[] = [
     group: 1,
     accept: (v) => /\d{4,}/.test(v),
   },
+  // Long codes need no label: admission, stay or record numbers, RPPS...
+  { category: "DOSSIER", re: /\b[A-Z]{0,3}\d{8,}\b/g },
+  {
+    category: "ETABLISSEMENT",
+    re: /\b(?:FINESS|SIRET|SIREN)\s*:?\s*(\d(?:[ .]?\d){8,13})/gi,
+    group: 1,
+  },
+  // A spaced 9- or 14-digit group that passes the Luhn check, label or not.
+  {
+    category: "ETABLISSEMENT",
+    re: /(?<!\d ?)\d{1,5}(?: \d{1,5}){1,4}(?! ?\d)/g,
+    accept: (v) => [9, 14].includes(v.replace(/\D/g, "").length) && isLuhnValid(v),
+  },
   { category: "TEL", re: /(?:\+33\s?|\b0)[1-9](?:[\s.-]?\d{2}){4}\b/g },
   { category: "EMAIL", re: /\b[\w.+-]+@[\w-]+(?:\.[\w-]+)+\b/g },
   {
@@ -65,6 +90,8 @@ const RULES: Rule[] = [
       "gi",
     ),
   },
+  // Postal boxes: "BP 123", "CS 81234", "TSA 30001".
+  { category: "ADRESSE", re: /\b(?:BP|CS|TSA)[ \t]?\d{2,5}\b/g },
   {
     category: "VILLE",
     re: new RegExp(String.raw`\b\d{5}[ \t]+[${UPPER}][${UPPER}${LOWER}' -]{1,40}?(?:\s+CEDEX(?:\s\d+)?)?(?=$|[\n,.;)])`, "gm"),

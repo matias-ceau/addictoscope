@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import { findNameSpans } from "../src/pii/names";
-import { findRuleSpans, isValidNir } from "../src/pii/rules";
+import { buildPageText } from "../src/core/pagetext";
+import type { Rect } from "../src/core/types";
+import { detectCorpus } from "../src/pii/detect";
+import { findRuleSpans, isLuhnValid, isValidNir } from "../src/pii/rules";
 
 const hits = (text: string) => findRuleSpans(text).map((s) => [s.category, text.slice(s.start, s.end)]);
 const names = (text: string) => findNameSpans(text).map((s) => [s.category, text.slice(s.start, s.end)]);
@@ -58,5 +61,48 @@ describe("names", () => {
 
   it("ignores lowercase homonyms of first names", () => {
     expect(names("des idées claires, une pierre")).toEqual([]);
+  });
+});
+
+describe("establishment and record codes", () => {
+  it("masks FINESS and SIRET numbers, labelled or checked by their Luhn key", () => {
+    expect(isLuhnValid("41200073100015")).toBe(true);
+    expect(hits("Finess 12 3 45678 2")).toContainEqual(["ETABLISSEMENT", "12 3 45678 2"]);
+    expect(hits("Siret 412 000 731 00015")).toContainEqual(["ETABLISSEMENT", "412 000 731 00015"]);
+    expect(hits("12 3 45678 2")).toContainEqual(["ETABLISSEMENT", "12 3 45678 2"]);
+    expect(hits("12 3 45678 3")).toEqual([]);
+  });
+
+  it("masks postal boxes", () => {
+    expect(hits("CS 81234")).toContainEqual(["ADRESSE", "CS 81234"]);
+  });
+
+  it("masks long codes without a label but keeps doses", () => {
+    expect(hits("B987654321")).toContainEqual(["DOSSIER", "B987654321"]);
+    expect(hits("1 000 000 UI de vitamine D, 75 mg x 2")).toEqual([]);
+  });
+
+  it("reads the name after a Méd. header field", () => {
+    expect(names("Méd. VERCHAMP - Lucie")).toContainEqual(["SOIGNANT", "VERCHAMP"]);
+  });
+});
+
+describe("form-like headers", () => {
+  // The text layer lists the value column before the label column, so the
+  // label sits lines away from its value; both share one visual row.
+  const word = (text: string, x: number, y: number) => ({ text, rect: [x, y, x + 8 * text.length, y + 10] as Rect });
+  const page = buildPageText(0, 600, 800, [
+    [word("AB-12345", 120, 100)],
+    [word("VERCHAMP", 120, 130)],
+    [word("Admission", 10, 101)],
+    [word("Méd.", 10, 129)],
+    [word("Suivi", 10, 300), word("stable.", 60, 300)],
+  ], "pdf");
+
+  it("pairs labels with their values across columns", () => {
+    const found = detectCorpus([{ id: "doc", pages: [page] }]).map((d) => [d.category, d.text]);
+    expect(found).toContainEqual(["DOSSIER", "AB-12345"]);
+    expect(found).toContainEqual(["SOIGNANT", "VERCHAMP"]);
+    expect(found.map(([, t]) => t)).not.toContain("Suivi");
   });
 });

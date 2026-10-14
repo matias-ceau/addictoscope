@@ -39,7 +39,8 @@ export const TIMELINE_SCHEMA = {
           start: { type: "string", description: "YYYY, YYYY-MM ou YYYY-MM-DD" },
           end: { type: ["string", "null"] },
           ongoing: { type: "boolean" },
-          mode: { type: ["string", "null"], enum: [...USAGE_MODES, null] },
+          // Anthropic rejects an enum under a union type; anyOf is accepted everywhere.
+          mode: { anyOf: [{ type: "string", enum: [...USAGE_MODES] }, { type: "null" }] },
           loss_of_control: { type: "boolean" },
           note: { type: "string" },
           observation_ids: { type: "array", items: { type: "string" } },

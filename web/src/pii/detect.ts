@@ -5,6 +5,7 @@
  * pseudonym labels.
  */
 import { rectsForSpan } from "../core/geometry";
+import { rowSpanToPage, visualRows } from "../core/pagetext";
 import type { Category, Detection, DetectionSource, PageText } from "../core/types";
 import { PERSON_CATEGORIES } from "../core/types";
 import { COMMON_WORDS, findNameSpans, nameTokens, normaliseName, trimModelPerson } from "./names";
@@ -121,6 +122,15 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
       pageText.set(key(doc.id, page.page), page);
       for (const s of findRuleSpans(page.text)) hits.push({ doc: doc.id, page: page.page, source: "rule", ...s });
       for (const s of findNameSpans(page.text)) hits.push({ doc: doc.id, page: page.page, source: "name", ...s });
+      // Again on the visual rows, for labels the text layer put away from their value.
+      const rows = visualRows(page);
+      const fromRows = [
+        ...findRuleSpans(rows.text).map((s) => ({ ...s, source: "rule" as const })),
+        ...findNameSpans(rows.text).map((s) => ({ ...s, source: "name" as const })),
+      ];
+      for (const s of fromRows) {
+        for (const span of rowSpanToPage(page, rows, s.start, s.end)) hits.push({ doc: doc.id, page: page.page, ...s, ...span });
+      }
       for (const s of doc.ner?.[page.page] ?? []) {
         if (s.label === "PER") {
           const span = trimModelPerson(page.text, s.start, s.end);

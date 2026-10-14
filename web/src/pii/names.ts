@@ -81,7 +81,7 @@ interface ContextRule {
 
 const LOWERCASE_STOPWORDS = new Set("les des une est qui que pour avec dans sur par pas son ses aux car mais elle lui leur".split(" "));
 
-const TITLES_SOIGNANT = String.raw`(?:Dr\.?|Docteur|Pr\.?|Professeur|Interne|IDE|Infirmi[eè]re?|Psychologue|Assistante? sociale?|Éducat(?:eur|rice)|Educat(?:eur|rice)|Di[ée]t[ée]ticienne?)`;
+const TITLES_SOIGNANT = String.raw`(?:Dr\.?|Docteur|M[ée]d\.|Pr\.?|Professeur|Interne|IDE|Infirmi[eè]re?|Psychologue|Assistante? sociale?|Éducat(?:eur|rice)|Educat(?:eur|rice)|Di[ée]t[ée]ticienne?)`;
 const TITLES_CIVIL = String.raw`(?:Mme|Madame|Mlle|Mademoiselle|M\.|Mr\.?|Monsieur)`;
 /** Let a keyword start with either case without making the whole regex case-insensitive. */
 function anyCase(alternation: string): string {
