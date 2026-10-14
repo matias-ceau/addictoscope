@@ -9,9 +9,10 @@
     "preview": "vite preview",
     "test": "vitest run",
     "e2e": "playwright test",
-    "postinstall": "node scripts/copy-assets.mjs"
+    "postinstall": "node scripts/copy-assets.mjs && node scripts/fetch-model.mjs"
   },
   "dependencies": {
+    "@huggingface/transformers": "^3.7.5",
     "@tesseract.js-data/fra": "^1.0.0",
     "mupdf": "^1.28.1",
     "react": "^19.1.0",

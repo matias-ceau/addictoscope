@@ -15,3 +15,11 @@ for (const f of readdirSync(resolve(nm, "tesseract.js-core"))) {
 }
 cpSync(resolve(nm, "@tesseract.js-data/fra/4.0.0_best_int/fra.traineddata.gz"), resolve(out, "fra.traineddata.gz"));
 console.log("copied OCR assets to", out);
+
+// ONNX runtime for the local NER model (the build transformers.js loads).
+const ort = resolve(root, "public/vendor/ort");
+mkdirSync(ort, { recursive: true });
+for (const f of ["ort-wasm-simd-threaded.jsep.wasm", "ort-wasm-simd-threaded.jsep.mjs"]) {
+  cpSync(resolve(nm, "onnxruntime-web/dist", f), resolve(ort, f));
+}
+console.log("copied ONNX runtime to", ort);

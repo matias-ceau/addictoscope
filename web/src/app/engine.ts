@@ -7,6 +7,8 @@ import { createWorker, type Worker as OcrWorker } from "tesseract.js";
 import { OCR_ZOOM, ocrPage } from "../core/ocr";
 import type { RedactionItem } from "../core/pdf";
 import type { PageText } from "../core/types";
+import type { NerSpan } from "../pii/ner";
+import type { NerRequest } from "../worker/ner.worker";
 import type { OpenResult, PdfRequest } from "../worker/pdf.worker";
 
 const pdfWorker = new Worker(new URL("../worker/pdf.worker.ts", import.meta.url), { type: "module" });
@@ -91,4 +93,52 @@ export async function redact(doc: string, items: RedactionItem[], ocrPages: numb
 export function close(doc: string) {
   void call({ op: "close", doc });
   void call({ op: "close", doc: `${doc}:pseudo` });
+}
+
+// --- Local NER model -------------------------------------------------------
+
+const nerWorker = new Worker(new URL("../worker/ner.worker.ts", import.meta.url), { type: "module" });
+const nerPending = new Map<number, { resolve: (v: unknown) => void; reject: (e: Error) => void }>();
+nerWorker.onmessage = (e: MessageEvent<{ id: number; result?: unknown; error?: string }>) => {
+  const p = nerPending.get(e.data.id);
+  if (!p) return;
+  nerPending.delete(e.data.id);
+  if (e.data.error) p.reject(new Error(e.data.error));
+  else p.resolve(e.data.result);
+};
+
+function nerCall<T>(req: NerRequest): Promise<T> {
+  const id = nextId++;
+  return new Promise<T>((resolve, reject) => {
+    nerPending.set(id, { resolve: resolve as (v: unknown) => void, reject });
+    nerWorker.postMessage({ id, req });
+  });
+}
+
+let nerReady: Promise<boolean> | null = null;
+
+/** Load the model once; resolves false if it is not available (rules only). */
+export function initNer(): Promise<boolean> {
+  nerReady ??= nerCall<boolean>({ op: "init", base: document.baseURI }).catch((err) => {
+    console.warn("Local NER model unavailable:", err);
+    return false;
+  });
+  return nerReady;
+}
+
+/**
+ * Run the NER model page by page (one page at a time keeps memory low on
+ * small machines). Returns null if the model is unavailable.
+ */
+export async function runNer(
+  pages: PageText[],
+  onProgress: (done: number, total: number) => void,
+): Promise<Record<number, NerSpan[]> | null> {
+  if (!(await initNer())) return null;
+  const out: Record<number, NerSpan[]> = {};
+  for (const page of pages) {
+    out[page.page] = await nerCall<NerSpan[]>({ op: "page", text: page.text });
+    onProgress(page.page + 1, pages.length);
+  }
+  return out;
 }

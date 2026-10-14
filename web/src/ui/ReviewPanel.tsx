@@ -104,7 +104,10 @@ export function ReviewPanel(props: {
                       <span className="tag">{g.label}</span>
                       <span className="muted small">{info.name}</span>
                     </span>
-                    <span className="entity-text">{g.texts.slice(0, 3).join(" · ") || "zone tracée"}</span>
+                    <span className="entity-text">
+                      {g.items.some((d) => d.source === "ner") && <span className="ai-badge" title="Proposé par l'IA locale">IA</span>}
+                      {g.texts.slice(0, 3).join(" · ") || "zone tracée"}
+                    </span>
                   </button>
                   <span className="count" title="Occurrences">
                     {g.items.length}
@@ -114,11 +117,33 @@ export function ReviewPanel(props: {
             })}
           </div>
           <div className="panel-foot">
+            {doc.ner?.status === "running" && (
+              <div className="ai-progress" role="status">
+                <span>
+                  <span className="ai-dot" aria-hidden /> Relecture par l'IA locale… {doc.ner.done}/{doc.ner.total} p.
+                </span>
+                <progress max={doc.ner.total} value={doc.ner.done} />
+              </div>
+            )}
+            {doc.ner?.status === "done" && (
+              <p className="small ai-done">✓ Relu aussi par l'IA locale (modèle de reconnaissance des noms, sur ce poste)</p>
+            )}
+            {doc.ner?.status === "unavailable" && (
+              <p className="small muted">IA locale indisponible : détection par règles uniquement.</p>
+            )}
             <p className="small muted">
               Vérifiez chaque surlignage : un élément oublié restera lisible dans le document final.
             </p>
-            <button className="primary" disabled={doc.status === "redacting"} onClick={props.onPseudonymise}>
-              {doc.status === "redacting" ? "Masquage et contrôle…" : "Pseudonymiser ce document"}
+            <button
+              className="primary"
+              disabled={doc.status === "redacting" || doc.ner?.status === "running"}
+              onClick={props.onPseudonymise}
+            >
+              {doc.status === "redacting"
+                ? "Masquage et contrôle…"
+                : doc.ner?.status === "running"
+                  ? "Patientez, relecture IA en cours…"
+                  : "Pseudonymiser ce document"}
             </button>
           </div>
         </>

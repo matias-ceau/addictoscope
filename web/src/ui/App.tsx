@@ -20,7 +20,7 @@ export function App() {
 
   const redetect = useCallback(() => {
     const ready = stateRef.current.docs.filter((d) => d.pages.length && d.status !== "reading" && d.status !== "error");
-    const fresh = detectCorpus(ready.map((d) => ({ id: d.id, pages: d.pages })));
+    const fresh = detectCorpus(ready.map((d) => ({ id: d.id, pages: d.pages, ner: d.ner?.spans })));
     dispatch({ type: "detections", detections: mergeDetections(stateRef.current.detections, fresh) });
   }, []);
 
@@ -43,9 +43,24 @@ export function App() {
           const pages = await engine.analyse(id, bytes.slice(), (done, total, phase) =>
             dispatch({ type: "patch", id, patch: { progress: { done, total, phase } } }),
           );
-          dispatch({ type: "patch", id, patch: { pages, status: "review", progress: undefined } });
-          stateRef.current = reducer(stateRef.current, { type: "patch", id, patch: { pages, status: "review" } });
+          const patch = { pages, status: "review" as const, progress: undefined, ner: { status: "running" as const, done: 0, total: pages.length } };
+          dispatch({ type: "patch", id, patch });
+          stateRef.current = reducer(stateRef.current, { type: "patch", id, patch });
           redetect();
+          // Second opinion from the local AI model, in the background: the
+          // reviewer can start on the rule-based detections meanwhile, and
+          // the next file is read without waiting for it.
+          void engine
+            .runNer(pages, (done, total) => dispatch({ type: "patch", id, patch: { ner: { status: "running", done, total } } }))
+            .catch(() => null)
+            .then((spans) => {
+              const ner = spans
+                ? { status: "done" as const, done: pages.length, total: pages.length, spans }
+                : { status: "unavailable" as const, done: 0, total: 0 };
+              dispatch({ type: "patch", id, patch: { ner } });
+              stateRef.current = reducer(stateRef.current, { type: "patch", id, patch: { ner } });
+              redetect();
+            });
         } catch (err) {
           dispatch({ type: "patch", id, patch: { status: "error", error: String((err as Error).message ?? err) } });
         }

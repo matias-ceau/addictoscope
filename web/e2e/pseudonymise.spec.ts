@@ -23,6 +23,9 @@ test("drop, review and pseudonymise text and scanned PDFs without any network ca
   await expect(cards.nth(0).getByText(/À vérifier/)).toBeVisible({ timeout: 60_000 });
   await expect(cards.nth(1).getByText(/À vérifier/)).toBeVisible({ timeout: 90_000 });
 
+  // The local AI pass runs in the browser and finishes without any download.
+  await expect(page.getByText(/Relu aussi par l'IA locale/)).toBeVisible({ timeout: 90_000 });
+
   // The patient is recognised across both documents under the same pseudonym.
   await expect(page.locator(".entity .tag", { hasText: "[PATIENT]" })).toBeVisible();
   await expect(page.locator(".box").first()).toBeVisible();

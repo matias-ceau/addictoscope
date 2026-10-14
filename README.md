@@ -42,7 +42,8 @@ données brutes et le mémoire associé vivent dans un dépôt privé séparé.
 
 ```bash
 cd web
-npm install          # copie aussi le moteur OCR et le modèle français dans public/vendor/
+npm install          # copie le moteur OCR et le runtime ONNX dans public/vendor/,
+                     # et télécharge une fois le modèle de noms (~110 Mo) dans public/models/
 npm run dev          # http://localhost:5173
 npm run build        # site statique dans web/dist/, à servir depuis n'importe quel dossier
 ```
@@ -54,16 +55,19 @@ comptes rendus, courriers, même scannés. Pour chaque document :
 2. **Détection** : noms (rôle deviné d'après le contexte : patient, proche,
    soignant), IPP, NIR (clé vérifiée), n° de dossier, téléphones, e-mails,
    adresses, villes, établissements, date de naissance (seule l'année est
-   gardée). Toute valeur trouvée une fois est recherchée dans tous les
-   documents déposés.
+   gardée). Puis, en arrière-plan, un modèle d'IA local de reconnaissance des
+   noms (CamemBERT-NER, quantifié, exécuté dans le navigateur) relit chaque
+   page. Toute valeur trouvée une fois est recherchée dans tous les documents
+   déposés.
 3. **Relecture** : surlignages cliquables sur la page, liste par personne,
    ajout d'une zone en traçant un cadre.
 4. **Masquage dans le PDF lui-même** (MuPDF/WebAssembly) avec étiquettes
    cohérentes, puis vérification du fichier produit. Ensuite, téléchargement
    du PDF et export chiffré de la table de correspondance.
 
-Aucune donnée ne quitte le poste : le moteur PDF, l'OCR et le modèle de
-langue française sont servis avec l'application.
+Aucune donnée ne quitte le poste : le moteur PDF, l'OCR et les modèles sont
+servis avec l'application. Le navigateur les met en cache après la première
+visite.
 
 ## Installation (Python)
 

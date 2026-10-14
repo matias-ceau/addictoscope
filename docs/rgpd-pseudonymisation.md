@@ -57,13 +57,15 @@ France. Vérifier que le service exact figure dans le périmètre du certificat.
 
 ## Limites actuelles
 
-- La détection repose sur des règles et un dictionnaire de prénoms, sans
-  modèle de langage. Elle est conçue pour le rappel : mieux vaut trop surligner
-  que pas assez. **La relecture humaine reste obligatoire.** La vérification
-  finale garantit qu'un nom repéré une fois est masqué partout. Elle ne peut
-  pas trouver un nom qu'aucune règle n'a repéré.
-- Prochaine étape prévue : un modèle de reconnaissance d'entités français
-  exécuté dans le navigateur (ONNX, par exemple un export d'EDS-Pseudo de
-  l'AP-HP), en complément des règles.
+- La détection combine des règles, un dictionnaire de prénoms et un **modèle
+  d'IA local** de reconnaissance des noms (CamemBERT-NER, quantifié, exécuté
+  dans le navigateur). Ce modèle lit chaque page après les règles, en
+  arrière-plan. Il retrouve des noms sans indice de contexte (« Inès Faraud »,
+  « Gisèle MOREL »). Il propose aussi les lieux, non masqués par défaut,
+  à confirmer. Il reste aveugle aux noms tapés en minuscules (« vu par dr
+  lemercier ») : c'est le rôle des règles. **La relecture humaine reste
+  obligatoire.** La vérification finale garantit qu'un nom repéré une fois est
+  masqué partout. Elle ne peut pas trouver un nom qu'aucun détecteur n'a
+  repéré.
 - L'OCR ne tourne que sur les pages sans couche texte. Une image collée dans
   une page qui a du texte n'est pas lue.

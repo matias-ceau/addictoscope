@@ -7,12 +7,15 @@
 import { rectsForSpan } from "../core/geometry";
 import type { Category, Detection, DetectionSource, PageText } from "../core/types";
 import { PERSON_CATEGORIES } from "../core/types";
-import { COMMON_WORDS, findNameSpans, nameTokens, normaliseName } from "./names";
+import { COMMON_WORDS, findNameSpans, nameTokens, normaliseName, trimModelPerson } from "./names";
+import type { NerSpan } from "./ner";
 import { findRuleSpans } from "./rules";
 
 export interface SourceDoc {
   id: string;
   pages: PageText[];
+  /** Spans proposed by the local NER model, by page index (optional). */
+  ner?: Record<number, NerSpan[]>;
 }
 
 interface Hit {
@@ -23,6 +26,8 @@ interface Hit {
   category: Category;
   source: DetectionSource;
   label?: string;
+  /** Shown to the reviewer but not masked unless they accept it. */
+  suggested?: boolean;
 }
 
 /** Lines that identify the patient (header bandeau, labelled identity fields). */
@@ -116,6 +121,15 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
       pageText.set(key(doc.id, page.page), page);
       for (const s of findRuleSpans(page.text)) hits.push({ doc: doc.id, page: page.page, source: "rule", ...s });
       for (const s of findNameSpans(page.text)) hits.push({ doc: doc.id, page: page.page, source: "name", ...s });
+      for (const s of doc.ner?.[page.page] ?? []) {
+        if (s.label === "PER") {
+          const span = trimModelPerson(page.text, s.start, s.end);
+          if (span) hits.push({ doc: doc.id, page: page.page, source: "ner", category: "PERSONNE", ...span });
+        } else if (s.label === "LOC") {
+          // Places are quasi-identifiers: offered for review, not masked by default.
+          hits.push({ doc: doc.id, page: page.page, source: "ner", category: "VILLE", start: s.start, end: s.end, suggested: true });
+        }
+      }
     }
   }
   hits = resolveOverlaps(hits);
@@ -162,7 +176,7 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
   // hospital name caught in a header is also caught in a free-text note.
   const valueHits = new Map<string, Hit>();
   for (const h of hits) {
-    if (PERSON_CATEGORIES.has(h.category)) continue;
+    if (PERSON_CATEGORIES.has(h.category) || h.suggested) continue;
     const value = foldChars(pageText.get(key(h.doc, h.page))!.text.slice(h.start, h.end)).toUpperCase();
     if (value.replace(/\W/g, "").length >= 4 && !valueHits.has(value)) valueHits.set(value, h);
   }
@@ -238,7 +252,7 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
       entity: `${category}:${entityKey}`,
       label,
       rects: rectsForSpan(page, h.start, h.end),
-      accepted: true,
+      accepted: !h.suggested,
     };
   });
 }

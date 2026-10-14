@@ -1,4 +1,5 @@
 import type { Detection, PageText } from "../core/types";
+import type { NerSpan } from "../pii/ner";
 import type { Manifest } from "../core/verify";
 
 export type DocStatus = "reading" | "review" | "redacting" | "done" | "error";
@@ -12,6 +13,8 @@ export interface SourceDocState {
   status: DocStatus;
   progress?: { done: number; total: number; phase: "text" | "ocr" };
   pages: PageText[];
+  /** Local AI model pass: runs in the background after the rules. */
+  ner?: { status: "running" | "done" | "unavailable"; done: number; total: number; spans?: Record<number, NerSpan[]> };
   output?: Uint8Array;
   manifest?: Manifest;
   error?: string;

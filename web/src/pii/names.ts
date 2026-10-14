@@ -164,6 +164,24 @@ export function findNameSpans(text: string): NameSpan[] {
   return spans;
 }
 
+/**
+ * Clean a person span proposed by the NER model: drop a leading title
+ * ("Mme", "Dr") and anything that is not name-like, so the model's
+ * occasional "Dr Garnier a" becomes "Garnier".
+ */
+export function trimModelPerson(text: string, start: number, end: number): { start: number; end: number } | null {
+  const title = new RegExp(String.raw`^(?:${TITLES_CIVIL}|${TITLES_SOIGNANT})[ \t]+`);
+  const m = title.exec(text.slice(start, end));
+  if (m) start += m[0].length;
+  // Trim punctuation at the edges, but trust the model on lowercase parts
+  // ("Odile vasseur"): that is exactly what the rules cannot see.
+  while (start < end && !/\p{L}/u.test(text[start])) start++;
+  while (end > start && !/\p{L}/u.test(text[end - 1])) end--;
+  const tokens = text.slice(start, end).split(/[ \t]+/);
+  if (!tokens.some((t) => t.length >= 2 && isNameToken(t))) return null;
+  return end > start ? { start, end } : null;
+}
+
 /** Split a name span into tokens, telling surnames (caps) from first names. */
 export function nameTokens(name: string): { surnames: string[]; firstNames: string[] } {
   const tokens = name.split(/[ \t]+/).filter(Boolean);
