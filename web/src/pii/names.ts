@@ -125,7 +125,8 @@ const CONTEXT_RULES: ContextRule[] = [
   { re: new RegExp(String.raw`\b${TITLES_CIVIL}[ \t]+(${NAME_SEQ})`, "g"), category: "PERSONNE" },
 ];
 
-export function findNameSpans(text: string): NameSpan[] {
+/** With `contextOnly`, only names cued by a title, a label or a signature. */
+export function findNameSpans(text: string, { contextOnly = false } = {}): NameSpan[] {
   const spans: NameSpan[] = [];
 
   for (const rule of CONTEXT_RULES) {
@@ -138,6 +139,8 @@ export function findNameSpans(text: string): NameSpan[] {
       if (span) spans.push({ ...span, category: rule.category });
     }
   }
+
+  if (contextOnly) return spans;
 
   // "DURAND Pierre" / "Pierre DURAND": an all-caps surname next to a known first name.
   const pair = new RegExp(String.raw`\b(${NAME_TOKEN})[ \t]+(${NAME_TOKEN})\b`, "g");

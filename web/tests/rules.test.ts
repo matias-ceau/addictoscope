@@ -105,4 +105,14 @@ describe("form-like headers", () => {
     expect(found).toContainEqual(["SOIGNANT", "VERCHAMP"]);
     expect(found.map(([, t]) => t)).not.toContain("Suivi");
   });
+
+  it("does not let an unlabelled rule run on into the next column", () => {
+    const twoColumns = buildPageText(0, 600, 800, [
+      [word("12", 10, 200), word("rue", 30, 200), word("des", 60, 200), word("Tilleuls", 90, 200)],
+      [word("Né(e)", 300, 200), word("le", 350, 200), word("14/06/1978", 370, 200)],
+    ], "pdf");
+    const found = detectCorpus([{ id: "doc", pages: [twoColumns] }]).map((d) => [d.category, d.text]);
+    expect(found).toContainEqual(["NAISSANCE", "14/06/1978"]);
+    expect(found.filter(([c, t]) => c === "ADRESSE" && /Né/.test(t))).toEqual([]);
+  });
 });

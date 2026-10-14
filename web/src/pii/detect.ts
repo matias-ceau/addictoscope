@@ -112,6 +112,11 @@ function findWord(text: string, token: string, caseSensitive: boolean): number[]
   return out;
 }
 
+/** Categories whose values all share one label instead of a numbered one. */
+export const FIXED_LABELS: Partial<Record<Category, string>> = {
+  PATIENT: "[PATIENT]", IPP: "[IPP]", NIR: "[NIR]", DOSSIER: "[DOSSIER]", TEL: "[TEL]", EMAIL: "[EMAIL]", ADRESSE: "[ADRESSE]", VILLE: "[VILLE]",
+};
+
 export function detectCorpus(docs: SourceDoc[]): Detection[] {
   const pageText = new Map<string, PageText>();
   const key = (doc: string, page: number) => `${doc}#${page}`;
@@ -122,11 +127,12 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
       pageText.set(key(doc.id, page.page), page);
       for (const s of findRuleSpans(page.text)) hits.push({ doc: doc.id, page: page.page, source: "rule", ...s });
       for (const s of findNameSpans(page.text)) hits.push({ doc: doc.id, page: page.page, source: "name", ...s });
-      // Again on the visual rows, for labels the text layer put away from their value.
+      // Labelled rules again on the visual rows, for labels the text layer put away
+      // from their value. Unanchored rules would run on across columns there.
       const rows = visualRows(page);
       const fromRows = [
-        ...findRuleSpans(rows.text).map((s) => ({ ...s, source: "rule" as const })),
-        ...findNameSpans(rows.text).map((s) => ({ ...s, source: "name" as const })),
+        ...findRuleSpans(rows.text, { labelledOnly: true }).map((s) => ({ ...s, source: "rule" as const })),
+        ...findNameSpans(rows.text, { contextOnly: true }).map((s) => ({ ...s, source: "name" as const })),
       ];
       for (const s of fromRows) {
         for (const span of rowSpanToPage(page, rows, s.start, s.end)) hits.push({ doc: doc.id, page: page.page, ...s, ...span });
@@ -239,9 +245,6 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
     }
     return labelOf.get(k)!;
   };
-  const FIXED: Partial<Record<Category, string>> = {
-    IPP: "[IPP]", NIR: "[NIR]", DOSSIER: "[DOSSIER]", TEL: "[TEL]", EMAIL: "[EMAIL]", ADRESSE: "[ADRESSE]", VILLE: "[VILLE]",
-  };
 
   return hits.map((h, i): Detection => {
     const page = pageText.get(key(h.doc, h.page))!;
@@ -249,7 +252,7 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
     const entity = entityOf.get(h);
     const category = entity ? entity.category : h.category;
     const entityKey = entity ? entity.key : normaliseName(text);
-    const label = h.label ?? FIXED[category] ?? nextLabel(category, entityKey);
+    const label = h.label ?? FIXED_LABELS[category] ?? nextLabel(category, entityKey);
     return {
       id: `d${i}`,
       doc: h.doc,

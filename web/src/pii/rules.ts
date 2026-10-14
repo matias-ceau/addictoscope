@@ -46,6 +46,8 @@ interface Rule {
   group?: number;
   accept?: (value: string) => boolean;
   label?: (m: RegExpExecArray) => string;
+  /** Anchored on a label: also worth running on visual rows (see visualRows). */
+  labelled?: boolean;
 }
 
 const RULES: Rule[] = [
@@ -55,12 +57,13 @@ const RULES: Rule[] = [
     // Without a key the shape alone is too weak; with one, the key must check out.
     accept: (v) => v.replace(/\s/g, "").length === 15 && isValidNir(v),
   },
-  { category: "IPP", re: /\b(?:IPP|I\.P\.P\.?|N°\s*patient)\s*:?\s*(\d{5,})/gi, group: 1 },
+  { category: "IPP", re: /\b(?:IPP|I\.P\.P\.?|N°\s*patient)\s*:?\s*(\d{5,})/gi, group: 1, labelled: true },
   {
     category: "DOSSIER",
     re: /\b(?:Admission|Séjour|S[ée]jour|N°\s*(?:de\s*)?dossier|Dossier|NDA|N°\s*venue)\s*:?\s*([A-Z0-9][A-Z0-9-]{4,})/gi,
     group: 1,
     accept: (v) => /\d{4,}/.test(v),
+    labelled: true,
   },
   // Long codes need no label: admission, stay or record numbers, RPPS...
   { category: "DOSSIER", re: /\b[A-Z]{0,3}\d{8,}\b/g },
@@ -68,6 +71,7 @@ const RULES: Rule[] = [
     category: "ETABLISSEMENT",
     re: /\b(?:FINESS|SIRET|SIREN)\s*:?\s*(\d(?:[ .]?\d){8,13})/gi,
     group: 1,
+    labelled: true,
   },
   // A spaced 9- or 14-digit group that passes the Luhn check, label or not.
   {
@@ -82,6 +86,7 @@ const RULES: Rule[] = [
     re: /\b(?:N[ée]e?\s*\(e\)|N[ée]e?|Date de naissance|DDN)\s*(?:le\s*)?:?\s*(\d{1,2}[/.-]\d{1,2}[/.-](\d{4}|\d{2}))/gi,
     group: 1,
     label: (m) => `[NE(E) EN ${m[2].length === 4 ? m[2] : "19" + m[2]}]`,
+    labelled: true,
   },
   {
     category: "ADRESSE",
@@ -106,9 +111,10 @@ const RULES: Rule[] = [
   },
 ];
 
-export function findRuleSpans(text: string): Span[] {
+export function findRuleSpans(text: string, { labelledOnly = false } = {}): Span[] {
   const spans: Span[] = [];
   for (const rule of RULES) {
+    if (labelledOnly && !rule.labelled) continue;
     rule.re.lastIndex = 0;
     let m: RegExpExecArray | null;
     while ((m = rule.re.exec(text))) {

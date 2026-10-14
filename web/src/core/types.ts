@@ -50,6 +50,8 @@ export interface Detection {
   source: DetectionSource;
   /** Groups detections that refer to the same real-world entity. */
   entity: string;
+  /** The entity the detector assigned, kept when the reviewer re-files it. */
+  origin?: string;
   /** Text drawn in place of the redacted area, e.g. "[SOIGNANT_2]". */
   label: string;
   rects: Rect[];

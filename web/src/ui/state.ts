@@ -1,4 +1,5 @@
-import type { Detection, PageText } from "../core/types";
+import type { Category, Detection, PageText } from "../core/types";
+import { FIXED_LABELS } from "../pii/detect";
 import type { NerSpan } from "../pii/ner";
 import type { Manifest } from "../core/verify";
 
@@ -22,9 +23,18 @@ export interface SourceDocState {
   error?: string;
 }
 
+/** How the reviewer re-filed one detector entity. */
+export interface EntityOverride {
+  category: Category;
+  label: string;
+  entity: string;
+}
+
 export interface AppState {
   docs: SourceDocState[];
   detections: Detection[];
+  /** Reviewer corrections, keyed by the detector's entity: they survive re-detection. */
+  overrides?: Record<string, EntityOverride>;
   selectedDoc?: string;
   focusedDetection?: string;
 }
@@ -37,6 +47,10 @@ export type Action =
   | { type: "detections"; detections: Detection[] }
   | { type: "toggle"; ids: string[]; accepted: boolean }
   | { type: "addManual"; detection: Detection }
+  /** Give an entity another category (and a fresh label in it). */
+  | { type: "recategorise"; entity: string; category: Category }
+  /** The two entities are one: `entity` takes the category and label of `into`. */
+  | { type: "merge"; entity: string; into: string }
   | { type: "focus"; id?: string };
 
 export function reducer(state: AppState, action: Action): AppState {
@@ -57,7 +71,18 @@ export function reducer(state: AppState, action: Action): AppState {
     case "select":
       return { ...state, selectedDoc: action.id };
     case "detections":
-      return { ...state, detections: action.detections };
+      return { ...state, detections: applyOverrides(action.detections, state.overrides) };
+    case "recategorise": {
+      const label = FIXED_LABELS[action.category] ?? nextLabel(state.detections, action.category);
+      // A shared label ("[PATIENT]", "[VILLE]") joins the group that already carries it.
+      const joined = state.detections.find((d) => d.category === action.category && d.label === label);
+      return refile(state, action.entity, { category: action.category, label, entity: joined?.entity ?? `${action.category}:${label}` });
+    }
+    case "merge": {
+      const target = state.detections.find((d) => d.entity === action.into);
+      if (!target || action.entity === action.into) return state;
+      return refile(state, action.entity, { category: target.category, label: target.label, entity: target.entity });
+    }
     case "toggle": {
       const ids = new Set(action.ids);
       return {
@@ -70,6 +95,30 @@ export function reducer(state: AppState, action: Action): AppState {
     case "focus":
       return { ...state, focusedDetection: action.id };
   }
+}
+
+/** The detector's entity behind a detection, whatever the reviewer did since. */
+const originOf = (d: Detection) => d.origin ?? d.entity;
+
+export function applyOverrides(detections: Detection[], overrides: AppState["overrides"]): Detection[] {
+  if (!overrides) return detections;
+  return detections.map((d) => {
+    const o = overrides[originOf(d)];
+    return o ? { ...d, ...o, origin: originOf(d) } : d;
+  });
+}
+
+function refile(state: AppState, entity: string, to: EntityOverride): AppState {
+  const overrides = { ...state.overrides };
+  for (const d of state.detections) if (d.entity === entity) overrides[originOf(d)] = to;
+  return { ...state, overrides, detections: applyOverrides(state.detections, overrides) };
+}
+
+/** The next unused numbered label of a category, e.g. "[ETABLISSEMENT_3]". */
+function nextLabel(detections: Detection[], category: Category): string {
+  const re = new RegExp(`^\\[${category}_(\\d+)\\]$`);
+  const used = detections.map((d) => Number(re.exec(d.label)?.[1] ?? 0));
+  return `[${category}_${Math.max(0, ...used) + 1}]`;
 }
 
 /**

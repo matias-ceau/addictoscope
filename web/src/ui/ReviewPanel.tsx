@@ -6,6 +6,8 @@ import { CATEGORY_INFO, CATEGORY_ORDER } from "./categories";
 import type { Action, SourceDocState } from "./state";
 
 interface Group {
+  /** Row key: entity and label. */
+  key: string;
   entity: string;
   label: string;
   category: Category;
@@ -39,7 +41,7 @@ export function ReviewPanel(props: {
     const byEntity = new Map<string, Group>();
     for (const d of mine) {
       const key = `${d.entity}|${d.label}`;
-      if (!byEntity.has(key)) byEntity.set(key, { entity: key, label: d.label, category: d.category, texts: [], items: [] });
+      if (!byEntity.has(key)) byEntity.set(key, { key, entity: d.entity, label: d.label, category: d.category, texts: [], items: [] });
       const g = byEntity.get(key)!;
       g.items.push(d);
       if (d.text && !g.texts.includes(d.text)) g.texts.push(d.text);
@@ -49,12 +51,26 @@ export function ReviewPanel(props: {
     );
   }, [mine]);
 
+  // Merge targets: every entity of the corpus, so one person keeps one pseudonym across documents.
+  const entities = useMemo(() => {
+    const out = new Map<string, { label: string; category: Category; texts: string[] }>();
+    for (const d of props.detections) {
+      if (!out.has(d.entity)) out.set(d.entity, { label: d.label, category: d.category, texts: [] });
+      const e = out.get(d.entity)!;
+      if (d.text && e.texts.length < 3 && !e.texts.includes(d.text)) e.texts.push(d.text);
+    }
+    return [...out.entries()].sort(
+      ([, a], [, b]) => CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category) || a.label.localeCompare(b.label),
+    );
+  }, [props.detections]);
+  const [editing, setEditing] = useState<string | null>(null);
+
   const accepted = mine.filter((d) => d.accepted).length;
   const editable = doc.status === "review";
 
   const focusNext = (g: Group) => {
-    const i = ((cursor[g.entity] ?? -1) + 1) % g.items.length;
-    setCursor({ ...cursor, [g.entity]: i });
+    const i = ((cursor[g.key] ?? -1) + 1) % g.items.length;
+    setCursor({ ...cursor, [g.key]: i });
     dispatch({ type: "focus", id: g.items[i].id });
   };
 
@@ -90,30 +106,81 @@ export function ReviewPanel(props: {
               const on = g.items.filter((d) => d.accepted).length;
               const info = CATEGORY_INFO[g.category];
               return (
-                <div key={g.entity} className={"entity" + (on === 0 ? " off" : "")} style={{ "--hue": info.hue } as React.CSSProperties}>
-                  <input
-                    type="checkbox"
-                    aria-label={`Masquer ${g.label}`}
-                    checked={on > 0}
-                    ref={(el) => {
-                      if (el) el.indeterminate = on > 0 && on < g.items.length;
-                    }}
-                    disabled={!editable}
-                    onChange={(e) => dispatch({ type: "toggle", ids: g.items.map((d) => d.id), accepted: e.target.checked })}
-                  />
-                  <button className="entity-body" onClick={() => focusNext(g)} title="Voir dans le document">
-                    <span className="entity-top">
-                      <span className="tag">{g.label}</span>
-                      <span className="muted small">{info.name}</span>
+                <div key={g.key} className="entity-wrap">
+                  <div className={"entity" + (on === 0 ? " off" : "")} style={{ "--hue": info.hue } as React.CSSProperties}>
+                    <input
+                      type="checkbox"
+                      aria-label={`Masquer ${g.label}`}
+                      checked={on > 0}
+                      ref={(el) => {
+                        if (el) el.indeterminate = on > 0 && on < g.items.length;
+                      }}
+                      disabled={!editable}
+                      onChange={(e) => dispatch({ type: "toggle", ids: g.items.map((d) => d.id), accepted: e.target.checked })}
+                    />
+                    <button className="entity-body" onClick={() => focusNext(g)} title="Voir dans le document">
+                      <span className="entity-top">
+                        <span className="tag">{g.label}</span>
+                        <span className="muted small">{info.name}</span>
+                      </span>
+                      <span className="entity-text">
+                        {g.items.some((d) => d.source === "ner") && <span className="ai-badge" title="Proposé par l'IA locale">IA</span>}
+                        {g.texts.slice(0, 3).join(" · ") || "zone tracée"}
+                      </span>
+                    </button>
+                    <span className="count" title="Occurrences">
+                      {g.items.length}
                     </span>
-                    <span className="entity-text">
-                      {g.items.some((d) => d.source === "ner") && <span className="ai-badge" title="Proposé par l'IA locale">IA</span>}
-                      {g.texts.slice(0, 3).join(" · ") || "zone tracée"}
-                    </span>
-                  </button>
-                  <span className="count" title="Occurrences">
-                    {g.items.length}
-                  </span>
+                    {editable && (
+                      <button
+                        className="ghost entity-more"
+                        aria-expanded={editing === g.key}
+                        title="Corriger la catégorie ou regrouper"
+                        onClick={() => setEditing(editing === g.key ? null : g.key)}
+                      >
+                        ⋯
+                      </button>
+                    )}
+                  </div>
+                  {editing === g.key && (
+                    <div className="entity-edit">
+                      <label>
+                        Catégorie
+                        <select
+                          value={g.category}
+                          onChange={(e) => {
+                            dispatch({ type: "recategorise", entity: g.entity, category: e.target.value as Category });
+                            setEditing(null);
+                          }}
+                        >
+                          {CATEGORY_ORDER.map((c) => (
+                            <option key={c} value={c}>
+                              {CATEGORY_INFO[c].name}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label>
+                        Même entité que
+                        <select
+                          value=""
+                          onChange={(e) => {
+                            dispatch({ type: "merge", entity: g.entity, into: e.target.value });
+                            setEditing(null);
+                          }}
+                        >
+                          <option value="">—</option>
+                          {entities
+                            .filter(([id]) => id !== g.entity)
+                            .map(([id, e]) => (
+                              <option key={id} value={id}>
+                                {e.label} · {e.texts.join(" · ") || "zone tracée"}
+                              </option>
+                            ))}
+                        </select>
+                      </label>
+                    </div>
+                  )}
                 </div>
               );
             })}
