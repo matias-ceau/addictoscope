@@ -27,6 +27,8 @@ export function ReviewPanel(props: {
   detections: Detection[];
   dispatch: Dispatch<Action>;
   onPseudonymise: () => void;
+  /** The analysis card, shown once the document is pseudonymized. */
+  nextStep?: React.ReactNode;
 }) {
   const { doc, dispatch } = props;
   const mine = props.detections.filter((d) => d.doc === doc.id);
@@ -187,15 +189,7 @@ export function ReviewPanel(props: {
             </button>
           </div>
 
-          <div className={"card next-step" + (doc.manifest.verified ? "" : " locked")}>
-            <span className="eyebrow">Étape suivante</span>
-            <strong>Analyse par IA</strong>
-            <p className="muted small">
-              Frise chronologique et questions sur le dossier, avec renvoi à la page source. Seuls les documents vérifiés
-              peuvent être envoyés à un modèle, via un fournisseur sans conservation des données.
-            </p>
-            <span className="chip">Bientôt</span>
-          </div>
+          {props.nextStep}
         </div>
       )}
 

@@ -69,6 +69,27 @@ Aucune donnée ne quitte le poste : le moteur PDF, l'OCR et les modèles sont
 servis avec l'application. Le navigateur les met en cache après la première
 visite.
 
+### Analyse par IA (documents vérifiés uniquement)
+
+Une fois un document pseudonymisé et vérifié, « Analyser le dossier » envoie à
+un modèle multimodal en ligne les **images des pages pseudonymisées** et leur
+texte, lignes numérotées. Le modèle est choisi dans « IA en ligne » : OpenRouter
+avec zéro conservation, ou un point d'accès HDS de l'établissement compatible
+OpenAI.
+
+1. **Découpage en observations** : le modèle voit la mise en page. Il
+   distingue l'encadré répété d'une nouvelle observation, et recolle une
+   observation coupée par un saut de page. Il cite chaque début et fin en
+   « page / ligne ». Du code vérifie ensuite la réponse (bornes, ordre,
+   chevauchements, dates).
+2. **Frise chronologique** : six pistes (consommations, psychopathologie,
+   somatique, médicaments, prises en charge, événements de vie). Chaque
+   événement cite ses observations sources. Un événement sans source ou mal
+   daté est écarté.
+3. **Retour à la source** : cliquer un événement ouvre la page
+   pseudonymisée, avec l'observation surlignée. Une vue tableau est aussi
+   disponible.
+
 ## Installation (Python)
 
 ```bash
@@ -87,8 +108,10 @@ uv run python scripts/make_synthetic_pdfs.py   # régénère les PDF fictifs
 ## État actuel
 
 - ✅ Jalon 1 : pseudonymisation locale des PDF dans le navigateur.
-- ⏳ Jalon 2 : espace d'analyse (découpage des observations par un modèle
+- ✅ Jalon 2 : espace d'analyse (découpage des observations par un modèle
   multimodal, frise chronologique), réservé aux documents vérifiés.
+  Testé de bout en bout avec un modèle simulé. La qualité réelle des
+  réponses reste à évaluer avec une clé d'API.
 - ⏳ Jalon 3 : questions sur le dossier avec renvoi à la page source.
 
 ## Licence

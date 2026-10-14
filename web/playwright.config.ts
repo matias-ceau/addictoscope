@@ -2,7 +2,9 @@ import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
   testDir: "e2e",
-  timeout: 120_000,
+  timeout: 180_000,
+  // Each test loads MuPDF, Tesseract and the NER model: run them one at a time.
+  workers: 1,
   use: {
     baseURL: "http://localhost:4173",
     launchOptions: process.env.PW_CHROMIUM ? { executablePath: process.env.PW_CHROMIUM } : {},

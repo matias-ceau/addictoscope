@@ -15,8 +15,15 @@ export function Viewer(props: {
   detections: Detection[];
   focused?: string;
   dispatch: Dispatch<Action>;
+  /** Lines to flash after a jump from the frise. */
+  highlight?: { page: number; rects: Rect[]; key: number };
 }) {
   const { doc, view } = props;
+
+  useEffect(() => {
+    if (!props.highlight) return;
+    document.getElementById(`page-${props.highlight.page}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [props.highlight?.key]);
   const renderId = view === "pseudo" ? `${doc.id}:pseudo` : doc.id;
   const editable = doc.status === "review";
 
@@ -52,6 +59,7 @@ export function Viewer(props: {
             page={page}
             detections={view === "original" ? props.detections.filter((d) => d.page === page.page) : []}
             focused={props.focused}
+            highlight={view === "pseudo" && props.highlight?.page === page.page ? props.highlight : undefined}
             editable={editable && view === "original"}
             dispatch={props.dispatch}
             sourceDoc={doc.id}
@@ -79,6 +87,7 @@ function PageView(props: {
   focused?: string;
   editable: boolean;
   dispatch: Dispatch<Action>;
+  highlight?: { rects: Rect[]; key: number };
 }) {
   const { page } = props;
   const ref = useRef<HTMLDivElement>(null);
@@ -156,6 +165,7 @@ function PageView(props: {
   return (
     <div
       ref={ref}
+      id={`page-${page.page}`}
       className={"page" + (props.editable ? " editable" : "")}
       style={{ aspectRatio: `${page.width} / ${page.height}` }}
       onPointerDown={(e) => {
@@ -183,6 +193,9 @@ function PageView(props: {
           </button>
         )),
       )}
+      {props.highlight?.rects.map((r, i) => (
+        <div key={`${props.highlight!.key}-${i}`} className="source-highlight" style={pct(r)} />
+      ))}
       {draft && (
         <div
           className="draft"

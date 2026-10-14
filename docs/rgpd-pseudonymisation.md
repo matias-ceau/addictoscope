@@ -35,6 +35,12 @@ Toute requête vers un modèle distant passe par `web/src/cloud/guard.ts`. Ce
 module refuse un document qui n'a pas été pseudonymisé, relu par un humain et
 vérifié sans fuite.
 
+Ce qui est envoyé : les images des pages du PDF **pseudonymisé** et leur texte
+(couche texte, ou OCR du PDF pseudonymisé pour les scans). Jamais le document
+d'origine, jamais la table de correspondance. La clé d'API est conservée dans
+le navigateur de l'utilisateur. C'est adapté à une démonstration ; en
+établissement, elle doit être portée par un petit relais côté serveur.
+
 **OpenRouter avec ZDR** (`provider: { zdr: true, data_collection: "deny" }`)
 est une bonne mesure de réduction du risque. Aucune conservation chez le
 fournisseur, ce qui écarte l'essentiel de la question de l'hébergement HDS. Sur

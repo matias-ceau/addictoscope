@@ -69,3 +69,7 @@ self.onmessage = (e: MessageEvent<{ id: number; req: PdfRequest }>) => {
     (self as DedicatedWorkerGlobalScope).postMessage({ id, error: String((err as Error)?.message ?? err) });
   }
 };
+
+// MuPDF loads with a top-level await: messages posted before this module has
+// finished evaluating would be dropped, so tell the page when we are ready.
+(self as DedicatedWorkerGlobalScope).postMessage({ ready: true });

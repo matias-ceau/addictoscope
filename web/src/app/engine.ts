@@ -14,7 +14,10 @@ import type { OpenResult, PdfRequest } from "../worker/pdf.worker";
 const pdfWorker = new Worker(new URL("../worker/pdf.worker.ts", import.meta.url), { type: "module" });
 let nextId = 0;
 const pending = new Map<number, { resolve: (v: unknown) => void; reject: (e: Error) => void }>();
-pdfWorker.onmessage = (e: MessageEvent<{ id: number; result?: unknown; error?: string }>) => {
+let markReady: () => void;
+const pdfReady = new Promise<void>((resolve) => (markReady = resolve));
+pdfWorker.onmessage = (e: MessageEvent<{ id: number; result?: unknown; error?: string; ready?: boolean }>) => {
+  if (e.data.ready) return markReady();
   const p = pending.get(e.data.id);
   if (!p) return;
   pending.delete(e.data.id);
@@ -22,7 +25,8 @@ pdfWorker.onmessage = (e: MessageEvent<{ id: number; result?: unknown; error?: s
   else p.resolve(e.data.result);
 };
 
-function call<T>(req: PdfRequest, transfer: Transferable[] = []): Promise<T> {
+async function call<T>(req: PdfRequest, transfer: Transferable[] = []): Promise<T> {
+  await pdfReady;
   const id = nextId++;
   return new Promise<T>((resolve, reject) => {
     pending.set(id, { resolve: resolve as (v: unknown) => void, reject });
