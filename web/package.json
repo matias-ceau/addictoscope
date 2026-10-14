@@ -17,7 +17,8 @@
     "mupdf": "^1.28.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tesseract.js": "^7.0.0"
+    "tesseract.js": "^7.0.0",
+    "sharp": "file:./stubs/sharp"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1",
@@ -28,5 +29,8 @@
     "typescript": "^5.9.3",
     "vite": "^7.1.12",
     "vitest": "^3.2.4"
+  },
+  "overrides": {
+    "sharp": "$sharp"
   }
 }
