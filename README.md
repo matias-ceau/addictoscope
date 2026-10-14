@@ -11,31 +11,61 @@ que de rester noyé dans les fluctuations événementielles du quotidien.
 
 - **UI** : en français.
 - **Code** (identifiants, commentaires, commits) : en anglais.
-- **Extraction** : Python, en priorité stdlib.
-- **Rendu dynamique** (pages HTML) : Java/TypeScript, à un stade ultérieur.
-- **Cible finale** : application web tournant en local (pas de service cloud
-  pour les données patient).
-- **Confidentialité** : conformité RGPD visée. Toute note d'entrée doit être
-  anonymisée avant tout traitement ou passage dans un pipeline IA — y
-  compris les exemples fournis ici (`data/anonymized/`), traités par le
-  pipeline comme si les noms étaient réels.
-- **Modèles** : prototypage via API distantes, exclusivement au travers
-  d'OpenRouter. Les modèles locaux sont une étape ultérieure.
+- **Application web** (`web/`) : TypeScript + React, servie comme un site
+  statique. Elle tourne sur des postes modestes, sans installation. Le
+  Python reste la couche de modélisation, de référence et d'évaluation.
+- **Confidentialité** : conformité RGPD visée. La pseudonymisation des PDF
+  se fait **dans le navigateur**, avant tout passage dans un pipeline IA. Les
+  exemples (`data/anonymized/`) sont traités comme si les noms étaient réels.
+  Voir [`docs/rgpd-pseudonymisation.md`](docs/rgpd-pseudonymisation.md).
+- **Modèles** : API distantes via OpenRouter avec zéro conservation (ZDR),
+  ou un point d'accès certifié HDS. Ils ne reçoivent que des documents
+  pseudonymisés **et vérifiés**, ce que le code impose
+  (`web/src/cloud/guard.ts`).
 
 ## Structure
 
 ```
-src/addictoscope/   package Python (extraction, anonymisation, frise, ...)
+web/                 application web (pseudonymisation locale, puis espace d'analyse)
+src/addictoscope/   package Python (modèle de frise, extraction de référence, ...)
 tests/               tests pytest
-data/anonymized/     notes d'exemple anonymisées, pour illustrer l'outil
+scripts/             génération des PDF d'exemple fictifs
+data/anonymized/     PDF d'exemple fictifs (+ ground_truth.json des identifiants plantés)
 data/processed/      sorties structurées d'exemple
-docs/                cahier des charges, templates, références
+docs/                cahier des charges, templates, références, note RGPD
 ```
 
 Ce dépôt est public et ne contient aucune donnée patient réelle — les
 données brutes et le mémoire associé vivent dans un dépôt privé séparé.
 
-## Installation
+## Application web
+
+```bash
+cd web
+npm install          # copie aussi le moteur OCR et le modèle français dans public/vendor/
+npm run dev          # http://localhost:5173
+npm run build        # site statique dans web/dist/, à servir depuis n'importe quel dossier
+```
+
+Il suffit de glisser des PDF dans la fenêtre : historiques d'observations,
+comptes rendus, courriers, même scannés. Pour chaque document :
+
+1. **Lecture** : couche texte du PDF, ou OCR (Tesseract, en local) pour les scans.
+2. **Détection** : noms (rôle deviné d'après le contexte : patient, proche,
+   soignant), IPP, NIR (clé vérifiée), n° de dossier, téléphones, e-mails,
+   adresses, villes, établissements, date de naissance (seule l'année est
+   gardée). Toute valeur trouvée une fois est recherchée dans tous les
+   documents déposés.
+3. **Relecture** : surlignages cliquables sur la page, liste par personne,
+   ajout d'une zone en traçant un cadre.
+4. **Masquage dans le PDF lui-même** (MuPDF/WebAssembly) avec étiquettes
+   cohérentes, puis vérification du fichier produit. Ensuite, téléchargement
+   du PDF et export chiffré de la table de correspondance.
+
+Aucune donnée ne quitte le poste : le moteur PDF, l'OCR et le modèle de
+langue française sont servis avec l'application.
+
+## Installation (Python)
 
 ```bash
 uv sync
@@ -44,11 +74,22 @@ uv sync
 ## Tests
 
 ```bash
-uv run pytest tests/ -v
+uv run pytest tests/ -v                        # Python
+cd web && npm test                             # règles, masquage et vérification sur les PDF fictifs
+cd web && npm run e2e                          # parcours complet dans Chromium, aucune requête externe
+uv run python scripts/make_synthetic_pdfs.py   # régénère les PDF fictifs
 ```
 
 ## État actuel
 
-Squelette de dépôt uniquement. La brique frise chronologique sera
-implémentée une fois le template et le cahier des charges (`docs/`)
-exploités.
+- ✅ Jalon 1 : pseudonymisation locale des PDF dans le navigateur.
+- ⏳ Jalon 2 : espace d'analyse (découpage des observations par un modèle
+  multimodal, frise chronologique), réservé aux documents vérifiés.
+- ⏳ Jalon 3 : questions sur le dossier avec renvoi à la page source.
+
+## Licence
+
+Code du projet sous licence MIT. L'application web embarque MuPDF
+(AGPL-3.0, Artifex) pour le masquage dans le PDF : l'application web,
+distribuée dans son ensemble, doit donc respecter l'AGPL, ce que fait la
+publication de ce dépôt.

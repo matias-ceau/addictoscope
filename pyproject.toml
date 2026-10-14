@@ -10,7 +10,10 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = ["pytest"]
+dev = [
+    "pytest",
+    "reportlab>=5.0.1",
+]
 
 [build-system]
 requires = ["hatchling"]
