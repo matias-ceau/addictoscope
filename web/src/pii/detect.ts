@@ -112,6 +112,17 @@ function findWord(text: string, token: string, caseSensitive: boolean): number[]
   return out;
 }
 
+const FUZZY_MIN_LENGTH = 7;
+
+/** True when `a` becomes `b` with one insertion, deletion or substitution. */
+function withinOneEdit(a: string, b: string): boolean {
+  if (Math.abs(a.length - b.length) > 1) return false;
+  let i = 0;
+  while (i < a.length && i < b.length && a[i] === b[i]) i++;
+  if (a.length === b.length) return a.slice(i + 1) === b.slice(i + 1);
+  return a.length > b.length ? a.slice(i + 1) === b.slice(i) : a.slice(i) === b.slice(i + 1);
+}
+
 /** Categories whose values all share one label instead of a numbered one. */
 export const FIXED_LABELS: Partial<Record<Category, string>> = {
   PATIENT: "[PATIENT]", IPP: "[IPP]", NIR: "[NIR]", DOSSIER: "[DOSSIER]", TEL: "[TEL]", EMAIL: "[EMAIL]", ADRESSE: "[ADRESSE]", VILLE: "[VILLE]",
@@ -197,10 +208,23 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
     if (value.replace(/\W/g, "").length >= 4 && !valueHits.has(value)) valueHits.set(value, h);
   }
 
+  // The patient's long surnames are also searched with one typo, capitalised
+  // only: "AOUGHLYS" for "AOUGHLIS" is still the patient.
+  const fuzzy = candidates[0] ? [...candidates[0].surnames].filter((t) => t.length >= FUZZY_MIN_LENGTH) : [];
+
   // Propagate: surnames anywhere (any case), first names only when capitalised.
   for (const doc of docs) {
     for (const page of doc.pages) {
       const folded = foldChars(page.text);
+      if (fuzzy.length) {
+        for (const m of folded.matchAll(/(?<![\p{L}\p{N}])\p{Lu}[\p{L}'’-]{5,}(?![\p{L}\p{N}])/gu)) {
+          const word = m[0].toUpperCase();
+          if (!fuzzy.some((t) => t !== word && withinOneEdit(t, word))) continue;
+          const h: Hit = { doc: doc.id, page: page.page, start: m.index, end: m.index + m[0].length, category: "PATIENT", source: "propagation" };
+          hits.push(h);
+          entityOf.set(h, candidates[0]);
+        }
+      }
       for (const e of entities) {
         const tokens = [...e.surnames, ...e.firstNames].filter((t) => t.length >= 3 && !COMMON_WORDS.has(t));
         for (const token of tokens) {
