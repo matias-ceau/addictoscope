@@ -120,6 +120,10 @@ installé : `PW_CHROMIUM=/usr/bin/chromium npm run e2e`.
   Testé de bout en bout avec un modèle simulé. La qualité réelle des
   réponses reste à évaluer avec une clé d'API.
 - ⏳ Jalon 3 : questions sur le dossier avec renvoi à la page source.
+- 🔜 Plus tard : l'écriture manuscrite (ordonnances, annotations), une fois le
+  traitement des PDF texte et scannés au point. D'ici là, elle est lue de
+  travers par l'OCR et n'est masquée que si un indice l'entoure (« Mr. »,
+  « Dr ») : **la relecture humaine doit la vérifier**.
 
 ## Licence
 
