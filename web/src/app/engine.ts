@@ -5,10 +5,12 @@
 import { createWorker, type Worker as OcrWorker } from "tesseract.js";
 
 import { OCR_ZOOM, ocrPage } from "../core/ocr";
+import type { RgbImage } from "../core/paddle";
 import type { RedactionItem } from "../core/pdf";
 import type { PageText } from "../core/types";
 import type { NerSpan } from "../pii/ner";
 import type { NerRequest } from "../worker/ner.worker";
+import type { OcrRequest } from "../worker/ocr.worker";
 import type { OpenResult, PdfRequest } from "../worker/pdf.worker";
 
 const pdfWorker = new Worker(new URL("../worker/pdf.worker.ts", import.meta.url), { type: "module" });
@@ -32,6 +34,43 @@ async function call<T>(req: PdfRequest, transfer: Transferable[] = []): Promise<
     pending.set(id, { resolve: resolve as (v: unknown) => void, reject });
     pdfWorker.postMessage({ id, req }, transfer);
   });
+}
+
+// --- OCR: PaddleOCR in a worker, Tesseract if its models are missing -------
+
+const paddleWorker = new Worker(new URL("../worker/ocr.worker.ts", import.meta.url), { type: "module" });
+const paddlePending = new Map<number, { resolve: (v: unknown) => void; reject: (e: Error) => void }>();
+paddleWorker.onmessage = (e: MessageEvent<{ id: number; result?: unknown; error?: string }>) => {
+  const p = paddlePending.get(e.data.id);
+  if (!p) return;
+  paddlePending.delete(e.data.id);
+  if (e.data.error) p.reject(new Error(e.data.error));
+  else p.resolve(e.data.result);
+};
+
+function paddleCall<T>(req: OcrRequest, transfer: Transferable[] = []): Promise<T> {
+  const id = nextId++;
+  return new Promise<T>((resolve, reject) => {
+    paddlePending.set(id, { resolve: resolve as (v: unknown) => void, reject });
+    paddleWorker.postMessage({ id, req }, transfer);
+  });
+}
+
+let paddleReady: Promise<boolean> | null = null;
+function initPaddle(): Promise<boolean> {
+  paddleReady ??= paddleCall<boolean>({ op: "init", base: document.baseURI }).catch((err) => {
+    console.warn("PaddleOCR unavailable, falling back to Tesseract:", err);
+    return false;
+  });
+  return paddleReady;
+}
+
+async function ocrOne(doc: string, index: number, width: number, height: number): Promise<PageText> {
+  if (await initPaddle()) {
+    const image = await call<RgbImage>({ op: "rgb", doc, page: index, zoom: OCR_ZOOM });
+    return paddleCall<PageText>({ op: "page", image, page: index, width, height, zoom: OCR_ZOOM }, [image.data.buffer]);
+  }
+  return ocrPage(await getOcr(), await renderPage(doc, index, OCR_ZOOM), index, width, height);
 }
 
 let ocr: Promise<OcrWorker> | null = null;
@@ -70,9 +109,8 @@ async function withOcr(doc: string, opened: OpenResult, onPage: (done: number) =
   const pages = [...opened.pages];
   let done = 0;
   for (const index of opened.scanned) {
-    const image = await renderPage(doc, index, OCR_ZOOM);
     const { width, height } = opened.pages[index];
-    pages[index] = await ocrPage(await getOcr(), image, index, width, height);
+    pages[index] = await ocrOne(doc, index, width, height);
     onPage(++done);
   }
   return pages;

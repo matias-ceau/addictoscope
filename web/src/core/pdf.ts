@@ -71,6 +71,13 @@ export function renderPagePng(doc: mupdf.Document, index: number, zoom: number):
   return pixmap.asPNG();
 }
 
+/** Render a page to raw RGB pixels at the given zoom, for the OCR models. */
+export function renderPageRgb(doc: mupdf.Document, index: number, zoom: number): { data: Uint8Array; width: number; height: number; channels: 3 } {
+  const page = doc.loadPage(index);
+  const pixmap = page.toPixmap(mupdf.Matrix.scale(zoom, zoom), mupdf.ColorSpace.DeviceRGB, false, true);
+  return { data: new Uint8Array(pixmap.getPixels()), width: pixmap.getWidth(), height: pixmap.getHeight(), channels: 3 };
+}
+
 export interface RedactionItem {
   page: number;
   rects: Rect[];

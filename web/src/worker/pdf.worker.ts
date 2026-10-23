@@ -5,13 +5,14 @@
  */
 import type * as mupdf from "mupdf";
 
-import { extractPageText, openPdf, redactPdf, renderPagePng, SCAN_TEXT_THRESHOLD } from "../core/pdf";
+import { extractPageText, openPdf, redactPdf, renderPagePng, renderPageRgb, SCAN_TEXT_THRESHOLD } from "../core/pdf";
 import type { RedactionItem } from "../core/pdf";
 import type { PageText } from "../core/types";
 
 export type PdfRequest =
   | { op: "open"; doc: string; bytes: Uint8Array }
   | { op: "render"; doc: string; page: number; zoom: number }
+  | { op: "rgb"; doc: string; page: number; zoom: number }
   | { op: "redact"; doc: string; out: string; items: RedactionItem[] }
   | { op: "close"; doc: string };
 
@@ -42,6 +43,10 @@ function handle(req: PdfRequest): { result: unknown; transfer?: Transferable[] }
     case "render": {
       const png = renderPagePng(get(req.doc).pdf, req.page, req.zoom);
       return { result: png, transfer: [png.buffer] };
+    }
+    case "rgb": {
+      const image = renderPageRgb(get(req.doc).pdf, req.page, req.zoom);
+      return { result: image, transfer: [image.data.buffer] };
     }
     case "redact": {
       const output = redactPdf(get(req.doc).bytes, req.items);

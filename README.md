@@ -42,8 +42,9 @@ données brutes et le mémoire associé vivent dans un dépôt privé séparé.
 
 ```bash
 cd web
-npm install          # copie le moteur OCR et le runtime ONNX dans public/vendor/,
-                     # et télécharge une fois le modèle de noms (~110 Mo) dans public/models/
+npm install          # copie le moteur OCR de secours et le runtime ONNX dans public/vendor/,
+                     # et télécharge une fois dans public/models/ le modèle de noms (~110 Mo)
+                     # et les modèles OCR PaddleOCR (~31 Mo, empreinte SHA-256 vérifiée)
 npm run dev          # http://localhost:5173
 npm run build        # site statique dans web/dist/, à servir depuis n'importe quel dossier
 ```
@@ -51,7 +52,10 @@ npm run build        # site statique dans web/dist/, à servir depuis n'importe 
 Il suffit de glisser des PDF dans la fenêtre : historiques d'observations,
 comptes rendus, courriers, même scannés. Pour chaque document :
 
-1. **Lecture** : couche texte du PDF, ou OCR (Tesseract, en local) pour les scans.
+1. **Lecture** : couche texte du PDF, ou OCR local pour les scans : PaddleOCR
+   (PP-OCRv6), qui repère chaque ligne de la page, colonnes d'en-tête et
+   marges comprises, même légèrement inclinée. Tesseract sert de secours si
+   ses modèles n'ont pas pu être installés.
 2. **Détection** : noms (rôle deviné d'après le contexte : patient, proche,
    soignant), IPP, NIR (clé vérifiée), n° de dossier, téléphones, e-mails,
    adresses, villes, établissements, date de naissance (seule l'année est
