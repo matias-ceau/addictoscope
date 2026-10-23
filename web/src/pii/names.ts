@@ -79,10 +79,21 @@ interface ContextRule {
   raw?: boolean;
 }
 
-const LOWERCASE_STOPWORDS = new Set("les des une est qui que pour avec dans sur par pas son ses aux car mais elle lui leur".split(" "));
+const LOWERCASE_STOPWORDS = new Set(
+  `les des une est qui que pour avec dans sur par pas son ses aux car mais elle lui leur
+   dit était etait sera serait semble souhaite explique rapporte présente presente refuse accepte demande
+   reste vient venu venue part revient appelle appelé appele confirme indique signale pense veut peut doit`
+    .split(/\s+/)
+    .filter(Boolean),
+);
 
-const TITLES_SOIGNANT = String.raw`(?:Dr\.?|Docteur|M[ée]d\.|Pr\.?|Professeur|Interne|IDE|Infirmi[eè]re?|Psychologue|Assistante? sociale?|Éducat(?:eur|rice)|Educat(?:eur|rice)|Di[ée]t[ée]ticienne?)`;
-const TITLES_CIVIL = String.raw`(?:Mme|Madame|Mlle|Mademoiselle|M\.|Mr\.?|Monsieur)`;
+// Titles match in any case ("DR", "docteur"): exports and notes use them all.
+const TITLES_SOIGNANT = String.raw`(?:[Dd][Rr]\.?|[Dd]octeur|DOCTEUR|M[ée]d\.|Pr\.?|[Pp]rofesseur|PROFESSEUR|[Ii]nterne|IDE|[Ii]nfirmi[eè]re?|[Pp]sychologue|Assistante? sociale?|Éducat(?:eur|rice)|Educat(?:eur|rice)|Di[ée]t[ée]ticienne?)`;
+const TITLES_CIVIL = String.raw`(?:Mme|Madame|Mlle|Mademoiselle|M\.|Mr\.?|Monsieur|Ma[îi]tre)`;
+/** An all-caps word of 3+ letters: a surname when it follows an initial or "Me". */
+const CAPS_SURNAME = `[${U}][${U}'’-]{2,}`;
+/** Roles written in brackets after a name: "TIBURCE (IDE)". */
+const ROLES = String.raw`IDE|AS|ASE|AMP|CESF|ES|IDEL|interne|Interne|psychologue|Psychologue|psy|[ée]duc(?:ateur|atrice)?|[ÉE]duc(?:ateur|atrice)?|m[ée]decin|M[ée]decin|cadre|Cadre|di[ée]t[ée]ticienne?`;
 /** Let a keyword start with either case without making the whole regex case-insensitive. */
 function anyCase(alternation: string): string {
   return alternation.replace(/(^|\|)([a-zà-ÿ])/g, (_m, sep: string, c: string) => `${sep}[${c}${c.toUpperCase()}]`);
@@ -119,8 +130,20 @@ const CONTEXT_RULES: ContextRule[] = [
     re: new RegExp(String.raw`(?:N[ée]e?[ \t]*\(e\)|N[ée]e?[ \t]+le|Date de naissance)[^\n]*\n[ \t]*(${NAME_SEQ})[ \t]*$`, "gm"),
     category: "PATIENT",
   },
-  // Lowercase notes: "dr lemercier", "Dr. vasseur"
+  // Lowercase notes: "dr lemercier", "Dr. vasseur", "mme carbonnaz"
   { re: /\b[Dd](?:r\.?|octeur)[ \t]+([a-zà-ÿ][a-zà-ÿ'’-]{2,})/g, category: "SOIGNANT", raw: true },
+  // Lowercase titles only: "Mme reviendra" is a verb, "mme carbonnaz" a name typed in a hurry.
+  { re: /\b(?:mme|mlle|mr\.?)[ \t]+([a-zà-ÿ][a-zà-ÿ'’-]{2,})/g, category: "PERSONNE", raw: true },
+  // An initial or a lawyer's "Me" before an all-caps surname: "par E BERNADOT", "Me DUCASSOU".
+  // Not a unit ("24H PATCH"), the preposition "A", or a word inside an all-caps sentence.
+  {
+    re: new RegExp(String.raw`(?<![${U}${L}\d/.'’-])(?<![${U}]{2,}[ \t]+)(?:[B-ZÉ]\.?|Me)[ \t]+(${CAPS_SURNAME})(?![${U}${L}])`, "g"),
+    category: "PERSONNE",
+  },
+  // A name followed by a role in brackets: "TIBURCE (IDE)"
+  { re: new RegExp(String.raw`(${NAME_SEQ})[ \t]*\((?:${ROLES})\)`, "g"), category: "SOIGNANT" },
+  // The prescriber closing an order line: "Ordonnance de sortie du ... de Nawel BENDRIS"
+  { re: new RegExp(String.raw`\bde[ \t]+([${U}][${L}]+(?:-[${U}][${L}]+)?[ \t]+${CAPS_SURNAME})[ \t]*$`, "gm"), category: "SOIGNANT" },
   // "Mme MARCHAND", "Monsieur Paul Dupont"
   { re: new RegExp(String.raw`\b${TITLES_CIVIL}[ \t]+(${NAME_SEQ})`, "g"), category: "PERSONNE" },
 ];

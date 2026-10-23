@@ -116,3 +116,58 @@ describe("form-like headers", () => {
     expect(found.filter(([c, t]) => c === "ADRESSE" && /Né/.test(t))).toEqual([]);
   });
 });
+
+// Shapes that leaked on real documents (names here are invented).
+describe("leaks seen on real documents", () => {
+  const masked = (text: string) => detectCorpus([{ id: "doc", pages: [buildPageText(0, 600, 800, text.split("\n").map((l) => l.split(" ").map((w, i) => ({ text: w, rect: [i * 40, 0, i * 40 + 30, 10] as Rect }))), "pdf")] }])
+    .filter((d) => d.accepted)
+    .map((d) => d.text);
+
+  it("reads titles in any case: DR, docteur", () => {
+    expect(names("- Adressé au DR Lemarchal décembre 2017")).toContainEqual(["SOIGNANT", "Lemarchal"]);
+    expect(names("Monsieur le docteur BERTAUDIN")).toContainEqual(["SOIGNANT", "BERTAUDIN"]);
+  });
+
+  it("finds a lawyer after Maître", () => {
+    expect(names("appel fait : Maitre DUCASSOU en attente du tribunal")).toContainEqual(["PERSONNE", "DUCASSOU"]);
+    expect(names("Maître Ducassou")).toContainEqual(["PERSONNE", "Ducassou"]);
+  });
+
+  it("finds an initial followed by an all-caps surname", () => {
+    expect(names("Patient suivi par E BERNADOT,")).toContainEqual(["PERSONNE", "BERNADOT"]);
+    expect(names("A RAS, J AVEC")).toEqual([]);
+    expect(names("NICOTINE 21MG/24H PATCH 4 dispositifs")).toEqual([]);
+    expect(names("CARTE DE SÉJOUR A RECUPERER A LA PRÉFECTURE")).toEqual([]);
+  });
+
+  it("finds a name followed by a role in brackets", () => {
+    expect(names("ou dans trans de TIBURCE (IDE)")).toContainEqual(["SOIGNANT", "TIBURCE"]);
+  });
+
+  it("finds the prescriber at the end of an order line", () => {
+    expect(names("Ordonnance de sortie du 12/07/2018 à 18:33 de Nawel BENDRIS")).toContainEqual(["SOIGNANT", "Nawel BENDRIS"]);
+    expect(names("sevrage de Valium")).toEqual([]);
+  });
+
+  it("finds lowercase names after mme / mlle / mr", () => {
+    expect(names("lien avec le SPIP, mme carbonnaz : coordonnées")).toContainEqual(["PERSONNE", "carbonnaz"]);
+    expect(names("mme est venue, mr dit que")).toEqual([]);
+    expect(names("Mme reviendra avec ses justificatifs, Mr prend son poste")).toEqual([]);
+  });
+
+  it("finds addresses without a dot after AV, or without a street number", () => {
+    expect(hits("18 AV DES ACACIAS")).toContainEqual(["ADRESSE", "18 AV DES ACACIAS"]);
+    expect(hits("RUE DES GLYCINES\n33000 BORDEAUX")).toContainEqual(["ADRESSE", "RUE DES GLYCINES"]);
+    expect(hits("dort dans la rue depuis mai")).toEqual([]);
+  });
+
+  it("finds the ASI anonymity number, label and value on separate lines", () => {
+    expect(hits("ASI N°\n2023151\nN° anonymat")).toContainEqual(["DOSSIER", "2023151"]);
+    expect(hits("N° d'anonymat : 2023151")).toContainEqual(["DOSSIER", "2023151"]);
+  });
+
+  it("propagates the patient's surname despite a one-letter typo", () => {
+    const found = masked("Patient : MARCHANDIEU Sylvie\nNé(e) le 14/06/1978\nnoté AS ' MARCHANDIOU ' sur la fiche");
+    expect(found).toContain("MARCHANDIOU");
+  });
+});
