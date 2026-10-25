@@ -6,6 +6,7 @@ import { loadPolicy, policyReady, savePolicy } from "../app/settings";
 import type { CloudPolicy } from "../cloud/guard";
 import { rectsForSpan } from "../core/geometry";
 import type { Rect } from "../core/types";
+import { inputKind } from "../core/inputs";
 import { buildManifest } from "../core/verify";
 import { detectCorpus } from "../pii/detect";
 import { AnalysisCard, type AnalysisState } from "./AnalysisCard";
@@ -40,19 +41,27 @@ export function App() {
   const addFiles = useCallback(
     async (files: File[]) => {
       for (const file of files) {
-        if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) continue;
         const id = `doc${++docCounter}`;
-        const bytes = new Uint8Array(await file.arrayBuffer());
+        const raw = new Uint8Array(await file.arrayBuffer());
+        const kind = inputKind(file.name, raw);
         const doc: SourceDocState = {
           id,
           name: file.name,
           pseudoName: `document-${String(docCounter).padStart(2, "0")}-pseudonymise.pdf`,
-          bytes,
+          bytes: raw,
           status: "reading",
           pages: [],
         };
         dispatch({ type: "add", doc });
+        if (!kind) {
+          const error = "Format non pris en charge : enregistrez-le en PDF, en Word (.docx) ou en texte (.txt).";
+          dispatch({ type: "patch", id, patch: { status: "error", error } });
+          continue;
+        }
         try {
+          // Text and Word documents are laid out as a PDF first; everything after is the same.
+          const bytes = await engine.toPdf(raw.slice(), kind);
+          dispatch({ type: "patch", id, patch: { bytes } });
           const pages = await engine.analyse(id, bytes.slice(), (done, total, phase) =>
             dispatch({ type: "patch", id, patch: { progress: { done, total, phase } } }),
           );

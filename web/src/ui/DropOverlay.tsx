@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
-/** Full-window drop target: dragging PDFs anywhere over the app works. */
+import { ACCEPTED_FILES } from "../core/inputs";
+
+/** Full-window drop target: dragging documents anywhere over the app works. */
 export function DropOverlay({ onFiles }: { onFiles: (files: File[]) => void }) {
   const [active, setActive] = useState(false);
 
@@ -43,7 +45,7 @@ export function DropOverlay({ onFiles }: { onFiles: (files: File[]) => void }) {
     <div className="drop-overlay" aria-hidden>
       <div className="drop-card">
         <UploadIcon size={40} />
-        <strong>Déposez vos PDF</strong>
+        <strong>Déposez vos documents</strong>
         <span>Ils restent sur ce poste</span>
       </div>
     </div>
@@ -64,7 +66,7 @@ export function FilePicker({ onFiles, className, children }: { onFiles: (f: File
     <label className={className}>
       <input
         type="file"
-        accept="application/pdf,.pdf"
+        accept={ACCEPTED_FILES}
         multiple
         hidden
         onChange={(e) => {
@@ -74,5 +76,48 @@ export function FilePicker({ onFiles, className, children }: { onFiles: (f: File
       />
       {children}
     </label>
+  );
+}
+
+let pasteCounter = 0;
+
+/** "Coller du texte": a note copied from the patient record becomes a .txt document. */
+export function PasteButton({ onFiles, className }: { onFiles: (f: File[]) => void; className?: string }) {
+  const [open, setOpen] = useState(false);
+  const [text, setText] = useState("");
+  const close = () => {
+    setOpen(false);
+    setText("");
+  };
+  const add = () => {
+    onFiles([new File([text], `texte-colle-${++pasteCounter}.txt`, { type: "text/plain" })]);
+    close();
+  };
+  return (
+    <>
+      <button type="button" className={className} onClick={() => setOpen(true)}>
+        Coller du texte
+      </button>
+      {open && (
+        <div className="modal-backdrop" onClick={close}>
+          <div className="modal wide" role="dialog" aria-modal onClick={(e) => e.stopPropagation()}>
+            <h3>Coller du texte</h3>
+            <p className="muted small">
+              Une note, un courrier copié depuis le dossier patient : il est traité comme un document, ici, sans rien
+              envoyer.
+            </p>
+            <textarea className="paste-area" value={text} onChange={(e) => setText(e.target.value)} autoFocus aria-label="Texte à pseudonymiser" />
+            <div className="modal-actions">
+              <button className="ghost" onClick={close}>
+                Annuler
+              </button>
+              <button className="primary" onClick={add} disabled={!text.trim()}>
+                Ajouter
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

@@ -5,11 +5,14 @@
  */
 import type * as mupdf from "mupdf";
 
+import { toPdf } from "../core/convert";
+import type { InputKind } from "../core/inputs";
 import { extractPageText, openPdf, redactPdf, renderPagePng, renderPageRgb, SCAN_TEXT_THRESHOLD } from "../core/pdf";
 import type { RedactionItem } from "../core/pdf";
 import type { PageText } from "../core/types";
 
 export type PdfRequest =
+  | { op: "convert"; bytes: Uint8Array; kind: InputKind }
   | { op: "open"; doc: string; bytes: Uint8Array }
   | { op: "render"; doc: string; page: number; zoom: number }
   | { op: "rgb"; doc: string; page: number; zoom: number }
@@ -27,6 +30,10 @@ const docs = new Map<string, { pdf: mupdf.PDFDocument; bytes: Uint8Array }>();
 
 function handle(req: PdfRequest): { result: unknown; transfer?: Transferable[] } {
   switch (req.op) {
+    case "convert": {
+      const pdf = toPdf(req.bytes, req.kind);
+      return { result: pdf, transfer: [pdf.buffer] };
+    }
     case "open": {
       const pdf = openPdf(req.bytes);
       docs.set(req.doc, { pdf, bytes: req.bytes });
