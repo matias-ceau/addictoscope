@@ -29,8 +29,8 @@ que de rester noyé dans les fluctuations événementielles du quotidien.
 web/                 application web (pseudonymisation locale, puis espace d'analyse)
 src/addictoscope/   package Python (modèle de frise, extraction de référence, ...)
 tests/               tests pytest
-scripts/             génération des PDF d'exemple fictifs
-data/anonymized/     PDF d'exemple fictifs (+ ground_truth.json des identifiants plantés)
+scripts/             génération des documents d'exemple fictifs
+data/anonymized/     documents d'exemple fictifs : PDF, Word, texte (+ ground_truth.json des identifiants plantés)
 data/processed/      sorties structurées d'exemple
 docs/                cahier des charges, templates, références, note RGPD
 ```
@@ -49,8 +49,12 @@ npm run dev          # http://localhost:5173
 npm run build        # site statique dans web/dist/, à servir depuis n'importe quel dossier
 ```
 
-Il suffit de glisser des PDF dans la fenêtre : historiques d'observations,
-comptes rendus, courriers, même scannés. Pour chaque document :
+Il suffit de glisser ses documents dans la fenêtre : historiques
+d'observations, comptes rendus, courriers, en **PDF** (même scannés), en
+**Word** (.docx) ou en **texte** (.txt). Une note peut aussi être **collée**
+directement (« Coller du texte »). Word et texte sont mis en page en PDF à
+l'ouverture, dans le navigateur, puis suivent exactement le même chemin.
+Pour chaque document :
 
 1. **Lecture** : couche texte du PDF, ou OCR local pour les scans : PaddleOCR
    (PP-OCRv6), qui repère chaque ligne de la page, colonnes d'en-tête et
@@ -67,7 +71,8 @@ comptes rendus, courriers, même scannés. Pour chaque document :
    ajout d'une zone en traçant un cadre.
 4. **Masquage dans le PDF lui-même** (MuPDF/WebAssembly) avec étiquettes
    cohérentes, puis vérification du fichier produit. Ensuite, téléchargement
-   du PDF et export chiffré de la table de correspondance.
+   du PDF ou de son texte (.txt), et export chiffré de la table de
+   correspondance.
 
 Aucune donnée ne quitte le poste : le moteur PDF, l'OCR et les modèles sont
 servis avec l'application. Le navigateur les met en cache après la première
@@ -104,9 +109,10 @@ uv sync
 
 ```bash
 uv run pytest tests/ -v                        # Python
-cd web && npm test                             # règles, masquage et vérification sur les PDF fictifs
+cd web && npm test                             # règles, masquage et vérification sur les documents fictifs
 cd web && npm run e2e                          # parcours complet dans Chromium, aucune requête externe
 uv run python scripts/make_synthetic_pdfs.py   # régénère les PDF fictifs
+uv run python scripts/make_synthetic_texts.py  # puis la note Word et la note texte fictives
 ```
 
 Pour l'e2e, soit `npx playwright install chromium`, soit un Chromium déjà
@@ -120,7 +126,8 @@ installé : `PW_CHROMIUM=/usr/bin/chromium npm run e2e`.
   Testé de bout en bout avec un modèle simulé. La qualité réelle des
   réponses reste à évaluer avec une clé d'API.
 - ⏳ Jalon 3 : questions sur le dossier avec renvoi à la page source.
-- 🎯 Périmètre validé pour l'instant : **PDF avec couche texte**. Les scans
+- 🎯 Périmètre validé pour l'instant : **PDF avec couche texte, Word, texte
+  et texte collé**. Les scans
   passent par PaddleOCR et sont masqués, mais leur évaluation est remise à
   plus tard : **la relecture humaine doit les vérifier**.
 - 🔜 Plus tard : les scans (PDF image), puis l'écriture manuscrite

@@ -4,6 +4,7 @@
  */
 import { createWorker, type Worker as OcrWorker } from "tesseract.js";
 
+import type { InputKind } from "../core/inputs";
 import { OCR_ZOOM, ocrPage } from "../core/ocr";
 import type { RgbImage } from "../core/paddle";
 import type { RedactionItem } from "../core/pdf";
@@ -84,6 +85,11 @@ function getOcr(): Promise<OcrWorker> {
     cacheMethod: "none",
   });
   return ocr;
+}
+
+/** Text and Word documents become PDFs, laid out in the PDF worker. */
+export function toPdf(bytes: Uint8Array, kind: InputKind): Promise<Uint8Array> {
+  return kind === "pdf" ? Promise.resolve(bytes) : call<Uint8Array>({ op: "convert", bytes, kind });
 }
 
 export async function renderPage(doc: string, page: number, zoom: number): Promise<Blob> {

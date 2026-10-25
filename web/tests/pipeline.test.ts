@@ -3,10 +3,12 @@ import { resolve } from "node:path";
 import { createWorker } from "tesseract.js";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
+import { toPdf } from "../src/core/convert";
+import { inputKind } from "../src/core/inputs";
 import { OCR_ZOOM, ocrPage } from "../src/core/ocr";
 import { paddleOcrPage, type PaddleModels } from "../src/core/paddle";
 import { extractPageText, openPdf, pageSize, redactPdf, renderPagePng, renderPageRgb, SCAN_TEXT_THRESHOLD } from "../src/core/pdf";
-import type { PageText } from "../src/core/types";
+import type { Detection, PageText } from "../src/core/types";
 import { buildManifest, findLeaks } from "../src/core/verify";
 import { assertSendable, CloudRefused } from "../src/cloud/guard";
 import { detectCorpus } from "../src/pii/detect";
@@ -59,11 +61,14 @@ describe.each(cases)("$name ($engine)", ({ name, engine }) => {
   let pages: PageText[];
   let output: Uint8Array;
   let outPages: PageText[];
+  let detections: Detection[];
 
   beforeAll(async () => {
-    input = readSample(name);
+    // Word and text samples are laid out into a PDF first, as the app does.
+    const raw = readSample(name);
+    input = toPdf(raw, inputKind(name, raw)!);
     pages = await readPages(engine, input);
-    const detections = detectCorpus([{ id: name, pages }]);
+    detections = detectCorpus([{ id: name, pages }]);
     output = redactPdf(
       input,
       detections.map((d) => ({ page: d.page, rects: d.rects, label: d.label })),
@@ -94,6 +99,20 @@ describe.each(cases)("$name ($engine)", ({ name, engine }) => {
     const all = outPages.map((p) => p.text).join("\n");
     expect(all).toMatch(/\d{2}\/\d{2}\/2024/);
     expect(all.toLowerCase()).toMatch(/alcool|tabac|sevrage/);
+  });
+
+  it("leaves the lines without identifiers untouched", () => {
+    // Text-layer pages only: scanned pages are read again from pixels.
+    for (const page of pages.filter((p) => p.source === "pdf")) {
+      const out = outPages[page.page].text;
+      let start = 0;
+      for (const line of page.text.split("\n")) {
+        const end = start + line.length;
+        const touched = detections.some((d) => d.page === page.page && d.start < end && d.end > start);
+        if (!touched && line.trim()) expect(out, line).toContain(line);
+        start = end + 1;
+      }
+    }
   });
 
   it("strips document metadata", () => {

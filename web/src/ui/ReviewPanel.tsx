@@ -247,6 +247,17 @@ export function ReviewPanel(props: {
             <button className="primary" onClick={() => download(doc.output!, doc.pseudoName, "application/pdf")}>
               Télécharger le PDF pseudonymisé
             </button>
+            <button
+              onClick={() =>
+                download(
+                  new TextEncoder().encode(doc.outPages!.map((p) => p.text).join("\n")),
+                  doc.pseudoName.replace(/\.pdf$/, ".txt"),
+                  "text/plain;charset=utf-8",
+                )
+              }
+            >
+              Télécharger le texte pseudonymisé (.txt)
+            </button>
             <button onClick={() => setKeyDialog(true)}>Exporter la table de correspondance…</button>
             <button
               className="ghost"
