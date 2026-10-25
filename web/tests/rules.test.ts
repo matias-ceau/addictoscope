@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { findNameSpans } from "../src/pii/names";
+import { findNameSpans, trimModelPerson } from "../src/pii/names";
 import { buildPageText } from "../src/core/pagetext";
 import type { Rect } from "../src/core/types";
 import { detectCorpus } from "../src/pii/detect";
@@ -115,6 +115,17 @@ describe("form-like headers", () => {
     expect(found).toContainEqual(["NAISSANCE", "14/06/1978"]);
     expect(found.filter(([c, t]) => c === "ADRESSE" && /Né/.test(t))).toEqual([]);
   });
+
+  it("does not run a name on into the next column", () => {
+    // Letterhead staff list on the left, the letter on the right, same row.
+    const letter = buildPageText(0, 600, 800, [
+      [word("Docteur", 10, 200), word("Martine", 74, 200), word("VERCHAMP", 126, 200)],
+      [word("Ce", 300, 200), word("patient,", 320, 200), word("vu", 390, 200)],
+    ], "pdf");
+    const found = detectCorpus([{ id: "doc", pages: [letter] }]).map((d) => d.text);
+    expect(found).toContain("Martine VERCHAMP");
+    expect(found).not.toContain("Ce");
+  });
 });
 
 // Shapes that leaked on real documents (names here are invented).
@@ -142,6 +153,17 @@ describe("leaks seen on real documents", () => {
 
   it("finds a name followed by a role in brackets", () => {
     expect(names("ou dans trans de TIBURCE (IDE)")).toContainEqual(["SOIGNANT", "TIBURCE"]);
+  });
+
+  it("finds the author of a note after its role", () => {
+    expect(names("12/03/2024 - IDE - CHAPUIS Hélène")).toContainEqual(["SOIGNANT", "CHAPUIS Hélène"]);
+  });
+
+  it("keeps a model name to its own line and never takes a clinical scale for a name", () => {
+    const text = "13/03/2024 - Dr LEBRETON\nCushman 3. Poursuite décroissance.";
+    const at = (s: string) => ({ start: text.indexOf(s), end: text.indexOf(s) + s.length });
+    expect(trimModelPerson(text, at("LEBRETON\nCushman").start, at("LEBRETON\nCushman").end)).toEqual(at("LEBRETON"));
+    expect(trimModelPerson(text, at("Cushman").start, at("Cushman").end)).toBeNull();
   });
 
   it("finds the prescriber at the end of an order line", () => {

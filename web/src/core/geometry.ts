@@ -8,6 +8,18 @@ export function padRect(r: Rect, pad: number): Rect {
   return [r[0] - pad, r[1] - pad, r[2] + pad, r[3] + pad];
 }
 
+/**
+ * The middle band of a text box. Glyph boxes span the font's full height, so
+ * on tightly set lines they overlap the lines above and below; MuPDF removes
+ * every glyph a redaction touches, so a full-height box would also remove the
+ * edges of the neighbouring lines. The band still crosses every glyph of its
+ * own line.
+ */
+export function textBand(r: Rect, pad: number): Rect {
+  const inset = (r[3] - r[1]) * 0.3;
+  return [r[0] - pad, r[1] + inset, r[2] + pad, r[3] - inset];
+}
+
 export function rectsOverlap(a: Rect, b: Rect): boolean {
   return a[0] < b[2] && b[0] < a[2] && a[1] < b[3] && b[1] < a[3];
 }
