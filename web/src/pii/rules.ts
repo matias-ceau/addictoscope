@@ -65,6 +65,8 @@ const RULES: Rule[] = [
     accept: (v) => /\d{4,}/.test(v),
     labelled: true,
   },
+  // ASI forms: "ASI N°" / "N° d'anonymat", the value often on the next line.
+  { category: "DOSSIER", re: /(?:\bASI[ \t]*N°|N°[ \t]*(?:d['’][ \t]*)?anonymat)[ \t]*:?\s*(\d{5,})/gi, group: 1, labelled: true },
   // Long codes need no label: admission, stay or record numbers, RPPS...
   { category: "DOSSIER", re: /\b[A-Z]{0,3}\d{8,}\b/g },
   {
@@ -91,8 +93,16 @@ const RULES: Rule[] = [
   {
     category: "ADRESSE",
     re: new RegExp(
-      String.raw`\b\d{1,4}\s?(?:bis|ter)?,?\s+(?:rue|avenue|av\.|boulevard|bd|allée|allee|chemin|impasse|place|route|cours|quai|lotissement|résidence|residence|lieu-dit)\b[^\n,;]{2,50}`,
+      String.raw`\b\d{1,4}\s?(?:bis|ter)?,?\s+(?:rue|avenue|av|boulevard|bd|allée|allee|chemin|impasse|place|route|cours|quai|lotissement|résidence|residence|lieu-dit)\b\.?[^\n,;]{2,50}`,
       "gi",
+    ),
+  },
+  // A letterhead street line without a number: "RUE DES GLYCINES", "Avenue Foch".
+  {
+    category: "ADRESSE",
+    re: new RegExp(
+      String.raw`^[ \t]*(?:RUE|AVENUE|BOULEVARD|ALL[ÉE]E|CHEMIN|IMPASSE|PLACE|ROUTE|QUAI|Rue|Avenue|Boulevard|All[ée]e|Chemin|Impasse|Place|Route|Quai)[ \t]+(?:(?:de|du|des|la|le|DE|DU|DES|LA|LE)[ \t]+|[dlDL]['’])?[${UPPER}][${UPPER}${LOWER}'’ -]{1,40}[ \t]*$`,
+      "gm",
     ),
   },
   // Postal boxes: "BP 123", "CS 81234", "TSA 30001".

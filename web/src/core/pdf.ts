@@ -4,7 +4,7 @@
  */
 import * as mupdf from "mupdf";
 
-import { padRect } from "./geometry";
+import { padRect, textBand } from "./geometry";
 import { buildPageText } from "./pagetext";
 import type { PageText, Rect } from "./types";
 
@@ -71,6 +71,13 @@ export function renderPagePng(doc: mupdf.Document, index: number, zoom: number):
   return pixmap.asPNG();
 }
 
+/** Render a page to raw RGB pixels at the given zoom, for the OCR models. */
+export function renderPageRgb(doc: mupdf.Document, index: number, zoom: number): { data: Uint8Array; width: number; height: number; channels: 3 } {
+  const page = doc.loadPage(index);
+  const pixmap = page.toPixmap(mupdf.Matrix.scale(zoom, zoom), mupdf.ColorSpace.DeviceRGB, false, true);
+  return { data: new Uint8Array(pixmap.getPixels()), width: pixmap.getWidth(), height: pixmap.getHeight(), channels: 3 };
+}
+
 export interface RedactionItem {
   page: number;
   rects: Rect[];
@@ -106,16 +113,22 @@ export function redactPdf(bytes: Uint8Array, items: RedactionItem[]): Uint8Array
   const font = doc.addSimpleFont(new mupdf.Font("Helvetica"));
   for (const [index, pageItems] of byPage) {
     const page = doc.loadPage(index) as mupdf.PDFPage;
-    for (const item of pageItems) {
-      for (const rect of item.rects) {
-        page.createAnnotation("Redact").setRect(padRect(rect, 0.6));
-      }
-    }
+    const rects = pageItems.flatMap((item) => item.rects);
+    // Text: the middle band of each box, so the neighbouring lines keep
+    // their glyphs. Scanned pixels: the whole box.
+    for (const rect of rects) page.createAnnotation("Redact").setRect(textBand(rect, 0.6));
+    page.applyRedactions(
+      false,
+      mupdf.PDFPage.REDACT_IMAGE_NONE,
+      mupdf.PDFPage.REDACT_LINE_ART_NONE,
+      mupdf.PDFPage.REDACT_TEXT_REMOVE,
+    );
+    for (const rect of rects) page.createAnnotation("Redact").setRect(padRect(rect, 0.6));
     page.applyRedactions(
       false,
       mupdf.PDFPage.REDACT_IMAGE_PIXELS,
       mupdf.PDFPage.REDACT_LINE_ART_NONE,
-      mupdf.PDFPage.REDACT_TEXT_REMOVE,
+      mupdf.PDFPage.REDACT_TEXT_NONE,
     );
     drawLabels(doc, page, pageItems, font);
   }

@@ -7,8 +7,14 @@ const DATA = resolve(dirname(fileURLToPath(import.meta.url)), "../../data/anonym
 
 test("drop, review and pseudonymise text and scanned PDFs without any network call", async ({ page }) => {
   const external: string[] = [];
+  const served: string[] = [];
+  const warnings: string[] = [];
   page.on("request", (r) => {
     if (!r.url().startsWith("http://localhost:4173") && !r.url().startsWith("blob:") && !r.url().startsWith("data:")) external.push(r.url());
+    else served.push(r.url());
+  });
+  page.on("console", (m) => {
+    if (m.type() === "warning") warnings.push(m.text());
   });
 
   await page.goto("/");
@@ -50,6 +56,9 @@ test("drop, review and pseudonymise text and scanned PDFs without any network ca
   await expect(page.getByText("Document pseudonymisé et vérifié")).toBeVisible({ timeout: 90_000 });
   await expect(page.getByText(/Pages scannées relues par OCR : 1/)).toBeVisible();
   await page.screenshot({ path: "test-results/scan-done.png" });
+  // ...with PaddleOCR, served by the app, not the Tesseract fallback.
+  expect(served.some((u) => u.includes("models/paddleocr/PP-OCRv6_rec_small.onnx"))).toBe(true);
+  expect(warnings.filter((w) => w.includes("PaddleOCR unavailable"))).toEqual([]);
 
   expect(external).toEqual([]);
 });

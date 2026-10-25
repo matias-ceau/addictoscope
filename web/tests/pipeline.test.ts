@@ -3,34 +3,45 @@ import { resolve } from "node:path";
 import { createWorker } from "tesseract.js";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
+import { toPdf } from "../src/core/convert";
+import { inputKind } from "../src/core/inputs";
 import { OCR_ZOOM, ocrPage } from "../src/core/ocr";
-import { extractPageText, openPdf, pageSize, redactPdf, renderPagePng, SCAN_TEXT_THRESHOLD } from "../src/core/pdf";
-import type { PageText } from "../src/core/types";
+import { paddleOcrPage, type PaddleModels } from "../src/core/paddle";
+import { extractPageText, openPdf, pageSize, redactPdf, renderPagePng, renderPageRgb, SCAN_TEXT_THRESHOLD } from "../src/core/pdf";
+import type { Detection, PageText } from "../src/core/types";
 import { buildManifest, findLeaks } from "../src/core/verify";
 import { assertSendable, CloudRefused } from "../src/cloud/guard";
 import { detectCorpus } from "../src/pii/detect";
-import { GROUND_TRUTH, readSample } from "./helpers";
+import { GROUND_TRUTH, loadPaddle, PADDLE_INSTALLED, readSample } from "./helpers";
 
-type Ocr = Awaited<ReturnType<typeof createWorker>>;
-let ocr: Ocr;
+type Tesseract = Awaited<ReturnType<typeof createWorker>>;
+let tesseract: Tesseract;
+let paddle: PaddleModels;
 
 beforeAll(async () => {
-  ocr = await createWorker("fra", 1, {
+  tesseract = await createWorker("fra", 1, {
     langPath: resolve(__dirname, "../node_modules/@tesseract.js-data/fra/4.0.0_best_int"),
     gzip: true,
     cacheMethod: "none",
   });
+  if (PADDLE_INSTALLED) paddle = await loadPaddle();
 });
-afterAll(async () => ocr?.terminate());
+afterAll(async () => tesseract?.terminate());
 
-async function readPages(bytes: Uint8Array, forceOcr: number[] = []): Promise<PageText[]> {
+type Engine = "paddle" | "tesseract";
+
+async function readPages(engine: Engine, bytes: Uint8Array, forceOcr: number[] = []): Promise<PageText[]> {
   const doc = openPdf(bytes);
   const pages: PageText[] = [];
   for (let i = 0; i < doc.countPages(); i++) {
     const text = extractPageText(doc, i);
     if (text.text.replace(/\s/g, "").length < SCAN_TEXT_THRESHOLD || forceOcr.includes(i)) {
       const { width, height } = pageSize(doc, i);
-      pages.push(await ocrPage(ocr, Buffer.from(renderPagePng(doc, i, OCR_ZOOM)), i, width, height));
+      pages.push(
+        engine === "paddle"
+          ? await paddleOcrPage(paddle, renderPageRgb(doc, i, OCR_ZOOM), i, width, height, OCR_ZOOM)
+          : await ocrPage(tesseract, Buffer.from(renderPagePng(doc, i, OCR_ZOOM)), i, width, height),
+      );
     } else pages.push(text);
   }
   return pages;
@@ -38,22 +49,32 @@ async function readPages(bytes: Uint8Array, forceOcr: number[] = []): Promise<Pa
 
 const fold = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").toUpperCase();
 
-describe.each(Object.keys(GROUND_TRUTH))("%s", (name) => {
+// The app reads scans with PaddleOCR, and falls back to Tesseract when its
+// models could not be installed: both paths must redact and verify.
+const cases = Object.keys(GROUND_TRUTH).flatMap((name) => [
+  ...(PADDLE_INSTALLED ? [{ name, engine: "paddle" as Engine }] : []),
+  { name, engine: "tesseract" as Engine },
+]);
+
+describe.each(cases)("$name ($engine)", ({ name, engine }) => {
   let input: Uint8Array;
   let pages: PageText[];
   let output: Uint8Array;
   let outPages: PageText[];
+  let detections: Detection[];
 
   beforeAll(async () => {
-    input = readSample(name);
-    pages = await readPages(input);
-    const detections = detectCorpus([{ id: name, pages }]);
+    // Word and text samples are laid out into a PDF first, as the app does.
+    const raw = readSample(name);
+    input = toPdf(raw, inputKind(name, raw)!);
+    pages = await readPages(engine, input);
+    detections = detectCorpus([{ id: name, pages }]);
     output = redactPdf(
       input,
       detections.map((d) => ({ page: d.page, rects: d.rects, label: d.label })),
     );
     const ocrPages = pages.filter((p) => p.source === "ocr").map((p) => p.page);
-    outPages = await readPages(output, ocrPages);
+    outPages = await readPages(engine, output, ocrPages);
   });
 
   it("removes every planted identifier from the output", () => {
@@ -78,6 +99,20 @@ describe.each(Object.keys(GROUND_TRUTH))("%s", (name) => {
     const all = outPages.map((p) => p.text).join("\n");
     expect(all).toMatch(/\d{2}\/\d{2}\/2024/);
     expect(all.toLowerCase()).toMatch(/alcool|tabac|sevrage/);
+  });
+
+  it("leaves the lines without identifiers untouched", () => {
+    // Text-layer pages only: scanned pages are read again from pixels.
+    for (const page of pages.filter((p) => p.source === "pdf")) {
+      const out = outPages[page.page].text;
+      let start = 0;
+      for (const line of page.text.split("\n")) {
+        const end = start + line.length;
+        const touched = detections.some((d) => d.page === page.page && d.start < end && d.end > start);
+        if (!touched && line.trim()) expect(out, line).toContain(line);
+        start = end + 1;
+      }
+    }
   });
 
   it("strips document metadata", () => {

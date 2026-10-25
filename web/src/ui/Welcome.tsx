@@ -1,9 +1,9 @@
-import { FilePicker, UploadIcon } from "./DropOverlay";
+import { FilePicker, PasteButton, UploadIcon } from "./DropOverlay";
 
 const STEPS = [
-  { title: "Déposez", text: "Comptes rendus, historiques d'observations, courriers, même scannés." },
+  { title: "Déposez", text: "Comptes rendus, historiques d'observations, courriers : PDF, Word, texte, ou un texte collé." },
   { title: "Vérifiez", text: "Les noms, numéros et adresses détectés sont surlignés sur la page. Un clic pour corriger." },
-  { title: "Récupérez", text: "Un PDF pseudonymisé à l'identique, prêt pour l'analyse par IA." },
+  { title: "Récupérez", text: "Un PDF (ou un texte) pseudonymisé, prêt pour l'analyse par IA." },
 ];
 
 export function Welcome({ onFiles }: { onFiles: (files: File[]) => void }) {
@@ -14,8 +14,9 @@ export function Welcome({ onFiles }: { onFiles: (files: File[]) => void }) {
           <UploadIcon size={34} />
         </span>
         <strong>Glissez vos documents patient ici</strong>
-        <span className="muted">ou cliquez pour choisir des PDF</span>
+        <span className="muted">ou cliquez pour choisir des fichiers (PDF, Word, texte)</span>
       </FilePicker>
+      <PasteButton onFiles={onFiles} className="welcome-paste" />
       <ol className="steps">
         {STEPS.map((s, i) => (
           <li key={s.title}>

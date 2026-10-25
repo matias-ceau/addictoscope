@@ -77,6 +77,9 @@ h3 { margin: 0 0 8px; }
 .steps li { display: flex; gap: 12px; padding: 14px; background: var(--surface); border-radius: var(--radius); border: 1px solid var(--line); }
 .steps p { margin: 2px 0 0; color: var(--muted); font-size: 0.88rem; }
 .step-num { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 0.85rem; }
+.welcome-paste { margin-top: -16px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--accent); font-weight: 600; cursor: pointer; }
+.welcome-paste:hover { border-color: var(--accent); }
+.paste-area { width: 100%; min-height: 220px; resize: vertical; padding: 10px; border-radius: 9px; border: 1px solid var(--line); background: var(--surface-2); color: inherit; font: inherit; font-size: 0.9rem; }
 .welcome-note { max-width: 620px; text-align: center; color: var(--muted); font-size: 0.85rem; margin: 0; }
 
 /* Workspace: NotebookLM-like three panes */
@@ -92,6 +95,7 @@ h3 { margin: 0 0 8px; }
 /* Sources */
 .add-source { margin: 4px 12px 8px; padding: 9px; border-radius: 10px; border: 1px dashed var(--line); text-align: center; cursor: pointer; color: var(--accent); font-weight: 600; font-size: 0.9rem; }
 .add-source:hover { background: var(--accent-soft); border-color: var(--accent); }
+.paste-source { margin-top: 0; background: none; font: inherit; font-weight: 600; font-size: 0.9rem; }
 .source-list { list-style: none; margin: 0; padding: 0 8px 8px; overflow: auto; }
 .source-list li { position: relative; }
 .source-card { width: 100%; display: flex; gap: 10px; text-align: left; padding: 10px; border: 0; border-radius: 10px; background: transparent; cursor: pointer; }

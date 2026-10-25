@@ -1,7 +1,8 @@
 /**
- * OCR for image-only pages, used *only to locate* identifiers on the page.
- * The recognised text is never handed to later steps: the redacted PDF
- * keeps its original pixels, and downstream models read the page image.
+ * Tesseract OCR, the fallback when the PaddleOCR models (core/paddle.ts)
+ * are not installed. OCR locates identifiers on the page; the redacted PDF
+ * keeps its original pixels, and only the text re-read from that redacted
+ * output goes on to the analysis.
  */
 import type Tesseract from "tesseract.js";
 
