@@ -17,9 +17,10 @@ const U = "A-ZÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ";
 const L = "a-zàâäçéèêëîïôöùûüÿœæ";
 /** A capitalised or all-caps word that could be part of a name. */
 const NAME_TOKEN = `[${U}][${U}${L}'’-]+`;
-const NAME_SEQ = `${NAME_TOKEN}(?:[ \\t]+${NAME_TOKEN}){0,3}`;
+/** Up to four name words, on one line and in one column (visual rows mark column gaps with a tab). */
+const NAME_SEQ = `${NAME_TOKEN}(?:[ ]+${NAME_TOKEN}){0,3}`;
 
-/** All-caps words that are routine in clinical exports and never names. */
+/** All-caps words that are routine in clinical exports and never names (clinical scales too, in any case). */
 const CAPS_STOPWORDS = new Set(
   `FICHE OBSERVATION OBSERVATIONS CENTRE HOSPITALIER CSAPA CAARUD ELSA IDE UID CDT IPP UFH UFM CH CHU CHS CEDEX
    NFS TSH ECG EEG IRM TDM HDT SDRE SDT SPDT SPI ASI TCC AS ASS ALD CMU CSS RSA AAH MDPH CAF CPAM PMSI SAMU SAU UHCD
@@ -31,7 +32,8 @@ const CAPS_STOPWORDS = new Set(
    FINESS SIRET TEL TÉL FAX MAIL EMAIL GHB GHT LSD MDMA THC CBD OH BZD TSO MSO BHD
    SECOP SMPR CMP CATTP CMPP SPIP JLD JAP UHSA UMD UMP UCSA SAMSAH SAVS ESAT IME ITEP CHRS CADA SIAO PASS EMPP
    MONSIEUR MADAME MADEMOISELLE DOCTEUR PROFESSEUR RPPS ADELI NUM STANDARD COURRIER GROUPE VALIDÉ VALIDE IMPRIMÉ
-   CPR GEL INJ SOL AMP MG ML KG UI LP AP ASP NB TTT`
+   CPR GEL INJ SOL AMP MG ML KG UI LP AP ASP NB TTT
+   CUSHMAN CIWA FAGERSTROM FAGERSTRÖM AUDIT MMSE MOCA MADRS PANSS BPRS DAST HADS PHQ DETA`
     .split(/\s+/)
     .filter(Boolean),
 );
@@ -66,7 +68,7 @@ function trimToName(text: string, start: number, end: number): { start: number; 
   let m: RegExpExecArray | null;
   while ((m = re.exec(segment))) {
     if (!isNameToken(m[0])) break;
-    if (kept > 0 && !/^[ \t]+$/.test(segment.slice(kept, m.index))) break;
+    if (kept > 0 && !/^ +$/.test(segment.slice(kept, m.index))) break;
     kept = m.index + m[0].length;
   }
   return kept ? { start, end: start + kept } : null;
@@ -102,8 +104,8 @@ function anyCase(alternation: string): string {
 const KIN = "(?:" + anyCase(String.raw`m[èe]re|p[èe]re|fr[èe]re|s(?:œ|oe)ur|demi-fr[èe]re|demi-s(?:œ|oe)ur|fils|fille|compagnon|compagne|conjoint|conjointe|mari|[ée]poux|[ée]pouse|ami|amie|copain|copine|oncle|tante|cousin|cousine|neveu|ni[èe]ce|grand-m[èe]re|grand-p[èe]re|beau-p[èe]re|belle-m[èe]re|beau-fr[èe]re|belle-s(?:œ|oe)ur|ex-compagnon|ex-compagne|ex-mari|ex-[ée]pouse|petit ami|petite amie|enfant|tuteur|tutrice|curat(?:eur|rice)`) + ")";
 
 const CONTEXT_RULES: ContextRule[] = [
-  // "Dr DURAND", "Docteur Anne LEROY"
-  { re: new RegExp(String.raw`\b${TITLES_SOIGNANT}[ \t]+(${NAME_SEQ})`, "g"), category: "SOIGNANT" },
+  // "Dr DURAND", "Docteur Anne LEROY", and the author of a note: "12/03/2024 - IDE - CHAPUIS Hélène"
+  { re: new RegExp(String.raw`\b${TITLES_SOIGNANT}(?:[ \t]+-)?[ \t]+(${NAME_SEQ})`, "g"), category: "SOIGNANT" },
   // Signature lines: "Validé par DURAND Pierre - Psychiatre", "Edité le ... par LEROY Anne"
   { re: new RegExp(String.raw`\bpar[ \t]+(${NAME_SEQ})(?=[ \t]*(?:-|le\b|Page\b|$))`, "gm"), category: "SOIGNANT" },
   // "sa mère Mme MARCHAND Odette", "son frère Thomas"
@@ -143,7 +145,7 @@ const CONTEXT_RULES: ContextRule[] = [
   // A name followed by a role in brackets: "TIBURCE (IDE)"
   { re: new RegExp(String.raw`(${NAME_SEQ})[ \t]*\((?:${ROLES})\)`, "g"), category: "SOIGNANT" },
   // The prescriber closing an order line: "Ordonnance de sortie du ... de Nawel BENDRIS"
-  { re: new RegExp(String.raw`\bde[ \t]+([${U}][${L}]+(?:-[${U}][${L}]+)?[ \t]+${CAPS_SURNAME})[ \t]*$`, "gm"), category: "SOIGNANT" },
+  { re: new RegExp(String.raw`\bde[ \t]+([${U}][${L}]+(?:-[${U}][${L}]+)?[ ]+${CAPS_SURNAME})[ \t]*$`, "gm"), category: "SOIGNANT" },
   // "Mme MARCHAND", "Monsieur Paul Dupont"
   { re: new RegExp(String.raw`\b${TITLES_CIVIL}[ \t]+(${NAME_SEQ})`, "g"), category: "PERSONNE" },
 ];
@@ -199,6 +201,15 @@ export function trimModelPerson(text: string, start: number, end: number): { sta
   const title = new RegExp(String.raw`^(?:${TITLES_CIVIL}|${TITLES_SOIGNANT})[ \t]+`);
   const m = title.exec(text.slice(start, end));
   if (m) start += m[0].length;
+  // A name the model runs into the next line ("Dr LEBRETON" then "Cushman 3")
+  // keeps only the lines whose words could all be names.
+  const lines = text.slice(start, end).split("\n");
+  let kept = lines[0].length;
+  for (const line of lines.slice(1)) {
+    if (!line.split(/[ \t]+/).every((t) => !t || isNameToken(t))) break;
+    kept += 1 + line.length;
+  }
+  end = start + kept;
   // Trim punctuation at the edges, but trust the model on lowercase parts
   // ("Odile vasseur"): that is exactly what the rules cannot see.
   while (start < end && !/\p{L}/u.test(text[start])) start++;

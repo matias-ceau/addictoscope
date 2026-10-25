@@ -34,6 +34,9 @@ export interface RowText {
   words: { start: number; end: number; index: number }[];
 }
 
+/** A horizontal gap wider than this many word heights separates two columns. */
+const COLUMN_GAP = 1.5;
+
 export function visualRows(page: PageText): RowText {
   const order = page.words.map((_, i) => i);
   const midY = (i: number) => (page.words[i].rect[1] + page.words[i].rect[3]) / 2;
@@ -56,7 +59,13 @@ export function visualRows(page: PageText): RowText {
   for (const row of rows) {
     row.sort((a, b) => page.words[a].rect[0] - page.words[b].rect[0]);
     row.forEach((i, k) => {
-      if (k > 0) text += " ";
+      if (k > 0) {
+        // A wide gap between two columns becomes a tab, which a name never spans:
+        // "Docteur Martine VERCHAMP" in the letterhead, "Ce patient" in the letter.
+        const prev = page.words[row[k - 1]].rect;
+        const rect = page.words[i].rect;
+        text += rect[0] - prev[2] > COLUMN_GAP * (rect[3] - rect[1]) ? "\t" : " ";
+      }
       words.push({ start: text.length, end: text.length + page.words[i].text.length, index: i });
       text += page.words[i].text;
     });
