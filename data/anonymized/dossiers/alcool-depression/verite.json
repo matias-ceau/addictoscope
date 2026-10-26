@@ -1,0 +1,84 @@
+{
+  "summary": "Femme de 50 ans, aide-soignante. Trouble de l'usage de l'alcool sévère, épisode dépressif caractérisé. Passage aux urgences, sevrage hospitalier, suivi CSAPA sur 14 mois, deuil, rémission puis rechute.",
+  "header": {
+    "establishment": [
+      "CENTRE HOSPITALIER FICTIF DU BOIS-JOLI",
+      "Pôle d'addictologie - 2, allée des Fictifs - 33000 BORDEAUX",
+      "Tél. 05 00 12 34 56   Finess 33 0 99997 4"
+    ],
+    "patient": [
+      "DESMAZURES CORINNE   Admission A2212050042",
+      "Née le 07/09/1972 (51 ans)",
+      "IPP 0081234567   UF 5120 - Addictologie",
+      "23 allée des Acacias, 33140 VILLENAVE-D'ORNON"
+    ],
+    "title": "FICHE D'OBSERVATIONS"
+  },
+  "export": {"edited": "01/02/2024 09:41", "by": "LAMOTHE Guy-Noël"},
+  "documents": {
+    "historique.pdf": {
+      "source": "notes.txt",
+      "type": "historique",
+      "identifiers": [
+        "DESMAZURES", "Corinne", "DESMAZURE", "07/09/1972", "0081234567", "A2212050042", "23 allée des Acacias",
+        "06 71 48 22 09", "PELLETIER", "Valérie", "Thierry", "Mathis", "Léa",
+        "VERGNOLLE", "Romain", "MONTEIL", "Gwenaëlle", "LAFFITTE", "Hortense", "ROCHEREAU", "Camille",
+        "TESSIER", "Ghislaine", "NAVARRO", "ARRIGHI", "Solène", "CASTAING", "Odile", "FOURCADE",
+        "LAMOTHE", "Guy-Noël"
+      ]
+    },
+    "courrier.pdf": {
+      "source": "courrier.txt",
+      "type": "courrier",
+      "identifiers": [
+        "DESMAZURES", "Corinne", "PELLETIER", "07/09/1972", "FOURCADE", "Bernard", "12 avenue de la Libération",
+        "MARTINON", "Gilles", "LAFFITTE", "Hortense", "NAVARRO", "Arnaud", "KERGUELEN", "Armelle",
+        "ARRIGHI", "Solène", "SOULA", "Josiane"
+      ]
+    }
+  },
+  "timeline": [
+    {"track": {"kind": "substance_use", "label": "Alcool"}, "start": "2015", "end": "2019", "mode": "usage", "certainty": "approx", "note": "Usage quotidien, aggravé après le divorce.", "sources": ["historique 24/11/2022", "courrier"]},
+    {"track": {"kind": "substance_use", "label": "Alcool"}, "start": "2019", "end": null, "mode": "sevrage", "certainty": "approx", "note": "Premier sevrage hospitalier (clinique des Pins), abstinence de 4 mois.", "sources": ["historique 15/11/2022", "historique 24/11/2022"]},
+    {"track": {"kind": "substance_use", "label": "Alcool"}, "start": "2019", "end": "2022-12-05", "mode": "rechute", "certainty": "approx", "note": "Reprise progressive, jusqu'à 10-12 UIA/j avec consommation matinale.", "sources": ["historique 24/11/2022"]},
+    {"track": {"kind": "substance_use", "label": "Alcool"}, "start": "2022-11-14", "end": null, "mode": "intoxication", "certainty": "exact", "note": "Alcoolisation aiguë (2,84 g/L) avec chute.", "sources": ["historique 14/11/2022"]},
+    {"track": {"kind": "substance_use", "label": "Alcool"}, "start": "2022-12-05", "end": "2022-12-16", "mode": "sevrage", "certainty": "exact", "note": "Sevrage hospitalier, hallucinations visuelles transitoires à J2 sans DT.", "sources": ["historique 05/12/2022", "historique 06/12/2022", "historique 16/12/2022", "courrier"]},
+    {"track": {"kind": "substance_use", "label": "Alcool"}, "start": "2022-12-25", "end": null, "mode": "rechute", "certainty": "exact", "note": "Consommation ponctuelle le soir de Noël, chez sa sœur.", "sources": ["historique 03/01/2023", "historique 24/01/2023"]},
+    {"track": {"kind": "substance_use", "label": "Alcool"}, "start": "2023-02", "end": null, "mode": "usage", "certainty": "month", "note": "Deux épisodes de consommation début février, sans reprise quotidienne ; abstinence ensuite depuis mars.", "sources": ["historique 21/02/2023"]},
+    {"track": {"kind": "substance_use", "label": "Alcool"}, "start": "2023-04", "end": null, "mode": "craving", "certainty": "month", "note": "Craving intense au décès de sa mère, sans consommation.", "sources": ["historique 10/05/2023"]},
+    {"track": {"kind": "substance_use", "label": "Alcool"}, "start": "2024-01", "end": null, "ongoing": true, "mode": "rechute", "certainty": "month", "note": "Rechute mi-janvier 2024, 4 à 6 UIA/j le soir, après le départ de son fils.", "sources": ["historique 23/01/2024", "historique 25/01/2024"]},
+    {"track": {"kind": "substance_use", "label": "Tabac"}, "start": "2022-11", "end": null, "ongoing": true, "mode": "usage", "certainty": "approx", "note": "10 cig/j (ancienneté inconnue, 15 PA selon l'interne), réduit à 5 cig/j en septembre 2023.", "sources": ["historique 14/11/2022", "historique 19/09/2023"]},
+    {"track": {"kind": "psychiatric", "label": "Épisode dépressif caractérisé"}, "start": "2022-11", "end": "2023-09", "certainty": "month", "note": "Symptômes présents dès novembre 2022, diagnostic posé le 10/01/2023 après sevrage ; aggravation après le deuil, rémission partielle en septembre 2023.", "sources": ["historique 24/11/2022", "historique 10/01/2023", "historique 13/06/2023", "historique 19/09/2023"]},
+    {"track": {"kind": "psychiatric", "label": "Tentative de suicide"}, "start": "2016", "end": null, "certainty": "year", "note": "Intoxication médicamenteuse volontaire au moment de la séparation, non hospitalisée.", "sources": ["historique 24/11/2022", "courrier"]},
+    {"track": {"kind": "psychiatric", "label": "Idées de mort passives"}, "start": "2023-06", "end": null, "certainty": "month", "note": "Sans projet ni scénario.", "sources": ["historique 13/06/2023"]},
+    {"track": {"kind": "somatic", "label": "Fracture du radius gauche"}, "start": "2022-11-14", "end": "2023-01-10", "certainty": "exact", "note": "Plâtre jusqu'au 10/01/2023.", "sources": ["historique 14/11/2022", "historique 10/01/2023"]},
+    {"track": {"kind": "somatic", "label": "Stéatose hépatique"}, "start": "2022-12", "end": null, "ongoing": true, "certainty": "month", "note": "Échographie pendant l'hospitalisation.", "sources": ["historique 16/12/2022", "courrier"]},
+    {"track": {"kind": "medication", "label": "Diazépam"}, "start": "2022-12-05", "end": "2022-12-16", "certainty": "exact", "note": "Protocole de sevrage.", "sources": ["historique 05/12/2022", "historique 16/12/2022"]},
+    {"track": {"kind": "medication", "label": "Thiamine"}, "start": "2022-11-24", "end": null, "certainty": "exact", "note": "250 mg/j à la sortie.", "sources": ["historique 24/11/2022", "historique 16/12/2022"]},
+    {"track": {"kind": "medication", "label": "Acamprosate"}, "start": "2022-12-16", "end": "2023-02-21", "certainty": "exact", "note": "333 mg 2-2-2, jugé peu efficace.", "sources": ["historique 16/12/2022", "historique 21/02/2023"]},
+    {"track": {"kind": "medication", "label": "Sertraline"}, "start": "2023-01-10", "end": null, "ongoing": true, "certainty": "exact", "note": "50 mg/j, 100 mg/j à partir du 13/06/2023.", "sources": ["historique 10/01/2023", "historique 13/06/2023"]},
+    {"track": {"kind": "medication", "label": "Baclofène"}, "start": "2023-02-21", "end": "2023-12", "certainty": "month", "note": "Titration jusqu'à 60 mg/j, arrêté par la patiente fin décembre 2023.", "sources": ["historique 21/02/2023", "historique 23/01/2024"]},
+    {"track": {"kind": "medication", "label": "Baclofène"}, "start": "2024-01-25", "end": null, "ongoing": true, "certainty": "exact", "note": "Reprise avec titration.", "sources": ["historique 25/01/2024"]},
+    {"track": {"kind": "medication", "label": "Substituts nicotiniques"}, "start": "2023-09-19", "end": null, "certainty": "exact", "note": "Patchs 14 mg/24h.", "sources": ["historique 19/09/2023"]},
+    {"track": {"kind": "therapeutic_psycho", "label": "Hospitalisation pour sevrage"}, "start": "2022-12-05", "end": "2022-12-16", "certainty": "exact", "note": "", "sources": ["historique 05/12/2022", "historique 16/12/2022", "courrier"]},
+    {"track": {"kind": "therapeutic_psycho", "label": "Suivi psychiatrique en addictologie"}, "start": "2022-11-24", "end": null, "ongoing": true, "certainty": "exact", "note": "ELSA aux urgences le 15/11/2022, puis consultations.", "sources": ["historique 15/11/2022", "historique 24/11/2022"]},
+    {"track": {"kind": "therapeutic_psycho", "label": "Psychothérapie (TCC)"}, "start": "2022-12-12", "end": null, "ongoing": true, "certainty": "exact", "note": "Tous les 15 jours au CSAPA après la sortie.", "sources": ["historique 12/12/2022", "historique 10/05/2023"]},
+    {"track": {"kind": "therapeutic_psycho", "label": "Accompagnement social"}, "start": "2023-01-03", "end": null, "certainty": "exact", "note": "IJ, pension alimentaire, pré-reprise.", "sources": ["historique 03/01/2023"]},
+    {"track": {"kind": "life_event", "label": "Divorce"}, "start": "2016", "end": null, "certainty": "year", "note": "", "sources": ["historique 24/11/2022"]},
+    {"track": {"kind": "life_event", "label": "Arrêt de travail"}, "start": "2022-09-12", "end": "2023-09-04", "certainty": "exact", "note": "", "sources": ["historique 03/01/2023", "historique 19/09/2023"]},
+    {"track": {"kind": "life_event", "label": "Décès de sa mère"}, "start": "2023-04", "end": null, "certainty": "month", "note": "Fin avril 2023 (\"il y a une dizaine de jours\" le 10/05).", "sources": ["historique 10/05/2023", "historique 13/06/2023"]},
+    {"track": {"kind": "life_event", "label": "Reprise du travail à mi-temps thérapeutique"}, "start": "2023-09-04", "end": null, "certainty": "exact", "note": "", "sources": ["historique 19/09/2023"]},
+    {"track": {"kind": "life_event", "label": "Départ de son fils pour Toulouse"}, "start": "2024-01", "end": null, "certainty": "month", "note": "", "sources": ["historique 23/01/2024"]}
+  ],
+  "contradictions": [
+    {"topic": "Début de l'usage quotidien d'alcool", "versions": [{"says": "vers 2015", "source": "historique 24/11/2022, courrier"}, {"says": "une dizaine d'années, soit 2012-2013", "source": "historique 05/12/2022 (interne)"}], "reading": "Vers 2015 : le psychiatre et le courrier concordent."},
+    {"topic": "Date du divorce", "versions": [{"says": "2016", "source": "historique 24/11/2022"}, {"says": "2017", "source": "historique 05/12/2022 (interne)"}], "reading": "2016, l'année de la tentative de suicide liée à la séparation."},
+    {"topic": "Tabac", "versions": [{"says": "non fumeuse", "source": "historique 15/11/2022 (IDE ELSA)"}, {"says": "10 cigarettes par jour", "source": "historique 14/11/2022, 24/11/2022, 24/01/2023, courrier"}], "reading": "Fumeuse, 10 cigarettes par jour."},
+    {"topic": "Année du premier sevrage", "versions": [{"says": "2019", "source": "historique 15/11/2022, 24/11/2022, courrier"}, {"says": "il y a 3 ans", "source": "historique 14/11/2022 (le fils)"}, {"says": "en 2018 ou 2019", "source": "historique 07/12/2022 (la patiente)"}], "reading": "2019."},
+    {"topic": "Abstinence après la sortie de décembre 2022", "versions": [{"says": "abstinente depuis la sortie", "source": "historique 10/01/2023 (psychiatre)"}, {"says": "a bu le soir de Noël", "source": "historique 03/01/2023 (AS), 24/01/2023 (IDE)"}], "reading": "Rechute ponctuelle le 25/12/2022, tue au psychiatre."},
+    {"topic": "Diagnostic thymique", "versions": [{"says": "trouble de l'adaptation avec humeur dépressive", "source": "historique 05/12/2022 (interne)"}, {"says": "épisode dépressif caractérisé d'intensité moyenne", "source": "historique 10/01/2023 (psychiatre)"}], "reading": "Épisode dépressif caractérisé : symptômes persistants après le sevrage."},
+    {"topic": "Dose de sertraline", "versions": [{"says": "100 mg/j prescrits", "source": "historique 13/06/2023"}, {"says": "150 mg pris par erreur", "source": "historique 15/06/2023 (IDE)"}], "reading": "100 mg/j prescrits ; erreur de prise corrigée."},
+    {"topic": "Date de sortie d'hospitalisation", "versions": [{"says": "16/12/2022", "source": "historique 16/12/2022"}, {"says": "16/12/2023", "source": "courrier (faute de frappe)"}], "reading": "16/12/2022."},
+    {"topic": "Début de la rechute de 2024", "versions": [{"says": "depuis 10 jours environ (vers le 13/01)", "source": "historique 23/01/2024 (IDE)"}, {"says": "mi-janvier 2024", "source": "historique 25/01/2024 (psychiatre)"}, {"says": "depuis les fêtes", "source": "historique 25/01/2024 (la patiente)"}], "reading": "Mi-janvier 2024."}
+  ]
+}
