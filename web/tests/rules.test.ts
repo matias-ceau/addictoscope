@@ -193,3 +193,18 @@ describe("leaks seen on real documents", () => {
     expect(found).toContain("MARCHANDIOU");
   });
 });
+
+// Shapes that leaked on the fictional dossiers (data/anonymized/dossiers).
+describe("leaks seen on the fictional dossiers", () => {
+  it("finds a birth name after née, not a word written in capitals", () => {
+    expect(names("Patiente : Mme DESMAZURES Corinne, née PELLETIER le 07/09/1972")).toContainEqual(["PERSONNE", "PELLETIER"]);
+    expect(names("Née le 07/09/1972 (51 ans)")).toEqual([]);
+    expect(names("il ne VEUT pas en parler")).toEqual([]);
+    expect(hits("née PELLETIER le 07/09/1972")).toContainEqual(["NAISSANCE", "07/09/1972"]);
+  });
+
+  it("reads a record number after a bare N°", () => {
+    expect(hits("PEYRAUBE OCEANE   N° 2024-0112")).toContainEqual(["DOSSIER", "2024-0112"]);
+    expect(hits("chambre N° 12, lit 2")).toEqual([]);
+  });
+});

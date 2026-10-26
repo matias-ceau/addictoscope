@@ -146,6 +146,8 @@ const CONTEXT_RULES: ContextRule[] = [
   { re: new RegExp(String.raw`(${NAME_SEQ})[ \t]*\((?:${ROLES})\)`, "g"), category: "SOIGNANT" },
   // The prescriber closing an order line: "Ordonnance de sortie du ... de Nawel BENDRIS"
   { re: new RegExp(String.raw`\bde[ \t]+([${U}][${L}]+(?:-[${U}][${L}]+)?[ ]+${CAPS_SURNAME})[ \t]*$`, "gm"), category: "SOIGNANT" },
+  // A birth name: "Mme DESMAZURES Corinne, née PELLETIER le 07/09/1972"
+  { re: new RegExp(String.raw`\b[Nn]ée?[ \t]+(${NAME_SEQ})`, "g"), category: "PERSONNE" },
   // "Mme MARCHAND", "Monsieur Paul Dupont"
   { re: new RegExp(String.raw`\b${TITLES_CIVIL}[ \t]+(${NAME_SEQ})`, "g"), category: "PERSONNE" },
 ];
