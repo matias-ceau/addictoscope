@@ -123,7 +123,8 @@ const RULES: Rule[] = [
   {
     category: "ETABLISSEMENT",
     re: new RegExp(
-      String.raw`\b(?:CENTRE HOSPITALIER|Centre [Hh]ospitalier|CHU|CHS|CH|Clinique|CLINIQUE|H[ôo]pital|H[ÔO]PITAL|EHPAD|CMP|CSAPA|CAARUD|SSR)[ \t]+(?:(?:de|du|des|d'|la|le|l'|et|Saint|St|Sainte)[ \t]*|[${UPPER}][${UPPER}${LOWER}'-]+[ \t]*){1,6}`,
+      // Ends on a capitalised word: "au CSAPA du centre hospitalier" names no one.
+      String.raw`\b(?:CENTRE HOSPITALIER|Centre [Hh]ospitalier|CHU|CHS|CH|Clinique|CLINIQUE|H[ôo]pital|H[ÔO]PITAL|EHPAD|CMP|CSAPA|CAARUD|SSR)[ \t]+(?:(?:de|du|des|d'|la|le|l'|et)[ \t]*|(?:Saint|St|Sainte|[${UPPER}][${UPPER}${LOWER}'-]+)[ \t]+){0,5}(?:Saint|St|Sainte|[${UPPER}][${UPPER}${LOWER}'-]+)`,
       "g",
     ),
     accept: (v) => v.trim().split(/\s+/).length >= 2,
