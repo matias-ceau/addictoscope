@@ -60,7 +60,8 @@ const RULES: Rule[] = [
   { category: "IPP", re: /\b(?:IPP|I\.P\.P\.?|N°\s*patient)\s*:?\s*(\d{5,})/gi, group: 1, labelled: true },
   {
     category: "DOSSIER",
-    re: /\b(?:Admission|Séjour|S[ée]jour|N°\s*(?:de\s*)?dossier|Dossier|NDA|N°\s*venue)\s*:?\s*([A-Z0-9][A-Z0-9-]{4,})/gi,
+    // A bare "N°" counts too, as in headers: "N° 2024-0112".
+    re: /(?:\b(?:Admission|Séjour|S[ée]jour|N°\s*(?:de\s*)?dossier|Dossier|NDA|N°\s*venue)|N°)\s*:?\s*([A-Z0-9][A-Z0-9-]{4,})/gi,
     group: 1,
     accept: (v) => /\d{4,}/.test(v),
     labelled: true,
@@ -86,6 +87,14 @@ const RULES: Rule[] = [
   {
     category: "NAISSANCE",
     re: /\b(?:N[ée]e?\s*\(e\)|N[ée]e?|Date de naissance|DDN)\s*(?:le\s*)?:?\s*(\d{1,2}[/.-]\d{1,2}[/.-](\d{4}|\d{2}))/gi,
+    group: 1,
+    label: (m) => `[NE(E) EN ${m[2].length === 4 ? m[2] : "19" + m[2]}]`,
+    labelled: true,
+  },
+  // With the birth name in between: "née PELLETIER le 07/09/1972".
+  {
+    category: "NAISSANCE",
+    re: new RegExp(String.raw`\b[Nn][ée]e?[ \t]+[${UPPER}][${UPPER}'’-]+[ \t]+le[ \t]+(\d{1,2}[/.-]\d{1,2}[/.-](\d{4}|\d{2}))`, "g"),
     group: 1,
     label: (m) => `[NE(E) EN ${m[2].length === 4 ? m[2] : "19" + m[2]}]`,
     labelled: true,

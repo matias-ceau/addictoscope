@@ -97,7 +97,7 @@ describe.each(cases)("$name ($engine)", ({ name, engine }) => {
 
   it("keeps clinical content and care dates in place", () => {
     const all = outPages.map((p) => p.text).join("\n");
-    expect(all).toMatch(/\d{2}\/\d{2}\/2024/);
+    expect(all).toMatch(/\d{2}\/\d{2}\/20\d{2}/);
     expect(all.toLowerCase()).toMatch(/alcool|tabac|sevrage/);
   });
 

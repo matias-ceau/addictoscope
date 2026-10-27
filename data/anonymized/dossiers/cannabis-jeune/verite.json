@@ -1,0 +1,66 @@
+{
+  "summary": "Femme de 21 ans suivie en consultation jeunes consommateurs. Trouble de l'usage du cannabis sévère avec syndrome d'hyperémèse cannabinoïde, trouble panique, TDAH discuté, alcoolisations du week-end. Sept mois de notes et un compte rendu des urgences.",
+  "header": {
+    "establishment": [
+      "CSAPA FICTIF L'ESCALE - CONSULTATION JEUNES CONSOMMATEURS",
+      "3, cours des Fictifs - 33000 BORDEAUX",
+      "Tél. 05 00 00 00 02   Finess 33 0 99996 6"
+    ],
+    "patient": [
+      "PEYRAUBE OCEANE   N° 2024-0112",
+      "Née le 11/01/2003 (21 ans)",
+      "IPP 0102456781",
+      "9 impasse des Vignes, 33130 BÈGLES"
+    ],
+    "title": "HISTORIQUE DES OBSERVATIONS"
+  },
+  "export": {"edited": "20/09/2024 10:26", "by": "BARTHE Laure"},
+  "documents": {
+    "historique.pdf": {
+      "source": "notes.txt",
+      "type": "historique",
+      "identifiers": [
+        "PEYRAUBE", "Océane", "PEYRAUDE", "11/01/2003", "0102456781", "2024-0112", "9 impasse des Vignes",
+        "06 33 17 84 52", "oceane.peyraube03@example.com", "Florence", "Dylan",
+        "BARTHE", "Laure", "DELMAS", "Gaspard", "MOUSTIE", "Clotilde", "TRIQUET", "Lucas"
+      ]
+    },
+    "urgences.pdf": {
+      "source": "urgences.txt",
+      "type": "compte rendu",
+      "identifiers": [
+        "PEYRAUBE", "Océane", "11/01/2003", "24031700871", "9 impasse des Vignes", "Florence", "06 12 90 47 35",
+        "KERJEAN"
+      ]
+    }
+  },
+  "timeline": [
+    {"track": {"kind": "substance_use", "label": "Cannabis"}, "start": "2017", "end": "2020-03", "mode": "usage", "certainty": "approx", "note": "Début en 3e, vers 14 ans (15 ans selon les urgences).", "sources": ["historique 15/02/2024", "urgences"]},
+    {"track": {"kind": "substance_use", "label": "Cannabis"}, "start": "2020-03", "end": "2024-04-01", "mode": "usage", "certainty": "month", "note": "Quotidien depuis le confinement ; 10-12 joints/j début 2024, premier joint au réveil.", "sources": ["historique 15/02/2024", "historique 04/03/2024"]},
+    {"track": {"kind": "substance_use", "label": "Cannabis"}, "start": "2024-04-01", "end": "2024-04-08", "mode": "sevrage", "certainty": "exact", "note": "Arrêt : insomnie, rêves intenses, irritabilité la première semaine.", "sources": ["historique 26/03/2024", "historique 09/04/2024"]},
+    {"track": {"kind": "substance_use", "label": "Cannabis"}, "start": "2024-04-23", "end": null, "ongoing": true, "mode": "rechute", "certainty": "approx", "note": "2-3 joints le soir après une rupture, puis quelques joints le week-end seulement pendant l'été.", "sources": ["historique 30/04/2024", "historique 21/05/2024", "historique 17/09/2024"]},
+    {"track": {"kind": "substance_use", "label": "Alcool"}, "start": "2024-03", "end": null, "ongoing": true, "mode": "usage", "certainty": "approx", "note": "Alcoolisations ponctuelles importantes le week-end (5 à 8 verres), ancienneté inconnue.", "sources": ["historique 26/03/2024"]},
+    {"track": {"kind": "substance_use", "label": "Alcool"}, "start": "2024-06", "end": null, "mode": "intoxication", "certainty": "month", "note": "Anniversaire début juin, avec trou noir.", "sources": ["historique 18/06/2024"]},
+    {"track": {"kind": "substance_use", "label": "Tabac"}, "start": "2024-03", "end": null, "ongoing": true, "mode": "usage", "certainty": "approx", "note": "Tabac roulé, une dizaine de cigarettes par jour.", "sources": ["historique 26/03/2024", "urgences"]},
+    {"track": {"kind": "psychiatric", "label": "Trouble panique avec agoraphobie"}, "start": "2023-07", "end": null, "ongoing": true, "certainty": "approx", "note": "Anxiété \"depuis toujours\", crises depuis le lycée, plus fréquentes depuis l'été 2023 ; améliorée sous TCC.", "sources": ["historique 12/03/2024", "historique 26/03/2024", "historique 21/05/2024"]},
+    {"track": {"kind": "psychiatric", "label": "TDAH (évaluation)"}, "start": "2024-03-12", "end": null, "ongoing": true, "certainty": "exact", "note": "ASRS positif ; bilan neuropsychologique demandé le 18/06/2024. Non exclu.", "sources": ["historique 12/03/2024", "historique 26/03/2024", "historique 18/06/2024"]},
+    {"track": {"kind": "somatic", "label": "Syndrome d'hyperémèse cannabinoïde"}, "start": "2024-02-10", "end": "2024-03-18", "certainty": "exact", "note": "Urgences les 10/02, 02/03 et 17/03/2024 (UHCD jusqu'au 18/03). Pas de récidive depuis.", "sources": ["historique 15/02/2024", "historique 04/03/2024", "historique 18/03/2024", "historique 26/03/2024", "urgences"]},
+    {"track": {"kind": "medication", "label": "Hydroxyzine"}, "start": "2024-03-26", "end": null, "ongoing": true, "certainty": "exact", "note": "25 mg si besoin, 2 par jour au maximum.", "sources": ["historique 26/03/2024"]},
+    {"track": {"kind": "medication", "label": "Halopéridol"}, "start": "2024-03-17", "end": null, "certainty": "exact", "note": "2,5 mg IV aux urgences.", "sources": ["urgences"]},
+    {"track": {"kind": "therapeutic_psycho", "label": "Consultation jeunes consommateurs"}, "start": "2024-02-15", "end": null, "ongoing": true, "certainty": "exact", "note": "", "sources": ["historique 15/02/2024"]},
+    {"track": {"kind": "therapeutic_psycho", "label": "Psychothérapie (TCC)"}, "start": "2024-03-12", "end": null, "ongoing": true, "certainty": "exact", "note": "", "sources": ["historique 12/03/2024", "historique 09/04/2024"]},
+    {"track": {"kind": "therapeutic_psycho", "label": "Suivi psychiatrique"}, "start": "2024-03-26", "end": null, "ongoing": true, "certainty": "exact", "note": "", "sources": ["historique 26/03/2024", "historique 18/06/2024"]},
+    {"track": {"kind": "life_event", "label": "Départ de son père"}, "start": "2009", "end": null, "certainty": "year", "note": "\"Quand j'avais 6 ans\".", "sources": ["historique 12/03/2024"]},
+    {"track": {"kind": "life_event", "label": "Arrêt du BTS"}, "start": "2024-01", "end": null, "certainty": "month", "note": "", "sources": ["historique 15/02/2024"]},
+    {"track": {"kind": "life_event", "label": "Rupture avec son compagnon"}, "start": "2024-04", "end": null, "certainty": "approx", "note": "Vers le 23/04/2024.", "sources": ["historique 30/04/2024"]},
+    {"track": {"kind": "life_event", "label": "Emploi saisonnier"}, "start": "2024-07-01", "end": "2024-09", "certainty": "exact", "note": "Camping.", "sources": ["historique 18/06/2024", "historique 17/09/2024"]}
+  ],
+  "contradictions": [
+    {"topic": "Âge du premier joint", "versions": [{"says": "vers 14 ans, en 3e", "source": "historique 15/02/2024"}, {"says": "15 ans", "source": "urgences"}], "reading": "Vers 14 ans (2017)."},
+    {"topic": "Quantité de cannabis début 2024", "versions": [{"says": "6 à 8 joints par jour", "source": "historique 15/02/2024"}, {"says": "10-12 joints par jour", "source": "historique 04/03/2024 (la patiente se corrige)"}], "reading": "10-12 joints par jour : minimisée au premier entretien."},
+    {"topic": "Alcool", "versions": [{"says": "pas vraiment, quelques verres en soirée", "source": "historique 15/02/2024"}, {"says": "alcoolisations importantes le week-end (5 à 8 verres)", "source": "historique 26/03/2024"}], "reading": "Alcoolisations ponctuelles importantes."},
+    {"topic": "Passages aux urgences antérieurs", "versions": [{"says": "2 passages antérieurs en février", "source": "urgences"}, {"says": "10/02 et 02/03/2024", "source": "historique 26/03/2024"}], "reading": "10/02 et 02/03/2024."},
+    {"topic": "TDAH", "versions": [{"says": "non retenu", "source": "historique 21/05/2024 (interne)"}, {"says": "en cours d'évaluation, non exclu", "source": "historique 18/06/2024 (psychiatre)"}], "reading": "En cours d'évaluation."},
+    {"topic": "Date de la reprise du cannabis", "versions": [{"says": "\"il y a une semaine\" le 30/04, le 23 ou le 24/04", "source": "historique 30/04/2024"}, {"says": "depuis fin avril, après 3 semaines d'abstinence", "source": "historique 21/05/2024"}], "reading": "Vers le 23/04/2024."}
+  ]
+}

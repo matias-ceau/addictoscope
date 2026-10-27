@@ -31,6 +31,7 @@ src/addictoscope/   package Python (modèle de frise, extraction de référence,
 tests/               tests pytest
 scripts/             génération des documents d'exemple fictifs
 data/anonymized/     documents d'exemple fictifs : PDF, Word, texte (+ ground_truth.json des identifiants plantés)
+data/anonymized/dossiers/  dossiers cliniques fictifs complets, avec frise et contradictions attendues
 data/processed/      sorties structurées d'exemple
 docs/                cahier des charges, templates, références, note RGPD
 ```
@@ -113,6 +114,7 @@ cd web && npm test                             # règles, masquage et vérificat
 cd web && npm run e2e                          # parcours complet dans Chromium, aucune requête externe
 uv run python scripts/make_synthetic_pdfs.py   # régénère les PDF fictifs
 uv run python scripts/make_synthetic_texts.py  # puis la note Word et la note texte fictives
+uv run python scripts/make_fictional_dossiers.py  # puis les dossiers cliniques fictifs
 ```
 
 Pour l'e2e, soit `npx playwright install chromium`, soit un Chromium déjà
