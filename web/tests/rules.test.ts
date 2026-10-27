@@ -208,3 +208,18 @@ describe("leaks seen on the fictional dossiers", () => {
     expect(hits("chambre N° 12, lit 2")).toEqual([]);
   });
 });
+
+describe("over-masking seen on the fictional dossiers", () => {
+  it("names an establishment only up to a capitalised word", () => {
+    expect(hits("Suivi : CSAPA du centre hospitalier (Dr LAFFITTE)").filter(([c]) => c === "ETABLISSEMENT")).toEqual([]);
+    expect(hits("Hôpital de jour le mardi").filter(([c]) => c === "ETABLISSEMENT")).toEqual([]);
+    expect(hits("sevrage à la clinique des Pins, Clinique des Pins")).toContainEqual(["ETABLISSEMENT", "Clinique des Pins"]);
+    expect(hits("CENTRE HOSPITALIER FICTIF DU BOIS-JOLI\n")).toContainEqual(["ETABLISSEMENT", "CENTRE HOSPITALIER FICTIF DU BOIS-JOLI"]);
+  });
+
+  it("judges the whole word when the model tags part of one", () => {
+    const text = "tremblements +, Cushman 7.";
+    const start = text.indexOf("ushman");
+    expect(trimModelPerson(text, start, start + "ushman".length)).toBeNull();
+  });
+});

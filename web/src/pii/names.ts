@@ -216,6 +216,9 @@ export function trimModelPerson(text: string, start: number, end: number): { sta
   // ("Odile vasseur"): that is exactly what the rules cannot see.
   while (start < end && !/\p{L}/u.test(text[start])) start++;
   while (end > start && !/\p{L}/u.test(text[end - 1])) end--;
+  // The model can tag part of a word ("ushman" in "Cushman"): judge the whole word.
+  while (start > 0 && /\p{L}/u.test(text[start - 1])) start--;
+  while (end < text.length && /\p{L}/u.test(text[end])) end++;
   const tokens = text.slice(start, end).split(/[ \t]+/);
   if (!tokens.some((t) => t.length >= 2 && isNameToken(t))) return null;
   return end > start ? { start, end } : null;
