@@ -117,6 +117,18 @@ uv run python scripts/make_synthetic_texts.py  # puis la note Word et la note te
 uv run python scripts/make_fictional_dossiers.py  # puis les dossiers cliniques fictifs
 ```
 
+### Qualité de la frise (modèle réel, dossiers fictifs)
+
+```bash
+cd web && OPENROUTER_API_KEY=... npx vite-node scripts/run-frise.ts --out=run1   # masquage, découpage, frise
+uv run python scripts/score_frise.py                                             # note contre verite.json
+```
+
+Le premier script suit le chemin de l'application sur chaque dossier de
+`data/anonymized/dossiers/` et garde les réponses du modèle dans
+`data/processed/frise/run1/`. Le second compare chaque frise à la frise
+attendue de `verite.json` et écrit `data/processed/frise/rapport.md`.
+
 Pour l'e2e, soit `npx playwright install chromium`, soit un Chromium déjà
 installé : `PW_CHROMIUM=/usr/bin/chromium npm run e2e`.
 
@@ -125,8 +137,12 @@ installé : `PW_CHROMIUM=/usr/bin/chromium npm run e2e`.
 - ✅ Jalon 1 : pseudonymisation locale des PDF dans le navigateur.
 - ✅ Jalon 2 : espace d'analyse (découpage des observations par un modèle
   multimodal, frise chronologique), réservé aux documents vérifiés.
-  Testé de bout en bout avec un modèle simulé. La qualité réelle des
-  réponses reste à évaluer avec une clé d'API.
+  Testé de bout en bout avec un modèle simulé, puis avec le modèle par
+  défaut sur les trois dossiers fictifs (3 passages) : chaque note découpée
+  et datée, 87 % des événements attendus retrouvés sur la bonne piste et à
+  la bonne date, chacun avec sa note source
+  ([rapport](data/processed/frise/rapport.md)). À évaluer encore sur des
+  dossiers réels.
 - ⏳ Jalon 3 : questions sur le dossier avec renvoi à la page source.
 - 🎯 Périmètre validé pour l'instant : **PDF avec couche texte, Word, texte
   et texte collé**. Les scans

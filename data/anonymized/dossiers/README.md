@@ -40,6 +40,10 @@ vrais dossiers :
   - `contradictions` : chaque contradiction plantée, ses versions et la
     lecture à retenir.
 
+Noter la frise que produit l'application contre `verite.json` (modèle réel,
+clé OpenRouter) : voir « Qualité de la frise » dans le README principal ;
+dernier rapport : [`data/processed/frise/rapport.md`](../../processed/frise/rapport.md).
+
 Régénérer les PDF après une modification des textes :
 
 ```bash
