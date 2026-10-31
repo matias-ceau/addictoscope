@@ -137,6 +137,12 @@ export async function segmentDocument(input: SegmentInput): Promise<Observation[
   return repairObservations(input.doc, input.pages, collected, repeated);
 }
 
+/** "YYYY-MM-DD", even with stray punctuation around it ("2022-12-07,"); else null. */
+function isoDay(raw: string | null): string | null {
+  const m = raw?.match(/^[\s\p{P}]*(\d{4}-\d{2}-\d{2})[\s\p{P}]*$/u);
+  return m && isPartialDate(m[1]) ? m[1] : null;
+}
+
 const before = (a: { page: number; line: number }, b: { page: number; line: number }) =>
   a.page < b.page || (a.page === b.page && a.line < b.line);
 
@@ -185,7 +191,7 @@ export function repairObservations(
       doc,
       start: o.start,
       end: o.end,
-      date: o.date && isPartialDate(o.date) && o.date.length === 10 ? o.date : null,
+      date: isoDay(o.date),
       kind: o.kind.trim() || "observation",
       authorRole: o.author_role?.trim() || null,
       summary: o.summary.trim(),

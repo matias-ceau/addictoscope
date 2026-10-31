@@ -87,11 +87,11 @@ interface RawEvent {
   observation_ids: string[];
 }
 
-function observationText(o: Observation, pages: PageText[], repeated: Set<string>): string {
+function observationText(o: Observation, shortId: string, pages: PageText[], repeated: Set<string>): string {
   const body = linesBetween(pages, o.start, o.end, repeated)
     .map((l) => l.text)
     .join("\n");
-  return `### ${o.id} — ${o.date ?? "date inconnue"} — ${o.kind}${o.authorRole ? ` (${o.authorRole})` : ""}\n${body}`;
+  return `### ${shortId} — ${o.date ?? "date inconnue"} — ${o.kind}${o.authorRole ? ` (${o.authorRole})` : ""}\n${body}`;
 }
 
 export async function buildTimeline(input: TimelineInput): Promise<Timeline> {
@@ -99,11 +99,16 @@ export async function buildTimeline(input: TimelineInput): Promise<Timeline> {
     Object.entries(input.pagesByDoc).map(([doc, pages]) => [doc, repeatedLines(pages)]),
   );
   const sorted = [...input.observations].sort((a, b) => (a.date ?? "9999").localeCompare(b.date ?? "9999"));
+  // The model sees short ids, unique across documents ("o1", "o2"…): given
+  // "historique:o2" and a single document, it often answered "o2", and every
+  // event was then dropped for want of a known source.
+  const realId = new Map(sorted.map((o, i) => [`o${i + 1}`, o.id]));
+  const shortId = new Map([...realId].map(([short, id]) => [id, short]));
 
   // Pack observations into calls of bounded size.
   const batches: { text: string; docs: Set<string> }[] = [];
   for (const o of sorted) {
-    const text = observationText(o, input.pagesByDoc[o.doc] ?? [], repeatedByDoc[o.doc] ?? new Set());
+    const text = observationText(o, shortId.get(o.id)!, input.pagesByDoc[o.doc] ?? [], repeatedByDoc[o.doc] ?? new Set());
     const last = batches.at(-1);
     if (!last || last.text.length + text.length > CHARS_PER_CALL) batches.push({ text, docs: new Set([o.doc]) });
     else {
@@ -126,7 +131,9 @@ export async function buildTimeline(input: TimelineInput): Promise<Timeline> {
       schema: TIMELINE_SCHEMA,
       fetchImpl: input.fetchImpl,
     });
-    raw.push(...(result.events ?? []));
+    for (const e of result.events ?? []) {
+      raw.push({ ...e, observation_ids: (e.observation_ids ?? []).map((id) => realId.get(id) ?? id) });
+    }
     input.onProgress?.(++done, batches.length);
   }
   return assembleTimeline(raw, new Set(input.observations.map((o) => o.id)));

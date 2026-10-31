@@ -4,8 +4,9 @@ import { chatJson } from "../src/cloud/client";
 import { CloudRefused, type CloudPolicy } from "../src/cloud/guard";
 import type { PageText } from "../src/core/types";
 import type { Manifest } from "../src/core/verify";
+import type { Observation } from "../src/notebook/model";
 import { repeatedLines } from "../src/notebook/lines";
-import { assembleTimeline, TIMELINE_SCHEMA } from "../src/notebook/timeline";
+import { assembleTimeline, buildTimeline, TIMELINE_SCHEMA } from "../src/notebook/timeline";
 import { repairObservations, SEGMENT_SCHEMA, segmentDocument } from "../src/notebook/segment";
 
 const policy: CloudPolicy = { kind: "openrouter-zdr", apiKey: "sk-test", model: "test/model" };
@@ -87,6 +88,15 @@ describe("observation segmentation", () => {
     expect(obs[0].date).toBeNull();
     expect(obs[1].end).toEqual({ page: 2, line: 6 });
   });
+
+  it("keeps an ISO date the model wrapped in stray punctuation", () => {
+    const obs = repairObservations("d", pages, [
+      { start: { page: 0, line: 4 }, end: { page: 0, line: 6 }, date: "2024-04-15,", kind: "IDE", author_role: null, summary: "" },
+      { start: { page: 1, line: 5 }, end: { page: 1, line: 6 }, date: " 2024-05-06.", kind: "psy", author_role: null, summary: "" },
+      { start: { page: 2, line: 4 }, end: { page: 2, line: 5 }, date: "2024-06-20 ou 2024-06-21", kind: "psy", author_role: null, summary: "" },
+    ]);
+    expect(obs.map((o) => o.date)).toEqual(["2024-04-15", "2024-05-06", null]);
+  });
 });
 
 describe("timeline assembly", () => {
@@ -118,6 +128,36 @@ describe("timeline assembly", () => {
     const t = assembleTimeline([raw({}), raw({ observation_ids: ["d:o2"] })], new Set(["d:o1", "d:o2"]));
     expect(t.events).toHaveLength(1);
     expect(t.events[0].observationIds).toEqual(["d:o1", "d:o2"]);
+  });
+});
+
+describe("timeline building", () => {
+  const obs = (id: string, doc: string, date: string, line: number): Observation => ({
+    id, doc, date, kind: "IDE", authorRole: null, summary: "",
+    start: { page: 0, line }, end: { page: 0, line },
+  });
+  const docPages = { historique: [page(0, ["Observation IDE du 15/04/2024", "Rechute."])], courrier: [page(0, ["Courrier", "Sortie."])] };
+  const event = (ids: string[]) => ({
+    kind: "substance_use", label: "Alcool", start: "2024-04", end: null, ongoing: false, mode: "rechute",
+    loss_of_control: false, note: "", observation_ids: ids,
+  });
+
+  // With a single document, the model shortened "historique:o2" to "o2" in
+  // about half the runs, and every event was then dropped for want of a source.
+  it("shows the model short ids and maps its answer back to the observations", async () => {
+    const seen: { url: string; body: any; headers: any }[] = [];
+    const t = await buildTimeline({
+      observations: [obs("historique:o1", "historique", "2024-04-15", 1), obs("courrier:o1", "courrier", "2024-05-02", 1)],
+      pagesByDoc: docPages,
+      manifests: { historique: verified, courrier: verified },
+      policy,
+      fetchImpl: fakeFetch([{ events: [event(["o1"]), event(["o2", "o9"]), event(["courrier:o1"])].map((e, i) => ({ ...e, start: `2024-0${i + 4}` })) }], seen),
+    });
+    const sent: string = seen[0].body.messages[1].content;
+    expect(sent).toContain("### o1 — 2024-04-15");
+    expect(sent).toContain("### o2 — 2024-05-02");
+    expect(sent).not.toContain("historique:o1");
+    expect(t.events.map((e) => e.observationIds)).toEqual([["historique:o1"], ["courrier:o1"], ["courrier:o1"]]);
   });
 });
 
