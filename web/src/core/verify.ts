@@ -4,7 +4,7 @@
  * look for anything that should have been removed.
  */
 import { foldChars } from "../pii/detect";
-import { COMMON_WORDS, isFirstName, isParticle, normaliseName } from "../pii/names";
+import { afterPlaceCue, COMMON_WORDS, isFirstName, isParticle, normaliseName } from "../pii/names";
 import { findRuleSpans } from "../pii/rules";
 import type { Detection, PageText } from "./types";
 import { PERSON_CATEGORIES } from "./types";
@@ -33,8 +33,13 @@ type Spelling = "any" | "capitalised" | "upper";
  * `outputPages` is the redacted document re-read from scratch. Every
  * accepted original value (and each name token of 3+ letters, particles
  * aside) must be gone, and no strong identifier pattern may remain.
+ *
+ * `places`: places left readable (offered, not masked). One that a person
+ * also bears is not a leak where it reads as a place ("retour d'Agen"), as
+ * the detector decided.
  */
-export function findLeaks(outputPages: PageText[], accepted: Detection[]): Leak[] {
+export function findLeaks(outputPages: PageText[], accepted: Detection[], places: string[] = []): Leak[] {
+  const placeSet = new Set(places.map(fold));
   const needles = new Map<string, Spelling>();
   for (const d of accepted) {
     if (!d.text) continue;
@@ -59,6 +64,7 @@ export function findLeaks(outputPages: PageText[], accepted: Detection[]): Leak[
         if (spelling === "capitalised" && first !== first.toUpperCase()) continue;
         const written = orig.slice(m.index, m.index + n.length);
         if (spelling === "upper" && written !== written.toUpperCase()) continue;
+        if (placeSet.has(n) && afterPlaceCue(orig, m.index)) continue;
         leaks.push({ page: page.page, text: n, reason: "known-identifier" });
         break;
       }
@@ -95,8 +101,9 @@ export async function buildManifest(
   outputPages: PageText[],
   accepted: Detection[],
   reviewedByHuman: boolean,
+  places: string[] = [],
 ): Promise<Manifest> {
-  const leaks = findLeaks(outputPages, accepted);
+  const leaks = findLeaks(outputPages, accepted, places);
   const redactions: Record<string, number> = {};
   for (const d of accepted) redactions[d.category] = (redactions[d.category] ?? 0) + 1;
   return {

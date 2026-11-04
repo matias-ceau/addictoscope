@@ -8,7 +8,7 @@ import { rectsForSpan } from "../core/geometry";
 import { rowSpanToPage, visualRows } from "../core/pagetext";
 import type { Category, Detection, DetectionSource, PageText } from "../core/types";
 import { PERSON_CATEGORIES } from "../core/types";
-import { COMMON_WORDS, findNameSpans, nameTokens, normaliseName, trimModelPerson } from "./names";
+import { afterPlaceCue, COMMON_WORDS, findNameSpans, nameTokens, normaliseName, trimModelPerson } from "./names";
 import type { NerSpan } from "./ner";
 import { findRuleSpans } from "./rules";
 
@@ -230,13 +230,6 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
   if (candidates[0]) candidates[0].category = "PATIENT";
   for (const e of entities) if (e.category === "PATIENT" && e !== candidates[0]) e.category = "PERSONNE";
 
-  // A place the model offered that is also a person's surname is masked as a
-  // place (and searched everywhere like one): left readable, the verifier would take it for the person.
-  const surnames = new Set(entities.flatMap((e) => [...e.surnames]));
-  for (const h of hits) {
-    if (h.suggested && h.category === "VILLE" && surnames.has(normaliseName(pageText.get(key(h.doc, h.page))!.text.slice(h.start, h.end)))) h.suggested = false;
-  }
-
   // Values found once are searched for everywhere, so a birth date or a
   // hospital name caught in a header is also caught in a free-text note.
   const valueHits = new Map<string, Hit>();
@@ -300,6 +293,21 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
       }
     }
   }
+  // Places stay readable, even when a person bears their name: a propagated
+  // name that falls exactly on a place the model offered, and reads as a place
+  // ("retour d'Agen"), is left to the place. The verifier makes the same call.
+  const placeSpans = new Set(
+    hits.filter((h) => h.suggested && h.category === "VILLE").map((h) => `${key(h.doc, h.page)}|${h.start}|${h.end}`),
+  );
+  hits = hits.filter(
+    (h) =>
+      !(
+        h.source === "propagation" &&
+        PERSON_CATEGORIES.has(h.category) &&
+        placeSpans.has(`${key(h.doc, h.page)}|${h.start}|${h.end}`) &&
+        afterPlaceCue(pageText.get(key(h.doc, h.page))!.text, h.start)
+      ),
+  );
   hits = resolveOverlaps(hits);
 
   // Surname-only mentions shared by several entities ("Mme MARCHAND" with a

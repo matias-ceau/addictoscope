@@ -237,7 +237,9 @@ describe("gaps seen on real exports", () => {
     const dets = detectCorpus([{ id: "doc", pages: [page], ner }]).filter((d) => d.accepted);
     let out = page.text;
     for (const d of [...dets].sort((a, b) => b.start - a.start)) out = out.slice(0, d.start) + d.label + out.slice(d.end);
-    return { dets, out, leaks: findLeaks([{ ...page, text: out }], dets) };
+    const all = detectCorpus([{ id: "doc", pages: [page], ner }]);
+    const places = all.filter((d) => !d.accepted && d.category === "VILLE").map((d) => d.text);
+    return { dets, out, leaks: findLeaks([{ ...page, text: out }], dets, places) };
   };
 
   describe("observation headers of Word history exports", () => {
@@ -328,7 +330,7 @@ describe("gaps seen on real exports", () => {
       expect(leaks).toEqual([]);
     });
 
-    it("never let a place suggestion hide a name, and mask a place that is also a surname as a place", () => {
+    it("never let a place suggestion hide a name, and leave a place readable even when a person bears its name", () => {
       const text = "21/06/2023 16:05 : Observation IDE ( AGEN Ondine - Psychiatre )\nRetour d'Agen ce week-end, revu par le Dr AGEN.";
       const loc = (value: string, from = 0): NerSpan => {
         const start = text.indexOf(value, from);
@@ -338,9 +340,17 @@ describe("gaps seen on real exports", () => {
       const ner = { 0: [loc(" AGEN Ondine"), loc("Agen", text.indexOf("Retour"))] };
       const { dets, out, leaks } = redacted(text, ner);
       expect(dets).toContainEqual(expect.objectContaining({ text: "AGEN Ondine", category: "SOIGNANT" }));
-      expect(dets).toContainEqual(expect.objectContaining({ text: "Agen", category: "VILLE" }));
-      expect(out).not.toMatch(/AGEN|Agen|Ondine/);
+      // The town is a place: not masked, and not a leak for the verifier.
+      expect(dets.filter((d) => d.text === "Agen")).toEqual([]);
+      expect(out).toContain("Retour d'Agen ce week-end");
+      expect(out).not.toMatch(/AGEN|Ondine/);
       expect(leaks).toEqual([]);
+      // Without a place cue, the same word is the person and stays masked.
+      const bare = "21/06/2023 16:05 : Observation IDE ( AGEN Ondine - Psychiatre )\nAppel d'Ondine puis Agen ce matin.";
+      const bareStart = bare.indexOf("Agen ce");
+      const r = redacted(bare, { 0: [{ start: bareStart, end: bareStart + 4, label: "LOC", score: 0.9 }] });
+      expect(r.out).not.toMatch(/Agen ce matin/);
+      expect(r.leaks).toEqual([]);
     });
 
     it("cover every occurrence of a name with a short or particle token", () => {

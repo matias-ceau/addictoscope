@@ -59,6 +59,15 @@ const FOLDED_STOPWORDS = new Set([...CAPS_STOPWORDS].map((w) => normaliseName(w)
  */
 const PARTICLES = new Set("D DE DU DES LE LA LES L DEL DELLA DELLO DI DA DOS DAS VAN VON DER DEN TER EL AL".split(" "));
 
+/**
+ * Is the word starting at `start` introduced as a place ("à Agen", "d'Agen",
+ * "vers Agen", "CHU de Agen")? Lowercase cues only: "DE" in "LE GOFF DE
+ * KERMADEC" is a particle, not a place.
+ */
+export function afterPlaceCue(text: string, start: number): boolean {
+  return /(?:^|[^\p{L}])(?:à|au|aux|en|vers|sur|de|du|d['’])\s*$/u.test(text.slice(Math.max(0, start - 12), start));
+}
+
 export function isParticle(t: string): boolean {
   return PARTICLES.has(normaliseName(t));
 }
