@@ -38,8 +38,13 @@ const PATIENT_MARKER = /\b(IPP|N[ée]e?\s*\(e\)|N[ée]e? le|Date de naissance|Ad
 const SOURCE_RANK: Record<DetectionSource, number> = { manual: 4, rule: 3, name: 2, ner: 2, propagation: 1 };
 
 function resolveOverlaps(hits: Hit[]): Hit[] {
+  // A mere suggestion never hides a masked value: "CHU de Bordeaux" found
+  // elsewhere still covers the "Bordeaux" the model offered as a place.
   const sorted = [...hits].sort(
-    (a, b) => SOURCE_RANK[b.source] - SOURCE_RANK[a.source] || b.end - b.start - (a.end - a.start),
+    (a, b) =>
+      Number(!!a.suggested) - Number(!!b.suggested) ||
+      SOURCE_RANK[b.source] - SOURCE_RANK[a.source] ||
+      b.end - b.start - (a.end - a.start),
   );
   const kept: Hit[] = [];
   for (const h of sorted) {
@@ -103,6 +108,28 @@ function escapeRe(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+/**
+ * Widen a hit inside a hyphenated name to the whole compound: "JEAN" found
+ * alone elsewhere takes "JEAN-MAELIG" with it. Not places: "Saint-Jean-de-Luz"
+ * has a lowercase part, "Saint-Jean" a saint.
+ */
+function wholeCompound(text: string, start: number, end: number): { start: number; end: number } {
+  let s = start;
+  let e = end;
+  while (s > 1 && text[s - 1] === "-" && /\p{L}/u.test(text[s - 2])) {
+    s -= 1;
+    while (s > 0 && /\p{L}/u.test(text[s - 1])) s--;
+  }
+  while (text[e] === "-" && /\p{L}/u.test(text[e + 1] ?? "")) {
+    e += 1;
+    while (e < text.length && /\p{L}/u.test(text[e])) e++;
+  }
+  if (s === start && e === end) return { start, end };
+  const parts = text.slice(s, e).split("-");
+  if (parts.length > 3 || !parts.every((p) => /^\p{Lu}/u.test(p)) || /^(?:SAINTE?|ST|STE)$/.test(normaliseName(parts[0]))) return { start, end };
+  return { start: s, end: e };
+}
+
 /** Find every occurrence of `token` in `text` as a whole word. */
 function findWord(text: string, token: string, caseSensitive: boolean): number[] {
   const re = new RegExp(`(?<![\\p{L}\\p{N}])${escapeRe(token)}(?![\\p{L}\\p{N}])`, caseSensitive ? "gu" : "giu");
@@ -154,7 +181,11 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
           if (span) hits.push({ doc: doc.id, page: page.page, source: "ner", category: "PERSONNE", ...span });
         } else if (s.label === "LOC") {
           // Places are quasi-identifiers: offered for review, not masked by default.
-          hits.push({ doc: doc.id, page: page.page, source: "ner", category: "VILLE", start: s.start, end: s.end, suggested: true });
+          // One suggestion per line, without the spaces the model sometimes takes in.
+          for (const m of page.text.slice(s.start, s.end).matchAll(/[^\s](?:[^\n]*[^\s])?/g)) {
+            const start = s.start + m.index;
+            hits.push({ doc: doc.id, page: page.page, source: "ner", category: "VILLE", start, end: start + m[0].length, suggested: true });
+          }
         }
       }
     }
@@ -199,6 +230,13 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
   if (candidates[0]) candidates[0].category = "PATIENT";
   for (const e of entities) if (e.category === "PATIENT" && e !== candidates[0]) e.category = "PERSONNE";
 
+  // A place the model offered that is also a person's surname is masked as a
+  // place (and searched everywhere like one): left readable, the verifier would take it for the person.
+  const surnames = new Set(entities.flatMap((e) => [...e.surnames]));
+  for (const h of hits) {
+    if (h.suggested && h.category === "VILLE" && surnames.has(normaliseName(pageText.get(key(h.doc, h.page))!.text.slice(h.start, h.end)))) h.suggested = false;
+  }
+
   // Values found once are searched for everywhere, so a birth date or a
   // hospital name caught in a header is also caught in a free-text note.
   const valueHits = new Map<string, Hit>();
@@ -206,6 +244,15 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
     if (PERSON_CATEGORIES.has(h.category) || h.suggested) continue;
     const value = foldChars(pageText.get(key(h.doc, h.page))!.text.slice(h.start, h.end)).toUpperCase();
     if (value.replace(/\W/g, "").length >= 4 && !valueHits.has(value)) valueHits.set(value, h);
+  }
+
+  // Whole person names too, as written ("J. D. M.", "Le Quellec"): the
+  // verifier looks for them, so every occurrence must be masked.
+  const personValues = new Map<string, Hit>();
+  for (const h of hits) {
+    if (!PERSON_CATEGORIES.has(h.category) || h.suggested) continue;
+    const value = foldChars(pageText.get(key(h.doc, h.page))!.text.slice(h.start, h.end)).toUpperCase();
+    if (/[^\p{L}'’-]/u.test(value) && value.replace(/[^\p{L}]/gu, "").length >= 2 && !personValues.has(value)) personValues.set(value, h);
   }
 
   // The patient's long surnames are also searched with one typo, capitalised
@@ -226,15 +273,24 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
         }
       }
       for (const e of entities) {
-        const tokens = [...e.surnames, ...e.firstNames].filter((t) => t.length >= 3 && !COMMON_WORDS.has(t));
+        const tokens = [...e.surnames, ...e.firstNames].filter((t) => t.length >= 3);
         for (const token of tokens) {
-          for (const start of findWord(folded, token, false)) {
-            const original = page.text.slice(start, start + token.length);
+          // An everyday word ("BON") only counts in capitals, as the verifier does.
+          for (const at of findWord(folded, token, COMMON_WORDS.has(token))) {
+            const original = page.text.slice(at, at + token.length);
             if (e.firstNames.has(token) && original[0] !== original[0].toUpperCase()) continue;
-            const h: Hit = { doc: doc.id, page: page.page, start, end: start + token.length, category: e.category, source: "propagation" };
+            const { start, end } = wholeCompound(page.text, at, at + token.length);
+            const h: Hit = { doc: doc.id, page: page.page, start, end, category: e.category, source: "propagation" };
             hits.push(h);
             entityOf.set(h, e);
           }
+        }
+      }
+      for (const [value, origin] of personValues) {
+        for (const start of findWord(folded, value, false)) {
+          const h: Hit = { doc: doc.id, page: page.page, start, end: start + value.length, category: origin.category, source: "propagation" };
+          hits.push(h);
+          if (entityOf.has(origin)) entityOf.set(h, entityOf.get(origin)!);
         }
       }
       for (const [value, origin] of valueHits) {
