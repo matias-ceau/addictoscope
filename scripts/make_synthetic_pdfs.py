@@ -6,7 +6,8 @@ reproduce the layout traps of real exports: a boxed per-page header (the
 "encadré") that cuts an observation in two, an image-only scanned letter
 with no text layer, and a different hospital's layout.
 
-The planted identifiers are written to ``ground_truth.json`` so tests can
+Everything here is invented (see data/anonymized/README.md). The planted
+identifiers are written to ``ground_truth.json`` so tests can
 check that each one is gone after redaction.
 
     uv run python scripts/make_synthetic_pdfs.py
