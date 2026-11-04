@@ -103,7 +103,8 @@ export function App() {
         accepted.map((d) => ({ page: d.page, rects: d.rects, label: d.label })),
         ocrPages,
       );
-      const manifest = await buildManifest(output, pages, accepted, true);
+      const places = stateRef.current.detections.filter((d) => d.doc === id && !d.accepted && d.category === "VILLE").map((d) => d.text);
+      const manifest = await buildManifest(output, pages, accepted, true, places);
       dispatch({ type: "patch", id, patch: { status: "done", output, outPages: pages, manifest } });
       setView("pseudo");
     } catch (err) {

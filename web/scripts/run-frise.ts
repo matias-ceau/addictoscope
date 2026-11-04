@@ -98,7 +98,8 @@ async function runDossier(slug: string) {
     const output = redactPdf(src.bytes, accepted.map((d) => ({ page: d.page, rects: d.rects, label: d.label })));
     const outDoc = openPdf(output);
     const outPages = readPages(outDoc);
-    const manifest = await buildManifest(output, outPages, accepted, true);
+    const places = detections.filter((d) => d.doc === src.id && !d.accepted && d.category === "VILLE").map((d) => d.text);
+    const manifest = await buildManifest(output, outPages, accepted, true, places);
     const readable = fold(outPages.map((p) => p.text).join("\n"));
     const planted = (PLANTED[`dossiers/${slug}/${src.id}.pdf`] ?? []).filter((id) => readable.includes(fold(id))).length;
     docs[src.id] = { pages: outPages.length, redactions: manifest.redactions, verified: manifest.verified, leaks: manifest.leaks.length, plantedLeft: planted };
