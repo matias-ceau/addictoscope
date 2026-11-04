@@ -7,6 +7,11 @@
  */
 import type { Category } from "../core/types";
 
+/** Two-digit birth year: this century up to the current year, else the last ("08" -> 2008, "61" -> 1961). */
+export function fullYear(yy: number, now: number = new Date().getFullYear()): number {
+  return yy <= now % 100 ? 2000 + yy : 1900 + yy;
+}
+
 export interface Span {
   start: number;
   end: number;
@@ -88,7 +93,7 @@ const RULES: Rule[] = [
     category: "NAISSANCE",
     re: /\b(?:N[ée]e?\s*\(e\)|N[ée]e?|Date de naissance|DDN)\s*(?:le\s*)?:?\s*(\d{1,2}[/.-]\d{1,2}[/.-](\d{4}|\d{2}))/gi,
     group: 1,
-    label: (m) => `[NE(E) EN ${m[2].length === 4 ? m[2] : "19" + m[2]}]`,
+    label: (m) => `[NE(E) EN ${m[2].length === 4 ? m[2] : fullYear(Number(m[2]))}]`,
     labelled: true,
   },
   // With the birth name in between: "née PELLETIER le 07/09/1972".
@@ -96,7 +101,7 @@ const RULES: Rule[] = [
     category: "NAISSANCE",
     re: new RegExp(String.raw`\b[Nn][ée]e?[ \t]+[${UPPER}][${UPPER}'’-]+[ \t]+le[ \t]+(\d{1,2}[/.-]\d{1,2}[/.-](\d{4}|\d{2}))`, "g"),
     group: 1,
-    label: (m) => `[NE(E) EN ${m[2].length === 4 ? m[2] : "19" + m[2]}]`,
+    label: (m) => `[NE(E) EN ${m[2].length === 4 ? m[2] : fullYear(Number(m[2]))}]`,
     labelled: true,
   },
   {

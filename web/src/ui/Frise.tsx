@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { reidentifyTimeline, type KeyTable } from "../core/reidentify";
+import { formatAge } from "../notebook/age";
 import {
   dateEnd,
   dateStart,
@@ -9,6 +11,7 @@ import {
   type Timeline,
   type TimelineEvent,
   type TrackKind,
+  withUndated,
 } from "../notebook/model";
 
 const LABEL_W = 168;
@@ -30,6 +33,15 @@ function formatDate(s: string): string {
   if (d) return `${d}/${m}/${y}`;
   if (m) return `${m}/${y}`;
   return y;
+}
+
+/** "d'après l'âge : 14 ans", for a bound computed from an age. */
+function ageNote(e: TimelineEvent): string | null {
+  if (!e.fromAge) return null;
+  const { start, end } = e.fromAge;
+  if (start && end) return `d'après l'âge : ${formatAge(start)} → ${formatAge(end)}`;
+  if (start) return `d'après l'âge : ${formatAge(start)}`;
+  return end ? `fin d'après l'âge : ${formatAge(end)}` : null;
 }
 
 function ticks(min: number, max: number): { t: number; label: string; major: boolean }[] {
@@ -56,9 +68,19 @@ function ticks(min: number, max: number): { t: number; label: string; major: boo
 export function Frise(props: {
   timeline: Timeline;
   observations: Observation[];
-  onOpenSource: (observationId: string) => void;
+  /** Label -> real value, from this session's detections (never sent). */
+  keyTable?: KeyTable;
+  /** `real`: open the original page rather than the pseudonymized one. */
+  onOpenSource: (observationId: string, real: boolean) => void;
 }) {
-  const { timeline } = props;
+  const hasKey = (props.keyTable?.size ?? 0) > 0;
+  const [names, setNames] = useState<"real" | "pseudo">(hasKey ? "real" : "pseudo");
+  const real = hasKey && names === "real";
+  const timeline = useMemo(
+    () => (real ? reidentifyTimeline(props.timeline, props.keyTable!) : withUndated(props.timeline)),
+    [real, props.timeline, props.keyTable],
+  );
+  const openSource = (id: string) => props.onOpenSource(id, real);
   const wrap = useRef<HTMLDivElement>(null);
   const chart = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(900);
@@ -91,10 +113,12 @@ export function Frise(props: {
   const plotW = width - LABEL_W - PAD_R;
   const x = (t: number) => LABEL_W + ((t - min) / (max - min)) * plotW;
 
-  // Layout: one section per kind that has tracks, one row per track.
+  // Layout: one section per kind that has tracks, one row per track (tracks
+  // holding only undated antecedents are listed below the frise instead).
+  const datedTracks = new Set(timeline.events.map((e) => e.trackId));
   const rows: ({ type: "head"; kind: TrackKind } | { type: "track"; trackId: string; label: string; kind: TrackKind })[] = [];
   for (const kind of TRACK_KINDS) {
-    const tracks = timeline.tracks.filter((t) => t.kind === kind);
+    const tracks = timeline.tracks.filter((t) => t.kind === kind && datedTracks.has(t.id));
     if (!tracks.length) continue;
     rows.push({ type: "head", kind });
     for (const t of tracks) rows.push({ type: "track", trackId: t.id, label: t.label, kind });
@@ -116,7 +140,8 @@ export function Frise(props: {
       <div className="viewer-toolbar">
         <div className="doc-title">Frise chronologique</div>
         <span className="muted small">
-          {timeline.events.length} événements · {timeline.tracks.length} pistes
+          {timeline.events.length} événements · {datedTracks.size} pistes
+          {timeline.undated.length > 0 && ` · ${timeline.undated.length} non datés`}
         </span>
         <div className="segmented" role="tablist">
           <button role="tab" aria-selected={mode === "chart"} onClick={() => setMode("chart")}>
@@ -126,6 +151,17 @@ export function Frise(props: {
             Tableau
           </button>
         </div>
+        {hasKey && (
+          <div className="segmented names-toggle" role="group" aria-label="Affichage des identités">
+            <button aria-pressed={real} onClick={() => setNames("real")} title="Remplace les étiquettes par les vraies valeurs, sur ce poste uniquement">
+              Noms réels
+            </button>
+            <button aria-pressed={!real} onClick={() => setNames("pseudo")}>
+              Pseudonymes
+            </button>
+          </div>
+        )}
+        {real && <span className="identifying small">contient des données identifiantes</span>}
       </div>
 
       <div className="frise-body" ref={wrap}>
@@ -166,13 +202,14 @@ export function Frise(props: {
                 const cy = rowY[e.trackId] + ROW_H / 2;
                 const x0 = x(dateStart(e.start));
                 const endT = e.end ? dateEnd(e.end) : e.ongoing && lastObservation ? dateEnd(lastObservation) : null;
-                const fill = { fill: `var(--kind-${kind})` };
+                const fill = { fill: `var(--kind-${kind})`, ...(e.fromAge ? { stroke: `var(--kind-${kind})` } : {}) };
+                const approx = e.fromAge ? " approx" : "";
                 const handlers = {
                   onMouseEnter: (ev: React.MouseEvent) =>
                     setHover({ e, x: ev.clientX - (chart.current?.getBoundingClientRect().left ?? 0), y: cy }),
-                  onClick: () => props.onOpenSource(e.observationIds[0]),
+                  onClick: () => openSource(e.observationIds[0]),
                   tabIndex: 0,
-                  onKeyDown: (ev: React.KeyboardEvent) => ev.key === "Enter" && props.onOpenSource(e.observationIds[0]),
+                  onKeyDown: (ev: React.KeyboardEvent) => ev.key === "Enter" && openSource(e.observationIds[0]),
                   onFocus: () => setHover({ e, x: x0, y: cy }),
                 };
                 return (
@@ -186,12 +223,12 @@ export function Frise(props: {
                           height={10}
                           rx={4}
                           style={fill}
-                          className={e.mode === "craving" ? "mark craving" : "mark"}
+                          className={(e.mode === "craving" ? "mark craving" : "mark") + approx}
                         />
                         {e.ongoing && <path d={`M${x(endT)} ${cy - 6} l7 6 l-7 6 z`} style={fill} className="mark" />}
                       </>
                     ) : (
-                      <circle cx={x0} cy={cy} r={5} style={fill} className="mark point" />
+                      <circle cx={x0} cy={cy} r={5} style={fill} className={"mark point" + approx} />
                     )}
                     {e.lossOfControl && <path d={`M${x0} ${cy - 13} l4 5 l-4 5 l-4 -5 z`} className="loss-marker" />}
                     <rect x={x0 - 8} y={cy - 12} width={Math.max(16, (endT ? x(endT) - x0 : 0) + 16)} height={24} className="hit" />
@@ -210,12 +247,14 @@ export function Frise(props: {
                   {hover.e.end ? ` → ${formatDate(hover.e.end)}` : hover.e.ongoing ? " → en cours" : ""}
                   {hover.e.lossOfControl ? " · perte de contrôle" : ""}
                 </span>
+                {ageNote(hover.e) && <span className="muted small">{ageNote(hover.e)}</span>}
                 {hover.e.note && <span>{hover.e.note}</span>}
                 <span className="muted small">Cliquer pour ouvrir la source</span>
               </div>
             )}
             <p className="legend-note small muted">
-              ▬ période · ● événement ponctuel · ▸ toujours en cours · ◆ perte de contrôle · teinte pâle : craving
+              ▬ période · ● événement ponctuel · ▸ toujours en cours · ◆ perte de contrôle · teinte pâle : craving · contour
+              pointillé : date calculée d'après l'âge
             </p>
           </div>
         )}
@@ -236,6 +275,7 @@ export function Frise(props: {
                   <td className="nowrap">
                     {formatDate(e.start)}
                     {e.end ? ` → ${formatDate(e.end)}` : e.ongoing ? " → en cours" : ""}
+                    {ageNote(e) && <div className="muted small">{ageNote(e)}</div>}
                   </td>
                   <td>
                     <span className="swatch" style={{ background: `var(--kind-${kindOf[e.trackId]})` }} />
@@ -248,7 +288,7 @@ export function Frise(props: {
                   </td>
                   <td>
                     {e.observationIds.map((id) => (
-                      <button key={id} className="link" onClick={() => props.onOpenSource(id)}>
+                      <button key={id} className="link" onClick={() => openSource(id)}>
                         {props.observations.find((o) => o.id === id)?.date ?? "voir"}
                       </button>
                     ))}
@@ -257,6 +297,36 @@ export function Frise(props: {
               ))}
             </tbody>
           </table>
+        )}
+
+        {timeline.undated.length > 0 && (
+          <section className="undated" aria-label="Antécédents non datés">
+            <h3>Antécédents non datés</h3>
+            <p className="muted small">
+              Racontés par l'âge, sans date de naissance connue ou au-delà de la dernière observation : ils ne sont pas
+              placés sur la frise.
+            </p>
+            <ul>
+              {timeline.undated.map((u) => (
+                <li key={u.id}>
+                  <span className="swatch" style={{ background: `var(--kind-${kindOf[u.trackId]})` }} />
+                  <strong>{trackLabel[u.trackId]}</strong>
+                  {u.mode ? <em> · {MODE_LABEL[u.mode]}</em> : null}
+                  <span className="muted">
+                    {" "}
+                    · {formatAge(u.startAge)}
+                    {u.endAge ? ` → ${formatAge(u.endAge)}` : u.ongoing ? " → en cours" : ""}
+                  </span>
+                  {u.note ? ` — ${u.note}` : ""}{" "}
+                  {u.observationIds.map((id) => (
+                    <button key={id} className="link" onClick={() => openSource(id)}>
+                      {props.observations.find((o) => o.id === id)?.date ?? "voir"}
+                    </button>
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </section>
         )}
       </div>
     </section>

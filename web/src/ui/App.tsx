@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 
 import { analyse } from "../app/analysis";
 import * as engine from "../app/engine";
@@ -7,6 +7,7 @@ import type { CloudPolicy } from "../cloud/guard";
 import { rectsForSpan } from "../core/geometry";
 import type { Rect } from "../core/types";
 import { inputKind } from "../core/inputs";
+import { keyTableFromDetections } from "../core/reidentify";
 import { buildManifest } from "../core/verify";
 import { detectCorpus } from "../pii/detect";
 import { AnalysisCard, type AnalysisState } from "./AnalysisCard";
@@ -127,6 +128,7 @@ export function App() {
         docs.map((d) => ({ id: d.id, pages: d.outPages!, manifest: d.manifest })),
         policy,
         (progress) => setAnalysis((a) => ({ ...a, progress })),
+        stateRef.current.detections,
       );
       setAnalysis({ status: "done", ...result, docs: docs.map((d) => d.id) });
       setMainView("frise");
@@ -135,9 +137,16 @@ export function App() {
     }
   }, [policy]);
 
-  /** Jump from a frise event to the observation it came from, highlighted. */
+  /** Labels of the analysed documents -> real values, for the frise only (local). */
+  const keyTable = useMemo(() => {
+    const docs = new Set(analysis.docs ?? []);
+    return keyTableFromDetections(state.detections.filter((d) => docs.has(d.doc)));
+  }, [state.detections, analysis.docs]);
+
+  /** Jump from a frise event to the observation it came from, highlighted:
+   *  on the original page when the frise shows real names, else the pseudonymized one. */
   const openSource = useCallback(
-    (observationId: string) => {
+    (observationId: string, real = false) => {
       const o = analysis.observations?.find((x) => x.id === observationId);
       const doc = stateRef.current.docs.find((d) => d.id === o?.doc);
       const page = doc?.outPages?.find((p) => p.page === o?.start.page);
@@ -149,7 +158,7 @@ export function App() {
       const lastLine = o.end.page === o.start.page ? o.end.line : lines.length;
       for (let i = o.start.line - 1; i < lastLine; i++) end += (lines[i]?.length ?? 0) + 1;
       dispatch({ type: "select", id: doc.id });
-      setView("pseudo");
+      setView(real ? "original" : "pseudo");
       setMainView("doc");
       setHighlight({ doc: doc.id, page: page.page, rects: rectsForSpan(page, start, end), key: Date.now() });
     },
@@ -209,7 +218,12 @@ export function App() {
             onFiles={addFiles}
           />
           {mainView === "frise" && analysis.timeline && (
-            <Frise timeline={analysis.timeline} observations={analysis.observations ?? []} onOpenSource={openSource} />
+            <Frise
+              timeline={analysis.timeline}
+              observations={analysis.observations ?? []}
+              keyTable={keyTable}
+              onOpenSource={openSource}
+            />
           )}
           {mainView === "doc" && selected && (
             <Viewer

@@ -1,6 +1,7 @@
 /** Orchestrates the cloud analysis of verified documents. */
 import type { CloudPolicy } from "../cloud/guard";
-import type { PageText } from "../core/types";
+import type { Detection, PageText } from "../core/types";
+import { birthYearFromDetections } from "../notebook/age";
 import type { Manifest } from "../core/verify";
 import type { Observation, Timeline } from "../notebook/model";
 import { segmentDocument } from "../notebook/segment";
@@ -34,7 +35,12 @@ export async function analyse(
   docs: AnalysisDoc[],
   policy: CloudPolicy,
   onProgress: (p: AnalysisProgress) => void,
+  /** The session's detections: the birth year is read from them here, in
+   *  the browser, and only used once the model has answered. */
+  detections: Detection[] = [],
 ): Promise<{ observations: Observation[]; timeline: Timeline }> {
+  const analysed = new Set(docs.map((d) => d.id));
+  const birthYear = birthYearFromDetections(detections.filter((d) => analysed.has(d.doc)));
   const observations: Observation[] = [];
   for (const doc of docs) {
     // Images come from the *pseudonymized* PDF, never from the original.
@@ -60,6 +66,7 @@ export async function analyse(
     manifests: Object.fromEntries(docs.map((d) => [d.id, d.manifest])),
     policy,
     onProgress: (done, total) => onProgress({ step: "timeline", done, total }),
+    birthYear,
   });
   return { observations, timeline };
 }

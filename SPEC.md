@@ -1,6 +1,23 @@
 # SPEC — Ré-identification locale et dates calculées depuis l'âge
 
-Statut : validée le 04/11/2026, en cours d'implémentation (branche `dev/local-reidentification`).
+Statut : validée le 04/11/2026, implémentée (branche `dev/local-reidentification`).
+
+Points tranchés à la réconciliation :
+- un âge illisible ou hors de 0–110 ans est écarté (comme une date illisible) ;
+  un âge lisible sans année de naissance, ou qui tombe après la dernière
+  observation, va dans « Antécédents non datés » ;
+- une fin donnée en intervalle d'âge prend sa borne haute (« jusqu'à
+  l'adolescence » = 17 ans) ; un début, sa borne basse ; la borne « dernière
+  observation » porte sur l'année de début ;
+- année de naissance sur deux chiffres : siècle courant jusqu'à l'année en
+  cours, sinon le précédent (« 08 » = 2008, « 61 » = 1961), aussi dans le
+  libellé `[NE(E) EN AAAA]` ;
+- une étiquette hors personnes partagée par des valeurs différentes (`[TEL]`
+  pour deux numéros) n'est pas remplacée : elle reste une étiquette. Les
+  personnes sont regroupées par le détecteur ; leurs variantes sont sûres ;
+- import d'un `.axkey` dans l'interface et export ré-identifié de la frise :
+  reportés, l'application ne rouvre pas encore une analyse et n'exporte pas
+  encore la frise (`keyTableFromEntries` est prêt).
 
 Décisions de l'utilisateur (04/11/2026) :
 - l'année de naissance reste dans le texte envoyé (`[NE(E) EN 1972]`) ;
@@ -83,17 +100,28 @@ export function birthYearFromDetections(dets: { category: string; text: string; 
 `web/src/notebook/timeline.ts` :
 - Le schéma et le prompt acceptent `start` null avec `start_age` (et `end_age`)
   au format accepté par `parseAge`.
-- `assembleTimeline(raw, knownObservations, birthYear: number | null = null)` :
-  - `start` daté : inchangé ; un `end_age` est résolu de la même façon que
-    `start_age` ;
+- `assembleTimeline(raw, knownObservations, birthYear: number | null = null, lastObservation: string | null = null)` :
+  - `lastObservation` : date (partielle) de la dernière observation datée,
+    borne haute des années résolues ; omise ou null, pas de borne (appels
+    existants inchangés) ;
+  - `start` daté : inchangé ; un `end_age` `[a, b]` est résolu de la même
+    façon que `start_age` (`end = String(birthYear + a)`), gardé seulement
+    s'il ne précède pas `start` ni ne dépasse la borne (sinon `end` reste
+    null, l'événement reste daté) ;
   - `start` null et `start_age` lisible, `birthYear` connu : âge `[a, b]` →
     `start = String(birthYear + a)` ; si `a < b`, que l'événement n'a pas d'`end`
-    et n'est pas en cours, `end = String(birthYear + b)`. `fromAge` est rempli ;
-  - année résolue > année de la dernière observation datée, ou `birthYear`
-    null → `undated` ;
+    et n'est pas en cours, `end = String(birthYear + b)`, ramené à l'année de
+    `lastObservation` si elle est dépassée. `fromAge` est rempli ;
+  - année résolue de `start_age` ou de `end_age` > année de `lastObservation`,
+    ou `birthYear` null → `undated` (identifiants `u1`, `u2`… ; la piste est
+    créée pour son libellé, la frise ne dessine que les pistes ayant un
+    événement daté) ;
   - ni date ni âge lisible → écarté (comme aujourd'hui).
 - `buildTimeline(input)` : `input.birthYear?: number | null`, transmis à
-  `assembleTimeline`. Le modèle ne reçoit jamais `birthYear`.
+  `assembleTimeline` avec la date de la dernière observation datée de
+  `input.observations`. Le modèle ne reçoit jamais `birthYear`.
+- `Timeline.undated` manque dans les sorties antérieures : le lire comme `[]`
+  (`withUndated(t)` dans `model.ts`).
 
 `web/src/core/reidentify.ts` :
 
@@ -121,6 +149,10 @@ Scripts : `run-frise.ts` passe `birthYear` (détections) et garde
 `timeline.undated` dans sa sortie. `render_frise.py --key <table.json>`, avec
 `{"labels": {"[PATIENT]": "…"}}`, remplace les étiquettes dans tout le texte
 de la page ; la page dessine `fromAge` comme approximatif et liste `undated`.
+`--banner synthetic|real|<texte>` règle le bandeau : « Données synthétiques
+(dossier entièrement inventé) » par défaut, « Dossier réel pseudonymisé
+(usage privé, ne pas diffuser) » pour `real` ; avec `--key`, « Dossier réel
+ré-identifié (usage privé, ne pas diffuser) ».
 
 ## Non-objectifs
 

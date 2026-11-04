@@ -59,7 +59,7 @@ export function Viewer(props: {
             page={page}
             detections={view === "original" ? props.detections.filter((d) => d.page === page.page) : []}
             focused={props.focused}
-            highlight={view === "pseudo" && props.highlight?.page === page.page ? props.highlight : undefined}
+            highlight={props.highlight?.page === page.page ? props.highlight : undefined}
             editable={editable && view === "original"}
             dispatch={props.dispatch}
             sourceDoc={doc.id}
