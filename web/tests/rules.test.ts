@@ -3,7 +3,9 @@ import { describe, expect, it } from "vitest";
 import { findNameSpans, trimModelPerson } from "../src/pii/names";
 import { buildPageText } from "../src/core/pagetext";
 import type { Rect } from "../src/core/types";
+import { findLeaks } from "../src/core/verify";
 import { detectCorpus } from "../src/pii/detect";
+import type { NerSpan } from "../src/pii/ner";
 import { findRuleSpans, isLuhnValid, isValidNir } from "../src/pii/rules";
 
 const hits = (text: string) => findRuleSpans(text).map((s) => [s.category, text.slice(s.start, s.end)]);
@@ -221,5 +223,132 @@ describe("over-masking seen on the fictional dossiers", () => {
     const text = "tremblements +, Cushman 7.";
     const start = text.indexOf("ushman");
     expect(trimModelPerson(text, start, start + "ushman".length)).toBeNull();
+  });
+});
+
+// Gaps found by a private control on real exports (every name here is invented).
+describe("gaps seen on real exports", () => {
+  const pageOf = (text: string) =>
+    buildPageText(0, 600, 800, text.split("\n").map((l) => l.split(" ").map((w, i) => ({ text: w, rect: [i * 40, 0, i * 40 + 30, 10] as Rect }))), "pdf");
+  const masked = (text: string, ner?: Record<number, NerSpan[]>) => detectCorpus([{ id: "doc", pages: [pageOf(text)], ner }]).filter((d) => d.accepted);
+  /** The page as a recipient would read it: accepted spans replaced by their labels. */
+  const redacted = (text: string, ner?: Record<number, NerSpan[]>) => {
+    const page = pageOf(text);
+    const dets = detectCorpus([{ id: "doc", pages: [page], ner }]).filter((d) => d.accepted);
+    let out = page.text;
+    for (const d of [...dets].sort((a, b) => b.start - a.start)) out = out.slice(0, d.start) + d.label + out.slice(d.end);
+    return { dets, out, leaks: findLeaks([{ ...page, text: out }], dets) };
+  };
+
+  describe("observation headers of Word history exports", () => {
+    it("takes the author between ' ( ' and ' - role )' as a clinician, whatever the first-name list says", () => {
+      expect(names("14/02/2024 10:30 : Observation psychiatrique de suivi ( VASSEUR Maëlys - Psychiatre )")).toContainEqual(["SOIGNANT", "VASSEUR Maëlys"]);
+      expect(names("03/05/2024 09:15 : Observation médicale ( LE GOFF DE KERMADEC Ondine - Médecin )")).toContainEqual(["SOIGNANT", "LE GOFF DE KERMADEC Ondine"]);
+      expect(names("21/06/2023 16:05 : Observation IDE ( TRAN Jean-Baptiste - Infirmier(ère) )")).toContainEqual(["SOIGNANT", "TRAN Jean-Baptiste"]);
+      expect(names("02/01/2024 11:00 : Entretien social ( DUVERGER SIDONIE - Assistants sociaux )")).toContainEqual(["SOIGNANT", "DUVERGER SIDONIE"]);
+      expect(names("02/01/2024 11:00 : Entretien ( BON Firmin - Psychologue )")).toContainEqual(["SOIGNANT", "BON Firmin"]);
+    });
+
+    it("needs the date and time header and a name-like author", () => {
+      expect(names("Traitement ( PARACETAMOL - 1 g )")).toEqual([]);
+      expect(names("14/02/2024 10:30 : Note ( à revoir - urgent )")).toEqual([]);
+      expect(names("14/02/2024 10:30 : Note (suite) - rappel prévu").filter(([c]) => c === "SOIGNANT")).toEqual([]);
+    });
+
+    it("masks the header names and their particles without masking 'de' or 'des' elsewhere", () => {
+      const text = [
+        "03/05/2024 09:15 : Observation médicale ( LE GOFF DE KERMADEC Ondine - Médecin )",
+        "Patient vu avec l'équipe de liaison, reprise des soins, plan de sevrage.",
+        "04/05/2024 10:00 : Observation psychiatrique de suivi ( VASSEUR Maëlys - Psychiatre )",
+        "Avis du Dr KERMADEC demandé.",
+      ].join("\n");
+      const { dets, out, leaks } = redacted(text);
+      expect(dets.map((d) => d.text)).toEqual(expect.arrayContaining(["LE GOFF DE KERMADEC Ondine", "VASSEUR Maëlys", "KERMADEC"]));
+      expect(out).toContain("reprise des soins, plan de sevrage");
+      expect(out).not.toMatch(/GOFF|KERMADEC|VASSEUR|Ma[eë]lys|Ondine/);
+      expect(leaks).toEqual([]);
+    });
+  });
+
+  it("masks a compound first name as a whole when only one part is a known first name", () => {
+    const text = ["Vu avec Jean ce matin.", "21/06/2023 16:05 : Observation IDE ( LIN JEAN-MAELIG - Infirmier(ère) )", "Relève faite par JEAN-MAELIG."].join("\n");
+    const { dets, out, leaks } = redacted(text);
+    expect(dets.map((d) => d.text)).toContain("JEAN-MAELIG");
+    expect(out).not.toMatch(/MAELIG/);
+    expect(leaks).toEqual([]);
+    // Only the known part was found: the propagated hit still takes the whole compound.
+    const alone = redacted("Vu avec Jean ce matin.\nTransmis à JEAN-MAELIG ce soir.");
+    expect(alone.out).not.toMatch(/MAELIG/);
+    expect(alone.leaks).toEqual([]);
+    // Places keep their name: "Saint-Jean-de-Luz" is not the person Jean.
+    expect(redacted("Vu avec Jean ce matin, parti à Saint-Jean-de-Luz.").out).toContain("de-Luz");
+  });
+
+  it("takes the married name above a 'Née <birth name>' line in the identity banner", () => {
+    const banner = "LEROY OSWINE\nNée DUBOIS\nNé(e) le 03/04/1961 (64 ans) à Pau\nIPP 0012345678";
+    expect(names(banner)).toContainEqual(["PATIENT", "LEROY OSWINE"]);
+    expect(names(banner)).toContainEqual(["PERSONNE", "DUBOIS"]);
+    const found = masked(banner + "\nSuivi de Mme LEROY, née le 03/04/1961.");
+    expect(found.filter((d) => d.category === "PATIENT").map((d) => d.text)).toEqual(expect.arrayContaining(["LEROY OSWINE", "LEROY"]));
+    // "née" itself is not a name to propagate.
+    expect(found.map((d) => d.text.toLowerCase())).not.toContain("née");
+  });
+
+  it("masks a surname that is an everyday word in the banner, and only its capitals elsewhere", () => {
+    const banner = "BON FIRMIN\nNé(e) le 12/05/1980 (44 ans) à Pau\nIPP 0012345678";
+    expect(names(banner)).toContainEqual(["PATIENT", "BON FIRMIN"]);
+    const { out, leaks } = redacted(banner + "\nBon contact, en bon état général. Appel de M. BON ce jour.");
+    expect(out).toContain("Bon contact, en bon état");
+    expect(out).not.toMatch(/\bBON\b|FIRMIN/);
+    expect(leaks).toEqual([]);
+    // Still never a name outside the banner's name line.
+    expect(names("BON DE SORTIE signé")).toEqual([]);
+    expect(names("Patient : Pas de plainte ce jour")).toEqual([]);
+    expect(names("Né(e) le 12/05/1980 (44 ans) à Pau\nSANS DOMICILE FIXE")).toEqual([]);
+  });
+
+  it("takes the lone surname line under 'Docteur <first name>' in a report's doctor list", () => {
+    const list = "Docteur Hélène\nMARCHETTI\nPraticien hospitalier\nDocteur Théodric\nVERNIOLLE-KERBRAT\nChef de service\nDocteur Marie Sixtine\nQUEMENEUR\nPneumologue attachée\nCOMPTE RENDU D'HOSPITALISATION";
+    expect(names(list)).toEqual(expect.arrayContaining([["SOIGNANT", "MARCHETTI"], ["SOIGNANT", "VERNIOLLE-KERBRAT"], ["SOIGNANT", "QUEMENEUR"]]));
+    expect(names("Docteur Hélène\nURGENCES\nMotif : chute").filter(([, t]) => t === "URGENCES")).toEqual([]);
+    expect(names("Docteur Hélène\nCOMPTE RENDU\nPraticien hospitalier").filter(([, t]) => t === "COMPTE RENDU")).toEqual([]);
+  });
+
+  describe("names found by the local model", () => {
+    const nerAt = (text: string, value: string, nth = 0): Record<number, NerSpan[]> => {
+      let start = -1;
+      for (let i = 0; i <= nth; i++) start = text.indexOf(value, start + 1);
+      return { 0: [{ start, end: start + value.length, label: "PER", score: 0.9 }] };
+    };
+
+    it("are searched in every document, initials and all", () => {
+      const text = "Avis de J. D. M. ce jour.\nRappel de J. D. M. demain.";
+      const { out, leaks } = redacted(text, nerAt(text, "J. D. M."));
+      expect(out).not.toContain("J. D. M.");
+      expect(leaks).toEqual([]);
+    });
+
+    it("never let a place suggestion hide a name, and mask a place that is also a surname as a place", () => {
+      const text = "21/06/2023 16:05 : Observation IDE ( AGEN Ondine - Psychiatre )\nRetour d'Agen ce week-end, revu par le Dr AGEN.";
+      const loc = (value: string, from = 0): NerSpan => {
+        const start = text.indexOf(value, from);
+        return { start, end: start + value.length, label: "LOC", score: 0.9 };
+      };
+      // The model takes the space before the name in, and tags the town.
+      const ner = { 0: [loc(" AGEN Ondine"), loc("Agen", text.indexOf("Retour"))] };
+      const { dets, out, leaks } = redacted(text, ner);
+      expect(dets).toContainEqual(expect.objectContaining({ text: "AGEN Ondine", category: "SOIGNANT" }));
+      expect(dets).toContainEqual(expect.objectContaining({ text: "Agen", category: "VILLE" }));
+      expect(out).not.toMatch(/AGEN|Agen|Ondine/);
+      expect(leaks).toEqual([]);
+    });
+
+    it("cover every occurrence of a name with a short or particle token", () => {
+      const text = "Vu par Le Quellec ce jour.\nAppel à Le Quellec, puis à l'équipe de nuit.";
+      const { out, leaks } = redacted(text, nerAt(text, "Le Quellec"));
+      expect(out).not.toMatch(/Quellec/);
+      expect(out).toContain("l'équipe de nuit");
+      expect(leaks).toEqual([]);
+    });
   });
 });

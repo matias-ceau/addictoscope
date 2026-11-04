@@ -33,7 +33,8 @@ const CAPS_STOPWORDS = new Set(
    SECOP SMPR CMP CATTP CMPP SPIP JLD JAP UHSA UMD UMP UCSA SAMSAH SAVS ESAT IME ITEP CHRS CADA SIAO PASS EMPP
    MONSIEUR MADAME MADEMOISELLE DOCTEUR PROFESSEUR RPPS ADELI NUM STANDARD COURRIER GROUPE VALIDÉ VALIDE IMPRIMÉ
    CPR GEL INJ SOL AMP MG ML KG UI LP AP ASP NB TTT
-   CUSHMAN CIWA FAGERSTROM FAGERSTRÖM AUDIT MMSE MOCA MADRS PANSS BPRS DAST HADS PHQ DETA`
+   CUSHMAN CIWA FAGERSTROM FAGERSTRÖM AUDIT MMSE MOCA MADRS PANSS BPRS DAST HADS PHQ DETA
+   NE NÉ NÉE NEE`
     .split(/\s+/)
     .filter(Boolean),
 );
@@ -52,22 +53,33 @@ export const COMMON_WORDS = new Set(
 
 const FOLDED_STOPWORDS = new Set([...CAPS_STOPWORDS].map((w) => normaliseName(w)));
 
-function isNameToken(t: string): boolean {
+/**
+ * Surname particles: "LE GOFF", "DE KERMADEC", "VAN DAMME". Part of the name
+ * where they stand, but never searched for on their own ("de", "des").
+ */
+const PARTICLES = new Set("D DE DU DES LE LA LES L DEL DELLA DELLO DI DA DOS DAS VAN VON DER DEN TER EL AL".split(" "));
+
+export function isParticle(t: string): boolean {
+  return PARTICLES.has(normaliseName(t));
+}
+
+/** With `strong`, an everyday word ("BON", "MAL") still counts: the context alone says it is a name. */
+function isNameToken(t: string, strong = false): boolean {
   const folded = normaliseName(t);
-  return !FOLDED_STOPWORDS.has(folded) && !COMMON_WORDS.has(folded);
+  return !FOLDED_STOPWORDS.has(folded) && (strong || !COMMON_WORDS.has(folded));
 }
 
 /**
  * Trim a token sequence to its name-like prefix: stop at the first stopword
  * so "DURAND Pierre Psychiatre" or "MARCHAND SYLVIE Admission" lose their tails.
  */
-function trimToName(text: string, start: number, end: number): { start: number; end: number } | null {
+function trimToName(text: string, start: number, end: number, strong = false): { start: number; end: number } | null {
   const re = new RegExp(NAME_TOKEN, "g");
   const segment = text.slice(start, end);
   let kept = 0;
   let m: RegExpExecArray | null;
   while ((m = re.exec(segment))) {
-    if (!isNameToken(m[0])) break;
+    if (!isNameToken(m[0], strong)) break;
     if (kept > 0 && !/^ +$/.test(segment.slice(kept, m.index))) break;
     kept = m.index + m[0].length;
   }
@@ -79,6 +91,26 @@ interface ContextRule {
   category: NameSpan["category"];
   /** Keep the captured group as is instead of trimming it to capitalised tokens. */
   raw?: boolean;
+  /** A context strong enough to take an everyday word for a surname (the banner's name line). */
+  strong?: boolean;
+  /** Keep the captured group whole when it passes this check (stopwords and particles included). */
+  whole?: (name: string) => boolean;
+}
+
+/**
+ * The author of an observation header, "VASSEUR Maëlys", "LE GOFF DE KERMADEC
+ * Anne", "DUVERGER CLEMENCE": an all-caps surname first (particles allowed),
+ * then capitalised or all-caps words.
+ */
+function isHeaderAuthor(name: string): boolean {
+  const tokens = name.split(/[ \t]+/);
+  const word = new RegExp(String.raw`^[${U}][${U}${L}'’-]*$`);
+  return (
+    tokens.length <= 7 &&
+    isCapsWord(tokens[0]) &&
+    tokens.every((t) => word.test(t)) &&
+    tokens.some((t) => !isParticle(t) && isNameToken(t, true))
+  );
 }
 
 const LOWERCASE_STOPWORDS = new Set(
@@ -124,13 +156,30 @@ const CONTEXT_RULES: ContextRule[] = [
   },
   // Header identity block: a line holding only a name, right above or below
   // "Né(e) le ..." (or followed on the same line by a date), is the patient.
+  // A married name sits one line higher, above "Née <birth name>".
   {
-    re: new RegExp(String.raw`^[ \t]*(${NAME_SEQ})[ \t]*(?=\n[^\n]*\b(?:N[ée]e?[ \t]*\(e\)|N[ée]e?[ \t]+le|Date de naissance)|[ \t]+\d{2}/\d{2}/\d{4}[ \t]*$)`, "gm"),
+    re: new RegExp(
+      String.raw`^[ \t]*(${NAME_SEQ})[ \t]*(?=(?:\n[ \t]*N[ée]e?[ \t]+${NAME_SEQ}[ \t]*)?\n[^\n]*\b(?:N[ée]e?[ \t]*\(e\)|N[ée]e?[ \t]+le|Date de naissance)|[ \t]+\d{2}/\d{2}/\d{4}[ \t]*$)`,
+      "gm",
+    ),
     category: "PATIENT",
+    strong: true,
   },
   {
     re: new RegExp(String.raw`(?:N[ée]e?[ \t]*\(e\)|N[ée]e?[ \t]+le|Date de naissance)[^\n]*\n[ \t]*(${NAME_SEQ})[ \t]*$`, "gm"),
     category: "PATIENT",
+  },
+  // Observation headers of history exports: "14/02/2024 10:30 : Observation
+  // psychiatrique ( VASSEUR Maëlys - Psychiatre )", the role possibly
+  // bracketed itself ("Infirmier(ère)"). The author is a clinician whether or
+  // not their first name is a known one.
+  {
+    re: new RegExp(
+      String.raw`^[ \t]*\d{2}/\d{2}/\d{4}\S*[ \t]+\d{1,2}[:h]\d{2}[ \t]*:[^\n]*?[ \t]\([ \t]*([^\n()]+?)[ \t]+-[ \t]+(?:[^\n()]|\([^\n()]*\))+?[ \t]*\)[ \t]*$`,
+      "gm",
+    ),
+    category: "SOIGNANT",
+    whole: isHeaderAuthor,
   },
   // Lowercase notes: "dr lemercier", "Dr. vasseur", "mme carbonnaz"
   { re: /\b[Dd](?:r\.?|octeur)[ \t]+([a-zà-ÿ][a-zà-ÿ'’-]{2,})/g, category: "SOIGNANT", raw: true },
@@ -162,10 +211,15 @@ export function findNameSpans(text: string, { contextOnly = false } = {}): NameS
     while ((m = rule.re.exec(text))) {
       const start = m.index + m[0].lastIndexOf(m[1]);
       if (rule.raw && LOWERCASE_STOPWORDS.has(m[1].toLowerCase())) continue;
-      const span = rule.raw ? { start, end: start + m[1].length } : trimToName(text, start, start + m[1].length);
+      if (rule.whole) {
+        if (rule.whole(m[1])) spans.push({ start, end: start + m[1].length, category: rule.category });
+        continue;
+      }
+      const span = rule.raw ? { start, end: start + m[1].length } : trimToName(text, start, start + m[1].length, rule.strong);
       if (span) spans.push({ ...span, category: rule.category });
     }
   }
+  spans.push(...doctorListSurnames(text));
 
   if (contextOnly) return spans;
 
@@ -191,6 +245,48 @@ export function findNameSpans(text: string, { contextOnly = false } = {}): NameS
     }
   }
 
+  return spans;
+}
+
+/** A role line under a doctor's name in a report letterhead: "Praticien hospitalier", "Chef de service". */
+const ROLE_LINE = new RegExp(
+  "^[ \\t]*(?:" +
+    [
+      "praticien", "ph\\b", "chef", "cheffe", "psychiatre", "p[ée]dopsychiatre", "m[ée]decin", "addictologue", "alcoologue",
+      "tabacologue", "assistant", "interne", "professeur", "pr\\b", "ma[îi]tre de conf", "cadre", "psychologue", "infirmi",
+      "responsable", "coordinat", "g[ée]n[ée]raliste", "ancien", "attach[ée]", "sp[ée]cialiste", "consultant", "docteur", "dr\\b",
+      "neurologue", "cardiologue", "h[ée]pato", "gastro", "urgentiste", "anesth", "interniste", "g[ée]riatre", "unit[ée]", "service",
+      "d[ée]partement", "p[ôo]le", "secr[ée]tari", "di[ée]t[ée]ticien", "[ée]ducat", "sage-femme",
+    ].join("|") +
+    ")",
+  "i",
+);
+
+/** Or any line shaped like a role: a capitalised word, then lowercase words only ("Pneumologue attachée"). */
+const ROLE_SHAPE = new RegExp(String.raw`^[ \t]*[${U}][${L}]+(?:[ \t]+[${L}][${L}'’-]*)*[ \t]*$`);
+
+/**
+ * Report letterheads list doctors as "Docteur Hélène" / "MARCHETTI" /
+ * "Praticien hospitalier": the surname alone on the line under the first
+ * name(s), then a role line (or the end of the page).
+ */
+function doctorListSurnames(text: string): NameSpan[] {
+  const spans: NameSpan[] = [];
+  const title = new RegExp(String.raw`^[ \t]*(?:[Dd]octeur|DOCTEUR|D[Rr]\.?|[Pp]rofesseur|PROFESSEUR|P[Rr]\.?)[ \t]+[${U}][${L}]+(?:[- ][${U}][${L}]+)?[ \t]*$`);
+  const surname = new RegExp(String.raw`^([ \t]*)(${CAPS_SURNAME}(?:[ ]+${CAPS_SURNAME}){0,2})[ \t]*$`);
+  const lines = text.split("\n");
+  let offset = 0;
+  for (let i = 0; i < lines.length; i++) {
+    const lineStart = offset;
+    offset += lines[i].length + 1;
+    if (i === 0 || !title.test(lines[i - 1])) continue;
+    const m = surname.exec(lines[i]);
+    if (!m || !m[2].split(/[ ]+/).every((t) => isNameToken(t, true))) continue;
+    const next = lines.slice(i + 1).find((l) => l.trim());
+    if (next !== undefined && !ROLE_LINE.test(next) && !ROLE_SHAPE.test(next)) continue;
+    const start = lineStart + m[1].length;
+    spans.push({ start, end: start + m[2].length, category: "SOIGNANT" });
+  }
   return spans;
 }
 
@@ -229,7 +325,9 @@ export function nameTokens(name: string): { surnames: string[]; firstNames: stri
   const tokens = name.split(/[ \t]+/).filter(Boolean);
   const surnames: string[] = [];
   const firstNames: string[] = [];
+  const particlesOnly = tokens.every(isParticle);
   for (const t of tokens) {
+    if (isParticle(t) && !particlesOnly) continue;
     if (isFirstName(t)) firstNames.push(t);
     else {
       surnames.push(t);

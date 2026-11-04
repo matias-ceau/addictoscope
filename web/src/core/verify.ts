@@ -4,7 +4,7 @@
  * look for anything that should have been removed.
  */
 import { foldChars } from "../pii/detect";
-import { isFirstName, normaliseName } from "../pii/names";
+import { COMMON_WORDS, isFirstName, isParticle, normaliseName } from "../pii/names";
 import { findRuleSpans } from "../pii/rules";
 import type { Detection, PageText } from "./types";
 import { PERSON_CATEGORIES } from "./types";
@@ -22,19 +22,28 @@ function fold(s: string): string {
 }
 
 /**
+ * How a leaked occurrence must be written to count: anyhow, capitalised
+ * (first names double as ordinary words: "Claire" the person vs "idées
+ * claires"), or in capitals (a surname that is an everyday word: "BON" the
+ * patient vs "bon contact"). The detector propagates names the same way.
+ */
+type Spelling = "any" | "capitalised" | "upper";
+
+/**
  * `outputPages` is the redacted document re-read from scratch. Every
- * accepted original value (and each name token of 3+ letters) must be gone,
- * and no strong identifier pattern may remain.
+ * accepted original value (and each name token of 3+ letters, particles
+ * aside) must be gone, and no strong identifier pattern may remain.
  */
 export function findLeaks(outputPages: PageText[], accepted: Detection[]): Leak[] {
-  // value -> must the leaked occurrence be capitalised to count? (first names
-  // double as ordinary words: "Claire" the person vs "idées claires")
-  const needles = new Map<string, boolean>();
+  const needles = new Map<string, Spelling>();
   for (const d of accepted) {
     if (!d.text) continue;
-    needles.set(fold(d.text), false);
+    needles.set(fold(d.text), "any");
     if (PERSON_CATEGORIES.has(d.category)) {
-      for (const t of d.text.split(/[\s'’-]+/)) if (t.length >= 3) needles.set(fold(t), isFirstName(t));
+      for (const t of d.text.split(/[\s'’-]+/)) {
+        if (t.length < 3 || isParticle(t)) continue;
+        needles.set(fold(t), COMMON_WORDS.has(fold(t)) ? "upper" : isFirstName(t) ? "capitalised" : "any");
+      }
     }
   }
 
@@ -42,12 +51,14 @@ export function findLeaks(outputPages: PageText[], accepted: Detection[]): Leak[
   for (const page of outputPages) {
     const hay = foldChars(page.text).toUpperCase().replace(/[ \t]+/g, " ");
     const orig = page.text.replace(/[ \t]+/g, " ");
-    for (const [n, capitalisedOnly] of needles) {
+    for (const [n, spelling] of needles) {
       const re = new RegExp(`(?<![\\p{L}\\p{N}])${n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?![\\p{L}\\p{N}])`, "gu");
       let m: RegExpExecArray | null;
       while ((m = re.exec(hay))) {
         const first = orig[m.index];
-        if (capitalisedOnly && first !== first.toUpperCase()) continue;
+        if (spelling === "capitalised" && first !== first.toUpperCase()) continue;
+        const written = orig.slice(m.index, m.index + n.length);
+        if (spelling === "upper" && written !== written.toUpperCase()) continue;
         leaks.push({ page: page.page, text: n, reason: "known-identifier" });
         break;
       }
