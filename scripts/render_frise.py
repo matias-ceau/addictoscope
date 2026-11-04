@@ -21,6 +21,13 @@ Usage (from ``addictoscope/``)::
     uv run python scripts/render_frise.py data/anonymized/dossiers/opiaces-tso/verite.json \
         -o data/processed/frise/interactive/opiaces-tso.html
 
+For an app run, ``--notes`` points at the fictional dossier the run was made
+on: each observation then shows the full note it was cut from (identities
+masked), instead of the model's one-line summary::
+
+    uv run python scripts/render_frise.py data/processed/frise/run1/opiaces-tso.json \
+        --notes data/anonymized/dossiers/opiaces-tso -o data/processed/frise/interactive/opiaces-tso.html
+
 Only dates, labels, notes and source names of the input frise end up in the
 page; patient headers of the dossier are never read.
 """
@@ -155,8 +162,12 @@ def evidence_marks(text: str, label: str, note: str) -> list[list[int]]:
     return sorted([sc[2], sc[3]] for sc in scored)
 
 
-def load(path: Path) -> dict:
-    """Normalise a verite.json or an app run into {tracks, events, sources}."""
+def load(path: Path, notes: Path | None = None) -> dict:
+    """Normalise a verite.json or an app run into {tracks, events, sources}.
+
+    ``notes``: for an app run, the dossier folder whose notes replace the
+    summaries of the observations they match (same document and date).
+    """
     raw = json.loads(path.read_text(encoding="utf-8"))
     tl = raw["timeline"]
     tracks: list[dict] = []
@@ -214,6 +225,13 @@ def load(path: Path) -> dict:
             o["id"]: {"label": f"{o['doc']} · {o['kind']}", "date": o.get("date"), "text": o["summary"], "summary_only": True}
             for o in raw.get("observations", [])
         }
+        if notes:
+            full = dossier_observations(json.loads((notes / "verite.json").read_text(encoding="utf-8")), notes)
+            for o in raw.get("observations", []):
+                day = "/".join(reversed(o["date"].split("-"))) if o.get("date") else None
+                note = full.get(f"{o['doc']} {day}") or full.get(o["doc"])
+                if note:
+                    observations[o["id"]] = {"label": f"{o['doc']} · {o['kind']}", "date": o.get("date"), "text": note["text"]}
         for e, raw_e in zip(events, tl["events"]):
             e["evidence"] = [oid for oid in raw_e.get("observationIds", []) if oid in observations]
     return {
@@ -558,9 +576,10 @@ def render(data: dict) -> str:
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("frise", type=Path, help="verite.json of a fictional dossier, or an app run (JSON)")
+    ap.add_argument("--notes", type=Path, help="for an app run: the fictional dossier folder, to show full notes")
     ap.add_argument("-o", "--out", type=Path, required=True)
     args = ap.parse_args(argv)
-    data = prepare(load(args.frise))
+    data = prepare(load(args.frise, args.notes))
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(render(data), encoding="utf-8")
     print(f"{args.out}: {len(data['events'])} événements, {len(data['tracks'])} pistes", file=sys.stderr)

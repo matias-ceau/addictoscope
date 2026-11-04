@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frise crack-rue</title>
+<style>
+:root{--bg:#fafaf7;--fg:#1d1d1b;--mute:#6b6b66;--line:#d8d8d0;--panel:#fff;--axis:#1d1d1b}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#eceae3;--mute:#9a9a92;--line:#34342f;--panel:#1f1f1c;--axis:#eceae3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:12px 16px 32px}
+h1{font-size:18px;margin:4px 0 2px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+button,.chip{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px}
+.chip i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chip[aria-pressed=false]{opacity:.4}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;touch-action:pan-y}
+svg{display:block;width:100%}
+text{fill:var(--fg);font-size:12px}
+.mute{fill:var(--mute)}
+.ev{cursor:pointer}
+.ev:hover rect,.ev.sel rect,.ev:hover path,.ev.sel path{stroke:var(--fg);stroke-width:1.6}
+#detail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:10px;min-height:76px}
+#detail b{font-size:15px}
+.obs{border:1px solid var(--line);border-radius:8px;margin-top:6px;overflow:hidden}
+.oh{background:var(--bg);color:var(--mute);font-size:12px;padding:4px 10px;border-bottom:1px solid var(--line)}
+.ot{white-space:pre-wrap;padding:8px 10px;max-height:240px;overflow:auto;font-size:13px}
+mark{background:#fde047;color:#1d1d1b;border-radius:3px;padding:0 1px}
+@media (prefers-color-scheme:dark){mark{background:#a16207;color:#fff}}
+#detail .k{color:var(--mute);font-size:12px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--mute);font-size:12px;margin-top:8px}
+.sw{display:inline-block;width:22px;height:9px;border-radius:2px;vertical-align:middle;margin-right:4px}
+</style>
+</head>
+<body>
+<main>
+<h1>Frise chronologique — crack-rue</h1>
+<p class="sub"><b>Données synthétiques</b> (dossier entièrement inventé). Touchez une barre pour lire la note et l'observation d'origine ; faites glisser la fenêtre de l'aperçu pour zoomer.</p>
+<div class="bar" id="kinds"></div>
+<div class="bar" id="presets"></div>
+<div class="chart"><svg id="ov" height="54"></svg></div>
+<div class="chart" style="margin-top:8px"><svg id="main"></svg></div>
+<div class="legend" id="legend"></div>
+<div id="detail"><span class="k">Aucun élément sélectionné.</span></div>
+</main>
+<script>
+const D = {"dossier": "crack-rue", "tracks": [{"id": "t24", "kind": "life_event", "label": "Fils confié à sa grand-mère paternelle"}, {"id": "t21", "kind": "life_event", "label": "Expulsion du logement"}, {"id": "t22", "kind": "life_event", "label": "Sans domicile / hébergement précaire"}, {"id": "t23", "kind": "life_event", "label": "Séparation d'avec l'ex-compagnon violent"}, {"id": "t25", "kind": "life_event", "label": "Agression sexuelle"}, {"id": "t26", "kind": "life_event", "label": "Mise à l'abri hivernale"}, {"id": "t27", "kind": "life_event", "label": "Décès de l'ex-compagnon"}, {"id": "t28", "kind": "life_event", "label": "Hébergement en CHRS"}, {"id": "t29", "kind": "life_event", "label": "Première visite médiatisée avec son fils"}, {"id": "t30", "kind": "life_event", "label": "Convocation au procès de l'agresseur"}, {"id": "t31", "kind": "life_event", "label": "Entrée en résidence sociale"}, {"id": "t32", "kind": "life_event", "label": "Élargissement des droits de visite"}, {"id": "t1", "kind": "substance_use", "label": "Crack"}, {"id": "t2", "kind": "substance_use", "label": "Alcool"}, {"id": "t3", "kind": "substance_use", "label": "Cannabis"}, {"id": "t4", "kind": "substance_use", "label": "Tabac"}, {"id": "t5", "kind": "psychiatric", "label": "TSPT complexe"}, {"id": "t6", "kind": "psychiatric", "label": "Idées de mort passives"}, {"id": "t7", "kind": "psychiatric", "label": "Anxiété majorée"}, {"id": "t9", "kind": "somatic", "label": "Toux grasse"}, {"id": "t8", "kind": "somatic", "label": "Brûlures superficielles des doigts et des lèvres"}, {"id": "t10", "kind": "somatic", "label": "Pneumopathie"}, {"id": "t11", "kind": "medication", "label": "Vaccin hépatite B"}, {"id": "t12", "kind": "medication", "label": "Prazosine"}, {"id": "t13", "kind": "medication", "label": "Hydroxyzine"}, {"id": "t14", "kind": "medication", "label": "Naloxone"}, {"id": "t15", "kind": "medication", "label": "Diazépam"}, {"id": "t16", "kind": "medication", "label": "Sertraline"}, {"id": "t17", "kind": "therapeutic_psycho", "label": "Suivi CAARUD"}, {"id": "t18", "kind": "therapeutic_psycho", "label": "Suivi psychiatrique"}, {"id": "t19", "kind": "therapeutic_psycho", "label": "Hospitalisation en médecine"}, {"id": "t20", "kind": "therapeutic_psycho", "label": "EMDR au centre de psychotraumatologie"}], "events": [{"track": "t1", "start": "2017", "end": "2024-03-28", "ongoing": false, "mode": "usage", "loss": true, "certainty": null, "note": "Crack fumé depuis environ 6 ans, 1 à 2 g/j quand elle a de l'argent, perte de contrôle franche. Baisse à un jour sur deux en janvier 2024, puis hausse jusqu'à 3 g/j après le décès de l'ex-compagnon.", "sources": ["historique 2023-09-06", "historique 2023-09-14", "historique 2024-01-16", "historique 2024-02-13", "historique 2024-02-20"], "evidence": [{"id": "historique:o1", "marks": [[86, 183]]}, {"id": "historique:o2", "marks": [[380, 497]]}, {"id": "historique:o6", "marks": [[102, 188], [218, 252]]}, {"id": "historique:o7", "marks": [[178, 211], [211, 264]]}, {"id": "historique:o8", "marks": [[157, 226]]}], "s": "2017-01-01", "e": "2024-03-28", "point": false, "startLabel": "2017", "endLabel": "2024-03-28"}, {"track": "t1", "start": "2024-04", "end": "2024-12-24", "ongoing": false, "mode": "usage", "loss": false, "certainty": null, "note": "Consommation réduite après l'hospitalisation : 2 à 3 fois par semaine, puis une fois par semaine (le samedi). Dernier crack le 24/12.", "sources": ["historique 2024-04-09", "historique 2024-04-23", "historique 2024-07-02", "historique 2024-09-17", "historique 2025-01-14"], "evidence": [{"id": "historique:o9", "marks": []}, {"id": "historique:o10", "marks": [[27, 90]]}, {"id": "historique:o12", "marks": [[188, 230]]}, {"id": "historique:o13", "marks": [[27, 60], [230, 317]]}, {"id": "historique:o15", "marks": [[184, 245]]}], "s": "2024-04-01", "e": "2024-12-24", "point": false, "startLabel": "2024-04", "endLabel": "2024-12-24"}, {"track": "t1", "start": "2025-03", "end": null, "ongoing": false, "mode": "rechute", "loss": false, "certainty": null, "note": "Rechute de 3 jours début mars après la convocation au tribunal. Arrêt par elle-même. Pas de crack depuis mars à la dernière observation.", "sources": ["historique 2025-03-25", "historique 2025-07-01"], "evidence": [{"id": "historique:o16", "marks": [[27, 137]]}, {"id": "historique:o18", "marks": [[77, 102]]}], "s": "2025-03-01", "e": null, "point": true, "startLabel": "2025-03", "endLabel": null}, {"track": "t2", "start": "2023-09", "end": "2024-03-28", "ongoing": false, "mode": "usage", "loss": false, "certainty": null, "note": "Environ 6 bières fortes de 50 cL par jour, tremblements le matin. Baisse à 4-5 bières par jour en janvier 2024, puis hausse en février 2024.", "sources": ["historique 2023-09-06", "historique 2023-09-14", "historique 2024-01-16", "historique 2024-02-20"], "evidence": [{"id": "historique:o1", "marks": [[266, 290]]}, {"id": "historique:o2", "marks": [[498, 565]]}, {"id": "historique:o6", "marks": [[252, 268]]}, {"id": "historique:o8", "marks": [[157, 226]]}], "s": "2023-09-01", "e": "2024-03-28", "point": false, "startLabel": "2023-09", "endLabel": "2024-03-28"}, {"track": "t2", "start": "2024-03-28", "end": "2024-04-04", "ongoing": false, "mode": "sevrage", "loss": false, "certainty": null, "note": "Sevrage pendant l'hospitalisation en médecine, sous diazépam, sans complication.", "sources": ["historique 2024-04-09"], "evidence": [{"id": "historique:o9", "marks": [[119, 186]]}], "s": "2024-03-28", "e": "2024-04-04", "point": false, "startLabel": "2024-03-28", "endLabel": "2024-04-04"}, {"track": "t2", "start": "2024-04", "end": "2024-06-03", "ongoing": false, "mode": "usage", "loss": false, "certainty": null, "note": "Environ 3 bières par jour après l'hospitalisation. Dit ne plus boire de bières fortes depuis l'entrée au CHRS.", "sources": ["historique 2024-04-23", "historique 2024-09-17"], "evidence": [{"id": "historique:o10", "marks": [[27, 90], [90, 102]]}, {"id": "historique:o13", "marks": [[60, 120]]}], "s": "2024-04-01", "e": "2024-06-03", "point": false, "startLabel": "2024-04", "endLabel": "2024-06-03"}, {"track": "t2", "start": "2024-10", "end": null, "ongoing": true, "mode": "usage", "loss": false, "certainty": null, "note": "2-3 bières le soir « en cachette » au CHRS, puis 1-2 bières le soir en janvier 2025. Au 2025-07 : 1-2 bières le week-end.", "sources": ["historique 2024-10-08", "historique 2025-01-14", "historique 2025-07-01"], "evidence": [{"id": "historique:o14", "marks": [[0, 101]]}, {"id": "historique:o15", "marks": [[245, 290]]}, {"id": "historique:o18", "marks": [[102, 137]]}], "s": "2024-10-01", "e": null, "point": false, "startLabel": "2024-10", "endLabel": null}, {"track": "t3", "start": "2023-09-14", "end": null, "ongoing": false, "mode": "usage", "loss": false, "certainty": null, "note": "Consommation occasionnelle.", "sources": ["historique 2023-09-14"], "evidence": [{"id": "historique:o2", "marks": [[566, 604]]}], "s": "2023-09-14", "e": null, "point": true, "startLabel": "2023-09-14", "endLabel": null}, {"track": "t4", "start": "2023-09-14", "end": null, "ongoing": true, "mode": "usage", "loss": false, "certainty": null, "note": "20 cigarettes par jour en 2023, 15 par jour en juillet 2025.", "sources": ["historique 2023-09-14", "historique 2025-07-01"], "evidence": [{"id": "historique:o2", "marks": [[566, 604]]}, {"id": "historique:o18", "marks": [[137, 153]]}], "s": "2023-09-14", "e": null, "point": false, "startLabel": "2023-09-14", "endLabel": null}, {"track": "t5", "start": "2023-09-14", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Hypervigilance, cauchemars, reviviscences, évitement. Consommations en partie auto-thérapeutiques. Symptômes atténués en 2025 (cauchemars rares, reviviscences moins intenses).", "sources": ["historique 2023-09-14", "historique 2023-11-21", "historique 2024-09-17", "historique 2025-01-14", "historique 2025-07-01"], "evidence": [{"id": "historique:o2", "marks": [[655, 747], [796, 924]]}, {"id": "historique:o5", "marks": [[205, 322]]}, {"id": "historique:o13", "marks": [[121, 206]]}, {"id": "historique:o15", "marks": [[125, 184]]}, {"id": "historique:o18", "marks": [[154, 201]]}], "s": "2023-09-14", "e": null, "point": false, "startLabel": "2023-09-14", "endLabel": null}, {"track": "t6", "start": "2024-02-20", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Sans scénario ni intention. Le fils est un facteur protecteur.", "sources": ["historique 2024-02-20"], "evidence": [{"id": "historique:o8", "marks": [[227, 327]]}], "s": "2024-02-20", "e": null, "point": true, "startLabel": "2024-02-20", "endLabel": null}, {"track": "t7", "start": "2025-03-25", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Anxiété importante après la convocation au tribunal. Pas d'idées suicidaires.", "sources": ["historique 2025-03-25"], "evidence": [{"id": "historique:o16", "marks": [[27, 137], [222, 247]]}], "s": "2025-03-25", "e": null, "point": true, "startLabel": "2025-03-25", "endLabel": null}, {"track": "t8", "start": "2023-09-06", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Liées à la pipe à crack. Soins infirmiers le 2023-10-03.", "sources": ["historique 2023-09-06", "historique 2023-10-03"], "evidence": [{"id": "historique:o1", "marks": [[184, 266]]}, {"id": "historique:o3", "marks": [[97, 159]]}], "s": "2023-09-06", "e": null, "point": true, "startLabel": "2023-09-06", "endLabel": null}, {"track": "t9", "start": "2023-09", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Toux grasse depuis 3 semaines au 2023-10-03, sans fièvre, à surveiller.", "sources": ["historique 2023-10-03"], "evidence": [{"id": "historique:o3", "marks": [[159, 220]]}], "s": "2023-09-01", "e": null, "point": true, "startLabel": "2023-09", "endLabel": null}, {"track": "t10", "start": "2024-03-28", "end": "2024-04-09", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Fièvre, toux, crachats noirs. Hospitalisation en médecine puis antibiotiques, amélioration au 2024-04-09.", "sources": ["historique 2024-04-09"], "evidence": [{"id": "historique:o9", "marks": [[0, 119]]}], "s": "2024-03-28", "e": "2024-04-09", "point": false, "startLabel": "2024-03-28", "endLabel": "2024-04-09"}, {"track": "t11", "start": "2023-10-03", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Non immunisée. Première injection faite ce jour.", "sources": ["historique 2023-10-03"], "evidence": [{"id": "historique:o3", "marks": [[25, 96]]}], "s": "2023-10-03", "e": null, "point": true, "startLabel": "2023-10-03", "endLabel": null}, {"track": "t12", "start": "2023-11-21", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "1 mg le soir, paliers jusqu'à 3 mg. Cauchemars réduits sous 3 mg.", "sources": ["historique 2023-11-21", "historique 2024-01-16", "historique 2024-04-23", "historique 2024-09-17", "historique 2025-01-14", "historique 2025-07-01"], "evidence": [{"id": "historique:o5", "marks": [[393, 477]]}, {"id": "historique:o6", "marks": [[102, 188], [283, 314]]}, {"id": "historique:o10", "marks": [[27, 90], [247, 281], [341, 358]]}, {"id": "historique:o13", "marks": [[364, 391]]}, {"id": "historique:o15", "marks": [[245, 290], [323, 340]]}, {"id": "historique:o18", "marks": [[260, 303]]}], "s": "2023-11-21", "e": null, "point": false, "startLabel": "2023-11-21", "endLabel": null}, {"track": "t13", "start": "2023-11-21", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "25 mg si besoin, max 2 par jour. Poursuivie en janvier 2024.", "sources": ["historique 2023-11-21", "historique 2024-01-16"], "evidence": [{"id": "historique:o5", "marks": [[478, 516]]}, {"id": "historique:o6", "marks": [[283, 314]]}], "s": "2023-11-21", "e": null, "point": true, "startLabel": "2023-11-21", "endLabel": null}, {"track": "t13", "start": "2025-03-25", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Reprise si besoin.", "sources": ["historique 2025-03-25"], "evidence": [{"id": "historique:o16", "marks": [[262, 291]]}], "s": "2025-03-25", "e": null, "point": true, "startLabel": "2025-03-25", "endLabel": null}, {"track": "t14", "start": "2024-02-20", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Naloxone remise : elle consomme parfois avec des usagers d'opioïdes.", "sources": ["historique 2024-02-20"], "evidence": [{"id": "historique:o8", "marks": [[485, 547]]}], "s": "2024-02-20", "e": null, "point": true, "startLabel": "2024-02-20", "endLabel": null}, {"track": "t15", "start": "2024-03-28", "end": "2024-04-04", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Utilisé pour le sevrage alcool pendant l'hospitalisation.", "sources": ["historique 2024-04-09"], "evidence": [{"id": "historique:o9", "marks": [[119, 186]]}], "s": "2024-03-28", "e": "2024-04-04", "point": false, "startLabel": "2024-03-28", "endLabel": "2024-04-04"}, {"track": "t16", "start": "2024-09-17", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Introduite à 50 mg, portée à 100 mg en janvier 2025.", "sources": ["historique 2024-09-17", "historique 2025-01-14", "historique 2025-07-01"], "evidence": [{"id": "historique:o13", "marks": [[332, 363]]}, {"id": "historique:o15", "marks": [[305, 322]]}, {"id": "historique:o18", "marks": [[260, 303]]}], "s": "2024-09-17", "e": null, "point": false, "startLabel": "2024-09-17", "endLabel": null}, {"track": "t17", "start": "2023-09-06", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Premier passage orientée par la maraude. Matériel de réduction des risques, entretiens éducatifs, infirmiers et sociaux.", "sources": ["historique 2023-09-06", "historique 2023-10-03", "historique 2023-10-25"], "evidence": [{"id": "historique:o1", "marks": [[0, 86]]}, {"id": "historique:o3", "marks": []}, {"id": "historique:o4", "marks": []}], "s": "2023-09-06", "e": null, "point": true, "startLabel": "2023-09-06", "endLabel": null}, {"track": "t18", "start": "2023-09-14", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Consultations régulières, toutes les 2 semaines au début, puis espacées.", "sources": ["historique 2023-09-14", "historique 2023-11-21", "historique 2024-01-16", "historique 2024-02-20", "historique 2024-04-23", "historique 2024-09-17", "historique 2025-01-14", "historique 2025-03-25", "historique 2025-07-01"], "evidence": [{"id": "historique:o2", "marks": [[605, 655], [939, 993]]}, {"id": "historique:o5", "marks": []}, {"id": "historique:o6", "marks": [[102, 188], [315, 329]]}, {"id": "historique:o8", "marks": [[328, 398]]}, {"id": "historique:o10", "marks": [[27, 90]]}, {"id": "historique:o13", "marks": []}, {"id": "historique:o15", "marks": []}, {"id": "historique:o16", "marks": []}, {"id": "historique:o18", "marks": []}], "s": "2023-09-14", "e": null, "point": false, "startLabel": "2023-09-14", "endLabel": null}, {"track": "t19", "start": "2024-03-28", "end": "2024-04-04", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Pour pneumopathie, avec sevrage alcool sous diazépam.", "sources": ["historique 2024-04-09"], "evidence": [{"id": "historique:o9", "marks": [[0, 119], [119, 186]]}], "s": "2024-03-28", "e": "2024-04-04", "point": false, "startLabel": "2024-03-28", "endLabel": "2024-04-04"}, {"track": "t20", "start": "2024-12", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Orientation en septembre 2024, début en décembre. Poursuivi en mars 2025.", "sources": ["historique 2024-09-17", "historique 2025-01-14", "historique 2025-03-25"], "evidence": [{"id": "historique:o13", "marks": [[230, 317]]}, {"id": "historique:o15", "marks": [[27, 124]]}, {"id": "historique:o16", "marks": [[27, 137], [292, 306]]}], "s": "2024-12-01", "e": null, "point": false, "startLabel": "2024-12", "endLabel": null}, {"track": "t21", "start": "2022", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Début de la situation sans domicile.", "sources": ["historique 2023-09-14"], "evidence": [{"id": "historique:o2", "marks": [[80, 148]]}], "s": "2022-01-01", "e": null, "point": true, "startLabel": "2022", "endLabel": null}, {"track": "t22", "start": "2022", "end": "2024-06-03", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Tente, connaissances, appels au 115, mise à l'abri hivernale.", "sources": ["historique 2023-09-06", "historique 2023-09-14", "historique 2023-10-25", "historique 2024-01-16", "historique 2024-06-11"], "evidence": [{"id": "historique:o1", "marks": [[86, 183]]}, {"id": "historique:o2", "marks": [[80, 148], [1026, 1053]]}, {"id": "historique:o4", "marks": [[218, 294]]}, {"id": "historique:o6", "marks": [[27, 89]]}, {"id": "historique:o11", "marks": []}], "s": "2022-01-01", "e": "2024-06-03", "point": false, "startLabel": "2022", "endLabel": "2024-06-03"}, {"track": "t23", "start": "2022", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Elle le croise encore régulièrement.", "sources": ["historique 2023-09-14"], "evidence": [{"id": "historique:o2", "marks": [[234, 366]]}], "s": "2022-01-01", "e": null, "point": true, "startLabel": "2022", "endLabel": null}, {"track": "t24", "start": "2021", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Visites médiatisées prévues par le juge des enfants mais non réalisées pendant un an.", "sources": ["historique 2023-10-25"], "evidence": [{"id": "historique:o4", "marks": [[295, 454]]}], "s": "2021-01-01", "e": null, "point": true, "startLabel": "2021", "endLabel": null}, {"track": "t25", "start": "2023-11", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Agression la nuit sous un pont par un inconnu. Plainte déposée, examen aux UMJ.", "sources": ["historique 2023-11-21"], "evidence": [{"id": "historique:o5", "marks": [[57, 134]]}], "s": "2023-11-01", "e": null, "point": true, "startLabel": "2023-11", "endLabel": null}, {"track": "t26", "start": "2024-01-08", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Gymnase, places 115. Elle dort mieux.", "sources": ["historique 2024-01-16"], "evidence": [{"id": "historique:o6", "marks": [[27, 89]]}], "s": "2024-01-08", "e": null, "point": true, "startLabel": "2024-01-08", "endLabel": null}, {"track": "t27", "start": "2024-02-10", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Mort d'une overdose dans un squat. Vécu ambivalent : soulagement et culpabilité.", "sources": ["historique 2024-02-13", "historique 2024-02-20"], "evidence": [{"id": "historique:o7", "marks": [[0, 108]]}, {"id": "historique:o8", "marks": [[40, 157]]}], "s": "2024-02-10", "e": null, "point": true, "startLabel": "2024-02-10", "endLabel": null}, {"track": "t28", "start": "2024-06-03", "end": "2025-05-26", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Chambre individuelle, référente sur place. RSA rétabli et CSS accordée. Fin de la prise en charge à l'accès à la résidence sociale.", "sources": ["historique 2024-06-11", "historique 2024-07-02", "historique 2025-06-03"], "evidence": [{"id": "historique:o11", "marks": [[0, 51], [83, 110]]}, {"id": "historique:o12", "marks": [[0, 15]]}, {"id": "historique:o17", "marks": [[0, 80], [80, 112]]}], "s": "2024-06-03", "e": "2025-05-26", "point": false, "startLabel": "2024-06-03", "endLabel": "2025-05-26"}, {"track": "t29", "start": "2024-06-28", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Visite d'une heure, très émue.", "sources": ["historique 2024-07-02"], "evidence": [{"id": "historique:o12", "marks": [[78, 176], [176, 187]]}], "s": "2024-06-28", "e": null, "point": true, "startLabel": "2024-06-28", "endLabel": null}, {"track": "t30", "start": "2025-03", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Procès ensuite renvoyé. Déclencheur de la rechute de crack.", "sources": ["historique 2025-03-25"], "evidence": [{"id": "historique:o16", "marks": [[27, 137]]}], "s": "2025-03-01", "e": null, "point": true, "startLabel": "2025-03", "endLabel": null}, {"track": "t31", "start": "2025-05-26", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Studio, bail d'un an renouvelable. Projet de formation cuisine.", "sources": ["historique 2025-06-03", "historique 2025-07-01"], "evidence": [{"id": "historique:o17", "marks": [[0, 80]]}, {"id": "historique:o18", "marks": [[201, 245]]}], "s": "2025-05-26", "e": null, "point": false, "startLabel": "2025-05-26", "endLabel": null}, {"track": "t32", "start": "2025-06", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Visites sans médiatisation un samedi sur deux.", "sources": ["historique 2025-06-03"], "evidence": [{"id": "historique:o17", "marks": [[113, 234]]}], "s": "2025-06-01", "e": null, "point": true, "startLabel": "2025-06", "endLabel": null}], "obs": {"historique:o1": {"label": "historique · Entretien éducatif", "date": "2023-09-06", "text": "Premier passage de [identité] à l'accueil du CAARUD, orientée par l'équipe de maraude. Fume du crack \"depuis ses 25 ans\", dort sous une tente vers les quais ou chez des connaissances.\nRécupère du matériel : pipes en verre, embouts, crèmes pour les lèvres (brûlures). Boit des bières fortes.\nDemande à voir \"un médecin pour les nerfs\". RDV pris avec le Dr [identité] le 14/09."}, "historique:o2": {"label": "historique · Observation psychiatrique de suivi", "date": "2023-09-14", "text": "Observations :\nVue ce jour en premier entretien, accompagnée par M. [identité].\nContexte : sans domicile depuis l'expulsion de son logement en 2022. Placement en foyer à 12 ans (violences intrafamiliales, abus sexuels dans l'enfance). Relation de plusieurs années avec un homme violent (son ex-compagnon [identité]), séparée depuis 2022 mais le croise régulièrement.\nSubstances :\n- crack fumé depuis 6 ans environ, 1 a 2 g/j quand elle a de l'argent (manche, dépannages), perte de contrôle franche\n- alcool : 6 bières fortes de 50 cL par jour, tremblements le matin\n- cannabis occasionnel, tabac 20 cig/j\nClinique : contact méfiant au début puis adhésion. Hypervigilance, sursauts, cauchemars quasi quotidiens, reviviscences, évitement des hommes. Thymie triste. Pas d'idées suicidaires ce jour.\nTableau compatible avec un TSPT complexe, consommations à visée en partie auto-thérapeutique (\"le caillou ça coupe les images\").\nConclusions :\n- RDV toutes les 2 semaines, couplés au passage CAARUD\n- Dépistages à faire avec l'IDE\n- Lien ASS pour hébergement"}, "historique:o3": {"label": "historique · Observation infirmière", "date": "2023-10-03", "text": "TROD VIH et VHC négatifs. Sérologie VHB : non immunisée, 1ère injection de vaccin faite ce jour.\nBrûlures superficielles des doigts et des lèvres, soins faits. Toux grasse depuis 3 semaines, pas de fièvre : à surveiller."}, "historique:o4": {"label": "historique · Entretien social", "date": "2023-10-25", "text": "Mme [identité] [identité], née le [identité]. Domiciliation administrative à l'association, [identité], 33000 BORDEAUX. Tél : [identité] (change souvent de téléphone).\nDroits : RSA à rouvrir (suspendu), demande de CSS. Demande SIAO faite ce jour, appels au 115 la plupart des soirs sans succès.\nSon fils [identité] (9 ans) vit chez sa grand-mère paternelle depuis 2021, visites médiatisées prévues par le juge des enfants mais non réalisées depuis un an."}, "historique:o5": {"label": "historique · Observation psychiatrique de suivi", "date": "2023-11-21", "text": "Observations :\nVue ce jour, accompagnée par l'éducateur.\nAgression sexuelle la semaine dernière la nuit, sous un pont, par un inconnu. Plainte déposée le lendemain avec M. [identité]. Examen aux UMJ fait.\nMajoration nette des reviviscences et des cauchemars, ne dort plus que par fragments, consomme \"pour tenir éveillée\".\nPas d'idées suicidaires, demande de l'aide pour dormir.\nConclusions :\n- Prazosine 1 mg le soir, paliers de 1 mg par semaine jusqu'à 3 mg (surveillance TA)\n- Hydroxyzine 25 mg si besoin, max 2/j\n- RDV dans 1 semaine"}, "historique:o6": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-01-16", "text": "Observations :\nVue ce jour\nMise à l'abri hivernale depuis le 08/01 (gymnase, places 115). Dort mieux.\nPrazosine 3 mg : cauchemars 2 a 3 fois par semaine contre toutes les nuits auparavant. TA correcte, pas de malaise.\nCrack diminué, \"un jour sur deux\". Bières 4 a 5/j.\nConclusions :\nRO prazosine 3 mg + hydroxyzine\nRDV 2 semaines"}, "historique:o7": {"label": "historique · Entretien éducatif", "date": "2024-02-13", "text": "[identité] vient nous apprendre le décès de [identité] le 10/02, retrouvé mort d'une overdose dans un squat. Sidérée, alterne pleurs et rires, \"je suis libre et je suis triste\".\nConsomme beaucoup depuis 3 jours. On reste avec elle une bonne partie de l'après-midi. RDV médical avancé."}, "historique:o8": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-02-20", "text": "Observations :\nVue ce jour, RDV avancé.\nDécès de son ex-compagnon (OD) il y a 10 jours : vécu ambivalent, soulagement et culpabilité (\"j'aurais du être là\"). Majoration des consommations, crack jusqu'à 3 g/j, alcool en hausse.\nIdées de mort passives, pas de scénario, pas d'intention, pense à son fils comme facteur protecteur.\nHospitalisation proposée (unité d'addictologie / psychiatrie) : refus.\nConclusions :\nRDV dans une semaine, appel téléphonique entre les deux par l'éducateur\nNaloxone remise (consomme parfois avec des usagers d'opioïdes)"}, "historique:o9": {"label": "historique · Observation infirmière", "date": "2024-04-09", "text": "Retour d'hospitalisation : hospitalisée du 28/03 au 04/04 en médecine pour pneumopathie (fièvre, toux, crachats noirs). Sevrage alcool sous diazépam pendant le séjour, sans complication.\nSortie avec antibiotiques, terminés. Va mieux. Dit avoir \"pas touché au caillou\" depuis la sortie."}, "historique:o10": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-04-23", "text": "Observations :\nVue ce jour\nAprès l'hospitalisation, crack réduit à 2 a 3 fois par semaine. Bières 3/j.\nPlus de motivation qu'auparavant, \"j'ai vu que mon corps lachait\". Souhaite un hébergement stable \"pour avoir une chance de revoir [identité]\".\nCauchemars stables sous prazosine.\nConclusions :\nSoutien de la candidature en CHRS (courrier)\nRO prazosine 3 mg"}, "historique:o11": {"label": "historique · Entretien social", "date": "2024-06-11", "text": "Entrée en CHRS le 03/06/2024, chambre individuelle. Référente sur place identifiée. RSA rétabli, CSS accordée.\nDemande de reprise des visites médiatisées avec son fils transmise au service de l'ASE.\nNouveau numéro : [identité]."}, "historique:o12": {"label": "historique · Entretien éducatif", "date": "2024-07-02", "text": "Visite au CHRS. [identité] est installée depuis le 10/06, a décoré sa chambre. Elle a revu [identité] le 28/06 en visite médiatisée, une heure, \"il m'a reconnue tout de suite\". Très émue.\nCrack : \"une fois par semaine, le samedi\". Elle s'organise pour ne pas avoir d'argent sur elle le samedi."}, "historique:o13": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-09-17", "text": "Observations :\nVue ce jour\nCrack 1 fois par semaine environ. Dit ne plus boire de bières fortes depuis l'entrée au CHRS.\nPersistance des reviviscences diurnes, évitement, hypervigilance dans les transports. Humeur triste en fond.\nOrientation vers le centre de psychotraumatologie pour EMDR (liste d'attente 2-3 mois).\nConclusions :\n- Introduction sertraline 50 mg\n- Prazosine 3 mg poursuivie\n- RDV 1 mois"}, "historique:o14": {"label": "historique · Observation infirmière", "date": "2024-10-08", "text": "Appel de l'éducatrice du CHRS : Mme [identité] boit 2-3 bières le soir dans sa chambre \"en cachette\". Pas d'alcoolisation massive, pas de violence. À reprendre avec elle et le Dr [identité]."}, "historique:o15": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-01-14", "text": "Observations :\nVue ce jour\nEMDR commencé en décembre au centre de psychotraumatologie, 3 séances, \"c'est dur mais ça bouge\".\nMoins de cauchemars, plus de reviviscences dans la journée. Dernier crack le 24/12 (soirée seule, \"Noël c'est le pire\"). Reconnait les bières au CHRS, 1 a 2 le soir.\nConclusions :\nSertraline 100 mg\nRO prazosine 3 mg\nRDV 6 semaines"}, "historique:o16": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-03-25", "text": "Observations :\nVue ce jour\nRechute de crack 3 jours de suite début mars après la convocation au tribunal pour le procès de son agresseur. Arret de elle-meme ensuite, en a parlé à son éducatrice.\nProcès renvoyé. Anxiété ++. Pas d'idées suicidaires.\nConclusions :\nHydroxyzine si besoin reprise\nEMDR poursuivi\nRDV 1 mois"}, "historique:o17": {"label": "historique · Entretien social", "date": "2025-06-03", "text": "Accès à une résidence sociale le 26/05/2025 (studio, bail d'un an renouvelable). Fin de la prise en charge CHRS.\nLe juge des enfants a élargi les droits : visites avec [identité] sans médiatisation un samedi sur deux à partir de juin."}, "historique:o18": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-07-01", "text": "Observations :\nVue ce jour, dans son nouveau logement depuis fin mai, fière.\nPas de crack depuis mars. Alcool : 1 a 2 bières le week-end. Tabac 15 cig/j.\nCauchemars rares, reviviscences moins intenses. Thymie neutre, projets (formation cuisine).\nConclusions :\nPoursuite sertraline 100 mg, prazosine 3 mg\nRDV 2 mois"}}, "ref": "2025-07-01", "kinds": [{"id": "life_event", "label": "Événements de vie", "light": "#b45309", "dark": "#f59e0b"}, {"id": "substance_use", "label": "Consommations", "light": "#c62828", "dark": "#ef6b6b"}, {"id": "psychiatric", "label": "Psychopathologie", "light": "#6a4bb0", "dark": "#a78bfa"}, {"id": "somatic", "label": "Somatique", "light": "#0f7b6c", "dark": "#34d3b9"}, {"id": "medication", "label": "Médicaments", "light": "#1d5fb4", "dark": "#6aa6f0"}, {"id": "therapeutic_psycho", "label": "Prises en charge", "light": "#4d7c0f", "dark": "#a3d95b"}], "modeLabel": {"usage": "usage", "intoxication": "intoxication", "sevrage": "sevrage", "rechute": "rechute", "craving": "craving"}, "certaintyLabel": {"exact": "date exacte", "month": "mois", "year": "année", "approx": "date approximative"}};
+const NS = "http://www.w3.org/2000/svg";
+const dark = () => matchMedia("(prefers-color-scheme: dark)").matches;
+const DAY = 864e5;
+const t = (iso) => Date.parse(iso + "T00:00:00Z");
+const REF = t(D.ref);
+const kindOf = Object.fromEntries(D.kinds.map(k => [k.id, k]));
+const trackOf = Object.fromEntries(D.tracks.map(x => [x.id, x]));
+const color = (kind) => kindOf[kind][dark() ? "dark" : "light"];
+const MODE_OP = {usage:.55, craving:.7, sevrage:.7, intoxication:.85, rechute:1};
+const EVENTS = D.events.map((e, i) => ({
+  ...e, i, kind: trackOf[e.track].kind, label: trackOf[e.track].label,
+  a: t(e.s), b: e.e ? t(e.e) : (e.ongoing ? REF : t(e.s)),
+}));
+const hidden = new Set();
+let LABEL_W = 150; const ROW = 26, PADR = 14, AXIS = 84;
+let DOM_MIN = Math.min(...EVENTS.map(e => e.a)) - 200*DAY, DOM_MAX = REF + 60*DAY;
+let view = [DOM_MIN, DOM_MAX];
+
+const el = (name, attrs = {}, parent, text) => {
+  const n = document.createElementNS(NS, name);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  if (text !== undefined) n.textContent = text;
+  if (parent) parent.appendChild(n);
+  return n;
+};
+const fmt = (s) => { if (!s) return ""; const [y,m,d] = s.split("-"); return d ? `${d}/${m}/${y}` : m ? `${m}/${y}` : y; };
+const yr = (ms) => new Date(ms).getUTCFullYear();
+
+function ticks(a, b) {
+  const span = (b - a) / (365.25*DAY), out = [];
+  const step = span > 40 ? 10 : span > 18 ? 5 : span > 9 ? 2 : span > 3.5 ? 1 : 0;
+  if (step) { for (let y = Math.ceil(yr(a)/step)*step; Date.UTC(y,0,1) <= b; y += step) out.push([Date.UTC(y,0,1), String(y), true]); }
+  else {
+    const q = span > 1.6 ? 3 : 1;
+    for (let y = yr(a); y <= yr(b); y++) for (let m = 0; m < 12; m += q) {
+      const v = Date.UTC(y, m, 1); if (v < a || v > b) continue;
+      out.push([v, m === 0 ? String(y) : `${String(m+1).padStart(2,"0")}/${String(y).slice(2)}`, m === 0]);
+    }
+  }
+  return out;
+}
+
+const bolt = (x, y, s=7) => `M${x} ${y-s} L${x-s*.55} ${y+.1} L${x-.05*s} ${y+.1} L${x-s*.35} ${y+s} L${x+s*.6} ${y-.25*s} L${x+.05*s} ${y-.25*s} Z`;
+
+function drawMain() {
+  const svg = document.getElementById("main");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800;
+  LABEL_W = W < 600 ? 92 : 150;
+  const innerW = W - LABEL_W - PADR;
+  const x = (ms) => LABEL_W + (ms - view[0]) / (view[1] - view[0]) * innerW;
+  const kinds = D.kinds.filter(k => !hidden.has(k.id));
+  const rows = [];
+  for (const k of kinds) if (k.id !== "life_event") {
+    rows.push({head: k});
+    for (const tr of D.tracks.filter(tr => tr.kind === k.id)) rows.push({track: tr});
+  }
+  const showLife = !hidden.has("life_event");
+  const H = AXIS + 18 + rows.length * ROW + 24;
+  svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const defs = el("defs", {}, svg);
+  const cp = el("clipPath", {id: "clip"}, defs); el("rect", {x: LABEL_W, y: 0, width: innerW, height: H}, cp);
+  // grid + axis
+  const gridG = el("g", {}, svg);
+  for (const [v, lab, major] of ticks(...view)) {
+    const xx = x(v);
+    el("line", {x1: xx, x2: xx, y1: AXIS - 4, y2: H - 20, stroke: "var(--line)", "stroke-width": major ? 1 : .5}, gridG);
+    el("text", {x: xx + 3, y: H - 7, class: "mute"}, gridG, lab);
+  }
+  el("line", {x1: LABEL_W, x2: W - PADR, y1: AXIS - 4, y2: AXIS - 4, stroke: "var(--axis)", "stroke-width": 4, "stroke-linecap": "round"}, svg);
+  const g = el("g", {"clip-path": "url(#clip)"}, svg);
+  // life events on the axis
+  if (showLife) {
+    const life = EVENTS.filter(e => e.kind === "life_event" && e.b >= view[0] && e.a <= view[1]);
+    const lanes = [[], [], [], [], []];
+    for (const e of life.sort((p, q) => p.a - q.a)) {
+      const pt = e.point || (e.b - e.a) < 120*DAY;
+      const xa = x(Math.max(e.a, view[0])), xb = pt ? xa : x(Math.min(e.b, view[1]));
+      const w = e.label.length * 5.9 + 10, flip = xa + w > W - PADR;
+      const iv = flip ? [xa - w, xa + 4] : [xa - 4, xa + w];
+      let ln = lanes.findIndex(l => l.every(o => o[1] < iv[0] || o[0] > iv[1]));
+      if (ln < 0) ln = lanes.length - 1;
+      lanes[ln].push(iv);
+      const ty = AXIS - 14 - ln * 13 - 4;
+      const grp = el("g", {class: "ev", "data-i": e.i}, g);
+      if (!pt) el("rect", {x: xa, y: AXIS - 8, width: Math.max(2, xb - xa), height: 8, rx: 3, fill: color("life_event"), opacity: .85}, grp);
+      else el("path", {d: `M${xa} ${AXIS-11} l6 6 l-6 6 l-6 -6 Z`, fill: color("life_event")}, grp);
+      el("line", {x1: xa, x2: xa, y1: ty + 3, y2: AXIS - 11, stroke: color("life_event"), "stroke-width": 1, opacity: .6}, grp);
+      el("text", {x: flip ? xa - 3 : xa + 3, y: ty, "font-size": 11, "text-anchor": flip ? "end" : "start", "pointer-events": "none"}, grp, e.label);
+      if (e.loss) el("path", {d: bolt(xa, AXIS + 6, 6), fill: "#e11d48"}, grp);
+    }
+  }
+  // rows
+  let y = AXIS + 6;
+  for (const r of rows) {
+    if (r.head) {
+      el("text", {x: 6, y: y + 17, "font-weight": 600, fill: color(r.head.id)}, svg, r.head.label.toUpperCase()).setAttribute("font-size", 11);
+      el("line", {x1: 6, x2: W - PADR, y1: y + ROW - 3, y2: y + ROW - 3, stroke: color(r.head.id), opacity: .35}, svg);
+    } else {
+      const cut = W < 600 ? 13 : 24;
+      const lab = r.track.label.length > cut ? r.track.label.slice(0, cut - 1) + "…" : r.track.label;
+      el("text", {x: 12, y: y + 17, class: "mute"}, svg, lab).appendChild(Object.assign(document.createElementNS(NS, "title"), {textContent: r.track.label}));
+      for (const e of EVENTS.filter(e => e.track === r.track.id)) {
+        if (e.b < view[0] || e.a > view[1]) continue;
+        const grp = el("g", {class: "ev", "data-i": e.i}, g);
+        const c = color(e.kind), op = e.mode ? (MODE_OP[e.mode] ?? .6) : .8;
+        const xa = x(e.a), xb = x(e.b);
+        const dash = e.certainty === "approx" ? "4 3" : null;
+        if (e.point || xb - xa < 5) {
+          el("path", {d: `M${xa} ${y+5} l7 7 l-7 7 l-7 -7 Z`, fill: c, opacity: op}, grp);
+        } else {
+          const rc = el("rect", {x: xa, y: y + 4, width: xb - xa, height: ROW - 10, rx: 4, fill: c, opacity: op}, grp);
+          if (dash) { rc.setAttribute("stroke", c); rc.setAttribute("stroke-dasharray", dash); rc.setAttribute("fill-opacity", .45); }
+          if (e.ongoing && xb < W) el("path", {d: `M${xb} ${y+4} l8 ${(ROW-10)/2} l-8 ${(ROW-10)/2} Z`, fill: c, opacity: op}, grp);
+        }
+        if (e.loss) el("path", {d: bolt(xa, y + ROW/2 - 1), fill: "#e11d48", stroke: "var(--panel)", "stroke-width": .8}, grp);
+        if (e.mode && e.mode !== "usage" && xb - xa > 56) el("text", {x: xa + 6, y: y + 17, fill: "#fff", "font-size": 10.5, "pointer-events": "none"}, grp, MODE_LABEL(e.mode)).setAttribute("style", "fill:#fff");
+      }
+    }
+    y += ROW;
+  }
+  svg.querySelectorAll(".ev").forEach(n => {
+    const go = () => select(+n.dataset.i);
+    n.addEventListener("click", go); n.addEventListener("pointerenter", (ev) => { if (ev.pointerType === "mouse") go(); });
+  });
+  if (selected !== null) svg.querySelector(`.ev[data-i="${selected}"]`)?.classList.add("sel");
+}
+const MODE_LABEL = (m) => D.modeLabel[m] || m;
+
+let selected = null;
+function obsHtml(v, esc) {
+  const o = D.obs[v.id];
+  let html = "", at = 0;
+  for (const [a, b] of v.marks) { html += esc(o.text.slice(at, a)) + "<mark>" + esc(o.text.slice(a, b)) + "</mark>"; at = b; }
+  html += esc(o.text.slice(at));
+  return `<div class="obs"><div class="oh">${o.date ? esc(o.date) + " · " : ""}${esc(o.label)}${o.summary_only ? " · résumé" : ""}</div><div class="ot">${html}</div></div>`;
+}
+function select(i) {
+  selected = i;
+  document.querySelectorAll(".ev").forEach(n => n.classList.toggle("sel", +n.dataset.i === i));
+  const e = EVENTS[i];
+  const when = e.endLabel ? (e.startLabel === e.endLabel ? fmt(e.startLabel) : `${fmt(e.startLabel)} → ${fmt(e.endLabel)}`)
+    : e.ongoing ? `depuis ${fmt(e.startLabel)} (en cours)` : fmt(e.startLabel);
+  const esc = (s) => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const bits = [];
+  if (e.mode) bits.push(MODE_LABEL(e.mode));
+  if (e.certainty) bits.push(D.certaintyLabel[e.certainty] || e.certainty);
+  if (e.loss) bits.push("⚡ perte de contrôle");
+  document.getElementById("detail").innerHTML =
+    `<b>${esc(e.label)}</b> <span class="k">· ${esc(kindOf[e.kind].label)} · ${when}${bits.length ? " · " + esc(bits.join(" · ")) : ""}</span>` +
+    (e.note ? `<div>${esc(e.note)}</div>` : "") +
+    (e.sources.length ? `<div class="k">Autres sources : ${e.sources.map(esc).join(" ; ")}</div>` : "") +
+    (e.evidence.length ? `<div class="k" style="margin-top:8px">${e.evidence.length > 1 ? "Observations" : "Observation"} d'origine${e.evidence.some(v => !v.marks.length) ? " (passage justificatif non repéré dans certaines)" : ", passage justificatif surligné"} :</div><div id="obs">` +
+      e.evidence.map(v => obsHtml(v, esc)).join("") + `</div>` : "");
+  document.querySelector("#obs mark")?.scrollIntoView({block: "nearest"});
+}
+
+// overview strip with a draggable window
+function drawOverview() {
+  const svg = document.getElementById("ov");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800, H = 54, L = 12, R = 12, innerW = W - L - R;
+  const x = (ms) => L + (ms - DOM_MIN) / (DOM_MAX - DOM_MIN) * innerW;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  for (const [v, lab, major] of ticks(DOM_MIN, DOM_MAX)) {
+    if (!major) continue;
+    el("line", {x1: x(v), x2: x(v), y1: 4, y2: H - 14, stroke: "var(--line)"}, svg);
+    el("text", {x: x(v) + 2, y: H - 3, class: "mute", "font-size": 10}, svg, lab);
+  }
+  const vis = EVENTS.filter(e => !hidden.has(e.kind));
+  const n = Math.max(1, new Set(vis.map(e => e.track)).size), tracks = [...new Set(vis.map(e => e.track))];
+  for (const e of vis) {
+    const r = tracks.indexOf(e.track), yy = 6 + r * (H - 24) / n;
+    el("rect", {x: x(e.a), y: yy, width: Math.max(2, x(e.b) - x(e.a)), height: Math.max(1.5, (H - 24) / n - 1), fill: color(e.kind), opacity: .7}, svg);
+  }
+  const win = el("rect", {x: x(view[0]), y: 1, width: Math.max(10, x(view[1]) - x(view[0])), height: H - 14, rx: 5, fill: "rgba(80,120,220,.16)", stroke: "#4f7be0", "stroke-width": 1.5, style: "cursor:grab"}, svg);
+  const hl = el("rect", {x: x(view[0]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const hr = el("rect", {x: x(view[1]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const inv = (px) => DOM_MIN + (px - L) / innerW * (DOM_MAX - DOM_MIN);
+  const MINSPAN = 120 * DAY;
+  const drag = (node, kind) => node.addEventListener("pointerdown", (ev) => {
+    ev.preventDefault(); node.setPointerCapture(ev.pointerId);
+    const x0 = ev.clientX, v0 = [...view], per = (DOM_MAX - DOM_MIN) / innerW;
+    const move = (m) => {
+      const d = (m.clientX - x0) * per;
+      let [a, b] = v0;
+      if (kind === "move") { const span = b - a; a = Math.min(Math.max(DOM_MIN, a + d), DOM_MAX - span); b = a + span; }
+      else if (kind === "l") a = Math.min(Math.max(DOM_MIN, a + d), b - MINSPAN);
+      else b = Math.max(Math.min(DOM_MAX, b + d), a + MINSPAN);
+      view = [a, b]; drawOverview(); drawMain();
+    };
+    const up = () => { node.removeEventListener("pointermove", move); node.removeEventListener("pointerup", up); };
+    node.addEventListener("pointermove", move); node.addEventListener("pointerup", up);
+  });
+  drag(win, "move"); drag(hl, "l"); drag(hr, "r");
+}
+
+function setView(a, b) { view = [Math.max(DOM_MIN, a), Math.min(DOM_MAX, b)]; redraw(); }
+function redraw() { drawOverview(); drawMain(); }
+
+// controls
+const kindsBar = document.getElementById("kinds");
+for (const k of D.kinds) {
+  const b = document.createElement("button"); b.className = "chip"; b.setAttribute("aria-pressed", "true");
+  b.innerHTML = `<i style="background:${k[dark() ? "dark" : "light"]}"></i>${k.label}`;
+  b.onclick = () => { hidden.has(k.id) ? hidden.delete(k.id) : hidden.add(k.id); b.setAttribute("aria-pressed", String(!hidden.has(k.id))); redraw(); };
+  kindsBar.appendChild(b);
+}
+const presets = document.getElementById("presets");
+const addPreset = (label, fn) => { const b = document.createElement("button"); b.textContent = label; b.onclick = fn; presets.appendChild(b); };
+addPreset("Tout", () => setView(DOM_MIN, DOM_MAX));
+for (const yrs of [10, 5, 2]) addPreset(`${yrs} dernières années`, () => setView(REF - yrs * 365.25 * DAY, DOM_MAX));
+addPreset("−", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]); setView(c - h, c + h); });
+addPreset("+", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]) / 4; setView(c - h, c + h); });
+document.getElementById("legend").innerHTML =
+  `<span><span class="sw" style="background:#888;opacity:.55"></span>usage</span><span><span class="sw" style="background:#888;opacity:.85"></span>intoxication</span>` +
+  `<span><span class="sw" style="background:#888"></span>rechute</span><span><span class="sw" style="background:#888;opacity:.45;border:1px dashed #888"></span>date approximative</span>` +
+  `<span style="color:#e11d48">⚡ perte de contrôle</span><span>◆ événement sans durée</span><span>▶ en cours</span>`;
+document.getElementById("main").addEventListener("wheel", (ev) => {
+  if (!ev.ctrlKey && !ev.shiftKey) return;
+  ev.preventDefault();
+  const r = ev.currentTarget.getBoundingClientRect(), W = r.width, f = (ev.clientX - r.left - LABEL_W) / (W - LABEL_W - PADR);
+  const c = view[0] + Math.min(Math.max(f, 0), 1) * (view[1] - view[0]), k = ev.deltaY > 0 ? 1.25 : .8;
+  setView(c - (c - view[0]) * k, c + (view[1] - c) * k);
+}, {passive: false});
+addEventListener("resize", redraw);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
+if (innerWidth < 600) view = [Math.max(DOM_MIN, REF - 5 * 365.25 * DAY), DOM_MAX];
+redraw();
+</script>
+</body>
+</html>

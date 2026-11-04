@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frise tabac-infarctus</title>
+<style>
+:root{--bg:#fafaf7;--fg:#1d1d1b;--mute:#6b6b66;--line:#d8d8d0;--panel:#fff;--axis:#1d1d1b}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#eceae3;--mute:#9a9a92;--line:#34342f;--panel:#1f1f1c;--axis:#eceae3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:12px 16px 32px}
+h1{font-size:18px;margin:4px 0 2px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+button,.chip{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px}
+.chip i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chip[aria-pressed=false]{opacity:.4}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;touch-action:pan-y}
+svg{display:block;width:100%}
+text{fill:var(--fg);font-size:12px}
+.mute{fill:var(--mute)}
+.ev{cursor:pointer}
+.ev:hover rect,.ev.sel rect,.ev:hover path,.ev.sel path{stroke:var(--fg);stroke-width:1.6}
+#detail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:10px;min-height:76px}
+#detail b{font-size:15px}
+.obs{border:1px solid var(--line);border-radius:8px;margin-top:6px;overflow:hidden}
+.oh{background:var(--bg);color:var(--mute);font-size:12px;padding:4px 10px;border-bottom:1px solid var(--line)}
+.ot{white-space:pre-wrap;padding:8px 10px;max-height:240px;overflow:auto;font-size:13px}
+mark{background:#fde047;color:#1d1d1b;border-radius:3px;padding:0 1px}
+@media (prefers-color-scheme:dark){mark{background:#a16207;color:#fff}}
+#detail .k{color:var(--mute);font-size:12px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--mute);font-size:12px;margin-top:8px}
+.sw{display:inline-block;width:22px;height:9px;border-radius:2px;vertical-align:middle;margin-right:4px}
+</style>
+</head>
+<body>
+<main>
+<h1>Frise chronologique — tabac-infarctus</h1>
+<p class="sub"><b>Données synthétiques</b> (dossier entièrement inventé). Touchez une barre pour lire la note et l'observation d'origine ; faites glisser la fenêtre de l'aperçu pour zoomer.</p>
+<div class="bar" id="kinds"></div>
+<div class="bar" id="presets"></div>
+<div class="chart"><svg id="ov" height="54"></svg></div>
+<div class="chart" style="margin-top:8px"><svg id="main"></svg></div>
+<div class="legend" id="legend"></div>
+<div id="detail"><span class="k">Aucun élément sélectionné.</span></div>
+</main>
+<script>
+const D = {"dossier": "tabac-infarctus", "tracks": [{"id": "t16", "kind": "life_event", "label": "Reprise du travail et conflit avec la responsable"}, {"id": "t1", "kind": "substance_use", "label": "Tabac"}, {"id": "t3", "kind": "substance_use", "label": "Cannabis"}, {"id": "t4", "kind": "substance_use", "label": "Alcool"}, {"id": "t2", "kind": "substance_use", "label": "Nicotine (vapoteuse)"}, {"id": "t8", "kind": "psychiatric", "label": "Trouble de l'adaptation avec anxiété et humeur dépressive"}, {"id": "t5", "kind": "somatic", "label": "Infarctus du myocarde"}, {"id": "t7", "kind": "somatic", "label": "Prise de poids"}, {"id": "t6", "kind": "somatic", "label": "Nausées sous varénicline"}, {"id": "t9", "kind": "medication", "label": "Varénicline"}, {"id": "t10", "kind": "medication", "label": "Patch nicotinique 21 mg"}, {"id": "t11", "kind": "medication", "label": "Gommes nicotiniques 2 mg"}, {"id": "t12", "kind": "therapeutic_psycho", "label": "Suivi en tabacologie"}, {"id": "t13", "kind": "therapeutic_psycho", "label": "Suivi psychiatrique"}, {"id": "t14", "kind": "therapeutic_psycho", "label": "TCC (anxiété)"}, {"id": "t15", "kind": "therapeutic_psycho", "label": "Orientation diététicienne"}], "events": [{"track": "t1", "start": "1986", "end": "2024-09", "ongoing": false, "mode": "usage", "loss": false, "certainty": null, "note": "Début à 14 ans (année estimée d'après la naissance en 1972) ; 25 cig/j avant l'infarctus, environ 38 PA. Arrêt à l'hôpital après l'infarctus.", "sources": ["historique 2024-10-08"], "evidence": [{"id": "historique:o1", "marks": [[191, 262]]}], "s": "1986-01-01", "e": "2024-09-30", "point": false, "startLabel": "1986", "endLabel": "2024-09"}, {"track": "t1", "start": "2024-09", "end": "2024-10-15", "ongoing": false, "mode": "rechute", "loss": false, "certainty": null, "note": "Reprise au retour à domicile, 10 cig/j le 08/10. Fagerström 8, CO 32 ppm. La patiente dit d'abord ne plus fumer, puis reconnaît les cigarettes du soir.", "sources": ["historique 2024-10-08", "historique 2024-10-10"], "evidence": [{"id": "historique:o1", "marks": [[262, 351]]}, {"id": "historique:o2", "marks": [[97, 207]]}], "s": "2024-09-01", "e": "2024-10-15", "point": false, "startLabel": "2024-09", "endLabel": "2024-10-15"}, {"track": "t1", "start": "2024-10-15", "end": "2025-01-06", "ongoing": false, "mode": "sevrage", "loss": false, "certainty": null, "note": "Arrêt total le 15/10/2024, CO 3 puis 2 ppm. Abstinence confirmée le 19/11.", "sources": ["historique 2024-10-22", "historique 2024-11-19"], "evidence": [{"id": "historique:o3", "marks": [[0, 28]]}, {"id": "historique:o4", "marks": [[143, 173], [173, 183], [184, 223]]}], "s": "2024-10-15", "e": "2025-01-06", "point": false, "startLabel": "2024-10-15", "endLabel": "2025-01-06"}, {"track": "t1", "start": "2024-10-22", "end": null, "ongoing": false, "mode": "craving", "loss": false, "certainty": null, "note": "Craving surtout après le café et en voiture.", "sources": ["historique 2024-10-22"], "evidence": [{"id": "historique:o3", "marks": [[125, 169]]}], "s": "2024-10-22", "e": null, "point": true, "startLabel": "2024-10-22", "endLabel": null}, {"track": "t1", "start": "2025-01-06", "end": "2025-04-01", "ongoing": false, "mode": "rechute", "loss": false, "certainty": null, "note": "Reprise à la reprise du travail après un conflit avec sa responsable : 8 cig/j (CO 18 ppm) le 14/01, puis 5 cig/j le 04/02.", "sources": ["historique 2025-01-14", "historique 2025-02-04", "historique 2025-04-15"], "evidence": [{"id": "historique:o5", "marks": [[0, 128]]}, {"id": "historique:o6", "marks": [[27, 178], [375, 403]]}, {"id": "historique:o8", "marks": [[0, 34]]}], "s": "2025-01-06", "e": "2025-04-01", "point": false, "startLabel": "2025-01-06", "endLabel": "2025-04-01"}, {"track": "t1", "start": "2025-04-01", "end": null, "ongoing": true, "mode": "sevrage", "loss": false, "certainty": null, "note": "Abstinence depuis le 01/04/2025, CO 2 ppm, confirmée à 6 mois le 30/09/2025.", "sources": ["historique 2025-04-15", "historique 2025-06-24", "historique 2025-09-30"], "evidence": [{"id": "historique:o8", "marks": [[0, 34], [61, 71], [86, 143]]}, {"id": "historique:o9", "marks": [[130, 170]]}, {"id": "historique:o10", "marks": [[0, 18]]}], "s": "2025-04-01", "e": null, "point": false, "startLabel": "2025-04-01", "endLabel": null}, {"track": "t2", "start": "2025-02", "end": null, "ongoing": true, "mode": "usage", "loss": false, "certainty": null, "note": "Vapoteuse proposée le 14/01/2025 et utilisée le 04/02 ; 12 mg/mL, puis 6 mg/mL en juin, puis 3 mg/mL en septembre. Projet d'arrêt d'ici la fin d'année 2025.", "sources": ["historique 2025-01-14", "historique 2025-02-04", "historique 2025-04-15", "historique 2025-06-24", "historique 2025-09-30"], "evidence": [{"id": "historique:o5", "marks": [[174, 265]]}, {"id": "historique:o6", "marks": [[375, 403]]}, {"id": "historique:o8", "marks": [[0, 34], [34, 61]]}, {"id": "historique:o9", "marks": []}, {"id": "historique:o10", "marks": [[18, 81]]}], "s": "2025-02-01", "e": null, "point": false, "startLabel": "2025-02", "endLabel": null}, {"track": "t3", "start": "1990", "end": "1997", "ongoing": false, "mode": "usage", "loss": false, "certainty": null, "note": "Consommation entre 18 et 25 ans (années estimées d'après la naissance en 1972), plus de consommation depuis.", "sources": ["historique 2024-10-10"], "evidence": [{"id": "historique:o2", "marks": [[227, 269]]}], "s": "1990-01-01", "e": "1997-12-31", "point": false, "startLabel": "1990", "endLabel": "1997"}, {"track": "t4", "start": "2024-10-10", "end": null, "ongoing": true, "mode": "usage", "loss": false, "certainty": null, "note": "Un verre de vin au dîner, inchangé en juin 2025. Début de consommation non précisé ; date = première observation.", "sources": ["historique 2024-10-10", "historique 2025-06-24"], "evidence": [{"id": "historique:o2", "marks": [[269, 304]]}, {"id": "historique:o9", "marks": [[170, 206]]}], "s": "2024-10-10", "e": null, "point": false, "startLabel": "2024-10-10", "endLabel": null}, {"track": "t5", "start": "2024-09-03", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Stent sur l'IVA. La patiente situe l'infarctus « fin août ». Réadaptation cardiaque. Bilan de septembre 2025 rassurant (FEVG 55 %, selon la patiente).", "sources": ["historique 2024-10-08", "historique 2024-10-10", "historique 2025-09-30"], "evidence": [{"id": "historique:o1", "marks": [[0, 145]]}, {"id": "historique:o2", "marks": [[65, 97]]}, {"id": "historique:o10", "marks": [[99, 172]]}], "s": "2024-09-03", "e": null, "point": true, "startLabel": "2024-09-03", "endLabel": null}, {"track": "t6", "start": "2024-10-22", "end": "2024-11-12", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Nausées matinales persistantes, cauchemars « très réalistes » et sommeil agité. Varénicline arrêtée par la patiente.", "sources": ["historique 2024-10-22", "historique 2024-11-19"], "evidence": [{"id": "historique:o3", "marks": [[38, 109], [109, 124]]}, {"id": "historique:o4", "marks": [[0, 107]]}], "s": "2024-10-22", "e": "2024-11-12", "point": false, "startLabel": "2024-10-22", "endLabel": "2024-11-12"}, {"track": "t7", "start": "2024-10", "end": "2025-09", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "+3 kg en novembre 2024, +6 kg en avril 2025 depuis octobre. Orientation vers une diététicienne. Poids stabilisé en septembre 2025.", "sources": ["historique 2024-11-19", "historique 2025-04-15", "historique 2025-09-30"], "evidence": [{"id": "historique:o4", "marks": [[184, 223]]}, {"id": "historique:o8", "marks": [[86, 143]]}, {"id": "historique:o10", "marks": [[81, 98]]}], "s": "2024-10-01", "e": "2025-09-30", "point": false, "startLabel": "2024-10", "endLabel": "2025-09"}, {"track": "t8", "start": "2024-10-10", "end": "2025-06-24", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Anxiété centrée sur le cœur après l'infarctus (HAD A 11, D 6). Majorée après la reprise du travail (A 14, D 9 le 04/02/2025). Nette amélioration en juin 2025 (A 7, D 5).", "sources": ["historique 2024-10-10", "historique 2025-01-14", "historique 2025-02-04", "historique 2025-06-24"], "evidence": [{"id": "historique:o2", "marks": [[362, 378], [378, 444]]}, {"id": "historique:o5", "marks": [[0, 128]]}, {"id": "historique:o6", "marks": [[27, 178], [268, 284], [285, 374]]}, {"id": "historique:o9", "marks": [[27, 96], [113, 129]]}], "s": "2024-10-10", "e": "2025-06-24", "point": false, "startLabel": "2024-10-10", "endLabel": "2025-06-24"}, {"track": "t9", "start": "2024-10", "end": "2024-11-12", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Schéma progressif prescrit le 10/10, arrêt du tabac prévu à J8 (15/10). Arrêtée par la patiente pour nausées et cauchemars.", "sources": ["historique 2024-10-10", "historique 2024-10-22", "historique 2024-11-19"], "evidence": [{"id": "historique:o2", "marks": [[558, 645]]}, {"id": "historique:o3", "marks": [[0, 28], [38, 109]]}, {"id": "historique:o4", "marks": [[0, 107]]}], "s": "2024-10-01", "e": "2024-11-12", "point": false, "startLabel": "2024-10", "endLabel": "2024-11-12"}, {"track": "t10", "start": "2024-11-19", "end": "2025-01-14", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Relais de la varénicline avec des gommes. Patchs arrêtés avant la consultation du 14/01/2025.", "sources": ["historique 2024-11-19", "historique 2025-01-14"], "evidence": [{"id": "historique:o4", "marks": [[108, 143]]}, {"id": "historique:o5", "marks": [[139, 155], [174, 265]]}], "s": "2024-11-19", "e": "2025-01-14", "point": false, "startLabel": "2024-11-19", "endLabel": "2025-01-14"}, {"track": "t11", "start": "2024-11-19", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Prescrites en relais de la varénicline avec le patch. Date d'arrêt non précisée.", "sources": ["historique 2024-11-19"], "evidence": [{"id": "historique:o4", "marks": [[108, 143]]}], "s": "2024-11-19", "e": null, "point": true, "startLabel": "2024-11-19", "endLabel": null}, {"track": "t10", "start": "2025-01-14", "end": "2025-04-15", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Reprise proposée avec la vapoteuse. Poursuite du patch le 04/02. Patch arrêté le 15/04/2025 au plus tard.", "sources": ["historique 2025-01-14", "historique 2025-02-04", "historique 2025-04-15"], "evidence": [{"id": "historique:o5", "marks": [[174, 265]]}, {"id": "historique:o6", "marks": [[483, 505]]}, {"id": "historique:o8", "marks": [[0, 34], [71, 85]]}], "s": "2025-01-14", "e": "2025-04-15", "point": false, "startLabel": "2025-01-14", "endLabel": "2025-04-15"}, {"track": "t12", "start": "2024-10-08", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Première consultation le 08/10/2024, suivi hebdomadaire le premier mois puis espacé. Prochain RDV dans 3 mois (septembre 2025).", "sources": ["historique 2024-10-08", "historique 2024-10-10", "historique 2025-09-30"], "evidence": [{"id": "historique:o1", "marks": [[0, 145]]}, {"id": "historique:o2", "marks": [[646, 692]]}, {"id": "historique:o10", "marks": [[173, 198]]}], "s": "2024-10-08", "e": null, "point": false, "startLabel": "2024-10-08", "endLabel": null}, {"track": "t13", "start": "2024-10-10", "end": "2025-06-24", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Fin du suivi le 24/06/2025, recontact possible. Pas de psychotrope.", "sources": ["historique 2024-10-10", "historique 2025-02-04", "historique 2025-06-24"], "evidence": [{"id": "historique:o2", "marks": [[304, 361]]}, {"id": "historique:o6", "marks": [[418, 482]]}, {"id": "historique:o9", "marks": [[221, 267]]}], "s": "2024-10-10", "e": "2025-06-24", "point": false, "startLabel": "2024-10-10", "endLabel": "2025-06-24"}, {"track": "t14", "start": "2025-03-11", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "2e séance le 11/03/2025. Psychoéducation et exposition progressive à l'effort. TCC proposée le 04/02/2025. Début exact et fin non précisés.", "sources": ["historique 2025-02-04", "historique 2025-03-11", "historique 2025-06-24"], "evidence": [{"id": "historique:o6", "marks": [[418, 482]]}, {"id": "historique:o7", "marks": [[0, 17], [102, 171], [172, 250]]}, {"id": "historique:o9", "marks": [[27, 96]]}], "s": "2025-03-11", "e": null, "point": true, "startLabel": "2025-03-11", "endLabel": null}, {"track": "t15", "start": "2025-04-15", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Orientation pour la prise de poids.", "sources": ["historique 2025-04-15"], "evidence": [{"id": "historique:o8", "marks": [[86, 143]]}], "s": "2025-04-15", "e": null, "point": true, "startLabel": "2025-04-15", "endLabel": null}, {"track": "t16", "start": "2025-01-06", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Reprise du travail avec conflit avec sa responsable. Rechute tabagique et anxiété majorée.", "sources": ["historique 2025-01-14", "historique 2025-02-04"], "evidence": [{"id": "historique:o5", "marks": [[0, 128]]}, {"id": "historique:o6", "marks": [[27, 178]]}], "s": "2025-01-06", "e": null, "point": true, "startLabel": "2025-01-06", "endLabel": null}], "obs": {"historique:o1": {"label": "historique · Consultation tabacologie", "date": "2024-10-08", "text": "Première consultation, adressée par le Dr [identité] (cardiologue) après un infarctus le 03/09/2024 (stent sur l'IVA), en réadaptation cardiaque.\nMme [identité] [identité], 51 ans, comptable. Fume depuis l'âge de 14 ans, 25 cig/j avant l'IDM, soit environ 38 PA. Arret à l'hôpital, a repris \"quelques-unes\" au retour à domicile, actuellement 10 cig/j.\nFagerström 8. CO expiré 32 ppm. Motivation 8/10, peur ++ de la récidive.\nSon mari [identité] fume aussi, \"dans le jardin\".\nPlan : traitement médicamenteux à discuter avec le Dr [identité], date d'arret fixée au 15/10.\nCoordonnées : [identité], 33850 LÉOGNAN, tél [identité]."}, "historique:o2": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-10-10", "text": "Observations :\nVue ce jour (consultation conjointe tabacologie).\nInfarctus \"fin aout\" selon elle. Dit ne plus fumer depuis l'infarctus, puis reconnait les cigarettes du soir quand on reprend la mesure du CO.\nFume depuis 15 ans. Cannabis entre 18 et 25 ans, plus depuis. Alcool : un verre de vin au diner. Pas d'ATCD psychiatrique, pas de traitement psychotrope.\nHAD : A 11, D 6. Anxiété centrée sur le coeur (palpitations, surveille son pouls).\nPas de CI à la varénicline (pas d'épilepsie, fonction rénale normale), avis cardiologue favorable.\nConclusions :\nVarénicline : 0,5 mg/j J1-J3, 0,5 x 2 J4-J7, puis 1 mg x 2, arret du tabac à J8 (15/10)\nSuivi tabacologie hebdomadaire le premier mois"}, "historique:o3": {"label": "historique · Consultation tabacologie", "date": "2024-10-22", "text": "Arret total depuis le 15/10. CO 3 ppm. Nausées le matin sous varénicline (prise pendant le repas conseillée). Sommeil agité.\nCraving surtout après le café et en voiture. Stratégies revues. Son mari accepte de ne plus fumer dans la maison."}, "historique:o4": {"label": "historique · Consultation tabacologie", "date": "2024-11-19", "text": "Varénicline arretée le 12/11 de sa propre initiative : nausées persistantes et cauchemars \"très réalistes\".\nRelais : patch 21 mg + gommes 2 mg. Toujours abstinente du tabac. CO 2 ppm.\nPrise de poids : + 3 kg depuis l'arret."}, "historique:o5": {"label": "historique · Consultation tabacologie", "date": "2025-01-14", "text": "Reprise du tabac depuis la reprise du travail le 06/01, conflit avec sa responsable, \"une cigarette pour souffler\" puis 8 cig/j. CO 18 ppm. Patchs arretés.\nDéçue d'elle-même. Proposition : patch 21 mg + vapoteuse (e-liquide 12 mg/mL), nouvelle date d'arret à fixer.\nAnxiété importante, RDV avec le Dr [identité] avancé."}, "historique:o6": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-02-04", "text": "Observations :\nVue ce jour\nAnxiété majorée depuis la reprise du travail : ruminations sur le coeur, peur de mourir \"d'un coup\", vérifications du pouls, insomnie d'endormissement. Pas de trouble panique caractérisé. Thymie légèrement abaissée, pas d'idées suicidaires.\nHAD : A 14, D 9.\nTrouble de l'adaptation avec anxiété et humeur dépressive dans les suites de l'infarctus.\nTabac : 5 cig/j + vapoteuse.\nConclusions :\nPas de psychotrope pour l'instant, TCC proposée (Mme [identité])\nPoursuite patch + vape\nRDV 2 mois"}, "historique:o7": {"label": "historique · Entretien psychologique", "date": "2025-03-11", "text": "2e séance de TCC. [identité] note ses \"alertes cardiaques\" : la plupart surviennent au repos, le soir. Psychoéducation sur la boucle anxiété - palpitations - vérification.\nExposition progressive à l'effort (marche rapide), validée par le cardiologue. Elle reprend la marche avec une amie."}, "historique:o8": {"label": "historique · Consultation tabacologie", "date": "2025-04-15", "text": "Plus de cigarette depuis le 01/04. Vapoteuse seule, 12 mg/mL. CO 2 ppm. Patch arreté.\nPoids : + 6 kg depuis octobre, orientation diététicienne. Moral meilleur."}, "historique:o9": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-06-24", "text": "Observations :\nVue ce jour\nNette diminution de l'anxiété avec la TCC, ne vérifie plus son pouls. Sommeil correct. HAD : A 7, D 5.\nPas de tabac depuis avril, vape 6 mg/mL. Alcool inchangé (1 verre au diner).\nConclusions :\nFin du suivi psychiatrique, recontact possible\nSuivi tabacologie poursuivi"}, "historique:o10": {"label": "historique · Consultation tabacologie", "date": "2025-09-30", "text": "6 mois sans tabac. Vape à 3 mg/mL, projet d'arreter la vape d'ici la fin d'année. Poids stabilisé.\nBilan cardiologique de septembre rassurant (FEVG 55 %) selon la patiente.\nProchain RDV dans 3 mois."}}, "ref": "2025-10-01", "kinds": [{"id": "life_event", "label": "Événements de vie", "light": "#b45309", "dark": "#f59e0b"}, {"id": "substance_use", "label": "Consommations", "light": "#c62828", "dark": "#ef6b6b"}, {"id": "psychiatric", "label": "Psychopathologie", "light": "#6a4bb0", "dark": "#a78bfa"}, {"id": "somatic", "label": "Somatique", "light": "#0f7b6c", "dark": "#34d3b9"}, {"id": "medication", "label": "Médicaments", "light": "#1d5fb4", "dark": "#6aa6f0"}, {"id": "therapeutic_psycho", "label": "Prises en charge", "light": "#4d7c0f", "dark": "#a3d95b"}], "modeLabel": {"usage": "usage", "intoxication": "intoxication", "sevrage": "sevrage", "rechute": "rechute", "craving": "craving"}, "certaintyLabel": {"exact": "date exacte", "month": "mois", "year": "année", "approx": "date approximative"}};
+const NS = "http://www.w3.org/2000/svg";
+const dark = () => matchMedia("(prefers-color-scheme: dark)").matches;
+const DAY = 864e5;
+const t = (iso) => Date.parse(iso + "T00:00:00Z");
+const REF = t(D.ref);
+const kindOf = Object.fromEntries(D.kinds.map(k => [k.id, k]));
+const trackOf = Object.fromEntries(D.tracks.map(x => [x.id, x]));
+const color = (kind) => kindOf[kind][dark() ? "dark" : "light"];
+const MODE_OP = {usage:.55, craving:.7, sevrage:.7, intoxication:.85, rechute:1};
+const EVENTS = D.events.map((e, i) => ({
+  ...e, i, kind: trackOf[e.track].kind, label: trackOf[e.track].label,
+  a: t(e.s), b: e.e ? t(e.e) : (e.ongoing ? REF : t(e.s)),
+}));
+const hidden = new Set();
+let LABEL_W = 150; const ROW = 26, PADR = 14, AXIS = 84;
+let DOM_MIN = Math.min(...EVENTS.map(e => e.a)) - 200*DAY, DOM_MAX = REF + 60*DAY;
+let view = [DOM_MIN, DOM_MAX];
+
+const el = (name, attrs = {}, parent, text) => {
+  const n = document.createElementNS(NS, name);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  if (text !== undefined) n.textContent = text;
+  if (parent) parent.appendChild(n);
+  return n;
+};
+const fmt = (s) => { if (!s) return ""; const [y,m,d] = s.split("-"); return d ? `${d}/${m}/${y}` : m ? `${m}/${y}` : y; };
+const yr = (ms) => new Date(ms).getUTCFullYear();
+
+function ticks(a, b) {
+  const span = (b - a) / (365.25*DAY), out = [];
+  const step = span > 40 ? 10 : span > 18 ? 5 : span > 9 ? 2 : span > 3.5 ? 1 : 0;
+  if (step) { for (let y = Math.ceil(yr(a)/step)*step; Date.UTC(y,0,1) <= b; y += step) out.push([Date.UTC(y,0,1), String(y), true]); }
+  else {
+    const q = span > 1.6 ? 3 : 1;
+    for (let y = yr(a); y <= yr(b); y++) for (let m = 0; m < 12; m += q) {
+      const v = Date.UTC(y, m, 1); if (v < a || v > b) continue;
+      out.push([v, m === 0 ? String(y) : `${String(m+1).padStart(2,"0")}/${String(y).slice(2)}`, m === 0]);
+    }
+  }
+  return out;
+}
+
+const bolt = (x, y, s=7) => `M${x} ${y-s} L${x-s*.55} ${y+.1} L${x-.05*s} ${y+.1} L${x-s*.35} ${y+s} L${x+s*.6} ${y-.25*s} L${x+.05*s} ${y-.25*s} Z`;
+
+function drawMain() {
+  const svg = document.getElementById("main");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800;
+  LABEL_W = W < 600 ? 92 : 150;
+  const innerW = W - LABEL_W - PADR;
+  const x = (ms) => LABEL_W + (ms - view[0]) / (view[1] - view[0]) * innerW;
+  const kinds = D.kinds.filter(k => !hidden.has(k.id));
+  const rows = [];
+  for (const k of kinds) if (k.id !== "life_event") {
+    rows.push({head: k});
+    for (const tr of D.tracks.filter(tr => tr.kind === k.id)) rows.push({track: tr});
+  }
+  const showLife = !hidden.has("life_event");
+  const H = AXIS + 18 + rows.length * ROW + 24;
+  svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const defs = el("defs", {}, svg);
+  const cp = el("clipPath", {id: "clip"}, defs); el("rect", {x: LABEL_W, y: 0, width: innerW, height: H}, cp);
+  // grid + axis
+  const gridG = el("g", {}, svg);
+  for (const [v, lab, major] of ticks(...view)) {
+    const xx = x(v);
+    el("line", {x1: xx, x2: xx, y1: AXIS - 4, y2: H - 20, stroke: "var(--line)", "stroke-width": major ? 1 : .5}, gridG);
+    el("text", {x: xx + 3, y: H - 7, class: "mute"}, gridG, lab);
+  }
+  el("line", {x1: LABEL_W, x2: W - PADR, y1: AXIS - 4, y2: AXIS - 4, stroke: "var(--axis)", "stroke-width": 4, "stroke-linecap": "round"}, svg);
+  const g = el("g", {"clip-path": "url(#clip)"}, svg);
+  // life events on the axis
+  if (showLife) {
+    const life = EVENTS.filter(e => e.kind === "life_event" && e.b >= view[0] && e.a <= view[1]);
+    const lanes = [[], [], [], [], []];
+    for (const e of life.sort((p, q) => p.a - q.a)) {
+      const pt = e.point || (e.b - e.a) < 120*DAY;
+      const xa = x(Math.max(e.a, view[0])), xb = pt ? xa : x(Math.min(e.b, view[1]));
+      const w = e.label.length * 5.9 + 10, flip = xa + w > W - PADR;
+      const iv = flip ? [xa - w, xa + 4] : [xa - 4, xa + w];
+      let ln = lanes.findIndex(l => l.every(o => o[1] < iv[0] || o[0] > iv[1]));
+      if (ln < 0) ln = lanes.length - 1;
+      lanes[ln].push(iv);
+      const ty = AXIS - 14 - ln * 13 - 4;
+      const grp = el("g", {class: "ev", "data-i": e.i}, g);
+      if (!pt) el("rect", {x: xa, y: AXIS - 8, width: Math.max(2, xb - xa), height: 8, rx: 3, fill: color("life_event"), opacity: .85}, grp);
+      else el("path", {d: `M${xa} ${AXIS-11} l6 6 l-6 6 l-6 -6 Z`, fill: color("life_event")}, grp);
+      el("line", {x1: xa, x2: xa, y1: ty + 3, y2: AXIS - 11, stroke: color("life_event"), "stroke-width": 1, opacity: .6}, grp);
+      el("text", {x: flip ? xa - 3 : xa + 3, y: ty, "font-size": 11, "text-anchor": flip ? "end" : "start", "pointer-events": "none"}, grp, e.label);
+      if (e.loss) el("path", {d: bolt(xa, AXIS + 6, 6), fill: "#e11d48"}, grp);
+    }
+  }
+  // rows
+  let y = AXIS + 6;
+  for (const r of rows) {
+    if (r.head) {
+      el("text", {x: 6, y: y + 17, "font-weight": 600, fill: color(r.head.id)}, svg, r.head.label.toUpperCase()).setAttribute("font-size", 11);
+      el("line", {x1: 6, x2: W - PADR, y1: y + ROW - 3, y2: y + ROW - 3, stroke: color(r.head.id), opacity: .35}, svg);
+    } else {
+      const cut = W < 600 ? 13 : 24;
+      const lab = r.track.label.length > cut ? r.track.label.slice(0, cut - 1) + "…" : r.track.label;
+      el("text", {x: 12, y: y + 17, class: "mute"}, svg, lab).appendChild(Object.assign(document.createElementNS(NS, "title"), {textContent: r.track.label}));
+      for (const e of EVENTS.filter(e => e.track === r.track.id)) {
+        if (e.b < view[0] || e.a > view[1]) continue;
+        const grp = el("g", {class: "ev", "data-i": e.i}, g);
+        const c = color(e.kind), op = e.mode ? (MODE_OP[e.mode] ?? .6) : .8;
+        const xa = x(e.a), xb = x(e.b);
+        const dash = e.certainty === "approx" ? "4 3" : null;
+        if (e.point || xb - xa < 5) {
+          el("path", {d: `M${xa} ${y+5} l7 7 l-7 7 l-7 -7 Z`, fill: c, opacity: op}, grp);
+        } else {
+          const rc = el("rect", {x: xa, y: y + 4, width: xb - xa, height: ROW - 10, rx: 4, fill: c, opacity: op}, grp);
+          if (dash) { rc.setAttribute("stroke", c); rc.setAttribute("stroke-dasharray", dash); rc.setAttribute("fill-opacity", .45); }
+          if (e.ongoing && xb < W) el("path", {d: `M${xb} ${y+4} l8 ${(ROW-10)/2} l-8 ${(ROW-10)/2} Z`, fill: c, opacity: op}, grp);
+        }
+        if (e.loss) el("path", {d: bolt(xa, y + ROW/2 - 1), fill: "#e11d48", stroke: "var(--panel)", "stroke-width": .8}, grp);
+        if (e.mode && e.mode !== "usage" && xb - xa > 56) el("text", {x: xa + 6, y: y + 17, fill: "#fff", "font-size": 10.5, "pointer-events": "none"}, grp, MODE_LABEL(e.mode)).setAttribute("style", "fill:#fff");
+      }
+    }
+    y += ROW;
+  }
+  svg.querySelectorAll(".ev").forEach(n => {
+    const go = () => select(+n.dataset.i);
+    n.addEventListener("click", go); n.addEventListener("pointerenter", (ev) => { if (ev.pointerType === "mouse") go(); });
+  });
+  if (selected !== null) svg.querySelector(`.ev[data-i="${selected}"]`)?.classList.add("sel");
+}
+const MODE_LABEL = (m) => D.modeLabel[m] || m;
+
+let selected = null;
+function obsHtml(v, esc) {
+  const o = D.obs[v.id];
+  let html = "", at = 0;
+  for (const [a, b] of v.marks) { html += esc(o.text.slice(at, a)) + "<mark>" + esc(o.text.slice(a, b)) + "</mark>"; at = b; }
+  html += esc(o.text.slice(at));
+  return `<div class="obs"><div class="oh">${o.date ? esc(o.date) + " · " : ""}${esc(o.label)}${o.summary_only ? " · résumé" : ""}</div><div class="ot">${html}</div></div>`;
+}
+function select(i) {
+  selected = i;
+  document.querySelectorAll(".ev").forEach(n => n.classList.toggle("sel", +n.dataset.i === i));
+  const e = EVENTS[i];
+  const when = e.endLabel ? (e.startLabel === e.endLabel ? fmt(e.startLabel) : `${fmt(e.startLabel)} → ${fmt(e.endLabel)}`)
+    : e.ongoing ? `depuis ${fmt(e.startLabel)} (en cours)` : fmt(e.startLabel);
+  const esc = (s) => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const bits = [];
+  if (e.mode) bits.push(MODE_LABEL(e.mode));
+  if (e.certainty) bits.push(D.certaintyLabel[e.certainty] || e.certainty);
+  if (e.loss) bits.push("⚡ perte de contrôle");
+  document.getElementById("detail").innerHTML =
+    `<b>${esc(e.label)}</b> <span class="k">· ${esc(kindOf[e.kind].label)} · ${when}${bits.length ? " · " + esc(bits.join(" · ")) : ""}</span>` +
+    (e.note ? `<div>${esc(e.note)}</div>` : "") +
+    (e.sources.length ? `<div class="k">Autres sources : ${e.sources.map(esc).join(" ; ")}</div>` : "") +
+    (e.evidence.length ? `<div class="k" style="margin-top:8px">${e.evidence.length > 1 ? "Observations" : "Observation"} d'origine${e.evidence.some(v => !v.marks.length) ? " (passage justificatif non repéré dans certaines)" : ", passage justificatif surligné"} :</div><div id="obs">` +
+      e.evidence.map(v => obsHtml(v, esc)).join("") + `</div>` : "");
+  document.querySelector("#obs mark")?.scrollIntoView({block: "nearest"});
+}
+
+// overview strip with a draggable window
+function drawOverview() {
+  const svg = document.getElementById("ov");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800, H = 54, L = 12, R = 12, innerW = W - L - R;
+  const x = (ms) => L + (ms - DOM_MIN) / (DOM_MAX - DOM_MIN) * innerW;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  for (const [v, lab, major] of ticks(DOM_MIN, DOM_MAX)) {
+    if (!major) continue;
+    el("line", {x1: x(v), x2: x(v), y1: 4, y2: H - 14, stroke: "var(--line)"}, svg);
+    el("text", {x: x(v) + 2, y: H - 3, class: "mute", "font-size": 10}, svg, lab);
+  }
+  const vis = EVENTS.filter(e => !hidden.has(e.kind));
+  const n = Math.max(1, new Set(vis.map(e => e.track)).size), tracks = [...new Set(vis.map(e => e.track))];
+  for (const e of vis) {
+    const r = tracks.indexOf(e.track), yy = 6 + r * (H - 24) / n;
+    el("rect", {x: x(e.a), y: yy, width: Math.max(2, x(e.b) - x(e.a)), height: Math.max(1.5, (H - 24) / n - 1), fill: color(e.kind), opacity: .7}, svg);
+  }
+  const win = el("rect", {x: x(view[0]), y: 1, width: Math.max(10, x(view[1]) - x(view[0])), height: H - 14, rx: 5, fill: "rgba(80,120,220,.16)", stroke: "#4f7be0", "stroke-width": 1.5, style: "cursor:grab"}, svg);
+  const hl = el("rect", {x: x(view[0]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const hr = el("rect", {x: x(view[1]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const inv = (px) => DOM_MIN + (px - L) / innerW * (DOM_MAX - DOM_MIN);
+  const MINSPAN = 120 * DAY;
+  const drag = (node, kind) => node.addEventListener("pointerdown", (ev) => {
+    ev.preventDefault(); node.setPointerCapture(ev.pointerId);
+    const x0 = ev.clientX, v0 = [...view], per = (DOM_MAX - DOM_MIN) / innerW;
+    const move = (m) => {
+      const d = (m.clientX - x0) * per;
+      let [a, b] = v0;
+      if (kind === "move") { const span = b - a; a = Math.min(Math.max(DOM_MIN, a + d), DOM_MAX - span); b = a + span; }
+      else if (kind === "l") a = Math.min(Math.max(DOM_MIN, a + d), b - MINSPAN);
+      else b = Math.max(Math.min(DOM_MAX, b + d), a + MINSPAN);
+      view = [a, b]; drawOverview(); drawMain();
+    };
+    const up = () => { node.removeEventListener("pointermove", move); node.removeEventListener("pointerup", up); };
+    node.addEventListener("pointermove", move); node.addEventListener("pointerup", up);
+  });
+  drag(win, "move"); drag(hl, "l"); drag(hr, "r");
+}
+
+function setView(a, b) { view = [Math.max(DOM_MIN, a), Math.min(DOM_MAX, b)]; redraw(); }
+function redraw() { drawOverview(); drawMain(); }
+
+// controls
+const kindsBar = document.getElementById("kinds");
+for (const k of D.kinds) {
+  const b = document.createElement("button"); b.className = "chip"; b.setAttribute("aria-pressed", "true");
+  b.innerHTML = `<i style="background:${k[dark() ? "dark" : "light"]}"></i>${k.label}`;
+  b.onclick = () => { hidden.has(k.id) ? hidden.delete(k.id) : hidden.add(k.id); b.setAttribute("aria-pressed", String(!hidden.has(k.id))); redraw(); };
+  kindsBar.appendChild(b);
+}
+const presets = document.getElementById("presets");
+const addPreset = (label, fn) => { const b = document.createElement("button"); b.textContent = label; b.onclick = fn; presets.appendChild(b); };
+addPreset("Tout", () => setView(DOM_MIN, DOM_MAX));
+for (const yrs of [10, 5, 2]) addPreset(`${yrs} dernières années`, () => setView(REF - yrs * 365.25 * DAY, DOM_MAX));
+addPreset("−", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]); setView(c - h, c + h); });
+addPreset("+", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]) / 4; setView(c - h, c + h); });
+document.getElementById("legend").innerHTML =
+  `<span><span class="sw" style="background:#888;opacity:.55"></span>usage</span><span><span class="sw" style="background:#888;opacity:.85"></span>intoxication</span>` +
+  `<span><span class="sw" style="background:#888"></span>rechute</span><span><span class="sw" style="background:#888;opacity:.45;border:1px dashed #888"></span>date approximative</span>` +
+  `<span style="color:#e11d48">⚡ perte de contrôle</span><span>◆ événement sans durée</span><span>▶ en cours</span>`;
+document.getElementById("main").addEventListener("wheel", (ev) => {
+  if (!ev.ctrlKey && !ev.shiftKey) return;
+  ev.preventDefault();
+  const r = ev.currentTarget.getBoundingClientRect(), W = r.width, f = (ev.clientX - r.left - LABEL_W) / (W - LABEL_W - PADR);
+  const c = view[0] + Math.min(Math.max(f, 0), 1) * (view[1] - view[0]), k = ev.deltaY > 0 ? 1.25 : .8;
+  setView(c - (c - view[0]) * k, c + (view[1] - c) * k);
+}, {passive: false});
+addEventListener("resize", redraw);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
+if (innerWidth < 600) view = [Math.max(DOM_MIN, REF - 5 * 365.25 * DAY), DOM_MAX];
+redraw();
+</script>
+</body>
+</html>

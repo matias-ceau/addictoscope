@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frise bupre-grossesse</title>
+<style>
+:root{--bg:#fafaf7;--fg:#1d1d1b;--mute:#6b6b66;--line:#d8d8d0;--panel:#fff;--axis:#1d1d1b}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#eceae3;--mute:#9a9a92;--line:#34342f;--panel:#1f1f1c;--axis:#eceae3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:12px 16px 32px}
+h1{font-size:18px;margin:4px 0 2px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+button,.chip{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px}
+.chip i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chip[aria-pressed=false]{opacity:.4}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;touch-action:pan-y}
+svg{display:block;width:100%}
+text{fill:var(--fg);font-size:12px}
+.mute{fill:var(--mute)}
+.ev{cursor:pointer}
+.ev:hover rect,.ev.sel rect,.ev:hover path,.ev.sel path{stroke:var(--fg);stroke-width:1.6}
+#detail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:10px;min-height:76px}
+#detail b{font-size:15px}
+.obs{border:1px solid var(--line);border-radius:8px;margin-top:6px;overflow:hidden}
+.oh{background:var(--bg);color:var(--mute);font-size:12px;padding:4px 10px;border-bottom:1px solid var(--line)}
+.ot{white-space:pre-wrap;padding:8px 10px;max-height:240px;overflow:auto;font-size:13px}
+mark{background:#fde047;color:#1d1d1b;border-radius:3px;padding:0 1px}
+@media (prefers-color-scheme:dark){mark{background:#a16207;color:#fff}}
+#detail .k{color:var(--mute);font-size:12px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--mute);font-size:12px;margin-top:8px}
+.sw{display:inline-block;width:22px;height:9px;border-radius:2px;vertical-align:middle;margin-right:4px}
+</style>
+</head>
+<body>
+<main>
+<h1>Frise chronologique — bupre-grossesse</h1>
+<p class="sub"><b>Données synthétiques</b> (dossier entièrement inventé). Touchez une barre pour lire la note et l'observation d'origine ; faites glisser la fenêtre de l'aperçu pour zoomer.</p>
+<div class="bar" id="kinds"></div>
+<div class="bar" id="presets"></div>
+<div class="chart"><svg id="ov" height="54"></svg></div>
+<div class="chart" style="margin-top:8px"><svg id="main"></svg></div>
+<div class="legend" id="legend"></div>
+<div id="detail"><span class="k">Aucun élément sélectionné.</span></div>
+</main>
+<script>
+const D = {"dossier": "bupre-grossesse", "tracks": [{"id": "t19", "kind": "life_event", "label": "Vie en couple avec M."}, {"id": "t20", "kind": "life_event", "label": "Projet d'enfant (retrait de l'implant)"}, {"id": "t21", "kind": "life_event", "label": "Demande de logement social plus grand"}, {"id": "t23", "kind": "life_event", "label": "Allaitement"}, {"id": "t22", "kind": "life_event", "label": "Naissance du fils"}, {"id": "t24", "kind": "life_event", "label": "Séparation d'avec le compagnon"}, {"id": "t25", "kind": "life_event", "label": "Place en crèche pour le fils"}, {"id": "t26", "kind": "life_event", "label": "Reprise du travail à mi-temps"}, {"id": "t2", "kind": "substance_use", "label": "Cannabis"}, {"id": "t3", "kind": "substance_use", "label": "Tabac"}, {"id": "t1", "kind": "substance_use", "label": "Héroïne"}, {"id": "t9", "kind": "psychiatric", "label": "Anxiété et thymie abaissée"}, {"id": "t10", "kind": "psychiatric", "label": "Symptômes dépressifs du post-partum"}, {"id": "t11", "kind": "psychiatric", "label": "Épisode dépressif caractérisé du post-partum"}, {"id": "t12", "kind": "somatic", "label": "Grossesse"}, {"id": "t13", "kind": "somatic", "label": "Nausées matinales"}, {"id": "t4", "kind": "medication", "label": "Buprénorphine haut dosage (BHD)"}, {"id": "t6", "kind": "medication", "label": "Substituts nicotiniques (patch + gommes)"}, {"id": "t8", "kind": "medication", "label": "Naloxone (kit)"}, {"id": "t5", "kind": "medication", "label": "Sertraline"}, {"id": "t7", "kind": "medication", "label": "Substituts nicotiniques (patch + forme orale)"}, {"id": "t14", "kind": "therapeutic_psycho", "label": "Suivi CSAPA avec TSO par BHD"}, {"id": "t15", "kind": "therapeutic_psycho", "label": "Consultation conjointe CSAPA / maternité"}, {"id": "t16", "kind": "therapeutic_psycho", "label": "Visites PMI à domicile"}, {"id": "t17", "kind": "therapeutic_psycho", "label": "Suivi avec la psychologue de la PMI"}, {"id": "t18", "kind": "therapeutic_psycho", "label": "Point sevrage tabac avec l'IDE tabacologue"}], "events": [{"track": "t1", "start": "2024-05", "end": null, "ongoing": false, "mode": "rechute", "loss": false, "certainty": null, "note": "Prise d'une 'trace' mi-mai 2024 chez une ancienne amie, avec beaucoup de culpabilité. Pas d'autre prise ensuite. Urines du 30/05 : opiacés négatifs.", "sources": ["historique 2024-05-30"], "evidence": [{"id": "historique:o6", "marks": [[35, 181]]}], "s": "2024-05-01", "e": null, "point": true, "startLabel": "2024-05", "endLabel": null}, {"track": "t1", "start": "2024-05-30", "end": null, "ongoing": false, "mode": "craving", "loss": false, "certainty": null, "note": "Craving en fin de journée, avec sensation de manque légère le soir (bâillements, jambes sans repos).", "sources": ["historique 2024-05-30"], "evidence": [{"id": "historique:o6", "marks": [[260, 355]]}], "s": "2024-05-30", "e": null, "point": true, "startLabel": "2024-05-30", "endLabel": null}, {"track": "t1", "start": "2024-07-25", "end": null, "ongoing": false, "mode": "sevrage", "loss": false, "certainty": null, "note": "Signes de manque en fin de journée malgré le fractionnement de la BHD, attendus au 3e trimestre. Pas de nouvelle consommation d'héroïne.", "sources": ["historique 2024-07-25"], "evidence": [{"id": "historique:o7", "marks": [[82, 210]]}], "s": "2024-07-25", "e": null, "point": true, "startLabel": "2024-07-25", "endLabel": null}, {"track": "t1", "start": "2025-05-10", "end": null, "ongoing": false, "mode": "rechute", "loss": false, "certainty": null, "note": "Prise unique sniffée chez une amie, dans un contexte de fatigue et d'isolement. Pas de perte de contrôle. Aucune reprise depuis (confirmé en septembre 2025).", "sources": ["historique 2025-05-15", "historique 2025-05-22", "historique 2025-09-09"], "evidence": [{"id": "historique:o14", "marks": [[60, 165]]}, {"id": "historique:o15", "marks": [[28, 164], [237, 287]]}, {"id": "historique:o16", "marks": [[145, 172]]}], "s": "2025-05-10", "e": null, "point": true, "startLabel": "2025-05-10", "endLabel": null}, {"track": "t2", "start": "2024-01-15", "end": "2024-03-03", "ongoing": false, "mode": "usage", "loss": false, "certainty": null, "note": "2 à 3 joints le soir 'pour couper la journée' (date de début antérieure inconnue). Arrêt le 03/03/2024 à l'annonce de la grossesse, sans difficulté majeure (sommeil haché).", "sources": ["historique 2024-01-15", "historique 2024-03-04", "historique 2024-03-07", "historique 2024-04-18"], "evidence": [{"id": "historique:o1", "marks": [[181, 237]]}, {"id": "historique:o2", "marks": [[170, 211]]}, {"id": "historique:o3", "marks": [[519, 615]]}, {"id": "historique:o5", "marks": [[41, 67]]}], "s": "2024-01-15", "e": "2024-03-03", "point": false, "startLabel": "2024-01-15", "endLabel": "2024-03-03"}, {"track": "t2", "start": "2024-10", "end": null, "ongoing": true, "mode": "usage", "loss": false, "certainty": null, "note": "Reprise après la sortie de maternité : un joint le soir pour dormir. 1 à 2 joints le soir en mars 2025, puis usage occasionnel le week-end en septembre 2025.", "sources": ["historique 2024-10-22", "historique 2025-03-06", "historique 2025-09-09"], "evidence": [{"id": "historique:o10", "marks": [[253, 320]]}, {"id": "historique:o13", "marks": [[244, 274]]}, {"id": "historique:o16", "marks": [[172, 206]]}], "s": "2024-10-01", "e": null, "point": false, "startLabel": "2024-10", "endLabel": null}, {"track": "t3", "start": "2024-01-15", "end": null, "ongoing": true, "mode": "usage", "loss": false, "certainty": null, "note": "15 cig/j en janvier 2024, 8 cig/j avec patchs en avril 2024, 15 cig/j à la reprise en octobre 2024, 12 cig/j en mars 2025, 10 cig/j en septembre 2025. Souhaite arrêter.", "sources": ["historique 2024-01-15", "historique 2024-03-07", "historique 2024-04-18", "historique 2024-10-22", "historique 2025-03-06", "historique 2025-09-09"], "evidence": [{"id": "historique:o1", "marks": [[237, 253]]}, {"id": "historique:o3", "marks": [[616, 653]]}, {"id": "historique:o5", "marks": [[283, 324]]}, {"id": "historique:o10", "marks": [[229, 253]]}, {"id": "historique:o13", "marks": [[274, 290]]}, {"id": "historique:o16", "marks": [[206, 277]]}], "s": "2024-01-15", "e": null, "point": false, "startLabel": "2024-01-15", "endLabel": null}, {"track": "t4", "start": "2019", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "TSO depuis 2019. 8 mg/j en janvier 2024 ; 10 mg/j le 30/05/2024 ; 12 mg/j dès le 26/07/2024. Diminution spontanée à 10 mg le 06/01/2025 ; 12 mg/j (8+4) le 22/05/2025, maintenu en septembre 2025.", "sources": ["historique 2024-01-15", "historique 2024-03-07", "historique 2024-05-30", "historique 2024-07-25", "historique 2025-01-23", "historique 2025-05-22", "historique 2025-09-09"], "evidence": [{"id": "historique:o1", "marks": [[45, 133], [133, 180], [570, 625]]}, {"id": "historique:o3", "marks": [[229, 294]]}, {"id": "historique:o6", "marks": [[528, 607]]}, {"id": "historique:o7", "marks": [[308, 346]]}, {"id": "historique:o12", "marks": [[444, 538]]}, {"id": "historique:o15", "marks": [[288, 345], [453, 481]]}, {"id": "historique:o16", "marks": [[292, 327]]}], "s": "2019-01-01", "e": null, "point": false, "startLabel": "2019", "endLabel": null}, {"track": "t5", "start": "2025-01-23", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Introduite à 50 mg le matin, puis 100 mg le 20/02/2025. Maintenue en septembre 2025.", "sources": ["historique 2025-01-23", "historique 2025-03-06", "historique 2025-05-22", "historique 2025-09-09"], "evidence": [{"id": "historique:o12", "marks": [[553, 593]]}, {"id": "historique:o13", "marks": [[28, 179]]}, {"id": "historique:o15", "marks": [[482, 509]]}, {"id": "historique:o16", "marks": [[292, 327]]}], "s": "2025-01-23", "e": null, "point": false, "startLabel": "2025-01-23", "endLabel": null}, {"track": "t6", "start": "2024-03-07", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Patch 21 mg + gommes 2 mg débutés pendant la grossesse. Date d'arrêt non précisée (tabac repris à 15 cig/j en octobre 2024).", "sources": ["historique 2024-03-07", "historique 2024-04-18", "historique 2024-10-22"], "evidence": [{"id": "historique:o3", "marks": [[616, 653], [690, 743]]}, {"id": "historique:o5", "marks": [[283, 324]]}, {"id": "historique:o10", "marks": [[229, 253]]}], "s": "2024-03-07", "e": null, "point": true, "startLabel": "2024-03-07", "endLabel": null}, {"track": "t7", "start": "2025-09-09", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Reprise des patchs 14 mg + forme orale pour un projet d'arrêt du tabac.", "sources": ["historique 2025-09-09"], "evidence": [{"id": "historique:o16", "marks": [[206, 277], [328, 367]]}], "s": "2025-09-09", "e": null, "point": false, "startLabel": "2025-09-09", "endLabel": null}, {"track": "t8", "start": "2024-03-07", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Kit naloxone remis.", "sources": ["historique 2024-03-07"], "evidence": [{"id": "historique:o3", "marks": [[846, 866]]}], "s": "2024-03-07", "e": null, "point": true, "startLabel": "2024-03-07", "endLabel": null}, {"track": "t8", "start": "2025-05-15", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Nouveau kit remis, l'ancien étant périmé.", "sources": ["historique 2025-05-15"], "evidence": [{"id": "historique:o14", "marks": [[187, 232]]}], "s": "2025-05-15", "e": null, "point": true, "startLabel": "2025-05-15", "endLabel": null}, {"track": "t9", "start": "2024-05-30", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Thymie légèrement abaissée, anxiété anticipatoire sur l'accouchement et le regard de l'équipe de maternité. Pas d'idées suicidaires.", "sources": ["historique 2024-05-30"], "evidence": [{"id": "historique:o6", "marks": [[377, 488]]}], "s": "2024-05-30", "e": null, "point": true, "startLabel": "2024-05-30", "endLabel": null}, {"track": "t10", "start": "2024-10-22", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Fatigue intense, pleurs, culpabilité, sommeil fragmenté. EPDS à 14. Vigilance dépression du post-partum.", "sources": ["historique 2024-10-22"], "evidence": [{"id": "historique:o10", "marks": [[57, 193], [358, 417]]}], "s": "2024-10-22", "e": null, "point": true, "startLabel": "2024-10-22", "endLabel": null}, {"track": "t11", "start": "2024-12", "end": "2025-09-09", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Intensité modérée, diagnostiqué le 23/01/2025 (tristesse depuis plusieurs semaines, anhédonie, culpabilité, ralentissement). Pas d'idées suicidaires. Amélioration nette en mars 2025 sous sertraline ; euthymique en septembre 2025.", "sources": ["historique 2025-01-23", "historique 2025-03-06", "historique 2025-05-22", "historique 2025-09-09"], "evidence": [{"id": "historique:o12", "marks": [[130, 249], [326, 402]]}, {"id": "historique:o13", "marks": [[28, 179]]}, {"id": "historique:o15", "marks": [[237, 287]]}, {"id": "historique:o16", "marks": []}], "s": "2024-12-01", "e": "2025-09-09", "point": false, "startLabel": "2024-12", "endLabel": "2025-09-09"}, {"track": "t12", "start": "2024-01", "end": "2024-09-29", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Grossesse désirée (DDR vers le 20/01/2024), test positif le 04/03/2024. Accouchement par voie basse à 36 SA + 2 j. Fils de 2 610 g, syndrome de sevrage néonatal traité par morphine orale 6 jours.", "sources": ["historique 2024-03-04", "historique 2024-03-07", "historique 2024-04-18", "historique 2024-10-03"], "evidence": [{"id": "historique:o2", "marks": [[0, 85], [85, 115]]}, {"id": "historique:o3", "marks": [[47, 82], [295, 469]]}, {"id": "historique:o5", "marks": [[41, 67]]}, {"id": "historique:o9", "marks": [[0, 97], [98, 213]]}], "s": "2024-01-01", "e": "2024-09-29", "point": false, "startLabel": "2024-01", "endLabel": "2024-09-29"}, {"track": "t13", "start": "2024-04-18", "end": "2024-05-30", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Nausées matinales sans vomissements à 12 SA, encore marquées (++) à 18 SA.", "sources": ["historique 2024-04-18", "historique 2024-05-30"], "evidence": [{"id": "historique:o5", "marks": [[207, 244]]}, {"id": "historique:o6", "marks": [[355, 376]]}], "s": "2024-04-18", "e": "2024-05-30", "point": false, "startLabel": "2024-04-18", "endLabel": "2024-05-30"}, {"track": "t14", "start": "2019", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Suivi au CSAPA avec TSO par BHD depuis 2019 (la patiente dit être suivie depuis 2018). Rendez-vous psychiatriques réguliers.", "sources": ["historique 2024-01-15", "historique 2024-03-07", "historique 2024-03-21"], "evidence": [{"id": "historique:o1", "marks": [[133, 180]]}, {"id": "historique:o3", "marks": [[229, 294]]}, {"id": "historique:o4", "marks": [[234, 276]]}], "s": "2019-01-01", "e": null, "point": false, "startLabel": "2019", "endLabel": null}, {"track": "t15", "start": "2024-04-18", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Consultation avec la sage-femme référente addicto. Échographie du 1er trimestre normale.", "sources": ["historique 2024-03-07", "historique 2024-04-18"], "evidence": [{"id": "historique:o3", "marks": [[744, 845]]}, {"id": "historique:o5", "marks": [[0, 41], [67, 105]]}], "s": "2024-04-18", "e": null, "point": true, "startLabel": "2024-04-18", "endLabel": null}, {"track": "t16", "start": "2024-10-08", "end": "2024-12-12", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Visites organisées dès la sortie de l'enfant ; passage hebdomadaire en décembre 2024. Date de fin non précisée.", "sources": ["historique 2024-10-03", "historique 2024-12-12"], "evidence": [{"id": "historique:o9", "marks": [[347, 395]]}, {"id": "historique:o11", "marks": [[29, 103], [275, 370]]}], "s": "2024-10-08", "e": "2024-12-12", "point": false, "startLabel": "2024-10-08", "endLabel": "2024-12-12"}, {"track": "t17", "start": "2025-02", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Consultations tous les 15 jours depuis février 2025. Dernière mention en mars 2025.", "sources": ["historique 2025-01-23", "historique 2025-03-06"], "evidence": [{"id": "historique:o12", "marks": [[594, 638]]}, {"id": "historique:o13", "marks": [[179, 243]]}], "s": "2025-02-01", "e": null, "point": false, "startLabel": "2025-02", "endLabel": null}, {"track": "t18", "start": "2025-09-09", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Point de sevrage tabac prévu avec l'IDE tabacologue.", "sources": ["historique 2025-09-09"], "evidence": [{"id": "historique:o16", "marks": [[368, 412]]}], "s": "2025-09-09", "e": null, "point": true, "startLabel": "2025-09-09", "endLabel": null}, {"track": "t19", "start": "2021", "end": "2024-12", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "En couple depuis 3 ans en janvier 2024. Le compagnon est parti du domicile début décembre 2024 après des disputes.", "sources": ["historique 2024-01-15", "historique 2024-03-21", "historique 2024-12-12"], "evidence": [{"id": "historique:o1", "marks": [[320, 356]]}, {"id": "historique:o4", "marks": []}, {"id": "historique:o11", "marks": [[29, 103]]}], "s": "2021-01-01", "e": "2024-12-31", "point": false, "startLabel": "2021", "endLabel": "2024-12"}, {"track": "t20", "start": "2023-11", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Implant retiré en novembre 2023 pour un projet d'enfant.", "sources": ["historique 2024-01-15"], "evidence": [{"id": "historique:o1", "marks": [[357, 402]]}], "s": "2023-11-01", "e": null, "point": true, "startLabel": "2023-11", "endLabel": null}, {"track": "t21", "start": "2024-03-21", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Vit dans un T2 au 3e sans ascenseur ; dossier à compléter. Relance du bailleur pour une mutation en décembre 2024.", "sources": ["historique 2024-03-21", "historique 2024-12-12"], "evidence": [{"id": "historique:o4", "marks": [[363, 520]]}, {"id": "historique:o11", "marks": [[225, 274]]}], "s": "2024-03-21", "e": null, "point": true, "startLabel": "2024-03-21", "endLabel": null}, {"track": "t22", "start": "2024-09-29", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Naissance à 36 SA + 2 j, hospitalisation en néonatologie, sortie prévue le 08/10/2024.", "sources": ["historique 2024-10-03"], "evidence": [{"id": "historique:o9", "marks": [[0, 97], [213, 249]]}], "s": "2024-09-29", "e": null, "point": true, "startLabel": "2024-09-29", "endLabel": null}, {"track": "t23", "start": "2024-09", "end": "2025-01", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Allaitement maternel compatible avec la BHD, arrêté début janvier 2025.", "sources": ["historique 2024-10-03", "historique 2024-10-22", "historique 2025-01-23"], "evidence": [{"id": "historique:o9", "marks": [[250, 302]]}, {"id": "historique:o10", "marks": [[467, 515]]}, {"id": "historique:o12", "marks": [[403, 443]]}], "s": "2024-09-01", "e": "2025-01-31", "point": false, "startLabel": "2024-09", "endLabel": "2025-01"}, {"track": "t24", "start": "2024-12", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Séparation vécue comme un abandon. Reste seule avec son fils. Demande de RSA majoré et révision des APL.", "sources": ["historique 2024-12-12", "historique 2025-01-23"], "evidence": [{"id": "historique:o11", "marks": [[149, 225]]}, {"id": "historique:o12", "marks": [[82, 130]]}], "s": "2024-12-01", "e": null, "point": true, "startLabel": "2024-12", "endLabel": null}, {"track": "t25", "start": "2025-06", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Place obtenue à partir de juin 2025 ; bonne adaptation de l'enfant.", "sources": ["historique 2025-03-06", "historique 2025-05-22", "historique 2025-09-09"], "evidence": [{"id": "historique:o13", "marks": [[291, 365]]}, {"id": "historique:o15", "marks": [[346, 423]]}, {"id": "historique:o16", "marks": [[78, 133]]}], "s": "2025-06-01", "e": null, "point": false, "startLabel": "2025-06", "endLabel": null}, {"track": "t26", "start": "2025-09-01", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Reprise le 01/09/2025, elle est contente.", "sources": ["historique 2025-09-09"], "evidence": [{"id": "historique:o16", "marks": [[28, 78]]}], "s": "2025-09-01", "e": null, "point": false, "startLabel": "2025-09-01", "endLabel": null}], "obs": {"historique:o1": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-01-15", "text": "Observations :\nVue ce jour, RDV trimestriel.\nStable sous BHD 8 mg/j en une prise le matin, pas de mésusage rapporté, pas d'injection. Plus d'héroïne depuis la mise sous TSO (2019).\nCannabis le soir, 2 a 3 joints \"pour couper la journée\". Tabac 15 cig/j.\nTravaille comme caissière à temps partiel (24h), en couple avec M. [identité] [identité] depuis 3 ans.\nImplant retiré en novembre : projet d'enfant. Questions nombreuses sur la BHD pendant une grossesse -> informations données, pas d'indication à arrêter, au contraire.\nThymie neutre. Sommeil correct.\nConclusions :\nRO BHD 8 mg QSP 28 j, délivrance hebdomadaire pharmacie\nRDV 3 mois, plus tôt si grossesse"}, "historique:o2": {"label": "historique · Observation infirmière", "date": "2024-03-04", "text": "Pte passée sans RDV, test urinaire de grossesse fait au CSAPA a sa demande : POSITIF. DDR vers le 20/01 (pas sure).\nTres angoissée, pleure, peur que \"le bébé soit accro\". A deja arreté le cannabis \"depuis hier\".\nRéassurance. Dr [identité] prévenue, RDV avancé au 07/03."}, "historique:o3": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-03-07", "text": "Observations :\nVue ce jour avec son compagnon.\nGrossesse de 6 SA environ, désirée. Pas encore de suivi obstétrical.\nRappel des ATCD : héroïne sniffée vers 18 ans dans un contexte festif, puis Skenan achetés dans la rue, pas d'IV. TSO par BHD au CSAPA depuis 2019, aucune rechute franche depuis.\nExplications sur le maintien de la BHD (risque de sevrage foetal à l'arret, pas de tératogénicité connue), sur le syndrome de sevrage néonatal possible et sa prise en charge. Bien compris par le couple, soulagement visible.\nCannabis : arret depuis le 03/03, sans difficulté majeure pour l'instant (sommeil un peu haché).\nTabac : 15 cig/j, accepte les patchs.\nConclusions :\n- Maintien BHD 8 mg/j\n- Substituts nicotiniques : patch 21 mg + gommes 2 mg\n- Orientation maternité, consultation conjointe avec la sage-femme référente addicto (Mme [identité])\n- Kit naloxone remis\n- Mise en lien ASS pour démarches"}, "historique:o4": {"label": "historique · Entretien social", "date": "2024-03-21", "text": "Premier entretien. Mme [identité] [identité], née le [identité], N° SS [identité], domiciliée [identité], 33310 LORMONT. Tél : [identité].\nVit avec son compagnon M. [identité] [identité] (livreur, CDD) dans un T2 au 3e sans ascenseur. Suivie au CSAPA \"depuis 2018\" selon elle.\nSa mère Mme [identité] [identité] vit à proximité et pourra aider après la naissance.\nDémarches : déclaration de grossesse à la CAF et à la CPAM, demande de logement social plus grand (dossier à compléter), contact PMI pour visites à domicile."}, "historique:o5": {"label": "historique · Consultation sage-femme", "date": "2024-04-18", "text": "Consultation conjointe CSAPA / maternité. Grossesse de 12 SA + 3 j. Échographie du 1er trimestre normale. Terme prévu le 27/10/2024.\nUsage d'héroïne de 20 à 23 ans, sous BHD depuis. BHD 8 mg/j, bien tolérée. Nausées matinales sans vomissements. Cannabis arrêté depuis plus d'un mois. Tabac diminué à 8 cig/j avec les patchs.\nProjet de naissance abordé : allaitement souhaité, compatible avec la BHD. Information sur l'hospitalisation possible du bébé en néonatologie.\nProchaine consultation à 22 SA."}, "historique:o6": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-05-30", "text": "Observations :\nVue ce jour, 18 SA.\nDit avoir consommé de l'héroïne mi-mai, \"une trace\" chez une ancienne amie croisée par hasard, en parle spontanément avec beaucoup de culpabilité. Pas d'autre prise depuis. Urines du jour : buprénorphine +, opiacés -, THC -.\nCraving en fin de journée, sensation de manque légère le soir (baillements, jambes sans repos). Nausées ++ le matin.\nThymie légèrement abaissée, anxiété anticipatoire sur l'accouchement et sur le regard de l'équipe de maternité. Pas d'idées suicidaires.\nConclusions :\nMajoration BHD 10 mg/j (6 mg le matin + 4 mg le soir), ordo transmise pharmacie\nEntretien avec Mme [identité] pour préparer le staff de périnatalité\nRDV 1 mois"}, "historique:o7": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-07-25", "text": "Observations :\nVue ce jour, 26 SA environ.\nPas de nouvelle consommation d'héroïne. Signes de manque en fin de journée malgré le fractionnement, attendus au 3e trimestre (augmentation du volume de distribution).\nBonne alliance, investie dans le suivi de grossesse. Le couple prépare la chambre.\nConclusions :\nBHD 12 mg/j (8 + 4) à partir de demain\nStaff périnatalité le 02/08 (maternité, PMI, CSAPA)"}, "historique:o8": {"label": "historique · Délivrance", "date": "2024-08-14", "text": "Délivrance exceptionnelle au CSAPA (pharmacie fermée pour congés). BHD 10 mg remis pour 3 jours. Pte fatiguée, chaleur ++, pas d'odeur d'alcool ni de signes d'intoxication."}, "historique:o9": {"label": "historique · Consultation sage-femme", "date": "2024-10-03", "text": "Accouchement le 29/09/2024 à 36 SA + 2 j, voie basse : naissance de son fils [identité], 2 610 g.\nSyndrome de sevrage néonatal à J2, score de Finnegan maximal à 11 : morphine orale pendant 6 jours en néonatologie. Sortie de l'enfant prévue le 08/10.\nMme [identité] tire son lait, allaitement poursuivi. Très présente auprès de son fils. Fatiguée.\nVisites PMI à domicile organisées dès la sortie."}, "historique:o10": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-10-22", "text": "Observations :\nVue ce jour avec [identité] (3 semaines).\nFatigue intense, pleurs fréquents depuis le retour a domicile, sentiment de ne pas être une bonne mere (\"il a souffert à cause de moi\"). Sommeil très fragmenté. EPDS à 14.\nTabac repris a 15 cig/j. Cannabis : \"un le soir pour dormir\" depuis la sortie de maternité.\nBHD 12 mg/j inchangée.\nConclusions :\nA revoir dans 15 jours, vigilance dépression du post-partum\nConsultation psychologue périnatalité à proposer\nPas de modification du TSO pendant l'allaitement"}, "historique:o11": {"label": "historique · Entretien social", "date": "2024-12-12", "text": "Mme [identité] indique que M. [identité] est parti du domicile début décembre après plusieurs disputes. Elle reste seule avec [identité] dans le T2.\nDemande d'ouverture de droits RSA majoré (parent isolé) et révision des APL. Relance du bailleur pour la demande de mutation.\nLa PMI passe toutes les semaines, rien d'inquiétant concernant l'enfant selon la puéricultrice."}, "historique:o12": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-01-23", "text": "Observations :\nVue ce jour, avec sa mere qui garde [identité] en salle d'attente.\nSéparation \"depuis Noël\" vécue comme un abandon. Tristesse quasi permanente depuis plusieurs semaines, anhédonie, culpabilité ++ vis-à-vis de son fils, ralentissement. Pas d'idées suicidaires ni d'idée délirante concernant l'enfant. Mange peu.\nTableau d'épisode dépressif caractérisé du post-partum, d'intensité modérée.\nAllaitement arreté depuis début janvier.\nA diminué d'elle-meme la BHD à 10 mg depuis le 06/01 (\"pour en prendre moins\"), pas de manque.\nConclusions :\n- Introduction sertraline 50 mg le matin\n- Psychologue de la PMI : 1er RDV en février\n- BHD 10 mg, RO\n- RDV 3 semaines"}, "historique:o13": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-03-06", "text": "Observations :\nVue ce jour.\nAmélioration nette depuis la majoration de la sertraline a 100 mg le 20/02, meilleur élan, s'occupe avec plaisir de son fils (5 mois), sort de nouveau. Voit la psychologue de la PMI tous les 15 jours depuis février.\nCannabis 1 a 2 joints le soir. Tabac 12 cig/j.\nPense reprendre le travail en septembre, demande de place en creche faite.\nConclusions :\nRO sertraline 100 mg + BHD 10 mg\nRDV 6 semaines"}, "historique:o14": {"label": "historique · Observation infirmière", "date": "2025-05-15", "text": "Pte venue chercher son ordonnance, RDV médical manqué le 13. Dit avoir sniffé de l'héroïne samedi soir 10/05 chez une amie, \"une fois\", [identité] gardé par sa mère. Pas d'autre produit.\nNouveau kit naloxone remis (l'ancien périmé). RDV médical reprogrammé le 22/05."}, "historique:o15": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-05-22", "text": "Observations :\nVue ce jour.\nReprise ponctuelle d'héroïne le 10/05, une prise unique, dans un contexte de fatigue et d'isolement ([identité] malade, nuits blanches). Analyse fonctionnelle faite : solitude du samedi soir, manque d'étayage. Pas de perte de contrôle ; aucune reprise depuis.\nSignes de manque le soir depuis la diminution de janvier.\nPlace en creche obtenue a partir de juin, sa mère garde [identité] le samedi.\nThymie stable.\nConclusions :\nBHD 12 mg/j (8 + 4), RO 28 j\nSertraline 100 mg inchangée\nRDV 2 mois"}, "historique:o16": {"label": "historique · psychiatrique de suivi", "date": "2025-09-09", "text": "Observations :\nVue ce jour.\nA repris le travail le 01/09 a mi-temps, contente. [identité] à la creche depuis juin, s'est bien adapté.\nEuthymique. Plus d'héroïne depuis mai. Cannabis occasionnel le week-end. Tabac 10 cig/j, souhaite arreter \"pour le petit\" : reprise des patchs.\nConclusions :\n- BHD 12 mg, sertraline 100 mg : RO\n- Patch nicotinique 14 mg + forme orale\n- Point sevrage tabac avec l'IDE tabacologue\n- RDV 2 mois"}}, "ref": "2025-10-01", "kinds": [{"id": "life_event", "label": "Événements de vie", "light": "#b45309", "dark": "#f59e0b"}, {"id": "substance_use", "label": "Consommations", "light": "#c62828", "dark": "#ef6b6b"}, {"id": "psychiatric", "label": "Psychopathologie", "light": "#6a4bb0", "dark": "#a78bfa"}, {"id": "somatic", "label": "Somatique", "light": "#0f7b6c", "dark": "#34d3b9"}, {"id": "medication", "label": "Médicaments", "light": "#1d5fb4", "dark": "#6aa6f0"}, {"id": "therapeutic_psycho", "label": "Prises en charge", "light": "#4d7c0f", "dark": "#a3d95b"}], "modeLabel": {"usage": "usage", "intoxication": "intoxication", "sevrage": "sevrage", "rechute": "rechute", "craving": "craving"}, "certaintyLabel": {"exact": "date exacte", "month": "mois", "year": "année", "approx": "date approximative"}};
+const NS = "http://www.w3.org/2000/svg";
+const dark = () => matchMedia("(prefers-color-scheme: dark)").matches;
+const DAY = 864e5;
+const t = (iso) => Date.parse(iso + "T00:00:00Z");
+const REF = t(D.ref);
+const kindOf = Object.fromEntries(D.kinds.map(k => [k.id, k]));
+const trackOf = Object.fromEntries(D.tracks.map(x => [x.id, x]));
+const color = (kind) => kindOf[kind][dark() ? "dark" : "light"];
+const MODE_OP = {usage:.55, craving:.7, sevrage:.7, intoxication:.85, rechute:1};
+const EVENTS = D.events.map((e, i) => ({
+  ...e, i, kind: trackOf[e.track].kind, label: trackOf[e.track].label,
+  a: t(e.s), b: e.e ? t(e.e) : (e.ongoing ? REF : t(e.s)),
+}));
+const hidden = new Set();
+let LABEL_W = 150; const ROW = 26, PADR = 14, AXIS = 84;
+let DOM_MIN = Math.min(...EVENTS.map(e => e.a)) - 200*DAY, DOM_MAX = REF + 60*DAY;
+let view = [DOM_MIN, DOM_MAX];
+
+const el = (name, attrs = {}, parent, text) => {
+  const n = document.createElementNS(NS, name);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  if (text !== undefined) n.textContent = text;
+  if (parent) parent.appendChild(n);
+  return n;
+};
+const fmt = (s) => { if (!s) return ""; const [y,m,d] = s.split("-"); return d ? `${d}/${m}/${y}` : m ? `${m}/${y}` : y; };
+const yr = (ms) => new Date(ms).getUTCFullYear();
+
+function ticks(a, b) {
+  const span = (b - a) / (365.25*DAY), out = [];
+  const step = span > 40 ? 10 : span > 18 ? 5 : span > 9 ? 2 : span > 3.5 ? 1 : 0;
+  if (step) { for (let y = Math.ceil(yr(a)/step)*step; Date.UTC(y,0,1) <= b; y += step) out.push([Date.UTC(y,0,1), String(y), true]); }
+  else {
+    const q = span > 1.6 ? 3 : 1;
+    for (let y = yr(a); y <= yr(b); y++) for (let m = 0; m < 12; m += q) {
+      const v = Date.UTC(y, m, 1); if (v < a || v > b) continue;
+      out.push([v, m === 0 ? String(y) : `${String(m+1).padStart(2,"0")}/${String(y).slice(2)}`, m === 0]);
+    }
+  }
+  return out;
+}
+
+const bolt = (x, y, s=7) => `M${x} ${y-s} L${x-s*.55} ${y+.1} L${x-.05*s} ${y+.1} L${x-s*.35} ${y+s} L${x+s*.6} ${y-.25*s} L${x+.05*s} ${y-.25*s} Z`;
+
+function drawMain() {
+  const svg = document.getElementById("main");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800;
+  LABEL_W = W < 600 ? 92 : 150;
+  const innerW = W - LABEL_W - PADR;
+  const x = (ms) => LABEL_W + (ms - view[0]) / (view[1] - view[0]) * innerW;
+  const kinds = D.kinds.filter(k => !hidden.has(k.id));
+  const rows = [];
+  for (const k of kinds) if (k.id !== "life_event") {
+    rows.push({head: k});
+    for (const tr of D.tracks.filter(tr => tr.kind === k.id)) rows.push({track: tr});
+  }
+  const showLife = !hidden.has("life_event");
+  const H = AXIS + 18 + rows.length * ROW + 24;
+  svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const defs = el("defs", {}, svg);
+  const cp = el("clipPath", {id: "clip"}, defs); el("rect", {x: LABEL_W, y: 0, width: innerW, height: H}, cp);
+  // grid + axis
+  const gridG = el("g", {}, svg);
+  for (const [v, lab, major] of ticks(...view)) {
+    const xx = x(v);
+    el("line", {x1: xx, x2: xx, y1: AXIS - 4, y2: H - 20, stroke: "var(--line)", "stroke-width": major ? 1 : .5}, gridG);
+    el("text", {x: xx + 3, y: H - 7, class: "mute"}, gridG, lab);
+  }
+  el("line", {x1: LABEL_W, x2: W - PADR, y1: AXIS - 4, y2: AXIS - 4, stroke: "var(--axis)", "stroke-width": 4, "stroke-linecap": "round"}, svg);
+  const g = el("g", {"clip-path": "url(#clip)"}, svg);
+  // life events on the axis
+  if (showLife) {
+    const life = EVENTS.filter(e => e.kind === "life_event" && e.b >= view[0] && e.a <= view[1]);
+    const lanes = [[], [], [], [], []];
+    for (const e of life.sort((p, q) => p.a - q.a)) {
+      const pt = e.point || (e.b - e.a) < 120*DAY;
+      const xa = x(Math.max(e.a, view[0])), xb = pt ? xa : x(Math.min(e.b, view[1]));
+      const w = e.label.length * 5.9 + 10, flip = xa + w > W - PADR;
+      const iv = flip ? [xa - w, xa + 4] : [xa - 4, xa + w];
+      let ln = lanes.findIndex(l => l.every(o => o[1] < iv[0] || o[0] > iv[1]));
+      if (ln < 0) ln = lanes.length - 1;
+      lanes[ln].push(iv);
+      const ty = AXIS - 14 - ln * 13 - 4;
+      const grp = el("g", {class: "ev", "data-i": e.i}, g);
+      if (!pt) el("rect", {x: xa, y: AXIS - 8, width: Math.max(2, xb - xa), height: 8, rx: 3, fill: color("life_event"), opacity: .85}, grp);
+      else el("path", {d: `M${xa} ${AXIS-11} l6 6 l-6 6 l-6 -6 Z`, fill: color("life_event")}, grp);
+      el("line", {x1: xa, x2: xa, y1: ty + 3, y2: AXIS - 11, stroke: color("life_event"), "stroke-width": 1, opacity: .6}, grp);
+      el("text", {x: flip ? xa - 3 : xa + 3, y: ty, "font-size": 11, "text-anchor": flip ? "end" : "start", "pointer-events": "none"}, grp, e.label);
+      if (e.loss) el("path", {d: bolt(xa, AXIS + 6, 6), fill: "#e11d48"}, grp);
+    }
+  }
+  // rows
+  let y = AXIS + 6;
+  for (const r of rows) {
+    if (r.head) {
+      el("text", {x: 6, y: y + 17, "font-weight": 600, fill: color(r.head.id)}, svg, r.head.label.toUpperCase()).setAttribute("font-size", 11);
+      el("line", {x1: 6, x2: W - PADR, y1: y + ROW - 3, y2: y + ROW - 3, stroke: color(r.head.id), opacity: .35}, svg);
+    } else {
+      const cut = W < 600 ? 13 : 24;
+      const lab = r.track.label.length > cut ? r.track.label.slice(0, cut - 1) + "…" : r.track.label;
+      el("text", {x: 12, y: y + 17, class: "mute"}, svg, lab).appendChild(Object.assign(document.createElementNS(NS, "title"), {textContent: r.track.label}));
+      for (const e of EVENTS.filter(e => e.track === r.track.id)) {
+        if (e.b < view[0] || e.a > view[1]) continue;
+        const grp = el("g", {class: "ev", "data-i": e.i}, g);
+        const c = color(e.kind), op = e.mode ? (MODE_OP[e.mode] ?? .6) : .8;
+        const xa = x(e.a), xb = x(e.b);
+        const dash = e.certainty === "approx" ? "4 3" : null;
+        if (e.point || xb - xa < 5) {
+          el("path", {d: `M${xa} ${y+5} l7 7 l-7 7 l-7 -7 Z`, fill: c, opacity: op}, grp);
+        } else {
+          const rc = el("rect", {x: xa, y: y + 4, width: xb - xa, height: ROW - 10, rx: 4, fill: c, opacity: op}, grp);
+          if (dash) { rc.setAttribute("stroke", c); rc.setAttribute("stroke-dasharray", dash); rc.setAttribute("fill-opacity", .45); }
+          if (e.ongoing && xb < W) el("path", {d: `M${xb} ${y+4} l8 ${(ROW-10)/2} l-8 ${(ROW-10)/2} Z`, fill: c, opacity: op}, grp);
+        }
+        if (e.loss) el("path", {d: bolt(xa, y + ROW/2 - 1), fill: "#e11d48", stroke: "var(--panel)", "stroke-width": .8}, grp);
+        if (e.mode && e.mode !== "usage" && xb - xa > 56) el("text", {x: xa + 6, y: y + 17, fill: "#fff", "font-size": 10.5, "pointer-events": "none"}, grp, MODE_LABEL(e.mode)).setAttribute("style", "fill:#fff");
+      }
+    }
+    y += ROW;
+  }
+  svg.querySelectorAll(".ev").forEach(n => {
+    const go = () => select(+n.dataset.i);
+    n.addEventListener("click", go); n.addEventListener("pointerenter", (ev) => { if (ev.pointerType === "mouse") go(); });
+  });
+  if (selected !== null) svg.querySelector(`.ev[data-i="${selected}"]`)?.classList.add("sel");
+}
+const MODE_LABEL = (m) => D.modeLabel[m] || m;
+
+let selected = null;
+function obsHtml(v, esc) {
+  const o = D.obs[v.id];
+  let html = "", at = 0;
+  for (const [a, b] of v.marks) { html += esc(o.text.slice(at, a)) + "<mark>" + esc(o.text.slice(a, b)) + "</mark>"; at = b; }
+  html += esc(o.text.slice(at));
+  return `<div class="obs"><div class="oh">${o.date ? esc(o.date) + " · " : ""}${esc(o.label)}${o.summary_only ? " · résumé" : ""}</div><div class="ot">${html}</div></div>`;
+}
+function select(i) {
+  selected = i;
+  document.querySelectorAll(".ev").forEach(n => n.classList.toggle("sel", +n.dataset.i === i));
+  const e = EVENTS[i];
+  const when = e.endLabel ? (e.startLabel === e.endLabel ? fmt(e.startLabel) : `${fmt(e.startLabel)} → ${fmt(e.endLabel)}`)
+    : e.ongoing ? `depuis ${fmt(e.startLabel)} (en cours)` : fmt(e.startLabel);
+  const esc = (s) => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const bits = [];
+  if (e.mode) bits.push(MODE_LABEL(e.mode));
+  if (e.certainty) bits.push(D.certaintyLabel[e.certainty] || e.certainty);
+  if (e.loss) bits.push("⚡ perte de contrôle");
+  document.getElementById("detail").innerHTML =
+    `<b>${esc(e.label)}</b> <span class="k">· ${esc(kindOf[e.kind].label)} · ${when}${bits.length ? " · " + esc(bits.join(" · ")) : ""}</span>` +
+    (e.note ? `<div>${esc(e.note)}</div>` : "") +
+    (e.sources.length ? `<div class="k">Autres sources : ${e.sources.map(esc).join(" ; ")}</div>` : "") +
+    (e.evidence.length ? `<div class="k" style="margin-top:8px">${e.evidence.length > 1 ? "Observations" : "Observation"} d'origine${e.evidence.some(v => !v.marks.length) ? " (passage justificatif non repéré dans certaines)" : ", passage justificatif surligné"} :</div><div id="obs">` +
+      e.evidence.map(v => obsHtml(v, esc)).join("") + `</div>` : "");
+  document.querySelector("#obs mark")?.scrollIntoView({block: "nearest"});
+}
+
+// overview strip with a draggable window
+function drawOverview() {
+  const svg = document.getElementById("ov");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800, H = 54, L = 12, R = 12, innerW = W - L - R;
+  const x = (ms) => L + (ms - DOM_MIN) / (DOM_MAX - DOM_MIN) * innerW;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  for (const [v, lab, major] of ticks(DOM_MIN, DOM_MAX)) {
+    if (!major) continue;
+    el("line", {x1: x(v), x2: x(v), y1: 4, y2: H - 14, stroke: "var(--line)"}, svg);
+    el("text", {x: x(v) + 2, y: H - 3, class: "mute", "font-size": 10}, svg, lab);
+  }
+  const vis = EVENTS.filter(e => !hidden.has(e.kind));
+  const n = Math.max(1, new Set(vis.map(e => e.track)).size), tracks = [...new Set(vis.map(e => e.track))];
+  for (const e of vis) {
+    const r = tracks.indexOf(e.track), yy = 6 + r * (H - 24) / n;
+    el("rect", {x: x(e.a), y: yy, width: Math.max(2, x(e.b) - x(e.a)), height: Math.max(1.5, (H - 24) / n - 1), fill: color(e.kind), opacity: .7}, svg);
+  }
+  const win = el("rect", {x: x(view[0]), y: 1, width: Math.max(10, x(view[1]) - x(view[0])), height: H - 14, rx: 5, fill: "rgba(80,120,220,.16)", stroke: "#4f7be0", "stroke-width": 1.5, style: "cursor:grab"}, svg);
+  const hl = el("rect", {x: x(view[0]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const hr = el("rect", {x: x(view[1]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const inv = (px) => DOM_MIN + (px - L) / innerW * (DOM_MAX - DOM_MIN);
+  const MINSPAN = 120 * DAY;
+  const drag = (node, kind) => node.addEventListener("pointerdown", (ev) => {
+    ev.preventDefault(); node.setPointerCapture(ev.pointerId);
+    const x0 = ev.clientX, v0 = [...view], per = (DOM_MAX - DOM_MIN) / innerW;
+    const move = (m) => {
+      const d = (m.clientX - x0) * per;
+      let [a, b] = v0;
+      if (kind === "move") { const span = b - a; a = Math.min(Math.max(DOM_MIN, a + d), DOM_MAX - span); b = a + span; }
+      else if (kind === "l") a = Math.min(Math.max(DOM_MIN, a + d), b - MINSPAN);
+      else b = Math.max(Math.min(DOM_MAX, b + d), a + MINSPAN);
+      view = [a, b]; drawOverview(); drawMain();
+    };
+    const up = () => { node.removeEventListener("pointermove", move); node.removeEventListener("pointerup", up); };
+    node.addEventListener("pointermove", move); node.addEventListener("pointerup", up);
+  });
+  drag(win, "move"); drag(hl, "l"); drag(hr, "r");
+}
+
+function setView(a, b) { view = [Math.max(DOM_MIN, a), Math.min(DOM_MAX, b)]; redraw(); }
+function redraw() { drawOverview(); drawMain(); }
+
+// controls
+const kindsBar = document.getElementById("kinds");
+for (const k of D.kinds) {
+  const b = document.createElement("button"); b.className = "chip"; b.setAttribute("aria-pressed", "true");
+  b.innerHTML = `<i style="background:${k[dark() ? "dark" : "light"]}"></i>${k.label}`;
+  b.onclick = () => { hidden.has(k.id) ? hidden.delete(k.id) : hidden.add(k.id); b.setAttribute("aria-pressed", String(!hidden.has(k.id))); redraw(); };
+  kindsBar.appendChild(b);
+}
+const presets = document.getElementById("presets");
+const addPreset = (label, fn) => { const b = document.createElement("button"); b.textContent = label; b.onclick = fn; presets.appendChild(b); };
+addPreset("Tout", () => setView(DOM_MIN, DOM_MAX));
+for (const yrs of [10, 5, 2]) addPreset(`${yrs} dernières années`, () => setView(REF - yrs * 365.25 * DAY, DOM_MAX));
+addPreset("−", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]); setView(c - h, c + h); });
+addPreset("+", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]) / 4; setView(c - h, c + h); });
+document.getElementById("legend").innerHTML =
+  `<span><span class="sw" style="background:#888;opacity:.55"></span>usage</span><span><span class="sw" style="background:#888;opacity:.85"></span>intoxication</span>` +
+  `<span><span class="sw" style="background:#888"></span>rechute</span><span><span class="sw" style="background:#888;opacity:.45;border:1px dashed #888"></span>date approximative</span>` +
+  `<span style="color:#e11d48">⚡ perte de contrôle</span><span>◆ événement sans durée</span><span>▶ en cours</span>`;
+document.getElementById("main").addEventListener("wheel", (ev) => {
+  if (!ev.ctrlKey && !ev.shiftKey) return;
+  ev.preventDefault();
+  const r = ev.currentTarget.getBoundingClientRect(), W = r.width, f = (ev.clientX - r.left - LABEL_W) / (W - LABEL_W - PADR);
+  const c = view[0] + Math.min(Math.max(f, 0), 1) * (view[1] - view[0]), k = ev.deltaY > 0 ? 1.25 : .8;
+  setView(c - (c - view[0]) * k, c + (view[1] - c) * k);
+}, {passive: false});
+addEventListener("resize", redraw);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
+if (innerWidth < 600) view = [Math.max(DOM_MIN, REF - 5 * 365.25 * DAY), DOM_MAX];
+redraw();
+</script>
+</body>
+</html>

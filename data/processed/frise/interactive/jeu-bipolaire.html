@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frise jeu-bipolaire</title>
+<style>
+:root{--bg:#fafaf7;--fg:#1d1d1b;--mute:#6b6b66;--line:#d8d8d0;--panel:#fff;--axis:#1d1d1b}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#eceae3;--mute:#9a9a92;--line:#34342f;--panel:#1f1f1c;--axis:#eceae3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:12px 16px 32px}
+h1{font-size:18px;margin:4px 0 2px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+button,.chip{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px}
+.chip i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chip[aria-pressed=false]{opacity:.4}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;touch-action:pan-y}
+svg{display:block;width:100%}
+text{fill:var(--fg);font-size:12px}
+.mute{fill:var(--mute)}
+.ev{cursor:pointer}
+.ev:hover rect,.ev.sel rect,.ev:hover path,.ev.sel path{stroke:var(--fg);stroke-width:1.6}
+#detail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:10px;min-height:76px}
+#detail b{font-size:15px}
+.obs{border:1px solid var(--line);border-radius:8px;margin-top:6px;overflow:hidden}
+.oh{background:var(--bg);color:var(--mute);font-size:12px;padding:4px 10px;border-bottom:1px solid var(--line)}
+.ot{white-space:pre-wrap;padding:8px 10px;max-height:240px;overflow:auto;font-size:13px}
+mark{background:#fde047;color:#1d1d1b;border-radius:3px;padding:0 1px}
+@media (prefers-color-scheme:dark){mark{background:#a16207;color:#fff}}
+#detail .k{color:var(--mute);font-size:12px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--mute);font-size:12px;margin-top:8px}
+.sw{display:inline-block;width:22px;height:9px;border-radius:2px;vertical-align:middle;margin-right:4px}
+</style>
+</head>
+<body>
+<main>
+<h1>Frise chronologique — jeu-bipolaire</h1>
+<p class="sub"><b>Données synthétiques</b> (dossier entièrement inventé). Touchez une barre pour lire la note et l'observation d'origine ; faites glisser la fenêtre de l'aperçu pour zoomer.</p>
+<div class="bar" id="kinds"></div>
+<div class="bar" id="presets"></div>
+<div class="chart"><svg id="ov" height="54"></svg></div>
+<div class="chart" style="margin-top:8px"><svg id="main"></svg></div>
+<div class="legend" id="legend"></div>
+<div id="detail"><span class="k">Aucun élément sélectionné.</span></div>
+</main>
+<script>
+const D = {"dossier": "jeu-bipolaire", "tracks": [{"id": "t18", "kind": "life_event", "label": "Découverte de crédits à l'insu de l'épouse"}, {"id": "t19", "kind": "life_event", "label": "Arrêt de travail"}, {"id": "t20", "kind": "life_event", "label": "Plan de surendettement accepté"}, {"id": "t1", "kind": "substance_use", "label": "Paris sportifs en ligne"}, {"id": "t4", "kind": "substance_use", "label": "Nicotine (vapotage)"}, {"id": "t3", "kind": "substance_use", "label": "Alcool"}, {"id": "t2", "kind": "substance_use", "label": "Jeux de grattage"}, {"id": "t5", "kind": "psychiatric", "label": "Épisode dépressif"}, {"id": "t6", "kind": "psychiatric", "label": "Épisode hypomaniaque"}, {"id": "t7", "kind": "psychiatric", "label": "Trouble bipolaire de type II"}, {"id": "t8", "kind": "psychiatric", "label": "Épisode dépressif caractérisé"}, {"id": "t9", "kind": "medication", "label": "Paroxétine"}, {"id": "t10", "kind": "medication", "label": "Lithium"}, {"id": "t11", "kind": "medication", "label": "Quétiapine"}, {"id": "t12", "kind": "medication", "label": "Lamotrigine"}, {"id": "t13", "kind": "therapeutic_psycho", "label": "Suivi psychiatrique"}, {"id": "t14", "kind": "therapeutic_psycho", "label": "Interdiction volontaire de jeux (ANJ)"}, {"id": "t15", "kind": "therapeutic_psycho", "label": "Accompagnement social (surendettement)"}, {"id": "t16", "kind": "therapeutic_psycho", "label": "TCC pour le jeu"}, {"id": "t17", "kind": "therapeutic_psycho", "label": "Thérapie de couple"}], "events": [{"track": "t1", "start": "2018", "end": "2020", "ongoing": false, "mode": "usage", "loss": false, "certainty": null, "note": "Début des paris sportifs en ligne depuis la Coupe du monde 2018, 'pour pimenter les matchs'; PMU avec le père dans l'enfance.", "sources": ["historique 2024-01-18", "historique 2024-04-16"], "evidence": [{"id": "historique:o14", "marks": [[404, 549]]}, {"id": "historique:o10", "marks": [[37, 166]]}], "s": "2018-01-01", "e": "2020-12-31", "point": false, "startLabel": "2018", "endLabel": "2020"}, {"track": "t1", "start": "2020", "end": "2024-01-29", "ongoing": false, "mode": "usage", "loss": true, "certainty": null, "note": "Perte de contrôle datée par le patient 'au confinement'; paris quotidiens depuis 2022 environ, mises jusqu'à 300 euros/jour, poursuite des pertes, environ 38 000 euros de dettes selon lui (45 200 euros retenus ensuite).", "sources": ["historique 2024-01-18", "historique 2024-04-16", "historique 2024-10-15"], "evidence": [{"id": "historique:o14", "marks": [[404, 549]]}, {"id": "historique:o10", "marks": [[37, 166], [166, 270]]}, {"id": "historique:o6", "marks": [[92, 171]]}], "s": "2020-01-01", "e": "2024-01-29", "point": false, "startLabel": "2020", "endLabel": "2024-01-29"}, {"track": "t1", "start": "2024-06", "end": "2024-07-05", "ongoing": false, "mode": "rechute", "loss": true, "certainty": null, "note": "Reprise des paris pendant l'Euro via le compte de son frère (contournement de l'interdiction), perte d'environ 2 500 euros. Dernier pari le 5 juillet selon l'épouse, le patient disait le 30/06.", "sources": ["historique 2024-06-25", "historique 2024-07-09", "historique 2024-09-10"], "evidence": [{"id": "historique:o9", "marks": [[195, 320]]}, {"id": "historique:o8", "marks": [[63, 104], [104, 198], [199, 248]]}, {"id": "historique:o7", "marks": [[186, 225]]}], "s": "2024-06-01", "e": "2024-07-05", "point": false, "startLabel": "2024-06", "endLabel": "2024-07-05"}, {"track": "t1", "start": "2025-01-14", "end": null, "ongoing": false, "mode": "craving", "loss": false, "certainty": null, "note": "Envies pendant la Ligue des champions, sans parier ('je regarde sans parier, c'est nouveau').", "sources": ["historique 2025-01-14"], "evidence": [{"id": "historique:o4", "marks": [[192, 272]]}], "s": "2025-01-14", "e": null, "point": true, "startLabel": "2025-01-14", "endLabel": null}, {"track": "t1", "start": "2025-07-01", "end": null, "ongoing": false, "mode": "craving", "loss": false, "certainty": null, "note": "Craving rare, surtout les soirs de match, géré en éteignant le téléphone. Pas de pari depuis 2024 (pas de jeu depuis mars 2025 selon le suivi).", "sources": ["historique 2025-07-01", "historique 2025-09-23"], "evidence": [{"id": "historique:o2", "marks": [[225, 299]]}, {"id": "historique:o1", "marks": [[57, 108]]}], "s": "2025-07-01", "e": null, "point": true, "startLabel": "2025-07-01", "endLabel": null}, {"track": "t2", "start": "2025-03", "end": "2025-03", "ongoing": false, "mode": "usage", "loss": false, "certainty": null, "note": "Achats à 5 ou 6 reprises en mars (60 euros au total), 'ce n'est pas du vrai jeu'; pas de jeu de grattage depuis mars.", "sources": ["historique 2025-04-15", "historique 2025-09-23"], "evidence": [{"id": "historique:o3", "marks": [[10, 156]]}, {"id": "historique:o1", "marks": [[57, 108]]}], "s": "2025-03-01", "e": "2025-03-31", "point": false, "startLabel": "2025-03", "endLabel": "2025-03"}, {"track": "t3", "start": "2024-01", "end": null, "ongoing": true, "mode": "usage", "loss": false, "certainty": null, "note": "3 à 4 bières pendant les matchs en janvier 2024; 2 bières pendant les matchs en juillet 2025, pas plus.", "sources": ["historique 2024-01-18", "historique 2025-07-01"], "evidence": [{"id": "historique:o14", "marks": [[635, 676]]}, {"id": "historique:o2", "marks": [[299, 340]]}], "s": "2024-01-01", "e": null, "point": false, "startLabel": "2024-01", "endLabel": null}, {"track": "t4", "start": "2019", "end": null, "ongoing": true, "mode": "usage", "loss": false, "certainty": null, "note": "Vapote depuis 2019, ancien fumeur (15 paquets-années); non réévalué ensuite.", "sources": ["historique 2024-01-18"], "evidence": [{"id": "historique:o14", "marks": [[173, 230]]}], "s": "2019-01-01", "e": null, "point": false, "startLabel": "2019", "endLabel": null}, {"track": "t5", "start": "2010", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Traité par son médecin généraliste; noté 'dépression récurrente'.", "sources": ["historique 2024-01-18"], "evidence": [{"id": "historique:o14", "marks": [[248, 362]]}], "s": "2010-01-01", "e": null, "point": true, "startLabel": "2010", "endLabel": null}, {"track": "t5", "start": "2016", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Traité par son MG, paroxétine quelques mois; pas de TS ni d'hospitalisation.", "sources": ["historique 2024-01-18"], "evidence": [{"id": "historique:o14", "marks": [[248, 362]]}], "s": "2016-01-01", "e": null, "point": true, "startLabel": "2016", "endLabel": null}, {"track": "t6", "start": "2016", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Période de 'pleine forme' sous paroxétine, très peu de sommeil, dépenses et paris accrus, relue rétrospectivement avec l'épouse.", "sources": ["historique 2024-02-01"], "evidence": [{"id": "historique:o13", "marks": [[140, 342]]}], "s": "2016-01-01", "e": null, "point": true, "startLabel": "2016", "endLabel": null}, {"track": "t7", "start": "2024-02-01", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Diagnostic retenu à la place de la dépression récurrente, après anamnèse thymique avec l'épouse.", "sources": ["historique 2024-02-01"], "evidence": [{"id": "historique:o13", "marks": [[366, 485]]}], "s": "2024-02-01", "e": null, "point": false, "startLabel": "2024-02-01", "endLabel": null}, {"track": "t6", "start": "2024-06", "end": "2024-07", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Environ 10 jours avant le 25/06: sommeil 4h, accélération, logorrhée, achats (montre 900 euros); lithiémie sous-dosée 0,58. Plus calme le 09/07, sommeil 7h.", "sources": ["historique 2024-06-25", "historique 2024-07-09"], "evidence": [{"id": "historique:o9", "marks": [[60, 195], [321, 358]]}, {"id": "historique:o8", "marks": [[40, 63], [63, 104]]}], "s": "2024-06-01", "e": "2024-07-31", "point": false, "startLabel": "2024-06", "endLabel": "2024-07"}, {"track": "t8", "start": "2024-11", "end": "2025-01", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Environ 3 semaines avant le 26/11: aboulie, hypersomnie, culpabilité autour des dettes, idées de mort passives sans scénario. Hospitalisation non retenue. Amélioration nette début janvier 2025.", "sources": ["historique 2024-11-26", "historique 2025-01-14"], "evidence": [{"id": "historique:o5", "marks": [[42, 254]]}, {"id": "historique:o4", "marks": [[26, 112]]}], "s": "2024-11-01", "e": "2025-01-31", "point": false, "startLabel": "2024-11", "endLabel": "2025-01"}, {"track": "t9", "start": "2016", "end": "2016", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Quelques mois en 2016, prescrite par le MG; une période de 'pleine forme' est survenue sous paroxétine.", "sources": ["historique 2024-01-18", "historique 2024-02-01"], "evidence": [{"id": "historique:o14", "marks": [[248, 362]]}, {"id": "historique:o13", "marks": [[140, 342]]}], "s": "2016-01-01", "e": "2016-12-31", "point": false, "startLabel": "2016", "endLabel": "2016"}, {"track": "t10", "start": "2024-03-05", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Lithium LP 400 mg le soir après bilan pré-thérapeutique normal; lithiémie 0,52 à J10; majoré à 800 mg le 25/06/2024; lithiémie 0,71-0,75 ensuite, bien toléré.", "sources": ["historique 2024-02-01", "historique 2024-03-05", "historique 2024-03-26", "historique 2024-06-25", "historique 2024-09-10", "historique 2024-11-26", "historique 2025-01-14", "historique 2025-07-01", "historique 2025-09-23"], "evidence": [{"id": "historique:o13", "marks": [[500, 575]]}, {"id": "historique:o12", "marks": [[26, 84], [158, 214]]}, {"id": "historique:o11", "marks": [[0, 63]]}, {"id": "historique:o9", "marks": [[321, 358], [419, 444]]}, {"id": "historique:o7", "marks": [[67, 83], [240, 276]]}, {"id": "historique:o5", "marks": [[255, 270]]}, {"id": "historique:o4", "marks": [[332, 372]]}, {"id": "historique:o2", "marks": [[355, 389]]}, {"id": "historique:o1", "marks": [[167, 220]]}], "s": "2024-03-05", "e": null, "point": false, "startLabel": "2024-03-05", "endLabel": null}, {"track": "t11", "start": "2024-06-25", "end": "2025-05", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "100 mg le soir, diminuée à 50 mg en septembre 2024, arrêtée en mai 2025 sans rebond d'insomnie.", "sources": ["historique 2024-06-25", "historique 2024-07-09", "historique 2024-09-10", "historique 2025-01-14", "historique 2025-07-01"], "evidence": [{"id": "historique:o9", "marks": [[445, 472]]}, {"id": "historique:o8", "marks": [[263, 291]]}, {"id": "historique:o7", "marks": [[83, 120]]}, {"id": "historique:o4", "marks": [[332, 372]]}, {"id": "historique:o2", "marks": [[48, 98]]}], "s": "2024-06-25", "e": "2025-05-31", "point": false, "startLabel": "2024-06-25", "endLabel": "2025-05"}, {"track": "t12", "start": "2024-11-26", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Titration lente (25 mg/15 j), 100 mg en janvier 2025 puis 150 mg; bien tolérée, pas d'éruption.", "sources": ["historique 2024-11-26", "historique 2025-01-14", "historique 2025-07-01", "historique 2025-09-23"], "evidence": [{"id": "historique:o5", "marks": [[403, 465]]}, {"id": "historique:o4", "marks": [[113, 178], [287, 331]]}, {"id": "historique:o2", "marks": [[355, 389]]}, {"id": "historique:o1", "marks": [[220, 269]]}], "s": "2024-11-26", "e": null, "point": false, "startLabel": "2024-11-26", "endLabel": null}, {"track": "t13", "start": "2024-01-18", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Premier entretien orienté par le MG; suivi régulier avec psychoéducation et plan de crise écrit avec l'épouse en juillet 2025.", "sources": ["historique 2024-01-18", "historique 2024-02-01", "historique 2024-03-05", "historique 2025-07-01", "historique 2025-09-23"], "evidence": [{"id": "historique:o14", "marks": [[15, 158]]}, {"id": "historique:o13", "marks": []}, {"id": "historique:o12", "marks": []}, {"id": "historique:o2", "marks": [[390, 492]]}, {"id": "historique:o1", "marks": []}], "s": "2024-01-18", "e": null, "point": false, "startLabel": "2024-01-18", "endLabel": null}, {"track": "t14", "start": "2024-01-29", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Interdiction de 3 ans demandée auprès de l'ANJ, applications supprimées.", "sources": ["historique 2024-01-18", "historique 2024-02-01"], "evidence": [{"id": "historique:o14", "marks": [[884, 931]]}, {"id": "historique:o13", "marks": [[43, 139]]}], "s": "2024-01-29", "e": null, "point": false, "startLabel": "2024-01-29", "endLabel": null}, {"track": "t15", "start": "2024-02", "end": "2024-10-15", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Orientation vers l'assistante sociale pour surendettement; entretien social le 15/10/2024.", "sources": ["historique 2024-02-01", "historique 2024-10-15"], "evidence": [{"id": "historique:o13", "marks": [[576, 633]]}, {"id": "historique:o6", "marks": [[0, 92]]}], "s": "2024-02-01", "e": "2024-10-15", "point": false, "startLabel": "2024-02", "endLabel": "2024-10-15"}, {"track": "t16", "start": "2024-04-16", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Premier entretien le 16/04/2024, 9e séance le 15/04/2025; travail sur les distorsions cognitives (illusion de contrôle, 'se refaire'), journal des envies.", "sources": ["historique 2024-02-01", "historique 2024-04-16", "historique 2025-04-15"], "evidence": [{"id": "historique:o13", "marks": [[576, 633]]}, {"id": "historique:o10", "marks": [[0, 37], [271, 362]]}, {"id": "historique:o3", "marks": [[156, 228]]}], "s": "2024-04-16", "e": null, "point": false, "startLabel": "2024-04-16", "endLabel": null}, {"track": "t17", "start": "2024-08", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Débutée à l'initiative de l'épouse.", "sources": ["historique 2024-09-10"], "evidence": [{"id": "historique:o7", "marks": [[121, 185]]}], "s": "2024-08-01", "e": null, "point": false, "startLabel": "2024-08", "endLabel": null}, {"track": "t18", "start": "2023-12", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "L'épouse découvre des crédits à la consommation contractés à son insu (5 crédits).", "sources": ["historique 2024-01-18"], "evidence": [{"id": "historique:o14", "marks": [[15, 158]]}], "s": "2023-12-01", "e": null, "point": true, "startLabel": "2023-12", "endLabel": null}, {"track": "t19", "start": "2024-06-25", "end": "2024-07-15", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Arrêt de 3 semaines pour hypomanie; reprise du travail le 15/07/2024.", "sources": ["historique 2024-06-25", "historique 2024-07-09", "historique 2024-09-10"], "evidence": [{"id": "historique:o9", "marks": [[473, 502]]}, {"id": "historique:o8", "marks": [[292, 353]]}, {"id": "historique:o7", "marks": [[37, 67]]}], "s": "2024-06-25", "e": "2024-07-15", "point": false, "startLabel": "2024-06-25", "endLabel": "2024-07-15"}, {"track": "t20", "start": "2024-10-08", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Rééchelonnement sur 7 ans, dettes retenues 45 200 euros; l'épouse gère les comptes, carte bancaire du patient plafonnée; remboursement suivi en septembre 2025.", "sources": ["historique 2024-10-15", "historique 2025-09-23"], "evidence": [{"id": "historique:o6", "marks": [[0, 92], [92, 171], [258, 353]]}, {"id": "historique:o1", "marks": [[108, 166]]}], "s": "2024-10-08", "e": null, "point": false, "startLabel": "2024-10-08", "endLabel": null}, {"track": "t19", "start": "2024-11-26", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Arrêt de 3 semaines prescrit pour épisode dépressif.", "sources": ["historique 2024-11-26"], "evidence": [{"id": "historique:o5", "marks": [[42, 254], [466, 495]]}], "s": "2024-11-26", "e": null, "point": true, "startLabel": "2024-11-26", "endLabel": null}], "obs": {"historique:o1": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-09-23", "text": "Observations :\nVu ce jour\nEuthymique depuis le printemps. Pas de paris, pas de jeux de grattage depuis mars. Le plan de remboursement suit son cours, \"un an de tenu\".\nLithiémie 0,71 (bilan rénal et TSH normaux le 12/09). Lamotrigine 150 mg bien tolérée, pas d'éruption.\nConclusions :\nRO lithium 800 mg + lamotrigine 150 mg QSP 3 mois\nRDV décembre"}, "historique:o2": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-07-01", "text": "Observations :\nVu ce jour en présentiel.\nStable. Quétiapine arretée en mai sans rebond d'insomnie. Pas de signe d'hypomanie malgré l'allongement des jours (vigilance habituelle de l'été, cf juin 2024).\nPas de jeu depuis mars. Craving rare, surtout les soirs de match, gère en éteignant le téléphone. Bières : 2 pendant les matchs, pas plus.\nConclusions :\nLamotrigine 150 mg, lithium 800 mg\nPsychoéducation : signes d'alerte (sommeil < 6h, achats) rappelés, plan de crise écrit avec son épouse\nRDV fin septembre"}, "historique:o3": {"label": "historique · Entretien psychologique", "date": "2025-04-15", "text": "9e séance. [identité] révèle avoir acheté des jeux de grattage au bureau de tabac à 5 ou 6 reprises en mars (60 euros au total), \"ce n'est pas du vrai jeu\". Travail sur la permission qu'il se donne et sur l'illusion de contrôle.\nDécide d'en parler à son épouse lui-même et de changer de bureau de tabac."}, "historique:o4": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-01-14", "text": "Observations :\nVu ce jour\nAmélioration thymique nette depuis début janvier, reprise des activités, sommeil 7-8h.\nLamotrigine 100 mg (titration terminée), pas d'effet indésirable.\nPas de paris. Envies pendant la Ligue des champions, \"je regarde sans parier, c'est nouveau\".\nConclusions :\nLamotrigine 100 mg puis 150 mg dans 15 jours\nLithium 800 mg, quétiapine 50 mg le soir\nRDV 3 mois"}, "historique:o5": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-11-26", "text": "Observations :\nVu ce jour avec son épouse\nÉpisode dépressif caractérisé depuis environ 3 semaines : aboulie, hypersomnie (11h/nuit), culpabilité massive autour des dettes, idées de mort passives (\"ils seraient mieux sans moi\"), pas de scénario, critique.\nLithiémie 0,74. Observance confirmée par son épouse.\nHospitalisation discutée, non retenue (bon étayage, pas d'intention suicidaire).\nConclusions :\n- Introduction lamotrigine 25 mg, titration lente (25 mg/15 j)\n- Arret de travail 3 semaines\n- Appel téléphonique dans une semaine\n- Numéro du 3114 donné"}, "historique:o6": {"label": "historique · Entretien social", "date": "2024-10-15", "text": "La commission de surendettement a accepté le plan le 08/10/2024 : rééchelonnement sur 7 ans. Montant total des dettes retenu : 45 200 euros (le patient parlait de 38 000).\nM. [identité] [identité], [identité], 33160 SAINT-MÉDARD-EN-JALLES. Tél : [identité].\nSon épouse [identité] gère désormais les comptes du foyer, carte bancaire du patient plafonnée."}, "historique:o7": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-09-10", "text": "Observations :\nVu ce jour\nEuthymique. A repris le travail le 15/07. Lithiémie 0,75. Quétiapine diminuée à 50 mg le soir.\nThérapie de couple débutée en aout à l'initiative de son épouse.\nPas de paris depuis fin juin selon lui.\nConclusions :\nRO lithium 800 mg + quétiapine 50 mg\nRDV novembre"}, "historique:o8": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-07-09", "text": "Observations :\nEntretien téléphonique :\nPlus calme, sommeil 7h. Dit ne plus avoir parié depuis le 30/06. Son épouse, présente à ses cotés, précise qu'il a encore parié \"jusqu'au match du 5 juillet\".\nAccepte de rendre l'accès au compte de son frère.\nConclusions :\nQuétiapine 100 mg poursuivie\nReprise du travail le 15/07 si stabilité, RDV début septembre"}, "historique:o9": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-06-25", "text": "Observations :\nVu ce jour en urgence (appel de son épouse).\nÉpisode hypomaniaque depuis une dizaine de jours : dort 4h par nuit, accéléré, logorrhée, projets multiples, achats (montre 900 euros). Reprise des paris pendant l'Euro, par le compte de son frère (contournement de l'interdiction), perte d'environ 2 500 euros.\nLithiémie du 20/06 : 0,58, sous-dosé. Pas d'élément psychotique, pas d'agressivité.\nConclusions :\n- Lithium majoré à 800 mg\n- Quétiapine 100 mg le soir\n- Arret de travail 3 semaines\n- Son épouse garde la carte bancaire, appel du frère pour bloquer le compte"}, "historique:o10": {"label": "historique · Entretien psychologique", "date": "2024-04-16", "text": "Premier entretien de TCC pour le jeu. [identité] parle du PMU avec son père le dimanche quand il était au collège, puis des paris sportifs \"pour pimenter les matchs\". Il date la perte de contrôle \"au confinement\", quand il était seul toute la journée avec son téléphone.\nDistorsions repérées : illusion de contrôle (\"je connais le foot\"), pensée de \"se refaire\". Journal des envies proposé."}, "historique:o11": {"label": "historique · Entretien infirmier", "date": "2024-03-26", "text": "Lithiémie à J10 : 0,52 mmol/L (prélèvement 12h après la prise). Bonne tolérance, un peu de soif. Pas de tremblements.\nRappel des consignes : hydratation, pas d'AINS sans avis, signes de surdosage. Info transmise au Dr [identité]."}, "historique:o12": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-03-05", "text": "Observations :\nVu ce jour\nBilan pré-lithium normal (créatinine, TSH, calcémie, ECG). Thymie légèrement abaissée, ruminations sur les dettes, sommeil correct.\nIntroduction lithium LP 400 mg le soir, lithiémie à J10.\nConclusions :\nRDV 1 mois"}, "historique:o13": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-02-01", "text": "Observations :\nVu ce jour avec son épouse.\nInterdiction volontaire de jeux faite auprès de l'ANJ le 29/01 (3 ans), applications supprimées.\nRetour sur l'anamnèse thymique avec son épouse : périodes de \"pleine forme\" de quelques jours à 2 semaines, avec très peu de sommeil, dépenses et paris plus importants, dont une sous paroxétine en 2016. Pas d'hospitalisation.\nDiagnostic de trouble bipolaire de type II retenu, plutot qu'une dépression récurrente comme noté jusqu'ici par son MG.\nConclusions :\nProposition de lithium expliquée (accord), bilan pré-thérapeutique prescrit\nOrientation ASS (surendettement) et psychologue (TCC jeu)"}, "historique:o14": {"label": "historique · évaluation (Motif de l'évaluation, urgence : bas)", "date": "2024-01-18", "text": "Observations :\nPremier entretien ce jour, orienté par son MG apres la découverte par son épouse de crédits à la consommation contractés à son insu (décembre).\nAntécédents :\nMédicaux : RAS, vapote depuis 2019 (ancien fumeur 15 PA).\nPsychiatriques :\n- 2 épisodes dépressifs (2010, 2016) traités par son MG, paroxétine en 2016 quelques mois, \"dépression récurrente\"\n- pas de TS, pas d'hospitalisation\nJeu :\n- paris sportifs en ligne depuis la Coupe du monde 2018, quotidien depuis 2022 environ, mises jusqu'à 300 euros par jour, poursuite des pertes ++\n- environ 38 000 euros de dettes selon lui (5 crédits)\n- pas de casino, pas de poker\nAlcool : 3 a 4 bières pendant les matchs. Pas d'autre produit.\nConducteur de travaux, marié, 2 enfants (14 et 10 ans).\nCliniquement : honte ++, discours cohérent, légèrement accéléré par moments. Thymie basse, pas d'idées suicidaires.\nConclusions :\n- Interdiction volontaire de jeux (ANJ) à faire\n- RDV avec son épouse dans 15 jours\n- Exploration thymique à poursuivre (hypomanies ?)"}}, "ref": "2025-08-01", "kinds": [{"id": "life_event", "label": "Événements de vie", "light": "#b45309", "dark": "#f59e0b"}, {"id": "substance_use", "label": "Consommations", "light": "#c62828", "dark": "#ef6b6b"}, {"id": "psychiatric", "label": "Psychopathologie", "light": "#6a4bb0", "dark": "#a78bfa"}, {"id": "medication", "label": "Médicaments", "light": "#1d5fb4", "dark": "#6aa6f0"}, {"id": "therapeutic_psycho", "label": "Prises en charge", "light": "#4d7c0f", "dark": "#a3d95b"}], "modeLabel": {"usage": "usage", "intoxication": "intoxication", "sevrage": "sevrage", "rechute": "rechute", "craving": "craving"}, "certaintyLabel": {"exact": "date exacte", "month": "mois", "year": "année", "approx": "date approximative"}};
+const NS = "http://www.w3.org/2000/svg";
+const dark = () => matchMedia("(prefers-color-scheme: dark)").matches;
+const DAY = 864e5;
+const t = (iso) => Date.parse(iso + "T00:00:00Z");
+const REF = t(D.ref);
+const kindOf = Object.fromEntries(D.kinds.map(k => [k.id, k]));
+const trackOf = Object.fromEntries(D.tracks.map(x => [x.id, x]));
+const color = (kind) => kindOf[kind][dark() ? "dark" : "light"];
+const MODE_OP = {usage:.55, craving:.7, sevrage:.7, intoxication:.85, rechute:1};
+const EVENTS = D.events.map((e, i) => ({
+  ...e, i, kind: trackOf[e.track].kind, label: trackOf[e.track].label,
+  a: t(e.s), b: e.e ? t(e.e) : (e.ongoing ? REF : t(e.s)),
+}));
+const hidden = new Set();
+let LABEL_W = 150; const ROW = 26, PADR = 14, AXIS = 84;
+let DOM_MIN = Math.min(...EVENTS.map(e => e.a)) - 200*DAY, DOM_MAX = REF + 60*DAY;
+let view = [DOM_MIN, DOM_MAX];
+
+const el = (name, attrs = {}, parent, text) => {
+  const n = document.createElementNS(NS, name);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  if (text !== undefined) n.textContent = text;
+  if (parent) parent.appendChild(n);
+  return n;
+};
+const fmt = (s) => { if (!s) return ""; const [y,m,d] = s.split("-"); return d ? `${d}/${m}/${y}` : m ? `${m}/${y}` : y; };
+const yr = (ms) => new Date(ms).getUTCFullYear();
+
+function ticks(a, b) {
+  const span = (b - a) / (365.25*DAY), out = [];
+  const step = span > 40 ? 10 : span > 18 ? 5 : span > 9 ? 2 : span > 3.5 ? 1 : 0;
+  if (step) { for (let y = Math.ceil(yr(a)/step)*step; Date.UTC(y,0,1) <= b; y += step) out.push([Date.UTC(y,0,1), String(y), true]); }
+  else {
+    const q = span > 1.6 ? 3 : 1;
+    for (let y = yr(a); y <= yr(b); y++) for (let m = 0; m < 12; m += q) {
+      const v = Date.UTC(y, m, 1); if (v < a || v > b) continue;
+      out.push([v, m === 0 ? String(y) : `${String(m+1).padStart(2,"0")}/${String(y).slice(2)}`, m === 0]);
+    }
+  }
+  return out;
+}
+
+const bolt = (x, y, s=7) => `M${x} ${y-s} L${x-s*.55} ${y+.1} L${x-.05*s} ${y+.1} L${x-s*.35} ${y+s} L${x+s*.6} ${y-.25*s} L${x+.05*s} ${y-.25*s} Z`;
+
+function drawMain() {
+  const svg = document.getElementById("main");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800;
+  LABEL_W = W < 600 ? 92 : 150;
+  const innerW = W - LABEL_W - PADR;
+  const x = (ms) => LABEL_W + (ms - view[0]) / (view[1] - view[0]) * innerW;
+  const kinds = D.kinds.filter(k => !hidden.has(k.id));
+  const rows = [];
+  for (const k of kinds) if (k.id !== "life_event") {
+    rows.push({head: k});
+    for (const tr of D.tracks.filter(tr => tr.kind === k.id)) rows.push({track: tr});
+  }
+  const showLife = !hidden.has("life_event");
+  const H = AXIS + 18 + rows.length * ROW + 24;
+  svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const defs = el("defs", {}, svg);
+  const cp = el("clipPath", {id: "clip"}, defs); el("rect", {x: LABEL_W, y: 0, width: innerW, height: H}, cp);
+  // grid + axis
+  const gridG = el("g", {}, svg);
+  for (const [v, lab, major] of ticks(...view)) {
+    const xx = x(v);
+    el("line", {x1: xx, x2: xx, y1: AXIS - 4, y2: H - 20, stroke: "var(--line)", "stroke-width": major ? 1 : .5}, gridG);
+    el("text", {x: xx + 3, y: H - 7, class: "mute"}, gridG, lab);
+  }
+  el("line", {x1: LABEL_W, x2: W - PADR, y1: AXIS - 4, y2: AXIS - 4, stroke: "var(--axis)", "stroke-width": 4, "stroke-linecap": "round"}, svg);
+  const g = el("g", {"clip-path": "url(#clip)"}, svg);
+  // life events on the axis
+  if (showLife) {
+    const life = EVENTS.filter(e => e.kind === "life_event" && e.b >= view[0] && e.a <= view[1]);
+    const lanes = [[], [], [], [], []];
+    for (const e of life.sort((p, q) => p.a - q.a)) {
+      const pt = e.point || (e.b - e.a) < 120*DAY;
+      const xa = x(Math.max(e.a, view[0])), xb = pt ? xa : x(Math.min(e.b, view[1]));
+      const w = e.label.length * 5.9 + 10, flip = xa + w > W - PADR;
+      const iv = flip ? [xa - w, xa + 4] : [xa - 4, xa + w];
+      let ln = lanes.findIndex(l => l.every(o => o[1] < iv[0] || o[0] > iv[1]));
+      if (ln < 0) ln = lanes.length - 1;
+      lanes[ln].push(iv);
+      const ty = AXIS - 14 - ln * 13 - 4;
+      const grp = el("g", {class: "ev", "data-i": e.i}, g);
+      if (!pt) el("rect", {x: xa, y: AXIS - 8, width: Math.max(2, xb - xa), height: 8, rx: 3, fill: color("life_event"), opacity: .85}, grp);
+      else el("path", {d: `M${xa} ${AXIS-11} l6 6 l-6 6 l-6 -6 Z`, fill: color("life_event")}, grp);
+      el("line", {x1: xa, x2: xa, y1: ty + 3, y2: AXIS - 11, stroke: color("life_event"), "stroke-width": 1, opacity: .6}, grp);
+      el("text", {x: flip ? xa - 3 : xa + 3, y: ty, "font-size": 11, "text-anchor": flip ? "end" : "start", "pointer-events": "none"}, grp, e.label);
+      if (e.loss) el("path", {d: bolt(xa, AXIS + 6, 6), fill: "#e11d48"}, grp);
+    }
+  }
+  // rows
+  let y = AXIS + 6;
+  for (const r of rows) {
+    if (r.head) {
+      el("text", {x: 6, y: y + 17, "font-weight": 600, fill: color(r.head.id)}, svg, r.head.label.toUpperCase()).setAttribute("font-size", 11);
+      el("line", {x1: 6, x2: W - PADR, y1: y + ROW - 3, y2: y + ROW - 3, stroke: color(r.head.id), opacity: .35}, svg);
+    } else {
+      const cut = W < 600 ? 13 : 24;
+      const lab = r.track.label.length > cut ? r.track.label.slice(0, cut - 1) + "…" : r.track.label;
+      el("text", {x: 12, y: y + 17, class: "mute"}, svg, lab).appendChild(Object.assign(document.createElementNS(NS, "title"), {textContent: r.track.label}));
+      for (const e of EVENTS.filter(e => e.track === r.track.id)) {
+        if (e.b < view[0] || e.a > view[1]) continue;
+        const grp = el("g", {class: "ev", "data-i": e.i}, g);
+        const c = color(e.kind), op = e.mode ? (MODE_OP[e.mode] ?? .6) : .8;
+        const xa = x(e.a), xb = x(e.b);
+        const dash = e.certainty === "approx" ? "4 3" : null;
+        if (e.point || xb - xa < 5) {
+          el("path", {d: `M${xa} ${y+5} l7 7 l-7 7 l-7 -7 Z`, fill: c, opacity: op}, grp);
+        } else {
+          const rc = el("rect", {x: xa, y: y + 4, width: xb - xa, height: ROW - 10, rx: 4, fill: c, opacity: op}, grp);
+          if (dash) { rc.setAttribute("stroke", c); rc.setAttribute("stroke-dasharray", dash); rc.setAttribute("fill-opacity", .45); }
+          if (e.ongoing && xb < W) el("path", {d: `M${xb} ${y+4} l8 ${(ROW-10)/2} l-8 ${(ROW-10)/2} Z`, fill: c, opacity: op}, grp);
+        }
+        if (e.loss) el("path", {d: bolt(xa, y + ROW/2 - 1), fill: "#e11d48", stroke: "var(--panel)", "stroke-width": .8}, grp);
+        if (e.mode && e.mode !== "usage" && xb - xa > 56) el("text", {x: xa + 6, y: y + 17, fill: "#fff", "font-size": 10.5, "pointer-events": "none"}, grp, MODE_LABEL(e.mode)).setAttribute("style", "fill:#fff");
+      }
+    }
+    y += ROW;
+  }
+  svg.querySelectorAll(".ev").forEach(n => {
+    const go = () => select(+n.dataset.i);
+    n.addEventListener("click", go); n.addEventListener("pointerenter", (ev) => { if (ev.pointerType === "mouse") go(); });
+  });
+  if (selected !== null) svg.querySelector(`.ev[data-i="${selected}"]`)?.classList.add("sel");
+}
+const MODE_LABEL = (m) => D.modeLabel[m] || m;
+
+let selected = null;
+function obsHtml(v, esc) {
+  const o = D.obs[v.id];
+  let html = "", at = 0;
+  for (const [a, b] of v.marks) { html += esc(o.text.slice(at, a)) + "<mark>" + esc(o.text.slice(a, b)) + "</mark>"; at = b; }
+  html += esc(o.text.slice(at));
+  return `<div class="obs"><div class="oh">${o.date ? esc(o.date) + " · " : ""}${esc(o.label)}${o.summary_only ? " · résumé" : ""}</div><div class="ot">${html}</div></div>`;
+}
+function select(i) {
+  selected = i;
+  document.querySelectorAll(".ev").forEach(n => n.classList.toggle("sel", +n.dataset.i === i));
+  const e = EVENTS[i];
+  const when = e.endLabel ? (e.startLabel === e.endLabel ? fmt(e.startLabel) : `${fmt(e.startLabel)} → ${fmt(e.endLabel)}`)
+    : e.ongoing ? `depuis ${fmt(e.startLabel)} (en cours)` : fmt(e.startLabel);
+  const esc = (s) => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const bits = [];
+  if (e.mode) bits.push(MODE_LABEL(e.mode));
+  if (e.certainty) bits.push(D.certaintyLabel[e.certainty] || e.certainty);
+  if (e.loss) bits.push("⚡ perte de contrôle");
+  document.getElementById("detail").innerHTML =
+    `<b>${esc(e.label)}</b> <span class="k">· ${esc(kindOf[e.kind].label)} · ${when}${bits.length ? " · " + esc(bits.join(" · ")) : ""}</span>` +
+    (e.note ? `<div>${esc(e.note)}</div>` : "") +
+    (e.sources.length ? `<div class="k">Autres sources : ${e.sources.map(esc).join(" ; ")}</div>` : "") +
+    (e.evidence.length ? `<div class="k" style="margin-top:8px">${e.evidence.length > 1 ? "Observations" : "Observation"} d'origine${e.evidence.some(v => !v.marks.length) ? " (passage justificatif non repéré dans certaines)" : ", passage justificatif surligné"} :</div><div id="obs">` +
+      e.evidence.map(v => obsHtml(v, esc)).join("") + `</div>` : "");
+  document.querySelector("#obs mark")?.scrollIntoView({block: "nearest"});
+}
+
+// overview strip with a draggable window
+function drawOverview() {
+  const svg = document.getElementById("ov");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800, H = 54, L = 12, R = 12, innerW = W - L - R;
+  const x = (ms) => L + (ms - DOM_MIN) / (DOM_MAX - DOM_MIN) * innerW;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  for (const [v, lab, major] of ticks(DOM_MIN, DOM_MAX)) {
+    if (!major) continue;
+    el("line", {x1: x(v), x2: x(v), y1: 4, y2: H - 14, stroke: "var(--line)"}, svg);
+    el("text", {x: x(v) + 2, y: H - 3, class: "mute", "font-size": 10}, svg, lab);
+  }
+  const vis = EVENTS.filter(e => !hidden.has(e.kind));
+  const n = Math.max(1, new Set(vis.map(e => e.track)).size), tracks = [...new Set(vis.map(e => e.track))];
+  for (const e of vis) {
+    const r = tracks.indexOf(e.track), yy = 6 + r * (H - 24) / n;
+    el("rect", {x: x(e.a), y: yy, width: Math.max(2, x(e.b) - x(e.a)), height: Math.max(1.5, (H - 24) / n - 1), fill: color(e.kind), opacity: .7}, svg);
+  }
+  const win = el("rect", {x: x(view[0]), y: 1, width: Math.max(10, x(view[1]) - x(view[0])), height: H - 14, rx: 5, fill: "rgba(80,120,220,.16)", stroke: "#4f7be0", "stroke-width": 1.5, style: "cursor:grab"}, svg);
+  const hl = el("rect", {x: x(view[0]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const hr = el("rect", {x: x(view[1]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const inv = (px) => DOM_MIN + (px - L) / innerW * (DOM_MAX - DOM_MIN);
+  const MINSPAN = 120 * DAY;
+  const drag = (node, kind) => node.addEventListener("pointerdown", (ev) => {
+    ev.preventDefault(); node.setPointerCapture(ev.pointerId);
+    const x0 = ev.clientX, v0 = [...view], per = (DOM_MAX - DOM_MIN) / innerW;
+    const move = (m) => {
+      const d = (m.clientX - x0) * per;
+      let [a, b] = v0;
+      if (kind === "move") { const span = b - a; a = Math.min(Math.max(DOM_MIN, a + d), DOM_MAX - span); b = a + span; }
+      else if (kind === "l") a = Math.min(Math.max(DOM_MIN, a + d), b - MINSPAN);
+      else b = Math.max(Math.min(DOM_MAX, b + d), a + MINSPAN);
+      view = [a, b]; drawOverview(); drawMain();
+    };
+    const up = () => { node.removeEventListener("pointermove", move); node.removeEventListener("pointerup", up); };
+    node.addEventListener("pointermove", move); node.addEventListener("pointerup", up);
+  });
+  drag(win, "move"); drag(hl, "l"); drag(hr, "r");
+}
+
+function setView(a, b) { view = [Math.max(DOM_MIN, a), Math.min(DOM_MAX, b)]; redraw(); }
+function redraw() { drawOverview(); drawMain(); }
+
+// controls
+const kindsBar = document.getElementById("kinds");
+for (const k of D.kinds) {
+  const b = document.createElement("button"); b.className = "chip"; b.setAttribute("aria-pressed", "true");
+  b.innerHTML = `<i style="background:${k[dark() ? "dark" : "light"]}"></i>${k.label}`;
+  b.onclick = () => { hidden.has(k.id) ? hidden.delete(k.id) : hidden.add(k.id); b.setAttribute("aria-pressed", String(!hidden.has(k.id))); redraw(); };
+  kindsBar.appendChild(b);
+}
+const presets = document.getElementById("presets");
+const addPreset = (label, fn) => { const b = document.createElement("button"); b.textContent = label; b.onclick = fn; presets.appendChild(b); };
+addPreset("Tout", () => setView(DOM_MIN, DOM_MAX));
+for (const yrs of [10, 5, 2]) addPreset(`${yrs} dernières années`, () => setView(REF - yrs * 365.25 * DAY, DOM_MAX));
+addPreset("−", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]); setView(c - h, c + h); });
+addPreset("+", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]) / 4; setView(c - h, c + h); });
+document.getElementById("legend").innerHTML =
+  `<span><span class="sw" style="background:#888;opacity:.55"></span>usage</span><span><span class="sw" style="background:#888;opacity:.85"></span>intoxication</span>` +
+  `<span><span class="sw" style="background:#888"></span>rechute</span><span><span class="sw" style="background:#888;opacity:.45;border:1px dashed #888"></span>date approximative</span>` +
+  `<span style="color:#e11d48">⚡ perte de contrôle</span><span>◆ événement sans durée</span><span>▶ en cours</span>`;
+document.getElementById("main").addEventListener("wheel", (ev) => {
+  if (!ev.ctrlKey && !ev.shiftKey) return;
+  ev.preventDefault();
+  const r = ev.currentTarget.getBoundingClientRect(), W = r.width, f = (ev.clientX - r.left - LABEL_W) / (W - LABEL_W - PADR);
+  const c = view[0] + Math.min(Math.max(f, 0), 1) * (view[1] - view[0]), k = ev.deltaY > 0 ? 1.25 : .8;
+  setView(c - (c - view[0]) * k, c + (view[1] - c) * k);
+}, {passive: false});
+addEventListener("resize", redraw);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
+if (innerWidth < 600) view = [Math.max(DOM_MIN, REF - 5 * 365.25 * DAY), DOM_MAX];
+redraw();
+</script>
+</body>
+</html>
