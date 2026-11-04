@@ -22,7 +22,13 @@ Each dossier lives in data/anonymized/dossiers/<slug>/:
 
 Source format. notes.txt: one note per "### date | title | author | role |
 validation" line, then its text; validation is "le DD/MM/YYYY HH:MM",
-"auto DD/MM/YYYY HH:MM" or "modif DD/MM/YYYY HH:MM". Other documents:
+"auto DD/MM/YYYY HH:MM" or "modif DD/MM/YYYY HH:MM". A notes export comes
+in two layouts, chosen by the document's type in verite.json: "historique"
+(framed identity box) or "fiche" (the "fiche d'observations" export:
+patient row with admission number, referring doctor and care units on
+every page). Notes are drawn in the order of notes.txt: oldest first for
+the historique dossiers, newest first for the fiche ones, as that export
+does. Other documents:
 [entete], [colonne], [champs] and [corps] sections. In every source, "~"
 joins words that must stay on one line (phone numbers, addresses).
 
@@ -179,6 +185,104 @@ def render_historique(path: Path, notes: list[dict], header: dict, export: dict)
     return drawn
 
 
+# --- record export, "fiche d'observations" layout ---------------------------------
+#
+# The other export of the patient record: no frame, the establishment block on
+# the left, the patient row (name, admission, referring doctor, admission date
+# and length of stay, care units, measurements) repeated on every page, the
+# newest note first, and the body of each note under "Observations :" and
+# "Conclusions :". Automatic validation names the author in capitals.
+
+FICHE_TOP = H - 28
+FICHE_BODY_TOP = H - 178
+
+
+def fiche_validation_line(note: dict) -> str:
+    kind, when = note["validation"].split(" ", 1)
+    day, time = when.split(" ")
+    if kind == "auto":
+        return f"Validé automatiquement le {day} à {time} par {note['author'].upper()}"
+    return validation_line(note)
+
+
+def fiche_lines(notes: list[dict]) -> list[Line]:
+    lines: list[Line] = []
+    for note in notes:
+        lines += paragraph(f"{note['title']} du {note['date']} (Urgence : Bas)", "title", LEFT, RIGHT - LEFT)
+        lines.append(Line("meta", fiche_validation_line(note)))
+        lines.append(Line("body", ""))
+        for text in note["body"].split("\n"):
+            # Section labels sit slightly left of the text, as in the export.
+            x = LEFT + 4 if text.strip() in ("Observations :", "Conclusions :") else LEFT + 8
+            lines += paragraph(text, "body", x, RIGHT - x)
+        lines.append(Line("body", ""))
+        lines.append(Line("body", ""))
+    return lines
+
+
+def fiche_header(c: Canvas, header: dict, page: int, total: int) -> list[str]:
+    """The per-page block of the fiche export; returns the strings it drew."""
+    drawn: list[str] = []
+
+    def put(x: float, y: float, text: str, font: str = "Helvetica", size: float = 8, right: bool = False) -> None:
+        c.setFont(font, size)
+        (c.drawRightString if right else c.drawString)(x, y, text)
+        drawn.append(text)
+
+    y = FICHE_TOP
+    for i, text in enumerate(header["establishment"]):
+        put(32, y, text, "Helvetica-Bold" if i == 0 else "Helvetica", 9 if i == 0 else 8)
+        y -= 10
+    y -= 6
+    for i, text in enumerate(header["contact"]):
+        put(32 if i == 0 else 200, y if i < 2 else y - 10, text)
+    put(W / 2 + 20, FICHE_TOP - 88, header["title"], "Helvetica-Bold", 10.5)
+    row = FICHE_TOP - 104
+    put(44, row, header["patient"], "Helvetica-Bold", 9)
+    put(225, row, f"Admission   {header['admission']}")
+    put(352, row, header["referent"], size=7.5)
+    put(225, row - 11, header["admitted"])
+    put(352, row - 11, header["unit"], size=7.5)
+    put(32, row - 22, header["birth"])
+    put(32, row - 33, header["ipp"])
+    put(352, row - 33, header["unit"].replace("UFM", "UFH"), size=7.5)
+    for i, text in enumerate(header.get("measures", [])):
+        put(W - 32, row - 11 * i, text, size=7.5, right=True)
+    put(W - 32, 22, f"Page {page} /{total}", size=7.5, right=True)
+    return drawn
+
+
+def render_fiche(path: Path, notes: list[dict], header: dict) -> list[str]:
+    pages: list[list[Line]] = []
+    current: list[Line] = []
+    y = FICHE_BODY_TOP
+    for line in fiche_lines(notes):
+        step = LEADING[line.style]
+        if y - step < BOTTOM:
+            pages.append(current)
+            current, y = [], FICHE_BODY_TOP
+        if not current and not line.text:
+            continue
+        current.append(line)
+        y -= step
+    if current:
+        pages.append(current)
+    c = Canvas(str(path), pagesize=A4)
+    c.setTitle("Fiche d'observations")
+    drawn: list[str] = []
+    for n, page in enumerate(pages, start=1):
+        drawn += fiche_header(c, header, n, len(pages))
+        y = FICHE_BODY_TOP
+        for line in page:
+            c.setFont(*FONTS[line.style])
+            c.drawString(line.x, y, line.text)
+            drawn.append(line.text)
+            y -= LEADING[line.style]
+        c.showPage()
+    c.save()
+    return drawn
+
+
 # --- letters and reports ----------------------------------------------------------
 
 def sections(source: str) -> dict[str, list[str]]:
@@ -257,6 +361,8 @@ def build(slug: str) -> dict[str, list[str]]:
         source = (folder / doc["source"]).read_text()
         if doc["type"] == "historique":
             drawn = render_historique(folder / name, parse_notes(source), truth["header"], truth["export"])
+        elif doc["type"] == "fiche":
+            drawn = render_fiche(folder / name, parse_notes(source), truth["header"])
         else:
             drawn = render_document(folder / name, source)
         text = fold("\n".join(drawn))

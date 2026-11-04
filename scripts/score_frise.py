@@ -75,12 +75,16 @@ def main(argv: list[str]) -> None:
 
     models = sorted({m["model"] for m in runs_meta})
     cost = sum(m["usage"].get("cost", 0) for m in runs_meta)
-    n_runs = len(run_dirs)
+    n_runs = max(len(v) for v in scores.values())
+    # Dossiers added later may have fewer runs than the first ones.
+    runs_per_dossier = sorted({len(v) for v in scores.values() if v}, reverse=True)
+    uneven = len(runs_per_dossier) > 1
     out: list[str] = []
     w = out.append
 
     w("# Frise des dossiers fictifs, notée contre `verite.json`\n")
-    w(f"- Modèle : {', '.join(models)} ; {n_runs} passage(s) par dossier ; coût total {cost:.2f} $.")
+    per = " ou ".join(str(k) for k in runs_per_dossier)
+    w(f"- Modèle : {', '.join(models)} ; {per} passage(s) par dossier ; coût total {cost:.2f} $.")
     w(f"- Dates des passages : {min(m['ranAt'] for m in runs_meta)[:10]} → {max(m['ranAt'] for m in runs_meta)[:10]}.")
     w("- Chemin de l'application : couche texte → détections automatiques acceptées telles quelles (à la place "
       "de la relecture humaine) → masquage → vérification → images des pages masquées → découpage → frise.")
@@ -110,15 +114,24 @@ def main(argv: list[str]) -> None:
             f"| {spread([100 * x['recall'] for x in sc])} % | {spread([100 * x['precision_lower_bound'] for x in sc])} % "
             f"| {spread([a for a, _ in seg])}/{seg[0][1]} |"
         )
-    for i in range(n_runs):
-        per_run = [scores[s][i] for s in slugs if len(scores[s]) > i]
-        totals["expected"].append(sum(x["expected"] for x in per_run))
-        totals["found"].append(sum(x["status"]["found"] for x in per_run))
-        totals["produced"].append(sum(x["produced"] for x in per_run))
-    recall = [100 * f / e for f, e in zip(totals["found"], totals["expected"])]
-    prec = [100 * f / p if p else 0 for f, p in zip(totals["found"], totals["produced"])]
-    w(f"| **Total** | {totals['expected'][0]} | {spread(totals['found'])} | | | | {spread(totals['produced'])} "
-      f"| {spread(recall)} % | {spread(prec)} % | |\n")
+    if uneven:
+        # Pool every run of every dossier: one figure, each run weighted by its events.
+        pooled = [x for s in slugs for x in scores[s]]
+        found = sum(x["status"]["found"] for x in pooled)
+        expected = sum(x["expected"] for x in pooled)
+        produced = sum(x["produced"] for x in pooled)
+        w(f"| **Total** (tous passages réunis) | {expected} | {found} | | | | {produced} "
+          f"| {pct(found, expected)} | {pct(found, produced)} | |\n")
+    else:
+        for i in range(n_runs):
+            per_run = [scores[s][i] for s in slugs if len(scores[s]) > i]
+            totals["expected"].append(sum(x["expected"] for x in per_run))
+            totals["found"].append(sum(x["status"]["found"] for x in per_run))
+            totals["produced"].append(sum(x["produced"] for x in per_run))
+        recall = [100 * f / e for f, e in zip(totals["found"], totals["expected"])]
+        prec = [100 * f / p if p else 0 for f, p in zip(totals["found"], totals["produced"])]
+        w(f"| **Total** | {totals['expected'][0]} | {spread(totals['found'])} | | | | {spread(totals['produced'])} "
+          f"| {spread(recall)} % | {spread(prec)} % | |\n")
 
     w("## Exactitude des événements trouvés\n")
     scored = [s for s in slugs if scores[s]]
@@ -178,7 +191,7 @@ def main(argv: list[str]) -> None:
         w("| Dossier | Trouvés à chaque passage | Parfois | Jamais |")
         w("|---|---|---|---|")
         for s in slugs:
-            if not scores[s]:
+            if len(scores[s]) < 2:
                 continue
             counts = [sum(x["matches"][i].status == "found" for x in scores[s]) for i in range(scores[s][0]["expected"])]
             k = len(scores[s])

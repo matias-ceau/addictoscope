@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frise cannabis-justice</title>
+<style>
+:root{--bg:#fafaf7;--fg:#1d1d1b;--mute:#6b6b66;--line:#d8d8d0;--panel:#fff;--axis:#1d1d1b}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#eceae3;--mute:#9a9a92;--line:#34342f;--panel:#1f1f1c;--axis:#eceae3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:12px 16px 32px}
+h1{font-size:18px;margin:4px 0 2px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+button,.chip{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px}
+.chip i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chip[aria-pressed=false]{opacity:.4}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;touch-action:pan-y}
+svg{display:block;width:100%}
+text{fill:var(--fg);font-size:12px}
+.mute{fill:var(--mute)}
+.ev{cursor:pointer}
+.ev:hover rect,.ev.sel rect,.ev:hover path,.ev.sel path{stroke:var(--fg);stroke-width:1.6}
+#detail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:10px;min-height:76px}
+#detail b{font-size:15px}
+.obs{border:1px solid var(--line);border-radius:8px;margin-top:6px;overflow:hidden}
+.oh{background:var(--bg);color:var(--mute);font-size:12px;padding:4px 10px;border-bottom:1px solid var(--line)}
+.ot{white-space:pre-wrap;padding:8px 10px;max-height:240px;overflow:auto;font-size:13px}
+mark{background:#fde047;color:#1d1d1b;border-radius:3px;padding:0 1px}
+@media (prefers-color-scheme:dark){mark{background:#a16207;color:#fff}}
+#detail .k{color:var(--mute);font-size:12px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--mute);font-size:12px;margin-top:8px}
+.sw{display:inline-block;width:22px;height:9px;border-radius:2px;vertical-align:middle;margin-right:4px}
+</style>
+</head>
+<body>
+<main>
+<h1>Frise chronologique — cannabis-justice</h1>
+<p class="sub"><b>Données synthétiques</b> (dossier entièrement inventé). Touchez une barre pour lire la note et l'observation d'origine ; faites glisser la fenêtre de l'aperçu pour zoomer.</p>
+<div class="bar" id="kinds"></div>
+<div class="bar" id="presets"></div>
+<div class="chart"><svg id="ov" height="54"></svg></div>
+<div class="chart" style="margin-top:8px"><svg id="main"></svg></div>
+<div class="legend" id="legend"></div>
+<div id="detail"><span class="k">Aucun élément sélectionné.</span></div>
+</main>
+<script>
+const D = {"dossier": "cannabis-justice", "tracks": [{"id": "t14", "kind": "life_event", "label": "Arrêt du CAP"}, {"id": "t15", "kind": "life_event", "label": "Conduite de scooter sous cannabis avec refus d'obtempérer"}, {"id": "t16", "kind": "life_event", "label": "Jugement et sursis probatoire avec obligation de soins"}, {"id": "t17", "kind": "life_event", "label": "Apprentissage en mécanique auto"}, {"id": "t1", "kind": "substance_use", "label": "Cannabis"}, {"id": "t3", "kind": "substance_use", "label": "Alcool"}, {"id": "t4", "kind": "substance_use", "label": "Tabac"}, {"id": "t2", "kind": "substance_use", "label": "Cannabinoïdes de synthèse"}, {"id": "t5", "kind": "psychiatric", "label": "Épisode psychotique aigu induit par les cannabinoïdes de synthèse"}, {"id": "t6", "kind": "psychiatric", "label": "TDAH, présentation combinée"}, {"id": "t8", "kind": "medication", "label": "Rispéridone"}, {"id": "t7", "kind": "medication", "label": "Loxapine"}, {"id": "t9", "kind": "medication", "label": "Méthylphénidate LP"}, {"id": "t10", "kind": "therapeutic_psycho", "label": "Suivi CJC/CSAPA (obligation de soins)"}, {"id": "t11", "kind": "therapeutic_psycho", "label": "Passage aux urgences"}, {"id": "t12", "kind": "therapeutic_psycho", "label": "Hospitalisation en psychiatrie (soins libres)"}, {"id": "t13", "kind": "therapeutic_psycho", "label": "Bilan neuropsychologique"}], "events": [{"track": "t1", "start": "2018", "end": "2024-11-08", "ongoing": false, "mode": "usage", "loss": false, "certainty": null, "note": "Consommation quotidienne, 8 à 10 joints/j (herbe et résine), premier joint au réveil, tolérance, irritabilité et insomnie à l'arrêt. Début à 13 ans (o1) ou 14 ans (o2) : 2018 retenu. Réduit à 6/j en juillet puis 6 à 8/j en septembre 2024. Arrêt déclaré le 08/11/2024.", "sources": ["historique 2024-06-11", "historique 2024-06-25", "historique 2024-07-09", "historique 2024-09-03", "urgences 2024-11-08", "historique 2024-11-26"], "evidence": [{"id": "historique:o1", "marks": [[236, 331]]}, {"id": "historique:o2", "marks": [[266, 357]]}, {"id": "historique:o3", "marks": [[182, 252]]}, {"id": "historique:o4", "marks": [[86, 127]]}, {"id": "urgences:o1", "marks": [[315, 394], [484, 596]]}, {"id": "historique:o6", "marks": [[15, 150], [438, 478]]}], "s": "2018-01-01", "e": "2024-11-08", "point": false, "startLabel": "2018", "endLabel": "2024-11-08"}, {"track": "t2", "start": "2024-11-08", "end": null, "ongoing": false, "mode": "intoxication", "loss": false, "certainty": null, "note": "Vape de liquide « PTC » achetée sur un réseau social, associée à du cannabis fumé. Angoisse massive, idées de persécution et hallucinations auditives dans l'heure. THC positif aux urines, cannabinoïdes de synthèse non détectés.", "sources": ["urgences 2024-11-08", "historique 2024-11-26"], "evidence": [{"id": "urgences:o1", "marks": [[596, 681], [989, 1091]]}, {"id": "historique:o6", "marks": [[151, 290]]}], "s": "2024-11-08", "e": null, "point": true, "startLabel": "2024-11-08", "endLabel": null}, {"track": "t1", "start": "2024-12", "end": null, "ongoing": false, "mode": "rechute", "loss": false, "certainty": null, "note": "2 joints lors d'une soirée début décembre 2024, puis plus rien. Le patient se disait ensuite abstinent depuis le 08/11 (urines THC négatives).", "sources": ["historique 2024-12-10", "historique 2025-01-21"], "evidence": [{"id": "historique:o7", "marks": [[51, 115]]}, {"id": "historique:o8", "marks": [[26, 71], [71, 134]]}], "s": "2024-12-01", "e": null, "point": true, "startLabel": "2024-12", "endLabel": null}, {"track": "t1", "start": "2024-12-10", "end": null, "ongoing": false, "mode": "craving", "loss": false, "certainty": null, "note": "Craving le soir, fait du vélo pour « tenir ».", "sources": ["historique 2024-12-10"], "evidence": [{"id": "historique:o7", "marks": [[116, 162]]}], "s": "2024-12-10", "e": null, "point": true, "startLabel": "2024-12-10", "endLabel": null}, {"track": "t1", "start": "2025-02", "end": null, "ongoing": true, "mode": "rechute", "loss": false, "certainty": null, "note": "Reprise en février 2025 : 1 à 2 joints le week-end, déclarée en mars après hésitation. Un joint de temps en temps le week-end en septembre 2025.", "sources": ["historique 2025-03-18", "historique 2025-05-06", "historique 2025-07-01", "historique 2025-09-16"], "evidence": [{"id": "historique:o9", "marks": [[85, 191]]}, {"id": "historique:o10", "marks": [[82, 121]]}, {"id": "historique:o11", "marks": [[66, 99]]}, {"id": "historique:o12", "marks": [[205, 255]]}], "s": "2025-02-01", "e": null, "point": false, "startLabel": "2025-02", "endLabel": null}, {"track": "t3", "start": "2024-06", "end": null, "ongoing": true, "mode": "usage", "loss": false, "certainty": null, "note": "6 à 8 bières le samedi soir avec ivresses en juin 2024. Puis 4 bières le samedi (janvier 2025), alcool en baisse (mai 2025), 2 à 3 bières en soirée (septembre 2025).", "sources": ["historique 2024-06-25", "historique 2025-01-21", "historique 2025-05-06", "historique 2025-09-16"], "evidence": [{"id": "historique:o2", "marks": [[358, 406]]}, {"id": "historique:o8", "marks": [[222, 250]]}, {"id": "historique:o10", "marks": [[82, 121]]}, {"id": "historique:o12", "marks": [[255, 286]]}], "s": "2024-06-01", "e": null, "point": false, "startLabel": "2024-06", "endLabel": null}, {"track": "t4", "start": "2024-06", "end": null, "ongoing": true, "mode": "usage", "loss": false, "certainty": null, "note": "10 cigarettes/j en juin 2024, 8 cigarettes/j en juillet 2025.", "sources": ["historique 2024-06-25", "historique 2025-07-01"], "evidence": [{"id": "historique:o2", "marks": [[266, 357], [407, 423]]}, {"id": "historique:o11", "marks": [[99, 114]]}], "s": "2024-06-01", "e": null, "point": false, "startLabel": "2024-06", "endLabel": null}, {"track": "t5", "start": "2024-11-08", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Persécution et hallucinations auditives. Résolution en quelques jours sous rispéridone. Plus d'élément délirant au 26/11, critique partielle. Pas de résurgence ensuite.", "sources": ["urgences 2024-11-08", "historique 2024-11-26", "historique 2025-03-18"], "evidence": [{"id": "urgences:o1", "marks": [[989, 1091], [1209, 1301]]}, {"id": "historique:o6", "marks": [[151, 290], [290, 337], [338, 420]]}, {"id": "historique:o9", "marks": [[26, 84]]}], "s": "2024-11-08", "e": null, "point": true, "startLabel": "2024-11-08", "endLabel": null}, {"track": "t6", "start": "2025-02", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Confirmé par le bilan neuropsychologique de février 2025. ASRS positif en juin 2024, symptômes depuis l'enfance selon la mère.", "sources": ["historique 2024-06-25", "historique 2024-09-24", "historique 2025-03-18"], "evidence": [{"id": "historique:o2", "marks": [[15, 187], [513, 527], [847, 889]]}, {"id": "historique:o5", "marks": [[73, 174], [280, 318], [360, 398]]}, {"id": "historique:o9", "marks": [[192, 256]]}], "s": "2025-02-01", "e": null, "point": false, "startLabel": "2025-02", "endLabel": null}, {"track": "t7", "start": "2024-11-08", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "50 mg per os aux urgences pour agitation et symptômes psychotiques.", "sources": ["urgences 2024-11-08"], "evidence": [{"id": "urgences:o1", "marks": [[1093, 1160]]}], "s": "2024-11-08", "e": null, "point": true, "startLabel": "2024-11-08", "endLabel": null}, {"track": "t8", "start": "2024-11", "end": "2025-03-01", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "2 mg, puis 1 mg depuis fin décembre 2024. Arrêtée le 01/03/2025 sans résurgence délirante.", "sources": ["historique 2024-11-26", "historique 2025-01-21", "historique 2025-03-18"], "evidence": [{"id": "historique:o6", "marks": [[420, 438], [564, 618]]}, {"id": "historique:o8", "marks": [[135, 193], [265, 310]]}, {"id": "historique:o9", "marks": [[26, 84]]}], "s": "2024-11-01", "e": "2025-03-01", "point": false, "startLabel": "2024-11", "endLabel": "2025-03-01"}, {"track": "t9", "start": "2025-07-01", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "18 mg le matin, 36 mg après 15 jours si toléré. 36 mg en septembre 2025 : meilleure concentration, appétit un peu diminué. Ordonnance sécurisée 28 j.", "sources": ["historique 2025-07-01", "historique 2025-09-16"], "evidence": [{"id": "historique:o11", "marks": [[257, 321]]}, {"id": "historique:o12", "marks": [[80, 177], [301, 353]]}], "s": "2025-07-01", "e": null, "point": false, "startLabel": "2025-07-01", "endLabel": null}, {"track": "t10", "start": "2024-06-11", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Entretiens éducatifs et psychiatriques en alternance, entretiens motivationnels, attestations pour le SPIP. Deux RDV manqués en août 2024. Relais proposé fin octobre 2025 : RDV médicaux trimestriels et CJC à la demande.", "sources": ["historique 2024-06-11", "historique 2024-06-25", "historique 2024-07-09", "historique 2024-09-03", "historique 2024-09-24", "historique 2024-11-26", "historique 2024-12-10", "historique 2025-01-21", "historique 2025-03-18", "historique 2025-05-06", "historique 2025-07-01", "historique 2025-09-16", "historique 2025-10-28"], "evidence": [{"id": "historique:o1", "marks": []}, {"id": "historique:o2", "marks": [[15, 187], [747, 807]]}, {"id": "historique:o3", "marks": []}, {"id": "historique:o4", "marks": [[0, 38]]}, {"id": "historique:o5", "marks": []}, {"id": "historique:o6", "marks": [[15, 150]]}, {"id": "historique:o7", "marks": [[197, 229]]}, {"id": "historique:o8", "marks": []}, {"id": "historique:o9", "marks": []}, {"id": "historique:o10", "marks": []}, {"id": "historique:o11", "marks": []}, {"id": "historique:o12", "marks": []}, {"id": "historique:o13", "marks": [[151, 214]]}], "s": "2024-06-11", "e": null, "point": false, "startLabel": "2024-06-11", "endLabel": null}, {"track": "t11", "start": "2024-11-08", "end": "2024-11-08", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Arrivée à 02:10 amené par les pompiers à la demande de sa mère. Transfert en psychiatrie à 14:30.", "sources": ["urgences 2024-11-08"], "evidence": [{"id": "urgences:o1", "marks": [[315, 394]]}], "s": "2024-11-08", "e": "2024-11-08", "point": false, "startLabel": "2024-11-08", "endLabel": "2024-11-08"}, {"track": "t12", "start": "2024-11-08", "end": "2024-11-19", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Hospitalisation acceptée par le patient. Sortie le 19/11/2024.", "sources": ["urgences 2024-11-08", "historique 2024-11-26"], "evidence": [{"id": "urgences:o1", "marks": [[1301, 1379]]}, {"id": "historique:o6", "marks": [[15, 150]]}], "s": "2024-11-08", "e": "2024-11-19", "point": false, "startLabel": "2024-11-08", "endLabel": "2024-11-19"}, {"track": "t13", "start": "2025-02", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Demandé le 24/09/2024 (délai 4 mois), réalisé en février 2025. Conclusion : TDAH confirmé.", "sources": ["historique 2024-09-24", "historique 2025-03-18"], "evidence": [{"id": "historique:o5", "marks": [[360, 398]]}, {"id": "historique:o9", "marks": [[192, 256]]}], "s": "2025-02-01", "e": null, "point": true, "startLabel": "2025-02", "endLabel": null}, {"track": "t14", "start": "2023", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "CAP interrompu en 2023, sans activité ensuite.", "sources": ["historique 2024-06-25"], "evidence": [{"id": "historique:o2", "marks": [[188, 252]]}], "s": "2023-01-01", "e": null, "point": true, "startLabel": "2023", "endLabel": null}, {"track": "t15", "start": "2024-02", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Faits de février 2024 à l'origine de la procédure judiciaire.", "sources": ["historique 2024-06-11", "historique 2024-06-25"], "evidence": [{"id": "historique:o1", "marks": [[151, 235]]}, {"id": "historique:o2", "marks": [[15, 187]]}], "s": "2024-02-01", "e": null, "point": true, "startLabel": "2024-02", "endLabel": null}, {"track": "t16", "start": "2024-05-14", "end": "2025-11-14", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Sursis probatoire de 18 mois suivi par le SPIP. Date du jugement du 14/05/2024 (o2) ; o1 évoque un jugement « en avril ». Fin du sursis prévue le 14/11/2025.", "sources": ["historique 2024-06-11", "historique 2024-06-25", "historique 2024-07-09", "historique 2025-10-28"], "evidence": [{"id": "historique:o1", "marks": []}, {"id": "historique:o2", "marks": [[15, 187]]}, {"id": "historique:o3", "marks": []}, {"id": "historique:o13", "marks": [[0, 75]]}], "s": "2024-05-14", "e": "2025-11-14", "point": false, "startLabel": "2024-05-14", "endLabel": "2025-11-14"}, {"track": "t17", "start": "2025-09-01", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Contrat d'apprentissage trouvé en mai 2025, début le 01/09/2025. Le patient dit que « le patron est cool ».", "sources": ["historique 2025-05-06", "historique 2025-09-16"], "evidence": [{"id": "historique:o10", "marks": [[0, 70]]}, {"id": "historique:o12", "marks": [[26, 80]]}], "s": "2025-09-01", "e": null, "point": false, "startLabel": "2025-09-01", "endLabel": null}], "obs": {"historique:o1": {"label": "historique · Entretien éducatif CJC", "date": "2024-06-11", "text": "Premier RDV à la consultation jeunes consommateurs. [identité] vient \"parce que le juge l'a dit\", avec sa mère [identité] qui reste en salle d'attente. Jugé \"en avril\" pour une conduite de scooter sous cannabis avec refus d'obtempérer.\nFume depuis l'âge de 13 ans, 8 a 10 joints par jour (herbe et résine), premier joint au réveil. Ne voit pas de problème \"à part la police\".\nAttestation de présence remise. RDV avec le Dr [identité] le 25/06."}, "historique:o2": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-06-25", "text": "Observations :\nVu ce jour en premier entretien, obligation de soins (jugement du 14/05/2024 : sursis probatoire 18 mois, faits de février : conduite sous stupéfiants, refus d'obtempérer).\n18 ans, vit chez sa mère, CAP interrompu en 2023, sans activité.\nSubstances :\n- cannabis depuis 14 ans, 8 a 10 joints/j, tolérance ++, irritabilité et insomnie à l'arret\n- alcool : 6 a 8 bières le samedi soir, ivresses\n- tabac 10 cig/j\nScolarité chaotique, \"toujours agité\", exclusions au collège, jamais évalué pour un TDAH. ASRS positif.\nContact correct, un peu provocant, rires immotivés absents, pas d'élément psychotique. Inversion du rythme veille-sommeil.\nAmbivalence : précontemplatif pour le cannabis, d'accord pour \"baisser l'alcool\".\nConclusions :\n- Entretiens motivationnels, alternance éducatrice / médecin\n- Attestations mensuelles pour le SPIP\n- Évaluation TDAH à prévoir (avec sa mère)"}, "historique:o3": {"label": "historique · Entretien éducatif CJC", "date": "2024-07-09", "text": "Appel de M. [identité] (CPIP, SPIP) avec l'accord d'[identité] : vérifie la régularité du suivi. Seules la présence et la régularité sont transmises, rien du contenu des entretiens.\n[identité], vu ensuite : a réduit \"à 6 par jour\" pour montrer au juge. Parle de son envie de travailler dans la mécanique."}, "historique:o4": {"label": "historique · Entretien éducatif CJC", "date": "2024-09-03", "text": "Deux RDV manqués en août (\"vacances\"). Revient de lui-même après un courrier du SPIP.\nConsommations inchangées, 6 a 8 joints/j. Cherche un patron d'apprentissage, sans succès pour l'instant."}, "historique:o5": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-09-24", "text": "Observations :\nVu ce jour avec sa mère pour l'anamnèse développementale.\nSa mère : agité \"depuis la maternelle\", ne tenait pas assis, oublis, impulsivité, redoublement du CP. Pas de suivi à l'époque.\nÉléments évocateurs d'un TDAH, mais difficile à évaluer sous cannabis quotidien. Orientation bilan neuropsychologique.\nPas d'élément psychotique.\nConclusions :\nBilan neuropsy demandé (délai ~4 mois)\nRDV 2 mois"}, "historique:o6": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-11-26", "text": "Observations :\nVu ce jour, sorti le 19/11 de l'hospitalisation en psychiatrie (soins libres) après le passage aux urgences du 08/11 (cf compte rendu).\nÉpisode psychotique aigu (persécution, hallucinations auditives) apres une vape de \"PTC\" achetée sur un réseau social, en plus du cannabis. Résolution en quelques jours sous rispéridone.\nActuellement : plus d'élément délirant, critique partielle (\"c'était le produit\"). Rispéridone 2 mg. Dit ne plus rien fumer depuis le 08/11.\nRetenu : trouble psychotique induit par les cannabinoïdes de synthèse.\nConclusions :\nRispéridone 2 mg, diminution prévue à 1 mg dans 1 mois\nInfo sur les cannabinoïdes de synthèse, pas de vape d'origine inconnue\nRDV 1 mois"}, "historique:o7": {"label": "historique · Entretien éducatif CJC", "date": "2024-12-10", "text": "[identité] plus posé, a eu \"très peur\" à l'hôpital. Dit avoir fumé 2 joints à une soirée début décembre, puis rien.\nCraving le soir, il fait du vélo pour \"tenir\". Sa copine [identité] le soutient.\nAttestation remise pour le SPIP."}, "historique:o8": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-01-21", "text": "Observations :\nVu ce jour\nSe dit abstinent depuis le 08/11, sans écart. Urines (3 prélèvements depuis décembre) négatives pour le THC.\nRispéridone 1 mg depuis fin décembre : somnolence moindre. Aucun symptome psychotique.\nAlcool : 4 bières le samedi.\nConclusions :\nArret de la rispéridone le 01/03 si stabilité\nRDV mars"}, "historique:o9": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-03-18", "text": "Observations :\nVu ce jour\nRispéridone arretée le 01/03, pas de résurgence délirante.\nReprise du cannabis depuis février, 1 a 2 joints le week-end \"pas plus\", reconnait avoir hésité à le dire.\nBilan neuropsy de février : TDAH présentation combinée confirmé.\nMéthylphénidate discuté : différé (épisode psychotique récent, reprise du cannabis) ; à rediscuter si stabilité.\nConclusions :\nRDV 2 mois"}, "historique:o10": {"label": "historique · Entretien éducatif CJC", "date": "2025-05-06", "text": "A trouvé un contrat d'apprentissage en mécanique auto, début le 01/09. Très fier.\nCannabis le week-end, alcool en baisse. Rendez-vous SPIP bien passé selon lui.\nCoordonnées mises à jour : [identité], 33140 VILLENAVE-D'ORNON, tél [identité]."}, "historique:o11": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-07-01", "text": "Observations :\nVu ce jour\nStable depuis l'arret de la rispéridone. Cannabis 1 a 2 joints le samedi. Tabac 8 cig/j.\nInquiet de \"ne pas tenir\" en apprentissage (attention, oublis). Accord pour un essai de méthylphénidate, ECG normal, TA 118/72.\nConclusions :\nMéthylphénidate LP 18 mg le matin, 36 mg dans 15 jours si toléré\nSurveillance sommeil, appétit, et tout symptome psychotique\nRDV septembre"}, "historique:o12": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-09-16", "text": "Observations :\nVu ce jour\nApprentissage commencé le 01/09, \"le patron est cool\". Méthylphénidate LP 36 mg : meilleure concentration, moins d'impulsivité, appétit un peu diminué. Pas d'élément psychotique.\nCannabis : un joint de temps en temps le week-end. Alcool 2 a 3 bières en soirée.\nConclusions :\nRO méthylphénidate 36 mg (ordonnance sécurisée 28 j)\nRDV novembre"}, "historique:o13": {"label": "historique · Entretien éducatif CJC", "date": "2025-10-28", "text": "Dernière attestation pour le SPIP : fin du sursis probatoire le 14/11/2025.\n[identité] souhaite continuer à venir \"de temps en temps\", sans obligation. Relais proposé : RDV médicaux trimestriels + CJC à la demande."}, "urgences:o1": {"label": "urgences · compte rendu de passage aux urgences", "date": "2024-11-08", "text": "CENTRE HOSPITALIER FICTIF DE LA GARONNE - URGENCES ADULTES\nCompte rendu de passage aux urgences\n\nPatient : [identité] [identité]\nNé le : [identité]\nN° de séjour : [identité]\nAdresse : [identité], 33140 VILLENAVE-D'ORNON\nPersonne à prévenir : Mme [identité] [identité] (mère), [identité]\nMédecin : Dr [identité] M.\n\n*Arrivée le 08/11/2024 à 02:10 - Transfert en psychiatrie le 08/11/2024 à 14:30\n\nMotif : agitation, propos incohérents, amené par les pompiers à la demande de sa mère.\n\nHistoire : jeune homme de 19 ans, cannabis quotidien depuis l'adolescence, suivi en CSAPA (obligation de soins). Ce soir, vapote un liquide \"PTC\" acheté sur un réseau social, puis fume du cannabis. Dans l'heure : angoisse massive, convaincu que des voisins veulent le tuer, entend des voix qui le menacent. S'est enfermé dans la salle de bain.\n\nExamen : agité, hypervigilant, tachycarde à 128/min, TA 145/85, mydriase. Pas de fièvre, pas de signe neurologique focal. Glycémie normale. Alcoolémie négative. Toxiques urinaires : THC positif, reste négatif (les cannabinoïdes de synthèse ne sont pas détectés).\n\nPrise en charge : loxapine 50 mg per os, surveillance en box calme. Persistance des idées de persécution au matin.\n\nConclusion : épisode psychotique aigu probablement induit par des cannabinoïdes de synthèse. Avis psychiatrique : hospitalisation en soins libres acceptée par le patient. Transfert dans l'unité de psychiatrie.\n\nDr M. [identité]"}}, "ref": "2025-12-01", "kinds": [{"id": "life_event", "label": "Événements de vie", "light": "#b45309", "dark": "#f59e0b"}, {"id": "substance_use", "label": "Consommations", "light": "#c62828", "dark": "#ef6b6b"}, {"id": "psychiatric", "label": "Psychopathologie", "light": "#6a4bb0", "dark": "#a78bfa"}, {"id": "medication", "label": "Médicaments", "light": "#1d5fb4", "dark": "#6aa6f0"}, {"id": "therapeutic_psycho", "label": "Prises en charge", "light": "#4d7c0f", "dark": "#a3d95b"}], "modeLabel": {"usage": "usage", "intoxication": "intoxication", "sevrage": "sevrage", "rechute": "rechute", "craving": "craving"}, "certaintyLabel": {"exact": "date exacte", "month": "mois", "year": "année", "approx": "date approximative"}};
+const NS = "http://www.w3.org/2000/svg";
+const dark = () => matchMedia("(prefers-color-scheme: dark)").matches;
+const DAY = 864e5;
+const t = (iso) => Date.parse(iso + "T00:00:00Z");
+const REF = t(D.ref);
+const kindOf = Object.fromEntries(D.kinds.map(k => [k.id, k]));
+const trackOf = Object.fromEntries(D.tracks.map(x => [x.id, x]));
+const color = (kind) => kindOf[kind][dark() ? "dark" : "light"];
+const MODE_OP = {usage:.55, craving:.7, sevrage:.7, intoxication:.85, rechute:1};
+const EVENTS = D.events.map((e, i) => ({
+  ...e, i, kind: trackOf[e.track].kind, label: trackOf[e.track].label,
+  a: t(e.s), b: e.e ? t(e.e) : (e.ongoing ? REF : t(e.s)),
+}));
+const hidden = new Set();
+let LABEL_W = 150; const ROW = 26, PADR = 14, AXIS = 84;
+let DOM_MIN = Math.min(...EVENTS.map(e => e.a)) - 200*DAY, DOM_MAX = REF + 60*DAY;
+let view = [DOM_MIN, DOM_MAX];
+
+const el = (name, attrs = {}, parent, text) => {
+  const n = document.createElementNS(NS, name);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  if (text !== undefined) n.textContent = text;
+  if (parent) parent.appendChild(n);
+  return n;
+};
+const fmt = (s) => { if (!s) return ""; const [y,m,d] = s.split("-"); return d ? `${d}/${m}/${y}` : m ? `${m}/${y}` : y; };
+const yr = (ms) => new Date(ms).getUTCFullYear();
+
+function ticks(a, b) {
+  const span = (b - a) / (365.25*DAY), out = [];
+  const step = span > 40 ? 10 : span > 18 ? 5 : span > 9 ? 2 : span > 3.5 ? 1 : 0;
+  if (step) { for (let y = Math.ceil(yr(a)/step)*step; Date.UTC(y,0,1) <= b; y += step) out.push([Date.UTC(y,0,1), String(y), true]); }
+  else {
+    const q = span > 1.6 ? 3 : 1;
+    for (let y = yr(a); y <= yr(b); y++) for (let m = 0; m < 12; m += q) {
+      const v = Date.UTC(y, m, 1); if (v < a || v > b) continue;
+      out.push([v, m === 0 ? String(y) : `${String(m+1).padStart(2,"0")}/${String(y).slice(2)}`, m === 0]);
+    }
+  }
+  return out;
+}
+
+const bolt = (x, y, s=7) => `M${x} ${y-s} L${x-s*.55} ${y+.1} L${x-.05*s} ${y+.1} L${x-s*.35} ${y+s} L${x+s*.6} ${y-.25*s} L${x+.05*s} ${y-.25*s} Z`;
+
+function drawMain() {
+  const svg = document.getElementById("main");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800;
+  LABEL_W = W < 600 ? 92 : 150;
+  const innerW = W - LABEL_W - PADR;
+  const x = (ms) => LABEL_W + (ms - view[0]) / (view[1] - view[0]) * innerW;
+  const kinds = D.kinds.filter(k => !hidden.has(k.id));
+  const rows = [];
+  for (const k of kinds) if (k.id !== "life_event") {
+    rows.push({head: k});
+    for (const tr of D.tracks.filter(tr => tr.kind === k.id)) rows.push({track: tr});
+  }
+  const showLife = !hidden.has("life_event");
+  const H = AXIS + 18 + rows.length * ROW + 24;
+  svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const defs = el("defs", {}, svg);
+  const cp = el("clipPath", {id: "clip"}, defs); el("rect", {x: LABEL_W, y: 0, width: innerW, height: H}, cp);
+  // grid + axis
+  const gridG = el("g", {}, svg);
+  for (const [v, lab, major] of ticks(...view)) {
+    const xx = x(v);
+    el("line", {x1: xx, x2: xx, y1: AXIS - 4, y2: H - 20, stroke: "var(--line)", "stroke-width": major ? 1 : .5}, gridG);
+    el("text", {x: xx + 3, y: H - 7, class: "mute"}, gridG, lab);
+  }
+  el("line", {x1: LABEL_W, x2: W - PADR, y1: AXIS - 4, y2: AXIS - 4, stroke: "var(--axis)", "stroke-width": 4, "stroke-linecap": "round"}, svg);
+  const g = el("g", {"clip-path": "url(#clip)"}, svg);
+  // life events on the axis
+  if (showLife) {
+    const life = EVENTS.filter(e => e.kind === "life_event" && e.b >= view[0] && e.a <= view[1]);
+    const lanes = [[], [], [], [], []];
+    for (const e of life.sort((p, q) => p.a - q.a)) {
+      const pt = e.point || (e.b - e.a) < 120*DAY;
+      const xa = x(Math.max(e.a, view[0])), xb = pt ? xa : x(Math.min(e.b, view[1]));
+      const w = e.label.length * 5.9 + 10, flip = xa + w > W - PADR;
+      const iv = flip ? [xa - w, xa + 4] : [xa - 4, xa + w];
+      let ln = lanes.findIndex(l => l.every(o => o[1] < iv[0] || o[0] > iv[1]));
+      if (ln < 0) ln = lanes.length - 1;
+      lanes[ln].push(iv);
+      const ty = AXIS - 14 - ln * 13 - 4;
+      const grp = el("g", {class: "ev", "data-i": e.i}, g);
+      if (!pt) el("rect", {x: xa, y: AXIS - 8, width: Math.max(2, xb - xa), height: 8, rx: 3, fill: color("life_event"), opacity: .85}, grp);
+      else el("path", {d: `M${xa} ${AXIS-11} l6 6 l-6 6 l-6 -6 Z`, fill: color("life_event")}, grp);
+      el("line", {x1: xa, x2: xa, y1: ty + 3, y2: AXIS - 11, stroke: color("life_event"), "stroke-width": 1, opacity: .6}, grp);
+      el("text", {x: flip ? xa - 3 : xa + 3, y: ty, "font-size": 11, "text-anchor": flip ? "end" : "start", "pointer-events": "none"}, grp, e.label);
+      if (e.loss) el("path", {d: bolt(xa, AXIS + 6, 6), fill: "#e11d48"}, grp);
+    }
+  }
+  // rows
+  let y = AXIS + 6;
+  for (const r of rows) {
+    if (r.head) {
+      el("text", {x: 6, y: y + 17, "font-weight": 600, fill: color(r.head.id)}, svg, r.head.label.toUpperCase()).setAttribute("font-size", 11);
+      el("line", {x1: 6, x2: W - PADR, y1: y + ROW - 3, y2: y + ROW - 3, stroke: color(r.head.id), opacity: .35}, svg);
+    } else {
+      const cut = W < 600 ? 13 : 24;
+      const lab = r.track.label.length > cut ? r.track.label.slice(0, cut - 1) + "…" : r.track.label;
+      el("text", {x: 12, y: y + 17, class: "mute"}, svg, lab).appendChild(Object.assign(document.createElementNS(NS, "title"), {textContent: r.track.label}));
+      for (const e of EVENTS.filter(e => e.track === r.track.id)) {
+        if (e.b < view[0] || e.a > view[1]) continue;
+        const grp = el("g", {class: "ev", "data-i": e.i}, g);
+        const c = color(e.kind), op = e.mode ? (MODE_OP[e.mode] ?? .6) : .8;
+        const xa = x(e.a), xb = x(e.b);
+        const dash = e.certainty === "approx" ? "4 3" : null;
+        if (e.point || xb - xa < 5) {
+          el("path", {d: `M${xa} ${y+5} l7 7 l-7 7 l-7 -7 Z`, fill: c, opacity: op}, grp);
+        } else {
+          const rc = el("rect", {x: xa, y: y + 4, width: xb - xa, height: ROW - 10, rx: 4, fill: c, opacity: op}, grp);
+          if (dash) { rc.setAttribute("stroke", c); rc.setAttribute("stroke-dasharray", dash); rc.setAttribute("fill-opacity", .45); }
+          if (e.ongoing && xb < W) el("path", {d: `M${xb} ${y+4} l8 ${(ROW-10)/2} l-8 ${(ROW-10)/2} Z`, fill: c, opacity: op}, grp);
+        }
+        if (e.loss) el("path", {d: bolt(xa, y + ROW/2 - 1), fill: "#e11d48", stroke: "var(--panel)", "stroke-width": .8}, grp);
+        if (e.mode && e.mode !== "usage" && xb - xa > 56) el("text", {x: xa + 6, y: y + 17, fill: "#fff", "font-size": 10.5, "pointer-events": "none"}, grp, MODE_LABEL(e.mode)).setAttribute("style", "fill:#fff");
+      }
+    }
+    y += ROW;
+  }
+  svg.querySelectorAll(".ev").forEach(n => {
+    const go = () => select(+n.dataset.i);
+    n.addEventListener("click", go); n.addEventListener("pointerenter", (ev) => { if (ev.pointerType === "mouse") go(); });
+  });
+  if (selected !== null) svg.querySelector(`.ev[data-i="${selected}"]`)?.classList.add("sel");
+}
+const MODE_LABEL = (m) => D.modeLabel[m] || m;
+
+let selected = null;
+function obsHtml(v, esc) {
+  const o = D.obs[v.id];
+  let html = "", at = 0;
+  for (const [a, b] of v.marks) { html += esc(o.text.slice(at, a)) + "<mark>" + esc(o.text.slice(a, b)) + "</mark>"; at = b; }
+  html += esc(o.text.slice(at));
+  return `<div class="obs"><div class="oh">${o.date ? esc(o.date) + " · " : ""}${esc(o.label)}${o.summary_only ? " · résumé" : ""}</div><div class="ot">${html}</div></div>`;
+}
+function select(i) {
+  selected = i;
+  document.querySelectorAll(".ev").forEach(n => n.classList.toggle("sel", +n.dataset.i === i));
+  const e = EVENTS[i];
+  const when = e.endLabel ? (e.startLabel === e.endLabel ? fmt(e.startLabel) : `${fmt(e.startLabel)} → ${fmt(e.endLabel)}`)
+    : e.ongoing ? `depuis ${fmt(e.startLabel)} (en cours)` : fmt(e.startLabel);
+  const esc = (s) => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const bits = [];
+  if (e.mode) bits.push(MODE_LABEL(e.mode));
+  if (e.certainty) bits.push(D.certaintyLabel[e.certainty] || e.certainty);
+  if (e.loss) bits.push("⚡ perte de contrôle");
+  document.getElementById("detail").innerHTML =
+    `<b>${esc(e.label)}</b> <span class="k">· ${esc(kindOf[e.kind].label)} · ${when}${bits.length ? " · " + esc(bits.join(" · ")) : ""}</span>` +
+    (e.note ? `<div>${esc(e.note)}</div>` : "") +
+    (e.sources.length ? `<div class="k">Autres sources : ${e.sources.map(esc).join(" ; ")}</div>` : "") +
+    (e.evidence.length ? `<div class="k" style="margin-top:8px">${e.evidence.length > 1 ? "Observations" : "Observation"} d'origine${e.evidence.some(v => !v.marks.length) ? " (passage justificatif non repéré dans certaines)" : ", passage justificatif surligné"} :</div><div id="obs">` +
+      e.evidence.map(v => obsHtml(v, esc)).join("") + `</div>` : "");
+  document.querySelector("#obs mark")?.scrollIntoView({block: "nearest"});
+}
+
+// overview strip with a draggable window
+function drawOverview() {
+  const svg = document.getElementById("ov");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800, H = 54, L = 12, R = 12, innerW = W - L - R;
+  const x = (ms) => L + (ms - DOM_MIN) / (DOM_MAX - DOM_MIN) * innerW;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  for (const [v, lab, major] of ticks(DOM_MIN, DOM_MAX)) {
+    if (!major) continue;
+    el("line", {x1: x(v), x2: x(v), y1: 4, y2: H - 14, stroke: "var(--line)"}, svg);
+    el("text", {x: x(v) + 2, y: H - 3, class: "mute", "font-size": 10}, svg, lab);
+  }
+  const vis = EVENTS.filter(e => !hidden.has(e.kind));
+  const n = Math.max(1, new Set(vis.map(e => e.track)).size), tracks = [...new Set(vis.map(e => e.track))];
+  for (const e of vis) {
+    const r = tracks.indexOf(e.track), yy = 6 + r * (H - 24) / n;
+    el("rect", {x: x(e.a), y: yy, width: Math.max(2, x(e.b) - x(e.a)), height: Math.max(1.5, (H - 24) / n - 1), fill: color(e.kind), opacity: .7}, svg);
+  }
+  const win = el("rect", {x: x(view[0]), y: 1, width: Math.max(10, x(view[1]) - x(view[0])), height: H - 14, rx: 5, fill: "rgba(80,120,220,.16)", stroke: "#4f7be0", "stroke-width": 1.5, style: "cursor:grab"}, svg);
+  const hl = el("rect", {x: x(view[0]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const hr = el("rect", {x: x(view[1]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const inv = (px) => DOM_MIN + (px - L) / innerW * (DOM_MAX - DOM_MIN);
+  const MINSPAN = 120 * DAY;
+  const drag = (node, kind) => node.addEventListener("pointerdown", (ev) => {
+    ev.preventDefault(); node.setPointerCapture(ev.pointerId);
+    const x0 = ev.clientX, v0 = [...view], per = (DOM_MAX - DOM_MIN) / innerW;
+    const move = (m) => {
+      const d = (m.clientX - x0) * per;
+      let [a, b] = v0;
+      if (kind === "move") { const span = b - a; a = Math.min(Math.max(DOM_MIN, a + d), DOM_MAX - span); b = a + span; }
+      else if (kind === "l") a = Math.min(Math.max(DOM_MIN, a + d), b - MINSPAN);
+      else b = Math.max(Math.min(DOM_MAX, b + d), a + MINSPAN);
+      view = [a, b]; drawOverview(); drawMain();
+    };
+    const up = () => { node.removeEventListener("pointermove", move); node.removeEventListener("pointerup", up); };
+    node.addEventListener("pointermove", move); node.addEventListener("pointerup", up);
+  });
+  drag(win, "move"); drag(hl, "l"); drag(hr, "r");
+}
+
+function setView(a, b) { view = [Math.max(DOM_MIN, a), Math.min(DOM_MAX, b)]; redraw(); }
+function redraw() { drawOverview(); drawMain(); }
+
+// controls
+const kindsBar = document.getElementById("kinds");
+for (const k of D.kinds) {
+  const b = document.createElement("button"); b.className = "chip"; b.setAttribute("aria-pressed", "true");
+  b.innerHTML = `<i style="background:${k[dark() ? "dark" : "light"]}"></i>${k.label}`;
+  b.onclick = () => { hidden.has(k.id) ? hidden.delete(k.id) : hidden.add(k.id); b.setAttribute("aria-pressed", String(!hidden.has(k.id))); redraw(); };
+  kindsBar.appendChild(b);
+}
+const presets = document.getElementById("presets");
+const addPreset = (label, fn) => { const b = document.createElement("button"); b.textContent = label; b.onclick = fn; presets.appendChild(b); };
+addPreset("Tout", () => setView(DOM_MIN, DOM_MAX));
+for (const yrs of [10, 5, 2]) addPreset(`${yrs} dernières années`, () => setView(REF - yrs * 365.25 * DAY, DOM_MAX));
+addPreset("−", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]); setView(c - h, c + h); });
+addPreset("+", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]) / 4; setView(c - h, c + h); });
+document.getElementById("legend").innerHTML =
+  `<span><span class="sw" style="background:#888;opacity:.55"></span>usage</span><span><span class="sw" style="background:#888;opacity:.85"></span>intoxication</span>` +
+  `<span><span class="sw" style="background:#888"></span>rechute</span><span><span class="sw" style="background:#888;opacity:.45;border:1px dashed #888"></span>date approximative</span>` +
+  `<span style="color:#e11d48">⚡ perte de contrôle</span><span>◆ événement sans durée</span><span>▶ en cours</span>`;
+document.getElementById("main").addEventListener("wheel", (ev) => {
+  if (!ev.ctrlKey && !ev.shiftKey) return;
+  ev.preventDefault();
+  const r = ev.currentTarget.getBoundingClientRect(), W = r.width, f = (ev.clientX - r.left - LABEL_W) / (W - LABEL_W - PADR);
+  const c = view[0] + Math.min(Math.max(f, 0), 1) * (view[1] - view[0]), k = ev.deltaY > 0 ? 1.25 : .8;
+  setView(c - (c - view[0]) * k, c + (view[1] - c) * k);
+}, {passive: false});
+addEventListener("resize", redraw);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
+if (innerWidth < 600) view = [Math.max(DOM_MIN, REF - 5 * 365.25 * DAY), DOM_MAX];
+redraw();
+</script>
+</body>
+</html>

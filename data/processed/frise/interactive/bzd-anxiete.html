@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frise bzd-anxiete</title>
+<style>
+:root{--bg:#fafaf7;--fg:#1d1d1b;--mute:#6b6b66;--line:#d8d8d0;--panel:#fff;--axis:#1d1d1b}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#eceae3;--mute:#9a9a92;--line:#34342f;--panel:#1f1f1c;--axis:#eceae3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:12px 16px 32px}
+h1{font-size:18px;margin:4px 0 2px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+button,.chip{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px}
+.chip i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chip[aria-pressed=false]{opacity:.4}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;touch-action:pan-y}
+svg{display:block;width:100%}
+text{fill:var(--fg);font-size:12px}
+.mute{fill:var(--mute)}
+.ev{cursor:pointer}
+.ev:hover rect,.ev.sel rect,.ev:hover path,.ev.sel path{stroke:var(--fg);stroke-width:1.6}
+#detail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:10px;min-height:76px}
+#detail b{font-size:15px}
+.obs{border:1px solid var(--line);border-radius:8px;margin-top:6px;overflow:hidden}
+.oh{background:var(--bg);color:var(--mute);font-size:12px;padding:4px 10px;border-bottom:1px solid var(--line)}
+.ot{white-space:pre-wrap;padding:8px 10px;max-height:240px;overflow:auto;font-size:13px}
+mark{background:#fde047;color:#1d1d1b;border-radius:3px;padding:0 1px}
+@media (prefers-color-scheme:dark){mark{background:#a16207;color:#fff}}
+#detail .k{color:var(--mute);font-size:12px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--mute);font-size:12px;margin-top:8px}
+.sw{display:inline-block;width:22px;height:9px;border-radius:2px;vertical-align:middle;margin-right:4px}
+</style>
+</head>
+<body>
+<main>
+<h1>Frise chronologique — bzd-anxiete</h1>
+<p class="sub"><b>Données synthétiques</b> (dossier entièrement inventé). Touchez une barre pour lire la note et l'observation d'origine ; faites glisser la fenêtre de l'aperçu pour zoomer.</p>
+<div class="bar" id="kinds"></div>
+<div class="bar" id="presets"></div>
+<div class="chart"><svg id="ov" height="54"></svg></div>
+<div class="chart" style="margin-top:8px"><svg id="main"></svg></div>
+<div class="legend" id="legend"></div>
+<div id="detail"><span class="k">Aucun élément sélectionné.</span></div>
+</main>
+<script>
+const D = {"dossier": "bzd-anxiete", "tracks": [{"id": "t13", "kind": "life_event", "label": "Décès du mari"}, {"id": "t14", "kind": "life_event", "label": "Hospitalisation de la sœur aînée (AVC)"}, {"id": "t15", "kind": "life_event", "label": "Déménagement près de sa fille"}, {"id": "t1", "kind": "substance_use", "label": "Benzodiazépines"}, {"id": "t2", "kind": "substance_use", "label": "Alcool"}, {"id": "t7", "kind": "psychiatric", "label": "Trouble anxieux généralisé"}, {"id": "t8", "kind": "somatic", "label": "Fracture du col du fémur droit (chute nocturne)"}, {"id": "t9", "kind": "somatic", "label": "Crise convulsive généralisée"}, {"id": "t3", "kind": "medication", "label": "Alprazolam"}, {"id": "t4", "kind": "medication", "label": "Zolpidem"}, {"id": "t5", "kind": "medication", "label": "Diazépam"}, {"id": "t6", "kind": "medication", "label": "Sertraline"}, {"id": "t10", "kind": "therapeutic_psycho", "label": "Hospitalisation orthopédie puis rééducation en SSR"}, {"id": "t11", "kind": "therapeutic_psycho", "label": "Suivi psychiatrique / addictologique"}, {"id": "t12", "kind": "therapeutic_psycho", "label": "TCC de l'anxiété et de l'insomnie"}], "events": [{"track": "t1", "start": "2005", "end": "2025-09-30", "ongoing": false, "mode": "usage", "loss": false, "certainty": null, "note": "Alprazolam depuis environ 2005, dose réelle 3 mg/j avec ordonnances complétées par un second médecin ; relais par diazépam en 2024-03, arrêt complet du diazépam le 30/09/2025.", "sources": ["courrier 2024-02-08", "historique 2024-02-20", "historique 2024-03-05", "historique 2025-10-21"], "evidence": [{"id": "courrier:o1", "marks": [[405, 571]]}, {"id": "historique:o1", "marks": [[431, 639]]}, {"id": "historique:o2", "marks": [[27, 127], [128, 235]]}, {"id": "historique:o13", "marks": [[27, 52]]}], "s": "2005-01-01", "e": "2025-09-30", "point": false, "startLabel": "2005", "endLabel": "2025-09-30"}, {"track": "t1", "start": "2024-01-17", "end": null, "ongoing": false, "mode": "sevrage", "loss": false, "certainty": null, "note": "Crise convulsive généralisée à l'hôpital, attribuée à l'arrêt brutal des benzodiazépines à l'admission.", "sources": ["courrier 2024-02-08", "historique 2024-02-20"], "evidence": [{"id": "courrier:o1", "marks": [[700, 831]]}, {"id": "historique:o1", "marks": [[211, 387]]}], "s": "2024-01-17", "e": null, "point": true, "startLabel": "2024-01-17", "endLabel": null}, {"track": "t1", "start": "2024-03-05", "end": "2025-09-30", "ongoing": false, "mode": "sevrage", "loss": false, "certainty": null, "note": "Sevrage progressif sous diazépam (30 mg/j puis 25, 20, 15, 12, 8, 4, 2 mg/j), arrêt le 30/09/2025 avec insomnie de rebond transitoire.", "sources": ["historique 2024-03-05", "historique 2024-04-23", "historique 2024-06-11", "historique 2024-09-10", "historique 2025-01-14", "historique 2025-03-18", "historique 2025-07-08", "historique 2025-10-21"], "evidence": [{"id": "historique:o2", "marks": [[27, 127], [128, 235]]}, {"id": "historique:o4", "marks": [[27, 93], [249, 294], [295, 309]]}, {"id": "historique:o5", "marks": [[27, 59]]}, {"id": "historique:o6", "marks": [[211, 247], [343, 376]]}, {"id": "historique:o9", "marks": [[397, 467]]}, {"id": "historique:o10", "marks": [[139, 155]]}, {"id": "historique:o12", "marks": [[263, 331]]}, {"id": "historique:o13", "marks": [[27, 52], [52, 126]]}], "s": "2024-03-05", "e": "2025-09-30", "point": false, "startLabel": "2024-03-05", "endLabel": "2025-09-30"}, {"track": "t1", "start": "2024-11-05", "end": null, "ongoing": false, "mode": "craving", "loss": false, "certainty": null, "note": "Demande de reprendre son alprazolam (Xanax) lors d'une période d'anxiété et d'insomnie (sœur hospitalisée) ; refus expliqué.", "sources": ["historique 2024-11-05"], "evidence": [{"id": "historique:o7", "marks": [[74, 96], [96, 158], [158, 187]]}], "s": "2024-11-05", "e": null, "point": true, "startLabel": "2024-11-05", "endLabel": null}, {"track": "t1", "start": "2024-11", "end": "2024-12", "ongoing": false, "mode": "rechute", "loss": false, "certainty": null, "note": "Reprise d'alprazolam 0,5 mg (une dizaine de comprimés au total) prescrit par un médecin remplaçant fin novembre ; honte exprimée, diazépam poursuivi.", "sources": ["historique 2024-12-17", "historique 2025-01-14"], "evidence": [{"id": "historique:o8", "marks": [[0, 130]]}, {"id": "historique:o9", "marks": [[41, 128]]}], "s": "2024-11-01", "e": "2024-12-31", "point": false, "startLabel": "2024-11", "endLabel": "2024-12"}, {"track": "t1", "start": "2025-06-03", "end": null, "ongoing": false, "mode": "craving", "loss": false, "certainty": null, "note": "Pense encore au Xanax uniquement le soir des mauvaises nouvelles.", "sources": ["historique 2025-06-03"], "evidence": [{"id": "historique:o11", "marks": [[298, 369]]}], "s": "2025-06-03", "e": null, "point": true, "startLabel": "2025-06-03", "endLabel": null}, {"track": "t2", "start": "2024-02-20", "end": null, "ongoing": true, "mode": "usage", "loss": false, "certainty": null, "note": "2 verres de vin au dîner + un porto le soir (2024-02), puis 1 verre au dîner (2024-04), puis un verre de temps en temps le week-end (2025-07). Le courrier du MG indiquait « pas d'alcool ».", "sources": ["courrier 2024-02-08", "historique 2024-02-20", "historique 2024-04-23", "historique 2024-11-05", "historique 2025-07-08"], "evidence": [{"id": "courrier:o1", "marks": [[87, 108], [571, 585]]}, {"id": "historique:o1", "marks": [[680, 739]]}, {"id": "historique:o4", "marks": [[138, 164]]}, {"id": "historique:o7", "marks": [[188, 227]]}, {"id": "historique:o12", "marks": [[136, 184]]}], "s": "2024-02-20", "e": null, "point": false, "startLabel": "2024-02-20", "endLabel": null}, {"track": "t3", "start": "2005", "end": "2024-03-05", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "0,5 mg x3/j prescrits, dose réelle 3 mg/j ; remplacé par le diazépam le 05/03/2024.", "sources": ["courrier 2024-02-08", "historique 2024-02-20", "historique 2024-03-05"], "evidence": [{"id": "courrier:o1", "marks": [[405, 571]]}, {"id": "historique:o1", "marks": [[431, 639]]}, {"id": "historique:o2", "marks": [[128, 235]]}], "s": "2005-01-01", "e": "2024-03-05", "point": false, "startLabel": "2005", "endLabel": "2024-03-05"}, {"track": "t4", "start": "2019", "end": "2025-01-01", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "10 mg au coucher, parfois 15 mg ; demi-comprimé certains soirs dès 2024-06 ; arrêté le 01/01/2025.", "sources": ["courrier 2024-02-08", "historique 2024-02-20", "historique 2024-06-11", "historique 2025-01-14"], "evidence": [{"id": "courrier:o1", "marks": [[405, 571], [587, 700]]}, {"id": "historique:o1", "marks": [[639, 679]]}, {"id": "historique:o5", "marks": [[130, 204]]}, {"id": "historique:o9", "marks": [[295, 382]]}], "s": "2019-01-01", "e": "2025-01-01", "point": false, "startLabel": "2019", "endLabel": "2025-01-01"}, {"track": "t5", "start": "2024-03-05", "end": "2025-09-30", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Relais de l'alprazolam (10 mg x3) puis décroissance progressive ; arrêt le 30/09/2025.", "sources": ["historique 2024-03-05", "historique 2024-04-23", "historique 2024-06-11", "historique 2024-09-10", "historique 2025-01-14", "historique 2025-03-18", "historique 2025-07-08", "historique 2025-10-21"], "evidence": [{"id": "historique:o2", "marks": [[128, 235]]}, {"id": "historique:o4", "marks": [[27, 93]]}, {"id": "historique:o5", "marks": [[27, 59]]}, {"id": "historique:o6", "marks": [[211, 247]]}, {"id": "historique:o9", "marks": [[128, 160], [397, 467]]}, {"id": "historique:o10", "marks": [[139, 155]]}, {"id": "historique:o12", "marks": [[263, 331]]}, {"id": "historique:o13", "marks": [[27, 52]]}], "s": "2024-03-05", "e": "2025-09-30", "point": false, "startLabel": "2024-03-05", "endLabel": "2025-09-30"}, {"track": "t6", "start": "2024-04-23", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "25 mg pendant 1 semaine puis 50 mg pour le TAG ; à poursuivre au moins 6 mois.", "sources": ["historique 2024-04-23", "historique 2024-06-11", "historique 2025-07-08", "historique 2025-10-21"], "evidence": [{"id": "historique:o4", "marks": [[249, 294]]}, {"id": "historique:o5", "marks": [[59, 129]]}, {"id": "historique:o12", "marks": [[106, 135]]}, {"id": "historique:o13", "marks": [[258, 303]]}], "s": "2024-04-23", "e": null, "point": false, "startLabel": "2024-04-23", "endLabel": null}, {"track": "t7", "start": "1998", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Anxiété ancienne, depuis la quarantaine environ (début estimé) ; amélioration sous sertraline et TCC.", "sources": ["historique 2024-02-20", "historique 2024-04-23", "historique 2024-06-11", "historique 2025-10-21"], "evidence": [{"id": "historique:o1", "marks": [[740, 896]]}, {"id": "historique:o4", "marks": []}, {"id": "historique:o5", "marks": []}, {"id": "historique:o13", "marks": [[199, 243]]}], "s": "1998-01-01", "e": null, "point": false, "startLabel": "1998", "endLabel": null}, {"track": "t8", "start": "2024-01-12", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Chute en se levant la nuit après le zolpidem ; prothèse totale de hanche le 13/01/2024 ; marche avec une canne.", "sources": ["courrier 2024-02-08", "historique 2024-02-20"], "evidence": [{"id": "courrier:o1", "marks": [[587, 700]]}, {"id": "historique:o1", "marks": [[211, 387]]}], "s": "2024-01-12", "e": null, "point": true, "startLabel": "2024-01-12", "endLabel": null}, {"track": "t9", "start": "2024-01-17", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Survenue en orthopédie, attribuée à l'arrêt brutal des benzodiazépines.", "sources": ["courrier 2024-02-08", "historique 2024-02-20"], "evidence": [{"id": "courrier:o1", "marks": [[700, 831]]}, {"id": "historique:o1", "marks": [[211, 387], [1001, 1085]]}], "s": "2024-01-17", "e": null, "point": true, "startLabel": "2024-01-17", "endLabel": null}, {"track": "t10", "start": "2024-01-12", "end": "2024-02-09", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Prothèse de hanche, puis rééducation en SSR jusqu'au 09/02/2024.", "sources": ["courrier 2024-02-08"], "evidence": [{"id": "courrier:o1", "marks": [[587, 700], [831, 866]]}], "s": "2024-01-12", "e": "2024-02-09", "point": false, "startLabel": "2024-01-12", "endLabel": "2024-02-09"}, {"track": "t11", "start": "2024-02-20", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Premier entretien le 20/02/2024 ; contrat de soins avec prescripteur unique ; passages IDE ; fin de suivi envisageable après 3 mois.", "sources": ["historique 2024-02-20", "historique 2024-03-05", "historique 2024-03-26", "historique 2025-01-14", "historique 2025-10-21"], "evidence": [{"id": "historique:o1", "marks": [[15, 125]]}, {"id": "historique:o2", "marks": [[397, 424]]}, {"id": "historique:o3", "marks": [[0, 14], [14, 97]]}, {"id": "historique:o9", "marks": [[161, 251]]}, {"id": "historique:o13", "marks": [[304, 349]]}], "s": "2024-02-20", "e": null, "point": false, "startLabel": "2024-02-20", "endLabel": null}, {"track": "t12", "start": "2025-03", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Orientation en 2025-01 ; début en 2025-03 ; 4e séance le 03/06/2025 (agenda des inquiétudes, temps dédié, restriction du temps au lit).", "sources": ["historique 2025-01-14", "historique 2025-03-18", "historique 2025-06-03"], "evidence": [{"id": "historique:o9", "marks": [[468, 549]]}, {"id": "historique:o10", "marks": [[27, 108]]}, {"id": "historique:o11", "marks": [[123, 218], [219, 297]]}], "s": "2025-03-01", "e": null, "point": false, "startLabel": "2025-03", "endLabel": null}, {"track": "t13", "start": "2019", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Veuve depuis 2019 ; anxiété majorée à l'approche de la date anniversaire en septembre.", "sources": ["courrier 2024-02-08", "historique 2024-02-20", "historique 2024-09-10"], "evidence": [{"id": "courrier:o1", "marks": [[405, 571]]}, {"id": "historique:o1", "marks": [[126, 199], [431, 639], [740, 896]]}, {"id": "historique:o6", "marks": [[248, 328]]}], "s": "2019-01-01", "e": null, "point": true, "startLabel": "2019", "endLabel": null}, {"track": "t14", "start": "2024-11", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Anxiété et insomnie accrues ; sœur sortie en rééducation en 2025-01.", "sources": ["historique 2024-11-05", "historique 2025-01-14"], "evidence": [{"id": "historique:o7", "marks": [[40, 74], [74, 96]]}, {"id": "historique:o9", "marks": [[251, 294], [468, 549]]}], "s": "2024-11-01", "e": null, "point": true, "startLabel": "2024-11", "endLabel": null}, {"track": "t15", "start": "2025-03-01", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Appartement en rez-de-chaussée près de sa fille ; patiente contente.", "sources": ["historique 2025-03-18"], "evidence": [{"id": "historique:o10", "marks": [[27, 108]]}], "s": "2025-03-01", "e": null, "point": true, "startLabel": "2025-03-01", "endLabel": null}], "obs": {"courrier:o1": {"label": "courrier · courrier de demande d'avis (adressage en addictologie)", "date": "2024-02-08", "text": "Dr [identité] [identité]\nMédecine générale - [identité], 33610 CESTAS\nTél. [identité]\n\nCestas, le 08/02/2024\n\nCSAPA FICTIF LES ROSEAUX\nConsultation d'addictologie\n\n*Objet : demande d'avis, benzodiazépines\nPatiente : Mme [identité] [identité], née le [identité]\n\nChère Consœur, Cher Confrère,\n\nJe vous adresse Mme [identité], 65 ans, que je suis depuis 2011, pour une aide au sevrage des benzodiazépines.\n\nElle prend de l'alprazolam depuis 2005 environ (0,5 mg trois fois par jour selon mes ordonnances) et du zolpidem 10 mg au coucher depuis le décès de son mari en 2019. Pas d'alcool.\n\nLe 12/01/2024, chute nocturne à domicile avec fracture du col du fémur droit, prothèse totale de hanche le 13/01. Le 17/01, crise convulsive généralisée dans le service d'orthopédie, attribuée à l'arrêt brutal des benzodiazépines à l'admission. Rééducation en SSR jusqu'au 09/02.\n\nJe lui ai represcrit son traitement habituel à la sortie. Elle est très anxieuse depuis toujours et redoute l'arrêt, mais elle a été marquée par la crise et accepte d'en parler.\n\nJe vous remercie de la recevoir et reste à votre disposition.\n\nBien confraternellement,\n\nDr T. [identité]"}, "historique:o1": {"label": "historique · psychiatrique de suivi", "date": "2024-02-20", "text": "Observations :\nVue ce jour en premier entretien, adressée par son MG (courrier du 08/02), accompagnée de sa fille [identité].\nMme [identité], 65 ans, secrétaire scolaire retraitée, veuve depuis 2019. Vit seule.\nChute la nuit du 12/01 en se levant aux toilettes \"après le Stilnox\", fracture du col du fémur, PTH, puis crise convulsive à J4 à l'hôpital (BZD non poursuivies à l'admission). Rééducation en SSR. Marche avec une canne.\nBenzodiazépines : alprazolam \"depuis la mort de mon mari\" selon elle (depuis bien avant selon sa fille), dose réelle 3 mg/j : complète les ordonnances du MG par celles d'un second médecin \"quand j'en manque\". Zolpidem 10 mg chaque soir, parfois 15.\nAlcool : 2 verres de vin au diner + un porto \"pour dormir\".\nAnxiété généralisée ancienne (inquiétudes incontrolables pour sa fille et ses petits-enfants, tensions musculaires, insomnie) depuis la quarantaine environ.\nThymie neutre, pas d'idées suicidaires. MMSE non fait, orientée, pas de plainte mnésique.\nConclusions :\n- Explications sur le sevrage progressif (pas d'arret brutal ++), accord de principe\n- Relais alprazolam par diazépam au prochain RDV\n- Alcool : à diminuer, pas d'alcool avec le zolpidem\n- RDV 15 jours"}, "historique:o2": {"label": "historique · psychiatrique de suivi", "date": "2024-03-05", "text": "Observations :\nVue ce jour\nArrêt du second prescripteur, a accepté que je sois seule prescriptrice des BZD avec son MG informé.\nRelais : arret alprazolam, diazépam 10 mg x 3 (équivalence approximative), à reévaluer selon la somnolence.\nZolpidem 10 mg poursuivi pour l'instant, une seule molécule modifiée a la fois.\nConclusions :\nOrdonnance sécurisée, délivrance hebdomadaire pharmacie habituelle\nPassage IDE dans 3 semaines\nRDV 1 mois"}, "historique:o3": {"label": "historique · entretien infirmier", "date": "2024-03-26", "text": "Entretien IDE. Bonne tolérance du diazépam, un peu de somnolence l'après-midi les premiers jours. Pas de chute. Pilulier mis en place avec sa fille.\nContacts : domicile [identité], 33610 CESTAS, tél. [identité] ; sa fille Mme [identité] [identité] [identité].\nTabac : ne fume pas."}, "historique:o4": {"label": "historique · psychiatrique de suivi", "date": "2024-04-23", "text": "Observations :\nVue ce jour\nDiazépam diminué à 25 mg/j (10-5-10) depuis le 10/04, bien toléré. Anxiété \"supportable\", ruminations le soir.\nAlcool : 1 verre au diner.\nPour le TAG, intéret d'un traitement de fond : accepte la sertraline.\nConclusions :\nSertraline 25 mg pendant 1 semaine puis 50 mg\nDiazépam 25 mg\nRDV 6 semaines"}, "historique:o5": {"label": "historique · psychiatrique de suivi", "date": "2024-06-11", "text": "Observations :\nVue ce jour\nDiazépam 20 mg/j depuis fin mai. Sertraline 50 mg : moins d'inquiétudes \"pour tout\", meilleur sommeil.\nZolpidem : passe à un demi-comprimé de 10 mg, de elle-meme certains soirs.\nConclusions :\nSchéma de diminution : - 2,5 mg toutes les 3 semaines si bien toléré\nRDV septembre (va chez sa fille en aout)"}, "historique:o6": {"label": "historique · psychiatrique de suivi", "date": "2024-09-10", "text": "Observations :\nVue ce jour\nDiminution mise en pause en aout chez sa fille (\"je n'ai rien touché pendant les vacances\"), donc toujours à 20 mg. En réalité, d'après le pilulier, est descendue à 17,5 mg mi-juillet. Diazépam à 15 mg/j depuis le 02/09.\nAnxiété majorée à l'approche de l'anniversaire du décès de son mari (septembre).\nConclusions :\nDiazépam 15 mg/j, maintien 1 mois\nRDV octobre-novembre"}, "historique:o7": {"label": "historique · psychiatrique de suivi", "date": "2024-11-05", "text": "Observations :\nEntretien téléphonique :\nSa soeur ainée hospitalisée (AVC). Anxiété ++, insomnie. Demande à reprendre \"son Xanax, juste le temps que ça passe\". Refus expliqué, réassurance.\nPas d'alcool supplémentaire selon elle.\nConclusions :\nMaintien diazépam 15 mg, pas de nouvelle diminution ce mois-ci\nRDV présentiel décembre"}, "historique:o8": {"label": "historique · infirmière", "date": "2024-12-17", "text": "Appel de sa fille : a trouvé chez sa mère une boite d'alprazolam 0,5 mg entamée, prescrite par un médecin remplaçant fin novembre. Mme [identité] reconnait au téléphone \"deux ou trois comprimés les soirs d'angoisse\".\nInfo transmise au Dr [identité], RDV avancé."}, "historique:o9": {"label": "historique · psychiatrique de suivi", "date": "2025-01-14", "text": "Observations :\nVue ce jour avec sa fille\nReprise d'alprazolam en novembre-décembre, une dizaine de comprimés au total, honte ++. Pas d'arret brutal du diazépam.\nContrat de soins rediscuté : un seul prescripteur (moi), une seule pharmacie, MG d'accord. Soeur sortie de l'hopital, en rééducation.\nZolpidem arreté depuis le 01/01 \"pour la nouvelle année\", sommeil haché mais tolérable.\nConclusions :\nDiazépam 12 mg/j (comprimés de 2 mg), puis -2 mg toutes les 3 semaines\nHygiène du sommeil, orientation TCC de l'insomnie / de l'anxiété (Mme [identité])\nRDV 2 mois"}, "historique:o10": {"label": "historique · psychiatrique de suivi", "date": "2025-03-18", "text": "Observations :\nVue ce jour\nA déménagé le 01/03 dans un appartement en rez-de-chaussée près de chez sa fille. Contente, \"plus d'escaliers\".\nDiazépam 8 mg/j. Plus d'alprazolam. Commence la TCC.\nThymie neutre, anxiété modérée.\nConclusions :\nPoursuite de la décroissance\nRDV mai"}, "historique:o11": {"label": "historique · psychologique", "date": "2025-06-03", "text": "4e séance de TCC. [identité] tient son agenda des inquiétudes, repère qu'elles portent surtout sur la santé de ses proches. Exercices de report de l'inquiétude à un \"temps dédié\" en fin d'après-midi : plutôt efficaces.\nRestriction du temps au lit en cours pour l'insomnie, endormissement amélioré.\nElle dit ne plus penser au Xanax \"que le soir des mauvaises nouvelles\"."}, "historique:o12": {"label": "historique · psychiatrique de suivi", "date": "2025-07-08", "text": "Observations :\nVue ce jour\nDiazépam 4 mg/j, tolérance correcte, un peu d'irritabilité les jours de baisse. Sertraline 50 mg poursuivie.\nAlcool : un verre de temps en temps le week-end.\nInquiétudes moins envahissantes, profite de ses petits-enfants.\nConclusions :\nDiazépam 2 mg/j a partir du 01/08 puis arret fin septembre si toléré\nRDV octobre"}, "historique:o13": {"label": "historique · psychiatrique de suivi", "date": "2025-10-21", "text": "Observations :\nVue ce jour\nDiazépam arreté le 30/09. Quelques nuits d'insomnie de rebond la 1ère semaine, rentré dans l'ordre. Pas de reprise d'alprazolam ni de zolpidem.\nFière, \"je n'y croyais pas\". Anxiété contenue avec les outils de la TCC.\nConclusions :\nSertraline 50 mg à poursuivre au moins 6 mois\nRDV 3 mois, fin de suivi envisageable ensuite"}}, "ref": "2025-10-01", "kinds": [{"id": "life_event", "label": "Événements de vie", "light": "#b45309", "dark": "#f59e0b"}, {"id": "substance_use", "label": "Consommations", "light": "#c62828", "dark": "#ef6b6b"}, {"id": "psychiatric", "label": "Psychopathologie", "light": "#6a4bb0", "dark": "#a78bfa"}, {"id": "somatic", "label": "Somatique", "light": "#0f7b6c", "dark": "#34d3b9"}, {"id": "medication", "label": "Médicaments", "light": "#1d5fb4", "dark": "#6aa6f0"}, {"id": "therapeutic_psycho", "label": "Prises en charge", "light": "#4d7c0f", "dark": "#a3d95b"}], "modeLabel": {"usage": "usage", "intoxication": "intoxication", "sevrage": "sevrage", "rechute": "rechute", "craving": "craving"}, "certaintyLabel": {"exact": "date exacte", "month": "mois", "year": "année", "approx": "date approximative"}};
+const NS = "http://www.w3.org/2000/svg";
+const dark = () => matchMedia("(prefers-color-scheme: dark)").matches;
+const DAY = 864e5;
+const t = (iso) => Date.parse(iso + "T00:00:00Z");
+const REF = t(D.ref);
+const kindOf = Object.fromEntries(D.kinds.map(k => [k.id, k]));
+const trackOf = Object.fromEntries(D.tracks.map(x => [x.id, x]));
+const color = (kind) => kindOf[kind][dark() ? "dark" : "light"];
+const MODE_OP = {usage:.55, craving:.7, sevrage:.7, intoxication:.85, rechute:1};
+const EVENTS = D.events.map((e, i) => ({
+  ...e, i, kind: trackOf[e.track].kind, label: trackOf[e.track].label,
+  a: t(e.s), b: e.e ? t(e.e) : (e.ongoing ? REF : t(e.s)),
+}));
+const hidden = new Set();
+let LABEL_W = 150; const ROW = 26, PADR = 14, AXIS = 84;
+let DOM_MIN = Math.min(...EVENTS.map(e => e.a)) - 200*DAY, DOM_MAX = REF + 60*DAY;
+let view = [DOM_MIN, DOM_MAX];
+
+const el = (name, attrs = {}, parent, text) => {
+  const n = document.createElementNS(NS, name);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  if (text !== undefined) n.textContent = text;
+  if (parent) parent.appendChild(n);
+  return n;
+};
+const fmt = (s) => { if (!s) return ""; const [y,m,d] = s.split("-"); return d ? `${d}/${m}/${y}` : m ? `${m}/${y}` : y; };
+const yr = (ms) => new Date(ms).getUTCFullYear();
+
+function ticks(a, b) {
+  const span = (b - a) / (365.25*DAY), out = [];
+  const step = span > 40 ? 10 : span > 18 ? 5 : span > 9 ? 2 : span > 3.5 ? 1 : 0;
+  if (step) { for (let y = Math.ceil(yr(a)/step)*step; Date.UTC(y,0,1) <= b; y += step) out.push([Date.UTC(y,0,1), String(y), true]); }
+  else {
+    const q = span > 1.6 ? 3 : 1;
+    for (let y = yr(a); y <= yr(b); y++) for (let m = 0; m < 12; m += q) {
+      const v = Date.UTC(y, m, 1); if (v < a || v > b) continue;
+      out.push([v, m === 0 ? String(y) : `${String(m+1).padStart(2,"0")}/${String(y).slice(2)}`, m === 0]);
+    }
+  }
+  return out;
+}
+
+const bolt = (x, y, s=7) => `M${x} ${y-s} L${x-s*.55} ${y+.1} L${x-.05*s} ${y+.1} L${x-s*.35} ${y+s} L${x+s*.6} ${y-.25*s} L${x+.05*s} ${y-.25*s} Z`;
+
+function drawMain() {
+  const svg = document.getElementById("main");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800;
+  LABEL_W = W < 600 ? 92 : 150;
+  const innerW = W - LABEL_W - PADR;
+  const x = (ms) => LABEL_W + (ms - view[0]) / (view[1] - view[0]) * innerW;
+  const kinds = D.kinds.filter(k => !hidden.has(k.id));
+  const rows = [];
+  for (const k of kinds) if (k.id !== "life_event") {
+    rows.push({head: k});
+    for (const tr of D.tracks.filter(tr => tr.kind === k.id)) rows.push({track: tr});
+  }
+  const showLife = !hidden.has("life_event");
+  const H = AXIS + 18 + rows.length * ROW + 24;
+  svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const defs = el("defs", {}, svg);
+  const cp = el("clipPath", {id: "clip"}, defs); el("rect", {x: LABEL_W, y: 0, width: innerW, height: H}, cp);
+  // grid + axis
+  const gridG = el("g", {}, svg);
+  for (const [v, lab, major] of ticks(...view)) {
+    const xx = x(v);
+    el("line", {x1: xx, x2: xx, y1: AXIS - 4, y2: H - 20, stroke: "var(--line)", "stroke-width": major ? 1 : .5}, gridG);
+    el("text", {x: xx + 3, y: H - 7, class: "mute"}, gridG, lab);
+  }
+  el("line", {x1: LABEL_W, x2: W - PADR, y1: AXIS - 4, y2: AXIS - 4, stroke: "var(--axis)", "stroke-width": 4, "stroke-linecap": "round"}, svg);
+  const g = el("g", {"clip-path": "url(#clip)"}, svg);
+  // life events on the axis
+  if (showLife) {
+    const life = EVENTS.filter(e => e.kind === "life_event" && e.b >= view[0] && e.a <= view[1]);
+    const lanes = [[], [], [], [], []];
+    for (const e of life.sort((p, q) => p.a - q.a)) {
+      const pt = e.point || (e.b - e.a) < 120*DAY;
+      const xa = x(Math.max(e.a, view[0])), xb = pt ? xa : x(Math.min(e.b, view[1]));
+      const w = e.label.length * 5.9 + 10, flip = xa + w > W - PADR;
+      const iv = flip ? [xa - w, xa + 4] : [xa - 4, xa + w];
+      let ln = lanes.findIndex(l => l.every(o => o[1] < iv[0] || o[0] > iv[1]));
+      if (ln < 0) ln = lanes.length - 1;
+      lanes[ln].push(iv);
+      const ty = AXIS - 14 - ln * 13 - 4;
+      const grp = el("g", {class: "ev", "data-i": e.i}, g);
+      if (!pt) el("rect", {x: xa, y: AXIS - 8, width: Math.max(2, xb - xa), height: 8, rx: 3, fill: color("life_event"), opacity: .85}, grp);
+      else el("path", {d: `M${xa} ${AXIS-11} l6 6 l-6 6 l-6 -6 Z`, fill: color("life_event")}, grp);
+      el("line", {x1: xa, x2: xa, y1: ty + 3, y2: AXIS - 11, stroke: color("life_event"), "stroke-width": 1, opacity: .6}, grp);
+      el("text", {x: flip ? xa - 3 : xa + 3, y: ty, "font-size": 11, "text-anchor": flip ? "end" : "start", "pointer-events": "none"}, grp, e.label);
+      if (e.loss) el("path", {d: bolt(xa, AXIS + 6, 6), fill: "#e11d48"}, grp);
+    }
+  }
+  // rows
+  let y = AXIS + 6;
+  for (const r of rows) {
+    if (r.head) {
+      el("text", {x: 6, y: y + 17, "font-weight": 600, fill: color(r.head.id)}, svg, r.head.label.toUpperCase()).setAttribute("font-size", 11);
+      el("line", {x1: 6, x2: W - PADR, y1: y + ROW - 3, y2: y + ROW - 3, stroke: color(r.head.id), opacity: .35}, svg);
+    } else {
+      const cut = W < 600 ? 13 : 24;
+      const lab = r.track.label.length > cut ? r.track.label.slice(0, cut - 1) + "…" : r.track.label;
+      el("text", {x: 12, y: y + 17, class: "mute"}, svg, lab).appendChild(Object.assign(document.createElementNS(NS, "title"), {textContent: r.track.label}));
+      for (const e of EVENTS.filter(e => e.track === r.track.id)) {
+        if (e.b < view[0] || e.a > view[1]) continue;
+        const grp = el("g", {class: "ev", "data-i": e.i}, g);
+        const c = color(e.kind), op = e.mode ? (MODE_OP[e.mode] ?? .6) : .8;
+        const xa = x(e.a), xb = x(e.b);
+        const dash = e.certainty === "approx" ? "4 3" : null;
+        if (e.point || xb - xa < 5) {
+          el("path", {d: `M${xa} ${y+5} l7 7 l-7 7 l-7 -7 Z`, fill: c, opacity: op}, grp);
+        } else {
+          const rc = el("rect", {x: xa, y: y + 4, width: xb - xa, height: ROW - 10, rx: 4, fill: c, opacity: op}, grp);
+          if (dash) { rc.setAttribute("stroke", c); rc.setAttribute("stroke-dasharray", dash); rc.setAttribute("fill-opacity", .45); }
+          if (e.ongoing && xb < W) el("path", {d: `M${xb} ${y+4} l8 ${(ROW-10)/2} l-8 ${(ROW-10)/2} Z`, fill: c, opacity: op}, grp);
+        }
+        if (e.loss) el("path", {d: bolt(xa, y + ROW/2 - 1), fill: "#e11d48", stroke: "var(--panel)", "stroke-width": .8}, grp);
+        if (e.mode && e.mode !== "usage" && xb - xa > 56) el("text", {x: xa + 6, y: y + 17, fill: "#fff", "font-size": 10.5, "pointer-events": "none"}, grp, MODE_LABEL(e.mode)).setAttribute("style", "fill:#fff");
+      }
+    }
+    y += ROW;
+  }
+  svg.querySelectorAll(".ev").forEach(n => {
+    const go = () => select(+n.dataset.i);
+    n.addEventListener("click", go); n.addEventListener("pointerenter", (ev) => { if (ev.pointerType === "mouse") go(); });
+  });
+  if (selected !== null) svg.querySelector(`.ev[data-i="${selected}"]`)?.classList.add("sel");
+}
+const MODE_LABEL = (m) => D.modeLabel[m] || m;
+
+let selected = null;
+function obsHtml(v, esc) {
+  const o = D.obs[v.id];
+  let html = "", at = 0;
+  for (const [a, b] of v.marks) { html += esc(o.text.slice(at, a)) + "<mark>" + esc(o.text.slice(a, b)) + "</mark>"; at = b; }
+  html += esc(o.text.slice(at));
+  return `<div class="obs"><div class="oh">${o.date ? esc(o.date) + " · " : ""}${esc(o.label)}${o.summary_only ? " · résumé" : ""}</div><div class="ot">${html}</div></div>`;
+}
+function select(i) {
+  selected = i;
+  document.querySelectorAll(".ev").forEach(n => n.classList.toggle("sel", +n.dataset.i === i));
+  const e = EVENTS[i];
+  const when = e.endLabel ? (e.startLabel === e.endLabel ? fmt(e.startLabel) : `${fmt(e.startLabel)} → ${fmt(e.endLabel)}`)
+    : e.ongoing ? `depuis ${fmt(e.startLabel)} (en cours)` : fmt(e.startLabel);
+  const esc = (s) => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const bits = [];
+  if (e.mode) bits.push(MODE_LABEL(e.mode));
+  if (e.certainty) bits.push(D.certaintyLabel[e.certainty] || e.certainty);
+  if (e.loss) bits.push("⚡ perte de contrôle");
+  document.getElementById("detail").innerHTML =
+    `<b>${esc(e.label)}</b> <span class="k">· ${esc(kindOf[e.kind].label)} · ${when}${bits.length ? " · " + esc(bits.join(" · ")) : ""}</span>` +
+    (e.note ? `<div>${esc(e.note)}</div>` : "") +
+    (e.sources.length ? `<div class="k">Autres sources : ${e.sources.map(esc).join(" ; ")}</div>` : "") +
+    (e.evidence.length ? `<div class="k" style="margin-top:8px">${e.evidence.length > 1 ? "Observations" : "Observation"} d'origine${e.evidence.some(v => !v.marks.length) ? " (passage justificatif non repéré dans certaines)" : ", passage justificatif surligné"} :</div><div id="obs">` +
+      e.evidence.map(v => obsHtml(v, esc)).join("") + `</div>` : "");
+  document.querySelector("#obs mark")?.scrollIntoView({block: "nearest"});
+}
+
+// overview strip with a draggable window
+function drawOverview() {
+  const svg = document.getElementById("ov");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800, H = 54, L = 12, R = 12, innerW = W - L - R;
+  const x = (ms) => L + (ms - DOM_MIN) / (DOM_MAX - DOM_MIN) * innerW;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  for (const [v, lab, major] of ticks(DOM_MIN, DOM_MAX)) {
+    if (!major) continue;
+    el("line", {x1: x(v), x2: x(v), y1: 4, y2: H - 14, stroke: "var(--line)"}, svg);
+    el("text", {x: x(v) + 2, y: H - 3, class: "mute", "font-size": 10}, svg, lab);
+  }
+  const vis = EVENTS.filter(e => !hidden.has(e.kind));
+  const n = Math.max(1, new Set(vis.map(e => e.track)).size), tracks = [...new Set(vis.map(e => e.track))];
+  for (const e of vis) {
+    const r = tracks.indexOf(e.track), yy = 6 + r * (H - 24) / n;
+    el("rect", {x: x(e.a), y: yy, width: Math.max(2, x(e.b) - x(e.a)), height: Math.max(1.5, (H - 24) / n - 1), fill: color(e.kind), opacity: .7}, svg);
+  }
+  const win = el("rect", {x: x(view[0]), y: 1, width: Math.max(10, x(view[1]) - x(view[0])), height: H - 14, rx: 5, fill: "rgba(80,120,220,.16)", stroke: "#4f7be0", "stroke-width": 1.5, style: "cursor:grab"}, svg);
+  const hl = el("rect", {x: x(view[0]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const hr = el("rect", {x: x(view[1]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const inv = (px) => DOM_MIN + (px - L) / innerW * (DOM_MAX - DOM_MIN);
+  const MINSPAN = 120 * DAY;
+  const drag = (node, kind) => node.addEventListener("pointerdown", (ev) => {
+    ev.preventDefault(); node.setPointerCapture(ev.pointerId);
+    const x0 = ev.clientX, v0 = [...view], per = (DOM_MAX - DOM_MIN) / innerW;
+    const move = (m) => {
+      const d = (m.clientX - x0) * per;
+      let [a, b] = v0;
+      if (kind === "move") { const span = b - a; a = Math.min(Math.max(DOM_MIN, a + d), DOM_MAX - span); b = a + span; }
+      else if (kind === "l") a = Math.min(Math.max(DOM_MIN, a + d), b - MINSPAN);
+      else b = Math.max(Math.min(DOM_MAX, b + d), a + MINSPAN);
+      view = [a, b]; drawOverview(); drawMain();
+    };
+    const up = () => { node.removeEventListener("pointermove", move); node.removeEventListener("pointerup", up); };
+    node.addEventListener("pointermove", move); node.addEventListener("pointerup", up);
+  });
+  drag(win, "move"); drag(hl, "l"); drag(hr, "r");
+}
+
+function setView(a, b) { view = [Math.max(DOM_MIN, a), Math.min(DOM_MAX, b)]; redraw(); }
+function redraw() { drawOverview(); drawMain(); }
+
+// controls
+const kindsBar = document.getElementById("kinds");
+for (const k of D.kinds) {
+  const b = document.createElement("button"); b.className = "chip"; b.setAttribute("aria-pressed", "true");
+  b.innerHTML = `<i style="background:${k[dark() ? "dark" : "light"]}"></i>${k.label}`;
+  b.onclick = () => { hidden.has(k.id) ? hidden.delete(k.id) : hidden.add(k.id); b.setAttribute("aria-pressed", String(!hidden.has(k.id))); redraw(); };
+  kindsBar.appendChild(b);
+}
+const presets = document.getElementById("presets");
+const addPreset = (label, fn) => { const b = document.createElement("button"); b.textContent = label; b.onclick = fn; presets.appendChild(b); };
+addPreset("Tout", () => setView(DOM_MIN, DOM_MAX));
+for (const yrs of [10, 5, 2]) addPreset(`${yrs} dernières années`, () => setView(REF - yrs * 365.25 * DAY, DOM_MAX));
+addPreset("−", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]); setView(c - h, c + h); });
+addPreset("+", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]) / 4; setView(c - h, c + h); });
+document.getElementById("legend").innerHTML =
+  `<span><span class="sw" style="background:#888;opacity:.55"></span>usage</span><span><span class="sw" style="background:#888;opacity:.85"></span>intoxication</span>` +
+  `<span><span class="sw" style="background:#888"></span>rechute</span><span><span class="sw" style="background:#888;opacity:.45;border:1px dashed #888"></span>date approximative</span>` +
+  `<span style="color:#e11d48">⚡ perte de contrôle</span><span>◆ événement sans durée</span><span>▶ en cours</span>`;
+document.getElementById("main").addEventListener("wheel", (ev) => {
+  if (!ev.ctrlKey && !ev.shiftKey) return;
+  ev.preventDefault();
+  const r = ev.currentTarget.getBoundingClientRect(), W = r.width, f = (ev.clientX - r.left - LABEL_W) / (W - LABEL_W - PADR);
+  const c = view[0] + Math.min(Math.max(f, 0), 1) * (view[1] - view[0]), k = ev.deltaY > 0 ? 1.25 : .8;
+  setView(c - (c - view[0]) * k, c + (view[1] - c) * k);
+}, {passive: false});
+addEventListener("resize", redraw);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
+if (innerWidth < 600) view = [Math.max(DOM_MIN, REF - 5 * 365.25 * DAY), DOM_MAX];
+redraw();
+</script>
+</body>
+</html>
