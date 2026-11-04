@@ -30,11 +30,23 @@ masked), instead of the model's one-line summary::
 
 Only dates, labels, notes and source names of the input frise end up in the
 page; patient headers of the dossier are never read.
+
+Antecedents dated from an age (``fromAge``) are drawn as approximate; those
+the app could not place (``timeline.undated``) are listed under the frise
+with their age.
+
+A real dossier, on the private side only: ``--key <table.json>`` (shape
+``{"labels": {"[PATIENT]": "..."}}``) puts the real values back in place of
+the labels in all the text of the page, and ``--banner real`` replaces the
+"synthetic data" banner (it is implied by ``--key``)::
+
+    uv run python scripts/render_frise.py <run>.json --key <slug>.key.json -o <slug>.reel.html
 """
 from __future__ import annotations
 
 import argparse
 import calendar
+import html
 import json
 import re
 import sys
@@ -70,6 +82,62 @@ MODE_LABEL = {
     "craving": "craving",
 }
 CERTAINTY_LABEL = {"exact": "date exacte", "month": "mois", "year": "année", "approx": "date approximative"}
+BANNERS = {
+    "synthetic": "Données synthétiques (dossier entièrement inventé)",
+    "real": "Dossier réel pseudonymisé (usage privé, ne pas diffuser)",
+    "reidentified": "Dossier réel ré-identifié (usage privé, ne pas diffuser)",
+}
+
+
+def format_age(age: list[int] | None) -> str:
+    """[14, 14] -> "14 ans"; [12, 17] -> "entre 12 et 17 ans" (as the app)."""
+    if not age:
+        return ""
+    a, b = age[0], age[-1]
+    return f"{a} ans" if a == b else f"entre {a} et {b} ans"
+
+
+def age_note(from_age: dict | None) -> str | None:
+    """"d'après l'âge : 14 ans" for an event whose dates were computed from an age."""
+    if not from_age:
+        return None
+    start, end = from_age.get("start"), from_age.get("end")
+    if start and end:
+        return f"d'après l'âge : {format_age(start)} → {format_age(end)}"
+    if start:
+        return f"d'après l'âge : {format_age(start)}"
+    return f"fin d'après l'âge : {format_age(end)}" if end else None
+
+
+def load_key(path: Path) -> dict[str, str]:
+    """Correspondence table ``{"labels": {"[PATIENT]": "..."}}`` -> label -> value."""
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    labels = raw.get("labels", raw)
+    return {str(k): str(v) for k, v in labels.items() if k and v}
+
+
+def reidentifier(labels: dict[str, str]):
+    """Replace every known label in a text (longest first); unknown labels stay."""
+    if not labels:
+        return lambda text: text
+    rx = re.compile("|".join(re.escape(k) for k in sorted(labels, key=len, reverse=True)))
+    return lambda text: rx.sub(lambda m: labels[m.group()], text) if isinstance(text, str) else text
+
+
+def reidentify(data: dict, labels: dict[str, str]) -> dict:
+    """Put the real values back in all the text of a loaded frise (before ``prepare``)."""
+    sub = reidentifier(labels)
+    for t in data["tracks"]:
+        t["label"] = sub(t["label"])
+    for e in data["events"] + data["undated"]:
+        e["note"] = sub(e["note"])
+        e["sources"] = [sub(x) for x in e["sources"]]
+    for u in data["undated"]:
+        u["label"] = sub(u["label"])
+    for o in data["obs"].values():
+        o["label"] = sub(o["label"])
+        o["text"] = sub(o["text"])
+    return data
 
 
 def parse_partial(s: str, end: bool) -> date:
@@ -211,7 +279,27 @@ def load(path: Path, notes: Path | None = None) -> dict:
                     "mode": e.get("mode"),
                     "loss": bool(e.get("lossOfControl")),
                     "certainty": None,
+                    "ageNote": age_note(e.get("fromAge")),
                     "note": e.get("note", ""),
+                    "sources": srcs,
+                }
+            )
+    # Antecedents told by age the app could not place (absent from older runs).
+    undated: list[dict] = []
+    if not isinstance(tl, list):
+        track_of = {t["id"]: t for t in tracks}
+        for u in tl.get("undated") or []:
+            track = track_of.get(u.get("trackId"), {"kind": "life_event", "label": "Autre"})
+            srcs = [f"{obs[oid]['doc']} {obs[oid]['date'] or 's.d.'}" for oid in u.get("observationIds", []) if oid in obs]
+            undated.append(
+                {
+                    "kind": track["kind"],
+                    "label": track["label"],
+                    "startAge": u.get("startAge"),
+                    "endAge": u.get("endAge"),
+                    "ongoing": bool(u.get("ongoing")),
+                    "mode": u.get("mode"),
+                    "note": u.get("note", ""),
                     "sources": srcs,
                 }
             )
@@ -238,6 +326,7 @@ def load(path: Path, notes: Path | None = None) -> dict:
         "dossier": raw.get("dossier") or path.parent.name,
         "tracks": tracks,
         "events": events,
+        "undated": undated,
         "obs": observations,
     }
 
@@ -266,6 +355,10 @@ def prepare(data: dict) -> dict:
             {"id": oid, "marks": [] if data["obs"][oid].get("summary_only") else evidence_marks(data["obs"][oid]["text"], label, e["note"])}
             for oid in e["evidence"]
         ]
+    # Tracks holding only undated antecedents are listed under the frise instead.
+    on_axis = {e["track"] for e in data["events"]}
+    data["tracks"] = [t for t in data["tracks"] if t["id"] in on_axis]
+    data.setdefault("undated", [])
     # ongoing events run up to a month after the last known date
     ref = date(last.year + (last.month // 12), last.month % 12 + 1, 1)
     data["ref"] = ref.isoformat()
@@ -318,18 +411,23 @@ mark{background:#fde047;color:#1d1d1b;border-radius:3px;padding:0 1px}
 #detail .k{color:var(--mute);font-size:12px}
 .legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--mute);font-size:12px;margin-top:8px}
 .sw{display:inline-block;width:22px;height:9px;border-radius:2px;vertical-align:middle;margin-right:4px}
+#undated{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin-top:10px}
+#undated h2{font-size:14px;margin:2px 0 4px}
+#undated ul{margin:4px 0 2px;padding-left:18px}
+#undated li{margin:3px 0}
+#undated .k{color:var(--mute);font-size:12px}
 </style>
 </head>
 <body>
 <main>
 <h1>Frise chronologique — __TITLE__</h1>
-<p class="sub"><b>Données synthétiques</b> (dossier entièrement inventé). Touchez une barre pour lire la note et l'observation d'origine ; faites glisser la fenêtre de l'aperçu pour zoomer.</p>
+<p class="sub"><b>__BANNER__</b>. Touchez une barre pour lire la note et l'observation d'origine ; faites glisser la fenêtre de l'aperçu pour zoomer.</p>
 <div class="bar" id="kinds"></div>
 <div class="bar" id="presets"></div>
 <div class="chart"><svg id="ov" height="54"></svg></div>
 <div class="chart" style="margin-top:8px"><svg id="main"></svg></div>
 <div class="legend" id="legend"></div>
-<div id="detail"><span class="k">Aucun élément sélectionné.</span></div>
+__UNDATED__<div id="detail"><span class="k">Aucun élément sélectionné.</span></div>
 </main>
 <script>
 const D = __DATA__;
@@ -440,9 +538,10 @@ function drawMain() {
         const grp = el("g", {class: "ev", "data-i": e.i}, g);
         const c = color(e.kind), op = e.mode ? (MODE_OP[e.mode] ?? .6) : .8;
         const xa = x(e.a), xb = x(e.b);
-        const dash = e.certainty === "approx" ? "4 3" : null;
+        const dash = e.certainty === "approx" || e.ageNote ? "4 3" : null;
         if (e.point || xb - xa < 5) {
-          el("path", {d: `M${xa} ${y+5} l7 7 l-7 7 l-7 -7 Z`, fill: c, opacity: op}, grp);
+          const pt = el("path", {d: `M${xa} ${y+5} l7 7 l-7 7 l-7 -7 Z`, fill: c, opacity: op}, grp);
+          if (dash) { pt.setAttribute("stroke", c); pt.setAttribute("stroke-dasharray", "2 2"); pt.setAttribute("fill-opacity", .45); }
         } else {
           const rc = el("rect", {x: xa, y: y + 4, width: xb - xa, height: ROW - 10, rx: 4, fill: c, opacity: op}, grp);
           if (dash) { rc.setAttribute("stroke", c); rc.setAttribute("stroke-dasharray", dash); rc.setAttribute("fill-opacity", .45); }
@@ -480,6 +579,7 @@ function select(i) {
   const bits = [];
   if (e.mode) bits.push(MODE_LABEL(e.mode));
   if (e.certainty) bits.push(D.certaintyLabel[e.certainty] || e.certainty);
+  if (e.ageNote) bits.push(e.ageNote);
   if (e.loss) bits.push("⚡ perte de contrôle");
   document.getElementById("detail").innerHTML =
     `<b>${esc(e.label)}</b> <span class="k">· ${esc(kindOf[e.kind].label)} · ${when}${bits.length ? " · " + esc(bits.join(" · ")) : ""}</span>` +
@@ -549,7 +649,7 @@ addPreset("−", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[
 addPreset("+", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]) / 4; setView(c - h, c + h); });
 document.getElementById("legend").innerHTML =
   `<span><span class="sw" style="background:#888;opacity:.55"></span>usage</span><span><span class="sw" style="background:#888;opacity:.85"></span>intoxication</span>` +
-  `<span><span class="sw" style="background:#888"></span>rechute</span><span><span class="sw" style="background:#888;opacity:.45;border:1px dashed #888"></span>date approximative</span>` +
+  `<span><span class="sw" style="background:#888"></span>rechute</span><span><span class="sw" style="background:#888;opacity:.45;border:1px dashed #888"></span>date approximative ou d'après l'âge</span>` +
   `<span style="color:#e11d48">⚡ perte de contrôle</span><span>◆ événement sans durée</span><span>▶ en cours</span>`;
 document.getElementById("main").addEventListener("wheel", (ev) => {
   if (!ev.ctrlKey && !ev.shiftKey) return;
@@ -568,20 +668,67 @@ redraw();
 """
 
 
-def render(data: dict) -> str:
+def undated_html(undated: list[dict]) -> str:
+    """Static list of the antecedents told by age that are not on the axis."""
+    if not undated:
+        return ""
+    esc = html.escape
+    items = []
+    for u in undated:
+        age = format_age(u.get("startAge"))
+        if u.get("endAge"):
+            age += f" → {format_age(u['endAge'])}"
+        elif u.get("ongoing"):
+            age += " → en cours"
+        bits = [f"<b>{esc(u['label'])}</b> <span class=\"k\">· {esc(KIND_LABEL.get(u['kind'], u['kind']))}"]
+        if u.get("mode"):
+            bits.append(f" · {esc(MODE_LABEL.get(u['mode'], u['mode']))}")
+        bits.append(f" · {esc(age)}</span>")
+        if u.get("note"):
+            bits.append(f" — {esc(u['note'])}")
+        if u.get("sources"):
+            bits.append(f' <span class="k">({esc(" ; ".join(u["sources"]))})</span>')
+        items.append(f"<li>{''.join(bits)}</li>")
+    return (
+        '<section id="undated"><h2>Antécédents non datés</h2>'
+        '<div class="k">Racontés par l\'âge, sans date de naissance connue ou au-delà de la dernière observation : '
+        "ils ne sont pas placés sur la frise.</div>"
+        f"<ul>{''.join(items)}</ul></section>\n"
+    )
+
+
+def render(data: dict, banner: str = BANNERS["synthetic"]) -> str:
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
-    return PAGE.replace("__TITLE__", data["dossier"]).replace("__DATA__", payload)
+    return (
+        PAGE.replace("__TITLE__", html.escape(data["dossier"]))
+        .replace("__BANNER__", html.escape(banner))
+        .replace("__UNDATED__", undated_html(data.get("undated", [])))
+        .replace("__DATA__", payload)
+    )
 
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("frise", type=Path, help="verite.json of a fictional dossier, or an app run (JSON)")
     ap.add_argument("--notes", type=Path, help="for an app run: the fictional dossier folder, to show full notes")
+    ap.add_argument("--key", type=Path, help='correspondence table {"labels": {"[PATIENT]": "..."}}: real values in place of labels')
+    ap.add_argument(
+        "--banner",
+        default=None,
+        help='"synthetic" (default), "real" (real dossier, pseudonymised; re-identified with --key), or any text',
+    )
     ap.add_argument("-o", "--out", type=Path, required=True)
     args = ap.parse_args(argv)
-    data = prepare(load(args.frise, args.notes))
+    data = load(args.frise, args.notes)
+    if args.key:
+        data = reidentify(data, load_key(args.key))
+    data = prepare(data)
+    if args.key and args.banner in (None, "real", "synthetic"):
+        banner = BANNERS["reidentified"]
+    else:
+        banner = BANNERS.get(args.banner or "synthetic", args.banner)
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(render(data), encoding="utf-8")
+    args.out.write_text(render(data, banner), encoding="utf-8")
     print(f"{args.out}: {len(data['events'])} événements, {len(data['tracks'])} pistes", file=sys.stderr)
     return 0
 

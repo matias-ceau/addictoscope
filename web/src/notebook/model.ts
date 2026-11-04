@@ -2,6 +2,9 @@
  * Timeline data model, mirroring src/addictoscope/models.py (Auriacombe et
  * al. 2018 swimlanes): fixed track kinds, any number of tracks per kind.
  */
+import type { AgeRange } from "./age";
+
+export type { AgeRange };
 export const TRACK_KINDS = [
   "substance_use",
   "psychiatric",
@@ -54,11 +57,27 @@ export interface TimelineEvent {
   lossOfControl: boolean;
   note: string;
   observationIds: string[];
+  /** Present when a bound was computed from an age: drawn as approximate. */
+  fromAge?: { start: AgeRange | null; end: AgeRange | null };
 }
+
+/** An antecedent told by age that could not be placed on the axis (no birth
+ *  date known locally, or a year past the last observation). */
+export type UndatedEvent = Omit<TimelineEvent, "start" | "end" | "fromAge"> & {
+  startAge: AgeRange;
+  endAge: AgeRange | null;
+};
 
 export interface Timeline {
   tracks: Track[];
   events: TimelineEvent[];
+  /** Missing from frises made before ages were handled: read as []. */
+  undated: UndatedEvent[];
+}
+
+/** A timeline read from older JSON (no `undated`) brought to the current shape. */
+export function withUndated(t: Omit<Timeline, "undated"> & { undated?: UndatedEvent[] }): Timeline {
+  return { ...t, undated: t.undated ?? [] };
 }
 
 const PARTIAL_DATE = /^\d{4}(-\d{2}(-\d{2})?)?$/;

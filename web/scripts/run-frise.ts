@@ -5,7 +5,10 @@
  * Same path as the app: text layer -> rule detections (accepted as they
  * are, standing in for the human review) -> redaction -> re-read and
  * verification -> page images of the *redacted* PDF -> segmentDocument ->
- * buildTimeline. A document that fails verification is not sent.
+ * buildTimeline. A document that fails verification is not sent. As in the
+ * app, the birth year is read from the detections, locally, and only turns
+ * ages into years once the model has answered (antecedents it cannot place
+ * are kept in timeline.undated).
  *
  * Run from web/ (key from the environment, never printed):
  *   OPENROUTER_API_KEY=... npx vite-node scripts/run-frise.ts
@@ -22,6 +25,7 @@ import type { CloudPolicy } from "../src/cloud/guard";
 import { extractPageText, openPdf, redactPdf, renderPagePng, SCAN_TEXT_THRESHOLD } from "../src/core/pdf";
 import type { PageText } from "../src/core/types";
 import { buildManifest } from "../src/core/verify";
+import { birthYearFromDetections } from "../src/notebook/age";
 import { segmentDocument } from "../src/notebook/segment";
 import { buildTimeline } from "../src/notebook/timeline";
 import { detectCorpus } from "../src/pii/detect";
@@ -115,8 +119,13 @@ async function runDossier(slug: string) {
     manifests[src.id] = manifest;
   }
 
-  const timeline = await buildTimeline({ observations, pagesByDoc, manifests, policy, fetchImpl });
-  console.log(`  frise: ${timeline.tracks.length} tracks, ${timeline.events.length} events`);
+  const birthYear = birthYearFromDetections(detections);
+  const timeline = await buildTimeline({ observations, pagesByDoc, manifests, policy, fetchImpl, birthYear });
+  const fromAge = timeline.events.filter((e) => e.fromAge).length;
+  console.log(
+    `  frise: ${timeline.tracks.length} tracks, ${timeline.events.length} events (${fromAge} dated from an age), ` +
+      `${timeline.undated.length} undated; birth year ${birthYear === null ? "unknown" : "known"}`,
+  );
   return { dossier: slug, model, ranAt: new Date().toISOString(), review: "automatic detections accepted as they are", docs, observations, timeline };
 }
 
