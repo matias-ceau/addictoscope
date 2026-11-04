@@ -30,7 +30,7 @@ web/                 application web (pseudonymisation locale, puis espace d'ana
 src/addictoscope/   package Python (modèle de frise, extraction de référence, ...)
 tests/               tests pytest
 scripts/             génération des documents d'exemple fictifs
-data/anonymized/     documents d'exemple fictifs : PDF, Word, texte (+ ground_truth.json des identifiants plantés)
+data/anonymized/     documents d'exemple **synthétiques** : PDF, Word, texte (+ ground_truth.json : identifiants fictifs plantés, voir data/anonymized/README.md)
 data/anonymized/dossiers/  dossiers cliniques fictifs complets, avec frise et contradictions attendues
 data/processed/      sorties structurées d'exemple
 docs/                cahier des charges, templates, références, note RGPD

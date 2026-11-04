@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frise opiaces-tso</title>
+<style>
+:root{--bg:#fafaf7;--fg:#1d1d1b;--mute:#6b6b66;--line:#d8d8d0;--panel:#fff;--axis:#1d1d1b}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#eceae3;--mute:#9a9a92;--line:#34342f;--panel:#1f1f1c;--axis:#eceae3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:12px 16px 32px}
+h1{font-size:18px;margin:4px 0 2px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+button,.chip{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px}
+.chip i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chip[aria-pressed=false]{opacity:.4}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;touch-action:pan-y}
+svg{display:block;width:100%}
+text{fill:var(--fg);font-size:12px}
+.mute{fill:var(--mute)}
+.ev{cursor:pointer}
+.ev:hover rect,.ev.sel rect,.ev:hover path,.ev.sel path{stroke:var(--fg);stroke-width:1.6}
+#detail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:10px;min-height:76px}
+#detail b{font-size:15px}
+.obs{border:1px solid var(--line);border-radius:8px;margin-top:6px;overflow:hidden}
+.oh{background:var(--bg);color:var(--mute);font-size:12px;padding:4px 10px;border-bottom:1px solid var(--line)}
+.ot{white-space:pre-wrap;padding:8px 10px;max-height:240px;overflow:auto;font-size:13px}
+mark{background:#fde047;color:#1d1d1b;border-radius:3px;padding:0 1px}
+@media (prefers-color-scheme:dark){mark{background:#a16207;color:#fff}}
+#detail .k{color:var(--mute);font-size:12px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--mute);font-size:12px;margin-top:8px}
+.sw{display:inline-block;width:22px;height:9px;border-radius:2px;vertical-align:middle;margin-right:4px}
+</style>
+</head>
+<body>
+<main>
+<h1>Frise chronologique — opiaces-tso</h1>
+<p class="sub"><b>Données synthétiques</b> (dossier entièrement inventé). Touchez une barre pour lire la note et l'observation d'origine ; faites glisser la fenêtre de l'aperçu pour zoomer.</p>
+<div class="bar" id="kinds"></div>
+<div class="bar" id="presets"></div>
+<div class="chart"><svg id="ov" height="54"></svg></div>
+<div class="chart" style="margin-top:8px"><svg id="main"></svg></div>
+<div class="legend" id="legend"></div>
+<div id="detail"><span class="k">Aucun élément sélectionné.</span></div>
+</main>
+<script>
+const D = {"dossier": "opiaces-tso", "tracks": [{"id": "t19", "kind": "life_event", "label": "Placements en foyer"}, {"id": "t20", "kind": "life_event", "label": "Incarcération"}, {"id": "t21", "kind": "life_event", "label": "Suspension du permis"}, {"id": "t22", "kind": "life_event", "label": "Naissance de sa fille"}, {"id": "t23", "kind": "life_event", "label": "Décès de son père"}, {"id": "t24", "kind": "life_event", "label": "Information préoccupante (PMI)"}, {"id": "t25", "kind": "life_event", "label": "Mesure d'AEMO"}, {"id": "t26", "kind": "life_event", "label": "Chantier d'insertion"}, {"id": "t1", "kind": "substance_use", "label": "Cannabis"}, {"id": "t2", "kind": "substance_use", "label": "Héroïne"}, {"id": "t3", "kind": "substance_use", "label": "Cocaïne"}, {"id": "t5", "kind": "substance_use", "label": "Tabac"}, {"id": "t4", "kind": "substance_use", "label": "Benzodiazépines (hors prescription)"}, {"id": "t6", "kind": "psychiatric", "label": "TDAH (enfance)"}, {"id": "t7", "kind": "somatic", "label": "Hépatite C"}, {"id": "t8", "kind": "somatic", "label": "Overdose, réanimation"}, {"id": "t13", "kind": "medication", "label": "Méthylphénidate"}, {"id": "t9", "kind": "medication", "label": "Méthadone sirop"}, {"id": "t12", "kind": "medication", "label": "Sofosbuvir/velpatasvir"}, {"id": "t11", "kind": "medication", "label": "Naloxone (kit)"}, {"id": "t10", "kind": "medication", "label": "Méthadone gélules"}, {"id": "t14", "kind": "therapeutic_psycho", "label": "Suivi CSAPA (TSO)"}, {"id": "t15", "kind": "therapeutic_psycho", "label": "Délivrance quotidienne au CSAPA"}, {"id": "t16", "kind": "therapeutic_psycho", "label": "Suivi éducatif"}, {"id": "t18", "kind": "therapeutic_psycho", "label": "Accompagnement social"}, {"id": "t17", "kind": "therapeutic_psycho", "label": "Réduction des risques crack"}], "events": [{"track": "t1", "start": "2002", "end": null, "ongoing": true, "mode": "usage", "loss": false, "certainty": "year", "note": "Depuis 14 ans ; 4-5 joints/j en 2023, 2 joints le soir en février 2024.", "sources": [], "evidence": [{"id": "historique 14/03/2022", "marks": [[296, 329]]}, {"id": "historique 12/01/2023", "marks": [[402, 425]]}, {"id": "historique 06/02/2024", "marks": [[251, 286]]}], "s": "2002-01-01", "e": null, "point": false, "startLabel": "2002", "endLabel": null}, {"track": "t2", "start": "2006", "end": "2012", "ongoing": false, "mode": "usage", "loss": false, "certainty": "approx", "note": "Sniffée puis injectée (vers 2008-2009), nombreuses rechutes jusqu'à la méthadone.", "sources": [], "evidence": [{"id": "historique 14/03/2022", "marks": [[170, 296]]}, {"id": "historique 12/01/2023", "marks": [[122, 210], [483, 545]]}], "s": "2006-01-01", "e": "2012-12-31", "point": false, "startLabel": "2006", "endLabel": "2012"}, {"track": "t2", "start": "2022-12", "end": "2023-02-18", "ongoing": false, "mode": "rechute", "loss": false, "certainty": "month", "note": "Reprise occasionnelle cachée à l'équipe.", "sources": [], "evidence": [{"id": "historique 22/02/2023", "marks": [[101, 270]]}], "s": "2022-12-01", "e": "2023-02-18", "point": false, "startLabel": "2022-12", "endLabel": "2023-02-18"}, {"track": "t2", "start": "2023-02-18", "end": null, "ongoing": false, "mode": "intoxication", "loss": false, "certainty": "exact", "note": "Overdose héroïne + clonazépam de rue, naloxone par le SMUR, 24h de réanimation.", "sources": [], "evidence": [{"id": "historique 20/02/2023", "marks": [[73, 183], [183, 261]]}, {"id": "historique 22/02/2023", "marks": [[15, 101]]}], "s": "2023-02-18", "e": null, "point": true, "startLabel": "2023-02-18", "endLabel": null}, {"track": "t3", "start": "2023-01", "end": "2023-09", "ongoing": false, "mode": "usage", "loss": false, "certainty": "approx", "note": "Occasionnelle en soirée (1 à 2 fois par mois), ancienneté inconnue.", "sources": [], "evidence": [{"id": "historique 12/01/2023", "marks": [[425, 464]]}, {"id": "historique 15/05/2023", "marks": [[137, 166]]}], "s": "2023-01-01", "e": "2023-09-30", "point": false, "startLabel": "2023-01", "endLabel": "2023-09"}, {"track": "t3", "start": "2023-09", "end": "2023-10", "ongoing": false, "mode": "rechute", "loss": false, "certainty": "month", "note": "Crack quasi quotidien, arrêt fin octobre - début novembre 2023.", "sources": [], "evidence": [{"id": "historique 26/09/2023", "marks": [[19, 120], [219, 262]]}, {"id": "historique 03/10/2023", "marks": [[15, 95]]}, {"id": "historique 14/11/2023", "marks": [[296, 403]]}, {"id": "historique 30/11/2023", "marks": [[15, 102]]}], "s": "2023-09-01", "e": "2023-10-31", "point": false, "startLabel": "2023-09", "endLabel": "2023-10"}, {"track": "t4", "start": "2023-02-18", "end": null, "ongoing": false, "mode": "usage", "loss": false, "certainty": "exact", "note": "Clonazépam acheté dans la rue.", "sources": [], "evidence": [{"id": "historique 20/02/2023", "marks": [[73, 183]]}, {"id": "historique 22/02/2023", "marks": [[15, 101]]}], "s": "2023-02-18", "e": null, "point": true, "startLabel": "2023-02-18", "endLabel": null}, {"track": "t5", "start": "2023-01", "end": null, "ongoing": true, "mode": "usage", "loss": false, "certainty": "approx", "note": "1 paquet/j, ancienneté inconnue.", "sources": [], "evidence": [{"id": "historique 12/01/2023", "marks": [[464, 482]]}, {"id": "historique 06/02/2024", "marks": [[354, 381]]}], "s": "2023-01-01", "e": null, "point": false, "startLabel": "2023-01", "endLabel": null}, {"track": "t6", "start": "1997", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": "approx", "note": "Méthylphénidate à 9 ans selon le patient, non réévalué.", "sources": [], "evidence": [{"id": "historique 22/02/2023", "marks": [[400, 507]]}], "s": "1997-01-01", "e": null, "point": true, "startLabel": "1997", "endLabel": null}, {"track": "t7", "start": "2019", "end": "2019", "ongoing": false, "mode": null, "loss": false, "certainty": "year", "note": "Traitée par sofosbuvir/velpatasvir, guérie (RVS12).", "sources": [], "evidence": [{"id": "historique 12/01/2023", "marks": [[280, 340]]}], "s": "2019-01-01", "e": "2019-12-31", "point": false, "startLabel": "2019", "endLabel": "2019"}, {"track": "t8", "start": "2023-02-18", "end": "2023-02-19", "ongoing": false, "mode": null, "loss": false, "certainty": "exact", "note": "Sortie contre avis médical.", "sources": [], "evidence": [{"id": "historique 20/02/2023", "marks": [[261, 319]]}], "s": "2023-02-18", "e": "2023-02-19", "point": false, "startLabel": "2023-02-18", "endLabel": "2023-02-19"}, {"track": "t9", "start": "2012", "end": "2024-01-09", "ongoing": false, "mode": null, "loss": false, "certainty": "year", "note": "60 mg/j ; 70 mg/j à partir du 22/02/2023 ; 80 mg/j à partir du 12/10/2023.", "sources": [], "evidence": [{"id": "historique 12/01/2023", "marks": [[34, 121], [122, 210], [560, 588]]}, {"id": "historique 22/02/2023", "marks": [[15, 101], [640, 714]]}, {"id": "historique 03/10/2023", "marks": [[313, 375]]}], "s": "2012-01-01", "e": "2024-01-09", "point": false, "startLabel": "2012", "endLabel": "2024-01-09"}, {"track": "t10", "start": "2024-01-09", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": "exact", "note": "80 mg/j.", "sources": [], "evidence": [{"id": "historique 30/11/2023", "marks": [[102, 148]]}, {"id": "historique 09/01/2024", "marks": [[0, 107]]}], "s": "2024-01-09", "e": null, "point": false, "startLabel": "2024-01-09", "endLabel": null}, {"track": "t11", "start": "2023-02-20", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": "exact", "note": "Refusé le 12/01/2023, remis après l'overdose.", "sources": [], "evidence": [{"id": "historique 12/01/2023", "marks": [[588, 668]]}, {"id": "historique 20/02/2023", "marks": [[73, 183], [452, 513]]}], "s": "2023-02-20", "e": null, "point": true, "startLabel": "2023-02-20", "endLabel": null}, {"track": "t12", "start": "2019", "end": "2019", "ongoing": false, "mode": null, "loss": false, "certainty": "year", "note": "", "sources": [], "evidence": [{"id": "historique 12/01/2023", "marks": [[280, 340]]}], "s": "2019-01-01", "e": "2019-12-31", "point": false, "startLabel": "2019", "endLabel": "2019"}, {"track": "t13", "start": "1997", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": "approx", "note": "Dans l'enfance, selon le patient.", "sources": [], "evidence": [{"id": "historique 22/02/2023", "marks": [[400, 507]]}], "s": "1997-01-01", "e": null, "point": true, "startLabel": "1997", "endLabel": null}, {"track": "t14", "start": "2012", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": "year", "note": "", "sources": [], "evidence": [{"id": "historique 12/01/2023", "marks": [[15, 34], [122, 210]]}], "s": "2012-01-01", "e": null, "point": false, "startLabel": "2012", "endLabel": null}, {"track": "t15", "start": "2023-02-22", "end": "2023-05-02", "ongoing": false, "mode": null, "loss": false, "certainty": "exact", "note": "", "sources": [], "evidence": [{"id": "historique 22/02/2023", "marks": [[714, 762]]}, {"id": "historique 13/04/2023", "marks": [[114, 189]]}, {"id": "historique 15/05/2023", "marks": [[167, 234]]}], "s": "2023-02-22", "e": "2023-05-02", "point": false, "startLabel": "2023-02-22", "endLabel": "2023-05-02"}, {"track": "t16", "start": "2023-03-07", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": "exact", "note": "", "sources": [], "evidence": [{"id": "historique 07/03/2023", "marks": [[0, 39]]}, {"id": "historique 06/02/2024", "marks": []}], "s": "2023-03-07", "e": null, "point": false, "startLabel": "2023-03-07", "endLabel": null}, {"track": "t17", "start": "2023-10-03", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": "exact", "note": "", "sources": [], "evidence": [{"id": "historique 03/10/2023", "marks": [[375, 433]]}], "s": "2023-10-03", "e": null, "point": true, "startLabel": "2023-10-03", "endLabel": null}, {"track": "t18", "start": "2023-03-28", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": "exact", "note": "FSL, permis, PLIE, information préoccupante.", "sources": [], "evidence": [{"id": "historique 28/03/2023", "marks": [[386, 516]]}, {"id": "historique 14/11/2023", "marks": [[0, 175]]}], "s": "2023-03-28", "e": null, "point": false, "startLabel": "2023-03-28", "endLabel": null}, {"track": "t19", "start": "2002", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": "approx", "note": "À l'adolescence, date imprécise.", "sources": [], "evidence": [{"id": "historique 14/03/2022", "marks": [[533, 634]]}], "s": "2002-01-01", "e": null, "point": true, "startLabel": "2002", "endLabel": null}, {"track": "t20", "start": "2014", "end": "2015", "ongoing": false, "mode": null, "loss": false, "certainty": "year", "note": "18 mois.", "sources": [], "evidence": [{"id": "historique 12/01/2023", "marks": [[210, 280]]}, {"id": "historique 14/03/2022", "marks": []}], "s": "2014-01-01", "e": "2015-12-31", "point": false, "startLabel": "2014", "endLabel": "2015"}, {"track": "t21", "start": "2019", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": "year", "note": "", "sources": [], "evidence": [{"id": "historique 07/03/2023", "marks": [[162, 266]]}], "s": "2019-01-01", "e": null, "point": true, "startLabel": "2019", "endLabel": null}, {"track": "t22", "start": "2020-03", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": "approx", "note": "Mars ou avril 2020.", "sources": [], "evidence": [{"id": "historique 14/03/2022", "marks": [[425, 533]]}, {"id": "historique 07/03/2023", "marks": [[267, 379]]}], "s": "2020-03-01", "e": null, "point": true, "startLabel": "2020-03", "endLabel": null}, {"track": "t23", "start": "2021-08", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": "month", "note": "Cancer du poumon.", "sources": [], "evidence": [{"id": "historique 14/03/2022", "marks": [[634, 691]]}, {"id": "historique 22/02/2023", "marks": [[101, 270]]}], "s": "2021-08-01", "e": null, "point": true, "startLabel": "2021-08", "endLabel": null}, {"track": "t24", "start": "2023-11-08", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": "exact", "note": "", "sources": [], "evidence": [{"id": "historique 14/11/2023", "marks": [[0, 175]]}], "s": "2023-11-08", "e": null, "point": true, "startLabel": "2023-11-08", "endLabel": null}, {"track": "t25", "start": "2024-01", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": "month", "note": "Décidée par le juge des enfants fin janvier 2024.", "sources": [], "evidence": [{"id": "historique 06/02/2024", "marks": [[109, 250]]}], "s": "2024-01-01", "e": null, "point": false, "startLabel": "2024-01", "endLabel": null}, {"track": "t26", "start": "2024-01-22", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": "exact", "note": "Espaces verts, 26h par semaine.", "sources": [], "evidence": [{"id": "historique 06/02/2024", "marks": [[0, 88]]}], "s": "2024-01-22", "e": null, "point": false, "startLabel": "2024-01-22", "endLabel": null}], "obs": {"historique 14/03/2022": {"label": "Observation médicale · Interne", "date": "14/03/2022", "text": "Observations :\nPatient de 33 ans suivi au CSAPA depuis 2011 pour un trouble de l'usage des opiacés sous méthadone (60 mg/j), vu ce jour en remplacement du Dr [identité].\nLe patient rapporte une première consommation d'héroïne \"à 17 ans\", d'abord sniffée, puis injectée à partir de 20 ans environ. Cannabis depuis l'âge de 14 ans. Nombreuses périodes de rechute. Il a été incarcéré \"pendant 2 ans\" pour trafic de stupéfiants.\nIl vit en appartement avec sa compagne Mme [identité] [identité] et leur fille [identité], née en mars 2020. Il décrit une enfance marquée par la violence paternelle et des placements en foyer à l'adolescence. Son père est décédé l'été dernier d'un cancer du poumon.\nÀ l'entretien, contact superficiel, discours parfois manipulateur concernant les ordonnances (demande d'avance de délivrance), multiples condamnations, absence apparente de culpabilité : on évoque un trouble de la personnalité antisociale.\nConclusions :\nRenouvellement méthadone 60 mg/j. Refus de délivrance anticipée expliqué au patient. Urines : méthadone +, THC +."}, "historique 12/01/2023": {"label": "Consultation médicale · Médecin généraliste", "date": "12/01/2023", "text": "Observations :\nRenouvellement TSO. Méthadone sirop 60 mg/j, délivrance hebdomadaire à la pharmacie du Marché depuis 2021.\nRappel : héroïne à partir de 18 ans (2006), IV dès 2009, méthadone au CSAPA depuis 2012. Incarcération 2014-2015 (18 mois), méthadone poursuivie en détention. VHC traité en 2019 (sofosbuvir/velpatasvir), guéri (RVS12).\nActuellement : pas d'héroïne depuis \"plus d'un an\" selon lui. Cannabis 4-5 joints/j. Cocaïne \"de temps en temps en soirée\". Tabac 1 paquet/j.\nUrines : méthadone +, cannabis +, cocaïne +, opiacés -, BZD -.\nConclusions :\nPoursuite méthadone 60 mg/j. Kit de naloxone proposé : refusé (\"j'en ai pas besoin, je touche plus à rien\")."}, "historique 20/02/2023": {"label": "Observation infirmière · IDE", "date": "20/02/2023", "text": "Pt vu en urgence a la demande de sa compagne [identité] (appel ce matin). Samedi soir 18/02, overdose a domicile apres \"un retour\" sur l'heroine avec un ami + \"2 cachets de Rivotril\". Retrouvé cyanosé par [identité], massage + appel au 15, naloxone par le SMUR. Hospit 24h en réa, sorti contre avis médical le dimanche.\nCe jour : fatigué, honteux, \"j'ai cru que j'allais plus voir ma fille\". Pas d'idées suicidaires, dit que c'etait \"pas pour mourir\".\nKit naloxone remis (2 sprays) + formation faite a [identité]."}, "historique 22/02/2023": {"label": "Consultation psychiatrique · Psychiatre", "date": "22/02/2023", "text": "Observations :\nConsultation après l'overdose du 18/02/2023 (héroïne + clonazépam acheté dans la rue). Reprise de l'héroïne \"occasionnelle\" depuis décembre, à l'insu de l'équipe, dans un contexte de deuil non élaboré (décès du père en août 2021) et de tensions de couple.\nPas d'élément en faveur d'un geste suicidaire. Pas de trouble de l'humeur caractérisé. Impulsivité, intolérance à la frustration. Antécédent de TDAH dans l'enfance (méthylphénidate à 9 ans selon le patient), non réévalué à l'âge adulte.\nPas d'argument franc pour un trouble de la personnalité antisociale (cf. note de l'interne du 14/03/2022, à nuancer).\nConclusions :\nAugmentation de la méthadone à 70 mg/j (paliers de 5 mg tous les 3 jours). Délivrance quotidienne au CSAPA pendant 1 mois. Pas de BZD prescrite. Suivi éducatif rapproché proposé (M. [identité])."}, "historique 07/03/2023": {"label": "Entretien éducatif · Éducateur spécialisé", "date": "07/03/2023", "text": "Premier entretien éducatif depuis l'OD. [identité] arrive à l'heure, détendu. On parle de sa journée type : lever tard, joints dès le réveil, \"je tourne en rond\". Il aimerait retrouver du travail (a déjà fait des chantiers en intérim, permis B suspendu depuis 2019).\nIl parle beaucoup de sa fille [identité] (\"elle a 3 ans le mois prochain\") et dit que c'est elle qui le \"tient\".\nProjet : chantier d'insertion, inscription au PLIE. Prochain RDV dans 15 jours."}, "historique 28/03/2023": {"label": "Entretien social · Assistante sociale", "date": "28/03/2023", "text": "Mise à jour du dossier. M. [identité] [identité], né le [identité] à Bordeaux, N° SS [identité]. Vit avec sa compagne Mme [identité] [identité] et leur fille au [identité], 33270 FLOIRAC. Contact : [identité].\nSa mère, Mme [identité] [identité], l'aide ponctuellement (courses, garde d'[identité]).\nRessources : RSA couple, APL. Dette de loyer de 1 800 euros auprès du bailleur social.\nDémarches : dossier FSL pour la dette de loyer, démarches pour récupérer le permis (stage + visite médicale), inscription au PLIE."}, "historique 13/04/2023": {"label": "Délivrance · IDE", "date": "13/04/2023", "text": "Délivrance methadone 70mg. Pt ok, pas d'odeur d'OH, pupilles normales. Demande à repasser en délivrance pharmacie. Vu avec Dr [identité] : maintien de la délivrance au CSAPA jusqu'au 30/04."}, "historique 15/05/2023": {"label": "Consultation psychiatrique · Psychiatre", "date": "15/05/2023", "text": "Observations :\nStabilisé à 70 mg/j depuis début mars. Pas d'héroïne depuis l'overdose (urines opiacés négatives x6). Cannabis 4 joints/j. Cocaïne 1 à 2 fois par mois.\nReprise de la délivrance hebdomadaire en pharmacie depuis le 02/05.\nConclusions :\nPoursuite 70 mg/j. Passage aux gélules de méthadone possible (sous sirop depuis 2012), à discuter au prochain RDV."}, "historique 26/09/2023": {"label": "Observation infirmière · IDE", "date": "26/09/2023", "text": "Pt vu a sa demande. Consomme du crack depuis environ 3 semaines, \"tous les soirs ou presque\", avec des amis du quartier. Dépenses ++ (300 euros en 1 semaine). Dort 3-4h/nuit. [identité] menace de partir avec la petite.\nUrines : cocaine +, methadone +, opiaces -.\nRDV medical avancé."}, "historique 03/10/2023": {"label": "Consultation psychiatrique · Psychiatre", "date": "03/10/2023", "text": "Observations :\nRechute de cocaïne basée (crack) depuis début septembre 2023, quasi quotidienne. Craving important. Plaintes de manque en fin de journée (bâillements, douleurs) : méthadone probablement insuffisante, pas d'inducteur enzymatique retrouvé.\nThymie : irritabilité, pas d'idée suicidaire.\nConclusions :\nAugmentation de la méthadone à 80 mg/j à partir du 12/10/2023. Orientation vers le programme de RdR crack (kits, pipes). Suivi éducatif rapproché. Information sur les risques pour la garde d'[identité]."}, "historique 20/10/2023": {"label": "Délivrance · IDE", "date": "20/10/2023", "text": "Délivrance 70mg. RAS. Pt pressé."}, "historique 14/11/2023": {"label": "Entretien social · Assistante sociale", "date": "14/11/2023", "text": "Information préoccupante transmise par la PMI le 08/11/2023 concernant [identité] (absences répétées à l'école maternelle, père vu \"pas dans son état\" à la sortie de l'école). M. [identité] très inquiet, en colère contre \"l'école qui balance\".\nExplication de la procédure, accompagnement proposé. Contact avec Mme [identité], qui confirme les tensions et dit qu'il \"a arrêté le crack depuis 2 semaines\"."}, "historique 30/11/2023": {"label": "Consultation psychiatrique · Psychiatre", "date": "30/11/2023", "text": "Observations :\nArrêt du crack depuis fin octobre selon lui, urines du 21/11 négatives pour la cocaïne. Méthadone 80 mg/j : plus de signes de manque.\nTrès mobilisé par l'information préoccupante. Évaluation sociale par l'ASE en cours.\nConclusions :\nPoursuite 80 mg/j. Passage aux gélules accepté, à la même dose, à partir du 08/01/2024. Poursuite du suivi éducatif."}, "historique 09/01/2024": {"label": "Délivrance · IDE", "date": "09/01/2024", "text": "Premiere délivrance de gelules 80 mg (relais du sirop prévu le 08/01, décalé d'un jour : pharmacie fermée). Explications sur les prises et le stockage hors de portée de l'enfant ++. Pt content."}, "historique 06/02/2024": {"label": "Entretien éducatif · Éducateur spécialisé", "date": "06/02/2024", "text": "[identité] a commencé un chantier d'insertion (espaces verts) le 22/01, 26h par semaine. Fatigué mais \"fier\". Une mesure d'AEMO a été décidée par le juge des enfants fin janvier : il le vit comme \"une surveillance\" mais reconnaît que \"ça peut aider\".\nCannabis réduit à 2 joints le soir. Plus de cocaïne depuis \"octobre\" (début novembre selon [identité]). Tabac toujours 1 paquet/j."}}, "ref": "2024-02-01", "kinds": [{"id": "life_event", "label": "Événements de vie", "light": "#b45309", "dark": "#f59e0b"}, {"id": "substance_use", "label": "Consommations", "light": "#c62828", "dark": "#ef6b6b"}, {"id": "psychiatric", "label": "Psychopathologie", "light": "#6a4bb0", "dark": "#a78bfa"}, {"id": "somatic", "label": "Somatique", "light": "#0f7b6c", "dark": "#34d3b9"}, {"id": "medication", "label": "Médicaments", "light": "#1d5fb4", "dark": "#6aa6f0"}, {"id": "therapeutic_psycho", "label": "Prises en charge", "light": "#4d7c0f", "dark": "#a3d95b"}], "modeLabel": {"usage": "usage", "intoxication": "intoxication", "sevrage": "sevrage", "rechute": "rechute", "craving": "craving"}, "certaintyLabel": {"exact": "date exacte", "month": "mois", "year": "année", "approx": "date approximative"}};
+const NS = "http://www.w3.org/2000/svg";
+const dark = () => matchMedia("(prefers-color-scheme: dark)").matches;
+const DAY = 864e5;
+const t = (iso) => Date.parse(iso + "T00:00:00Z");
+const REF = t(D.ref);
+const kindOf = Object.fromEntries(D.kinds.map(k => [k.id, k]));
+const trackOf = Object.fromEntries(D.tracks.map(x => [x.id, x]));
+const color = (kind) => kindOf[kind][dark() ? "dark" : "light"];
+const MODE_OP = {usage:.55, craving:.7, sevrage:.7, intoxication:.85, rechute:1};
+const EVENTS = D.events.map((e, i) => ({
+  ...e, i, kind: trackOf[e.track].kind, label: trackOf[e.track].label,
+  a: t(e.s), b: e.e ? t(e.e) : (e.ongoing ? REF : t(e.s)),
+}));
+const hidden = new Set();
+let LABEL_W = 150; const ROW = 26, PADR = 14, AXIS = 84;
+let DOM_MIN = Math.min(...EVENTS.map(e => e.a)) - 200*DAY, DOM_MAX = REF + 60*DAY;
+let view = [DOM_MIN, DOM_MAX];
+
+const el = (name, attrs = {}, parent, text) => {
+  const n = document.createElementNS(NS, name);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  if (text !== undefined) n.textContent = text;
+  if (parent) parent.appendChild(n);
+  return n;
+};
+const fmt = (s) => { if (!s) return ""; const [y,m,d] = s.split("-"); return d ? `${d}/${m}/${y}` : m ? `${m}/${y}` : y; };
+const yr = (ms) => new Date(ms).getUTCFullYear();
+
+function ticks(a, b) {
+  const span = (b - a) / (365.25*DAY), out = [];
+  const step = span > 40 ? 10 : span > 18 ? 5 : span > 9 ? 2 : span > 3.5 ? 1 : 0;
+  if (step) { for (let y = Math.ceil(yr(a)/step)*step; Date.UTC(y,0,1) <= b; y += step) out.push([Date.UTC(y,0,1), String(y), true]); }
+  else {
+    const q = span > 1.6 ? 3 : 1;
+    for (let y = yr(a); y <= yr(b); y++) for (let m = 0; m < 12; m += q) {
+      const v = Date.UTC(y, m, 1); if (v < a || v > b) continue;
+      out.push([v, m === 0 ? String(y) : `${String(m+1).padStart(2,"0")}/${String(y).slice(2)}`, m === 0]);
+    }
+  }
+  return out;
+}
+
+const bolt = (x, y, s=7) => `M${x} ${y-s} L${x-s*.55} ${y+.1} L${x-.05*s} ${y+.1} L${x-s*.35} ${y+s} L${x+s*.6} ${y-.25*s} L${x+.05*s} ${y-.25*s} Z`;
+
+function drawMain() {
+  const svg = document.getElementById("main");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800;
+  LABEL_W = W < 600 ? 92 : 150;
+  const innerW = W - LABEL_W - PADR;
+  const x = (ms) => LABEL_W + (ms - view[0]) / (view[1] - view[0]) * innerW;
+  const kinds = D.kinds.filter(k => !hidden.has(k.id));
+  const rows = [];
+  for (const k of kinds) if (k.id !== "life_event") {
+    rows.push({head: k});
+    for (const tr of D.tracks.filter(tr => tr.kind === k.id)) rows.push({track: tr});
+  }
+  const showLife = !hidden.has("life_event");
+  const H = AXIS + 18 + rows.length * ROW + 24;
+  svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const defs = el("defs", {}, svg);
+  const cp = el("clipPath", {id: "clip"}, defs); el("rect", {x: LABEL_W, y: 0, width: innerW, height: H}, cp);
+  // grid + axis
+  const gridG = el("g", {}, svg);
+  for (const [v, lab, major] of ticks(...view)) {
+    const xx = x(v);
+    el("line", {x1: xx, x2: xx, y1: AXIS - 4, y2: H - 20, stroke: "var(--line)", "stroke-width": major ? 1 : .5}, gridG);
+    el("text", {x: xx + 3, y: H - 7, class: "mute"}, gridG, lab);
+  }
+  el("line", {x1: LABEL_W, x2: W - PADR, y1: AXIS - 4, y2: AXIS - 4, stroke: "var(--axis)", "stroke-width": 4, "stroke-linecap": "round"}, svg);
+  const g = el("g", {"clip-path": "url(#clip)"}, svg);
+  // life events on the axis
+  if (showLife) {
+    const life = EVENTS.filter(e => e.kind === "life_event" && e.b >= view[0] && e.a <= view[1]);
+    const lanes = [[], [], [], [], []];
+    for (const e of life.sort((p, q) => p.a - q.a)) {
+      const pt = e.point || (e.b - e.a) < 120*DAY;
+      const xa = x(Math.max(e.a, view[0])), xb = pt ? xa : x(Math.min(e.b, view[1]));
+      const w = e.label.length * 5.9 + 10, flip = xa + w > W - PADR;
+      const iv = flip ? [xa - w, xa + 4] : [xa - 4, xa + w];
+      let ln = lanes.findIndex(l => l.every(o => o[1] < iv[0] || o[0] > iv[1]));
+      if (ln < 0) ln = lanes.length - 1;
+      lanes[ln].push(iv);
+      const ty = AXIS - 14 - ln * 13 - 4;
+      const grp = el("g", {class: "ev", "data-i": e.i}, g);
+      if (!pt) el("rect", {x: xa, y: AXIS - 8, width: Math.max(2, xb - xa), height: 8, rx: 3, fill: color("life_event"), opacity: .85}, grp);
+      else el("path", {d: `M${xa} ${AXIS-11} l6 6 l-6 6 l-6 -6 Z`, fill: color("life_event")}, grp);
+      el("line", {x1: xa, x2: xa, y1: ty + 3, y2: AXIS - 11, stroke: color("life_event"), "stroke-width": 1, opacity: .6}, grp);
+      el("text", {x: flip ? xa - 3 : xa + 3, y: ty, "font-size": 11, "text-anchor": flip ? "end" : "start", "pointer-events": "none"}, grp, e.label);
+      if (e.loss) el("path", {d: bolt(xa, AXIS + 6, 6), fill: "#e11d48"}, grp);
+    }
+  }
+  // rows
+  let y = AXIS + 6;
+  for (const r of rows) {
+    if (r.head) {
+      el("text", {x: 6, y: y + 17, "font-weight": 600, fill: color(r.head.id)}, svg, r.head.label.toUpperCase()).setAttribute("font-size", 11);
+      el("line", {x1: 6, x2: W - PADR, y1: y + ROW - 3, y2: y + ROW - 3, stroke: color(r.head.id), opacity: .35}, svg);
+    } else {
+      const cut = W < 600 ? 13 : 24;
+      const lab = r.track.label.length > cut ? r.track.label.slice(0, cut - 1) + "…" : r.track.label;
+      el("text", {x: 12, y: y + 17, class: "mute"}, svg, lab).appendChild(Object.assign(document.createElementNS(NS, "title"), {textContent: r.track.label}));
+      for (const e of EVENTS.filter(e => e.track === r.track.id)) {
+        if (e.b < view[0] || e.a > view[1]) continue;
+        const grp = el("g", {class: "ev", "data-i": e.i}, g);
+        const c = color(e.kind), op = e.mode ? (MODE_OP[e.mode] ?? .6) : .8;
+        const xa = x(e.a), xb = x(e.b);
+        const dash = e.certainty === "approx" ? "4 3" : null;
+        if (e.point || xb - xa < 5) {
+          el("path", {d: `M${xa} ${y+5} l7 7 l-7 7 l-7 -7 Z`, fill: c, opacity: op}, grp);
+        } else {
+          const rc = el("rect", {x: xa, y: y + 4, width: xb - xa, height: ROW - 10, rx: 4, fill: c, opacity: op}, grp);
+          if (dash) { rc.setAttribute("stroke", c); rc.setAttribute("stroke-dasharray", dash); rc.setAttribute("fill-opacity", .45); }
+          if (e.ongoing && xb < W) el("path", {d: `M${xb} ${y+4} l8 ${(ROW-10)/2} l-8 ${(ROW-10)/2} Z`, fill: c, opacity: op}, grp);
+        }
+        if (e.loss) el("path", {d: bolt(xa, y + ROW/2 - 1), fill: "#e11d48", stroke: "var(--panel)", "stroke-width": .8}, grp);
+        if (e.mode && e.mode !== "usage" && xb - xa > 56) el("text", {x: xa + 6, y: y + 17, fill: "#fff", "font-size": 10.5, "pointer-events": "none"}, grp, MODE_LABEL(e.mode)).setAttribute("style", "fill:#fff");
+      }
+    }
+    y += ROW;
+  }
+  svg.querySelectorAll(".ev").forEach(n => {
+    const go = () => select(+n.dataset.i);
+    n.addEventListener("click", go); n.addEventListener("pointerenter", (ev) => { if (ev.pointerType === "mouse") go(); });
+  });
+  if (selected !== null) svg.querySelector(`.ev[data-i="${selected}"]`)?.classList.add("sel");
+}
+const MODE_LABEL = (m) => D.modeLabel[m] || m;
+
+let selected = null;
+function obsHtml(v, esc) {
+  const o = D.obs[v.id];
+  let html = "", at = 0;
+  for (const [a, b] of v.marks) { html += esc(o.text.slice(at, a)) + "<mark>" + esc(o.text.slice(a, b)) + "</mark>"; at = b; }
+  html += esc(o.text.slice(at));
+  return `<div class="obs"><div class="oh">${o.date ? esc(o.date) + " · " : ""}${esc(o.label)}${o.summary_only ? " · résumé" : ""}</div><div class="ot">${html}</div></div>`;
+}
+function select(i) {
+  selected = i;
+  document.querySelectorAll(".ev").forEach(n => n.classList.toggle("sel", +n.dataset.i === i));
+  const e = EVENTS[i];
+  const when = e.endLabel ? (e.startLabel === e.endLabel ? fmt(e.startLabel) : `${fmt(e.startLabel)} → ${fmt(e.endLabel)}`)
+    : e.ongoing ? `depuis ${fmt(e.startLabel)} (en cours)` : fmt(e.startLabel);
+  const esc = (s) => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const bits = [];
+  if (e.mode) bits.push(MODE_LABEL(e.mode));
+  if (e.certainty) bits.push(D.certaintyLabel[e.certainty] || e.certainty);
+  if (e.loss) bits.push("⚡ perte de contrôle");
+  document.getElementById("detail").innerHTML =
+    `<b>${esc(e.label)}</b> <span class="k">· ${esc(kindOf[e.kind].label)} · ${when}${bits.length ? " · " + esc(bits.join(" · ")) : ""}</span>` +
+    (e.note ? `<div>${esc(e.note)}</div>` : "") +
+    (e.sources.length ? `<div class="k">Autres sources : ${e.sources.map(esc).join(" ; ")}</div>` : "") +
+    (e.evidence.length ? `<div class="k" style="margin-top:8px">${e.evidence.length > 1 ? "Observations" : "Observation"} d'origine${e.evidence.some(v => !v.marks.length) ? " (passage justificatif non repéré dans certaines)" : ", passage justificatif surligné"} :</div><div id="obs">` +
+      e.evidence.map(v => obsHtml(v, esc)).join("") + `</div>` : "");
+  document.querySelector("#obs mark")?.scrollIntoView({block: "nearest"});
+}
+
+// overview strip with a draggable window
+function drawOverview() {
+  const svg = document.getElementById("ov");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800, H = 54, L = 12, R = 12, innerW = W - L - R;
+  const x = (ms) => L + (ms - DOM_MIN) / (DOM_MAX - DOM_MIN) * innerW;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  for (const [v, lab, major] of ticks(DOM_MIN, DOM_MAX)) {
+    if (!major) continue;
+    el("line", {x1: x(v), x2: x(v), y1: 4, y2: H - 14, stroke: "var(--line)"}, svg);
+    el("text", {x: x(v) + 2, y: H - 3, class: "mute", "font-size": 10}, svg, lab);
+  }
+  const vis = EVENTS.filter(e => !hidden.has(e.kind));
+  const n = Math.max(1, new Set(vis.map(e => e.track)).size), tracks = [...new Set(vis.map(e => e.track))];
+  for (const e of vis) {
+    const r = tracks.indexOf(e.track), yy = 6 + r * (H - 24) / n;
+    el("rect", {x: x(e.a), y: yy, width: Math.max(2, x(e.b) - x(e.a)), height: Math.max(1.5, (H - 24) / n - 1), fill: color(e.kind), opacity: .7}, svg);
+  }
+  const win = el("rect", {x: x(view[0]), y: 1, width: Math.max(10, x(view[1]) - x(view[0])), height: H - 14, rx: 5, fill: "rgba(80,120,220,.16)", stroke: "#4f7be0", "stroke-width": 1.5, style: "cursor:grab"}, svg);
+  const hl = el("rect", {x: x(view[0]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const hr = el("rect", {x: x(view[1]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const inv = (px) => DOM_MIN + (px - L) / innerW * (DOM_MAX - DOM_MIN);
+  const MINSPAN = 120 * DAY;
+  const drag = (node, kind) => node.addEventListener("pointerdown", (ev) => {
+    ev.preventDefault(); node.setPointerCapture(ev.pointerId);
+    const x0 = ev.clientX, v0 = [...view], per = (DOM_MAX - DOM_MIN) / innerW;
+    const move = (m) => {
+      const d = (m.clientX - x0) * per;
+      let [a, b] = v0;
+      if (kind === "move") { const span = b - a; a = Math.min(Math.max(DOM_MIN, a + d), DOM_MAX - span); b = a + span; }
+      else if (kind === "l") a = Math.min(Math.max(DOM_MIN, a + d), b - MINSPAN);
+      else b = Math.max(Math.min(DOM_MAX, b + d), a + MINSPAN);
+      view = [a, b]; drawOverview(); drawMain();
+    };
+    const up = () => { node.removeEventListener("pointermove", move); node.removeEventListener("pointerup", up); };
+    node.addEventListener("pointermove", move); node.addEventListener("pointerup", up);
+  });
+  drag(win, "move"); drag(hl, "l"); drag(hr, "r");
+}
+
+function setView(a, b) { view = [Math.max(DOM_MIN, a), Math.min(DOM_MAX, b)]; redraw(); }
+function redraw() { drawOverview(); drawMain(); }
+
+// controls
+const kindsBar = document.getElementById("kinds");
+for (const k of D.kinds) {
+  const b = document.createElement("button"); b.className = "chip"; b.setAttribute("aria-pressed", "true");
+  b.innerHTML = `<i style="background:${k[dark() ? "dark" : "light"]}"></i>${k.label}`;
+  b.onclick = () => { hidden.has(k.id) ? hidden.delete(k.id) : hidden.add(k.id); b.setAttribute("aria-pressed", String(!hidden.has(k.id))); redraw(); };
+  kindsBar.appendChild(b);
+}
+const presets = document.getElementById("presets");
+const addPreset = (label, fn) => { const b = document.createElement("button"); b.textContent = label; b.onclick = fn; presets.appendChild(b); };
+addPreset("Tout", () => setView(DOM_MIN, DOM_MAX));
+for (const yrs of [10, 5, 2]) addPreset(`${yrs} dernières années`, () => setView(REF - yrs * 365.25 * DAY, DOM_MAX));
+addPreset("−", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]); setView(c - h, c + h); });
+addPreset("+", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]) / 4; setView(c - h, c + h); });
+document.getElementById("legend").innerHTML =
+  `<span><span class="sw" style="background:#888;opacity:.55"></span>usage</span><span><span class="sw" style="background:#888;opacity:.85"></span>intoxication</span>` +
+  `<span><span class="sw" style="background:#888"></span>rechute</span><span><span class="sw" style="background:#888;opacity:.45;border:1px dashed #888"></span>date approximative</span>` +
+  `<span style="color:#e11d48">⚡ perte de contrôle</span><span>◆ événement sans durée</span><span>▶ en cours</span>`;
+document.getElementById("main").addEventListener("wheel", (ev) => {
+  if (!ev.ctrlKey && !ev.shiftKey) return;
+  ev.preventDefault();
+  const r = ev.currentTarget.getBoundingClientRect(), W = r.width, f = (ev.clientX - r.left - LABEL_W) / (W - LABEL_W - PADR);
+  const c = view[0] + Math.min(Math.max(f, 0), 1) * (view[1] - view[0]), k = ev.deltaY > 0 ? 1.25 : .8;
+  setView(c - (c - view[0]) * k, c + (view[1] - c) * k);
+}, {passive: false});
+addEventListener("resize", redraw);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
+if (innerWidth < 600) view = [Math.max(DOM_MIN, REF - 5 * 365.25 * DAY), DOM_MAX];
+redraw();
+</script>
+</body>
+</html>
