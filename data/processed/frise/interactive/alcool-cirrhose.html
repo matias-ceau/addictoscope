@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frise alcool-cirrhose</title>
+<style>
+:root{--bg:#fafaf7;--fg:#1d1d1b;--mute:#6b6b66;--line:#d8d8d0;--panel:#fff;--axis:#1d1d1b}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#eceae3;--mute:#9a9a92;--line:#34342f;--panel:#1f1f1c;--axis:#eceae3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:12px 16px 32px}
+h1{font-size:18px;margin:4px 0 2px}
+.sub{color:var(--mute);margin:0 0 10px;font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+button,.chip{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px}
+.chip i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chip[aria-pressed=false]{opacity:.4}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;touch-action:pan-y}
+svg{display:block;width:100%}
+text{fill:var(--fg);font-size:12px}
+.mute{fill:var(--mute)}
+.ev{cursor:pointer}
+.ev:hover rect,.ev.sel rect,.ev:hover path,.ev.sel path{stroke:var(--fg);stroke-width:1.6}
+#detail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:10px;min-height:76px}
+#detail b{font-size:15px}
+.obs{border:1px solid var(--line);border-radius:8px;margin-top:6px;overflow:hidden}
+.oh{background:var(--bg);color:var(--mute);font-size:12px;padding:4px 10px;border-bottom:1px solid var(--line)}
+.ot{white-space:pre-wrap;padding:8px 10px;max-height:240px;overflow:auto;font-size:13px}
+mark{background:#fde047;color:#1d1d1b;border-radius:3px;padding:0 1px}
+@media (prefers-color-scheme:dark){mark{background:#a16207;color:#fff}}
+#detail .k{color:var(--mute);font-size:12px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--mute);font-size:12px;margin-top:8px}
+.sw{display:inline-block;width:22px;height:9px;border-radius:2px;vertical-align:middle;margin-right:4px}
+</style>
+</head>
+<body>
+<main>
+<h1>Frise chronologique — alcool-cirrhose</h1>
+<p class="sub"><b>Données synthétiques</b> (dossier entièrement inventé). Touchez une barre pour lire la note et l'observation d'origine ; faites glisser la fenêtre de l'aperçu pour zoomer.</p>
+<div class="bar" id="kinds"></div>
+<div class="bar" id="presets"></div>
+<div class="chart"><svg id="ov" height="54"></svg></div>
+<div class="chart" style="margin-top:8px"><svg id="main"></svg></div>
+<div class="legend" id="legend"></div>
+<div id="detail"><span class="k">Aucun élément sélectionné.</span></div>
+</main>
+<script>
+const D = {"dossier": "alcool-cirrhose", "tracks": [{"id": "t20", "kind": "life_event", "label": "Licenciement (chauffeur poids lourd)"}, {"id": "t21", "kind": "life_event", "label": "Invalidité catégorie 2"}, {"id": "t22", "kind": "life_event", "label": "Décès du frère (cancer du pancréas)"}, {"id": "t23", "kind": "life_event", "label": "Suspension de l'inscription sur liste de greffe"}, {"id": "t24", "kind": "life_event", "label": "Décès du patient"}, {"id": "t1", "kind": "substance_use", "label": "Alcool"}, {"id": "t7", "kind": "psychiatric", "label": "Deuil difficile avec symptomatologie dépressive"}, {"id": "t8", "kind": "psychiatric", "label": "Thymie abaissée / découragement"}, {"id": "t9", "kind": "somatic", "label": "Cirrhose alcoolique"}, {"id": "t10", "kind": "somatic", "label": "Crise convulsive généralisée"}, {"id": "t11", "kind": "somatic", "label": "Décompensation oedémato-ascitique et ligature de varices oesophagiennes"}, {"id": "t12", "kind": "somatic", "label": "Ascite : ponction évacuatrice"}, {"id": "t13", "kind": "somatic", "label": "Hémorragie digestive sur rupture de varices oesophagiennes"}, {"id": "t14", "kind": "somatic", "label": "Parcours de greffe hépatique"}, {"id": "t15", "kind": "somatic", "label": "Ascite récidivante"}, {"id": "t16", "kind": "somatic", "label": "Hospitalisation en hépatologie (ictère, ascite, encéphalopathie hépatique)"}, {"id": "t2", "kind": "medication", "label": "Oxazépam"}, {"id": "t3", "kind": "medication", "label": "Thiamine"}, {"id": "t4", "kind": "medication", "label": "Baclofène"}, {"id": "t5", "kind": "medication", "label": "Mirtazapine"}, {"id": "t6", "kind": "medication", "label": "Substituts nicotiniques"}, {"id": "t17", "kind": "therapeutic_psycho", "label": "Suivi addictologique ambulatoire"}, {"id": "t18", "kind": "therapeutic_psycho", "label": "Hospitalisation de sevrage en unité d'addictologie"}, {"id": "t19", "kind": "therapeutic_psycho", "label": "Entretien social"}], "events": [{"track": "t1", "start": "2022-11", "end": null, "ongoing": false, "mode": "sevrage", "loss": false, "certainty": null, "note": "Arrêt brutal de l'alcool à domicile compliqué d'une crise convulsive généralisée. L'épouse parle de deux crises, le patient d'une seule.", "sources": ["historique 2023-03-06", "historique 2023-03-20"], "evidence": [{"id": "historique:o17", "marks": [[289, 386]]}, {"id": "historique:o16", "marks": [[80, 232], [232, 271]]}], "s": "2022-11-01", "e": null, "point": true, "startLabel": "2022-11", "endLabel": null}, {"track": "t1", "start": "2015", "end": "2023-03-27", "ongoing": false, "mode": "usage", "loss": true, "certainty": null, "note": "Consommation quotidienne depuis le licenciement : 1,5 L de vin + 2 pastis par jour (environ 17 UI), l'épouse parle de 3 bouteilles par jour. Premier verre au réveil. Perte de contrôle reconnue. Dernière prise le 20/03 au matin, CIWA à 9.", "sources": ["historique 2023-03-06", "historique 2023-03-20"], "evidence": [{"id": "historique:o17", "marks": [[572, 635], [785, 963]]}, {"id": "historique:o16", "marks": [[80, 232], [302, 346]]}], "s": "2015-01-01", "e": "2023-03-27", "point": false, "startLabel": "2015", "endLabel": "2023-03-27"}, {"track": "t1", "start": "2023-03-27", "end": "2023-04-07", "ongoing": false, "mode": "sevrage", "loss": false, "certainty": null, "note": "Sevrage hospitalier sous oxazépam et vitamines B1 B6, sans complication.", "sources": ["historique 2023-04-11"], "evidence": [{"id": "historique:o15", "marks": [[15, 154]]}], "s": "2023-03-27", "e": "2023-04-07", "point": false, "startLabel": "2023-03-27", "endLabel": "2023-04-07"}, {"track": "t1", "start": "2023-06", "end": "2023-11-20", "ongoing": false, "mode": "rechute", "loss": true, "certainty": null, "note": "Rechute après les obsèques du frère : vin 1 à 1,5 L/j, tremblements matinaux soulagés par la première prise. Environ 1 L/j plus pastis en octobre. Sevrage hospitalier refusé, objectif de réduction négocié.", "sources": ["historique 2023-07-04", "historique 2023-07-18", "historique 2023-10-17", "historique 2023-11-28"], "evidence": [{"id": "historique:o13", "marks": []}, {"id": "historique:o12", "marks": [[26, 92]]}, {"id": "historique:o10", "marks": [[26, 93], [93, 183], [183, 266]]}, {"id": "historique:o9", "marks": [[299, 328]]}], "s": "2023-06-01", "e": "2023-11-20", "point": false, "startLabel": "2023-06", "endLabel": "2023-11-20"}, {"track": "t1", "start": "2023-11-20", "end": "2023-11-24", "ongoing": false, "mode": "sevrage", "loss": false, "certainty": null, "note": "Sevrage pendant l'hospitalisation pour hémorragie digestive, sous oxazépam, non compliqué. Pas d'alcool depuis le 20/11.", "sources": ["historique 2023-11-28"], "evidence": [{"id": "historique:o9", "marks": [[97, 235], [235, 298], [299, 328]]}], "s": "2023-11-20", "e": "2023-11-24", "point": false, "startLabel": "2023-11-20", "endLabel": "2023-11-24"}, {"track": "t1", "start": "2024-06-25", "end": null, "ongoing": false, "mode": "craving", "loss": false, "certainty": null, "note": "Craving en hausse à l'approche de l'anniversaire de la mort du frère, envies de trinquer pour lui. Pas de consommation.", "sources": ["historique 2024-06-25"], "evidence": [{"id": "historique:o5", "marks": [[61, 178]]}], "s": "2024-06-25", "e": null, "point": true, "startLabel": "2024-06-25", "endLabel": null}, {"track": "t1", "start": "2024-07", "end": "2024-08-25", "ongoing": false, "mode": "rechute", "loss": false, "certainty": null, "note": "Reprise : le patient parle de rosé 2 à 3 verres/j pendant deux semaines en août, la fille de reprise quotidienne depuis juillet. Arrêt de lui-même le 25/08. EthG positif. Abstinent ensuite jusqu'à la dernière information (EthG négatif début octobre).", "sources": ["historique 2024-09-03", "historique 2024-10-15", "historique 2024-12-10"], "evidence": [{"id": "historique:o4", "marks": [[53, 190]]}, {"id": "historique:o3", "marks": [[43, 98]]}, {"id": "historique:o2", "marks": [[179, 220]]}], "s": "2024-07-01", "e": "2024-08-25", "point": false, "startLabel": "2024-07", "endLabel": "2024-08-25"}, {"track": "t2", "start": "2023-03-27", "end": "2023-04-07", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Traitement du sevrage hospitalier.", "sources": ["historique 2023-04-11"], "evidence": [{"id": "historique:o15", "marks": [[15, 154]]}], "s": "2023-03-27", "e": "2023-04-07", "point": false, "startLabel": "2023-03-27", "endLabel": "2023-04-07"}, {"track": "t2", "start": "2023-11-20", "end": "2023-11-24", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Traitement du sevrage pendant l'hospitalisation en hépatologie.", "sources": ["historique 2023-11-28"], "evidence": [{"id": "historique:o9", "marks": [[235, 298]]}], "s": "2023-11-20", "e": "2023-11-24", "point": false, "startLabel": "2023-11-20", "endLabel": "2023-11-24"}, {"track": "t3", "start": "2023-04-11", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "250 mg x 2. Poursuivie en juillet 2023, date d'arrêt non précisée.", "sources": ["historique 2023-04-11", "historique 2023-07-18"], "evidence": [{"id": "historique:o15", "marks": [[459, 478]]}, {"id": "historique:o12", "marks": [[475, 494]]}], "s": "2023-04-11", "e": null, "point": true, "startLabel": "2023-04-11", "endLabel": null}, {"track": "t4", "start": "2023-04-11", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Paliers jusqu'à 30 mg/j, puis 45 mg/j (mai 2023), 60 mg/j (octobre 2023), 45 mg/j depuis janvier 2024. Acamprosate écarté par l'hépatologue.", "sources": ["historique 2023-04-11", "historique 2023-05-30", "historique 2023-07-18", "historique 2023-10-17", "historique 2024-01-09", "historique 2024-03-05", "historique 2024-06-25", "historique 2024-10-15"], "evidence": [{"id": "historique:o15", "marks": [[269, 371], [386, 458]]}, {"id": "historique:o14", "marks": [[99, 149], [241, 270]]}, {"id": "historique:o12", "marks": [[448, 474]]}, {"id": "historique:o10", "marks": [[417, 452]]}, {"id": "historique:o8", "marks": [[411, 430]]}, {"id": "historique:o7", "marks": [[251, 297]]}, {"id": "historique:o5", "marks": [[272, 312]]}, {"id": "historique:o3", "marks": [[43, 98], [364, 390]]}], "s": "2023-04-11", "e": null, "point": false, "startLabel": "2023-04-11", "endLabel": null}, {"track": "t5", "start": "2023-07-18", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "15 mg le soir (sommeil, appétit), surveillance hépatique. Passage à 30 mg en octobre 2024.", "sources": ["historique 2023-07-18", "historique 2024-03-05", "historique 2024-06-25", "historique 2024-10-15"], "evidence": [{"id": "historique:o12", "marks": [[366, 447]]}, {"id": "historique:o7", "marks": [[251, 297]]}, {"id": "historique:o5", "marks": [[272, 312]]}, {"id": "historique:o3", "marks": [[346, 363]]}], "s": "2023-07-18", "e": null, "point": false, "startLabel": "2023-07-18", "endLabel": null}, {"track": "t6", "start": "2024-01-09", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Patch 21 mg + pastilles 2 mg. Tabac à 20 cig/j en janvier, 12 en mai, 15 en octobre 2024.", "sources": ["historique 2024-01-09", "historique 2024-05-14", "historique 2024-10-15"], "evidence": [{"id": "historique:o8", "marks": [[306, 365], [380, 410]]}, {"id": "historique:o6", "marks": [[105, 147]]}, {"id": "historique:o3", "marks": [[298, 331]]}], "s": "2024-01-09", "e": null, "point": false, "startLabel": "2024-01-09", "endLabel": null}, {"track": "t7", "start": "2023-07", "end": "2024-03", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Tristesse, pleurs, insomnie d'endormissement, perte d'appétit, culpabilité après le décès du frère. Pas d'idées suicidaires. Thymie meilleure en mars 2024.", "sources": ["historique 2023-07-18", "historique 2024-03-05"], "evidence": [{"id": "historique:o12", "marks": [[148, 274]]}, {"id": "historique:o7", "marks": [[45, 132]]}], "s": "2023-07-01", "e": "2024-03-31", "point": false, "startLabel": "2023-07", "endLabel": "2024-03"}, {"track": "t8", "start": "2024-08-29", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Après la suspension de l'inscription sur liste de greffe : découragement, appétit faible, pas d'idées suicidaires. Dernière mention le 15/10/2024.", "sources": ["historique 2024-09-03", "historique 2024-10-15"], "evidence": [{"id": "historique:o4", "marks": [[269, 377]]}, {"id": "historique:o3", "marks": [[98, 186], [186, 211]]}], "s": "2024-08-29", "e": null, "point": false, "startLabel": "2024-08-29", "endLabel": null}, {"track": "t9", "start": "2022", "end": "2025-01-14", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Découverte en 2022, Child-Pugh B. Décès sur décompensation en janvier 2025.", "sources": ["historique 2023-03-06", "historique 2025-01-21"], "evidence": [{"id": "historique:o17", "marks": [[187, 241]]}, {"id": "historique:o1", "marks": [[89, 257]]}], "s": "2022-01-01", "e": "2025-01-14", "point": false, "startLabel": "2022", "endLabel": "2025-01-14"}, {"track": "t10", "start": "2022-11", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Survenue lors d'un arrêt brutal de l'alcool. Nombre de crises discordant : une selon le patient, deux selon l'épouse.", "sources": ["historique 2023-03-06", "historique 2023-03-20"], "evidence": [{"id": "historique:o17", "marks": [[289, 386]]}, {"id": "historique:o16", "marks": [[80, 232]]}], "s": "2022-11-01", "e": null, "point": true, "startLabel": "2022-11", "endLabel": null}, {"track": "t11", "start": "2023-01", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Hospitalisation en janvier 2023.", "sources": ["historique 2023-03-06"], "evidence": [{"id": "historique:o17", "marks": [[15, 161], [242, 288]]}], "s": "2023-01-01", "e": null, "point": true, "startLabel": "2023-01", "endLabel": null}, {"track": "t12", "start": "2023-10-09", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Ponction réalisée en hépatologie.", "sources": ["historique 2023-10-17"], "evidence": [{"id": "historique:o10", "marks": [[267, 316]]}], "s": "2023-10-09", "e": null, "point": true, "startLabel": "2023-10-09", "endLabel": null}, {"track": "t13", "start": "2023-11-20", "end": "2023-11-24", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Hospitalisation, ligature en urgence, transfusion de 2 culots.", "sources": ["historique 2023-11-28"], "evidence": [{"id": "historique:o9", "marks": [[97, 235]]}], "s": "2023-11-20", "e": "2023-11-24", "point": false, "startLabel": "2023-11-20", "endLabel": "2023-11-24"}, {"track": "t14", "start": "2024-01", "end": "2024-08-29", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Bilan pré-greffe, accord d'inscription sur liste en RCP le 18/06/2024, inscription suspendue le 29/08/2024. Réévaluation prévue à 6 mois.", "sources": ["historique 2024-01-09", "historique 2024-03-05", "historique 2024-06-25", "historique 2024-09-03"], "evidence": [{"id": "historique:o8", "marks": [[179, 305]]}, {"id": "historique:o7", "marks": [[133, 194]]}, {"id": "historique:o5", "marks": [[179, 238]]}, {"id": "historique:o4", "marks": [[269, 377]]}], "s": "2024-01-01", "e": "2024-08-29", "point": false, "startLabel": "2024-01", "endLabel": "2024-08-29"}, {"track": "t15", "start": "2024-10", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Ponction prévue la semaine suivant le 15/10/2024. Fatigue importante.", "sources": ["historique 2024-10-15"], "evidence": [{"id": "historique:o3", "marks": [[228, 285]]}], "s": "2024-10-01", "e": null, "point": true, "startLabel": "2024-10", "endLabel": null}, {"track": "t16", "start": "2024-12-02", "end": "2025-01-14", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Hospitalisation en hépatologie puis en réanimation, nouvelle hémorragie digestive. Décès le 14/01/2025.", "sources": ["historique 2024-12-10", "historique 2025-01-21"], "evidence": [{"id": "historique:o2", "marks": [[80, 179]]}, {"id": "historique:o1", "marks": [[89, 257]]}], "s": "2024-12-02", "e": "2025-01-14", "point": false, "startLabel": "2024-12-02", "endLabel": "2025-01-14"}, {"track": "t17", "start": "2023-03-06", "end": "2025-01-21", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Premier entretien le 06/03/2023, adressé par l'hépatologue. Dossier clôturé le 21/01/2025 après le décès.", "sources": ["historique 2023-03-06", "historique 2025-01-21"], "evidence": [{"id": "historique:o17", "marks": [[15, 161]]}, {"id": "historique:o1", "marks": [[89, 257]]}], "s": "2023-03-06", "e": "2025-01-21", "point": false, "startLabel": "2023-03-06", "endLabel": "2025-01-21"}, {"track": "t18", "start": "2023-03-27", "end": "2023-04-07", "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Sevrage sans complication, après entretien IDE de pré-admission le 20/03.", "sources": ["historique 2023-03-20", "historique 2023-04-11"], "evidence": [{"id": "historique:o16", "marks": [[0, 77]]}, {"id": "historique:o15", "marks": [[15, 154]]}], "s": "2023-03-27", "e": "2023-04-07", "point": false, "startLabel": "2023-03-27", "endLabel": "2023-04-07"}, {"track": "t19", "start": "2023-09-05", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Aide-ménagère demandée, information sur les groupes d'entraide pour l'entourage.", "sources": ["historique 2023-09-05"], "evidence": [{"id": "historique:o11", "marks": [[317, 458]]}], "s": "2023-09-05", "e": null, "point": true, "startLabel": "2023-09-05", "endLabel": null}, {"track": "t20", "start": "2015", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Consommation d'alcool devenue quotidienne depuis cette date.", "sources": ["historique 2023-03-06", "historique 2023-09-05"], "evidence": [{"id": "historique:o17", "marks": [[480, 572]]}, {"id": "historique:o11", "marks": [[96, 182]]}], "s": "2015-01-01", "e": null, "point": true, "startLabel": "2015", "endLabel": null}, {"track": "t21", "start": "2022", "end": null, "ongoing": true, "mode": null, "loss": false, "certainty": null, "note": "Épouse travaillant à mi-temps.", "sources": ["historique 2023-09-05"], "evidence": [{"id": "historique:o11", "marks": [[96, 182], [182, 226]]}], "s": "2022-01-01", "e": null, "point": false, "startLabel": "2022", "endLabel": null}, {"track": "t22", "start": "2023-06-26", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Frère hospitalisé en soins palliatifs en mai 2023. Rechute alcoolique après les obsèques.", "sources": ["historique 2023-05-30", "historique 2023-07-04"], "evidence": [{"id": "historique:o14", "marks": [[150, 226]]}, {"id": "historique:o13", "marks": [[40, 102]]}], "s": "2023-06-26", "e": null, "point": true, "startLabel": "2023-06-26", "endLabel": null}, {"track": "t23", "start": "2024-08-29", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Décision de la RCP après EthG positif. Déception et colère contre lui-même.", "sources": ["historique 2024-09-03"], "evidence": [{"id": "historique:o4", "marks": [[269, 377], [377, 419]]}], "s": "2024-08-29", "e": null, "point": true, "startLabel": "2024-08-29", "endLabel": null}, {"track": "t24", "start": "2025-01-14", "end": null, "ongoing": false, "mode": null, "loss": false, "certainty": null, "note": "Décès en réanimation, défaillance multiviscérale sur décompensation de la cirrhose après une nouvelle hémorragie digestive.", "sources": ["historique 2025-01-21"], "evidence": [{"id": "historique:o1", "marks": [[89, 257]]}], "s": "2025-01-14", "e": null, "point": true, "startLabel": "2025-01-14", "endLabel": null}], "obs": {"historique:o1": {"label": "historique · Observation psychiatrique de suivi", "date": "2025-01-21", "text": "Observations :\nAppel de son épouse ce jour au secrétariat puis entretien téléphonique.\nM. [identité] est décédé le 14/01/2025 en réanimation (hépatologie), défaillance multiviscérale sur décompensation de sa cirrhose apres une nouvelle hémorragie digestive.\nMme [identité] remercie l'équipe. Épuisée, culpabilité (\"j'aurais du le forcer à rester abstinent\"). Soutien, déculpabilisation.\nConclusions :\nProposition d'entretien pour l'épouse (groupe entourage / psychologue), coordonnées données\nInformation de l'équipe et du MG (Dr [identité])\nCloture du dossier"}, "historique:o2": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-12-10", "text": "Observations :\nEntretien téléphonique avec son épouse (RDV du jour non honoré).\nHospitalisé en hépatologie depuis le 02/12 : ictère, ascite, confusion (encéphalopathie hépatique). Pas d'alcool depuis fin aout selon elle.\nPronostic réservé selon l'équipe d'hépato.\nConclusions :\nRappeler la semaine prochaine\nLien avec l'ELSA du service"}, "historique:o3": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-10-15", "text": "Observations :\nVu ce jour avec son épouse.\nAbstinent depuis le 25/08 (EthG négatif début octobre). Thymie abaissée depuis la suspension de l'inscription, découragement, \"à quoi ça sert\". Pas d'idées suicidaires. Appétit faible.\nAscite récidivante, ponction prévue la semaine prochaine. Fatigue ++.\nTabac 15 cig/j malgré les patchs.\nConclusions :\nMirtazapine 30 mg\nBaclofène 45 mg/j inchangé\nRDV 1 mois, plus tôt si besoin"}, "historique:o4": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-09-03", "text": "Observations :\nVu ce jour, avec sa fille [identité].\nReprise de l'alcool pendant ses vacances chez sa fille : \"deux semaines en aout\", rosé 2 a 3 verres par jour, arret le 25/08 de lui-meme. Sa fille, présente, situe la reprise \"depuis juillet, tous les jours un peu\".\nRésultat EthG positif transmis par l'hépatologue : inscription sur liste de greffe suspendue (RCP du 29/08). Grosse déception, colère contre lui-meme.\nPas de signe de sevrage actuellement (arret il y a plus d'une semaine).\nConclusions :\nReprise du suivi rapproché, RDV dans 15 jours\nContact Dr [identité] pour réévaluation de l'inscription a 6 mois"}, "historique:o5": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-06-25", "text": "Observations :\nVu ce jour\nAbstinent depuis le 20/11 (7 mois). Craving en hausse a l'approche de l'anniversaire de la mort de son frère, envies \"de trinquer pour lui\", n'a pas bu.\nRCP de greffe du 18/06 : accord pour inscription sur liste. Fier, se projette.\nConclusions :\nRO baclofène 45 mg/j + mirtazapine 15 mg\nRDV juillet"}, "historique:o6": {"label": "historique · Entretien infirmier", "date": "2024-05-14", "text": "Entretien IDE avec M. [identité] + prélèvement urinaire : EthG négatif. TA 128/76. Poids 82 kg (stable).\nTabac diminué à 12 cig/j avec patch 21 mg. Pas de craving déclaré.\nContact de son épouse à jour : [identité]."}, "historique:o7": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-03-05", "text": "Observations :\nVu ce jour\nToujours abstinent. Thymie meilleure, reprend le jardin, voit sa fille et ses petits-enfants plus souvent.\nBilan pré-greffe en cours (consultations anesthésie, cardio). Explications sur le contrat d'abstinence.\nConclusions :\nPoursuite baclofène 45 mg/j, mirtazapine 15 mg\nRDV 3 mois"}, "historique:o8": {"label": "historique · Observation psychiatrique de suivi", "date": "2024-01-09", "text": "Observations :\nVu ce jour en entretien :\nAbstinent depuis l'hémorragie digestive (20/11). \"J'ai eu peur de mourir\". Pas de craving majeur, quelques envies le soir devant la télé.\nAbord de la greffe hépatique avec le Dr [identité] : nécessite une abstinence durable et un suivi addicto régulier, motivé ++.\nTabac : 20 cig/j, souhaite réduire, accepte les substituts.\nConclusions :\n- Patch 21 mg + pastilles 2 mg\n- Baclofène 45 mg/j\n- RDV 2 mois"}, "historique:o9": {"label": "historique · Observation somatique de suivi", "date": "2023-11-28", "text": "Observations :\nEchanges de mails avec le Dr [identité] (hépatologue), avec l'accord du patient :\nHospitalisation du 20 au 24/11 pour hémorragie digestive sur rupture de varices oesophagiennes, ligature en urgence, transfusion 2 culots. Pas de sevrage compliqué pendant l'hospitalisation (oxazépam).\nPas d'alcool depuis le 20/11.\nConclusions :\nRDV avancé début janvier"}, "historique:o10": {"label": "historique · Observation psychiatrique de suivi", "date": "2023-10-17", "text": "Observations :\nVu ce jour\nConsommation actuelle autour d'1 L de vin par jour, plus de pastis. Refuse un nouveau sevrage hospitalier pour l'instant (\"pas maintenant, après les fêtes\"). Objectif de réduction négocié : 4 verres par jour maximum, agenda de consommation.\nAscite : ponction évacuatrice le 09/10 en hépato.\nRappel : sevrage ambulatoire non indiqué au vu des ATCD (crise convulsive, cirrhose).\nConclusions :\nBaclofène majoré à 60 mg/j (20 x 3)\nRDV 1 mois"}, "historique:o11": {"label": "historique · Entretien social", "date": "2023-09-05", "text": "M. [identité] [identité], né le [identité], N° SS [identité], demeurant [identité], 33450 IZON.\nAncien chauffeur poids lourd, licencié en 2015, en invalidité catégorie 2 depuis 2022. Son épouse [identité] travaille à mi-temps.\nMme [identité] exprime son épuisement, \"parle de partir\" si les consommations continuent.\nDémarches : aide-ménagère via la caisse de retraite, dossier APA non éligible (âge), information sur les groupes d'entraide pour l'entourage."}, "historique:o12": {"label": "historique · Observation psychiatrique de suivi", "date": "2023-07-18", "text": "Observations :\nVu ce jour\nRechute franche depuis les obsèques de son frère, vin 1 a 1,5 L/j. Tremblements le matin, soulagés par la première prise.\nDeuil difficile : tristesse, pleurs, insomnie d'endormissement, perte d'appétit, culpabilité de ne pas avoir été plus présent. Pas d'idées suicidaires.\nNe souhaite pas re-hospitalisation dans l'immédiat.\nConclusions :\nIntroduction mirtazapine 15 mg le soir (sommeil, appétit), surveillance hépatique\nBaclofène 45 mg/j maintenu\nThiamine poursuivie"}, "historique:o13": {"label": "historique · Observation psychiatrique de suivi", "date": "2023-07-04", "text": "Observations :\nEntretien téléphonique :\nSon frère [identité] est décédé le 26/06 (cancer du pancréas). A bu \"quelques verres\" le jour des obsèques et depuis, n'arrive pas à s'arreter, ne quantifie pas.\nCraving ++. Accepte un RDV présentiel rapide.\nConclusions :\nRDV le 18/07"}, "historique:o14": {"label": "historique · Observation psychiatrique de suivi", "date": "2023-05-30", "text": "Observations :\nVu ce jour\nAbstinent depuis la sortie (2 mois). Fatigue, mais \"l'esprit plus clair\". Baclofène 30 mg/j bien toléré, pas de somnolence.\nPréoccupé par l'état de santé de son frère, hospitalisé en soins palliatifs.\nConclusions :\nBaclofène 15 mg x 3 = 45 mg/j\nRDV 1 mois"}, "historique:o15": {"label": "historique · Observation psychiatrique de suivi", "date": "2023-04-11", "text": "Observations :\nVu ce jour, sorti le 07/04 de l'unité d'addictologie apres un sevrage du 27/03 au 07/04 sous oxazépam + vitamines B1 B6, sans complication.\nAbstinent, satisfait, se sent \"léger\". Quelques troubles du sommeil.\nProjet : maintien de l'abstinence (cirrhose). Discussion sur les traitements de maintien, acamprosate écarté par l'hépatologue, choix du baclofène.\nConclusions :\nIntroduction baclofène, paliers de 5 mg tous les 3 jours jusqu'à 30 mg/j\nThiamine 250 mg x 2\nRDV fin mai"}, "historique:o16": {"label": "historique · Entretien infirmier", "date": "2023-03-20", "text": "Entretien de pré-admission pour sevrage hospitalier (entrée prévue le 27/03).\nM. [identité] est accompagné de son épouse, qui décrit \"3 bouteilles de vin par jour\" et des crises \"deux fois à l'automne dernier\" lors d'arrets brutaux. Le patient corrige : \"une seule fois\".\nTremblements matinaux, sueurs. CIWA à 9 ce jour (dernière prise ce matin).\nCoordonnées : tél. du domicile [identité]."}, "historique:o17": {"label": "historique · Motif de l'évaluation", "date": "2023-03-06", "text": "Observations :\nPremier entretien ce jour, adressé par le Dr [identité] (hépatologue) apres une hospitalisation en janvier pour décompensation oedémato-ascitique.\nAntécédents :\nMédicaux :\n- cirrhose alcoolique découverte en 2022, Child-Pugh B\n- varices oesophagiennes ligaturées en janvier\n- une crise convulsive généralisée en novembre 2022 lors d'un arret brutal de l'alcool à domicile\n- HTA traitée\nPsychiatriques :\n- pas de suivi, pas d'hospitalisation, pas de TS\nSubstances :\n- Alcool : depuis l'age de 18 ans, festif, devenu quotidien depuis son licenciement en 2015. Actuellement 1,5 L de vin + 2 pastis par jour (environ 17 UI). Premier verre au réveil. Pas d'abstinence de plus de quelques jours depuis 2015.\n- Tabac : 25 cig/j depuis l'age de 16 ans.\n- pas d'autres produits.\nCliniquement, contact bon, un peu fruste, minimise (\"je bois comme tout le monde au village\"), mais reconnait la perte de contrôle depuis que l'hépatologue lui a parlé de greffe. Thymie neutre.\nConclusions :\n- Sevrage hospitalier programmé (ambulatoire non indiqué : ATCD de crise, cirrhose)\n- Entretien de pré-admission IDE\n- RDV au retour"}}, "ref": "2025-02-01", "kinds": [{"id": "life_event", "label": "Événements de vie", "light": "#b45309", "dark": "#f59e0b"}, {"id": "substance_use", "label": "Consommations", "light": "#c62828", "dark": "#ef6b6b"}, {"id": "psychiatric", "label": "Psychopathologie", "light": "#6a4bb0", "dark": "#a78bfa"}, {"id": "somatic", "label": "Somatique", "light": "#0f7b6c", "dark": "#34d3b9"}, {"id": "medication", "label": "Médicaments", "light": "#1d5fb4", "dark": "#6aa6f0"}, {"id": "therapeutic_psycho", "label": "Prises en charge", "light": "#4d7c0f", "dark": "#a3d95b"}], "modeLabel": {"usage": "usage", "intoxication": "intoxication", "sevrage": "sevrage", "rechute": "rechute", "craving": "craving"}, "certaintyLabel": {"exact": "date exacte", "month": "mois", "year": "année", "approx": "date approximative"}};
+const NS = "http://www.w3.org/2000/svg";
+const dark = () => matchMedia("(prefers-color-scheme: dark)").matches;
+const DAY = 864e5;
+const t = (iso) => Date.parse(iso + "T00:00:00Z");
+const REF = t(D.ref);
+const kindOf = Object.fromEntries(D.kinds.map(k => [k.id, k]));
+const trackOf = Object.fromEntries(D.tracks.map(x => [x.id, x]));
+const color = (kind) => kindOf[kind][dark() ? "dark" : "light"];
+const MODE_OP = {usage:.55, craving:.7, sevrage:.7, intoxication:.85, rechute:1};
+const EVENTS = D.events.map((e, i) => ({
+  ...e, i, kind: trackOf[e.track].kind, label: trackOf[e.track].label,
+  a: t(e.s), b: e.e ? t(e.e) : (e.ongoing ? REF : t(e.s)),
+}));
+const hidden = new Set();
+let LABEL_W = 150; const ROW = 26, PADR = 14, AXIS = 84;
+let DOM_MIN = Math.min(...EVENTS.map(e => e.a)) - 200*DAY, DOM_MAX = REF + 60*DAY;
+let view = [DOM_MIN, DOM_MAX];
+
+const el = (name, attrs = {}, parent, text) => {
+  const n = document.createElementNS(NS, name);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  if (text !== undefined) n.textContent = text;
+  if (parent) parent.appendChild(n);
+  return n;
+};
+const fmt = (s) => { if (!s) return ""; const [y,m,d] = s.split("-"); return d ? `${d}/${m}/${y}` : m ? `${m}/${y}` : y; };
+const yr = (ms) => new Date(ms).getUTCFullYear();
+
+function ticks(a, b) {
+  const span = (b - a) / (365.25*DAY), out = [];
+  const step = span > 40 ? 10 : span > 18 ? 5 : span > 9 ? 2 : span > 3.5 ? 1 : 0;
+  if (step) { for (let y = Math.ceil(yr(a)/step)*step; Date.UTC(y,0,1) <= b; y += step) out.push([Date.UTC(y,0,1), String(y), true]); }
+  else {
+    const q = span > 1.6 ? 3 : 1;
+    for (let y = yr(a); y <= yr(b); y++) for (let m = 0; m < 12; m += q) {
+      const v = Date.UTC(y, m, 1); if (v < a || v > b) continue;
+      out.push([v, m === 0 ? String(y) : `${String(m+1).padStart(2,"0")}/${String(y).slice(2)}`, m === 0]);
+    }
+  }
+  return out;
+}
+
+const bolt = (x, y, s=7) => `M${x} ${y-s} L${x-s*.55} ${y+.1} L${x-.05*s} ${y+.1} L${x-s*.35} ${y+s} L${x+s*.6} ${y-.25*s} L${x+.05*s} ${y-.25*s} Z`;
+
+function drawMain() {
+  const svg = document.getElementById("main");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800;
+  LABEL_W = W < 600 ? 92 : 150;
+  const innerW = W - LABEL_W - PADR;
+  const x = (ms) => LABEL_W + (ms - view[0]) / (view[1] - view[0]) * innerW;
+  const kinds = D.kinds.filter(k => !hidden.has(k.id));
+  const rows = [];
+  for (const k of kinds) if (k.id !== "life_event") {
+    rows.push({head: k});
+    for (const tr of D.tracks.filter(tr => tr.kind === k.id)) rows.push({track: tr});
+  }
+  const showLife = !hidden.has("life_event");
+  const H = AXIS + 18 + rows.length * ROW + 24;
+  svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const defs = el("defs", {}, svg);
+  const cp = el("clipPath", {id: "clip"}, defs); el("rect", {x: LABEL_W, y: 0, width: innerW, height: H}, cp);
+  // grid + axis
+  const gridG = el("g", {}, svg);
+  for (const [v, lab, major] of ticks(...view)) {
+    const xx = x(v);
+    el("line", {x1: xx, x2: xx, y1: AXIS - 4, y2: H - 20, stroke: "var(--line)", "stroke-width": major ? 1 : .5}, gridG);
+    el("text", {x: xx + 3, y: H - 7, class: "mute"}, gridG, lab);
+  }
+  el("line", {x1: LABEL_W, x2: W - PADR, y1: AXIS - 4, y2: AXIS - 4, stroke: "var(--axis)", "stroke-width": 4, "stroke-linecap": "round"}, svg);
+  const g = el("g", {"clip-path": "url(#clip)"}, svg);
+  // life events on the axis
+  if (showLife) {
+    const life = EVENTS.filter(e => e.kind === "life_event" && e.b >= view[0] && e.a <= view[1]);
+    const lanes = [[], [], [], [], []];
+    for (const e of life.sort((p, q) => p.a - q.a)) {
+      const pt = e.point || (e.b - e.a) < 120*DAY;
+      const xa = x(Math.max(e.a, view[0])), xb = pt ? xa : x(Math.min(e.b, view[1]));
+      const w = e.label.length * 5.9 + 10, flip = xa + w > W - PADR;
+      const iv = flip ? [xa - w, xa + 4] : [xa - 4, xa + w];
+      let ln = lanes.findIndex(l => l.every(o => o[1] < iv[0] || o[0] > iv[1]));
+      if (ln < 0) ln = lanes.length - 1;
+      lanes[ln].push(iv);
+      const ty = AXIS - 14 - ln * 13 - 4;
+      const grp = el("g", {class: "ev", "data-i": e.i}, g);
+      if (!pt) el("rect", {x: xa, y: AXIS - 8, width: Math.max(2, xb - xa), height: 8, rx: 3, fill: color("life_event"), opacity: .85}, grp);
+      else el("path", {d: `M${xa} ${AXIS-11} l6 6 l-6 6 l-6 -6 Z`, fill: color("life_event")}, grp);
+      el("line", {x1: xa, x2: xa, y1: ty + 3, y2: AXIS - 11, stroke: color("life_event"), "stroke-width": 1, opacity: .6}, grp);
+      el("text", {x: flip ? xa - 3 : xa + 3, y: ty, "font-size": 11, "text-anchor": flip ? "end" : "start", "pointer-events": "none"}, grp, e.label);
+      if (e.loss) el("path", {d: bolt(xa, AXIS + 6, 6), fill: "#e11d48"}, grp);
+    }
+  }
+  // rows
+  let y = AXIS + 6;
+  for (const r of rows) {
+    if (r.head) {
+      el("text", {x: 6, y: y + 17, "font-weight": 600, fill: color(r.head.id)}, svg, r.head.label.toUpperCase()).setAttribute("font-size", 11);
+      el("line", {x1: 6, x2: W - PADR, y1: y + ROW - 3, y2: y + ROW - 3, stroke: color(r.head.id), opacity: .35}, svg);
+    } else {
+      const cut = W < 600 ? 13 : 24;
+      const lab = r.track.label.length > cut ? r.track.label.slice(0, cut - 1) + "…" : r.track.label;
+      el("text", {x: 12, y: y + 17, class: "mute"}, svg, lab).appendChild(Object.assign(document.createElementNS(NS, "title"), {textContent: r.track.label}));
+      for (const e of EVENTS.filter(e => e.track === r.track.id)) {
+        if (e.b < view[0] || e.a > view[1]) continue;
+        const grp = el("g", {class: "ev", "data-i": e.i}, g);
+        const c = color(e.kind), op = e.mode ? (MODE_OP[e.mode] ?? .6) : .8;
+        const xa = x(e.a), xb = x(e.b);
+        const dash = e.certainty === "approx" ? "4 3" : null;
+        if (e.point || xb - xa < 5) {
+          el("path", {d: `M${xa} ${y+5} l7 7 l-7 7 l-7 -7 Z`, fill: c, opacity: op}, grp);
+        } else {
+          const rc = el("rect", {x: xa, y: y + 4, width: xb - xa, height: ROW - 10, rx: 4, fill: c, opacity: op}, grp);
+          if (dash) { rc.setAttribute("stroke", c); rc.setAttribute("stroke-dasharray", dash); rc.setAttribute("fill-opacity", .45); }
+          if (e.ongoing && xb < W) el("path", {d: `M${xb} ${y+4} l8 ${(ROW-10)/2} l-8 ${(ROW-10)/2} Z`, fill: c, opacity: op}, grp);
+        }
+        if (e.loss) el("path", {d: bolt(xa, y + ROW/2 - 1), fill: "#e11d48", stroke: "var(--panel)", "stroke-width": .8}, grp);
+        if (e.mode && e.mode !== "usage" && xb - xa > 56) el("text", {x: xa + 6, y: y + 17, fill: "#fff", "font-size": 10.5, "pointer-events": "none"}, grp, MODE_LABEL(e.mode)).setAttribute("style", "fill:#fff");
+      }
+    }
+    y += ROW;
+  }
+  svg.querySelectorAll(".ev").forEach(n => {
+    const go = () => select(+n.dataset.i);
+    n.addEventListener("click", go); n.addEventListener("pointerenter", (ev) => { if (ev.pointerType === "mouse") go(); });
+  });
+  if (selected !== null) svg.querySelector(`.ev[data-i="${selected}"]`)?.classList.add("sel");
+}
+const MODE_LABEL = (m) => D.modeLabel[m] || m;
+
+let selected = null;
+function obsHtml(v, esc) {
+  const o = D.obs[v.id];
+  let html = "", at = 0;
+  for (const [a, b] of v.marks) { html += esc(o.text.slice(at, a)) + "<mark>" + esc(o.text.slice(a, b)) + "</mark>"; at = b; }
+  html += esc(o.text.slice(at));
+  return `<div class="obs"><div class="oh">${o.date ? esc(o.date) + " · " : ""}${esc(o.label)}${o.summary_only ? " · résumé" : ""}</div><div class="ot">${html}</div></div>`;
+}
+function select(i) {
+  selected = i;
+  document.querySelectorAll(".ev").forEach(n => n.classList.toggle("sel", +n.dataset.i === i));
+  const e = EVENTS[i];
+  const when = e.endLabel ? (e.startLabel === e.endLabel ? fmt(e.startLabel) : `${fmt(e.startLabel)} → ${fmt(e.endLabel)}`)
+    : e.ongoing ? `depuis ${fmt(e.startLabel)} (en cours)` : fmt(e.startLabel);
+  const esc = (s) => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const bits = [];
+  if (e.mode) bits.push(MODE_LABEL(e.mode));
+  if (e.certainty) bits.push(D.certaintyLabel[e.certainty] || e.certainty);
+  if (e.loss) bits.push("⚡ perte de contrôle");
+  document.getElementById("detail").innerHTML =
+    `<b>${esc(e.label)}</b> <span class="k">· ${esc(kindOf[e.kind].label)} · ${when}${bits.length ? " · " + esc(bits.join(" · ")) : ""}</span>` +
+    (e.note ? `<div>${esc(e.note)}</div>` : "") +
+    (e.sources.length ? `<div class="k">Autres sources : ${e.sources.map(esc).join(" ; ")}</div>` : "") +
+    (e.evidence.length ? `<div class="k" style="margin-top:8px">${e.evidence.length > 1 ? "Observations" : "Observation"} d'origine${e.evidence.some(v => !v.marks.length) ? " (passage justificatif non repéré dans certaines)" : ", passage justificatif surligné"} :</div><div id="obs">` +
+      e.evidence.map(v => obsHtml(v, esc)).join("") + `</div>` : "");
+  document.querySelector("#obs mark")?.scrollIntoView({block: "nearest"});
+}
+
+// overview strip with a draggable window
+function drawOverview() {
+  const svg = document.getElementById("ov");
+  svg.replaceChildren();
+  const W = svg.clientWidth || 800, H = 54, L = 12, R = 12, innerW = W - L - R;
+  const x = (ms) => L + (ms - DOM_MIN) / (DOM_MAX - DOM_MIN) * innerW;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  for (const [v, lab, major] of ticks(DOM_MIN, DOM_MAX)) {
+    if (!major) continue;
+    el("line", {x1: x(v), x2: x(v), y1: 4, y2: H - 14, stroke: "var(--line)"}, svg);
+    el("text", {x: x(v) + 2, y: H - 3, class: "mute", "font-size": 10}, svg, lab);
+  }
+  const vis = EVENTS.filter(e => !hidden.has(e.kind));
+  const n = Math.max(1, new Set(vis.map(e => e.track)).size), tracks = [...new Set(vis.map(e => e.track))];
+  for (const e of vis) {
+    const r = tracks.indexOf(e.track), yy = 6 + r * (H - 24) / n;
+    el("rect", {x: x(e.a), y: yy, width: Math.max(2, x(e.b) - x(e.a)), height: Math.max(1.5, (H - 24) / n - 1), fill: color(e.kind), opacity: .7}, svg);
+  }
+  const win = el("rect", {x: x(view[0]), y: 1, width: Math.max(10, x(view[1]) - x(view[0])), height: H - 14, rx: 5, fill: "rgba(80,120,220,.16)", stroke: "#4f7be0", "stroke-width": 1.5, style: "cursor:grab"}, svg);
+  const hl = el("rect", {x: x(view[0]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const hr = el("rect", {x: x(view[1]) - 5, y: 1, width: 10, height: H - 14, fill: "#4f7be0", opacity: .01, style: "cursor:ew-resize"}, svg);
+  const inv = (px) => DOM_MIN + (px - L) / innerW * (DOM_MAX - DOM_MIN);
+  const MINSPAN = 120 * DAY;
+  const drag = (node, kind) => node.addEventListener("pointerdown", (ev) => {
+    ev.preventDefault(); node.setPointerCapture(ev.pointerId);
+    const x0 = ev.clientX, v0 = [...view], per = (DOM_MAX - DOM_MIN) / innerW;
+    const move = (m) => {
+      const d = (m.clientX - x0) * per;
+      let [a, b] = v0;
+      if (kind === "move") { const span = b - a; a = Math.min(Math.max(DOM_MIN, a + d), DOM_MAX - span); b = a + span; }
+      else if (kind === "l") a = Math.min(Math.max(DOM_MIN, a + d), b - MINSPAN);
+      else b = Math.max(Math.min(DOM_MAX, b + d), a + MINSPAN);
+      view = [a, b]; drawOverview(); drawMain();
+    };
+    const up = () => { node.removeEventListener("pointermove", move); node.removeEventListener("pointerup", up); };
+    node.addEventListener("pointermove", move); node.addEventListener("pointerup", up);
+  });
+  drag(win, "move"); drag(hl, "l"); drag(hr, "r");
+}
+
+function setView(a, b) { view = [Math.max(DOM_MIN, a), Math.min(DOM_MAX, b)]; redraw(); }
+function redraw() { drawOverview(); drawMain(); }
+
+// controls
+const kindsBar = document.getElementById("kinds");
+for (const k of D.kinds) {
+  const b = document.createElement("button"); b.className = "chip"; b.setAttribute("aria-pressed", "true");
+  b.innerHTML = `<i style="background:${k[dark() ? "dark" : "light"]}"></i>${k.label}`;
+  b.onclick = () => { hidden.has(k.id) ? hidden.delete(k.id) : hidden.add(k.id); b.setAttribute("aria-pressed", String(!hidden.has(k.id))); redraw(); };
+  kindsBar.appendChild(b);
+}
+const presets = document.getElementById("presets");
+const addPreset = (label, fn) => { const b = document.createElement("button"); b.textContent = label; b.onclick = fn; presets.appendChild(b); };
+addPreset("Tout", () => setView(DOM_MIN, DOM_MAX));
+for (const yrs of [10, 5, 2]) addPreset(`${yrs} dernières années`, () => setView(REF - yrs * 365.25 * DAY, DOM_MAX));
+addPreset("−", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]); setView(c - h, c + h); });
+addPreset("+", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]) / 4; setView(c - h, c + h); });
+document.getElementById("legend").innerHTML =
+  `<span><span class="sw" style="background:#888;opacity:.55"></span>usage</span><span><span class="sw" style="background:#888;opacity:.85"></span>intoxication</span>` +
+  `<span><span class="sw" style="background:#888"></span>rechute</span><span><span class="sw" style="background:#888;opacity:.45;border:1px dashed #888"></span>date approximative</span>` +
+  `<span style="color:#e11d48">⚡ perte de contrôle</span><span>◆ événement sans durée</span><span>▶ en cours</span>`;
+document.getElementById("main").addEventListener("wheel", (ev) => {
+  if (!ev.ctrlKey && !ev.shiftKey) return;
+  ev.preventDefault();
+  const r = ev.currentTarget.getBoundingClientRect(), W = r.width, f = (ev.clientX - r.left - LABEL_W) / (W - LABEL_W - PADR);
+  const c = view[0] + Math.min(Math.max(f, 0), 1) * (view[1] - view[0]), k = ev.deltaY > 0 ? 1.25 : .8;
+  setView(c - (c - view[0]) * k, c + (view[1] - c) * k);
+}, {passive: false});
+addEventListener("resize", redraw);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
+if (innerWidth < 600) view = [Math.max(DOM_MIN, REF - 5 * 365.25 * DAY), DOM_MAX];
+redraw();
+</script>
+</body>
+</html>

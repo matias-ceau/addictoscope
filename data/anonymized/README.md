@@ -20,5 +20,5 @@ peut donc rester dans le dépôt public. Il est régénéré par
 ## Autres fichiers
 
 - `synthetique-*` : documents d'exemple (PDF, Word, texte) à un seul patient fictif.
-- `dossiers/` : trois dossiers cliniques fictifs complets avec leur frise
+- `dossiers/` : quatorze dossiers cliniques fictifs complets avec leur frise
   attendue (`verite.json`), voir `dossiers/README.md`.
