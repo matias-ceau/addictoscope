@@ -161,3 +161,25 @@ def test_undated_events_are_listed(render_frise, tmp_path):
 def test_age_based_events_are_drawn(render_frise, tmp_path):
     page = render(render_frise, tmp_path, None)
     assert "Ivresses de [PATIENT] à l'adolescence." in page
+
+
+def test_texts_replace_summaries_and_take_the_key(render_frise, tmp_path):
+    run = tmp_path / "run.json"
+    run.write_text(json.dumps(app_run()), encoding="utf-8")
+    texts = tmp_path / "texts.json"
+    full = "Entretien avec [PATIENT] ce jour, appel de [SOIGNANT_2] : ivresses dès 14 ans."
+    texts.write_text(json.dumps({"historique:o1": full}), encoding="utf-8")
+    table = tmp_path / "table.json"
+    table.write_text(json.dumps(KEY), encoding="utf-8")
+
+    plain = tmp_path / "plain.html"
+    render_frise.main([str(run), "--texts", str(texts), "-o", str(plain)])
+    page = plain.read_text(encoding="utf-8")
+    assert "Entretien avec [PATIENT] ce jour" in page
+    assert "Appel de [SOIGNANT_9]." in page  # an observation without full text keeps its summary
+
+    real = tmp_path / "real.html"
+    render_frise.main([str(run), "--texts", str(texts), "--key", str(table), "-o", str(real)])
+    page = real.read_text(encoding="utf-8")
+    assert "Entretien avec VASSEUR Maëlys ce jour, appel de LEROY Martine" in page
+    assert "[SOIGNANT_2]" not in page

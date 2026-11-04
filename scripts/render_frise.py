@@ -230,11 +230,13 @@ def evidence_marks(text: str, label: str, note: str) -> list[list[int]]:
     return sorted([sc[2], sc[3]] for sc in scored)
 
 
-def load(path: Path, notes: Path | None = None) -> dict:
+def load(path: Path, notes: Path | None = None, texts: Path | None = None) -> dict:
     """Normalise a verite.json or an app run into {tracks, events, sources}.
 
     ``notes``: for an app run, the dossier folder whose notes replace the
     summaries of the observations they match (same document and date).
+    ``texts``: for an app run, a JSON object {observation id: full text, as
+    sent to the model (pseudonymised)} replacing the summaries.
     """
     raw = json.loads(path.read_text(encoding="utf-8"))
     tl = raw["timeline"]
@@ -320,6 +322,11 @@ def load(path: Path, notes: Path | None = None) -> dict:
                 note = full.get(f"{o['doc']} {day}") or full.get(o["doc"])
                 if note:
                     observations[o["id"]] = {"label": f"{o['doc']} · {o['kind']}", "date": o.get("date"), "text": note["text"]}
+        if texts:
+            full_texts = json.loads(texts.read_text(encoding="utf-8"))
+            for o in raw.get("observations", []):
+                if isinstance(full_texts.get(o["id"]), str) and full_texts[o["id"]].strip():
+                    observations[o["id"]] = {"label": f"{o['doc']} · {o['kind']}", "date": o.get("date"), "text": full_texts[o["id"]].strip()}
         for e, raw_e in zip(events, tl["events"]):
             e["evidence"] = [oid for oid in raw_e.get("observationIds", []) if oid in observations]
     return {
@@ -711,6 +718,7 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("frise", type=Path, help="verite.json of a fictional dossier, or an app run (JSON)")
     ap.add_argument("--notes", type=Path, help="for an app run: the fictional dossier folder, to show full notes")
+    ap.add_argument("--texts", type=Path, help="for an app run: {observation id: full pseudonymised text}, shown in place of summaries")
     ap.add_argument("--key", type=Path, help='correspondence table {"labels": {"[PATIENT]": "..."}}: real values in place of labels')
     ap.add_argument(
         "--banner",
@@ -719,7 +727,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     ap.add_argument("-o", "--out", type=Path, required=True)
     args = ap.parse_args(argv)
-    data = load(args.frise, args.notes)
+    data = load(args.frise, args.notes, args.texts)
     if args.key:
         data = reidentify(data, load_key(args.key))
     data = prepare(data)
