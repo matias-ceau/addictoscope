@@ -7,8 +7,8 @@ import type { Manifest } from "../core/verify";
 
 export type CloudPolicy =
   | { kind: "off" }
-  | { kind: "openrouter-zdr"; apiKey: string; model: string }
-  | { kind: "custom-endpoint"; url: string; apiKey: string; model: string };
+  | { kind: "openrouter-zdr"; apiKey: string; model: string; segmentModel?: string }
+  | { kind: "custom-endpoint"; url: string; apiKey: string; model: string; segmentModel?: string };
 
 export class CloudRefused extends Error {}
 
@@ -25,4 +25,10 @@ export function assertSendable(manifest: Manifest | undefined, policy: CloudPoli
  */
 export function openRouterPrivacyFields() {
   return { provider: { zdr: true, data_collection: "deny" as const } };
+}
+
+/** The policy for the segmentation: its own model if one is set (often a
+ *  cheaper one), else the frise's. */
+export function segmentationPolicy(p: CloudPolicy): CloudPolicy {
+  return p.kind !== "off" && p.segmentModel ? { ...p, model: p.segmentModel } : p;
 }

@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { chatJson } from "../src/cloud/client";
-import { CloudRefused, type CloudPolicy } from "../src/cloud/guard";
+import { CloudRefused, segmentationPolicy, type CloudPolicy } from "../src/cloud/guard";
 import { clearLedger, ledgerEntries, realValuesIn } from "../src/cloud/ledger";
 import { isReplay, replayFetch, type Recording } from "../src/cloud/replay";
 import type { Manifest } from "../src/core/verify";
@@ -113,5 +113,13 @@ describe("real values in an outbound text", () => {
 
   it("ignores parts of words, other spellings and short values", () => {
     expect(realValuesIn("Le leader du groupe, idées claires.", ["Lea", "Claire", "Le"])).toEqual([]);
+  });
+});
+
+describe("segmentation model", () => {
+  it("uses its own model when one is set, the frise's otherwise", () => {
+    expect(segmentationPolicy({ ...policy, segmentModel: "vendor/small" })).toMatchObject({ model: "vendor/small" });
+    expect(segmentationPolicy(policy)).toBe(policy);
+    expect(segmentationPolicy({ kind: "off" })).toEqual({ kind: "off" });
   });
 });

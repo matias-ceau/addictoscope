@@ -7,6 +7,7 @@ Coût d'un dossier réel : estimé par proportion à partir du coût du modèle 
 | Modèle | Dossiers | Rappel | Rappel (dossiers réussis) | Précision (borne basse) | Antécédents par l'âge | Fins compatibles | Observations (dates justes) | Coût / dossier fictif | ≈ Coût / dossier réel | Durée / dossier |
 |---|---|---|---|---|---|---|---|---|---|---|
 | `anthropic/claude-sonnet-5.5` | 14/14 | 88 % (281/320) | 88 % | 70 % | 17/20 | 72 % | 100 % | 0.147 $ | 1.17 $ | – |
+| `anthropic/claude-sonnet-5.5 (découpage : anthropic/claude-haiku-5.5)` | 14/14 | 86 % (275/320) | 86 % | 69 % | 17/20 | 75 % | 100 % | 0.093 $ | 0.74 $ | 67 s |
 | `deepseek/deepseek-v4.1-flash` | 14/14 | 81 % (258/320) | 81 % | 62 % | 17/20 | 61 % | 100 % | 0.042 $ | 0.33 $ | 65 s |
 | `openai/gpt-5.6-luna-pro` | 14/14 | 78 % (248/320) | 78 % | 68 % | 18/20 | 58 % | 100 % | 0.035 $ | 0.28 $ | 92 s |
 | `anthropic/claude-haiku-5.5` | 14/14 | 75 % (239/320) | 75 % | 74 % | 16/20 | 65 % | 100 % | 0.009 $ | 0.07 $ | 63 s |

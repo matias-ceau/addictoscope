@@ -142,6 +142,7 @@ dossiers fictifs ([comparaison](data/processed/frise/comparaison-modeles.md)) :
 | Modèle | Rappel | ≈ coût d'un dossier réel |
 |---|---|---|
 | Claude Sonnet 5.5 (défaut) | 88 % | 1,17 $ |
+| Sonnet pour la frise, Haiku pour le découpage | 86 % | ≈ 0,74 $ |
 | DeepSeek V4.1 Flash | 81 % | 0,33 $ |
 | GPT-5.6 Luna Pro | 78 % | 0,28 $ |
 | Claude Haiku 5.5 | 75 % | 0,07 $ |
@@ -149,8 +150,12 @@ dossiers fictifs ([comparaison](data/processed/frise/comparaison-modeles.md)) :
 | Mistral Small | 54 % | 0,04 $ |
 | Gemini 3.5 Flash Lite | 47 % | 0,12 $ |
 
+Sur les 6 dossiers réels, Claude Haiku 5.5 coûte 0,50 $ au total contre 7,00 $,
+mais ne retrouve que la moitié des événements de la frise de Sonnet (67 % sur
+les dossiers fictifs) : l'écart se creuse sur les dossiers longs.
+
 ```bash
-cd web && npx vite-node scripts/run-frise.ts --model=<id> --out=bench/<id avec __>
+cd web && npx vite-node scripts/run-frise.ts --model=<id> [--segment-model=<id>] --out=bench/<id avec __>
 uv run python scripts/compare_models.py
 ```
 

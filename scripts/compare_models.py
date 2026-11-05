@@ -71,6 +71,8 @@ def score_folder(
             continue
         run = json.loads(f.read_text(encoding="utf8"))
         out["model"] = run.get("model", out["model"])
+        if run.get("segmentModel"):
+            out["model"] = f"{out['model']} (découpage : {run['segmentModel']})"
         out["cost"] += run.get("usage", {}).get("cost", 0) or 0
         if run.get("elapsedMs"):
             out["elapsed"].append(run["elapsedMs"] / 1000)

@@ -1,5 +1,5 @@
 /** Orchestrates the cloud analysis of verified documents. */
-import type { CloudPolicy } from "../cloud/guard";
+import { segmentationPolicy, type CloudPolicy } from "../cloud/guard";
 import type { Detection, PageText } from "../core/types";
 import { birthYearFromDetections } from "../notebook/age";
 import type { Manifest } from "../core/verify";
@@ -44,6 +44,8 @@ export async function analyse(
   const analysed = new Set(docs.map((d) => d.id));
   const birthYear = birthYearFromDetections(detections.filter((d) => analysed.has(d.doc)));
   const observations: Observation[] = [];
+  // The segmentation may use a cheaper model; the frise keeps the main one.
+  const segmentPolicy = segmentationPolicy(policy);
   for (const doc of docs) {
     // Images come from the *pseudonymized* PDF, never from the original.
     const images: Record<number, string> = {};
@@ -57,7 +59,7 @@ export async function analyse(
         pages: doc.pages,
         images,
         manifest: doc.manifest,
-        policy,
+        policy: segmentPolicy,
         fetchImpl,
         onProgress: (done, total) => onProgress({ step: "segment", done, total, doc: doc.id }),
       })),

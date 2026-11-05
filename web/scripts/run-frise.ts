@@ -44,6 +44,9 @@ const apiKey = process.env.OPENROUTER_API_KEY;
 if (!apiKey) throw new Error("OPENROUTER_API_KEY is not set");
 const model = arg("model") ?? DEFAULT_MODEL;
 const policy: CloudPolicy = { kind: "openrouter-zdr", apiKey, model };
+/** --segment-model: a cheaper model for the segmentation only (the frise keeps --model). */
+const segmentModel = arg("segment-model");
+const segmentPolicy: CloudPolicy = segmentModel ? { ...policy, model: segmentModel } : policy;
 /** Repeated runs go to their own folder: --out=run2 -> data/processed/frise/run2/. */
 const OUT = resolve(FRISE, arg("out") ?? ".");
 
@@ -114,7 +117,7 @@ async function runDossier(slug: string) {
 
     const images: Record<number, string> = {};
     for (const p of outPages) images[p.page] = `data:image/png;base64,${Buffer.from(renderPagePng(outDoc, p.page, IMAGE_ZOOM)).toString("base64")}`;
-    const obs = await segmentDocument({ doc: src.id, pages: outPages, images, manifest, policy, fetchImpl });
+    const obs = await segmentDocument({ doc: src.id, pages: outPages, images, manifest, policy: segmentPolicy, fetchImpl });
     console.log(`  ${obs.length} observations`);
     observations.push(...obs);
     pagesByDoc[src.id] = outPages;
@@ -128,7 +131,7 @@ async function runDossier(slug: string) {
     `  frise: ${timeline.tracks.length} tracks, ${timeline.events.length} events (${fromAge} dated from an age), ` +
       `${timeline.undated.length} undated; birth year ${birthYear === null ? "unknown" : "known"}`,
   );
-  return { dossier: slug, model, ranAt: new Date().toISOString(), review: "automatic detections accepted as they are", docs, observations, timeline };
+  return { dossier: slug, model, ...(segmentModel ? { segmentModel } : {}), ranAt: new Date().toISOString(), review: "automatic detections accepted as they are", docs, observations, timeline };
 }
 
 mkdirSync(OUT, { recursive: true });
