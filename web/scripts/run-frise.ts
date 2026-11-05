@@ -66,7 +66,9 @@ const fetchImpl = (async (url: string, init: RequestInit) => {
       usage.calls++;
       usage.promptTokens += data?.usage?.prompt_tokens ?? 0;
       usage.completionTokens += data?.usage?.completion_tokens ?? 0;
-      usage.cost += data?.usage?.cost ?? 0;
+      // With the user's own provider key (BYOK), OpenRouter reports 0 and the
+      // provider bills upstream_inference_cost directly.
+      usage.cost += data?.usage?.cost || data?.usage?.cost_details?.upstream_inference_cost || 0;
       const schema = JSON.parse(String(init.body)).response_format?.json_schema?.name;
       let content: unknown = data?.choices?.[0]?.message?.content;
       try {
@@ -138,13 +140,23 @@ const slugs = readdirSync(DOSSIERS, { withFileTypes: true })
 for (const slug of slugs) {
   const before = { ...usage };
   rawAnswers = [];
-  const result = await runDossier(slug);
+  const t0 = Date.now();
+  let result;
+  try {
+    result = await runDossier(slug);
+  } catch (err) {
+    // One failing dossier (a model that breaks the JSON schema, a provider
+    // error) is recorded and the comparison goes on with the next one.
+    console.log(`${slug}: FAILED ${String((err as Error).message ?? err).slice(0, 200)}`);
+    result = { dossier: slug, model, ranAt: new Date().toISOString(), error: String((err as Error).message ?? err) };
+  }
+  const elapsedMs = Date.now() - t0;
   const spent = {
     calls: usage.calls - before.calls,
     promptTokens: usage.promptTokens - before.promptTokens,
     completionTokens: usage.completionTokens - before.completionTokens,
     cost: Number((usage.cost - before.cost).toFixed(4)),
   };
-  writeFileSync(resolve(OUT, `${slug}.json`), JSON.stringify({ ...result, usage: spent, rawAnswers }, null, 2) + "\n");
+  writeFileSync(resolve(OUT, `${slug}.json`), JSON.stringify({ ...result, elapsedMs, usage: spent, rawAnswers }, null, 2) + "\n");
 }
 console.log(`total: ${usage.calls} calls, ${usage.promptTokens} + ${usage.completionTokens} tokens, $${usage.cost.toFixed(3)}`);

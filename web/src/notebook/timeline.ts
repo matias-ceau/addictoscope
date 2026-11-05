@@ -144,6 +144,7 @@ export async function buildTimeline(input: TimelineInput): Promise<Timeline> {
         { role: "system", content: TIMELINE_SYSTEM },
         { role: "user", content: `Observations (ordre chronologique) :\n\n${batch.text}` },
       ],
+      docs: [...batch.docs],
       schemaName: "frise",
       schema: TIMELINE_SCHEMA,
       fetchImpl: input.fetchImpl,

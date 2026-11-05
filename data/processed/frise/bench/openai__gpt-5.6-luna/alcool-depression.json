@@ -1,0 +1,1903 @@
+{
+  "dossier": "alcool-depression",
+  "model": "openai/gpt-5.6-luna",
+  "ranAt": "2026-11-05T00:08:51.278Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "courrier": {
+      "pages": 1,
+      "redactions": {
+        "ETABLISSEMENT": 1,
+        "SOIGNANT": 9,
+        "PERSONNE": 1,
+        "TEL": 1,
+        "ADRESSE": 1,
+        "VILLE": 1,
+        "PATIENT": 2,
+        "PROCHE": 1,
+        "NAISSANCE": 1
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    },
+    "historique": {
+      "pages": 4,
+      "redactions": {
+        "ETABLISSEMENT": 9,
+        "ADRESSE": 8,
+        "TEL": 5,
+        "PATIENT": 9,
+        "DOSSIER": 4,
+        "NAISSANCE": 4,
+        "IPP": 4,
+        "VILLE": 4,
+        "SOIGNANT": 28,
+        "PROCHE": 9,
+        "PERSONNE": 4
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "courrier:o1",
+      "doc": "courrier",
+      "start": {
+        "page": 0,
+        "line": 14
+      },
+      "end": {
+        "page": 0,
+        "line": 39
+      },
+      "date": "2022-12-05",
+      "kind": "compte rendu d'hospitalisation",
+      "authorRole": "médecin",
+      "summary": "Compte rendu d’un sevrage alcoolique hospitalier avec hallucinations visuelles transitoires sous diazépam, stéatose hépatique, éléments dépressifs persistants, prescription d’acamprosate et suivi au CSAPA."
+    },
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 12
+      },
+      "end": {
+        "page": 0,
+        "line": 25
+      },
+      "date": "2022-11-14",
+      "kind": "Observation médicale des urgences",
+      "authorRole": "médecin urgentiste",
+      "summary": "La patiente est prise en charge après une chute dans un contexte d’alcoolisation aiguë, avec alcoolémie élevée et fracture non déplacée du radius gauche, puis accepte une rencontre avec l’ELSA."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 26
+      },
+      "end": {
+        "page": 0,
+        "line": 43
+      },
+      "date": "2022-11-15",
+      "kind": "Observation ELSA",
+      "authorRole": null,
+      "summary": "L’entretien confirme une consommation quotidienne importante de vin avec tremblements matinaux et conduit à l’acceptation d’une hospitalisation programmée pour sevrage."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 44
+      },
+      "end": {
+        "page": 0,
+        "line": 67
+      },
+      "date": "2022-11-24",
+      "kind": "Consultation psychiatrique addictologie",
+      "authorRole": "psychiatre addictologue",
+      "summary": "La consultation conclut à un trouble sévère de l’usage de l’alcool avec symptômes dépressifs à réévaluer après sevrage, et programme un sevrage résidentiel avec supplémentation en thiamine."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 68
+      },
+      "end": {
+        "page": 1,
+        "line": 24
+      },
+      "date": "2022-12-05",
+      "kind": "Observation médicale d'entrée",
+      "authorRole": "interne",
+      "summary": "À l’entrée pour sevrage alcoolique, la patiente présente une consommation récente, des signes de sevrage modérés et une humeur dépressive, justifiant un protocole par diazépam, thiamine et surveillance rapprochée."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 25
+      },
+      "end": {
+        "page": 1,
+        "line": 31
+      },
+      "date": "2022-12-06",
+      "kind": "Observation infirmière",
+      "authorRole": "infirmier ou infirmière",
+      "summary": "La patiente présente durant la nuit une aggravation transitoire du sevrage avec sueurs, tremblements et hallucinations visuelles, améliorée après diazépam selon protocole."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 32
+      },
+      "end": {
+        "page": 1,
+        "line": 42
+      },
+      "date": "2022-12-07",
+      "kind": "Observation médicale de suivi",
+      "authorRole": "interne",
+      "summary": "Au troisième jour du sevrage, les hallucinations visuelles sont transitoires et critiquées sans argument pour un delirium tremens, avec poursuite de la décroissance du diazépam et bilan complémentaire."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 43
+      },
+      "end": {
+        "page": 1,
+        "line": 54
+      },
+      "date": "2022-12-12",
+      "kind": "Entretien psychologique",
+      "authorRole": "psychologue",
+      "summary": "La patiente décrit le rôle anxiolytique et anesthésiant de l’alcool, sa culpabilité familiale et demande un suivi psychologique de type TCC après la sortie."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 55
+      },
+      "end": {
+        "page": 2,
+        "line": 16
+      },
+      "date": "2022-12-16",
+      "kind": "Observation médicale de sortie",
+      "authorRole": "psychiatre addictologue",
+      "summary": "Le sevrage est mené à terme sans complication majeure, avec persistance de symptômes dépressifs, et la sortie est organisée sous acamprosate et thiamine avec suivis orthopédique, psychiatrique, psychologique et infirmier."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 17
+      },
+      "end": {
+        "page": 2,
+        "line": 32
+      },
+      "date": "2023-01-03",
+      "kind": "Entretien social",
+      "authorRole": "assistante sociale",
+      "summary": "L’entretien porte sur les difficultés professionnelles et financières de la patiente, notamment les indemnités journalières, les dettes et la pension alimentaire, avec plusieurs démarches sociales proposées."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 33
+      },
+      "end": {
+        "page": 2,
+        "line": 45
+      },
+      "date": "2023-01-10",
+      "kind": "Consultation psychiatrique addictologie",
+      "authorRole": "psychiatre addictologue",
+      "summary": "Après trois semaines d’abstinence, la patiente reste très dépressive et présente un craving important, conduisant à l’introduction de la sertraline avec poursuite de l’acamprosate."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 46
+      },
+      "end": {
+        "page": 2,
+        "line": 51
+      },
+      "date": "2023-01-24",
+      "kind": "Observation infirmière CSAPA",
+      "authorRole": "infirmier ou infirmière",
+      "summary": "Le contrôle biologique montre une baisse des GGT, la patiente rapporte un écart d’alcool isolé sans autre consommation depuis, tolère la sertraline et ne souhaite pas encore arrêter le tabac."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 52
+      },
+      "end": {
+        "page": 2,
+        "line": 63
+      },
+      "date": "2023-02-21",
+      "kind": "Consultation psychiatrique addictologie",
+      "authorRole": "psychiatre addictologue",
+      "summary": "Devant un craving persistant et deux épisodes de consommation, l’acamprosate est remplacé par du baclofène avec titration progressive, tandis que la sertraline est poursuivie."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 64
+      },
+      "end": {
+        "page": 3,
+        "line": 16
+      },
+      "date": "2023-05-10",
+      "kind": "Entretien psychologique",
+      "authorRole": "psychologue",
+      "summary": "La séance est marquée par le décès récent de la mère de la patiente, dont les suites émotionnelles sont abordées."
+    },
+    {
+      "id": "historique:o14",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 17
+      },
+      "end": {
+        "page": 3,
+        "line": 27
+      },
+      "date": "2023-06-13",
+      "kind": "Consultation psychiatrique addictologie",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Une aggravation thymique avec ruminations, culpabilité, insomnie et idées de mort passives est rapportée après le décès de la mère, tandis que l’abstinence alcoolique est maintenue; la sertraline est augmentée à 100 mg/j et un suivi rapproché est organisé."
+    },
+    {
+      "id": "historique:o15",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 28
+      },
+      "end": {
+        "page": 3,
+        "line": 31
+      },
+      "date": "2023-06-15",
+      "kind": "Observation infirmière CSAPA",
+      "authorRole": "Infirmière CSAPA",
+      "summary": "La patiente signale des nausées et diarrhées après avoir pris par erreur 150 mg de sertraline au lieu des 100 mg prescrits; la posologie est réexpliquée et réécrite."
+    },
+    {
+      "id": "historique:o16",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 32
+      },
+      "end": {
+        "page": 3,
+        "line": 42
+      },
+      "date": "2023-09-19",
+      "kind": "Consultation psychiatrique addictologie",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "L’amélioration thymique et du sommeil est nette, l’abstinence alcoolique est complète depuis mars 2023, le tabagisme est réduit et le traitement par sertraline, baclofène et substituts nicotiniques est poursuivi."
+    },
+    {
+      "id": "historique:o17",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 43
+      },
+      "end": {
+        "page": 3,
+        "line": 53
+      },
+      "date": "2024-01-23",
+      "kind": "Observation infirmière CSAPA",
+      "authorRole": "Infirmière CSAPA",
+      "summary": "Venue sans rendez-vous et en pleurs, la patiente rapporte une reprise de l’alcool depuis environ dix jours, jusqu’à six verres de vin chaque soir, dans un contexte de départ de son fils, ainsi que l’arrêt du baclofène, sans idée suicidaire exprimée."
+    },
+    {
+      "id": "historique:o18",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 54
+      },
+      "end": {
+        "page": 3,
+        "line": 64
+      },
+      "date": "2024-01-25",
+      "kind": "Consultation psychiatrique addictologie",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "La patiente présente une reprise des consommations alcooliques depuis la mi-janvier ou les fêtes, sans consommation matinale ni signe de sevrage, après arrêt du baclofène; celui-ci est repris avec titration, avec un objectif initial de réduction et un suivi rapproché."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t1",
+        "kind": "substance_use",
+        "label": "Alcool"
+      },
+      {
+        "id": "t3",
+        "kind": "psychiatric",
+        "label": "Passage à l'acte suicidaire par intoxication médicamenteuse volontaire"
+      },
+      {
+        "id": "t8",
+        "kind": "psychiatric",
+        "label": "Symptomatologie dépressive"
+      },
+      {
+        "id": "t15",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif caractérisé d'intensité moyenne"
+      },
+      {
+        "id": "t19",
+        "kind": "psychiatric",
+        "label": "Aggravation thymique dans le contexte du deuil"
+      },
+      {
+        "id": "t6",
+        "kind": "somatic",
+        "label": "Fracture de l'extrémité inférieure du radius gauche"
+      },
+      {
+        "id": "t10",
+        "kind": "somatic",
+        "label": "Stéatose hépatique"
+      },
+      {
+        "id": "t12",
+        "kind": "medication",
+        "label": "Diazépam"
+      },
+      {
+        "id": "t13",
+        "kind": "medication",
+        "label": "Thiamine"
+      },
+      {
+        "id": "t14",
+        "kind": "medication",
+        "label": "Acamprosate"
+      },
+      {
+        "id": "t16",
+        "kind": "medication",
+        "label": "Sertraline"
+      },
+      {
+        "id": "t17",
+        "kind": "medication",
+        "label": "Baclofène"
+      },
+      {
+        "id": "t20",
+        "kind": "medication",
+        "label": "Patch nicotinique"
+      },
+      {
+        "id": "t4",
+        "kind": "therapeutic_psycho",
+        "label": "Sevrage hospitalier antérieur"
+      },
+      {
+        "id": "t7",
+        "kind": "therapeutic_psycho",
+        "label": "Évaluation et orientation ELSA"
+      },
+      {
+        "id": "t9",
+        "kind": "therapeutic_psycho",
+        "label": "Hospitalisation pour sevrage alcoolique"
+      },
+      {
+        "id": "t11",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi psychologique au CSAPA"
+      },
+      {
+        "id": "t23",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi CSAPA"
+      },
+      {
+        "id": "t2",
+        "kind": "life_event",
+        "label": "Divorce / séparation conjugale"
+      },
+      {
+        "id": "t5",
+        "kind": "life_event",
+        "label": "Arrêt de travail"
+      },
+      {
+        "id": "t18",
+        "kind": "life_event",
+        "label": "Décès de la mère"
+      },
+      {
+        "id": "t21",
+        "kind": "life_event",
+        "label": "Reprise du travail en mi-temps thérapeutique"
+      },
+      {
+        "id": "t22",
+        "kind": "life_event",
+        "label": "Départ du fils pour une formation à Toulouse"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "1984",
+        "end": "2011",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Premières ivresses à l'adolescence, puis usage festif jusqu'à la trentaine.",
+        "observationIds": [
+          "historique:o3"
+        ],
+        "fromAge": {
+          "start": [
+            12,
+            17
+          ],
+          "end": [
+            30,
+            39
+          ]
+        }
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "2016",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Divorce situé en 2016 dans une observation et en 2017 dans une autre ; décrit comme un facteur d'aggravation des consommations.",
+        "observationIds": [
+          "historique:o3",
+          "historique:o4",
+          "historique:o7"
+        ]
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "2016",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Un passage à l'acte en 2016 au moment de la séparation, sans hospitalisation.",
+        "observationIds": [
+          "historique:o3",
+          "courrier:o1"
+        ]
+      },
+      {
+        "id": "e4",
+        "trackId": "t1",
+        "start": "2015",
+        "end": "2022-12-05",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Usage quotidien installé vers 2015, avec consommation matinale, perte de contrôle et abandon d'activités ; une consommation d'environ 1 litre de vin par jour est aussi rapportée depuis 2012-2013.",
+        "observationIds": [
+          "historique:o3",
+          "historique:o4"
+        ]
+      },
+      {
+        "id": "e5",
+        "trackId": "t4",
+        "start": "2019",
+        "end": "2019",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Sevrage à la clinique des Pins, suivi de quatre mois d'abstinence puis d'une reprise progressive.",
+        "observationIds": [
+          "historique:o2",
+          "historique:o3",
+          "courrier:o1"
+        ]
+      },
+      {
+        "id": "e6",
+        "trackId": "t5",
+        "start": "2022-09-12",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Arrêt maladie comme aide-soignante ; reprise ultérieure en mi-temps thérapeutique.",
+        "observationIds": [
+          "historique:o4",
+          "historique:o9",
+          "historique:o16"
+        ]
+      },
+      {
+        "id": "e7",
+        "trackId": "t1",
+        "start": "2022-11-14",
+        "end": "2022-11-14",
+        "ongoing": false,
+        "mode": "intoxication",
+        "lossOfControl": false,
+        "note": "Intoxication alcoolique aiguë avec alcoolémie à 2,84 g/L, chute à domicile et fracture du radius gauche.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o3",
+          "courrier:o1"
+        ]
+      },
+      {
+        "id": "e8",
+        "trackId": "t6",
+        "start": "2022-11-14",
+        "end": "2023-01-10",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Fracture non déplacée, immobilisée par plâtre ; ablation du plâtre le 10/01/2023.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o3",
+          "historique:o4",
+          "historique:o8",
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e9",
+        "trackId": "t7",
+        "start": "2022-11-15",
+        "end": "2022-11-24",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Rencontre à l'UHCD, inscription sur liste d'attente de sevrage et consultation addictologique programmée.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e10",
+        "trackId": "t8",
+        "start": "2022-11-24",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Tristesse, anhédonie partielle, sommeil fragmenté et culpabilité ; réévaluation prévue après le sevrage.",
+        "observationIds": [
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e11",
+        "trackId": "t1",
+        "start": "2022-12-05",
+        "end": "2022-12-16",
+        "ongoing": false,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Sevrage résidentiel programmé par diazépam ; tremblements, sueurs et hallucinations visuelles transitoires sans delirium tremens.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o4",
+          "historique:o5",
+          "historique:o6",
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e12",
+        "trackId": "t9",
+        "start": "2022-12-05",
+        "end": "2022-12-16",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Sevrage hospitalier mené à terme, avec surveillance clinique et accompagnement addictologique.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o4",
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e13",
+        "trackId": "t10",
+        "start": "2022-12-16",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Stéatose hépatique homogène à l'échographie, sans signe d'hypertension portale.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e14",
+        "trackId": "t11",
+        "start": "2022-12-12",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Demande de suivi, notamment en TCC ; entretiens proposés tous les quinze jours après la sortie.",
+        "observationIds": [
+          "historique:o7",
+          "historique:o8",
+          "historique:o18"
+        ]
+      },
+      {
+        "id": "e15",
+        "trackId": "t12",
+        "start": "2022-12-05",
+        "end": "2022-12-16",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Traitement du sevrage selon protocole Cushman, arrêté à la sortie.",
+        "observationIds": [
+          "historique:o4",
+          "historique:o5",
+          "historique:o6",
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e16",
+        "trackId": "t13",
+        "start": "2022-11-24",
+        "end": "2022-12-16",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Introduite avant le sevrage, administrée initialement par voie intraveineuse puis per os.",
+        "observationIds": [
+          "historique:o3",
+          "courrier:o1",
+          "historique:o4",
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e17",
+        "trackId": "t14",
+        "start": "2022-12-16",
+        "end": "2023-02-21",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "333 mg, deux comprimés trois fois par jour ; observance initialement bonne, efficacité jugée insuffisante.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o8",
+          "historique:o10",
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e18",
+        "trackId": "t1",
+        "start": "2022-12-25",
+        "end": "2022-12-25",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": true,
+        "note": "Lors des fêtes, consommation de champagne avec impossibilité de s'arrêter ; épisode non signalé initialement à l'équipe.",
+        "observationIds": [
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e19",
+        "trackId": "t1",
+        "start": "2022-12-16",
+        "end": "2023-02-21",
+        "ongoing": false,
+        "mode": "craving",
+        "lossOfControl": false,
+        "note": "Craving important, surtout en soirée, malgré l'abstinence rapportée après la sortie.",
+        "observationIds": [
+          "historique:o10",
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e20",
+        "trackId": "t15",
+        "start": "2023-01-10",
+        "end": "2023-09-19",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Tristesse, anhédonie, aboulie, ralentissement, insomnie et perte de poids ; évolution vers une rémission partielle en septembre.",
+        "observationIds": [
+          "historique:o8",
+          "historique:o10",
+          "historique:o12",
+          "historique:o14",
+          "historique:o16"
+        ]
+      },
+      {
+        "id": "e21",
+        "trackId": "t16",
+        "start": "2023-01-10",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Débutée à 50 mg/j, augmentée à 100 mg/j en juin 2023 ; erreur ponctuelle de prise à 150 mg/j rapportée en juin.",
+        "observationIds": [
+          "historique:o10",
+          "historique:o11",
+          "historique:o14",
+          "historique:o15",
+          "historique:o16",
+          "historique:o18"
+        ]
+      },
+      {
+        "id": "e22",
+        "trackId": "t1",
+        "start": "2023-02",
+        "end": "2023-02",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Deux épisodes de consommation de vin, environ une bouteille à chaque fois, sans reprise quotidienne.",
+        "observationIds": [
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e23",
+        "trackId": "t17",
+        "start": "2023-02-21",
+        "end": "2023-12",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Relais de l'acamprosate, avec titration jusqu'à 60 mg/j ; dose rapportée à 50 mg en mai puis 60 mg/j en juin.",
+        "observationIds": [
+          "historique:o12",
+          "historique:o13",
+          "historique:o14",
+          "historique:o16",
+          "historique:o17",
+          "historique:o18"
+        ]
+      },
+      {
+        "id": "e24",
+        "trackId": "t18",
+        "start": "2023-04",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Décès survenu une dizaine de jours avant l'entretien du 10/05/2023 ; deuil vécu avec culpabilité et absence de réconciliation.",
+        "observationIds": [
+          "historique:o7",
+          "historique:o13",
+          "historique:o14"
+        ]
+      },
+      {
+        "id": "e25",
+        "trackId": "t19",
+        "start": "2023-04",
+        "end": "2023-09-19",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Ruminations, culpabilité, insomnie et idées de mort passives en juin, sans projet suicidaire ; amélioration nette en septembre.",
+        "observationIds": [
+          "historique:o13",
+          "historique:o14",
+          "historique:o16"
+        ]
+      },
+      {
+        "id": "e26",
+        "trackId": "t1",
+        "start": "2023-03",
+        "end": "2024-01",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Abstinence complète rapportée depuis mars 2023 jusqu'à la reprise de janvier 2024.",
+        "observationIds": [
+          "historique:o13",
+          "historique:o14",
+          "historique:o16",
+          "historique:o17",
+          "historique:o18"
+        ]
+      },
+      {
+        "id": "e27",
+        "trackId": "t20",
+        "start": "2023-09-19",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Patch 14 mg/24 h proposé dans le contexte de réduction du tabagisme.",
+        "observationIds": [
+          "historique:o16"
+        ]
+      },
+      {
+        "id": "e28",
+        "trackId": "t21",
+        "start": "2023-09-04",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Reprise à l'EHPAD, vécue positivement.",
+        "observationIds": [
+          "historique:o16"
+        ]
+      },
+      {
+        "id": "e29",
+        "trackId": "t22",
+        "start": "2024-01",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Départ début janvier, vécu avec sentiment de maison vide et identifié comme déclencheur de la reprise des consommations.",
+        "observationIds": [
+          "historique:o17",
+          "historique:o18"
+        ]
+      },
+      {
+        "id": "e30",
+        "trackId": "t1",
+        "start": "2024-01",
+        "end": null,
+        "ongoing": true,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Reprise depuis environ mi-janvier, puis consommation le soir de 4 à 6 UIA ou jusqu'à 6 verres de vin ; pas de consommation matinale ni de signe de sevrage.",
+        "observationIds": [
+          "historique:o17",
+          "historique:o18"
+        ]
+      },
+      {
+        "id": "e31",
+        "trackId": "t1",
+        "start": "2024-01",
+        "end": null,
+        "ongoing": true,
+        "mode": "craving",
+        "lossOfControl": false,
+        "note": "Reprise des consommations dans un contexte de maison vide après le départ du fils ; objectif de réduction puis d'abstinence discuté.",
+        "observationIds": [
+          "historique:o17",
+          "historique:o18"
+        ]
+      },
+      {
+        "id": "e32",
+        "trackId": "t17",
+        "start": "2024-01-25",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Reprise après arrêt de sa propre initiative fin décembre 2023, avec nouvelle titration jusqu'à 60 mg/j.",
+        "observationIds": [
+          "historique:o17",
+          "historique:o18"
+        ]
+      },
+      {
+        "id": "e33",
+        "trackId": "t23",
+        "start": "2022-12-16",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Suivi psychiatrique, psychologique et infirmier après le sevrage ; consultations rapprochées lors de la rechute de janvier 2024.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o8",
+          "historique:o10",
+          "historique:o12",
+          "historique:o14",
+          "historique:o16",
+          "historique:o17",
+          "historique:o18"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 66668,
+  "usage": {
+    "calls": 4,
+    "promptTokens": 19766,
+    "completionTokens": 8814,
+    "cost": 0.0155
+  },
+  "rawAnswers": [
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 14
+            },
+            "end": {
+              "page": 1,
+              "line": 39
+            },
+            "date": "2022-12-05",
+            "kind": "compte rendu d'hospitalisation",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "Compte rendu d’un sevrage alcoolique hospitalier avec hallucinations visuelles transitoires sous diazépam, stéatose hépatique, éléments dépressifs persistants, prescription d’acamprosate et suivi au CSAPA."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 12
+            },
+            "end": {
+              "page": 1,
+              "line": 25
+            },
+            "date": "2022-11-14",
+            "kind": "Observation médicale des urgences",
+            "author_role": "médecin urgentiste",
+            "continues_previous": false,
+            "summary": "La patiente est prise en charge après une chute dans un contexte d’alcoolisation aiguë, avec alcoolémie élevée et fracture non déplacée du radius gauche, puis accepte une rencontre avec l’ELSA."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 26
+            },
+            "end": {
+              "page": 1,
+              "line": 43
+            },
+            "date": "2022-11-15",
+            "kind": "Observation ELSA",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "L’entretien confirme une consommation quotidienne importante de vin avec tremblements matinaux et conduit à l’acceptation d’une hospitalisation programmée pour sevrage."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 44
+            },
+            "end": {
+              "page": 1,
+              "line": 67
+            },
+            "date": "2022-11-24",
+            "kind": "Consultation psychiatrique addictologie",
+            "author_role": "psychiatre addictologue",
+            "continues_previous": false,
+            "summary": "La consultation conclut à un trouble sévère de l’usage de l’alcool avec symptômes dépressifs à réévaluer après sevrage, et programme un sevrage résidentiel avec supplémentation en thiamine."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 68
+            },
+            "end": {
+              "page": 2,
+              "line": 24
+            },
+            "date": "2022-12-05",
+            "kind": "Observation médicale d'entrée",
+            "author_role": "interne",
+            "continues_previous": false,
+            "summary": "À l’entrée pour sevrage alcoolique, la patiente présente une consommation récente, des signes de sevrage modérés et une humeur dépressive, justifiant un protocole par diazépam, thiamine et surveillance rapprochée."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 25
+            },
+            "end": {
+              "page": 2,
+              "line": 31
+            },
+            "date": "2022-12-06",
+            "kind": "Observation infirmière",
+            "author_role": "infirmier ou infirmière",
+            "continues_previous": false,
+            "summary": "La patiente présente durant la nuit une aggravation transitoire du sevrage avec sueurs, tremblements et hallucinations visuelles, améliorée après diazépam selon protocole."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 32
+            },
+            "end": {
+              "page": 2,
+              "line": 42
+            },
+            "date": "2022-12-07",
+            "kind": "Observation médicale de suivi",
+            "author_role": "interne",
+            "continues_previous": false,
+            "summary": "Au troisième jour du sevrage, les hallucinations visuelles sont transitoires et critiquées sans argument pour un delirium tremens, avec poursuite de la décroissance du diazépam et bilan complémentaire."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 43
+            },
+            "end": {
+              "page": 2,
+              "line": 54
+            },
+            "date": "2022-12-12",
+            "kind": "Entretien psychologique",
+            "author_role": "psychologue",
+            "continues_previous": false,
+            "summary": "La patiente décrit le rôle anxiolytique et anesthésiant de l’alcool, sa culpabilité familiale et demande un suivi psychologique de type TCC après la sortie."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 55
+            },
+            "end": {
+              "page": 3,
+              "line": 16
+            },
+            "date": "2022-12-16",
+            "kind": "Observation médicale de sortie",
+            "author_role": "psychiatre addictologue",
+            "continues_previous": false,
+            "summary": "Le sevrage est mené à terme sans complication majeure, avec persistance de symptômes dépressifs, et la sortie est organisée sous acamprosate et thiamine avec suivis orthopédique, psychiatrique, psychologique et infirmier."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 17
+            },
+            "end": {
+              "page": 3,
+              "line": 32
+            },
+            "date": "2023-01-03",
+            "kind": "Entretien social",
+            "author_role": "assistante sociale",
+            "continues_previous": false,
+            "summary": "L’entretien porte sur les difficultés professionnelles et financières de la patiente, notamment les indemnités journalières, les dettes et la pension alimentaire, avec plusieurs démarches sociales proposées."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 33
+            },
+            "end": {
+              "page": 3,
+              "line": 45
+            },
+            "date": "2023-01-10",
+            "kind": "Consultation psychiatrique addictologie",
+            "author_role": "psychiatre addictologue",
+            "continues_previous": false,
+            "summary": "Après trois semaines d’abstinence, la patiente reste très dépressive et présente un craving important, conduisant à l’introduction de la sertraline avec poursuite de l’acamprosate."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 46
+            },
+            "end": {
+              "page": 3,
+              "line": 51
+            },
+            "date": "2023-01-24",
+            "kind": "Observation infirmière CSAPA",
+            "author_role": "infirmier ou infirmière",
+            "continues_previous": false,
+            "summary": "Le contrôle biologique montre une baisse des GGT, la patiente rapporte un écart d’alcool isolé sans autre consommation depuis, tolère la sertraline et ne souhaite pas encore arrêter le tabac."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 52
+            },
+            "end": {
+              "page": 3,
+              "line": 63
+            },
+            "date": "2023-02-21",
+            "kind": "Consultation psychiatrique addictologie",
+            "author_role": "psychiatre addictologue",
+            "continues_previous": false,
+            "summary": "Devant un craving persistant et deux épisodes de consommation, l’acamprosate est remplacé par du baclofène avec titration progressive, tandis que la sertraline est poursuivie."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 64
+            },
+            "end": {
+              "page": 3,
+              "line": 68
+            },
+            "date": "2023-05-10",
+            "kind": "Entretien psychologique",
+            "author_role": "psychologue",
+            "continues_previous": false,
+            "summary": "La séance est marquée par le décès récent de la mère de la patiente, dont les suites émotionnelles sont abordées."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 4,
+              "line": 12
+            },
+            "end": {
+              "page": 4,
+              "line": 16
+            },
+            "date": "2023-05-10",
+            "kind": "Entretien psychologique",
+            "author_role": "Psychologue",
+            "continues_previous": true,
+            "summary": "La patiente évoque le deuil de sa mère, une envie importante de boire à laquelle elle a résisté, les situations à risque et la prise de baclofène à 50 mg, avec abstinence depuis début mars."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 17
+            },
+            "end": {
+              "page": 4,
+              "line": 27
+            },
+            "date": "2023-06-13",
+            "kind": "Consultation psychiatrique addictologie",
+            "author_role": "Psychiatre addictologue",
+            "continues_previous": false,
+            "summary": "Une aggravation thymique avec ruminations, culpabilité, insomnie et idées de mort passives est rapportée après le décès de la mère, tandis que l’abstinence alcoolique est maintenue; la sertraline est augmentée à 100 mg/j et un suivi rapproché est organisé."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 28
+            },
+            "end": {
+              "page": 4,
+              "line": 31
+            },
+            "date": "2023-06-15",
+            "kind": "Observation infirmière CSAPA",
+            "author_role": "Infirmière CSAPA",
+            "continues_previous": false,
+            "summary": "La patiente signale des nausées et diarrhées après avoir pris par erreur 150 mg de sertraline au lieu des 100 mg prescrits; la posologie est réexpliquée et réécrite."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 32
+            },
+            "end": {
+              "page": 4,
+              "line": 42
+            },
+            "date": "2023-09-19",
+            "kind": "Consultation psychiatrique addictologie",
+            "author_role": "Psychiatre addictologue",
+            "continues_previous": false,
+            "summary": "L’amélioration thymique et du sommeil est nette, l’abstinence alcoolique est complète depuis mars 2023, le tabagisme est réduit et le traitement par sertraline, baclofène et substituts nicotiniques est poursuivi."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 43
+            },
+            "end": {
+              "page": 4,
+              "line": 53
+            },
+            "date": "2024-01-23",
+            "kind": "Observation infirmière CSAPA",
+            "author_role": "Infirmière CSAPA",
+            "continues_previous": false,
+            "summary": "Venue sans rendez-vous et en pleurs, la patiente rapporte une reprise de l’alcool depuis environ dix jours, jusqu’à six verres de vin chaque soir, dans un contexte de départ de son fils, ainsi que l’arrêt du baclofène, sans idée suicidaire exprimée."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 54
+            },
+            "end": {
+              "page": 4,
+              "line": 64
+            },
+            "date": "2024-01-25",
+            "kind": "Consultation psychiatrique addictologie",
+            "author_role": "Psychiatre addictologue",
+            "continues_previous": false,
+            "summary": "La patiente présente une reprise des consommations alcooliques depuis la mi-janvier ou les fêtes, sans consommation matinale ni signe de sevrage, après arrêt du baclofène; celui-ci est repris avec titration, avec un objectif initial de réduction et un suivi rapproché."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": null,
+            "end": null,
+            "start_age": "adolescence",
+            "end_age": [
+              30,
+              39
+            ],
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Premières ivresses à l'adolescence, puis usage festif jusqu'à la trentaine.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Divorce / séparation conjugale",
+            "start": "2016",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Divorce situé en 2016 dans une observation et en 2017 dans une autre ; décrit comme un facteur d'aggravation des consommations.",
+            "observation_ids": [
+              "o3",
+              "o5",
+              "o8"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Passage à l'acte suicidaire par intoxication médicamenteuse volontaire",
+            "start": "2016",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Un passage à l'acte en 2016 au moment de la séparation, sans hospitalisation.",
+            "observation_ids": [
+              "o3",
+              "o4"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2015",
+            "end": "2022-12-05",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Usage quotidien installé vers 2015, avec consommation matinale, perte de contrôle et abandon d'activités ; une consommation d'environ 1 litre de vin par jour est aussi rapportée depuis 2012-2013.",
+            "observation_ids": [
+              "o3",
+              "o5"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Sevrage hospitalier antérieur",
+            "start": "2019",
+            "end": "2019",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Sevrage à la clinique des Pins, suivi de quatre mois d'abstinence puis d'une reprise progressive.",
+            "observation_ids": [
+              "o2",
+              "o3",
+              "o4"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Arrêt de travail",
+            "start": "2022-09-12",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Arrêt maladie comme aide-soignante ; reprise ultérieure en mi-temps thérapeutique.",
+            "observation_ids": [
+              "o5",
+              "o10",
+              "o17"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2022-11-14",
+            "end": "2022-11-14",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": false,
+            "note": "Intoxication alcoolique aiguë avec alcoolémie à 2,84 g/L, chute à domicile et fracture du radius gauche.",
+            "observation_ids": [
+              "o1",
+              "o3",
+              "o4"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Fracture de l'extrémité inférieure du radius gauche",
+            "start": "2022-11-14",
+            "end": "2023-01-10",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Fracture non déplacée, immobilisée par plâtre ; ablation du plâtre le 10/01/2023.",
+            "observation_ids": [
+              "o1",
+              "o3",
+              "o5",
+              "o9",
+              "o11"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Évaluation et orientation ELSA",
+            "start": "2022-11-15",
+            "end": "2022-11-24",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Rencontre à l'UHCD, inscription sur liste d'attente de sevrage et consultation addictologique programmée.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Symptomatologie dépressive",
+            "start": "2022-11-24",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Tristesse, anhédonie partielle, sommeil fragmenté et culpabilité ; réévaluation prévue après le sevrage.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2022-12-05",
+            "end": "2022-12-16",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Sevrage résidentiel programmé par diazépam ; tremblements, sueurs et hallucinations visuelles transitoires sans delirium tremens.",
+            "observation_ids": [
+              "o4",
+              "o5",
+              "o6",
+              "o7",
+              "o9"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation pour sevrage alcoolique",
+            "start": "2022-12-05",
+            "end": "2022-12-16",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Sevrage hospitalier mené à terme, avec surveillance clinique et accompagnement addictologique.",
+            "observation_ids": [
+              "o4",
+              "o5",
+              "o9"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Stéatose hépatique",
+            "start": "2022-12-16",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Stéatose hépatique homogène à l'échographie, sans signe d'hypertension portale.",
+            "observation_ids": [
+              "o4",
+              "o9"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychologique au CSAPA",
+            "start": "2022-12-12",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Demande de suivi, notamment en TCC ; entretiens proposés tous les quinze jours après la sortie.",
+            "observation_ids": [
+              "o8",
+              "o9",
+              "o19"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Diazépam",
+            "start": "2022-12-05",
+            "end": "2022-12-16",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Traitement du sevrage selon protocole Cushman, arrêté à la sortie.",
+            "observation_ids": [
+              "o5",
+              "o6",
+              "o7",
+              "o9"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Thiamine",
+            "start": "2022-11-24",
+            "end": "2022-12-16",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Introduite avant le sevrage, administrée initialement par voie intraveineuse puis per os.",
+            "observation_ids": [
+              "o3",
+              "o4",
+              "o5",
+              "o9"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Acamprosate",
+            "start": "2022-12-16",
+            "end": "2023-02-21",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "333 mg, deux comprimés trois fois par jour ; observance initialement bonne, efficacité jugée insuffisante.",
+            "observation_ids": [
+              "o4",
+              "o9",
+              "o11",
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2022-12-25",
+            "end": "2022-12-25",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": true,
+            "note": "Lors des fêtes, consommation de champagne avec impossibilité de s'arrêter ; épisode non signalé initialement à l'équipe.",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2022-12-16",
+            "end": "2023-02-21",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "craving",
+            "loss_of_control": false,
+            "note": "Craving important, surtout en soirée, malgré l'abstinence rapportée après la sortie.",
+            "observation_ids": [
+              "o11",
+              "o13"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif caractérisé d'intensité moyenne",
+            "start": "2023-01-10",
+            "end": "2023-09-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Tristesse, anhédonie, aboulie, ralentissement, insomnie et perte de poids ; évolution vers une rémission partielle en septembre.",
+            "observation_ids": [
+              "o9",
+              "o11",
+              "o13",
+              "o15",
+              "o17"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Sertraline",
+            "start": "2023-01-10",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Débutée à 50 mg/j, augmentée à 100 mg/j en juin 2023 ; erreur ponctuelle de prise à 150 mg/j rapportée en juin.",
+            "observation_ids": [
+              "o11",
+              "o12",
+              "o15",
+              "o16",
+              "o17",
+              "o19"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2023-02",
+            "end": "2023-02",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Deux épisodes de consommation de vin, environ une bouteille à chaque fois, sans reprise quotidienne.",
+            "observation_ids": [
+              "o13"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Baclofène",
+            "start": "2023-02-21",
+            "end": "2023-12",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Relais de l'acamprosate, avec titration jusqu'à 60 mg/j ; dose rapportée à 50 mg en mai puis 60 mg/j en juin.",
+            "observation_ids": [
+              "o13",
+              "o14",
+              "o15",
+              "o17",
+              "o18",
+              "o19"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Tabagisme rapporté à environ 10 cigarettes par jour, puis réduit à 5 cigarettes par jour en septembre 2023 ; une observation antérieure le nie.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3",
+              "o4",
+              "o5",
+              "o12",
+              "o17"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Décès de la mère",
+            "start": "2023-04",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Décès survenu une dizaine de jours avant l'entretien du 10/05/2023 ; deuil vécu avec culpabilité et absence de réconciliation.",
+            "observation_ids": [
+              "o8",
+              "o14",
+              "o15"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Aggravation thymique dans le contexte du deuil",
+            "start": "2023-04",
+            "end": "2023-09-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Ruminations, culpabilité, insomnie et idées de mort passives en juin, sans projet suicidaire ; amélioration nette en septembre.",
+            "observation_ids": [
+              "o14",
+              "o15",
+              "o17"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2023-03",
+            "end": "2024-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Abstinence complète rapportée depuis mars 2023 jusqu'à la reprise de janvier 2024.",
+            "observation_ids": [
+              "o14",
+              "o15",
+              "o17",
+              "o18",
+              "o19"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Patch nicotinique",
+            "start": "2023-09-19",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Patch 14 mg/24 h proposé dans le contexte de réduction du tabagisme.",
+            "observation_ids": [
+              "o17"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Reprise du travail en mi-temps thérapeutique",
+            "start": "2023-09-04",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Reprise à l'EHPAD, vécue positivement.",
+            "observation_ids": [
+              "o17"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Départ du fils pour une formation à Toulouse",
+            "start": "2024-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Départ début janvier, vécu avec sentiment de maison vide et identifié comme déclencheur de la reprise des consommations.",
+            "observation_ids": [
+              "o18",
+              "o19"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2024-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Reprise depuis environ mi-janvier, puis consommation le soir de 4 à 6 UIA ou jusqu'à 6 verres de vin ; pas de consommation matinale ni de signe de sevrage.",
+            "observation_ids": [
+              "o18",
+              "o19"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2024-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "craving",
+            "loss_of_control": false,
+            "note": "Reprise des consommations dans un contexte de maison vide après le départ du fils ; objectif de réduction puis d'abstinence discuté.",
+            "observation_ids": [
+              "o18",
+              "o19"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Baclofène",
+            "start": "2024-01-25",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Reprise après arrêt de sa propre initiative fin décembre 2023, avec nouvelle titration jusqu'à 60 mg/j.",
+            "observation_ids": [
+              "o18",
+              "o19"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi CSAPA",
+            "start": "2022-12-16",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Suivi psychiatrique, psychologique et infirmier après le sevrage ; consultations rapprochées lors de la rechute de janvier 2024.",
+            "observation_ids": [
+              "o4",
+              "o9",
+              "o11",
+              "o13",
+              "o15",
+              "o17",
+              "o18",
+              "o19"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

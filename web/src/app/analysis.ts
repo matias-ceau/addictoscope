@@ -38,6 +38,8 @@ export async function analyse(
   /** The session's detections: the birth year is read from them here, in
    *  the browser, and only used once the model has answered. */
   detections: Detection[] = [],
+  /** Replaces the network, e.g. recorded answers in the demonstration. */
+  fetchImpl?: typeof fetch,
 ): Promise<{ observations: Observation[]; timeline: Timeline }> {
   const analysed = new Set(docs.map((d) => d.id));
   const birthYear = birthYearFromDetections(detections.filter((d) => analysed.has(d.doc)));
@@ -56,6 +58,7 @@ export async function analyse(
         images,
         manifest: doc.manifest,
         policy,
+        fetchImpl,
         onProgress: (done, total) => onProgress({ step: "segment", done, total, doc: doc.id }),
       })),
     );
@@ -66,6 +69,7 @@ export async function analyse(
     manifests: Object.fromEntries(docs.map((d) => [d.id, d.manifest])),
     policy,
     onProgress: (done, total) => onProgress({ step: "timeline", done, total }),
+    fetchImpl,
     birthYear,
   });
   return { observations, timeline };

@@ -118,6 +118,19 @@ describe("form-like headers", () => {
     expect(found.filter(([c, t]) => c === "ADRESSE" && /Né/.test(t))).toEqual([]);
   });
 
+  it("masks a value again where a line break splits it", () => {
+    // "33000 BORDEAUX" is masked in the address line; further down a line
+    // break falls between the postcode and the city.
+    const text = buildPageText(0, 600, 800, [
+      [word("Adresse", 10, 100), word(":", 70, 100), word("12", 80, 100), word("rue", 100, 100), word("des", 130, 100), word("Ormeaux,", 160, 100), word("33000", 230, 100), word("BORDEAUX", 280, 100)],
+      [word("Domiciliation", 10, 200), word("au", 120, 200), word("CCAS,", 140, 200), word("33000", 190, 200)],
+      [word("BORDEAUX.", 10, 215), word("Suivi", 90, 215), word("stable.", 140, 215)],
+    ], "pdf");
+    const dets = detectCorpus([{ id: "doc", pages: [text] }]).filter((d) => d.accepted);
+    const values = dets.map((d) => d.text.replace(/\s+/g, " "));
+    expect(values.filter((t) => t === "33000 BORDEAUX").length).toBe(2);
+  });
+
   it("does not run a name on into the next column", () => {
     // Letterhead staff list on the left, the letter on the right, same row.
     const letter = buildPageText(0, 600, 800, [

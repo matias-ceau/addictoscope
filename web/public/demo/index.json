@@ -1,0 +1,158 @@
+{
+  "dossiers": [
+    {
+      "slug": "alcool-depression",
+      "title": "Alcool et dépression",
+      "summary": "Femme de 50 ans : trouble de l'usage de l'alcool sévère, épisode dépressif. Urgences, sevrage hospitalier, 14 mois de suivi, deuil, rechute.",
+      "docs": [
+        {
+          "file": "courrier.pdf",
+          "title": "Courrier de sortie",
+          "pages": 1
+        },
+        {
+          "file": "historique.pdf",
+          "title": "Historique des observations",
+          "pages": 4
+        }
+      ],
+      "recordings": [
+        {
+          "file": "age1.json",
+          "model": "anthropic/claude-sonnet-5.5",
+          "cost": 0.2062,
+          "elapsedMs": null,
+          "events": 39,
+          "score": {
+            "found": 28,
+            "expected": 31
+          }
+        },
+        {
+          "file": "bench__anthropic__claude-haiku-5.5.json",
+          "model": "anthropic/claude-haiku-5.5",
+          "cost": 0.0132,
+          "elapsedMs": 79813,
+          "events": 30,
+          "score": {
+            "found": 24,
+            "expected": 31
+          }
+        }
+      ]
+    },
+    {
+      "slug": "crack-rue",
+      "title": "Crack, rue et psychotraumatisme",
+      "summary": "Femme de 32 ans sans domicile : crack et alcool, TSPT complexe. Décès de son ex-compagnon par overdose, pneumopathie, CHRS, EMDR.",
+      "docs": [
+        {
+          "file": "historique.pdf",
+          "title": "Historique des observations",
+          "pages": 4
+        }
+      ],
+      "recordings": [
+        {
+          "file": "age1.json",
+          "model": "anthropic/claude-sonnet-5.5",
+          "cost": 0.1547,
+          "elapsedMs": null,
+          "events": 37,
+          "score": {
+            "found": 29,
+            "expected": 30
+          }
+        },
+        {
+          "file": "bench__anthropic__claude-haiku-5.5.json",
+          "model": "anthropic/claude-haiku-5.5",
+          "cost": 0.0116,
+          "elapsedMs": 76236,
+          "events": 28,
+          "score": {
+            "found": 19,
+            "expected": 30
+          }
+        }
+      ]
+    },
+    {
+      "slug": "chemsex-prep",
+      "title": "Chemsex sous PrEP",
+      "summary": "Homme de 37 ans : 3-MMC injectée, GHB/GBL. Coma au GHB, sevrage hospitalier, épisode dépressif, rechute. Format « fiche d'observations ».",
+      "docs": [
+        {
+          "file": "historique.pdf",
+          "title": "Historique des observations",
+          "pages": 5
+        }
+      ],
+      "recordings": [
+        {
+          "file": "age1.json",
+          "model": "anthropic/claude-sonnet-5.5",
+          "cost": 0.1769,
+          "elapsedMs": null,
+          "events": 37,
+          "score": {
+            "found": 25,
+            "expected": 27
+          }
+        },
+        {
+          "file": "bench__anthropic__claude-haiku-5.5.json",
+          "model": "anthropic/claude-haiku-5.5",
+          "cost": 0.0107,
+          "elapsedMs": 66890,
+          "events": 31,
+          "score": {
+            "found": 23,
+            "expected": 27
+          }
+        }
+      ]
+    },
+    {
+      "slug": "cannabis-jeune",
+      "title": "Cannabis chez une jeune adulte",
+      "summary": "Femme de 21 ans en consultation jeunes consommateurs : hyperémèse cannabinoïde, trouble panique, TDAH discuté.",
+      "docs": [
+        {
+          "file": "historique.pdf",
+          "title": "Historique des observations",
+          "pages": 2
+        },
+        {
+          "file": "urgences.pdf",
+          "title": "Compte rendu des urgences",
+          "pages": 1
+        }
+      ],
+      "recordings": [
+        {
+          "file": "age1.json",
+          "model": "anthropic/claude-sonnet-5.5",
+          "cost": 0.1106,
+          "elapsedMs": null,
+          "events": 20,
+          "score": {
+            "found": 16,
+            "expected": 19
+          }
+        },
+        {
+          "file": "bench__anthropic__claude-haiku-5.5.json",
+          "model": "anthropic/claude-haiku-5.5",
+          "cost": 0.0076,
+          "elapsedMs": 48257,
+          "events": 19,
+          "score": {
+            "found": 15,
+            "expected": 19
+          }
+        }
+      ]
+    }
+  ]
+}

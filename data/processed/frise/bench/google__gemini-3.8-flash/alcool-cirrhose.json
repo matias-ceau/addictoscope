@@ -1,0 +1,1442 @@
+{
+  "dossier": "alcool-cirrhose",
+  "model": "google/gemini-3.8-flash",
+  "ranAt": "2026-11-05T00:10:50.004Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 5,
+      "redactions": {
+        "ETABLISSEMENT": 15,
+        "ADRESSE": 11,
+        "VILLE": 6,
+        "TEL": 7,
+        "PATIENT": 10,
+        "DOSSIER": 5,
+        "SOIGNANT": 27,
+        "PERSONNE": 7,
+        "NAISSANCE": 6,
+        "IPP": 5,
+        "PROCHE": 2,
+        "NIR": 1
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 19
+      },
+      "end": {
+        "page": 0,
+        "line": 32
+      },
+      "date": "2025-01-21",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Annonce par son épouse du décès du patient en réanimation des suites d'une décompensation de cirrhose, avec soutien psychologique apporté et clôture du dossier."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 33
+      },
+      "end": {
+        "page": 0,
+        "line": 42
+      },
+      "date": "2024-12-10",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Entretien téléphonique avec l'épouse signalant l'hospitalisation en hépatologie du patient pour décompensation avec pronostic réservé."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 43
+      },
+      "end": {
+        "page": 0,
+        "line": 55
+      },
+      "date": "2024-10-15",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Consultation conjointe avec l'épouse notant une humeur dépressive suite à la suspension de l'inscription sur liste de greffe, malgré le maintien de l'abstinence."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 56
+      },
+      "end": {
+        "page": 1,
+        "line": 26
+      },
+      "date": "2024-09-03",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Reprise des consommations d'alcool constatée en présence de sa fille, entraînant la suspension de l'inscription sur liste de greffe hépatique."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 27
+      },
+      "end": {
+        "page": 1,
+        "line": 36
+      },
+      "date": "2024-06-25",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Poursuite de l'abstinence depuis sept mois et accord de la RCP pour l'inscription sur la liste de greffe hépatique."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 37
+      },
+      "end": {
+        "page": 1,
+        "line": 43
+      },
+      "date": "2024-05-14",
+      "kind": "Entretien infirmier",
+      "authorRole": "IDE",
+      "summary": "Entretien infirmier de suivi montrant une éthylglucuronide urinaire négative et une diminution de la consommation de tabac."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 44
+      },
+      "end": {
+        "page": 1,
+        "line": 52
+      },
+      "date": "2024-03-05",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Amélioration clinique et thymique avec maintien de l'abstinence et poursuite du bilan pré-greffe hépatique."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 53
+      },
+      "end": {
+        "page": 2,
+        "line": 26
+      },
+      "date": "2024-01-09",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Maintien de l'abstinence consécutif à l'hémorragie digestive, évocation du projet de greffe et mise en place d'une substitution nicotinique."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 27
+      },
+      "end": {
+        "page": 2,
+        "line": 36
+      },
+      "date": "2023-11-28",
+      "kind": "somatique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Point sur l'hospitalisation récente pour hémorragie digestive par rupture de varices œsophagiennes et début de l'abstinence alcoolique."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 37
+      },
+      "end": {
+        "page": 2,
+        "line": 48
+      },
+      "date": "2023-10-17",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Persistance des consommations d'alcool, refus de sevrage hospitalier immédiat, négociation d'une réduction et augmentation du baclofène."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 49
+      },
+      "end": {
+        "page": 2,
+        "line": 62
+      },
+      "date": "2023-09-05",
+      "kind": "Entretien social",
+      "authorRole": "Assistante sociale",
+      "summary": "Évaluation sociale recueillant l'épuisement de l'épouse face aux consommations du patient et mise en place de démarches d'aide."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 63
+      },
+      "end": {
+        "page": 3,
+        "line": 29
+      },
+      "date": "2023-07-18",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Début de la consultation psychiatrique de suivi se poursuivant sur la page suivante."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 30
+      },
+      "end": {
+        "page": 3,
+        "line": 39
+      },
+      "date": "2023-07-04",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Entretien téléphonique rapportant une reprise des consommations d'alcool suite au décès de son frère et organisation d'une consultation en présentiel."
+    },
+    {
+      "id": "historique:o14",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 40
+      },
+      "end": {
+        "page": 3,
+        "line": 48
+      },
+      "date": "2023-05-30",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Consultation de suivi confirmant le maintien de l'abstinence à deux mois sous baclofène, dont la posologie est augmentée à 45 mg par jour."
+    },
+    {
+      "id": "historique:o15",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 49
+      },
+      "end": {
+        "page": 4,
+        "line": 19
+      },
+      "date": "2023-04-11",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Consultation de suivi post-sevrage hospitalier confirmant l'abstinence et instaurant un traitement par baclofène."
+    },
+    {
+      "id": "historique:o16",
+      "doc": "historique",
+      "start": {
+        "page": 4,
+        "line": 20
+      },
+      "end": {
+        "page": 4,
+        "line": 28
+      },
+      "date": "2023-03-20",
+      "kind": "Entretien infirmier",
+      "authorRole": "IDE",
+      "summary": "Entretien infirmier de pré-admission évaluant la dépendance et préparant l'hospitalisation pour sevrage complet."
+    },
+    {
+      "id": "historique:o17",
+      "doc": "historique",
+      "start": {
+        "page": 4,
+        "line": 29
+      },
+      "end": {
+        "page": 4,
+        "line": 53
+      },
+      "date": "2023-03-06",
+      "kind": "Motif de l'évaluation",
+      "authorRole": "Médecin",
+      "summary": "Première évaluation addictologique concluant à l'indication d'un sevrage hospitalier en raison d'antécédents de crise comitiale et d'une cirrhose."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t10",
+        "kind": "substance_use",
+        "label": "Tabac"
+      },
+      {
+        "id": "t11",
+        "kind": "substance_use",
+        "label": "Alcool"
+      },
+      {
+        "id": "t15",
+        "kind": "psychiatric",
+        "label": "Deuil difficile"
+      },
+      {
+        "id": "t19",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif réactionnel"
+      },
+      {
+        "id": "t4",
+        "kind": "somatic",
+        "label": "Cirrhose hépatique"
+      },
+      {
+        "id": "t5",
+        "kind": "somatic",
+        "label": "Crise convulsive de sevrage"
+      },
+      {
+        "id": "t6",
+        "kind": "somatic",
+        "label": "Décompensation œdémato-ascitique et varices œsophagiennes"
+      },
+      {
+        "id": "t7",
+        "kind": "somatic",
+        "label": "Ascite"
+      },
+      {
+        "id": "t8",
+        "kind": "somatic",
+        "label": "Hémorragie digestive sur rupture de varices œsophagiennes"
+      },
+      {
+        "id": "t9",
+        "kind": "somatic",
+        "label": "Décompensation hépatique terminale et décès"
+      },
+      {
+        "id": "t13",
+        "kind": "medication",
+        "label": "Baclofène"
+      },
+      {
+        "id": "t14",
+        "kind": "medication",
+        "label": "Thiamine"
+      },
+      {
+        "id": "t16",
+        "kind": "medication",
+        "label": "Mirtazapine"
+      },
+      {
+        "id": "t18",
+        "kind": "medication",
+        "label": "Nicotine"
+      },
+      {
+        "id": "t12",
+        "kind": "therapeutic_psycho",
+        "label": "Hospitalisation en addictologie"
+      },
+      {
+        "id": "t17",
+        "kind": "therapeutic_psycho",
+        "label": "Hospitalisation en hépatologie"
+      },
+      {
+        "id": "t1",
+        "kind": "life_event",
+        "label": "Licenciement"
+      },
+      {
+        "id": "t2",
+        "kind": "life_event",
+        "label": "Invalidité catégorie 2"
+      },
+      {
+        "id": "t3",
+        "kind": "life_event",
+        "label": "Décès de son frère"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2015",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Licenciement en 2015 (ancien chauffeur poids lourd)",
+        "observationIds": [
+          "historique:o17",
+          "historique:o11"
+        ]
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "2022",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "En invalidité catégorie 2 depuis 2022",
+        "observationIds": [
+          "historique:o11"
+        ]
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "2023-06-26",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Décès de son frère d'un cancer du pancréas",
+        "observationIds": [
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e4",
+        "trackId": "t4",
+        "start": "2022",
+        "end": "2025-01-14",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Cirrhose alcoolique Child-Pugh B découverte en 2022, compliquée de défaillance multiviscérale",
+        "observationIds": [
+          "historique:o17",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e5",
+        "trackId": "t5",
+        "start": "2022-11",
+        "end": "2022-11",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Crise convulsive généralisée lors d'un arrêt brutal à domicile",
+        "observationIds": [
+          "historique:o17",
+          "historique:o16"
+        ]
+      },
+      {
+        "id": "e6",
+        "trackId": "t6",
+        "start": "2023-01",
+        "end": "2023-01",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hospitalisation en janvier pour décompensation œdémato-ascitique et ligature de varices œsophagiennes",
+        "observationIds": [
+          "historique:o17"
+        ]
+      },
+      {
+        "id": "e7",
+        "trackId": "t7",
+        "start": "2023-10-09",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Ponction évacuatrice d'ascite en hépatologie",
+        "observationIds": [
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e8",
+        "trackId": "t8",
+        "start": "2023-11-20",
+        "end": "2023-11-24",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hospitalisation pour rupture de VO, ligature en urgence et transfusion",
+        "observationIds": [
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e9",
+        "trackId": "t9",
+        "start": "2024-12-02",
+        "end": "2025-01-14",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hospitalisation pour ictère, ascite, encéphalopathie hépatique, puis décès en réanimation le 14/01/2025",
+        "observationIds": [
+          "historique:o2",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e10",
+        "trackId": "t10",
+        "start": "1982",
+        "end": "2025-01-14",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "25 cig/j depuis l'âge de 16 ans, réduction sous substituts en 2024",
+        "observationIds": [
+          "historique:o17",
+          "historique:o8",
+          "historique:o6",
+          "historique:o3"
+        ],
+        "fromAge": {
+          "start": [
+            16,
+            16
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e11",
+        "trackId": "t11",
+        "start": "1984",
+        "end": "2023-03-27",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Usage débuté à 18 ans, devenu quotidien en 2015 (17 UI/j), perte de contrôle",
+        "observationIds": [
+          "historique:o17",
+          "historique:o16"
+        ],
+        "fromAge": {
+          "start": [
+            18,
+            18
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e12",
+        "trackId": "t12",
+        "start": "2023-03-27",
+        "end": "2023-04-07",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Sevrage hospitalier sous oxazépam et vitamines B1 B6 sans complication",
+        "observationIds": [
+          "historique:o16",
+          "historique:o15"
+        ]
+      },
+      {
+        "id": "e13",
+        "trackId": "t11",
+        "start": "2023-03-27",
+        "end": "2023-04-07",
+        "ongoing": false,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Sevrage hospitalier réussi",
+        "observationIds": [
+          "historique:o15"
+        ]
+      },
+      {
+        "id": "e14",
+        "trackId": "t13",
+        "start": "2023-04-11",
+        "end": "2024-12-02",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Introduction baclofène, titration progressive jusqu'à 45-60 mg/j",
+        "observationIds": [
+          "historique:o15",
+          "historique:o14",
+          "historique:o12",
+          "historique:o10",
+          "historique:o8",
+          "historique:o7",
+          "historique:o5",
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e15",
+        "trackId": "t14",
+        "start": "2023-04-11",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Thiamine 250 mg x 2",
+        "observationIds": [
+          "historique:o15",
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e16",
+        "trackId": "t11",
+        "start": "2023-06-26",
+        "end": null,
+        "ongoing": false,
+        "mode": "craving",
+        "lossOfControl": false,
+        "note": "Craving ++ suite au décès de son frère",
+        "observationIds": [
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e17",
+        "trackId": "t11",
+        "start": "2023-06-26",
+        "end": "2023-11-20",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": true,
+        "note": "Rechute après les obsèques de son frère (1 à 1,5 L de vin/j), arrêt à l'hospitalisation",
+        "observationIds": [
+          "historique:o13",
+          "historique:o12",
+          "historique:o10",
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e18",
+        "trackId": "t15",
+        "start": "2023-07-18",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Tristesse, pleurs, insomnie d'endormissement, perte d'appétit, culpabilité",
+        "observationIds": [
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e19",
+        "trackId": "t16",
+        "start": "2023-07-18",
+        "end": "2024-12-02",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Mirtazapine 15 mg puis augmentée à 30 mg pour sommeil, appétit et humeur",
+        "observationIds": [
+          "historique:o12",
+          "historique:o7",
+          "historique:o5",
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e20",
+        "trackId": "t17",
+        "start": "2023-11-20",
+        "end": "2023-11-24",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hospitalisation pour hémorragie digestive sur rupture de VO, sevrage sous oxazépam",
+        "observationIds": [
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e21",
+        "trackId": "t18",
+        "start": "2024-01-09",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Substituts nicotiniques : patch 21 mg + pastilles 2 mg",
+        "observationIds": [
+          "historique:o8",
+          "historique:o6",
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e22",
+        "trackId": "t11",
+        "start": "2024-06-25",
+        "end": null,
+        "ongoing": false,
+        "mode": "craving",
+        "lossOfControl": false,
+        "note": "Craving à l'approche de la date anniversaire de la mort de son frère",
+        "observationIds": [
+          "historique:o5"
+        ]
+      },
+      {
+        "id": "e23",
+        "trackId": "t11",
+        "start": "2024-07",
+        "end": "2024-08-25",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": true,
+        "note": "Reprise de consommation pendant les vacances, arrêt de lui-même le 25/08",
+        "observationIds": [
+          "historique:o4"
+        ]
+      },
+      {
+        "id": "e24",
+        "trackId": "t19",
+        "start": "2024-09-03",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Thymie abaissée, découragement, perte d'appétit suite à la suspension de la greffe",
+        "observationIds": [
+          "historique:o4",
+          "historique:o3"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 228627,
+  "usage": {
+    "calls": 3,
+    "promptTokens": 18328,
+    "completionTokens": 13304,
+    "cost": 0.0636
+  },
+  "rawAnswers": [
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 19
+            },
+            "end": {
+              "page": 1,
+              "line": 32
+            },
+            "date": "2025-01-21",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Annonce par son épouse du décès du patient en réanimation des suites d'une décompensation de cirrhose, avec soutien psychologique apporté et clôture du dossier."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 33
+            },
+            "end": {
+              "page": 1,
+              "line": 42
+            },
+            "date": "2024-12-10",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Entretien téléphonique avec l'épouse signalant l'hospitalisation en hépatologie du patient pour décompensation avec pronostic réservé."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 43
+            },
+            "end": {
+              "page": 1,
+              "line": 55
+            },
+            "date": "2024-10-15",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Consultation conjointe avec l'épouse notant une humeur dépressive suite à la suspension de l'inscription sur liste de greffe, malgré le maintien de l'abstinence."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 56
+            },
+            "end": {
+              "page": 2,
+              "line": 26
+            },
+            "date": "2024-09-03",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Reprise des consommations d'alcool constatée en présence de sa fille, entraînant la suspension de l'inscription sur liste de greffe hépatique."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 27
+            },
+            "end": {
+              "page": 2,
+              "line": 36
+            },
+            "date": "2024-06-25",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Poursuite de l'abstinence depuis sept mois et accord de la RCP pour l'inscription sur la liste de greffe hépatique."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 37
+            },
+            "end": {
+              "page": 2,
+              "line": 43
+            },
+            "date": "2024-05-14",
+            "kind": "Entretien infirmier",
+            "author_role": "IDE",
+            "continues_previous": false,
+            "summary": "Entretien infirmier de suivi montrant une éthylglucuronide urinaire négative et une diminution de la consommation de tabac."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 44
+            },
+            "end": {
+              "page": 2,
+              "line": 52
+            },
+            "date": "2024-03-05",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Amélioration clinique et thymique avec maintien de l'abstinence et poursuite du bilan pré-greffe hépatique."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 53
+            },
+            "end": {
+              "page": 3,
+              "line": 26
+            },
+            "date": "2024-01-09",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Maintien de l'abstinence consécutif à l'hémorragie digestive, évocation du projet de greffe et mise en place d'une substitution nicotinique."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 27
+            },
+            "end": {
+              "page": 3,
+              "line": 36
+            },
+            "date": "2023-11-28",
+            "kind": "somatique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Point sur l'hospitalisation récente pour hémorragie digestive par rupture de varices œsophagiennes et début de l'abstinence alcoolique."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 37
+            },
+            "end": {
+              "page": 3,
+              "line": 48
+            },
+            "date": "2023-10-17",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Persistance des consommations d'alcool, refus de sevrage hospitalier immédiat, négociation d'une réduction et augmentation du baclofène."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 49
+            },
+            "end": {
+              "page": 3,
+              "line": 62
+            },
+            "date": "2023-09-05",
+            "kind": "Entretien social",
+            "author_role": "Assistante sociale",
+            "continues_previous": false,
+            "summary": "Évaluation sociale recueillant l'épuisement de l'épouse face aux consommations du patient et mise en place de démarches d'aide."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 63
+            },
+            "end": {
+              "page": 3,
+              "line": 65
+            },
+            "date": "2023-07-18",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Début de la consultation psychiatrique de suivi se poursuivant sur la page suivante."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 4,
+              "line": 19
+            },
+            "end": {
+              "page": 4,
+              "line": 29
+            },
+            "date": "2023-07-18",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": true,
+            "summary": "Consultation de suivi constatant une rechute alcoolique dans un contexte de deuil difficile, avec introduction de mirtazapine et maintien du baclofène."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 30
+            },
+            "end": {
+              "page": 4,
+              "line": 39
+            },
+            "date": "2023-07-04",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Entretien téléphonique rapportant une reprise des consommations d'alcool suite au décès de son frère et organisation d'une consultation en présentiel."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 40
+            },
+            "end": {
+              "page": 4,
+              "line": 48
+            },
+            "date": "2023-05-30",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Consultation de suivi confirmant le maintien de l'abstinence à deux mois sous baclofène, dont la posologie est augmentée à 45 mg par jour."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 49
+            },
+            "end": {
+              "page": 5,
+              "line": 19
+            },
+            "date": "2023-04-11",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Consultation de suivi post-sevrage hospitalier confirmant l'abstinence et instaurant un traitement par baclofène."
+          },
+          {
+            "start": {
+              "page": 5,
+              "line": 20
+            },
+            "end": {
+              "page": 5,
+              "line": 28
+            },
+            "date": "2023-03-20",
+            "kind": "Entretien infirmier",
+            "author_role": "IDE",
+            "continues_previous": false,
+            "summary": "Entretien infirmier de pré-admission évaluant la dépendance et préparant l'hospitalisation pour sevrage complet."
+          },
+          {
+            "start": {
+              "page": 5,
+              "line": 29
+            },
+            "end": {
+              "page": 5,
+              "line": 53
+            },
+            "date": "2023-03-06",
+            "kind": "Motif de l'évaluation",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Première évaluation addictologique concluant à l'indication d'un sevrage hospitalier en raison d'antécédents de crise comitiale et d'une cirrhose."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "life_event",
+            "label": "Licenciement",
+            "start": "2015",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Licenciement en 2015 (ancien chauffeur poids lourd)",
+            "observation_ids": [
+              "o1",
+              "o7"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Invalidité catégorie 2",
+            "start": "2022",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "En invalidité catégorie 2 depuis 2022",
+            "observation_ids": [
+              "o7"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Décès de son frère",
+            "start": "2023-06-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Décès de son frère d'un cancer du pancréas",
+            "observation_ids": [
+              "o5"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Cirrhose hépatique",
+            "start": "2022",
+            "end": "2025-01-14",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Cirrhose alcoolique Child-Pugh B découverte en 2022, compliquée de défaillance multiviscérale",
+            "observation_ids": [
+              "o1",
+              "o17"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Crise convulsive de sevrage",
+            "start": "2022-11",
+            "end": "2022-11",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Crise convulsive généralisée lors d'un arrêt brutal à domicile",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Décompensation œdémato-ascitique et varices œsophagiennes",
+            "start": "2023-01",
+            "end": "2023-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hospitalisation en janvier pour décompensation œdémato-ascitique et ligature de varices œsophagiennes",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Ascite",
+            "start": "2023-10-09",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Ponction évacuatrice d'ascite en hépatologie",
+            "observation_ids": [
+              "o8"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Hémorragie digestive sur rupture de varices œsophagiennes",
+            "start": "2023-11-20",
+            "end": "2023-11-24",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hospitalisation pour rupture de VO, ligature en urgence et transfusion",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Décompensation hépatique terminale et décès",
+            "start": "2024-12-02",
+            "end": "2025-01-14",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hospitalisation pour ictère, ascite, encéphalopathie hépatique, puis décès en réanimation le 14/01/2025",
+            "observation_ids": [
+              "o16",
+              "o17"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": null,
+            "end": "2025-01-14",
+            "start_age": 16,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "25 cig/j depuis l'âge de 16 ans, réduction sous substituts en 2024",
+            "observation_ids": [
+              "o1",
+              "o10",
+              "o12",
+              "o15"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": null,
+            "end": "2023-03-27",
+            "start_age": 18,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Usage débuté à 18 ans, devenu quotidien en 2015 (17 UI/j), perte de contrôle",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en addictologie",
+            "start": "2023-03-27",
+            "end": "2023-04-07",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Sevrage hospitalier sous oxazépam et vitamines B1 B6 sans complication",
+            "observation_ids": [
+              "o2",
+              "o3"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2023-03-27",
+            "end": "2023-04-07",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Sevrage hospitalier réussi",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Baclofène",
+            "start": "2023-04-11",
+            "end": "2024-12-02",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Introduction baclofène, titration progressive jusqu'à 45-60 mg/j",
+            "observation_ids": [
+              "o3",
+              "o4",
+              "o6",
+              "o8",
+              "o10",
+              "o11",
+              "o13",
+              "o15"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Thiamine",
+            "start": "2023-04-11",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Thiamine 250 mg x 2",
+            "observation_ids": [
+              "o3",
+              "o6"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2023-06-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "craving",
+            "loss_of_control": false,
+            "note": "Craving ++ suite au décès de son frère",
+            "observation_ids": [
+              "o5"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2023-06-26",
+            "end": "2023-11-20",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": true,
+            "note": "Rechute après les obsèques de son frère (1 à 1,5 L de vin/j), arrêt à l'hospitalisation",
+            "observation_ids": [
+              "o5",
+              "o6",
+              "o8",
+              "o9"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Deuil difficile",
+            "start": "2023-07-18",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Tristesse, pleurs, insomnie d'endormissement, perte d'appétit, culpabilité",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Mirtazapine",
+            "start": "2023-07-18",
+            "end": "2024-12-02",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Mirtazapine 15 mg puis augmentée à 30 mg pour sommeil, appétit et humeur",
+            "observation_ids": [
+              "o6",
+              "o11",
+              "o13",
+              "o15"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en hépatologie",
+            "start": "2023-11-20",
+            "end": "2023-11-24",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hospitalisation pour hémorragie digestive sur rupture de VO, sevrage sous oxazépam",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Nicotine",
+            "start": "2024-01-09",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Substituts nicotiniques : patch 21 mg + pastilles 2 mg",
+            "observation_ids": [
+              "o10",
+              "o12",
+              "o15"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2024-06-25",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "craving",
+            "loss_of_control": false,
+            "note": "Craving à l'approche de la date anniversaire de la mort de son frère",
+            "observation_ids": [
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2024-07",
+            "end": "2024-08-25",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": true,
+            "note": "Reprise de consommation pendant les vacances, arrêt de lui-même le 25/08",
+            "observation_ids": [
+              "o14"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif réactionnel",
+            "start": "2024-09-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Thymie abaissée, découragement, perte d'appétit suite à la suspension de la greffe",
+            "observation_ids": [
+              "o14",
+              "o15"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

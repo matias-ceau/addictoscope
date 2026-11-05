@@ -1,5 +1,7 @@
 import type { AnalysisProgress } from "../app/analysis";
+import type { DemoDossier } from "../app/demo";
 import type { CloudPolicy } from "../cloud/guard";
+import { modelName } from "../cloud/models";
 import type { Observation, Timeline } from "../notebook/model";
 
 export interface AnalysisState {
@@ -10,7 +12,21 @@ export interface AnalysisState {
   error?: string;
   /** Documents included in the last run. */
   docs?: string[];
+  /** Model of the last run, and whether its answers were replayed. */
+  model?: string;
+  replayed?: boolean;
 }
+
+/** In the demonstration: which recording to replay, or "live". */
+export interface DemoAnalysis {
+  dossier: DemoDossier;
+  /** Every document of the dossier is pseudonymized and verified. */
+  allVerified: boolean;
+  source: string;
+  onSource: (source: string) => void;
+}
+
+const dollars = (n: number) => (n < 0.01 ? `${n.toFixed(3)} $` : `${n.toFixed(2)} $`);
 
 function progressLabel(p?: AnalysisProgress): string {
   if (!p) return "Préparation…";
@@ -27,25 +43,69 @@ export function AnalysisCard(props: {
   onConfigure: () => void;
   onRun: () => void;
   onShowFrise: () => void;
+  demo?: DemoAnalysis;
 }) {
-  const { analysis } = props;
-  const locked = props.verifiedCount === 0;
+  const { analysis, demo } = props;
+  const locked = demo ? !demo.allVerified : props.verifiedCount === 0;
+  const replaying = demo !== undefined && demo.source !== "live";
   return (
     <div className={"card next-step" + (locked ? " locked" : "")}>
-      <span className="eyebrow">Étape suivante</span>
+      <span className="eyebrow">Étape 5 · en ligne</span>
       <strong>Analyse par IA</strong>
       <p className="muted small">
         Découpage du dossier en observations, puis frise chronologique (consommations, psychopathologie, traitements,
         événements de vie) avec renvoi à la page source. Porte sur les {props.verifiedCount} document(s) vérifié(s).
       </p>
 
-      {!props.ready && (
+      {demo && analysis.status !== "running" && (
+        <div className="choices compact" role="radiogroup" aria-label="Source des réponses">
+          {demo.dossier.recordings.map((r) => (
+            <label key={r.file} className={"choice" + (demo.source === r.file ? " selected" : "")}>
+              <input type="radio" name="demo-source" checked={demo.source === r.file} onChange={() => demo.onSource(r.file)} />
+              <span>
+                <strong>{modelName(r.model)}</strong>
+                <span className="recording-stats">
+                  {r.score && (
+                    <span title="Événements de la frise attendue (vérité du dossier fictif) retrouvés par ce passage">
+                      {Math.round((100 * r.score.found) / r.score.expected)} % des événements attendus
+                    </span>
+                  )}
+                  <span>{dollars(r.cost)}</span>
+                  {r.elapsedMs ? <span>{Math.round(r.elapsedMs / 1000)} s</span> : null}
+                </span>
+                <span className="muted small">Réponses enregistrées d'un vrai passage · aucun envoi</span>
+              </span>
+            </label>
+          ))}
+          {props.ready && (
+            <label className={"choice" + (demo.source === "live" ? " selected" : "")}>
+              <input type="radio" name="demo-source" checked={demo.source === "live"} onChange={() => demo.onSource("live")} />
+              <span>
+                <strong>En direct</strong>
+                <span className="muted small">
+                  {props.policy.kind !== "off" && modelName(props.policy.model)} · envoi réel du texte pseudonymisé
+                </span>
+              </span>
+            </label>
+          )}
+        </div>
+      )}
+      {demo && !demo.allVerified && (
+        <p className="small muted">Pseudonymisez d'abord les {demo.dossier.docs.length} document(s) du dossier.</p>
+      )}
+      {replaying && analysis.status !== "running" && (
+        <button className="primary" disabled={locked} onClick={props.onRun}>
+          {analysis.status === "done" ? "Relancer l'analyse (rejouée)" : "Analyser le dossier (rejoué)"}
+        </button>
+      )}
+
+      {!replaying && !props.ready && (
         <button onClick={props.onConfigure} disabled={locked}>
           Configurer l'IA en ligne…
         </button>
       )}
 
-      {props.ready && analysis.status !== "running" && (
+      {!replaying && props.ready && analysis.status !== "running" && (
         <>
           <p className="small muted">
             Modèle : {props.policy.kind !== "off" && props.policy.model}
@@ -75,6 +135,7 @@ export function AnalysisCard(props: {
         <div className="analysis-done">
           <span className="small">
             {analysis.observations?.length} observations · {analysis.timeline.events.length} événements
+            {analysis.model && ` · ${modelName(analysis.model)}${analysis.replayed ? " (rejoué)" : ""}`}
           </span>
           <button onClick={props.onShowFrise}>Voir la frise</button>
         </div>

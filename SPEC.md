@@ -1,3 +1,68 @@
+# SPEC — Démonstration de bout en bout et transparence des envois
+
+Statut : en cours (branche `dev/demo-and-cheaper-models`), 05/11/2026.
+
+Objectif : montrer l'outil entier à un directeur de mémoire, sur des données
+**fictives**, sans clé d'API et sans réseau, et rendre visible à chaque
+instant ce qui reste sur le poste et ce qui part vers un modèle en ligne.
+
+## A. Mode démonstration
+
+- L'accueil propose, à côté du dépôt de fichiers, 3 dossiers fictifs (tirés de
+  `data/anonymized/dossiers`, déjà publics) : résumé clinique, documents,
+  nombre de pages. Un clic les charge comme des fichiers déposés : lecture,
+  détection (règles + IA locale), relecture, masquage et vérification
+  s'exécutent pour de vrai, dans le navigateur.
+- Bandeau permanent « Dossier fictif — démonstration » tant qu'un dossier de
+  démonstration est ouvert.
+- Analyse IA : par défaut, **réponses enregistrées** d'un vrai passage du
+  modèle (aucun envoi). Le code de l'application tourne en entier (garde
+  `assertSendable`, construction de la requête, contrôles, calcul des âges,
+  ré-identification) ; seul `fetch` est remplacé. Deux enregistrements par
+  dossier : le modèle par défaut et le modèle économique, pour comparer les
+  frises et les coûts. « En direct » reste possible si l'IA en ligne est
+  configurée.
+- L'analyse de démonstration demande que tous les documents du dossier soient
+  vérifiés (les réponses enregistrées portent sur le dossier entier).
+- `scripts/build-demo.ts` produit `web/public/demo/` (PDF + réponses
+  enregistrées) depuis `data/anonymized/dossiers` et
+  `data/processed/frise/<passage>/`.
+
+## B. Où sont les données
+
+- **Parcours** (sous la barre du haut) : Dépôt → Détection → Relecture →
+  Masquage et vérification → Analyse IA → Frise. Chaque étape porte son lieu :
+  « ce poste » ou « en ligne (OpenRouter, ZDR) » ; l'étape courante est mise en
+  avant ; l'étape en ligne indique ce qui part (texte et images des pages
+  pseudonymisées) et ce qui ne part jamais (originaux, table de
+  correspondance, date de naissance complète).
+- **Indicateur d'état** dans la barre du haut, calculé à partir du journal :
+  « Tout reste sur ce poste » ; « Envoi en cours vers … » ; « N envois
+  pseudonymisés » ; en démonstration, « Aucun envoi : réponses enregistrées ».
+- **Journal des envois** (tiroir) : chaque requête du modèle, envoyée ou
+  rejouée : heure, destination, modèle, ZDR, documents, taille, nombre
+  d'images, durée, coût s'il est connu. Contenu exact consultable (texte et
+  vignettes des pages). Contrôle local de chaque envoi : nombre de valeurs
+  réelles (détections acceptées) retrouvées dans la requête ; attendu : 0.
+  Le journal vit en mémoire, il n'est ni stocké ni envoyé.
+- Frise en vrais noms : mention « noms remis sur ce poste, jamais envoyés ».
+
+## C. Modèle et coût
+
+- Banc d'essai de modèles moins chers, tous via OpenRouter avec ZDR, sur les
+  14 dossiers fictifs (`--out=bench/<modèle>`), noté par
+  `scripts/compare_models.py` → `data/processed/frise/comparaison-modeles.md`.
+- Les réglages proposent les modèles mesurés (rappel, coût par dossier) ;
+  l'identifiant reste modifiable.
+
+## Non-objectifs
+
+- Pas de nouvelle donnée réelle dans addictoscope : la démonstration n'utilise
+  que les dossiers fictifs.
+- Le journal ne remplace pas la garde : il montre, `assertSendable` décide.
+
+---
+
 # SPEC — Ré-identification locale et dates calculées depuis l'âge
 
 Statut : validée le 04/11/2026, implémentée (branche `dev/local-reidentification`).

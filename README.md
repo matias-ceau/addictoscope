@@ -100,6 +100,58 @@ OpenAI.
    pseudonymisée, avec l'observation surlignée. Une vue tableau est aussi
    disponible.
 
+4. **Frise ré-identifiée, sur le poste** : les vrais noms et la date de
+   naissance reviennent depuis la table locale (bascule « Noms réels /
+   Pseudonymes »), les antécédents racontés par l'âge sont datés ici. La
+   frise s'exporte en page HTML (pseudonymisée, ou marquée « identifiante »)
+   et l'analyse s'enregistre en `.json` pseudonymisé, à rouvrir plus tard
+   avec la table chiffrée `.axkey` (« Rouvrir une analyse »).
+
+### Où sont les données
+
+- Un **parcours** en six étapes, sous la barre du haut, indique pour chacune
+  où sont les données : « Ce poste » ou « En ligne · ZDR ».
+- L'**indicateur** de la barre du haut dit en permanence ce qui est sorti :
+  « Tout reste sur ce poste », « Envoi en cours → openrouter.ai », « N envois
+  pseudonymisés ».
+- Le **journal des envois** liste chaque requête (destination, modèle, ZDR,
+  taille, images, durée, coût) et montre exactement ce qui part, texte et
+  pages. Chaque envoi est relu sur le poste : nombre de valeurs réelles
+  (éléments masqués à la relecture) retrouvées dans le texte, attendu 0.
+  Les refus de la garde y figurent aussi.
+
+### Démonstration (données fictives, sans clé)
+
+L'accueil propose quatre dossiers entièrement inventés. Lecture, détection,
+relecture, masquage et vérification s'exécutent pour de vrai ; l'analyse IA
+rejoue les réponses enregistrées d'un vrai passage du modèle
+(`web/public/demo/`, construit par `scripts/build-demo.ts`) : la garde, les
+requêtes, les contrôles et la ré-identification tournent, seul le réseau est
+remplacé. Deux enregistrements par dossier (Claude Sonnet 5.5 et Claude
+Haiku 5.5) montrent l'écart de qualité et de coût.
+
+```bash
+cd web && npx vite-node scripts/build-demo.ts --runs=age1,bench/anthropic__claude-haiku-5.5
+```
+
+### Choix du modèle et coût
+
+Banc d'essai de modèles via OpenRouter, tous en zéro conservation, sur les 14
+dossiers fictifs ([comparaison](data/processed/frise/comparaison-modeles.md)) :
+
+| Modèle | Rappel | ≈ coût d'un dossier réel |
+|---|---|---|
+| Claude Sonnet 5.5 (défaut) | 88 % | 1,17 $ |
+| Claude Haiku 5.5 | 75 % | 0,07 $ |
+| GPT-5.6 Luna | 74 % | 0,09 $ |
+| Mistral Small | 54 % | 0,04 $ |
+| Gemini 3.5 Flash Lite | 47 % | 0,12 $ |
+
+```bash
+cd web && npx vite-node scripts/run-frise.ts --model=<id> --out=bench/<id avec __>
+uv run python scripts/compare_models.py
+```
+
 ## Installation (Python)
 
 ```bash
@@ -153,6 +205,8 @@ installé : `PW_CHROMIUM=/usr/bin/chromium npm run e2e`.
   source ([rapport](data/processed/frise/rapport.md) ; frises interactives
   dans `data/processed/frise/interactive/`). À évaluer encore sur des
   dossiers réels.
+- ✅ Démonstration de bout en bout sur données fictives, journal des envois,
+  ré-identification locale, export et réouverture d'une analyse.
 - ⏳ Jalon 3 : questions sur le dossier avec renvoi à la page source.
 - 🎯 Périmètre validé pour l'instant : **PDF avec couche texte, Word, texte
   et texte collé**. Les scans
