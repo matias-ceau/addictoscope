@@ -11,7 +11,7 @@ test("pseudonymise a Word document and pasted text, and download the text", asyn
   await expect(page.getByText("Glissez vos documents patient ici")).toBeVisible();
 
   // An old .doc is refused with a way out, not silently dropped.
-  await page.locator('input[type="file"]').setInputFiles([
+  await page.locator('input[type="file"]:not([accept=".json,.axkey"])').setInputFiles([
     {
       name: "synthetique-fiche-word.docx",
       mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",

@@ -19,7 +19,7 @@ test("drop, review and pseudonymise text and scanned PDFs without any network ca
 
   await page.goto("/");
   await expect(page.getByText("Glissez vos documents patient ici")).toBeVisible();
-  await page.locator('input[type="file"]').setInputFiles([
+  await page.locator('input[type="file"]:not([accept=".json,.axkey"])').setInputFiles([
     resolve(DATA, "synthetique-historique-csapa.pdf"),
     resolve(DATA, "synthetique-courrier-scanne.pdf"),
   ]);

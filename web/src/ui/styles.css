@@ -90,12 +90,12 @@ h3 { margin: 0 0 8px; }
 .flow-zone.local .flow-num { background: var(--ok); }
 .flow-zone.online .flow-num { background: var(--online); }
 .flow-num { color: white !important; }
-.flow-gate { position: relative; width: 74px; display: grid; place-items: center; }
+.flow-gate { position: relative; width: 100px; display: grid; place-items: center; }
 .flow-gate::before { content: ""; position: absolute; left: 6px; right: 6px; top: 50%; height: 2px; background: linear-gradient(90deg, var(--ok), var(--online)); }
 .flow-gate::after { content: ""; position: absolute; right: 4px; top: calc(50% - 5px); border: 6px solid transparent; border-left: 8px solid var(--online); border-right: 0; }
 .flow-gate.back::before { background: linear-gradient(90deg, var(--online), var(--ok)); }
 .flow-gate.back::after { border-left-color: var(--ok); }
-.flow-gate span { position: relative; z-index: 1; margin-bottom: 46px; font-size: 0.66rem; line-height: 1.2; text-align: center; color: var(--muted); font-weight: 650; }
+.flow-gate span { position: relative; z-index: 1; margin-bottom: 50px; padding: 0 4px; font-size: 0.7rem; line-height: 1.2; text-align: center; color: var(--muted); font-weight: 650; }
 
 .welcome-grid { width: min(1180px, 100%); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 22px; align-items: start; }
 .welcome-col { display: flex; flex-direction: column; gap: 10px; }
