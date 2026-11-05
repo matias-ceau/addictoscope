@@ -197,6 +197,13 @@ def main(argv: list[str]) -> None:
             f"| {opt(s['costPerRealDossier'], lambda v: f'{v:.2f} $')} "
             f"| {opt(s['secondsPerDossier'], lambda v: f'{v} s')} |"
         )
+    w.append(
+        "\nNotes : un seul passage par modèle (DeepSeek : deux, 81 % chaque fois sur les dossiers réussis), l'écart d'un passage à l'autre "
+        "est de quelques points. Les modèles qui raisonnent (DeepSeek, Luna Pro) produisent beaucoup de jetons de "
+        "sortie, d'où leur coût. Le compte utilise des clés fournisseur (BYOK) pour certains fournisseurs : le coût "
+        "compté est alors le coût amont. Qwen3 VL (plus de 6 minutes par dossier) a été arrêté ; Mistral Medium "
+        "n'est servi que par Mistral, où la clé fournisseur enregistrée est refusée."
+    )
     failed = [s for s in summary if s["failed"]]
     if failed:
         w.append(

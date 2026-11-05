@@ -29,6 +29,22 @@ export const MODELS: ModelInfo[] = [
     tag: "Meilleure frise",
   },
   {
+    id: "deepseek/deepseek-v4.1-flash",
+    name: "DeepSeek V4.1 Flash",
+    maker: "DeepSeek",
+    recall: 258 / 320,
+    costPerRealDossier: 0.33,
+    tag: "Compromis",
+    note: "Proche de Sonnet pour 4 fois moins cher (81 % sur deux passages), mais lent et plus d'événements en trop.",
+  },
+  {
+    id: "openai/gpt-5.6-luna-pro",
+    name: "GPT-5.6 Luna Pro",
+    maker: "OpenAI (Azure)",
+    recall: 248 / 320,
+    costPerRealDossier: 0.28,
+  },
+  {
     id: "anthropic/claude-haiku-5.5",
     name: "Claude Haiku 5.5",
     maker: "Anthropic",

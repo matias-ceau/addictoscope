@@ -86,65 +86,67 @@
   {
     "model": "deepseek/deepseek-v4.1-flash",
     "run": "deepseek__deepseek-v4.1-flash",
-    "dossiersOk": 13,
-    "failed": [
-      "bzd-anxiete"
-    ],
-    "recall": 0.76875,
-    "recallOnSucceeded": 0.8092105263157895,
-    "found": 246,
+    "dossiersOk": 14,
+    "failed": [],
+    "recall": 0.80625,
+    "recallOnSucceeded": 0.80625,
+    "found": 258,
     "expected": 320,
-    "precisionLowerBound": 0.6212121212121212,
-    "ageFound": 18,
+    "precisionLowerBound": 0.6201923076923077,
+    "ageFound": 17,
     "ageExpected": 20,
-    "endCompatible": 0.6159420289855072,
+    "endCompatible": 0.610738255033557,
     "observations": [
-      192,
-      192
+      206,
+      206
     ],
     "observationDatesRight": [
-      189,
-      189
+      202,
+      202
     ],
-    "costTotal": 0.0,
-    "costPerDossier": null,
-    "costPerRealDossier": null,
-    "secondsPerDossier": 84,
+    "costTotal": 0.5812,
+    "costPerDossier": 0.0415,
+    "costPerRealDossier": 0.329,
+    "secondsPerDossier": 65,
     "perDossier": {
       "alcool-cirrhose": {
         "found": 25,
         "expected": 28
       },
       "alcool-depression": {
-        "found": 29,
+        "found": 30,
         "expected": 31
       },
       "alcool-tspt": {
-        "found": 18,
+        "found": 19,
         "expected": 24
       },
       "antalgiques-opioides": {
-        "found": 13,
+        "found": 11,
         "expected": 17
       },
       "bupre-grossesse": {
-        "found": 18,
+        "found": 17,
         "expected": 22
+      },
+      "bzd-anxiete": {
+        "found": 13,
+        "expected": 16
       },
       "cannabis-jeune": {
         "found": 14,
         "expected": 19
       },
       "cannabis-justice": {
-        "found": 14,
+        "found": 13,
         "expected": 19
       },
       "chemsex-prep": {
-        "found": 23,
+        "found": 24,
         "expected": 27
       },
       "crack-rue": {
-        "found": 26,
+        "found": 28,
         "expected": 30
       },
       "jeu-bipolaire": {
@@ -152,15 +154,99 @@
         "expected": 23
       },
       "methadone-schizophrenie": {
-        "found": 10,
+        "found": 9,
         "expected": 19
       },
       "opiaces-tso": {
-        "found": 20,
+        "found": 21,
         "expected": 29
       },
       "tabac-infarctus": {
+        "found": 13,
+        "expected": 16
+      }
+    }
+  },
+  {
+    "model": "openai/gpt-5.6-luna-pro",
+    "run": "openai__gpt-5.6-luna-pro",
+    "dossiersOk": 14,
+    "failed": [],
+    "recall": 0.775,
+    "recallOnSucceeded": 0.775,
+    "found": 248,
+    "expected": 320,
+    "precisionLowerBound": 0.6813186813186813,
+    "ageFound": 18,
+    "ageExpected": 20,
+    "endCompatible": 0.5804195804195804,
+    "observations": [
+      206,
+      206
+    ],
+    "observationDatesRight": [
+      202,
+      202
+    ],
+    "costTotal": 0.4889,
+    "costPerDossier": 0.0349,
+    "costPerRealDossier": 0.277,
+    "secondsPerDossier": 92,
+    "perDossier": {
+      "alcool-cirrhose": {
+        "found": 21,
+        "expected": 28
+      },
+      "alcool-depression": {
+        "found": 26,
+        "expected": 31
+      },
+      "alcool-tspt": {
+        "found": 19,
+        "expected": 24
+      },
+      "antalgiques-opioides": {
+        "found": 14,
+        "expected": 17
+      },
+      "bupre-grossesse": {
+        "found": 19,
+        "expected": 22
+      },
+      "bzd-anxiete": {
+        "found": 14,
+        "expected": 16
+      },
+      "cannabis-jeune": {
+        "found": 14,
+        "expected": 19
+      },
+      "cannabis-justice": {
         "found": 15,
+        "expected": 19
+      },
+      "chemsex-prep": {
+        "found": 21,
+        "expected": 27
+      },
+      "crack-rue": {
+        "found": 23,
+        "expected": 30
+      },
+      "jeu-bipolaire": {
+        "found": 20,
+        "expected": 23
+      },
+      "methadone-schizophrenie": {
+        "found": 14,
+        "expected": 19
+      },
+      "opiaces-tso": {
+        "found": 18,
+        "expected": 29
+      },
+      "tabac-infarctus": {
+        "found": 10,
         "expected": 16
       }
     }
@@ -336,31 +422,28 @@
   {
     "model": "google/gemini-3.8-flash",
     "run": "google__gemini-3.8-flash",
-    "dossiersOk": 12,
-    "failed": [
-      "opiaces-tso",
-      "tabac-infarctus"
-    ],
-    "recall": 0.603125,
-    "recallOnSucceeded": 0.7018181818181818,
-    "found": 193,
+    "dossiersOk": 14,
+    "failed": [],
+    "recall": 0.703125,
+    "recallOnSucceeded": 0.703125,
+    "found": 225,
     "expected": 320,
-    "precisionLowerBound": 0.8177966101694916,
-    "ageFound": 11,
+    "precisionLowerBound": 0.8211678832116789,
+    "ageFound": 17,
     "ageExpected": 20,
-    "endCompatible": 0.5648148148148148,
+    "endCompatible": 0.592,
     "observations": [
-      181,
-      181
+      206,
+      206
     ],
     "observationDatesRight": [
-      177,
-      177
+      202,
+      202
     ],
-    "costTotal": 0.7021,
-    "costPerDossier": 0.0585,
-    "costPerRealDossier": 0.464,
-    "secondsPerDossier": 107,
+    "costTotal": 0.7652,
+    "costPerDossier": 0.0547,
+    "costPerRealDossier": 0.434,
+    "secondsPerDossier": 97,
     "perDossier": {
       "alcool-cirrhose": {
         "found": 19,
@@ -409,6 +492,98 @@
       "methadone-schizophrenie": {
         "found": 8,
         "expected": 19
+      },
+      "opiaces-tso": {
+        "found": 21,
+        "expected": 29
+      },
+      "tabac-infarctus": {
+        "found": 11,
+        "expected": 16
+      }
+    }
+  },
+  {
+    "model": "openai/gpt-5-mini",
+    "run": "openai__gpt-5-mini",
+    "dossiersOk": 14,
+    "failed": [],
+    "recall": 0.61875,
+    "recallOnSucceeded": 0.61875,
+    "found": 198,
+    "expected": 320,
+    "precisionLowerBound": 0.7046263345195729,
+    "ageFound": 16,
+    "ageExpected": 20,
+    "endCompatible": 0.6601941747572816,
+    "observations": [
+      198,
+      206
+    ],
+    "observationDatesRight": [
+      194,
+      202
+    ],
+    "costTotal": 0.4412,
+    "costPerDossier": 0.0315,
+    "costPerRealDossier": 0.25,
+    "secondsPerDossier": 112,
+    "perDossier": {
+      "alcool-cirrhose": {
+        "found": 18,
+        "expected": 28
+      },
+      "alcool-depression": {
+        "found": 15,
+        "expected": 31
+      },
+      "alcool-tspt": {
+        "found": 14,
+        "expected": 24
+      },
+      "antalgiques-opioides": {
+        "found": 12,
+        "expected": 17
+      },
+      "bupre-grossesse": {
+        "found": 14,
+        "expected": 22
+      },
+      "bzd-anxiete": {
+        "found": 12,
+        "expected": 16
+      },
+      "cannabis-jeune": {
+        "found": 10,
+        "expected": 19
+      },
+      "cannabis-justice": {
+        "found": 14,
+        "expected": 19
+      },
+      "chemsex-prep": {
+        "found": 19,
+        "expected": 27
+      },
+      "crack-rue": {
+        "found": 19,
+        "expected": 30
+      },
+      "jeu-bipolaire": {
+        "found": 18,
+        "expected": 23
+      },
+      "methadone-schizophrenie": {
+        "found": 10,
+        "expected": 19
+      },
+      "opiaces-tso": {
+        "found": 15,
+        "expected": 29
+      },
+      "tabac-infarctus": {
+        "found": 8,
+        "expected": 16
       }
     }
   },
@@ -577,119 +752,6 @@
       "tabac-infarctus": {
         "found": 9,
         "expected": 16
-      }
-    }
-  },
-  {
-    "model": "openai/gpt-5.6-luna-pro",
-    "run": "openai__gpt-5.6-luna-pro",
-    "dossiersOk": 5,
-    "failed": [
-      "bzd-anxiete",
-      "cannabis-jeune",
-      "cannabis-justice",
-      "chemsex-prep",
-      "crack-rue",
-      "jeu-bipolaire",
-      "methadone-schizophrenie",
-      "opiaces-tso",
-      "tabac-infarctus"
-    ],
-    "recall": 0.309375,
-    "recallOnSucceeded": 0.8114754098360656,
-    "found": 99,
-    "expected": 320,
-    "precisionLowerBound": 0.6644295302013423,
-    "ageFound": 3,
-    "ageExpected": 20,
-    "endCompatible": 0.5964912280701754,
-    "observations": [
-      80,
-      80
-    ],
-    "observationDatesRight": [
-      79,
-      79
-    ],
-    "costTotal": 0.196,
-    "costPerDossier": 0.0392,
-    "costPerRealDossier": 0.311,
-    "secondsPerDossier": 101,
-    "perDossier": {
-      "alcool-cirrhose": {
-        "found": 21,
-        "expected": 28
-      },
-      "alcool-depression": {
-        "found": 26,
-        "expected": 31
-      },
-      "alcool-tspt": {
-        "found": 19,
-        "expected": 24
-      },
-      "antalgiques-opioides": {
-        "found": 14,
-        "expected": 17
-      },
-      "bupre-grossesse": {
-        "found": 19,
-        "expected": 22
-      }
-    }
-  },
-  {
-    "model": "openai/gpt-5-mini",
-    "run": "openai__gpt-5-mini",
-    "dossiersOk": 4,
-    "failed": [
-      "bupre-grossesse",
-      "bzd-anxiete",
-      "cannabis-jeune",
-      "cannabis-justice",
-      "chemsex-prep",
-      "crack-rue",
-      "jeu-bipolaire",
-      "methadone-schizophrenie",
-      "opiaces-tso",
-      "tabac-infarctus"
-    ],
-    "recall": 0.184375,
-    "recallOnSucceeded": 0.59,
-    "found": 59,
-    "expected": 320,
-    "precisionLowerBound": 0.6483516483516484,
-    "ageFound": 2,
-    "ageExpected": 20,
-    "endCompatible": 0.7272727272727273,
-    "observations": [
-      58,
-      64
-    ],
-    "observationDatesRight": [
-      57,
-      63
-    ],
-    "costTotal": 0.1373,
-    "costPerDossier": 0.0343,
-    "costPerRealDossier": 0.272,
-    "secondsPerDossier": 123,
-    "perDossier": {
-      "alcool-cirrhose": {
-        "found": 18,
-        "expected": 28
-      },
-      "alcool-depression": {
-        "found": 15,
-        "expected": 31
-      },
-      "alcool-tspt": {
-        "found": 14,
-        "expected": 24
-      },
-      "antalgiques-opioides": {
-        "found": 12,
-        "expected": 17
       }
     }
   },

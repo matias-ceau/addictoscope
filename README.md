@@ -142,6 +142,8 @@ dossiers fictifs ([comparaison](data/processed/frise/comparaison-modeles.md)) :
 | Modèle | Rappel | ≈ coût d'un dossier réel |
 |---|---|---|
 | Claude Sonnet 5.5 (défaut) | 88 % | 1,17 $ |
+| DeepSeek V4.1 Flash | 81 % | 0,33 $ |
+| GPT-5.6 Luna Pro | 78 % | 0,28 $ |
 | Claude Haiku 5.5 | 75 % | 0,07 $ |
 | GPT-5.6 Luna | 74 % | 0,09 $ |
 | Mistral Small | 54 % | 0,04 $ |

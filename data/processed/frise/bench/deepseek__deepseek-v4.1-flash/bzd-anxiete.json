@@ -1,0 +1,1475 @@
+{
+  "dossier": "bzd-anxiete",
+  "model": "deepseek/deepseek-v4.1-flash",
+  "ranAt": "2026-11-05T00:36:04.858Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "courrier": {
+      "pages": 1,
+      "redactions": {
+        "SOIGNANT": 2,
+        "ADRESSE": 1,
+        "VILLE": 1,
+        "TEL": 1,
+        "ETABLISSEMENT": 1,
+        "PATIENT": 2,
+        "NAISSANCE": 1
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    },
+    "historique": {
+      "pages": 3,
+      "redactions": {
+        "ETABLISSEMENT": 6,
+        "ADRESSE": 7,
+        "TEL": 5,
+        "PATIENT": 6,
+        "DOSSIER": 3,
+        "NAISSANCE": 3,
+        "IPP": 3,
+        "VILLE": 4,
+        "SOIGNANT": 18,
+        "PROCHE": 2
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "courrier:o1",
+      "doc": "courrier",
+      "start": {
+        "page": 0,
+        "line": 1
+      },
+      "end": {
+        "page": 0,
+        "line": 23
+      },
+      "date": "2024-02-08",
+      "kind": "courrier",
+      "authorRole": "médecin généraliste",
+      "summary": "Courrier du Dr [SOIGNANT_1], médecin généraliste, adressé à un confrère addictologue pour une demande d'avis sur le sevrage en benzodiazépines (alprazolam et zolpidem) chez Mme [PATIENT], 65 ans, très anxieuse, après une crise convulsive généralisée survenue le 17/01/2024 lors d'une hospitalisation pour fracture du col du fémur."
+    },
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 10
+      },
+      "end": {
+        "page": 0,
+        "line": 29
+      },
+      "date": "2024-02-20",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Premier entretien : patiente de 65 ans veuve, chute nocturne sous Stilnox avec fracture du col du fémur, benzodiazépines (alprazolam 3 mg/j, zolpidem) et alcool, accord de principe pour un sevrage progressif avec relais par diazépam."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 30
+      },
+      "end": {
+        "page": 0,
+        "line": 41
+      },
+      "date": "2024-03-05",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Arrêt du second prescripteur, relais de l'alprazolam par diazépam 10 mg x 3, ordonnance sécurisée avec délivrance hebdomadaire et passage IDE dans 3 semaines."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 42
+      },
+      "end": {
+        "page": 0,
+        "line": 50
+      },
+      "date": "2024-03-26",
+      "kind": "Entretien infirmier",
+      "authorRole": "IDE",
+      "summary": "Entretien IDE : bonne tolérance du diazépam avec une légère somnolence l'après-midi les premiers jours, pas de chute, pilulier mis en place avec sa fille, ne fume pas."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 51
+      },
+      "end": {
+        "page": 0,
+        "line": 61
+      },
+      "date": "2024-04-23",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Diazépam diminué à 25 mg/j depuis le 10/04 et bien toléré, anxiété supportable, acceptation de la sertraline 25 puis 50 mg comme traitement de fond du TAG."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 10
+      },
+      "end": {
+        "page": 1,
+        "line": 19
+      },
+      "date": "2024-06-11",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Diazépam 20 mg/j depuis fin mai, sertraline 50 mg efficace sur les inquiétudes et le sommeil, zolpidem réduit à un demi-comprimé, schéma de diminution de 2,5 mg toutes les 3 semaines."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 20
+      },
+      "end": {
+        "page": 1,
+        "line": 29
+      },
+      "date": "2024-09-10",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Diminution mise en pause en août chez sa fille mais en réalité descendue à 17,5 mg mi-juillet, diazépam à 15 mg/j depuis le 02/09, anxiété majorée à l'approche de l'anniversaire du décès de son mari."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 30
+      },
+      "end": {
+        "page": 1,
+        "line": 39
+      },
+      "date": "2024-11-05",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Entretien téléphonique : anxiété et insomnie après l'hospitalisation pour AVC de sa sœur aînée, demande de reprise de Xanax refusée et expliquée, maintien du diazépam à 15 mg sans nouvelle diminution."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 40
+      },
+      "end": {
+        "page": 1,
+        "line": 46
+      },
+      "date": "2024-12-17",
+      "kind": "Observation infirmière",
+      "authorRole": "IDE",
+      "summary": "Appel de la fille : découverte d'une boîte d'alprazolam 0,5 mg prescrite par un médecin remplaçant fin novembre, reconnue par la patiente, information transmise au psychiatre et RDV avancé."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 47
+      },
+      "end": {
+        "page": 1,
+        "line": 60
+      },
+      "date": "2025-01-14",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Reprise d'alprazolam en novembre-décembre (une dizaine de comprimés) avec honte, contrat de soins rediscuté (un seul prescripteur, une seule pharmacie), arrêt du zolpidem depuis le 01/01 et diazépam réduit à 12 mg/j avec décroissance de 2 mg toutes les 3 semaines."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 10
+      },
+      "end": {
+        "page": 2,
+        "line": 19
+      },
+      "date": "2025-03-18",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Déménagement le 01/03 dans un appartement en rez-de-chaussée près de sa fille, diazépam 8 mg/j, plus d'alprazolam, début de la TCC, poursuite de la décroissance."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 20
+      },
+      "end": {
+        "page": 2,
+        "line": 27
+      },
+      "date": "2025-06-03",
+      "kind": "Entretien psychologique",
+      "authorRole": "psychologue",
+      "summary": "4e séance de TCC : agenda des inquiétudes centrées sur la santé des proches, exercices de report de l'inquiétude plutôt efficaces, restriction du temps au lit avec endormissement amélioré."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 28
+      },
+      "end": {
+        "page": 2,
+        "line": 38
+      },
+      "date": "2025-07-08",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Diazépam 4 mg/j avec tolérance correcte et légère irritabilité les jours de baisse, sertraline 50 mg poursuivie, inquiétudes moins envahissantes, décroissance à 2 mg/j puis arrêt fin septembre si toléré."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 39
+      },
+      "end": {
+        "page": 2,
+        "line": 48
+      },
+      "date": "2025-10-21",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Diazépam arrêté le 30/09 avec quelques nuits d'insomnie de rebond la première semaine, pas de reprise d'alprazolam ni de zolpidem, anxiété contenue par les outils de la TCC et poursuite de la sertraline au moins 6 mois."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t3",
+        "kind": "substance_use",
+        "label": "Benzodiazépines"
+      },
+      {
+        "id": "t6",
+        "kind": "substance_use",
+        "label": "Zolpidem"
+      },
+      {
+        "id": "t1",
+        "kind": "psychiatric",
+        "label": "Anxiété généralisée (TAG)"
+      },
+      {
+        "id": "t2",
+        "kind": "psychiatric",
+        "label": "Insomnie"
+      },
+      {
+        "id": "t8",
+        "kind": "somatic",
+        "label": "Chute nocturne avec fracture du col du fémur droit"
+      },
+      {
+        "id": "t10",
+        "kind": "somatic",
+        "label": "Prothèse totale de hanche droite"
+      },
+      {
+        "id": "t11",
+        "kind": "somatic",
+        "label": "Crise convulsive généralisée"
+      },
+      {
+        "id": "t4",
+        "kind": "medication",
+        "label": "Alprazolam"
+      },
+      {
+        "id": "t7",
+        "kind": "medication",
+        "label": "Zolpidem"
+      },
+      {
+        "id": "t13",
+        "kind": "medication",
+        "label": "Diazépam"
+      },
+      {
+        "id": "t15",
+        "kind": "medication",
+        "label": "Sertraline"
+      },
+      {
+        "id": "t9",
+        "kind": "therapeutic_psycho",
+        "label": "Hospitalisation pour fracture du col du fémur, PTH, crise convulsive, puis SSR"
+      },
+      {
+        "id": "t12",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi psychiatrique"
+      },
+      {
+        "id": "t14",
+        "kind": "therapeutic_psycho",
+        "label": "Entretien infirmier"
+      },
+      {
+        "id": "t19",
+        "kind": "therapeutic_psycho",
+        "label": "TCC de l'insomnie et de l'anxiété"
+      },
+      {
+        "id": "t5",
+        "kind": "life_event",
+        "label": "Décès du mari"
+      },
+      {
+        "id": "t16",
+        "kind": "life_event",
+        "label": "Séjour chez sa fille"
+      },
+      {
+        "id": "t17",
+        "kind": "life_event",
+        "label": "Hospitalisation de la sœur pour AVC"
+      },
+      {
+        "id": "t18",
+        "kind": "life_event",
+        "label": "Déménagement"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "1998",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Anxiété généralisée ancienne depuis la quarantaine environ, avec inquiétudes incontrôlables, tensions musculaires, insomnie.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o4",
+          "historique:o5",
+          "historique:o6",
+          "historique:o7",
+          "historique:o9",
+          "historique:o10",
+          "historique:o12",
+          "historique:o13"
+        ],
+        "fromAge": {
+          "start": [
+            40,
+            49
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "1998",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Insomnie présente dans le TAG depuis la quarantaine, majorée après le décès du mari (zolpidem depuis 2019).",
+        "observationIds": [
+          "historique:o1",
+          "historique:o7",
+          "historique:o9",
+          "historique:o11"
+        ],
+        "fromAge": {
+          "start": [
+            40,
+            49
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "2005",
+        "end": "2024-03-05",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Usage d'alprazolam depuis 2005, dose réelle 3 mg/j, complétée par un second prescripteur ; arrêt le 05/03/2024 lors du relais par diazépam.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o1",
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e4",
+        "trackId": "t4",
+        "start": "2005",
+        "end": "2024-03-05",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Alprazolam 0,5 mg x3/j, dose réelle 3 mg/j, complétée par un second prescripteur ; arrêt le 05/03/2024.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o1",
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e5",
+        "trackId": "t5",
+        "start": "2019-09",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Décès du mari en septembre 2019 ; veuve depuis.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o1",
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e6",
+        "trackId": "t6",
+        "start": "2019-09",
+        "end": "2025-01-01",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Zolpidem 10 mg au coucher depuis 2019, parfois 15 mg ; arrêt le 01/01/2025.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o1",
+          "historique:o5",
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e7",
+        "trackId": "t7",
+        "start": "2019-09",
+        "end": "2025-01-01",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Zolpidem 10 mg au coucher depuis 2019, parfois 15 mg ; arrêt le 01/01/2025.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o1",
+          "historique:o5",
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e8",
+        "trackId": "t8",
+        "start": "2024-01-12",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Chute nocturne à domicile, fracture du col du fémur droit.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e9",
+        "trackId": "t3",
+        "start": "2024-01-12",
+        "end": "2024-01-17",
+        "ongoing": false,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Arrêt brutal des benzodiazépines à l'admission, crise convulsive généralisée le 17/01/2024.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e10",
+        "trackId": "t9",
+        "start": "2024-01-12",
+        "end": "2024-02-09",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hospitalisation pour fracture du col du fémur, PTH, crise convulsive, puis SSR jusqu'au 09/02/2024.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e11",
+        "trackId": "t10",
+        "start": "2024-01-13",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Prothèse totale de hanche droite.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e12",
+        "trackId": "t11",
+        "start": "2024-01-17",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Crise convulsive généralisée, attribuée à l'arrêt brutal des benzodiazépines.",
+        "observationIds": [
+          "courrier:o1",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e13",
+        "trackId": "t12",
+        "start": "2024-02-20",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Suivi psychiatrique régulier pour sevrage des benzodiazépines et TAG.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o4",
+          "historique:o5",
+          "historique:o6",
+          "historique:o7",
+          "historique:o9",
+          "historique:o10",
+          "historique:o12",
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e14",
+        "trackId": "t13",
+        "start": "2024-03-05",
+        "end": "2025-09-30",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Relais par diazépam, décroissance progressive de 30 mg/j à l'arrêt le 30/09/2025.",
+        "observationIds": [
+          "historique:o2",
+          "historique:o4",
+          "historique:o5",
+          "historique:o6",
+          "historique:o9",
+          "historique:o10",
+          "historique:o12",
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e15",
+        "trackId": "t3",
+        "start": "2024-03-05",
+        "end": "2025-09-30",
+        "ongoing": false,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Sevrage progressif par diazépam, de 30 mg/j à l'arrêt le 30/09/2025.",
+        "observationIds": [
+          "historique:o2",
+          "historique:o4",
+          "historique:o5",
+          "historique:o6",
+          "historique:o9",
+          "historique:o10",
+          "historique:o12",
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e16",
+        "trackId": "t14",
+        "start": "2024-03-26",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Entretien infirmier, bonne tolérance du diazépam, pilulier avec sa fille.",
+        "observationIds": [
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e17",
+        "trackId": "t15",
+        "start": "2024-04-23",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Sertraline 25 mg puis 50 mg, poursuivie au moins 6 mois après l'arrêt du diazépam.",
+        "observationIds": [
+          "historique:o4",
+          "historique:o5",
+          "historique:o12",
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e18",
+        "trackId": "t16",
+        "start": "2024-08",
+        "end": "2024-08",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Séjour chez sa fille en août 2024, pause dans la diminution du diazépam.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e19",
+        "trackId": "t17",
+        "start": "2024-11",
+        "end": "2025-01",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hospitalisation de la sœur aînée pour AVC en novembre 2024, sortie avant le 14/01/2025.",
+        "observationIds": [
+          "historique:o7",
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e20",
+        "trackId": "t3",
+        "start": "2024-11-05",
+        "end": null,
+        "ongoing": false,
+        "mode": "craving",
+        "lossOfControl": false,
+        "note": "Craving d'alprazolam ('Xanax') lors de stress (hospitalisation de la sœur, mauvaises nouvelles).",
+        "observationIds": [
+          "historique:o7",
+          "historique:o11"
+        ]
+      },
+      {
+        "id": "e21",
+        "trackId": "t3",
+        "start": "2024-11",
+        "end": "2024-12",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": true,
+        "note": "Reprise d'alprazolam en novembre-décembre 2024 (une dizaine de comprimés), arrêt ensuite.",
+        "observationIds": [
+          "historique:o8",
+          "historique:o9",
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e22",
+        "trackId": "t4",
+        "start": "2024-11",
+        "end": "2024-12",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Reprise d'alprazolam 0,5 mg en novembre-décembre 2024 (une dizaine de comprimés), arrêt ensuite.",
+        "observationIds": [
+          "historique:o8",
+          "historique:o9",
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e23",
+        "trackId": "t14",
+        "start": "2024-12-17",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Appel de la fille : boîte d'alprazolam entamée, reprise signalée.",
+        "observationIds": [
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e24",
+        "trackId": "t18",
+        "start": "2025-03-01",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Déménagement dans un appartement en rez-de-chaussée près de sa fille.",
+        "observationIds": [
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e25",
+        "trackId": "t19",
+        "start": "2025-03-18",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "TCC de l'insomnie et de l'anxiété, commencée le 18/03/2025, 4e séance le 03/06/2025.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o10",
+          "historique:o11",
+          "historique:o13"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 62009,
+  "usage": {
+    "calls": 3,
+    "promptTokens": 10537,
+    "completionTokens": 31894,
+    "cost": 0.0407
+  },
+  "rawAnswers": [
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 1
+            },
+            "end": {
+              "page": 1,
+              "line": 23
+            },
+            "date": "2024-02-08",
+            "kind": "courrier",
+            "author_role": "médecin généraliste",
+            "continues_previous": false,
+            "summary": "Courrier du Dr [SOIGNANT_1], médecin généraliste, adressé à un confrère addictologue pour une demande d'avis sur le sevrage en benzodiazépines (alprazolam et zolpidem) chez Mme [PATIENT], 65 ans, très anxieuse, après une crise convulsive généralisée survenue le 17/01/2024 lors d'une hospitalisation pour fracture du col du fémur."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 10
+            },
+            "end": {
+              "page": 1,
+              "line": 29
+            },
+            "date": "2024-02-20",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "psychiatre",
+            "continues_previous": false,
+            "summary": "Premier entretien : patiente de 65 ans veuve, chute nocturne sous Stilnox avec fracture du col du fémur, benzodiazépines (alprazolam 3 mg/j, zolpidem) et alcool, accord de principe pour un sevrage progressif avec relais par diazépam."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 30
+            },
+            "end": {
+              "page": 1,
+              "line": 41
+            },
+            "date": "2024-03-05",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "psychiatre",
+            "continues_previous": false,
+            "summary": "Arrêt du second prescripteur, relais de l'alprazolam par diazépam 10 mg x 3, ordonnance sécurisée avec délivrance hebdomadaire et passage IDE dans 3 semaines."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 42
+            },
+            "end": {
+              "page": 1,
+              "line": 50
+            },
+            "date": "2024-03-26",
+            "kind": "Entretien infirmier",
+            "author_role": "IDE",
+            "continues_previous": false,
+            "summary": "Entretien IDE : bonne tolérance du diazépam avec une légère somnolence l'après-midi les premiers jours, pas de chute, pilulier mis en place avec sa fille, ne fume pas."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 51
+            },
+            "end": {
+              "page": 1,
+              "line": 61
+            },
+            "date": "2024-04-23",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "psychiatre",
+            "continues_previous": false,
+            "summary": "Diazépam diminué à 25 mg/j depuis le 10/04 et bien toléré, anxiété supportable, acceptation de la sertraline 25 puis 50 mg comme traitement de fond du TAG."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 10
+            },
+            "end": {
+              "page": 2,
+              "line": 19
+            },
+            "date": "2024-06-11",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "psychiatre",
+            "continues_previous": false,
+            "summary": "Diazépam 20 mg/j depuis fin mai, sertraline 50 mg efficace sur les inquiétudes et le sommeil, zolpidem réduit à un demi-comprimé, schéma de diminution de 2,5 mg toutes les 3 semaines."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 20
+            },
+            "end": {
+              "page": 2,
+              "line": 29
+            },
+            "date": "2024-09-10",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "psychiatre",
+            "continues_previous": false,
+            "summary": "Diminution mise en pause en août chez sa fille mais en réalité descendue à 17,5 mg mi-juillet, diazépam à 15 mg/j depuis le 02/09, anxiété majorée à l'approche de l'anniversaire du décès de son mari."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 30
+            },
+            "end": {
+              "page": 2,
+              "line": 39
+            },
+            "date": "2024-11-05",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "psychiatre",
+            "continues_previous": false,
+            "summary": "Entretien téléphonique : anxiété et insomnie après l'hospitalisation pour AVC de sa sœur aînée, demande de reprise de Xanax refusée et expliquée, maintien du diazépam à 15 mg sans nouvelle diminution."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 40
+            },
+            "end": {
+              "page": 2,
+              "line": 46
+            },
+            "date": "2024-12-17",
+            "kind": "Observation infirmière",
+            "author_role": "IDE",
+            "continues_previous": false,
+            "summary": "Appel de la fille : découverte d'une boîte d'alprazolam 0,5 mg prescrite par un médecin remplaçant fin novembre, reconnue par la patiente, information transmise au psychiatre et RDV avancé."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 47
+            },
+            "end": {
+              "page": 2,
+              "line": 60
+            },
+            "date": "2025-01-14",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "psychiatre",
+            "continues_previous": false,
+            "summary": "Reprise d'alprazolam en novembre-décembre (une dizaine de comprimés) avec honte, contrat de soins rediscuté (un seul prescripteur, une seule pharmacie), arrêt du zolpidem depuis le 01/01 et diazépam réduit à 12 mg/j avec décroissance de 2 mg toutes les 3 semaines."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 10
+            },
+            "end": {
+              "page": 3,
+              "line": 19
+            },
+            "date": "2025-03-18",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "psychiatre",
+            "continues_previous": false,
+            "summary": "Déménagement le 01/03 dans un appartement en rez-de-chaussée près de sa fille, diazépam 8 mg/j, plus d'alprazolam, début de la TCC, poursuite de la décroissance."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 20
+            },
+            "end": {
+              "page": 3,
+              "line": 27
+            },
+            "date": "2025-06-03",
+            "kind": "Entretien psychologique",
+            "author_role": "psychologue",
+            "continues_previous": false,
+            "summary": "4e séance de TCC : agenda des inquiétudes centrées sur la santé des proches, exercices de report de l'inquiétude plutôt efficaces, restriction du temps au lit avec endormissement amélioré."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 28
+            },
+            "end": {
+              "page": 3,
+              "line": 38
+            },
+            "date": "2025-07-08",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "psychiatre",
+            "continues_previous": false,
+            "summary": "Diazépam 4 mg/j avec tolérance correcte et légère irritabilité les jours de baisse, sertraline 50 mg poursuivie, inquiétudes moins envahissantes, décroissance à 2 mg/j puis arrêt fin septembre si toléré."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 39
+            },
+            "end": {
+              "page": 3,
+              "line": 48
+            },
+            "date": "2025-10-21",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "psychiatre",
+            "continues_previous": false,
+            "summary": "Diazépam arrêté le 30/09 avec quelques nuits d'insomnie de rebond la première semaine, pas de reprise d'alprazolam ni de zolpidem, anxiété contenue par les outils de la TCC et poursuite de la sertraline au moins 6 mois."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "psychiatric",
+            "label": "Anxiété généralisée (TAG)",
+            "start": null,
+            "end": null,
+            "start_age": [
+              40,
+              49
+            ],
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Anxiété généralisée ancienne depuis la quarantaine environ, avec inquiétudes incontrôlables, tensions musculaires, insomnie.",
+            "observation_ids": [
+              "o2",
+              "o5",
+              "o6",
+              "o7",
+              "o8",
+              "o10",
+              "o11",
+              "o13",
+              "o14"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Insomnie",
+            "start": null,
+            "end": null,
+            "start_age": [
+              40,
+              49
+            ],
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Insomnie présente dans le TAG depuis la quarantaine, majorée après le décès du mari (zolpidem depuis 2019).",
+            "observation_ids": [
+              "o2",
+              "o8",
+              "o10",
+              "o12"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Usage d'alcool : 2 verres de vin au dîner + porto pour dormir (02/2024), puis 1 verre au dîner (04/2024), puis occasionnel le week-end (07/2025).",
+            "observation_ids": [
+              "o2",
+              "o5",
+              "o8",
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Benzodiazépines",
+            "start": "2005",
+            "end": "2024-03-05",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Usage d'alprazolam depuis 2005, dose réelle 3 mg/j, complétée par un second prescripteur ; arrêt le 05/03/2024 lors du relais par diazépam.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Alprazolam",
+            "start": "2005",
+            "end": "2024-03-05",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Alprazolam 0,5 mg x3/j, dose réelle 3 mg/j, complétée par un second prescripteur ; arrêt le 05/03/2024.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Décès du mari",
+            "start": "2019-09",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Décès du mari en septembre 2019 ; veuve depuis.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o7"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Zolpidem",
+            "start": "2019-09",
+            "end": "2025-01-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Zolpidem 10 mg au coucher depuis 2019, parfois 15 mg ; arrêt le 01/01/2025.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o6",
+              "o10"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Zolpidem",
+            "start": "2019-09",
+            "end": "2025-01-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Zolpidem 10 mg au coucher depuis 2019, parfois 15 mg ; arrêt le 01/01/2025.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o6",
+              "o10"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Chute nocturne avec fracture du col du fémur droit",
+            "start": "2024-01-12",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Chute nocturne à domicile, fracture du col du fémur droit.",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Benzodiazépines",
+            "start": "2024-01-12",
+            "end": "2024-01-17",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Arrêt brutal des benzodiazépines à l'admission, crise convulsive généralisée le 17/01/2024.",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation pour fracture du col du fémur, PTH, crise convulsive, puis SSR",
+            "start": "2024-01-12",
+            "end": "2024-02-09",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hospitalisation pour fracture du col du fémur, PTH, crise convulsive, puis SSR jusqu'au 09/02/2024.",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Prothèse totale de hanche droite",
+            "start": "2024-01-13",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Prothèse totale de hanche droite.",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Crise convulsive généralisée",
+            "start": "2024-01-17",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Crise convulsive généralisée, attribuée à l'arrêt brutal des benzodiazépines.",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychiatrique",
+            "start": "2024-02-20",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Suivi psychiatrique régulier pour sevrage des benzodiazépines et TAG.",
+            "observation_ids": [
+              "o2",
+              "o3",
+              "o5",
+              "o6",
+              "o7",
+              "o8",
+              "o10",
+              "o11",
+              "o13",
+              "o14"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Diazépam",
+            "start": "2024-03-05",
+            "end": "2025-09-30",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Relais par diazépam, décroissance progressive de 30 mg/j à l'arrêt le 30/09/2025.",
+            "observation_ids": [
+              "o3",
+              "o5",
+              "o6",
+              "o7",
+              "o10",
+              "o11",
+              "o13",
+              "o14"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Benzodiazépines",
+            "start": "2024-03-05",
+            "end": "2025-09-30",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Sevrage progressif par diazépam, de 30 mg/j à l'arrêt le 30/09/2025.",
+            "observation_ids": [
+              "o3",
+              "o5",
+              "o6",
+              "o7",
+              "o10",
+              "o11",
+              "o13",
+              "o14"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Entretien infirmier",
+            "start": "2024-03-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entretien infirmier, bonne tolérance du diazépam, pilulier avec sa fille.",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Sertraline",
+            "start": "2024-04-23",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Sertraline 25 mg puis 50 mg, poursuivie au moins 6 mois après l'arrêt du diazépam.",
+            "observation_ids": [
+              "o5",
+              "o6",
+              "o13",
+              "o14"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Séjour chez sa fille",
+            "start": "2024-08",
+            "end": "2024-08",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Séjour chez sa fille en août 2024, pause dans la diminution du diazépam.",
+            "observation_ids": [
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Hospitalisation de la sœur pour AVC",
+            "start": "2024-11",
+            "end": "2025-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hospitalisation de la sœur aînée pour AVC en novembre 2024, sortie avant le 14/01/2025.",
+            "observation_ids": [
+              "o8",
+              "o10"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Benzodiazépines",
+            "start": "2024-11-05",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "craving",
+            "loss_of_control": false,
+            "note": "Craving d'alprazolam ('Xanax') lors de stress (hospitalisation de la sœur, mauvaises nouvelles).",
+            "observation_ids": [
+              "o8",
+              "o12"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Benzodiazépines",
+            "start": "2024-11",
+            "end": "2024-12",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": true,
+            "note": "Reprise d'alprazolam en novembre-décembre 2024 (une dizaine de comprimés), arrêt ensuite.",
+            "observation_ids": [
+              "o9",
+              "o10",
+              "o11"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Alprazolam",
+            "start": "2024-11",
+            "end": "2024-12",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Reprise d'alprazolam 0,5 mg en novembre-décembre 2024 (une dizaine de comprimés), arrêt ensuite.",
+            "observation_ids": [
+              "o9",
+              "o10",
+              "o11"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Entretien infirmier",
+            "start": "2024-12-17",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Appel de la fille : boîte d'alprazolam entamée, reprise signalée.",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Déménagement",
+            "start": "2025-03-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Déménagement dans un appartement en rez-de-chaussée près de sa fille.",
+            "observation_ids": [
+              "o11"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "TCC de l'insomnie et de l'anxiété",
+            "start": "2025-03-18",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "TCC de l'insomnie et de l'anxiété, commencée le 18/03/2025, 4e séance le 03/06/2025.",
+            "observation_ids": [
+              "o10",
+              "o11",
+              "o12",
+              "o14"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
