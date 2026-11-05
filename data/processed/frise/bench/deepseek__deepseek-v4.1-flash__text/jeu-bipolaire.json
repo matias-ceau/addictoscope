@@ -1,0 +1,1565 @@
+{
+  "dossier": "jeu-bipolaire",
+  "model": "deepseek/deepseek-v4.1-flash",
+  "textOnly": true,
+  "ranAt": "2026-11-05T14:21:56.937Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 4,
+      "redactions": {
+        "ETABLISSEMENT": 12,
+        "ADRESSE": 9,
+        "VILLE": 5,
+        "TEL": 5,
+        "PATIENT": 7,
+        "DOSSIER": 4,
+        "SOIGNANT": 19,
+        "PERSONNE": 5,
+        "NAISSANCE": 4,
+        "IPP": 4
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 15
+      },
+      "end": {
+        "page": 0,
+        "line": 24
+      },
+      "date": "2025-09-23",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Suivi psychiatrique : euthymique depuis le printemps, arrêt des jeux et paris depuis mars, lithiémie 0,71, traitement par lithium 800 mg et lamotrigine 150 mg, RDV en décembre."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 25
+      },
+      "end": {
+        "page": 0,
+        "line": 37
+      },
+      "date": "2025-07-01",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Suivi en présentiel : stable, quétiapine arrêtée en mai sans rebond d'insomnie, pas de jeu depuis mars, craving rare, traitement lamotrigine 150 mg et lithium 800 mg, psychoéducation et plan de crise."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 38
+      },
+      "end": {
+        "page": 0,
+        "line": 44
+      },
+      "date": "2025-04-15",
+      "kind": "Entretien psychologique",
+      "authorRole": "psychologue",
+      "summary": "9e séance : révèle avoir acheté des jeux de grattage en mars pour 60 euros, travail sur l'illusion de contrôle, décide d'en parler à son épouse et de changer de bureau de tabac."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 45
+      },
+      "end": {
+        "page": 0,
+        "line": 55
+      },
+      "date": "2025-01-14",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Suivi : amélioration thymique, lamotrigine 100 mg puis 150 mg, lithium 800 mg et quétiapine 50 mg, pas de paris malgré des envies pendant la Ligue des champions, RDV à 3 mois."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 15
+      },
+      "end": {
+        "page": 1,
+        "line": 28
+      },
+      "date": "2024-11-26",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Vu avec son épouse : épisode dépressif caractérisé avec aboulie, hypersomnie, culpabilité et idées de mort passives, lithiémie 0,74, pas d'hospitalisation, introduction lamotrigine, arrêt de travail 3 semaines, appel téléphonique et numéro 3114."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 29
+      },
+      "end": {
+        "page": 1,
+        "line": 37
+      },
+      "date": "2024-10-15",
+      "kind": "Entretien social",
+      "authorRole": "assistante sociale",
+      "summary": "Entretien social : plan de surendettement accepté le 08/10/2024, rééchelonnement sur 7 ans pour 45 200 euros de dettes, l'épouse gère les comptes et la carte bancaire est plafonnée."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 38
+      },
+      "end": {
+        "page": 1,
+        "line": 47
+      },
+      "date": "2024-09-10",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Suivi : euthymique, reprise du travail le 15/07, lithiémie 0,75, quétiapine diminuée à 50 mg, thérapie de couple débutée en août, pas de paris depuis fin juin."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 48
+      },
+      "end": {
+        "page": 1,
+        "line": 57
+      },
+      "date": "2024-07-09",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Entretien téléphonique : plus calme, l'épouse signale des paris jusqu'au 5 juillet, accepte de rendre l'accès au compte de son frère, quétiapine 100 mg poursuivie, reprise du travail le 15/07 si stabilité."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 15
+      },
+      "end": {
+        "page": 2,
+        "line": 28
+      },
+      "date": "2024-06-25",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Vu en urgence : épisode hypomaniaque, reprise des paris via le compte de son frère avec perte d'environ 2 500 euros, lithiémie 0,58, lithium majoré à 800 mg, quétiapine 100 mg, arrêt de travail, mesures de protection financière."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 29
+      },
+      "end": {
+        "page": 2,
+        "line": 36
+      },
+      "date": "2024-04-16",
+      "kind": "Entretien psychologique",
+      "authorRole": "psychologue",
+      "summary": "Premier entretien de TCC pour le jeu : évocation du PMU avec son père, paris sportifs, perte de contrôle au confinement, distorsions repérées et journal des envies proposé."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 37
+      },
+      "end": {
+        "page": 2,
+        "line": 41
+      },
+      "date": "2024-03-26",
+      "kind": "Entretien infirmier",
+      "authorRole": "IDE",
+      "summary": "Entretien infirmier : lithiémie à J10 à 0,52 mmol/L, bonne tolérance avec un peu de soif, rappel des consignes d'hydratation et de surveillance, information transmise au Dr."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 42
+      },
+      "end": {
+        "page": 2,
+        "line": 50
+      },
+      "date": "2024-03-05",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Suivi : bilan pré-lithium normal, thymie légèrement abaissée avec ruminations sur les dettes, introduction de lithium LP 400 mg le soir, lithiémie à J10 et RDV à 1 mois."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 51
+      },
+      "end": {
+        "page": 3,
+        "line": 21
+      },
+      "date": "2024-02-01",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Début d'observation : vu ce jour avec son épouse ; la suite se trouve page 4, non fournie."
+    },
+    {
+      "id": "historique:o14",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 22
+      },
+      "end": {
+        "page": 3,
+        "line": 43
+      },
+      "date": "2024-01-18",
+      "kind": "Motif de l'évaluation",
+      "authorRole": "médecin",
+      "summary": "Évaluation du 18/01/2024 motivée par des crédits à la consommation contractés à l'insu de l'épouse, avec antécédents dépressifs, jeu pathologique, dettes et conduite à tenir incluant interdiction ANJ, rendez-vous avec l'épouse et exploration thymique."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t1",
+        "kind": "substance_use",
+        "label": "Paris sportifs"
+      },
+      {
+        "id": "t2",
+        "kind": "substance_use",
+        "label": "Jeux de grattage"
+      },
+      {
+        "id": "t3",
+        "kind": "substance_use",
+        "label": "Nicotine (vapotage)"
+      },
+      {
+        "id": "t4",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif"
+      },
+      {
+        "id": "t5",
+        "kind": "psychiatric",
+        "label": "Dépression récurrente"
+      },
+      {
+        "id": "t6",
+        "kind": "psychiatric",
+        "label": "Trouble bipolaire de type II"
+      },
+      {
+        "id": "t7",
+        "kind": "psychiatric",
+        "label": "Épisode hypomaniaque"
+      },
+      {
+        "id": "t8",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif caractérisé"
+      },
+      {
+        "id": "t9",
+        "kind": "medication",
+        "label": "Paroxétine"
+      },
+      {
+        "id": "t10",
+        "kind": "medication",
+        "label": "Lithium"
+      },
+      {
+        "id": "t11",
+        "kind": "medication",
+        "label": "Quétiapine"
+      },
+      {
+        "id": "t12",
+        "kind": "medication",
+        "label": "Lamotrigine"
+      },
+      {
+        "id": "t13",
+        "kind": "therapeutic_psycho",
+        "label": "Interdiction volontaire de jeux (ANJ)"
+      },
+      {
+        "id": "t14",
+        "kind": "therapeutic_psycho",
+        "label": "TCC pour le jeu"
+      },
+      {
+        "id": "t15",
+        "kind": "therapeutic_psycho",
+        "label": "Thérapie de couple"
+      },
+      {
+        "id": "t16",
+        "kind": "therapeutic_psycho",
+        "label": "Psychoéducation"
+      },
+      {
+        "id": "t17",
+        "kind": "therapeutic_psycho",
+        "label": "Orientation assistante sociale (surendettement)"
+      },
+      {
+        "id": "t18",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi psychiatrique"
+      },
+      {
+        "id": "t19",
+        "kind": "life_event",
+        "label": "Découverte par l'épouse de crédits à la consommation"
+      },
+      {
+        "id": "t20",
+        "kind": "life_event",
+        "label": "Surendettement"
+      },
+      {
+        "id": "t21",
+        "kind": "life_event",
+        "label": "Arrêt de travail"
+      },
+      {
+        "id": "t22",
+        "kind": "life_event",
+        "label": "Gestion des comptes par l'épouse"
+      },
+      {
+        "id": "t23",
+        "kind": "life_event",
+        "label": "PMU avec son père le dimanche (collège)"
+      },
+      {
+        "id": "t24",
+        "kind": "life_event",
+        "label": "Confinement (perte de contrôle du jeu)"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2018",
+        "end": "2024-01-29",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Depuis la Coupe du monde 2018, quotidien depuis 2022 environ, mises jusqu'à 300 €/j, poursuite des pertes. Perte de contrôle datée au confinement. Arrêt lors interdiction ANJ le 29/01/2024.",
+        "observationIds": [
+          "historique:o14",
+          "historique:o13",
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e2",
+        "trackId": "t1",
+        "start": "2024-06-14",
+        "end": "2024-07-05",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": true,
+        "note": "Reprise pendant l'Euro via le compte de son frère, contournement de l'interdiction, perte ~2 500 €, jusqu'au match du 05/07/2024.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e3",
+        "trackId": "t2",
+        "start": "2025-03",
+        "end": "2025-03",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "5-6 achats au bureau de tabac en mars 2025, 60 € au total, « ce n'est pas du vrai jeu ».",
+        "observationIds": [
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e4",
+        "trackId": "t1",
+        "start": "2025-01-14",
+        "end": null,
+        "ongoing": false,
+        "mode": "craving",
+        "lossOfControl": false,
+        "note": "Envies pendant la Ligue des champions, « je regarde sans parier, c'est nouveau ».",
+        "observationIds": [
+          "historique:o4"
+        ]
+      },
+      {
+        "id": "e5",
+        "trackId": "t1",
+        "start": "2025-07-01",
+        "end": null,
+        "ongoing": false,
+        "mode": "craving",
+        "lossOfControl": false,
+        "note": "Craving rare, surtout les soirs de match, géré en éteignant le téléphone.",
+        "observationIds": [
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e6",
+        "trackId": "t3",
+        "start": "2019",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Vapote depuis 2019, ancien fumeur 15 PA.",
+        "observationIds": [
+          "historique:o14"
+        ]
+      },
+      {
+        "id": "e7",
+        "trackId": "t4",
+        "start": "2010",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Épisode dépressif en 2010, traité par le MG.",
+        "observationIds": [
+          "historique:o14"
+        ]
+      },
+      {
+        "id": "e8",
+        "trackId": "t4",
+        "start": "2016",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Épisode dépressif en 2016, traité par paroxétine quelques mois.",
+        "observationIds": [
+          "historique:o14"
+        ]
+      },
+      {
+        "id": "e9",
+        "trackId": "t5",
+        "start": "2010",
+        "end": "2024-02-01",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Diagnostic du MG, remplacé par trouble bipolaire de type II le 01/02/2024.",
+        "observationIds": [
+          "historique:o14",
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e10",
+        "trackId": "t6",
+        "start": "2024-02-01",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Diagnostic retenu le 01/02/2024, après réévaluation thymique.",
+        "observationIds": [
+          "historique:o13",
+          "historique:o12",
+          "historique:o9",
+          "historique:o7",
+          "historique:o5",
+          "historique:o4",
+          "historique:o2",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e11",
+        "trackId": "t7",
+        "start": "2024-06-15",
+        "end": "2024-07-09",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Depuis une dizaine de jours au 25/06/2024, résolu au 09/07/2024.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e12",
+        "trackId": "t8",
+        "start": "2024-11-05",
+        "end": "2025-01-01",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Depuis environ 3 semaines au 26/11/2024, amélioration nette depuis début janvier 2025.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o4"
+        ]
+      },
+      {
+        "id": "e13",
+        "trackId": "t9",
+        "start": "2016",
+        "end": "2016",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Quelques mois en 2016.",
+        "observationIds": [
+          "historique:o14",
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e14",
+        "trackId": "t10",
+        "start": "2024-03-05",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "LP 400 mg le soir, majoré à 800 mg le 25/06/2024.",
+        "observationIds": [
+          "historique:o12",
+          "historique:o11",
+          "historique:o9",
+          "historique:o7",
+          "historique:o5",
+          "historique:o4",
+          "historique:o2",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e15",
+        "trackId": "t11",
+        "start": "2024-06-25",
+        "end": "2025-05",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "100 mg le soir, diminuée à 50 mg le 10/09/2024, arrêtée en mai 2025.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o8",
+          "historique:o7",
+          "historique:o5",
+          "historique:o4",
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e16",
+        "trackId": "t12",
+        "start": "2024-11-26",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "25 mg avec titration lente, 100 mg le 14/01/2025, 150 mg depuis fin janvier 2025.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o4",
+          "historique:o2",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e17",
+        "trackId": "t13",
+        "start": "2024-01-29",
+        "end": "2027-01-29",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Faite le 29/01/2024 pour 3 ans, contournée via le compte du frère en juin 2024.",
+        "observationIds": [
+          "historique:o13",
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e18",
+        "trackId": "t14",
+        "start": "2024-04-16",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Premier entretien le 16/04/2024, 9e séance le 15/04/2025.",
+        "observationIds": [
+          "historique:o10",
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e19",
+        "trackId": "t15",
+        "start": "2024-08",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Débutée en août 2024 à l'initiative de son épouse.",
+        "observationIds": [
+          "historique:o7"
+        ]
+      },
+      {
+        "id": "e20",
+        "trackId": "t16",
+        "start": "2025-07-01",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Signes d'alerte (sommeil < 6h, achats), plan de crise écrit avec son épouse.",
+        "observationIds": [
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e21",
+        "trackId": "t17",
+        "start": "2024-02-01",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Orientation ASS, plan de surendettement accepté le 08/10/2024.",
+        "observationIds": [
+          "historique:o13",
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e22",
+        "trackId": "t18",
+        "start": "2024-01-18",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Suivi régulier par le médecin.",
+        "observationIds": [
+          "historique:o14",
+          "historique:o13",
+          "historique:o12",
+          "historique:o9",
+          "historique:o8",
+          "historique:o7",
+          "historique:o5",
+          "historique:o4",
+          "historique:o2",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e23",
+        "trackId": "t19",
+        "start": "2023-12",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Découverte par son épouse de crédits contractés à son insu en décembre.",
+        "observationIds": [
+          "historique:o14"
+        ]
+      },
+      {
+        "id": "e24",
+        "trackId": "t20",
+        "start": "2024-01-18",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Dettes 38 000 € puis 45 200 €, plan accepté le 08/10/2024, rééchelonnement sur 7 ans.",
+        "observationIds": [
+          "historique:o14",
+          "historique:o6",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e25",
+        "trackId": "t21",
+        "start": "2024-06-25",
+        "end": "2024-07-15",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Arrêt 3 semaines, reprise le 15/07/2024.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o8",
+          "historique:o7"
+        ]
+      },
+      {
+        "id": "e26",
+        "trackId": "t21",
+        "start": "2024-11-26",
+        "end": "2024-12-17",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Arrêt 3 semaines.",
+        "observationIds": [
+          "historique:o5"
+        ]
+      },
+      {
+        "id": "e27",
+        "trackId": "t22",
+        "start": "2024-06-25",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Carte bancaire gardée/plafonnée, comptes du foyer gérés par l'épouse.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e28",
+        "trackId": "t23",
+        "start": "1991",
+        "end": "1995",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Parle du PMU avec son père le dimanche quand il était au collège.",
+        "observationIds": [
+          "historique:o10"
+        ],
+        "fromAge": {
+          "start": [
+            11,
+            15
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e29",
+        "trackId": "t24",
+        "start": "2020-03",
+        "end": "2020-05",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Date la perte de contrôle au confinement, seul toute la journée avec son téléphone.",
+        "observationIds": [
+          "historique:o10"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 351744,
+  "usage": {
+    "calls": 3,
+    "promptTokens": 9098,
+    "completionTokens": 38198,
+    "cost": 0.019
+  },
+  "rawAnswers": [
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 15
+            },
+            "end": {
+              "page": 1,
+              "line": 24
+            },
+            "date": "2025-09-23",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Suivi psychiatrique : euthymique depuis le printemps, arrêt des jeux et paris depuis mars, lithiémie 0,71, traitement par lithium 800 mg et lamotrigine 150 mg, RDV en décembre."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 25
+            },
+            "end": {
+              "page": 1,
+              "line": 37
+            },
+            "date": "2025-07-01",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "Suivi en présentiel : stable, quétiapine arrêtée en mai sans rebond d'insomnie, pas de jeu depuis mars, craving rare, traitement lamotrigine 150 mg et lithium 800 mg, psychoéducation et plan de crise."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 38
+            },
+            "end": {
+              "page": 1,
+              "line": 44
+            },
+            "date": "2025-04-15",
+            "kind": "Entretien psychologique",
+            "author_role": "psychologue",
+            "continues_previous": false,
+            "summary": "9e séance : révèle avoir acheté des jeux de grattage en mars pour 60 euros, travail sur l'illusion de contrôle, décide d'en parler à son épouse et de changer de bureau de tabac."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 45
+            },
+            "end": {
+              "page": 1,
+              "line": 55
+            },
+            "date": "2025-01-14",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Suivi : amélioration thymique, lamotrigine 100 mg puis 150 mg, lithium 800 mg et quétiapine 50 mg, pas de paris malgré des envies pendant la Ligue des champions, RDV à 3 mois."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 15
+            },
+            "end": {
+              "page": 2,
+              "line": 28
+            },
+            "date": "2024-11-26",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "Vu avec son épouse : épisode dépressif caractérisé avec aboulie, hypersomnie, culpabilité et idées de mort passives, lithiémie 0,74, pas d'hospitalisation, introduction lamotrigine, arrêt de travail 3 semaines, appel téléphonique et numéro 3114."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 29
+            },
+            "end": {
+              "page": 2,
+              "line": 37
+            },
+            "date": "2024-10-15",
+            "kind": "Entretien social",
+            "author_role": "assistante sociale",
+            "continues_previous": false,
+            "summary": "Entretien social : plan de surendettement accepté le 08/10/2024, rééchelonnement sur 7 ans pour 45 200 euros de dettes, l'épouse gère les comptes et la carte bancaire est plafonnée."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 38
+            },
+            "end": {
+              "page": 2,
+              "line": 47
+            },
+            "date": "2024-09-10",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Suivi : euthymique, reprise du travail le 15/07, lithiémie 0,75, quétiapine diminuée à 50 mg, thérapie de couple débutée en août, pas de paris depuis fin juin."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 48
+            },
+            "end": {
+              "page": 2,
+              "line": 57
+            },
+            "date": "2024-07-09",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Entretien téléphonique : plus calme, l'épouse signale des paris jusqu'au 5 juillet, accepte de rendre l'accès au compte de son frère, quétiapine 100 mg poursuivie, reprise du travail le 15/07 si stabilité."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 15
+            },
+            "end": {
+              "page": 3,
+              "line": 28
+            },
+            "date": "2024-06-25",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "Vu en urgence : épisode hypomaniaque, reprise des paris via le compte de son frère avec perte d'environ 2 500 euros, lithiémie 0,58, lithium majoré à 800 mg, quétiapine 100 mg, arrêt de travail, mesures de protection financière."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 29
+            },
+            "end": {
+              "page": 3,
+              "line": 36
+            },
+            "date": "2024-04-16",
+            "kind": "Entretien psychologique",
+            "author_role": "psychologue",
+            "continues_previous": false,
+            "summary": "Premier entretien de TCC pour le jeu : évocation du PMU avec son père, paris sportifs, perte de contrôle au confinement, distorsions repérées et journal des envies proposé."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 37
+            },
+            "end": {
+              "page": 3,
+              "line": 41
+            },
+            "date": "2024-03-26",
+            "kind": "Entretien infirmier",
+            "author_role": "IDE",
+            "continues_previous": false,
+            "summary": "Entretien infirmier : lithiémie à J10 à 0,52 mmol/L, bonne tolérance avec un peu de soif, rappel des consignes d'hydratation et de surveillance, information transmise au Dr."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 42
+            },
+            "end": {
+              "page": 3,
+              "line": 50
+            },
+            "date": "2024-03-05",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Suivi : bilan pré-lithium normal, thymie légèrement abaissée avec ruminations sur les dettes, introduction de lithium LP 400 mg le soir, lithiémie à J10 et RDV à 1 mois."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 51
+            },
+            "end": {
+              "page": 3,
+              "line": 55
+            },
+            "date": "2024-02-01",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "Début d'observation : vu ce jour avec son épouse ; la suite se trouve page 4, non fournie."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 4,
+              "line": 15
+            },
+            "end": {
+              "page": 4,
+              "line": 21
+            },
+            "date": "2024-02-01",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "médecin",
+            "continues_previous": true,
+            "summary": "Suite de l'observation psychiatrique de suivi du 2024-02-01 : interdiction volontaire de jeux auprès de l'ANJ, anamnèse thymique avec l'épouse, diagnostic de trouble bipolaire de type II retenu, proposition de lithium et orientations ASS et psychologue."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 22
+            },
+            "end": {
+              "page": 4,
+              "line": 43
+            },
+            "date": "2024-01-18",
+            "kind": "Motif de l'évaluation",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "Évaluation du 18/01/2024 motivée par des crédits à la consommation contractés à l'insu de l'épouse, avec antécédents dépressifs, jeu pathologique, dettes et conduite à tenir incluant interdiction ANJ, rendez-vous avec l'épouse et exploration thymique."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Paris sportifs",
+            "start": "2018",
+            "end": "2024-01-29",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Depuis la Coupe du monde 2018, quotidien depuis 2022 environ, mises jusqu'à 300 €/j, poursuite des pertes. Perte de contrôle datée au confinement. Arrêt lors interdiction ANJ le 29/01/2024.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o5"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Paris sportifs",
+            "start": "2024-06-14",
+            "end": "2024-07-05",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": true,
+            "note": "Reprise pendant l'Euro via le compte de son frère, contournement de l'interdiction, perte ~2 500 €, jusqu'au match du 05/07/2024.",
+            "observation_ids": [
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Jeux de grattage",
+            "start": "2025-03",
+            "end": "2025-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "5-6 achats au bureau de tabac en mars 2025, 60 € au total, « ce n'est pas du vrai jeu ».",
+            "observation_ids": [
+              "o12"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Paris sportifs",
+            "start": "2025-01-14",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "craving",
+            "loss_of_control": false,
+            "note": "Envies pendant la Ligue des champions, « je regarde sans parier, c'est nouveau ».",
+            "observation_ids": [
+              "o11"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Paris sportifs",
+            "start": "2025-07-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "craving",
+            "loss_of_control": false,
+            "note": "Craving rare, surtout les soirs de match, géré en éteignant le téléphone.",
+            "observation_ids": [
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "3-4 bières pendant les matchs, puis 2 en 2025, pas plus.",
+            "observation_ids": [
+              "o1",
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Nicotine (vapotage)",
+            "start": "2019",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Vapote depuis 2019, ancien fumeur 15 PA.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif",
+            "start": "2010",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Épisode dépressif en 2010, traité par le MG.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif",
+            "start": "2016",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Épisode dépressif en 2016, traité par paroxétine quelques mois.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Dépression récurrente",
+            "start": "2010",
+            "end": "2024-02-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Diagnostic du MG, remplacé par trouble bipolaire de type II le 01/02/2024.",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Trouble bipolaire de type II",
+            "start": "2024-02-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Diagnostic retenu le 01/02/2024, après réévaluation thymique.",
+            "observation_ids": [
+              "o2",
+              "o3",
+              "o6",
+              "o8",
+              "o10",
+              "o11",
+              "o13",
+              "o14"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode hypomaniaque",
+            "start": "2024-06-15",
+            "end": "2024-07-09",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Depuis une dizaine de jours au 25/06/2024, résolu au 09/07/2024.",
+            "observation_ids": [
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif caractérisé",
+            "start": "2024-11-05",
+            "end": "2025-01-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Depuis environ 3 semaines au 26/11/2024, amélioration nette depuis début janvier 2025.",
+            "observation_ids": [
+              "o10",
+              "o11"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Paroxétine",
+            "start": "2016",
+            "end": "2016",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Quelques mois en 2016.",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Lithium",
+            "start": "2024-03-05",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "LP 400 mg le soir, majoré à 800 mg le 25/06/2024.",
+            "observation_ids": [
+              "o3",
+              "o4",
+              "o6",
+              "o8",
+              "o10",
+              "o11",
+              "o13",
+              "o14"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Quétiapine",
+            "start": "2024-06-25",
+            "end": "2025-05",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "100 mg le soir, diminuée à 50 mg le 10/09/2024, arrêtée en mai 2025.",
+            "observation_ids": [
+              "o6",
+              "o7",
+              "o8",
+              "o10",
+              "o11",
+              "o13"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Lamotrigine",
+            "start": "2024-11-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "25 mg avec titration lente, 100 mg le 14/01/2025, 150 mg depuis fin janvier 2025.",
+            "observation_ids": [
+              "o10",
+              "o11",
+              "o13",
+              "o14"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Interdiction volontaire de jeux (ANJ)",
+            "start": "2024-01-29",
+            "end": "2027-01-29",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Faite le 29/01/2024 pour 3 ans, contournée via le compte du frère en juin 2024.",
+            "observation_ids": [
+              "o2",
+              "o6"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "TCC pour le jeu",
+            "start": "2024-04-16",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Premier entretien le 16/04/2024, 9e séance le 15/04/2025.",
+            "observation_ids": [
+              "o5",
+              "o12"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Thérapie de couple",
+            "start": "2024-08",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Débutée en août 2024 à l'initiative de son épouse.",
+            "observation_ids": [
+              "o8"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Psychoéducation",
+            "start": "2025-07-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Signes d'alerte (sommeil < 6h, achats), plan de crise écrit avec son épouse.",
+            "observation_ids": [
+              "o13"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Orientation assistante sociale (surendettement)",
+            "start": "2024-02-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Orientation ASS, plan de surendettement accepté le 08/10/2024.",
+            "observation_ids": [
+              "o2",
+              "o9"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychiatrique",
+            "start": "2024-01-18",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Suivi régulier par le médecin.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3",
+              "o6",
+              "o7",
+              "o8",
+              "o10",
+              "o11",
+              "o13",
+              "o14"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Découverte par l'épouse de crédits à la consommation",
+            "start": "2023-12",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Découverte par son épouse de crédits contractés à son insu en décembre.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Surendettement",
+            "start": "2024-01-18",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Dettes 38 000 € puis 45 200 €, plan accepté le 08/10/2024, rééchelonnement sur 7 ans.",
+            "observation_ids": [
+              "o1",
+              "o9",
+              "o14"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Arrêt de travail",
+            "start": "2024-06-25",
+            "end": "2024-07-15",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Arrêt 3 semaines, reprise le 15/07/2024.",
+            "observation_ids": [
+              "o6",
+              "o7",
+              "o8"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Arrêt de travail",
+            "start": "2024-11-26",
+            "end": "2024-12-17",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Arrêt 3 semaines.",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Gestion des comptes par l'épouse",
+            "start": "2024-06-25",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Carte bancaire gardée/plafonnée, comptes du foyer gérés par l'épouse.",
+            "observation_ids": [
+              "o6",
+              "o9"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "PMU avec son père le dimanche (collège)",
+            "start": null,
+            "end": null,
+            "start_age": [
+              11,
+              15
+            ],
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Parle du PMU avec son père le dimanche quand il était au collège.",
+            "observation_ids": [
+              "o5"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Confinement (perte de contrôle du jeu)",
+            "start": "2020-03",
+            "end": "2020-05",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Date la perte de contrôle au confinement, seul toute la journée avec son téléphone.",
+            "observation_ids": [
+              "o5"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

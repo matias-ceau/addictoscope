@@ -17,7 +17,7 @@
  * Output: data/processed/frise/[<--out>/]<dossier>.json, scored by
  *   uv run python scripts/score_frise.py
  */
-import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, resolve } from "node:path";
 
 import { DEFAULT_MODEL } from "../src/cloud/client";
@@ -46,6 +46,8 @@ const model = arg("model") ?? DEFAULT_MODEL;
 const policy: CloudPolicy = { kind: "openrouter-zdr", apiKey, model };
 /** --segment-model: a cheaper model for the segmentation only (the frise keeps --model). */
 const segmentModel = arg("segment-model");
+/** --text-only: numbered lines without the page images (text-only models; measures what the images add). */
+const TEXT_ONLY = process.argv.includes("--text-only");
 const segmentPolicy: CloudPolicy = segmentModel ? { ...policy, model: segmentModel } : policy;
 /** Repeated runs go to their own folder: --out=run2 -> data/processed/frise/run2/. */
 const OUT = resolve(FRISE, arg("out") ?? ".");
@@ -116,7 +118,7 @@ async function runDossier(slug: string) {
     if (!manifest.verified || planted > 0) continue; // the guard would refuse the first, a reviewer the second
 
     const images: Record<number, string> = {};
-    for (const p of outPages) images[p.page] = `data:image/png;base64,${Buffer.from(renderPagePng(outDoc, p.page, IMAGE_ZOOM)).toString("base64")}`;
+    if (!TEXT_ONLY) for (const p of outPages) images[p.page] = `data:image/png;base64,${Buffer.from(renderPagePng(outDoc, p.page, IMAGE_ZOOM)).toString("base64")}`;
     const obs = await segmentDocument({ doc: src.id, pages: outPages, images, manifest, policy: segmentPolicy, fetchImpl });
     console.log(`  ${obs.length} observations`);
     observations.push(...obs);
@@ -131,7 +133,7 @@ async function runDossier(slug: string) {
     `  frise: ${timeline.tracks.length} tracks, ${timeline.events.length} events (${fromAge} dated from an age), ` +
       `${timeline.undated.length} undated; birth year ${birthYear === null ? "unknown" : "known"}`,
   );
-  return { dossier: slug, model, ...(segmentModel ? { segmentModel } : {}), ranAt: new Date().toISOString(), review: "automatic detections accepted as they are", docs, observations, timeline };
+  return { dossier: slug, model, ...(segmentModel ? { segmentModel } : {}), ...(TEXT_ONLY ? { textOnly: true } : {}), ranAt: new Date().toISOString(), review: "automatic detections accepted as they are", docs, observations, timeline };
 }
 
 mkdirSync(OUT, { recursive: true });
@@ -141,6 +143,8 @@ const slugs = readdirSync(DOSSIERS, { withFileTypes: true })
   .map((d) => d.name)
   .sort();
 for (const slug of slugs) {
+  // --resume: keep a dossier that already has a frise in this folder.
+  if (process.argv.includes("--resume") && existsSync(resolve(OUT, `${slug}.json`)) && "timeline" in JSON.parse(readFileSync(resolve(OUT, `${slug}.json`), "utf8"))) continue;
   const before = { ...usage };
   rawAnswers = [];
   const t0 = Date.now();

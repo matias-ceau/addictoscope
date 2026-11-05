@@ -2,7 +2,7 @@
  * Build the demonstration bundle (web/public/demo/) from the fictional
  * dossiers and recorded runs of web/scripts/run-frise.ts.
  *
- *   npx vite-node scripts/build-demo.ts -- --runs=age1,bench/anthropic__claude-haiku-5.5
+ *   npx vite-node scripts/build-demo.ts -- --runs=age1,bench/openai__gpt-6-luna,bench/anthropic__claude-haiku-5.5
  *
  * Per dossier: its PDFs, and one recording per run (the model's raw answers
  * in call order, cost, duration), replayed by the app instead of the network.

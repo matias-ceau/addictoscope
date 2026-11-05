@@ -7,6 +7,10 @@ extraction d'événements datés depuis des notes cliniques et mise en forme
 visuelle, permettant de prendre du recul sur une trajectoire de soin plutôt
 que de rester noyé dans les fluctuations événementielles du quotidien.
 
+**Essayer sans rien installer :** <https://matias-ceau.github.io/addictoscope/>
+(démonstration sur des dossiers fictifs ; tout s'exécute dans le navigateur,
+rien n'est envoyé sans une clé saisie par l'utilisateur).
+
 ## Principes
 
 - **UI** : en français.
@@ -127,35 +131,47 @@ relecture, masquage et vérification s'exécutent pour de vrai ; l'analyse IA
 rejoue les réponses enregistrées d'un vrai passage du modèle
 (`web/public/demo/`, construit par `scripts/build-demo.ts`) : la garde, les
 requêtes, les contrôles et la ré-identification tournent, seul le réseau est
-remplacé. Deux enregistrements par dossier (Claude Sonnet 5.5 et Claude
-Haiku 5.5) montrent l'écart de qualité et de coût.
+remplacé. Trois enregistrements par dossier (Claude Sonnet 5.5, GPT-6 Luna
+et Claude Haiku 5.5) montrent l'écart de qualité et de coût.
 
 ```bash
-cd web && npx vite-node scripts/build-demo.ts --runs=age1,bench/anthropic__claude-haiku-5.5
+cd web && npx vite-node scripts/build-demo.ts --runs=age1,bench/openai__gpt-6-luna,bench/anthropic__claude-haiku-5.5
 ```
 
 ### Choix du modèle et coût
 
-Banc d'essai de modèles via OpenRouter, tous en zéro conservation, sur les 14
-dossiers fictifs ([comparaison](data/processed/frise/comparaison-modeles.md)) :
+Banc d'essai de modèles via OpenRouter (05/11/2026), tous en zéro
+conservation : rappel sur les 14 dossiers fictifs
+([comparaison](data/processed/frise/comparaison-modeles.md)), coût moyen
+mesuré sur 6 dossiers réels, et part de la frise de Sonnet retrouvée sur ces
+mêmes dossiers réels (accord, faute de vérité de référence).
 
-| Modèle | Rappel | ≈ coût d'un dossier réel |
-|---|---|---|
-| Claude Sonnet 5.5 (défaut) | 88 % | 1,17 $ |
-| Sonnet pour la frise, Haiku pour le découpage | 86 % | ≈ 0,74 $ |
-| DeepSeek V4.1 Flash | 81 % | 0,33 $ |
-| GPT-5.6 Luna Pro | 78 % | 0,28 $ |
-| Claude Haiku 5.5 | 75 % | 0,07 $ |
-| GPT-5.6 Luna | 74 % | 0,09 $ |
-| Mistral Small | 54 % | 0,04 $ |
-| Gemini 3.5 Flash Lite | 47 % | 0,12 $ |
+| Modèle | Rappel (fictifs) | Coût d'un dossier réel | Frise de Sonnet retrouvée (réels) |
+|---|---|---|---|
+| Claude Sonnet 5.5 (défaut) | 88 % | 1,17 $ | – |
+| Sonnet pour la frise, Haiku pour le découpage | 86 % | ≈ 0,74 $ (estimé) | – |
+| DeepSeek V4.1 Flash | 81 % | 0,19 $ | 24 %, 2 dossiers sur 6 sans réponse |
+| **GPT-6 Luna** | 79 % | **0,05 $** | 45 % |
+| GPT-6 Luna Pro | 77 % | 0,12 $ | 42 % |
+| Claude Haiku 5.5 | 75 % | 0,08 $ | 50 % |
+| MiMo-V2.6-Flash | 75 % | – | sans réponse sur les dossiers longs |
+| GPT-5.6 Luna | 74 % | 0,09 $ | 39 % |
+| Gemma 4 31B | 61 % | 0,02 $ | 27 % |
+| Mistral Small | 54 % | 0,04 $ | 28 % |
+| Gemini 3.5 Flash Lite | 47 % | 0,10 $ | 17 % |
 
-Sur les 6 dossiers réels, Claude Haiku 5.5 coûte 0,50 $ au total contre 7,00 $,
-mais ne retrouve que la moitié des événements de la frise de Sonnet (67 % sur
-les dossiers fictifs) : l'écart se creuse sur les dossiers longs.
+Le texte seul, sans les images des pages, ne change presque rien pour Haiku
+(76 % au lieu de 75 % sur les fictifs, 45 % au lieu de 50 % sur les réels, à
+peine moins cher). Écartés : Kimi K3 (plus cher que Sonnet), Qwen3.8 27B
+(0,95 $ et des réponses vides), MiniMax M3.1 Flash et Ling 3.0 Flash (plus de
+15 minutes par dossier fictif), GLM-5.3 Flash et gpt-oss-120b (frises
+incomplètes sur les vrais dossiers). Qwen3.7 Flash n'a pas de point d'accès en
+zéro conservation. Les modèles qui raisonnent avant de répondre peuvent
+s'emballer sur les dossiers longs (réponse vide au bout de 131 000 jetons) :
+l'application réessaie une fois une réponse vide ou illisible.
 
 ```bash
-cd web && npx vite-node scripts/run-frise.ts --model=<id> [--segment-model=<id>] --out=bench/<id avec __>
+cd web && npx vite-node scripts/run-frise.ts --model=<id> [--segment-model=<id>] [--text-only] [--resume] --out=bench/<id avec __>
 uv run python scripts/compare_models.py
 ```
 

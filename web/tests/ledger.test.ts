@@ -62,6 +62,22 @@ describe("journal of outbound requests", () => {
     expect(ledgerEntries()).toMatchObject([{ status: "refused", destination: null, bytes: 0 }]);
   });
 
+  it("tries once more after an empty answer, and gives up after the second", async () => {
+    const empty = () => new Response(JSON.stringify({ choices: [{ message: { content: "" }, finish_reason: "length" }] }), { status: 200 });
+    const once = vi.fn().mockResolvedValueOnce(empty()).mockResolvedValueOnce(answer({ ok: 1 })) as unknown as typeof fetch;
+    expect(await chatJson(call({ fetchImpl: once }))).toEqual({ ok: 1 });
+    expect(ledgerEntries().map((e) => e.status)).toEqual(["error", "ok"]);
+    const never = vi.fn(async () => empty()) as unknown as typeof fetch;
+    await expect(chatJson(call({ fetchImpl: never }))).rejects.toThrow(/vide.*length/);
+    expect(never).toHaveBeenCalledTimes(2);
+  });
+
+  it("does not retry a refused request", async () => {
+    const fetchImpl = vi.fn(async () => new Response("bad key", { status: 401 })) as unknown as typeof fetch;
+    await expect(chatJson(call({ fetchImpl }))).rejects.toThrow(/401/);
+    expect(fetchImpl).toHaveBeenCalledTimes(1);
+  });
+
   it("records a failed request as an error", async () => {
     const fetchImpl = vi.fn(async () => new Response("rate limited", { status: 429 })) as unknown as typeof fetch;
     await expect(chatJson(call({ fetchImpl }))).rejects.toThrow(/429/);

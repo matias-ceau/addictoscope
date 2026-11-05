@@ -1,0 +1,867 @@
+{
+  "dossier": "bupre-grossesse",
+  "model": "google/gemini-3.1-flash-lite",
+  "ranAt": "2026-11-05T12:18:23.160Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 4,
+      "redactions": {
+        "ETABLISSEMENT": 8,
+        "ADRESSE": 9,
+        "TEL": 5,
+        "PATIENT": 6,
+        "DOSSIER": 4,
+        "NAISSANCE": 5,
+        "IPP": 4,
+        "VILLE": 5,
+        "SOIGNANT": 23,
+        "PROCHE": 12,
+        "NIR": 1,
+        "PERSONNE": 2
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 10
+      },
+      "end": {
+        "page": 0,
+        "line": 24
+      },
+      "date": "2024-01-15",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Consultation trimestrielle de suivi sous BHD, patiente stable, projet de grossesse en cours."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 25
+      },
+      "end": {
+        "page": 0,
+        "line": 30
+      },
+      "date": "2024-03-04",
+      "kind": "infirmière",
+      "authorRole": null,
+      "summary": "Test de grossesse positif réalisé au CSAPA, patiente très angoissée."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 31
+      },
+      "end": {
+        "page": 0,
+        "line": 48
+      },
+      "date": "2024-03-07",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Suivi de grossesse, maintien du traitement par BHD et mise en place d'un accompagnement pluridisciplinaire."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 49
+      },
+      "end": {
+        "page": 0,
+        "line": 63
+      },
+      "date": "2024-03-21",
+      "kind": "social",
+      "authorRole": "Assistante sociale",
+      "summary": "Premier entretien social pour l'ouverture des droits et l'organisation de l'aide à la naissance."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 64
+      },
+      "end": {
+        "page": 1,
+        "line": 15
+      },
+      "date": "2024-04-18",
+      "kind": "sage-femme",
+      "authorRole": "Sage-femme",
+      "summary": "Consultation conjointe CSAPA/maternité, grossesse de 12 SA, projet d'allaitement abordé."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 16
+      },
+      "end": {
+        "page": 1,
+        "line": 29
+      },
+      "date": "2024-05-30",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Consommation ponctuelle d'héroïne rapportée, majoration de la BHD et préparation du staff de périnatalité."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 30
+      },
+      "end": {
+        "page": 1,
+        "line": 40
+      },
+      "date": "2024-07-25",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Suivi de grossesse à 26 SA, ajustement de la posologie de BHD pour signes de manque en fin de journée."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 41
+      },
+      "end": {
+        "page": 1,
+        "line": 44
+      },
+      "date": "2024-08-14",
+      "kind": "Délivrance",
+      "authorRole": null,
+      "summary": "Délivrance exceptionnelle de BHD au CSAPA pour cause de fermeture de pharmacie."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 45
+      },
+      "end": {
+        "page": 1,
+        "line": 54
+      },
+      "date": "2024-10-03",
+      "kind": "sage-femme",
+      "authorRole": "Sage-femme",
+      "summary": "Accouchement à 36 SA, syndrome de sevrage néonatal traité, allaitement en cours."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 55
+      },
+      "end": {
+        "page": 2,
+        "line": 14
+      },
+      "date": "2024-10-22",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Consultation post-partum, fatigue intense et signes dépressifs, maintien du traitement."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 15
+      },
+      "end": {
+        "page": 2,
+        "line": 25
+      },
+      "date": "2024-12-12",
+      "kind": "social",
+      "authorRole": "Assistante sociale",
+      "summary": "Entretien social suite à la séparation du couple, démarches pour RSA et logement."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 26
+      },
+      "end": {
+        "page": 2,
+        "line": 43
+      },
+      "date": "2025-01-23",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Diagnostic d'épisode dépressif post-partum, introduction de sertraline."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 44
+      },
+      "end": {
+        "page": 2,
+        "line": 54
+      },
+      "date": "2025-03-06",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Amélioration clinique sous sertraline, projet de reprise du travail."
+    },
+    {
+      "id": "historique:o14",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 55
+      },
+      "end": {
+        "page": 2,
+        "line": 60
+      },
+      "date": "2025-05-15",
+      "kind": "infirmière",
+      "authorRole": null,
+      "summary": "Consommation ponctuelle d'héroïne rapportée, remise d'un kit naloxone."
+    },
+    {
+      "id": "historique:o15",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 61
+      },
+      "end": {
+        "page": 3,
+        "line": 21
+      },
+      "date": "2025-05-22",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Consultation de suivi psychiatrique."
+    },
+    {
+      "id": "historique:o16",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 22
+      },
+      "end": {
+        "page": 3,
+        "line": 34
+      },
+      "date": "2025-09-09",
+      "kind": "psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Consultation de suivi montrant une reprise du travail, une stabilisation thymique, l'arrêt de l'héroïne et la mise en place d'un sevrage tabagique."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t1",
+        "kind": "substance_use",
+        "label": "Héroïne"
+      },
+      {
+        "id": "t3",
+        "kind": "substance_use",
+        "label": "Cannabis"
+      },
+      {
+        "id": "t4",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif caractérisé du post-partum"
+      },
+      {
+        "id": "t2",
+        "kind": "medication",
+        "label": "Buprénorphine (BHD)"
+      },
+      {
+        "id": "t5",
+        "kind": "medication",
+        "label": "Sertraline"
+      },
+      {
+        "id": "t6",
+        "kind": "life_event",
+        "label": "Séparation"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2014",
+        "end": "2019",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Héroïne sniffée vers 18 ans, puis Skenan.",
+        "observationIds": [
+          "historique:o3"
+        ],
+        "fromAge": {
+          "start": [
+            18,
+            18
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "2019",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "TSO par BHD débuté en 2019.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e3",
+        "trackId": "t1",
+        "start": "2024-05-15",
+        "end": "2024-05-15",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Consommation ponctuelle d'une trace.",
+        "observationIds": [
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e4",
+        "trackId": "t3",
+        "start": "2024-10-08",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Reprise d'un joint le soir pour dormir après la maternité.",
+        "observationIds": [
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e5",
+        "trackId": "t1",
+        "start": "2025-05-10",
+        "end": "2025-05-10",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Reprise ponctuelle d'héroïne, prise unique.",
+        "observationIds": [
+          "historique:o14",
+          "historique:o15"
+        ]
+      },
+      {
+        "id": "e6",
+        "trackId": "t4",
+        "start": "2024-12",
+        "end": "2025-03",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Tableau d'intensité modérée, amélioration sous sertraline.",
+        "observationIds": [
+          "historique:o12",
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e7",
+        "trackId": "t5",
+        "start": "2025-01",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Introduction pour dépression post-partum.",
+        "observationIds": [
+          "historique:o12",
+          "historique:o13",
+          "historique:o15",
+          "historique:o16"
+        ]
+      },
+      {
+        "id": "e8",
+        "trackId": "t6",
+        "start": "2024-12",
+        "end": "2024-12",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Départ du compagnon début décembre.",
+        "observationIds": [
+          "historique:o11"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 13504,
+  "usage": {
+    "calls": 3,
+    "promptTokens": 16218,
+    "completionTokens": 3294,
+    "cost": 0.009
+  },
+  "rawAnswers": [
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 10
+            },
+            "end": {
+              "page": 1,
+              "line": 24
+            },
+            "date": "2024-01-15",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Consultation trimestrielle de suivi sous BHD, patiente stable, projet de grossesse en cours."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 25
+            },
+            "end": {
+              "page": 1,
+              "line": 30
+            },
+            "date": "2024-03-04",
+            "kind": "infirmière",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Test de grossesse positif réalisé au CSAPA, patiente très angoissée."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 31
+            },
+            "end": {
+              "page": 1,
+              "line": 48
+            },
+            "date": "2024-03-07",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Suivi de grossesse, maintien du traitement par BHD et mise en place d'un accompagnement pluridisciplinaire."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 49
+            },
+            "end": {
+              "page": 1,
+              "line": 63
+            },
+            "date": "2024-03-21",
+            "kind": "social",
+            "author_role": "Assistante sociale",
+            "continues_previous": false,
+            "summary": "Premier entretien social pour l'ouverture des droits et l'organisation de l'aide à la naissance."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 64
+            },
+            "end": {
+              "page": 2,
+              "line": 15
+            },
+            "date": "2024-04-18",
+            "kind": "sage-femme",
+            "author_role": "Sage-femme",
+            "continues_previous": false,
+            "summary": "Consultation conjointe CSAPA/maternité, grossesse de 12 SA, projet d'allaitement abordé."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 16
+            },
+            "end": {
+              "page": 2,
+              "line": 29
+            },
+            "date": "2024-05-30",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Consommation ponctuelle d'héroïne rapportée, majoration de la BHD et préparation du staff de périnatalité."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 30
+            },
+            "end": {
+              "page": 2,
+              "line": 40
+            },
+            "date": "2024-07-25",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Suivi de grossesse à 26 SA, ajustement de la posologie de BHD pour signes de manque en fin de journée."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 41
+            },
+            "end": {
+              "page": 2,
+              "line": 44
+            },
+            "date": "2024-08-14",
+            "kind": "Délivrance",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Délivrance exceptionnelle de BHD au CSAPA pour cause de fermeture de pharmacie."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 45
+            },
+            "end": {
+              "page": 2,
+              "line": 54
+            },
+            "date": "2024-10-03",
+            "kind": "sage-femme",
+            "author_role": "Sage-femme",
+            "continues_previous": false,
+            "summary": "Accouchement à 36 SA, syndrome de sevrage néonatal traité, allaitement en cours."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 55
+            },
+            "end": {
+              "page": 3,
+              "line": 14
+            },
+            "date": "2024-10-22",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Consultation post-partum, fatigue intense et signes dépressifs, maintien du traitement."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 15
+            },
+            "end": {
+              "page": 3,
+              "line": 25
+            },
+            "date": "2024-12-12",
+            "kind": "social",
+            "author_role": "Assistante sociale",
+            "continues_previous": false,
+            "summary": "Entretien social suite à la séparation du couple, démarches pour RSA et logement."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 26
+            },
+            "end": {
+              "page": 3,
+              "line": 43
+            },
+            "date": "2025-01-23",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Diagnostic d'épisode dépressif post-partum, introduction de sertraline."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 44
+            },
+            "end": {
+              "page": 3,
+              "line": 54
+            },
+            "date": "2025-03-06",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Amélioration clinique sous sertraline, projet de reprise du travail."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 55
+            },
+            "end": {
+              "page": 3,
+              "line": 60
+            },
+            "date": "2025-05-15",
+            "kind": "infirmière",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Consommation ponctuelle d'héroïne rapportée, remise d'un kit naloxone."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 61
+            },
+            "end": {
+              "page": 3,
+              "line": 65
+            },
+            "date": "2025-05-22",
+            "kind": "psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Consultation de suivi psychiatrique."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 4,
+              "line": 10
+            },
+            "end": {
+              "page": 4,
+              "line": 21
+            },
+            "date": null,
+            "kind": "psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": true,
+            "summary": "Suite de la consultation du 22/05/2025, évoquant une reprise ponctuelle d'héroïne en mai, une stabilisation thymique et le maintien du traitement par BHD et sertraline."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 22
+            },
+            "end": {
+              "page": 4,
+              "line": 34
+            },
+            "date": "2025-09-09",
+            "kind": "psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Consultation de suivi montrant une reprise du travail, une stabilisation thymique, l'arrêt de l'héroïne et la mise en place d'un sevrage tabagique."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Héroïne",
+            "start": null,
+            "end": "2019",
+            "start_age": 18,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Héroïne sniffée vers 18 ans, puis Skenan.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Buprénorphine (BHD)",
+            "start": "2019",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "TSO par BHD débuté en 2019.",
+            "observation_ids": [
+              "o1",
+              "o3"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": null,
+            "end": "2024-03-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "2 à 3 joints le soir pour couper la journée.",
+            "observation_ids": [
+              "o1",
+              "o3"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Héroïne",
+            "start": "2024-05-15",
+            "end": "2024-05-15",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Consommation ponctuelle d'une trace.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2024-10-08",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Reprise d'un joint le soir pour dormir après la maternité.",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Héroïne",
+            "start": "2025-05-10",
+            "end": "2025-05-10",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Reprise ponctuelle d'héroïne, prise unique.",
+            "observation_ids": [
+              "o14",
+              "o15"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif caractérisé du post-partum",
+            "start": "2024-12",
+            "end": "2025-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Tableau d'intensité modérée, amélioration sous sertraline.",
+            "observation_ids": [
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Sertraline",
+            "start": "2025-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Introduction pour dépression post-partum.",
+            "observation_ids": [
+              "o12",
+              "o13",
+              "o15",
+              "o16"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Séparation",
+            "start": "2024-12",
+            "end": "2024-12",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Départ du compagnon début décembre.",
+            "observation_ids": [
+              "o11"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

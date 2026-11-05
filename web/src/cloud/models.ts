@@ -1,7 +1,8 @@
 /**
- * Models offered in the settings, with what was measured on the 14
- * fictional dossiers (data/processed/frise/comparaison-modeles.md): every
- * one is reached through OpenRouter with zero data retention.
+ * Models offered in the settings, with what was measured: recall on the 14
+ * fictional dossiers (data/processed/frise/comparaison-modeles.md), cost as
+ * the mean of six real dossiers (benchmark of 05/11/2026). Every one is
+ * reached through OpenRouter with zero data retention.
  */
 
 export interface ModelInfo {
@@ -11,8 +12,7 @@ export interface ModelInfo {
   maker: string;
   /** Events of verite.json found, over the 14 fictional dossiers. */
   recall?: number;
-  /** Estimated cost of one real dossier, in dollars (proportional to the
-   *  measured cost of the fictional dossiers). */
+  /** Mean cost of one real dossier, in dollars. */
   costPerRealDossier?: number;
   /** Short badge: "Recommandé", "Économique". */
   tag?: string;
@@ -29,29 +29,37 @@ export const MODELS: ModelInfo[] = [
     tag: "Meilleure frise",
   },
   {
-    id: "deepseek/deepseek-v4.1-flash",
-    name: "DeepSeek V4.1 Flash",
-    maker: "DeepSeek",
-    recall: 258 / 320,
-    costPerRealDossier: 0.33,
-    tag: "Compromis",
-    note: "Proche de Sonnet pour 4 fois moins cher (81 % sur deux passages), mais lent et plus d'événements en trop.",
-  },
-  {
-    id: "openai/gpt-5.6-luna-pro",
-    name: "GPT-5.6 Luna Pro",
+    id: "openai/gpt-6-luna",
+    name: "GPT-6 Luna",
     maker: "OpenAI (Azure)",
-    recall: 248 / 320,
-    costPerRealDossier: 0.28,
+    recall: 254 / 320,
+    costPerRealDossier: 0.05,
+    tag: "Économique",
+    note: "Plus de 20 fois moins cher que Sonnet. Sur de vrais dossiers, retrouve un peu moins de la moitié de la frise de Sonnet, comme Haiku.",
   },
   {
     id: "anthropic/claude-haiku-5.5",
     name: "Claude Haiku 5.5",
     maker: "Anthropic",
     recall: 239 / 320,
-    costPerRealDossier: 0.07,
-    tag: "Économique",
-    note: "16 fois moins cher ; fins de période et événements secondaires plus souvent manqués.",
+    costPerRealDossier: 0.08,
+    note: "Le plus proche de Sonnet sur de vrais dossiers (la moitié de sa frise) ; fins de période et événements secondaires plus souvent manqués.",
+  },
+  {
+    id: "openai/gpt-6-luna-pro",
+    name: "GPT-6 Luna Pro",
+    maker: "OpenAI (Azure)",
+    recall: 246 / 320,
+    costPerRealDossier: 0.12,
+    note: "Pas mieux que GPT-6 Luna, plus cher et nettement plus lent.",
+  },
+  {
+    id: "deepseek/deepseek-v4.1-flash",
+    name: "DeepSeek V4.1 Flash",
+    maker: "DeepSeek",
+    recall: 258 / 320,
+    costPerRealDossier: 0.19,
+    note: "Bon sur les dossiers fictifs, peu fiable sur les vrais : sur les dossiers longs, il s'emballe et ne rend pas de réponse.",
   },
   {
     id: "openai/gpt-5.6-luna",
@@ -59,7 +67,7 @@ export const MODELS: ModelInfo[] = [
     maker: "OpenAI (Azure)",
     recall: 238 / 320,
     costPerRealDossier: 0.09,
-    note: "Proche de Haiku ; le meilleur sur les antécédents datés par l'âge (18/20).",
+    note: "Remplacé par GPT-6 Luna, meilleur et moins cher.",
   },
   {
     id: "mistralai/mistral-small-2603",
@@ -67,15 +75,15 @@ export const MODELS: ModelInfo[] = [
     maker: "Mistral AI",
     recall: 173 / 320,
     costPerRealDossier: 0.04,
-    note: "Le moins cher, éditeur européen ; frise nettement moins complète.",
+    note: "Éditeur européen ; frise nettement moins complète.",
   },
   {
-    id: "google/gemini-3.5-flash-lite",
-    name: "Gemini 3.5 Flash Lite",
-    maker: "Google",
-    recall: 150 / 320,
-    costPerRealDossier: 0.12,
-    note: "Le plus rapide ; frise la moins complète.",
+    id: "google/gemma-4-31b-it",
+    name: "Gemma 4 31B",
+    maker: "Google (modèle ouvert)",
+    recall: 195 / 320,
+    costPerRealDossier: 0.02,
+    note: "Le moins cher ; modèle ouvert, hébergeable sur un serveur HDS. Frise nettement moins complète.",
   },
 ];
 

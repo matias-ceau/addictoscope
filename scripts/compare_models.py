@@ -73,6 +73,8 @@ def score_folder(
         out["model"] = run.get("model", out["model"])
         if run.get("segmentModel"):
             out["model"] = f"{out['model']} (découpage : {run['segmentModel']})"
+        if run.get("textOnly"):
+            out["model"] = f"{out['model']} (texte seul, sans images)"
         out["cost"] += run.get("usage", {}).get("cost", 0) or 0
         if run.get("elapsedMs"):
             out["elapsed"].append(run["elapsedMs"] / 1000)

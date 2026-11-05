@@ -29,7 +29,15 @@ export interface JsonCall {
   fetchImpl?: typeof fetch;
 }
 
-export class CloudError extends Error {}
+export class CloudError extends Error {
+  /** An empty or unreadable answer: worth one more try (another provider may serve it). */
+  constructor(message: string, readonly retryable = false) {
+    super(message);
+  }
+}
+
+/** Tries per call when the answer is empty or unreadable. */
+const ATTEMPTS = 2;
 
 export async function chatJson<T>(call: JsonCall): Promise<T> {
   const { text, images } = messageParts(call.messages);
@@ -63,7 +71,18 @@ export async function chatJson<T>(call: JsonCall): Promise<T> {
     ...(policy.kind === "openrouter-zdr" ? openRouterPrivacyFields() : {}),
   };
   const payload = JSON.stringify(body);
-  const entry = openEntry({ ...journal, destination: replayed ? null : new URL(url).host, bytes: new Blob([payload]).size });
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await send<T>(call, url, payload, { ...journal, destination: replayed ? null : new URL(url).host });
+    } catch (err) {
+      if (!(err instanceof CloudError && err.retryable) || replayed || attempt >= ATTEMPTS) throw err;
+    }
+  }
+}
+
+async function send<T>(call: JsonCall, url: string, payload: string, journal: Omit<Parameters<typeof openEntry>[0], "bytes">): Promise<T> {
+  const policy = call.policy as Exclude<CloudPolicy, { kind: "off" }>;
+  const entry = openEntry({ ...journal, bytes: new Blob([payload]).size });
   try {
     const res = await (call.fetchImpl ?? fetch)(url, {
       method: "POST",
@@ -78,12 +97,12 @@ export async function chatJson<T>(call: JsonCall): Promise<T> {
     if (!res.ok) throw new CloudError(`Le modèle a répondu ${res.status} : ${(await res.text()).slice(0, 300)}`);
     const data = await res.json();
     const answer: string | undefined = data?.choices?.[0]?.message?.content;
-    if (!answer) throw new CloudError("Réponse vide du modèle.");
+    if (!answer) throw new CloudError(`Réponse vide du modèle (arrêt : ${data?.choices?.[0]?.finish_reason ?? "inconnu"}).`, true);
     let parsed: T;
     try {
       parsed = JSON.parse(answer.replace(/^```(?:json)?\s*|\s*```$/g, "")) as T;
     } catch {
-      throw new CloudError("Réponse du modèle illisible (JSON invalide).");
+      throw new CloudError("Réponse du modèle illisible (JSON invalide).", true);
     }
     // With the user's own provider key (BYOK), the provider bills upstream_inference_cost.
     const reported = data?.usage?.cost || data?.usage?.cost_details?.upstream_inference_cost;

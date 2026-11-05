@@ -1,0 +1,1162 @@
+{
+  "dossier": "methadone-schizophrenie",
+  "model": "qwen/qwen3.8-27b",
+  "ranAt": "2026-11-05T12:39:04.631Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 4,
+      "redactions": {
+        "ETABLISSEMENT": 12,
+        "ADRESSE": 9,
+        "VILLE": 5,
+        "TEL": 5,
+        "PATIENT": 5,
+        "DOSSIER": 4,
+        "SOIGNANT": 21,
+        "PERSONNE": 7,
+        "NAISSANCE": 5,
+        "IPP": 4
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 19
+      },
+      "end": {
+        "page": 0,
+        "line": 31
+      },
+      "date": "2025-10-07",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Patient stable, gélules de méthadone 80 mg bien tolérées et plus d'héroïne depuis 2023, injection mensuelle d'aripiprazole faite, quelques idées de référence anciennes critiquées ; renouvellement de méthadone 80 mg et ECG de contrôle prévu en décembre."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 32
+      },
+      "end": {
+        "page": 0,
+        "line": 42
+      },
+      "date": "2025-07-08",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Vu avec sa curatrice [PERSONNE_2], le patient demande le passage aux gélules (sirop trop sucré), relais sirop vers gélules à dose égale de 80 mg décidé, ordonnance sécurisée émise et rappel du stockage en coffre."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 43
+      },
+      "end": {
+        "page": 0,
+        "line": 52
+      },
+      "date": "2025-05-13",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Entrée de la mère en EHPAD avec tristesse et isolement du patient, pas de recrudescence délirante, RDV à 2 mois et liaison avec le CMP pour des visites à domicile plus fréquentes."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 53
+      },
+      "end": {
+        "page": 0,
+        "line": 56
+      },
+      "date": "2025-03-11",
+      "kind": "Délivrance",
+      "authorRole": null,
+      "summary": "Délivrance de méthadone sirop 80 mg avec ECG de contrôle à QTc 452 ms transmis au médecin, patient calme sans signe d'imprégnation."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 19
+      },
+      "end": {
+        "page": 1,
+        "line": 31
+      },
+      "date": "2025-01-14",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "ECG à QTc 478 ms, le patient accepte la diminution de la méthadone (90 mg une semaine puis 80 mg), arrêt de l'hydroxyzine, stabilité psychique et réduction du cannabis à 3 joints/j."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 32
+      },
+      "end": {
+        "page": 1,
+        "line": 42
+      },
+      "date": "2024-11-19",
+      "kind": "Entretien social",
+      "authorRole": "assistante sociale",
+      "summary": "Point avec la curatrice [PERSONNE_2] (UDAF) en présence du patient, curatelle renforcée depuis 2018, logement associatif, loyer et factures réglés par la curatelle et demande de renouvellement AAH en cours."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 43
+      },
+      "end": {
+        "page": 1,
+        "line": 54
+      },
+      "date": "2024-11-05",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Sorti d'hospitalisation le 25/10 en programme de soins, relais par aripiprazole LP mensuel, méthadone maintenue à 100 mg, contact meilleur avec critique partielle des idées de persécution et reprise de la délivrance hebdomadaire."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 55
+      },
+      "end": {
+        "page": 2,
+        "line": 20
+      },
+      "date": "2024-09-17",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Entretien téléphonique avec la mère [PERSONNE_3], hospitalisation en psychiatrie sous contrainte depuis le 14/09 après barricadage et idées d'empoisonnement, méthadone poursuivie dans le service, suspension de la délivrance en pharmacie et rappel du service prévu en fin de semaine."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 21
+      },
+      "end": {
+        "page": 2,
+        "line": 32
+      },
+      "date": "2024-06-11",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "ARN VHC indétectable à S12 annonçant la guérison, pas d'héroïne, retards d'injections signalés par le CMP, renouvellement de méthadone 100 mg et rappel de la prévention de la recontamination."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 33
+      },
+      "end": {
+        "page": 2,
+        "line": 36
+      },
+      "date": "2024-03-12",
+      "kind": "Délivrance",
+      "authorRole": null,
+      "summary": "Fin du traitement VHC le 04/03 sans prise oubliée sur les délivrances couplées, délivrance de méthadone sirop 100 mg, patient souriant."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 37
+      },
+      "end": {
+        "page": 2,
+        "line": 43
+      },
+      "date": "2024-01-16",
+      "kind": "Observation somatique de suivi",
+      "authorRole": "médecin",
+      "summary": "Début du traitement de l'hépatite C (glécaprévir/pibrentasvir 8 semaines, génotype 1a, fibroscan F2) prescrit par le Dr [SOIGNANT_6], délivrance hebdomadaire au CSAPA couplée à la méthadone pour sécuriser l'observance."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 44
+      },
+      "end": {
+        "page": 2,
+        "line": 53
+      },
+      "date": "2023-09-19",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Consultation d'hépatologie (fibroscan F2, génotype 1a), le patient accepte enfin le traitement après plusieurs refus, méthadone 100 mg sans manque le soir et RDV à 3 mois."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 19
+      },
+      "end": {
+        "page": 3,
+        "line": 29
+      },
+      "date": "2023-06-13",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Le patient rapporte des plaintes de manque et une prise d'héroïne en mai, conduisant à une majoration de la méthadone à 100 mg/j."
+    },
+    {
+      "id": "historique:o14",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 30
+      },
+      "end": {
+        "page": 3,
+        "line": 33
+      },
+      "date": "2023-03-07",
+      "kind": "Délivrance",
+      "authorRole": null,
+      "summary": "Délivrance hebdomadaire de 90 mg de sirop de méthadone pour un patient sous traitement depuis 2009, avec un ECG montrant un QTc de 445 ms."
+    },
+    {
+      "id": "historique:o15",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 34
+      },
+      "end": {
+        "page": 3,
+        "line": 51
+      },
+      "date": "2023-02-14",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Première consultation d'un patient schizophrène paranoïde sous palipéridone et méthadone, avec consommation de cannabis et VHC chronique, conduisant à une orientation hépatologie."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t2",
+        "kind": "substance_use",
+        "label": "Héroïne"
+      },
+      {
+        "id": "t4",
+        "kind": "substance_use",
+        "label": "Alcool"
+      },
+      {
+        "id": "t5",
+        "kind": "substance_use",
+        "label": "Cannabis"
+      },
+      {
+        "id": "t1",
+        "kind": "psychiatric",
+        "label": "Schizophrénie paranoïde"
+      },
+      {
+        "id": "t6",
+        "kind": "somatic",
+        "label": "Fibroscan F2"
+      },
+      {
+        "id": "t3",
+        "kind": "medication",
+        "label": "Méthadone"
+      },
+      {
+        "id": "t7",
+        "kind": "medication",
+        "label": "Glécaprévir/pibrentasvir"
+      },
+      {
+        "id": "t9",
+        "kind": "medication",
+        "label": "Aripiprazole LP"
+      },
+      {
+        "id": "t13",
+        "kind": "medication",
+        "label": "Méthadone gélules"
+      },
+      {
+        "id": "t8",
+        "kind": "therapeutic_psycho",
+        "label": "Hospitalisation psychiatrique sous contrainte"
+      },
+      {
+        "id": "t10",
+        "kind": "life_event",
+        "label": "Curatelle renforcée"
+      },
+      {
+        "id": "t11",
+        "kind": "life_event",
+        "label": "Renouvellement AAH"
+      },
+      {
+        "id": "t12",
+        "kind": "life_event",
+        "label": "Mère entrée en EHPAD"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2005",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Diagnostiquée à 22 ans",
+        "observationIds": [
+          "historique:o15"
+        ],
+        "fromAge": {
+          "start": [
+            22,
+            22
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "2003",
+        "end": "2009",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "IV de 2003 à 2009 environ",
+        "observationIds": [
+          "historique:o15"
+        ]
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "2010",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Au CSAPA depuis 2010 ; 90 mg sirop en délivrance hebdomadaire",
+        "observationIds": [
+          "historique:o15"
+        ]
+      },
+      {
+        "id": "e4",
+        "trackId": "t4",
+        "start": "2023-03-07",
+        "end": null,
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Ne boit pas d'alcool selon lui",
+        "observationIds": [
+          "historique:o14"
+        ]
+      },
+      {
+        "id": "e5",
+        "trackId": "t2",
+        "start": "2023-05",
+        "end": "2023-05",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Prise unique en mai 2023, sniffée, pour voir si ça calmait",
+        "observationIds": [
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e6",
+        "trackId": "t5",
+        "start": "2023-09-19",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "4 joints/jour",
+        "observationIds": [
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e7",
+        "trackId": "t6",
+        "start": "2023-09-19",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Génotype 1a",
+        "observationIds": [
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e8",
+        "trackId": "t7",
+        "start": "2024-01-08",
+        "end": "2024-03-04",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Traitement de l'hépatite C, 8 semaines",
+        "observationIds": [
+          "historique:o11",
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e9",
+        "trackId": "t8",
+        "start": "2024-09-14",
+        "end": "2024-10-25",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "SDT à la demande de sa mère ; barricadé chez lui, idées de persécution",
+        "observationIds": [
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e10",
+        "trackId": "t9",
+        "start": "2024-10-25",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "400 mg/mois en relais de la palipéridone",
+        "observationIds": [
+          "historique:o7"
+        ]
+      },
+      {
+        "id": "e11",
+        "trackId": "t10",
+        "start": "2018",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Depuis 2018 ; loyer et factures réglés par la curatelle",
+        "observationIds": [
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e12",
+        "trackId": "t11",
+        "start": "2024-11-19",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Demande de renouvellement en cours",
+        "observationIds": [
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e13",
+        "trackId": "t12",
+        "start": "2025-04",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Démence débutante ; le patient lui rend visite 2 fois par semaine",
+        "observationIds": [
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e14",
+        "trackId": "t13",
+        "start": "2025-07-15",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Relais sirop vers gélules à dose égale 80 mg ; délivrance tous les 14 jours",
+        "observationIds": [
+          "historique:o2"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 84367,
+  "usage": {
+    "calls": 3,
+    "promptTokens": 12832,
+    "completionTokens": 12513,
+    "cost": 0.0305
+  },
+  "rawAnswers": [
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 19
+            },
+            "end": {
+              "page": 1,
+              "line": 31
+            },
+            "date": "2025-10-07",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "Patient stable, gélules de méthadone 80 mg bien tolérées et plus d'héroïne depuis 2023, injection mensuelle d'aripiprazole faite, quelques idées de référence anciennes critiquées ; renouvellement de méthadone 80 mg et ECG de contrôle prévu en décembre."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 32
+            },
+            "end": {
+              "page": 1,
+              "line": 42
+            },
+            "date": "2025-07-08",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "Vu avec sa curatrice [PERSONNE_2], le patient demande le passage aux gélules (sirop trop sucré), relais sirop vers gélules à dose égale de 80 mg décidé, ordonnance sécurisée émise et rappel du stockage en coffre."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 43
+            },
+            "end": {
+              "page": 1,
+              "line": 52
+            },
+            "date": "2025-05-13",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "Entrée de la mère en EHPAD avec tristesse et isolement du patient, pas de recrudescence délirante, RDV à 2 mois et liaison avec le CMP pour des visites à domicile plus fréquentes."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 53
+            },
+            "end": {
+              "page": 1,
+              "line": 56
+            },
+            "date": "2025-03-11",
+            "kind": "Délivrance",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Délivrance de méthadone sirop 80 mg avec ECG de contrôle à QTc 452 ms transmis au médecin, patient calme sans signe d'imprégnation."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 19
+            },
+            "end": {
+              "page": 2,
+              "line": 31
+            },
+            "date": "2025-01-14",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "ECG à QTc 478 ms, le patient accepte la diminution de la méthadone (90 mg une semaine puis 80 mg), arrêt de l'hydroxyzine, stabilité psychique et réduction du cannabis à 3 joints/j."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 32
+            },
+            "end": {
+              "page": 2,
+              "line": 42
+            },
+            "date": "2024-11-19",
+            "kind": "Entretien social",
+            "author_role": "assistante sociale",
+            "continues_previous": false,
+            "summary": "Point avec la curatrice [PERSONNE_2] (UDAF) en présence du patient, curatelle renforcée depuis 2018, logement associatif, loyer et factures réglés par la curatelle et demande de renouvellement AAH en cours."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 43
+            },
+            "end": {
+              "page": 2,
+              "line": 54
+            },
+            "date": "2024-11-05",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "Sorti d'hospitalisation le 25/10 en programme de soins, relais par aripiprazole LP mensuel, méthadone maintenue à 100 mg, contact meilleur avec critique partielle des idées de persécution et reprise de la délivrance hebdomadaire."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 55
+            },
+            "end": {
+              "page": 3,
+              "line": 20
+            },
+            "date": "2024-09-17",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "Entretien téléphonique avec la mère [PERSONNE_3], hospitalisation en psychiatrie sous contrainte depuis le 14/09 après barricadage et idées d'empoisonnement, méthadone poursuivie dans le service, suspension de la délivrance en pharmacie et rappel du service prévu en fin de semaine."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 21
+            },
+            "end": {
+              "page": 3,
+              "line": 32
+            },
+            "date": "2024-06-11",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "ARN VHC indétectable à S12 annonçant la guérison, pas d'héroïne, retards d'injections signalés par le CMP, renouvellement de méthadone 100 mg et rappel de la prévention de la recontamination."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 33
+            },
+            "end": {
+              "page": 3,
+              "line": 36
+            },
+            "date": "2024-03-12",
+            "kind": "Délivrance",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Fin du traitement VHC le 04/03 sans prise oubliée sur les délivrances couplées, délivrance de méthadone sirop 100 mg, patient souriant."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 37
+            },
+            "end": {
+              "page": 3,
+              "line": 43
+            },
+            "date": "2024-01-16",
+            "kind": "Observation somatique de suivi",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "Début du traitement de l'hépatite C (glécaprévir/pibrentasvir 8 semaines, génotype 1a, fibroscan F2) prescrit par le Dr [SOIGNANT_6], délivrance hebdomadaire au CSAPA couplée à la méthadone pour sécuriser l'observance."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 44
+            },
+            "end": {
+              "page": 3,
+              "line": 53
+            },
+            "date": "2023-09-19",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "médecin",
+            "continues_previous": false,
+            "summary": "Consultation d'hépatologie (fibroscan F2, génotype 1a), le patient accepte enfin le traitement après plusieurs refus, méthadone 100 mg sans manque le soir et RDV à 3 mois."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 4,
+              "line": 19
+            },
+            "end": {
+              "page": 4,
+              "line": 29
+            },
+            "date": "2023-06-13",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Le patient rapporte des plaintes de manque et une prise d'héroïne en mai, conduisant à une majoration de la méthadone à 100 mg/j."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 30
+            },
+            "end": {
+              "page": 4,
+              "line": 33
+            },
+            "date": "2023-03-07",
+            "kind": "Délivrance",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Délivrance hebdomadaire de 90 mg de sirop de méthadone pour un patient sous traitement depuis 2009, avec un ECG montrant un QTc de 445 ms."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 34
+            },
+            "end": {
+              "page": 4,
+              "line": 51
+            },
+            "date": "2023-02-14",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Première consultation d'un patient schizophrène paranoïde sous palipéridone et méthadone, avec consommation de cannabis et VHC chronique, conduisant à une orientation hépatologie."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "psychiatric",
+            "label": "Schizophrénie paranoïde",
+            "start": null,
+            "end": null,
+            "start_age": 22,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Diagnostiquée à 22 ans",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisations psychiatriques",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "4 hospitalisations dont 2 sous contrainte",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Palipéridone LP",
+            "start": null,
+            "end": "2024-08-06",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "100 mg/mois en injection au CMP ; dernière injection le 06/08/2024",
+            "observation_ids": [
+              "o1",
+              "o9"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi CMP",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Suivi régulier au CMP",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Héroïne",
+            "start": "2003",
+            "end": "2009",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "IV de 2003 à 2009 environ",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Méthadone",
+            "start": "2010",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Au CSAPA depuis 2010 ; 90 mg sirop en délivrance hebdomadaire",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "6 joints/jour pour calmer les voix",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "30 cigarettes/jour",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Rare",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "VHC chronique",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Connu, jamais traité",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Curatelle renforcée",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "UDAF",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Logement en appartement associatif",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Vit seul ; sa mère passe tous les jours",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2023-03-07",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Ne boit pas d'alcool selon lui",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Héroïne",
+            "start": "2023-05",
+            "end": "2023-05",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Prise unique en mai 2023, sniffée, pour voir si ça calmait",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2023-09-19",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "4 joints/jour",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Fibroscan F2",
+            "start": "2023-09-19",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Génotype 1a",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Glécaprévir/pibrentasvir",
+            "start": "2024-01-08",
+            "end": "2024-03-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Traitement de l'hépatite C, 8 semaines",
+            "observation_ids": [
+              "o5",
+              "o6"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "VHC chronique",
+            "start": null,
+            "end": "2024-06-11",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Guérison ; ARN VHC indétectable à S12 post-traitement",
+            "observation_ids": [
+              "o7"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation psychiatrique sous contrainte",
+            "start": "2024-09-14",
+            "end": "2024-10-25",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "SDT à la demande de sa mère ; barricadé chez lui, idées de persécution",
+            "observation_ids": [
+              "o8"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Aripiprazole LP",
+            "start": "2024-10-25",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "400 mg/mois en relais de la palipéridone",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Curatelle renforcée",
+            "start": "2018",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Depuis 2018 ; loyer et factures réglés par la curatelle",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Renouvellement AAH",
+            "start": "2024-11-19",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Demande de renouvellement en cours",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Hydroxyzine",
+            "start": null,
+            "end": "2025-01-14",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Prise de temps en temps ; arrêtée",
+            "observation_ids": [
+              "o11"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Mère entrée en EHPAD",
+            "start": "2025-04",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Démence débutante ; le patient lui rend visite 2 fois par semaine",
+            "observation_ids": [
+              "o13"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Méthadone gélules",
+            "start": "2025-07-15",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Relais sirop vers gélules à dose égale 80 mg ; délivrance tous les 14 jours",
+            "observation_ids": [
+              "o14"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

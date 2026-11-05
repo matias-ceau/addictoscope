@@ -70,8 +70,8 @@ export function SettingsDialog(props: { policy: CloudPolicy; onSave: (p: CloudPo
                         {m.tag && <span className="model-tag">{m.tag}</span>}
                       </strong>
                       <span className="model-stats">
-                        {m.recall !== undefined && <span>Rappel {Math.round(m.recall * 100)} %</span>}
-                        {m.costPerRealDossier !== undefined && <span>≈ {m.costPerRealDossier.toFixed(2)} $ / dossier réel</span>}
+                        {m.recall !== undefined && <span title="Part des événements attendus retrouvés sur les 14 dossiers fictifs">{Math.round(m.recall * 100)} % des événements (dossiers fictifs)</span>}
+                        {m.costPerRealDossier !== undefined && <span>{m.costPerRealDossier.toFixed(2)} $ / dossier réel (moyenne mesurée)</span>}
                       </span>
                       {m.note && <span className="muted small">{m.note}</span>}
                     </span>

@@ -24,6 +24,8 @@ export function assertSendable(manifest: Manifest | undefined, policy: CloudPoli
  * data retention that do not train on prompts.
  */
 export function openRouterPrivacyFields() {
+  // Not require_parameters: it leaves no ZDR endpoint for some models (404).
+  // An empty or unreadable answer is tried once more instead (client.ts).
   return { provider: { zdr: true, data_collection: "deny" as const } };
 }
 

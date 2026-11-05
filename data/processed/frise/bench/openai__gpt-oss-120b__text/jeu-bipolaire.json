@@ -1,0 +1,981 @@
+{
+  "dossier": "jeu-bipolaire",
+  "model": "openai/gpt-oss-120b",
+  "textOnly": true,
+  "ranAt": "2026-11-05T12:51:45.854Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 4,
+      "redactions": {
+        "ETABLISSEMENT": 12,
+        "ADRESSE": 9,
+        "VILLE": 5,
+        "TEL": 5,
+        "PATIENT": 7,
+        "DOSSIER": 4,
+        "SOIGNANT": 19,
+        "PERSONNE": 5,
+        "NAISSANCE": 4,
+        "IPP": 4
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 15
+      },
+      "end": {
+        "page": 0,
+        "line": 24
+      },
+      "date": "2025-09-23",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Le patient est euthymique depuis le printemps, sans paris ni jeux de grattage, traitement lithium 800 mg et lamotrigine 150 mg."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 25
+      },
+      "end": {
+        "page": 0,
+        "line": 37
+      },
+      "date": "2025-07-01",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Stabilité clinique, Quétiapine arrêtée, pas de signe d'hypomanie, consommation de bières limitée, traitement lamotrigine 150 mg et lithium 800 mg, psychoéducation et RDV fin septembre."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 38
+      },
+      "end": {
+        "page": 0,
+        "line": 44
+      },
+      "date": "2025-04-15",
+      "kind": "Entretien psychologique",
+      "authorRole": "Psychologue",
+      "summary": "Neuvième séance, le patient a acheté des jeux de grattage en mars, travaille sur l'illusion de contrôle et décide d'en parler à son épouse."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 45
+      },
+      "end": {
+        "page": 0,
+        "line": 55
+      },
+      "date": "2025-01-14",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Amélioration thymique, reprise d'activités, sommeil 7‑8 h, lamotrigine 100 mg puis 150 mg, lithium 800 mg, Quétiapine 50 mg, RDV 3 mois."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 15
+      },
+      "end": {
+        "page": 1,
+        "line": 28
+      },
+      "date": "2024-11-26",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Dépression caractérisée depuis 3 semaines, aboulie, hypersomnie, idées de mort, lithiémie 0,74, observance confirmée, hospitalisation non retenue, introduction lamotrigine 25 mg."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 29
+      },
+      "end": {
+        "page": 1,
+        "line": 37
+      },
+      "date": "2024-10-15",
+      "kind": "Entretien social",
+      "authorRole": "Assistante sociale",
+      "summary": "Commission de surendettement acceptée, rééchelonnement 7 ans, dettes 45 200 €, épouse gère les comptes, carte bancaire plafonnée."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 38
+      },
+      "end": {
+        "page": 1,
+        "line": 47
+      },
+      "date": "2024-09-10",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Euthymique, reprise du travail, lithiémie 0,75, Quétiapine 50 mg, thérapie de couple, pas de paris depuis fin juin, traitement lithium 800 mg + Quétiapine 50 mg, RDV novembre."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 48
+      },
+      "end": {
+        "page": 1,
+        "line": 57
+      },
+      "date": "2024-07-09",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Entretien téléphonique, plus calme, sommeil 7 h, plus de paris depuis 30/06, épouse confirme pari le 5 juillet, accepte de bloquer compte du frère, Quétiapine 100 mg, reprise du travail prévue, RDV début septembre."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 15
+      },
+      "end": {
+        "page": 2,
+        "line": 27
+      },
+      "date": "2024-06-25",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Épisode hypomaniaque, sommeil 4 h, logorrhée, achats, reprise des paris via compte du frère, perte ~2 500 €, lithiémie 0,58 sous‑dosée, lithium majoré à 800 mg, Quétiapine 100 mg, arrêt de travail 3 semaines, épouse garde carte bancaire."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 29
+      },
+      "end": {
+        "page": 2,
+        "line": 36
+      },
+      "date": "2024-04-16",
+      "kind": "Entretien psychologique",
+      "authorRole": "Psychologue",
+      "summary": "Premier entretien de TCC pour le jeu, exploration des antécédents, identification d'illusions de contrôle, proposition de journal des envies."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 37
+      },
+      "end": {
+        "page": 2,
+        "line": 42
+      },
+      "date": "2024-03-26",
+      "kind": "Entretien infirmier",
+      "authorRole": "IDE",
+      "summary": "Lithiémie à J10 0,52 mmol/L, bonne tolérance, rappel d'hydratation, éviter AINS, surveillance surdosage, information transmise au médecin."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 43
+      },
+      "end": {
+        "page": 2,
+        "line": 51
+      },
+      "date": "2024-03-05",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Bilan pré‑lithium normal, thymie légèrement abaissée, ruminations sur dettes, introduction lithium 400 mg le soir, RDV 1 mois."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 52
+      },
+      "end": {
+        "page": 3,
+        "line": 43
+      },
+      "date": "2024-02-01",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Stabilité avec l'épouse, observations cliniques notées, suivi en cours."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t2",
+        "kind": "substance_use",
+        "label": "Vapotage"
+      },
+      {
+        "id": "t4",
+        "kind": "psychiatric",
+        "label": "Trouble bipolaire de type II"
+      },
+      {
+        "id": "t5",
+        "kind": "psychiatric",
+        "label": "Épisode hypomanique"
+      },
+      {
+        "id": "t6",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif"
+      },
+      {
+        "id": "t7",
+        "kind": "medication",
+        "label": "Lithium"
+      },
+      {
+        "id": "t8",
+        "kind": "medication",
+        "label": "Quetiapine"
+      },
+      {
+        "id": "t9",
+        "kind": "medication",
+        "label": "Lamotrigine"
+      },
+      {
+        "id": "t10",
+        "kind": "therapeutic_psycho",
+        "label": "Thérapie cognitivo‑comportementale pour le jeu"
+      },
+      {
+        "id": "t11",
+        "kind": "therapeutic_psycho",
+        "label": "Thérapie de couple"
+      },
+      {
+        "id": "t12",
+        "kind": "therapeutic_psycho",
+        "label": "Psychoéducation – plan de crise"
+      },
+      {
+        "id": "t1",
+        "kind": "life_event",
+        "label": "Interdiction volontaire de jeux (ANJ)"
+      },
+      {
+        "id": "t3",
+        "kind": "life_event",
+        "label": "Début des paris sportifs"
+      },
+      {
+        "id": "t13",
+        "kind": "life_event",
+        "label": "Plan de surendettement accepté"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2024-01-29",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Interdiction volontaire de jeux faite auprès de l'ANJ le 29/01/2024, durée 3 ans",
+        "observationIds": [
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "2019",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Vapotage depuis 2019, ancien fumeur 15 PA",
+        "observationIds": [
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "2018",
+        "end": "2025-03",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Pari sportif en ligne depuis la Coupe du monde 2018, quotidien depuis 2022, arrêt en mars 2025",
+        "observationIds": [
+          "historique:o13",
+          "historique:o10",
+          "historique:o9",
+          "historique:o8",
+          "historique:o7",
+          "historique:o4",
+          "historique:o3",
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e4",
+        "trackId": "t4",
+        "start": "2024-02-01",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Diagnostic de trouble bipolaire de type II retenu",
+        "observationIds": [
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e5",
+        "trackId": "t5",
+        "start": "2024-06-25",
+        "end": "2024-07-09",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hypomanie avec sommeil 4h, logorrhée, achats, reprise des paris",
+        "observationIds": [
+          "historique:o9",
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e6",
+        "trackId": "t6",
+        "start": "2024-11-26",
+        "end": "2025-01-14",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Dépression caractérisée, aboulie, hypersomnie, idées de mort passives",
+        "observationIds": [
+          "historique:o5",
+          "historique:o4"
+        ]
+      },
+      {
+        "id": "e7",
+        "trackId": "t7",
+        "start": "2024-03-05",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Lithium introduit 400 mg puis augmenté à 800 mg, dosage stable jusqu’à la dernière observation",
+        "observationIds": [
+          "historique:o12",
+          "historique:o11",
+          "historique:o9",
+          "historique:o7",
+          "historique:o5",
+          "historique:o4",
+          "historique:o2",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e8",
+        "trackId": "t8",
+        "start": "2024-06-25",
+        "end": "2025-05",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Quetiapine 100 mg puis 50 mg, arrêt en mai 2025 sans rebond d’insomnie",
+        "observationIds": [
+          "historique:o9",
+          "historique:o8",
+          "historique:o7",
+          "historique:o5",
+          "historique:o4",
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e9",
+        "trackId": "t9",
+        "start": "2024-11-26",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Lamotrigine introduite 25 mg, titration à 150 mg, bien tolérée",
+        "observationIds": [
+          "historique:o5",
+          "historique:o4",
+          "historique:o2",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e10",
+        "trackId": "t10",
+        "start": "2024-04-16",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Première séance de TCC pour le jeu, suivi continu avec séances ultérieures",
+        "observationIds": [
+          "historique:o10",
+          "historique:o3",
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e11",
+        "trackId": "t11",
+        "start": "2024-08-01",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Thérapie de couple débutée en août à l’initiative de l’épouse",
+        "observationIds": [
+          "historique:o7"
+        ]
+      },
+      {
+        "id": "e12",
+        "trackId": "t12",
+        "start": "2025-07-01",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Psychoéducation, plan de crise écrit avec l’épouse, rappel des signes d’alerte",
+        "observationIds": [
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e13",
+        "trackId": "t13",
+        "start": "2024-10-08",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Commission de surendettement accepte le plan de rééchelonnement sur 7 ans",
+        "observationIds": [
+          "historique:o6"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 22493,
+  "usage": {
+    "calls": 3,
+    "promptTokens": 9303,
+    "completionTokens": 9256,
+    "cost": 0.0069
+  },
+  "rawAnswers": [
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 15
+            },
+            "end": {
+              "page": 1,
+              "line": 24
+            },
+            "date": "2025-09-23",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Le patient est euthymique depuis le printemps, sans paris ni jeux de grattage, traitement lithium 800 mg et lamotrigine 150 mg."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 25
+            },
+            "end": {
+              "page": 1,
+              "line": 37
+            },
+            "date": "2025-07-01",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Stabilité clinique, Quétiapine arrêtée, pas de signe d'hypomanie, consommation de bières limitée, traitement lamotrigine 150 mg et lithium 800 mg, psychoéducation et RDV fin septembre."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 38
+            },
+            "end": {
+              "page": 1,
+              "line": 44
+            },
+            "date": "2025-04-15",
+            "kind": "Entretien psychologique",
+            "author_role": "Psychologue",
+            "continues_previous": false,
+            "summary": "Neuvième séance, le patient a acheté des jeux de grattage en mars, travaille sur l'illusion de contrôle et décide d'en parler à son épouse."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 45
+            },
+            "end": {
+              "page": 1,
+              "line": 55
+            },
+            "date": "2025-01-14",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Amélioration thymique, reprise d'activités, sommeil 7‑8 h, lamotrigine 100 mg puis 150 mg, lithium 800 mg, Quétiapine 50 mg, RDV 3 mois."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 15
+            },
+            "end": {
+              "page": 2,
+              "line": 28
+            },
+            "date": "2024-11-26",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Dépression caractérisée depuis 3 semaines, aboulie, hypersomnie, idées de mort, lithiémie 0,74, observance confirmée, hospitalisation non retenue, introduction lamotrigine 25 mg."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 29
+            },
+            "end": {
+              "page": 2,
+              "line": 37
+            },
+            "date": "2024-10-15",
+            "kind": "Entretien social",
+            "author_role": "Assistante sociale",
+            "continues_previous": false,
+            "summary": "Commission de surendettement acceptée, rééchelonnement 7 ans, dettes 45 200 €, épouse gère les comptes, carte bancaire plafonnée."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 38
+            },
+            "end": {
+              "page": 2,
+              "line": 47
+            },
+            "date": "2024-09-10",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Euthymique, reprise du travail, lithiémie 0,75, Quétiapine 50 mg, thérapie de couple, pas de paris depuis fin juin, traitement lithium 800 mg + Quétiapine 50 mg, RDV novembre."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 48
+            },
+            "end": {
+              "page": 2,
+              "line": 57
+            },
+            "date": "2024-07-09",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Entretien téléphonique, plus calme, sommeil 7 h, plus de paris depuis 30/06, épouse confirme pari le 5 juillet, accepte de bloquer compte du frère, Quétiapine 100 mg, reprise du travail prévue, RDV début septembre."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 15
+            },
+            "end": {
+              "page": 3,
+              "line": 27
+            },
+            "date": "2024-06-25",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Épisode hypomaniaque, sommeil 4 h, logorrhée, achats, reprise des paris via compte du frère, perte ~2 500 €, lithiémie 0,58 sous‑dosée, lithium majoré à 800 mg, Quétiapine 100 mg, arrêt de travail 3 semaines, épouse garde carte bancaire."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 29
+            },
+            "end": {
+              "page": 3,
+              "line": 36
+            },
+            "date": "2024-04-16",
+            "kind": "Entretien psychologique",
+            "author_role": "Psychologue",
+            "continues_previous": false,
+            "summary": "Premier entretien de TCC pour le jeu, exploration des antécédents, identification d'illusions de contrôle, proposition de journal des envies."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 37
+            },
+            "end": {
+              "page": 3,
+              "line": 42
+            },
+            "date": "2024-03-26",
+            "kind": "Entretien infirmier",
+            "author_role": "IDE",
+            "continues_previous": false,
+            "summary": "Lithiémie à J10 0,52 mmol/L, bonne tolérance, rappel d'hydratation, éviter AINS, surveillance surdosage, information transmise au médecin."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 43
+            },
+            "end": {
+              "page": 3,
+              "line": 51
+            },
+            "date": "2024-03-05",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Bilan pré‑lithium normal, thymie légèrement abaissée, ruminations sur dettes, introduction lithium 400 mg le soir, RDV 1 mois."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 52
+            },
+            "end": {
+              "page": 3,
+              "line": 56
+            },
+            "date": "2024-02-01",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Stabilité avec l'épouse, observations cliniques notées, suivi en cours."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 4,
+              "line": 15
+            },
+            "end": {
+              "page": 4,
+              "line": 43
+            },
+            "date": "2024-01-18",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": true,
+            "summary": "Le patient a été informé de l’interdiction volontaire de jeux auprès de l’ANJ le 29/01, présente un trouble bipolaire de type II, des dettes d’environ 38 000 €, et les conclusions recommandent l’interdiction de jeux, un rendez‑vous avec son épouse et la poursuite de l’exploration thymique."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "life_event",
+            "label": "Interdiction volontaire de jeux (ANJ)",
+            "start": "2024-01-29",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Interdiction volontaire de jeux faite auprès de l'ANJ le 29/01/2024, durée 3 ans",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Vapotage",
+            "start": "2019",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Vapotage depuis 2019, ancien fumeur 15 PA",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Consommation de 3 à 4 bières pendant les matchs",
+            "observation_ids": [
+              "o1",
+              "o12"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Début des paris sportifs",
+            "start": "2018",
+            "end": "2025-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Pari sportif en ligne depuis la Coupe du monde 2018, quotidien depuis 2022, arrêt en mars 2025",
+            "observation_ids": [
+              "o1",
+              "o4",
+              "o5",
+              "o6",
+              "o7",
+              "o10",
+              "o11",
+              "o12"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Trouble bipolaire de type II",
+            "start": "2024-02-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Diagnostic de trouble bipolaire de type II retenu",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode hypomanique",
+            "start": "2024-06-25",
+            "end": "2024-07-09",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hypomanie avec sommeil 4h, logorrhée, achats, reprise des paris",
+            "observation_ids": [
+              "o5",
+              "o6"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif",
+            "start": "2024-11-26",
+            "end": "2025-01-14",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Dépression caractérisée, aboulie, hypersomnie, idées de mort passives",
+            "observation_ids": [
+              "o9",
+              "o10"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Lithium",
+            "start": "2024-03-05",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Lithium introduit 400 mg puis augmenté à 800 mg, dosage stable jusqu’à la dernière observation",
+            "observation_ids": [
+              "o2",
+              "o3",
+              "o5",
+              "o7",
+              "o9",
+              "o10",
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Quetiapine",
+            "start": "2024-06-25",
+            "end": "2025-05",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Quetiapine 100 mg puis 50 mg, arrêt en mai 2025 sans rebond d’insomnie",
+            "observation_ids": [
+              "o5",
+              "o6",
+              "o7",
+              "o9",
+              "o10",
+              "o12"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Lamotrigine",
+            "start": "2024-11-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Lamotrigine introduite 25 mg, titration à 150 mg, bien tolérée",
+            "observation_ids": [
+              "o9",
+              "o10",
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Thérapie cognitivo‑comportementale pour le jeu",
+            "start": "2024-04-16",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Première séance de TCC pour le jeu, suivi continu avec séances ultérieures",
+            "observation_ids": [
+              "o4",
+              "o11",
+              "o12"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Thérapie de couple",
+            "start": "2024-08-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Thérapie de couple débutée en août à l’initiative de l’épouse",
+            "observation_ids": [
+              "o7"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Psychoéducation – plan de crise",
+            "start": "2025-07-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Psychoéducation, plan de crise écrit avec l’épouse, rappel des signes d’alerte",
+            "observation_ids": [
+              "o12"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Plan de surendettement accepté",
+            "start": "2024-10-08",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Commission de surendettement accepte le plan de rééchelonnement sur 7 ans",
+            "observation_ids": [
+              "o8"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

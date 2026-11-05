@@ -1,0 +1,467 @@
+{
+  "dossier": "antalgiques-opioides",
+  "model": "deepseek/deepseek-v4.1-flash",
+  "textOnly": true,
+  "ranAt": "2026-11-05T13:31:49.785Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 4,
+      "redactions": {
+        "ETABLISSEMENT": 12,
+        "ADRESSE": 9,
+        "VILLE": 5,
+        "TEL": 5,
+        "PATIENT": 5,
+        "DOSSIER": 4,
+        "SOIGNANT": 18,
+        "PERSONNE": 4,
+        "NAISSANCE": 5,
+        "IPP": 4,
+        "PROCHE": 2
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 19
+      },
+      "end": {
+        "page": 3,
+        "line": 32
+      },
+      "date": "2025-10-28",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "La patiente est vue pour le J14 de la première injection de buprénorphine LP mensuelle, présentant une bonne tolérance et une EVA stable à 4."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t3",
+        "kind": "psychiatric",
+        "label": "Amélioration de l'humeur et de la fonction"
+      },
+      {
+        "id": "t1",
+        "kind": "medication",
+        "label": "Buprénorphine LP 96 mg"
+      },
+      {
+        "id": "t2",
+        "kind": "medication",
+        "label": "BHD 14 mg/j et Duloxétine 60 mg"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2024-10-14",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Première injection mensuelle de buprénorphine LP.",
+        "observationIds": [
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "2024-10-28",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Traitement de maintien et de soutien.",
+        "observationIds": [
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "2025-10-28",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Thymie meilleure, marche 30 minutes par jour, piscine 1 fois par semaine.",
+        "observationIds": [
+          "historique:o1"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 98452,
+  "usage": {
+    "calls": 3,
+    "promptTokens": 8786,
+    "completionTokens": 11931,
+    "cost": 0.0067
+  },
+  "rawAnswers": [
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 19
+            },
+            "end": {
+              "page": 1,
+              "line": 25
+            },
+            "date": "2025-10-28",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "La patiente est vue pour le J14 de la première injection de buprénorphine LP mensuelle, présentant une bonne tolérance et une EVA stable à 4."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 4,
+              "line": 19
+            },
+            "end": {
+              "page": 4,
+              "line": 32
+            },
+            "date": "2025-10-28",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "psychiatre",
+            "continues_previous": true,
+            "summary": "Suite de l'observation psychiatrique de suivi : trouble de l'usage sévère des opioïdes sur douleur chronique, avec oxycodone détournée, proposition et accord d'un relais par buprénorphine, induction prévue le 30/09 avec l'IDE et prescription d'opioïdes recentrée au CSAPA."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "somatic",
+            "label": "Lombalgie chronique post-arthrodèse L4-L5 et syndrome fibromyalgique",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Antécédents médicaux mentionnés lors de l'évaluation initiale.",
+            "observation_ids": [
+              "o7"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes (Tramadol, Oxycodone)",
+            "start": "2020",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Usage de Tramadol depuis 2020, puis Oxycodone depuis la chirurgie (2021).",
+            "observation_ids": [
+              "o7"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes (Oxycodone)",
+            "start": "2021",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Usage d'Oxycodone LP 40mg x 2 + LI 10mg jusqu'à 4/j, complété par d'autres prescriptions.",
+            "observation_ids": [
+              "o7"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Évaluation initiale et proposition de relais par buprénorphine",
+            "start": "2024-09-11",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Patiente vue en premier entretien suite à un passage aux urgences.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes (Oxycodone)",
+            "start": "2024-04",
+            "end": "2024-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Reprise d'oxycodone mi-avril pendant 3 jours lors d'une poussée douloureuse.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "BHD 16 mg/j",
+            "start": "2024-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Diminuée à 14 mg/j à sa demande depuis le 01/06.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif caractérisé d'intensité moyenne",
+            "start": "Ancien (depuis le licenciement)",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Thymie basse, anhédonie, fatigue, culpabilité. Épisodes dépressifs mentionnés.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Duloxétine 30 mg puis 60 mg",
+            "start": "2024-09",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Prise pour douleur et thymie.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Licenciement",
+            "start": "2023-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Perte d'emploi, source de troubles thymiques.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Entretien social",
+            "start": "2024-11-05",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Suivi des démarches sociales et financières.",
+            "observation_ids": [
+              "o5"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "BHD 16 mg/j",
+            "start": "2024-09-11",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Utilisation de BHD 16 mg/j en 2 prises pour couverture antalgique.",
+            "observation_ids": [
+              "o5"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes (Tramadol)",
+            "start": "2024-09-11",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Tentative de prise de 2 comprimés de Tramadol sans effet.",
+            "observation_ids": [
+              "o5"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Induction de buprénorphine",
+            "start": "2024-09-30",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Début du traitement de relais par buprénorphine.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes (Oxycodone, Tramadol)",
+            "start": "2024-09-30",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Tests urinaires positifs pour oxycodone et tramadol.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Son part pour ses études",
+            "start": "2024-09-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Événement déclencheur de tristesse attendue.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Thymie basse et anhédonie",
+            "start": "2024-09-11",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Description de la situation psychique actuelle.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Buprénorphine LP 96 mg",
+            "start": "2024-10-14",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Première injection mensuelle de buprénorphine LP.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "BHD 14 mg/j et Duloxétine 60 mg",
+            "start": "2024-10-28",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Traitement de maintien et de soutien.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "10 cig/j.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Amélioration de l'humeur et de la fonction",
+            "start": "2025-10-28",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Thymie meilleure, marche 30 minutes par jour, piscine 1 fois par semaine.",
+            "observation_ids": [
+              "o1"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

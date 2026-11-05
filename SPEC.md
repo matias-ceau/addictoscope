@@ -18,9 +18,9 @@ instant ce qui reste sur le poste et ce qui part vers un modèle en ligne.
 - Analyse IA : par défaut, **réponses enregistrées** d'un vrai passage du
   modèle (aucun envoi). Le code de l'application tourne en entier (garde
   `assertSendable`, construction de la requête, contrôles, calcul des âges,
-  ré-identification) ; seul `fetch` est remplacé. Deux enregistrements par
-  dossier : le modèle par défaut et le modèle économique, pour comparer les
-  frises et les coûts. « En direct » reste possible si l'IA en ligne est
+  ré-identification) ; seul `fetch` est remplacé. Trois enregistrements par
+  dossier : le modèle par défaut et deux modèles économiques, pour comparer
+  les frises et les coûts. « En direct » reste possible si l'IA en ligne est
   configurée.
 - L'analyse de démonstration demande que tous les documents du dossier soient
   vérifiés (les réponses enregistrées portent sur le dossier entier).
