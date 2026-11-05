@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { friseHtml } from "../app/exportFrise";
 import { reidentifyTimeline, type KeyTable } from "../core/reidentify";
 import { formatAge } from "../notebook/age";
 import {
@@ -71,7 +72,13 @@ export function Frise(props: {
   /** Label -> real value, from this session's detections (never sent). */
   keyTable?: KeyTable;
   /** `real`: open the original page rather than the pseudonymized one. */
-  onOpenSource: (observationId: string, real: boolean) => void;
+  onOpenSource?: (observationId: string, real: boolean) => void;
+  /** Save the analysis (pseudonymized) to reopen it later. */
+  onSave?: () => void;
+  /** Reopened analysis without its table: load the .axkey. */
+  onImportKey?: (files: File[]) => void;
+  /** Where the analysis came from, e.g. "Claude Sonnet 5.5, réponses rejouées". */
+  source?: string;
 }) {
   const hasKey = (props.keyTable?.size ?? 0) > 0;
   const [names, setNames] = useState<"real" | "pseudo">(hasKey ? "real" : "pseudo");
@@ -80,7 +87,7 @@ export function Frise(props: {
     () => (real ? reidentifyTimeline(props.timeline, props.keyTable!) : withUndated(props.timeline)),
     [real, props.timeline, props.keyTable],
   );
-  const openSource = (id: string) => props.onOpenSource(id, real);
+  const openSource = (id: string) => props.onOpenSource?.(id, real);
   const wrap = useRef<HTMLDivElement>(null);
   const chart = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(900);
@@ -100,18 +107,35 @@ export function Frise(props: {
     [props.observations],
   );
 
-  const { min, max } = useMemo(() => {
+  /** First and last observation dates: the follow-up period. */
+  const followUp = useMemo(() => {
+    const dates = props.observations.map((o) => o.date).filter((d): d is string => Boolean(d)).sort();
+    return dates.length ? { from: dateStart(dates[0]), to: dateEnd(dates.at(-1)!) } : null;
+  }, [props.observations]);
+
+  const whole = useMemo(() => {
     const starts = timeline.events.map((e) => dateStart(e.start));
     const ends = timeline.events.map((e) => dateEnd(e.end ?? e.start));
     if (lastObservation) ends.push(dateEnd(lastObservation));
-    const lo = Math.min(...starts);
-    const hi = Math.max(...ends);
-    const pad = Math.max((hi - lo) * 0.03, 15 * 864e5);
-    return { min: lo - pad, max: hi + pad };
+    return { lo: Math.min(...starts), hi: Math.max(...ends) };
   }, [timeline, lastObservation]);
 
+  // A life-long history (antecedents from childhood) squeezes a year of
+  // follow-up into a sliver: then the frise opens on the follow-up period.
+  const longHistory = followUp !== null && whole.lo < followUp.from && whole.hi - whole.lo > 3 * Math.max(followUp.to - followUp.from, 180 * 864e5);
+  const [span, setSpan] = useState<"followup" | "all">(longHistory ? "followup" : "all");
+  const zoomed = span === "followup" && longHistory;
+
+  const { min, max } = useMemo(() => {
+    const lo = zoomed ? followUp!.from : whole.lo;
+    const hi = zoomed ? Math.max(followUp!.to, ...timeline.events.filter((e) => dateStart(e.start) >= followUp!.from).map((e) => dateEnd(e.end ?? e.start))) : whole.hi;
+    const pad = Math.max((hi - lo) * 0.03, 15 * 864e5);
+    return { min: lo - pad, max: hi + pad };
+  }, [timeline, whole, followUp, zoomed]);
+
   const plotW = width - LABEL_W - PAD_R;
-  const x = (t: number) => LABEL_W + ((t - min) / (max - min)) * plotW;
+  // Before the window (follow-up view), marks are pinned to its left edge.
+  const x = (t: number) => LABEL_W + ((Math.max(t, min) - min) / (max - min)) * plotW;
 
   // Layout: one section per kind that has tracks, one row per track (tracks
   // holding only undated antecedents are listed below the frise instead).
@@ -135,6 +159,31 @@ export function Frise(props: {
 
   const sortedEvents = [...timeline.events].sort((a, b) => a.start.localeCompare(b.start));
 
+  const exportHtml = () => {
+    const svg = chart.current?.querySelector("svg")?.outerHTML;
+    if (!svg) return;
+    if (real && !window.confirm("Cette page contiendra les vrais noms du patient et des soignants. L'enregistrer sur ce poste ?")) return;
+    const html = friseHtml({
+      title: "Frise chronologique",
+      meta: `${timeline.events.length} événements · exportée le ${new Date().toLocaleDateString("fr-FR")}${props.source ? ` · ${props.source}` : ""}`,
+      identifying: real,
+      svg,
+      rows: sortedEvents.map((e) => ({
+        date: `${formatDate(e.start)}${e.end ? ` → ${formatDate(e.end)}` : e.ongoing ? " → en cours" : ""}`,
+        kind: TRACK_KIND_LABEL[kindOf[e.trackId] as TrackKind],
+        color: `var(--kind-${kindOf[e.trackId]})`,
+        track: trackLabel[e.trackId],
+        note: [e.mode ? MODE_LABEL[e.mode] : "", e.lossOfControl ? "(perte de contrôle)" : "", e.note].filter(Boolean).join(" "),
+      })),
+    });
+    const url = URL.createObjectURL(new Blob([html], { type: "text/html" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = real ? "frise-IDENTIFIANTE.html" : "frise-pseudonymisee.html";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
   return (
     <section className="frise viz-root">
       <div className="viewer-toolbar">
@@ -143,6 +192,16 @@ export function Frise(props: {
           {timeline.events.length} événements · {datedTracks.size} pistes
           {timeline.undated.length > 0 && ` · ${timeline.undated.length} non datés`}
         </span>
+        {longHistory && mode === "chart" && (
+          <div className="segmented" role="group" aria-label="Période affichée">
+            <button aria-pressed={zoomed} onClick={() => setSpan("followup")} title="Du premier au dernier document">
+              Période de suivi
+            </button>
+            <button aria-pressed={!zoomed} onClick={() => setSpan("all")} title="Antécédents compris, depuis l'enfance">
+              Toute l'histoire
+            </button>
+          </div>
+        )}
         <div className="segmented" role="tablist">
           <button role="tab" aria-selected={mode === "chart"} onClick={() => setMode("chart")}>
             Frise
@@ -161,7 +220,39 @@ export function Frise(props: {
             </button>
           </div>
         )}
-        {real && <span className="identifying small">contient des données identifiantes</span>}
+        <div className="frise-actions">
+          {mode === "chart" && timeline.events.length > 0 && (
+            <button className="small-btn" onClick={exportHtml} title={real ? "Page HTML avec les vrais noms (identifiante)" : "Page HTML pseudonymisée"}>
+              Exporter la page
+            </button>
+          )}
+          {props.onImportKey && !hasKey && (
+            <label className="small-btn" title="Fichier .axkey exporté à la relecture, déchiffré sur ce poste">
+              Remettre les vrais noms…
+              <input type="file" accept=".axkey" hidden onChange={(e) => e.target.files && props.onImportKey!([...e.target.files])} />
+            </label>
+          )}
+          {props.onSave && (
+            <button className="small-btn" onClick={props.onSave} title="Fichier .json pseudonymisé, à rouvrir avec la table de correspondance">
+              Enregistrer l'analyse
+            </button>
+          )}
+        </div>
+      </div>
+      <PatientHeader keyTable={props.keyTable} real={real} observations={props.observations} />
+      <div className={"frise-banner " + (real ? "real" : "pseudo")}>
+        {real ? (
+          <>
+            <strong>Noms réels remis sur ce poste.</strong> Le modèle n'a vu que des étiquettes ([PATIENT], [SOIGNANT_2]…) ;
+            la correspondance reste dans ce navigateur. Affichage identifiant : ne pas diffuser.
+          </>
+        ) : (
+          <>
+            <strong>Vue pseudonymisée</strong> : exactement ce que le modèle a lu et rendu.
+            {props.source && ` ${props.source}.`}
+          </>
+        )}
+        {real && props.source && <span className="muted"> {props.source}.</span>}
       </div>
 
       <div className="frise-body" ref={wrap}>
@@ -203,7 +294,8 @@ export function Frise(props: {
                 const x0 = x(dateStart(e.start));
                 const endT = e.end ? dateEnd(e.end) : e.ongoing && lastObservation ? dateEnd(lastObservation) : null;
                 const fill = { fill: `var(--kind-${kind})`, ...(e.fromAge ? { stroke: `var(--kind-${kind})` } : {}) };
-                const approx = e.fromAge ? " approx" : "";
+                const early = zoomed && !e.ongoing && dateEnd(e.end ?? e.start) < min ? " early" : "";
+                const approx = (e.fromAge ? " approx" : "") + early;
                 const handlers = {
                   onMouseEnter: (ev: React.MouseEvent) =>
                     setHover({ e, x: ev.clientX - (chart.current?.getBoundingClientRect().left ?? 0), y: cy }),
@@ -330,5 +422,34 @@ export function Frise(props: {
         )}
       </div>
     </section>
+  );
+}
+
+/** Who the frise is about: labels, or the real values from the local table. */
+function PatientHeader(props: { keyTable?: KeyTable; real: boolean; observations: Observation[] }) {
+  const birthLabel = props.keyTable && [...props.keyTable.keys()].find((k) => /^\[NE\(E\) EN \d{4}\]$/.test(k));
+  const show = (label: string) => (props.real ? props.keyTable?.get(label) ?? label : label);
+  const dates = props.observations.map((o) => o.date).filter((d): d is string => Boolean(d)).sort();
+  const docs = new Set(props.observations.map((o) => o.doc)).size;
+  return (
+    <div className={"patient-header" + (props.real ? " real" : "")}>
+      <span className="patient-avatar" aria-hidden>
+        {props.real ? "●" : "?"}
+      </span>
+      <div className="patient-id">
+        <strong>{show("[PATIENT]")}</strong>
+        {birthLabel && <span>{props.real ? `né(e) le ${show(birthLabel)}` : birthLabel}</span>}
+      </div>
+      <div className="patient-facts">
+        {dates.length > 0 && (
+          <span>
+            Suivi du {formatDate(dates[0])} au {formatDate(dates.at(-1)!)}
+          </span>
+        )}
+        <span>
+          {props.observations.length} observations · {docs} document{docs > 1 ? "s" : ""}
+        </span>
+      </div>
+    </div>
   );
 }

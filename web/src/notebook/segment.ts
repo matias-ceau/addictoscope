@@ -110,6 +110,7 @@ export async function segmentDocument(input: SegmentInput): Promise<Observation[
         { role: "system", content: SEGMENT_SYSTEM },
         { role: "user", content },
       ],
+      docs: [input.doc],
       schemaName: "segmentation",
       schema: SEGMENT_SCHEMA,
       fetchImpl: input.fetchImpl,

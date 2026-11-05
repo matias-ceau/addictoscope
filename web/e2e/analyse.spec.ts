@@ -58,7 +58,7 @@ test("analyse a verified document into a frise, sending nothing identifying", as
   page.on("console", (m) => m.type() === "error" && console.log("BROWSER:", m.text()));
   page.on("pageerror", (e) => console.log("PAGEERROR:", e.message));
   await page.goto("/");
-  await page.locator('input[type="file"]').setInputFiles(resolve(DATA, "synthetique-historique-csapa.pdf"));
+  await page.locator('input[type="file"]:not([accept=".json,.axkey"])').setInputFiles(resolve(DATA, "synthetique-historique-csapa.pdf"));
   await expect(page.getByText(/Relu aussi par l'IA locale/)).toBeVisible({ timeout: 90_000 });
 
   // Before pseudonymization, nothing can reach the model.

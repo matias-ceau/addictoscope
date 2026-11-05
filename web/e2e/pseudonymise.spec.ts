@@ -5,12 +5,12 @@ import { expect, test } from "@playwright/test";
 
 const DATA = resolve(dirname(fileURLToPath(import.meta.url)), "../../data/anonymized");
 
-test("drop, review and pseudonymise text and scanned PDFs without any network call", async ({ page }) => {
+test("drop, review and pseudonymise text and scanned PDFs without any network call", async ({ page, baseURL }) => {
   const external: string[] = [];
   const served: string[] = [];
   const warnings: string[] = [];
   page.on("request", (r) => {
-    if (!r.url().startsWith("http://localhost:4173") && !r.url().startsWith("blob:") && !r.url().startsWith("data:")) external.push(r.url());
+    if (!r.url().startsWith(baseURL ?? "http://localhost:4173") && !r.url().startsWith("blob:") && !r.url().startsWith("data:")) external.push(r.url());
     else served.push(r.url());
   });
   page.on("console", (m) => {
@@ -19,7 +19,7 @@ test("drop, review and pseudonymise text and scanned PDFs without any network ca
 
   await page.goto("/");
   await expect(page.getByText("Glissez vos documents patient ici")).toBeVisible();
-  await page.locator('input[type="file"]').setInputFiles([
+  await page.locator('input[type="file"]:not([accept=".json,.axkey"])').setInputFiles([
     resolve(DATA, "synthetique-historique-csapa.pdf"),
     resolve(DATA, "synthetique-courrier-scanne.pdf"),
   ]);

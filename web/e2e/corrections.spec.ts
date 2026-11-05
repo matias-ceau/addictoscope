@@ -7,7 +7,7 @@ const DATA = resolve(dirname(fileURLToPath(import.meta.url)), "../../data/anonym
 
 test("the reviewer re-files a detection and merges two entities", async ({ page }) => {
   await page.goto("/");
-  await page.locator('input[type="file"]').setInputFiles([resolve(DATA, "synthetique-historique-csapa.pdf")]);
+  await page.locator('input[type="file"]:not([accept=".json,.axkey"])').setInputFiles([resolve(DATA, "synthetique-historique-csapa.pdf")]);
   await expect(page.locator(".source-card").getByText(/À vérifier/)).toBeVisible({ timeout: 60_000 });
   await expect(page.getByText(/Relu aussi par l'IA locale/)).toBeVisible({ timeout: 90_000 });
 

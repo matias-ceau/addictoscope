@@ -98,7 +98,9 @@ def period(partial: str) -> tuple[date, date]:
     if len(parts) == 2:
         y, m = parts
         return date(y, m, 1), date(y, m, calendar.monthrange(y, m)[1])
-    d = date(*parts)
+    y, m, day = parts
+    # A model may write an impossible day ("2024-06-31"): keep it within its month.
+    d = date(y, m, min(day, calendar.monthrange(y, m)[1]))
     return d, d
 
 

@@ -1,6 +1,13 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 
 import { analyse } from "../app/analysis";
+import { demoFiles, loadRecording, type DemoDossier } from "../app/demo";
+import { clearLedger } from "../cloud/ledger";
+import { modelName } from "../cloud/models";
+import { replayFetch } from "../cloud/replay";
+import { parseAnalysis, serializeAnalysis, type SavedAnalysis } from "../app/saved";
+import type { KeyEntry } from "../core/keyfile";
+import { keyTableFromEntries, type KeyTable } from "../core/reidentify";
 import * as engine from "../app/engine";
 import { loadPolicy, policyReady, savePolicy } from "../app/settings";
 import type { CloudPolicy } from "../cloud/guard";
@@ -8,9 +15,12 @@ import { rectsForSpan } from "../core/geometry";
 import type { Rect } from "../core/types";
 import { inputKind } from "../core/inputs";
 import { keyTableFromDetections } from "../core/reidentify";
+import { KeyPrompt } from "./KeyPrompt";
 import { buildManifest } from "../core/verify";
 import { detectCorpus } from "../pii/detect";
 import { AnalysisCard, type AnalysisState } from "./AnalysisCard";
+import { DataStatus, Journal } from "./Journal";
+import { Journey, journeySteps } from "./Journey";
 import { DropOverlay } from "./DropOverlay";
 import { Frise } from "./Frise";
 import { ReviewPanel } from "./ReviewPanel";
@@ -32,6 +42,15 @@ export function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [analysis, setAnalysis] = useState<AnalysisState>({ status: "idle" });
   const [highlight, setHighlight] = useState<{ doc: string; page: number; rects: Rect[]; key: number }>();
+  /** The fictional dossier on screen, in the demonstration. */
+  const [demo, setDemo] = useState<DemoDossier | null>(null);
+  /** Recording replayed by the demonstration's analysis, or "live". */
+  const [demoSource, setDemoSource] = useState("");
+  const [journalOpen, setJournalOpen] = useState(false);
+  /** An analysis reopened from disk, with the real names if its .axkey was given. */
+  const [reopened, setReopened] = useState<{ saved: SavedAnalysis; keyTable?: KeyTable } | null>(null);
+  const [keyFile, setKeyFile] = useState<Uint8Array | null>(null);
+  const [reopenError, setReopenError] = useState<string | null>(null);
 
   const redetect = useCallback(() => {
     const ready = stateRef.current.docs.filter((d) => d.pages.length && d.status !== "reading" && d.status !== "error");
@@ -124,18 +143,74 @@ export function App() {
     const docs = stateRef.current.docs.filter((d) => d.status === "done" && d.manifest?.verified && d.outPages);
     setAnalysis({ status: "running", docs: docs.map((d) => d.id) });
     try {
+      // Demonstration: the recorded answers stand in for the network; the
+      // guard, the requests and every local step run as they would live.
+      const recording = demo && demoSource !== "live" ? demo.recordings.find((r) => r.file === demoSource) : undefined;
+      const replay = recording ? await loadRecording(demo!, recording) : undefined;
+      const runPolicy: CloudPolicy = replay ? { kind: "openrouter-zdr", apiKey: "", model: replay.model } : policy;
       const result = await analyse(
         docs.map((d) => ({ id: d.id, pages: d.outPages!, manifest: d.manifest })),
-        policy,
+        runPolicy,
         (progress) => setAnalysis((a) => ({ ...a, progress })),
         stateRef.current.detections,
+        replay ? replayFetch(replay, 700) : undefined,
       );
-      setAnalysis({ status: "done", ...result, docs: docs.map((d) => d.id) });
+      const model = runPolicy.kind === "off" ? undefined : runPolicy.model;
+      setAnalysis({ status: "done", ...result, docs: docs.map((d) => d.id), model, replayed: Boolean(replay) });
       setMainView("frise");
     } catch (err) {
       setAnalysis({ status: "error", error: String((err as Error).message ?? err) });
     }
-  }, [policy]);
+  }, [policy, demo, demoSource]);
+
+  const openDemo = useCallback(
+    async (d: DemoDossier) => {
+      setDemo(d);
+      setDemoSource(d.recordings[0]?.file ?? "live");
+      await addFiles(await demoFiles(d));
+    },
+    [addFiles],
+  );
+
+  /** Back to the welcome screen: documents, analysis and journal forgotten. */
+  const closeAll = useCallback(() => {
+    for (const d of stateRef.current.docs) removeDoc(d.id);
+    clearLedger();
+    setAnalysis({ status: "idle" });
+    setMainView("doc");
+    setDemo(null);
+    setReopened(null);
+  }, [removeDoc]);
+
+  /** Save the current analysis: pseudonymized, as the model returned it. */
+  const saveAnalysis = useCallback(() => {
+    if (!analysis.timeline || !analysis.observations) return;
+    const text = serializeAnalysis({ observations: analysis.observations, timeline: analysis.timeline, model: analysis.model, replayed: analysis.replayed });
+    const url = URL.createObjectURL(new Blob([text], { type: "application/json" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "analyse-pseudonymisee.json";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }, [analysis]);
+
+  /** Reopen a saved analysis (.json), and its table (.axkey) if given. */
+  const reopen = useCallback(async (files: File[]) => {
+    setReopenError(null);
+    const json = files.find((f) => /\.json$/i.test(f.name));
+    const key = files.find((f) => /\.axkey$/i.test(f.name));
+    try {
+      if (json) setReopened({ saved: parseAnalysis(await json.text()) });
+      else if (!reopened) throw new Error("Choisissez le fichier d'analyse (.json), et si vous l'avez sa table de correspondance (.axkey).");
+      if (key) setKeyFile(new Uint8Array(await key.arrayBuffer()));
+    } catch (err) {
+      setReopenError(String((err as Error).message ?? err));
+    }
+  }, [reopened]);
+
+  const onKey = useCallback((entries: KeyEntry[]) => {
+    setReopened((r) => (r ? { ...r, keyTable: keyTableFromEntries(entries) } : r));
+  }, []);
 
   /** Labels of the analysed documents -> real values, for the frise only (local). */
   const keyTable = useMemo(() => {
@@ -166,6 +241,19 @@ export function App() {
   );
 
   const selected = state.docs.find((d) => d.id === state.selectedDoc);
+  const replayMode = demo !== null && demoSource !== "live";
+  const steps = journeySteps(
+    state.docs,
+    analysis,
+    replayMode ? "replay" : policy.kind === "off" ? "off" : "online",
+    mainView === "frise",
+  );
+  const realValues = useMemo(
+    () => [...new Set(state.detections.filter((d) => d.accepted).map((d) => d.text))],
+    [state.detections],
+  );
+  const docNames = useMemo(() => Object.fromEntries(state.docs.map((d) => [d.id, d.name])), [state.docs]);
+  const allVerified = state.docs.length > 0 && state.docs.every((d) => d.status === "done" && d.manifest?.verified);
   useEffect(() => {
     if (selected?.status !== "done") setView("original");
   }, [selected?.id, selected?.status]);
@@ -180,6 +268,11 @@ export function App() {
             </svg>
           </span>
           addictoscope
+          {demo && (
+            <span className="demo-ribbon" title="Dossier entièrement inventé, pour la démonstration">
+              Dossier fictif · démonstration
+            </span>
+          )}
         </div>
         <div className="topbar-right">
         {analysis.timeline && (
@@ -192,21 +285,32 @@ export function App() {
             </button>
           </div>
         )}
+        <DataStatus demo={replayMode} onOpen={() => setJournalOpen(true)} />
         <button className="cloud-badge" onClick={() => setSettingsOpen(true)} title="Réglages de l'IA en ligne">
           IA en ligne : {policy.kind === "off" ? "désactivée" : policy.kind === "openrouter-zdr" ? "OpenRouter ZDR" : "point d'accès HDS"}
         </button>
-        <div className="privacy-badge" title="Lecture, détection et masquage s'exécutent dans ce navigateur. Aucun fichier n'est envoyé.">
-          <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden>
-            <path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-            <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          Pseudonymisation locale · rien ne quitte ce poste
-        </div>
+        {(state.docs.length > 0 || reopened) && (
+          <button className="cloud-badge" onClick={closeAll} title="Fermer tous les documents et revenir à l'accueil">
+            {demo ? "Quitter la démonstration" : "Tout fermer"}
+          </button>
+        )}
         </div>
       </header>
+      {state.docs.length > 0 && <Journey steps={steps} />}
 
-      {state.docs.length === 0 ? (
-        <Welcome onFiles={addFiles} />
+      {state.docs.length === 0 && reopened ? (
+        <main className="workspace single">
+          <Frise
+            key={reopened.keyTable ? "with-key" : "no-key"}
+            timeline={reopened.saved.timeline}
+            observations={reopened.saved.observations}
+            keyTable={reopened.keyTable}
+            source={`Analyse rouverte${reopened.saved.model ? ` : ${modelName(reopened.saved.model)}` : ""}${reopened.saved.createdAt ? `, enregistrée le ${new Date(reopened.saved.createdAt).toLocaleDateString("fr-FR")}` : ""}`}
+            onImportKey={(files) => void reopen(files)}
+          />
+        </main>
+      ) : state.docs.length === 0 ? (
+        <Welcome onFiles={addFiles} onDemo={openDemo} onReopen={(f) => void reopen(f)} reopenError={reopenError} />
       ) : (
         <main className="workspace">
           <Sources
@@ -223,6 +327,11 @@ export function App() {
               observations={analysis.observations ?? []}
               keyTable={keyTable}
               onOpenSource={openSource}
+              onSave={saveAnalysis}
+              source={
+                analysis.model &&
+                `Analyse : ${modelName(analysis.model)}${analysis.replayed ? ", réponses enregistrées rejouées (aucun envoi)" : ", OpenRouter sans conservation"}`
+              }
             />
           )}
           {mainView === "doc" && selected && (
@@ -230,7 +339,7 @@ export function App() {
               highlight={highlight?.doc === selected.id ? highlight : undefined}
               key={selected.id}
               doc={selected}
-              view={view}
+              view={selected.status === "done" ? view : "original"}
               onViewChange={setView}
               detections={state.detections.filter((d) => d.doc === selected.id)}
               focused={state.focusedDetection}
@@ -252,6 +361,7 @@ export function App() {
                   onConfigure={() => setSettingsOpen(true)}
                   onRun={runAnalysis}
                   onShowFrise={() => setMainView("frise")}
+                  demo={demo ? { dossier: demo, allVerified, source: demoSource, onSource: setDemoSource } : undefined}
                 />
               }
             />
@@ -259,6 +369,8 @@ export function App() {
         </main>
       )}
       <DropOverlay onFiles={addFiles} />
+      {keyFile && <KeyPrompt data={keyFile} onKey={onKey} onClose={() => setKeyFile(null)} />}
+      {journalOpen && <Journal onClose={() => setJournalOpen(false)} realValues={realValues} docNames={docNames} />}
       {settingsOpen && (
         <SettingsDialog
           policy={policy}

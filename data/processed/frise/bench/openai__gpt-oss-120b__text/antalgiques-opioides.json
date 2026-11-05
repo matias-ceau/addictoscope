@@ -1,0 +1,806 @@
+{
+  "dossier": "antalgiques-opioides",
+  "model": "openai/gpt-oss-120b",
+  "textOnly": true,
+  "ranAt": "2026-11-05T12:48:32.126Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 4,
+      "redactions": {
+        "ETABLISSEMENT": 12,
+        "ADRESSE": 9,
+        "VILLE": 5,
+        "TEL": 5,
+        "PATIENT": 5,
+        "DOSSIER": 4,
+        "SOIGNANT": 18,
+        "PERSONNE": 4,
+        "NAISSANCE": 5,
+        "IPP": 4,
+        "PROCHE": 2
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 19
+      },
+      "end": {
+        "page": 0,
+        "line": 28
+      },
+      "date": "2025-10-28",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Bonne tolérance à la première injection de buprénorphine LP mensuelle, induration minime, aucune signe de manque, douleurs stables (EVA 4)."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 29
+      },
+      "end": {
+        "page": 0,
+        "line": 34
+      },
+      "date": "2025-10-14",
+      "kind": "Entretien infirmier",
+      "authorRole": "IDE",
+      "summary": "Première injection sous-cutanée de buprénorphine LP 96 mg, surveillance d’une heure sans incident, tabac 10 cig/j."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 35
+      },
+      "end": {
+        "page": 0,
+        "line": 47
+      },
+      "date": "2025-09-09",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Le fils est parti, tristesse attendue, pas d’effondrement thymique, BHD 14 mg, proposition d’injection mensuelle de buprénorphine acceptée."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 48
+      },
+      "end": {
+        "page": 0,
+        "line": 57
+      },
+      "date": "2025-06-17",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Thymie améliorée, marche 30 min/j, piscine hebdo, EVA 4/10, BHD 14 mg depuis 01/06 sans manque, RDV septembre."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 58
+      },
+      "end": {
+        "page": 1,
+        "line": 29
+      },
+      "date": "2025-05-06",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Reprise d’oxycodone mi‑avril, craving faible, plan de crise douleur, BHD 16 mg maintenue, RDV juin."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 30
+      },
+      "end": {
+        "page": 1,
+        "line": 34
+      },
+      "date": "2025-03-11",
+      "kind": "Entretien infirmier",
+      "authorRole": "IDE",
+      "summary": "Urines positives à buprénorphine, tabac 10 cig/j, pas de signes de manque."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 35
+      },
+      "end": {
+        "page": 1,
+        "line": 42
+      },
+      "date": "2025-01-21",
+      "kind": "Observation somatique de suivi",
+      "authorRole": null,
+      "summary": "Consultation CETD : lombalgie post‑arthrodèse, syndrome fibromyalgique, avis favorable au maintien de la buprénorphine en deux prises."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 43
+      },
+      "end": {
+        "page": 1,
+        "line": 55
+      },
+      "date": "2024-11-26",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Thymie basse, anhédonie, fatigue, culpabilité, épisode dépressif moyen, EVA 6/10, duloxétine 30 → 60 mg, orientation CETD, RDV 1 mois."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 56
+      },
+      "end": {
+        "page": 1,
+        "line": 60
+      },
+      "date": "2024-11-05",
+      "kind": "Entretien social",
+      "authorRole": "Assistante sociale",
+      "summary": "Entretien social réalisé, collecte des informations d’identité."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 23
+      },
+      "end": {
+        "page": 2,
+        "line": 33
+      },
+      "date": "2024-10-15",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Induction buprénorphine, BHD 16 mg/j, tramadol pris sans effet, douleurs EVA 6/10, le mari constate une amélioration."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 34
+      },
+      "end": {
+        "page": 2,
+        "line": 43
+      },
+      "date": "2024-10-01",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Induction buprénorphine le 30/09, COWS 13, pas de manque, nausées légères, douleurs dorsales."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 44
+      },
+      "end": {
+        "page": 2,
+        "line": 49
+      },
+      "date": "2024-09-19",
+      "kind": "Entretien infirmier",
+      "authorRole": "IDE",
+      "summary": "Préparation de l’induction, explications sur le délai sans opioïde, urines buprénorphine +, tramadol +, patiente sous antalgiques forts depuis 5 ans."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 50
+      },
+      "end": {
+        "page": 3,
+        "line": 32
+      },
+      "date": "2024-09-11",
+      "kind": "Motif de l'évaluation",
+      "authorRole": null,
+      "summary": "Première entrevue, antécédents de lombalgie chronique post‑arthrodèse et fibromyalgie."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t1",
+        "kind": "substance_use",
+        "label": "Opioïdes"
+      },
+      {
+        "id": "t5",
+        "kind": "somatic",
+        "label": "Lombalgie chronique post-arthrodèse L4-L5"
+      },
+      {
+        "id": "t2",
+        "kind": "medication",
+        "label": "Buprénorphine sublinguale"
+      },
+      {
+        "id": "t3",
+        "kind": "medication",
+        "label": "Buprénorphine LP injectable mensuelle"
+      },
+      {
+        "id": "t4",
+        "kind": "medication",
+        "label": "Duloxétine"
+      },
+      {
+        "id": "t6",
+        "kind": "therapeutic_psycho",
+        "label": "Induction buprénorphine au CSAPA"
+      },
+      {
+        "id": "t7",
+        "kind": "life_event",
+        "label": "Départ du fils"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2020",
+        "end": "2024-09-29",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Tramadol depuis 2020, puis oxycodone depuis 2021, usage pour soulager la douleur et « ça m'apaise ».",
+        "observationIds": [
+          "historique:o13",
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e2",
+        "trackId": "t1",
+        "start": "2025-04",
+        "end": "2025-04-18",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Reprise d'oxycodone mi-avril 2025 pendant 3 jours lors d'une poussée douloureuse.",
+        "observationIds": [
+          "historique:o5"
+        ]
+      },
+      {
+        "id": "e3",
+        "trackId": "t2",
+        "start": "2024-09-30",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Induction de buprénorphine sublinguale 4 mg puis 4 mg le 30/09/2024, dosage maintenu à 16 mg/j puis ajusté.",
+        "observationIds": [
+          "historique:o11",
+          "historique:o10",
+          "historique:o8",
+          "historique:o5",
+          "historique:o4",
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e4",
+        "trackId": "t3",
+        "start": "2025-10-14",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Première injection sous-cutanée de buprénorphine LP 96 mg le 14/10/2025, deuxième prévue le 11/11/2025.",
+        "observationIds": [
+          "historique:o2",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e5",
+        "trackId": "t4",
+        "start": "2024-11-26",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Duloxétine 30 mg puis 60 mg à J15 après l'induction, poursuivie.",
+        "observationIds": [
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e6",
+        "trackId": "t5",
+        "start": "2021",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Lombalgie chronique après arthrodèse L4-L5 en 2021, suivi en CETD.",
+        "observationIds": [
+          "historique:o13",
+          "historique:o7"
+        ]
+      },
+      {
+        "id": "e7",
+        "trackId": "t6",
+        "start": "2024-09-30",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Induction de buprénorphine réalisée le 30/09/2024 au CSAPA, suivi hebdomadaire.",
+        "observationIds": [
+          "historique:o11"
+        ]
+      },
+      {
+        "id": "e8",
+        "trackId": "t7",
+        "start": "2025-09-01",
+        "end": "2025-09-01",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Le fils est parti le 01/09/2025 pour ses études, entraînant tristesse attendue.",
+        "observationIds": [
+          "historique:o3"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 24880,
+  "usage": {
+    "calls": 3,
+    "promptTokens": 8765,
+    "completionTokens": 9768,
+    "cost": 0.0071
+  },
+  "rawAnswers": [
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 19
+            },
+            "end": {
+              "page": 1,
+              "line": 28
+            },
+            "date": "2025-10-28",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Bonne tolérance à la première injection de buprénorphine LP mensuelle, induration minime, aucune signe de manque, douleurs stables (EVA 4)."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 29
+            },
+            "end": {
+              "page": 1,
+              "line": 34
+            },
+            "date": "2025-10-14",
+            "kind": "Entretien infirmier",
+            "author_role": "IDE",
+            "continues_previous": false,
+            "summary": "Première injection sous-cutanée de buprénorphine LP 96 mg, surveillance d’une heure sans incident, tabac 10 cig/j."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 35
+            },
+            "end": {
+              "page": 1,
+              "line": 47
+            },
+            "date": "2025-09-09",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Le fils est parti, tristesse attendue, pas d’effondrement thymique, BHD 14 mg, proposition d’injection mensuelle de buprénorphine acceptée."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 48
+            },
+            "end": {
+              "page": 1,
+              "line": 57
+            },
+            "date": "2025-06-17",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Thymie améliorée, marche 30 min/j, piscine hebdo, EVA 4/10, BHD 14 mg depuis 01/06 sans manque, RDV septembre."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 58
+            },
+            "end": {
+              "page": 2,
+              "line": 29
+            },
+            "date": "2025-05-06",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Reprise d’oxycodone mi‑avril, craving faible, plan de crise douleur, BHD 16 mg maintenue, RDV juin."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 30
+            },
+            "end": {
+              "page": 2,
+              "line": 34
+            },
+            "date": "2025-03-11",
+            "kind": "Entretien infirmier",
+            "author_role": "IDE",
+            "continues_previous": false,
+            "summary": "Urines positives à buprénorphine, tabac 10 cig/j, pas de signes de manque."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 35
+            },
+            "end": {
+              "page": 2,
+              "line": 42
+            },
+            "date": "2025-01-21",
+            "kind": "Observation somatique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Consultation CETD : lombalgie post‑arthrodèse, syndrome fibromyalgique, avis favorable au maintien de la buprénorphine en deux prises."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 43
+            },
+            "end": {
+              "page": 2,
+              "line": 55
+            },
+            "date": "2024-11-26",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Thymie basse, anhédonie, fatigue, culpabilité, épisode dépressif moyen, EVA 6/10, duloxétine 30 → 60 mg, orientation CETD, RDV 1 mois."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 56
+            },
+            "end": {
+              "page": 2,
+              "line": 60
+            },
+            "date": "2024-11-05",
+            "kind": "Entretien social",
+            "author_role": "Assistante sociale",
+            "continues_previous": false,
+            "summary": "Entretien social réalisé, collecte des informations d’identité."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 23
+            },
+            "end": {
+              "page": 3,
+              "line": 33
+            },
+            "date": "2024-10-15",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Induction buprénorphine, BHD 16 mg/j, tramadol pris sans effet, douleurs EVA 6/10, le mari constate une amélioration."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 34
+            },
+            "end": {
+              "page": 3,
+              "line": 43
+            },
+            "date": "2024-10-01",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Induction buprénorphine le 30/09, COWS 13, pas de manque, nausées légères, douleurs dorsales."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 44
+            },
+            "end": {
+              "page": 3,
+              "line": 49
+            },
+            "date": "2024-09-19",
+            "kind": "Entretien infirmier",
+            "author_role": "IDE",
+            "continues_previous": false,
+            "summary": "Préparation de l’induction, explications sur le délai sans opioïde, urines buprénorphine +, tramadol +, patiente sous antalgiques forts depuis 5 ans."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 50
+            },
+            "end": {
+              "page": 3,
+              "line": 58
+            },
+            "date": "2024-09-11",
+            "kind": "Motif de l'évaluation",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Première entrevue, antécédents de lombalgie chronique post‑arthrodèse et fibromyalgie."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 4,
+              "line": 19
+            },
+            "end": {
+              "page": 4,
+              "line": 32
+            },
+            "date": "2024-09-11",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": true,
+            "summary": "Le patient présente un trouble sévère de l'usage des opioïdes lié à une douleur chronique, consomme du tramadol et de l'oxycodone à forte dose, ne consomme pas d'alcool, fume 10 cigarettes/j, et une proposition de relais par buprénorphine avec induction prévue le 30/09 a été faite."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes",
+            "start": "2020",
+            "end": "2024-09-29",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Tramadol depuis 2020, puis oxycodone depuis 2021, usage pour soulager la douleur et « ça m'apaise ».",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes",
+            "start": "2025-04",
+            "end": "2025-04-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Reprise d'oxycodone mi-avril 2025 pendant 3 jours lors d'une poussée douloureuse.",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Buprénorphine sublinguale",
+            "start": "2024-09-30",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Induction de buprénorphine sublinguale 4 mg puis 4 mg le 30/09/2024, dosage maintenu à 16 mg/j puis ajusté.",
+            "observation_ids": [
+              "o3",
+              "o4",
+              "o6",
+              "o9",
+              "o10",
+              "o11"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Buprénorphine LP injectable mensuelle",
+            "start": "2025-10-14",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Première injection sous-cutanée de buprénorphine LP 96 mg le 14/10/2025, deuxième prévue le 11/11/2025.",
+            "observation_ids": [
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Duloxétine",
+            "start": "2024-11-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Duloxétine 30 mg puis 60 mg à J15 après l'induction, poursuivie.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Dépression d'intensité moyenne, thymie basse depuis plusieurs mois, probablement depuis le licenciement.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Lombalgie chronique post-arthrodèse L4-L5",
+            "start": "2021",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Lombalgie chronique après arthrodèse L4-L5 en 2021, suivi en CETD.",
+            "observation_ids": [
+              "o1",
+              "o7"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Fibromyalgie",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Fibromyalgie évoquée dans les antécédents.",
+            "observation_ids": [
+              "o1",
+              "o7"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Induction buprénorphine au CSAPA",
+            "start": "2024-09-30",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Induction de buprénorphine réalisée le 30/09/2024 au CSAPA, suivi hebdomadaire.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Licenciement",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Licenciement mentionné comme déclencheur probable de la dépression.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Départ du fils",
+            "start": "2025-09-01",
+            "end": "2025-09-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Le fils est parti le 01/09/2025 pour ses études, entraînant tristesse attendue.",
+            "observation_ids": [
+              "o11"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

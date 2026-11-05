@@ -17,7 +17,7 @@
  * Output: data/processed/frise/[<--out>/]<dossier>.json, scored by
  *   uv run python scripts/score_frise.py
  */
-import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, resolve } from "node:path";
 
 import { DEFAULT_MODEL } from "../src/cloud/client";
@@ -44,6 +44,11 @@ const apiKey = process.env.OPENROUTER_API_KEY;
 if (!apiKey) throw new Error("OPENROUTER_API_KEY is not set");
 const model = arg("model") ?? DEFAULT_MODEL;
 const policy: CloudPolicy = { kind: "openrouter-zdr", apiKey, model };
+/** --segment-model: a cheaper model for the segmentation only (the frise keeps --model). */
+const segmentModel = arg("segment-model");
+/** --text-only: numbered lines without the page images (text-only models; measures what the images add). */
+const TEXT_ONLY = process.argv.includes("--text-only");
+const segmentPolicy: CloudPolicy = segmentModel ? { ...policy, model: segmentModel } : policy;
 /** Repeated runs go to their own folder: --out=run2 -> data/processed/frise/run2/. */
 const OUT = resolve(FRISE, arg("out") ?? ".");
 
@@ -66,7 +71,9 @@ const fetchImpl = (async (url: string, init: RequestInit) => {
       usage.calls++;
       usage.promptTokens += data?.usage?.prompt_tokens ?? 0;
       usage.completionTokens += data?.usage?.completion_tokens ?? 0;
-      usage.cost += data?.usage?.cost ?? 0;
+      // With the user's own provider key (BYOK), OpenRouter reports 0 and the
+      // provider bills upstream_inference_cost directly.
+      usage.cost += data?.usage?.cost || data?.usage?.cost_details?.upstream_inference_cost || 0;
       const schema = JSON.parse(String(init.body)).response_format?.json_schema?.name;
       let content: unknown = data?.choices?.[0]?.message?.content;
       try {
@@ -111,8 +118,8 @@ async function runDossier(slug: string) {
     if (!manifest.verified || planted > 0) continue; // the guard would refuse the first, a reviewer the second
 
     const images: Record<number, string> = {};
-    for (const p of outPages) images[p.page] = `data:image/png;base64,${Buffer.from(renderPagePng(outDoc, p.page, IMAGE_ZOOM)).toString("base64")}`;
-    const obs = await segmentDocument({ doc: src.id, pages: outPages, images, manifest, policy, fetchImpl });
+    if (!TEXT_ONLY) for (const p of outPages) images[p.page] = `data:image/png;base64,${Buffer.from(renderPagePng(outDoc, p.page, IMAGE_ZOOM)).toString("base64")}`;
+    const obs = await segmentDocument({ doc: src.id, pages: outPages, images, manifest, policy: segmentPolicy, fetchImpl });
     console.log(`  ${obs.length} observations`);
     observations.push(...obs);
     pagesByDoc[src.id] = outPages;
@@ -126,7 +133,7 @@ async function runDossier(slug: string) {
     `  frise: ${timeline.tracks.length} tracks, ${timeline.events.length} events (${fromAge} dated from an age), ` +
       `${timeline.undated.length} undated; birth year ${birthYear === null ? "unknown" : "known"}`,
   );
-  return { dossier: slug, model, ranAt: new Date().toISOString(), review: "automatic detections accepted as they are", docs, observations, timeline };
+  return { dossier: slug, model, ...(segmentModel ? { segmentModel } : {}), ...(TEXT_ONLY ? { textOnly: true } : {}), ranAt: new Date().toISOString(), review: "automatic detections accepted as they are", docs, observations, timeline };
 }
 
 mkdirSync(OUT, { recursive: true });
@@ -136,15 +143,27 @@ const slugs = readdirSync(DOSSIERS, { withFileTypes: true })
   .map((d) => d.name)
   .sort();
 for (const slug of slugs) {
+  // --resume: keep a dossier that already has a frise in this folder.
+  if (process.argv.includes("--resume") && existsSync(resolve(OUT, `${slug}.json`)) && "timeline" in JSON.parse(readFileSync(resolve(OUT, `${slug}.json`), "utf8"))) continue;
   const before = { ...usage };
   rawAnswers = [];
-  const result = await runDossier(slug);
+  const t0 = Date.now();
+  let result;
+  try {
+    result = await runDossier(slug);
+  } catch (err) {
+    // One failing dossier (a model that breaks the JSON schema, a provider
+    // error) is recorded and the comparison goes on with the next one.
+    console.log(`${slug}: FAILED ${String((err as Error).message ?? err).slice(0, 200)}`);
+    result = { dossier: slug, model, ranAt: new Date().toISOString(), error: String((err as Error).message ?? err) };
+  }
+  const elapsedMs = Date.now() - t0;
   const spent = {
     calls: usage.calls - before.calls,
     promptTokens: usage.promptTokens - before.promptTokens,
     completionTokens: usage.completionTokens - before.completionTokens,
     cost: Number((usage.cost - before.cost).toFixed(4)),
   };
-  writeFileSync(resolve(OUT, `${slug}.json`), JSON.stringify({ ...result, usage: spent, rawAnswers }, null, 2) + "\n");
+  writeFileSync(resolve(OUT, `${slug}.json`), JSON.stringify({ ...result, elapsedMs, usage: spent, rawAnswers }, null, 2) + "\n");
 }
 console.log(`total: ${usage.calls} calls, ${usage.promptTokens} + ${usage.completionTokens} tokens, $${usage.cost.toFixed(3)}`);

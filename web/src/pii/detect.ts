@@ -131,6 +131,14 @@ function wholeCompound(text: string, start: number, end: number): { start: numbe
 }
 
 /** Find every occurrence of `token` in `text` as a whole word. */
+/** Whole-word occurrences of a multi-word value, a line break counting as a
+ *  space: "33000 BORDEAUX" also matches "33000\nBORDEAUX". */
+function findValue(text: string, value: string): { start: number; end: number }[] {
+  const body = value.split(/\s+/).map(escapeRe).join("\\s+");
+  const re = new RegExp(`(?<![\\p{L}\\p{N}])${body}(?![\\p{L}\\p{N}])`, "giu");
+  return [...text.matchAll(re)].map((m) => ({ start: m.index, end: m.index + m[0].length }));
+}
+
 function findWord(text: string, token: string, caseSensitive: boolean): number[] {
   const re = new RegExp(`(?<![\\p{L}\\p{N}])${escapeRe(token)}(?![\\p{L}\\p{N}])`, caseSensitive ? "gu" : "giu");
   const out: number[] = [];
@@ -280,15 +288,15 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
         }
       }
       for (const [value, origin] of personValues) {
-        for (const start of findWord(folded, value, false)) {
-          const h: Hit = { doc: doc.id, page: page.page, start, end: start + value.length, category: origin.category, source: "propagation" };
+        for (const { start, end } of findValue(folded, value)) {
+          const h: Hit = { doc: doc.id, page: page.page, start, end, category: origin.category, source: "propagation" };
           hits.push(h);
           if (entityOf.has(origin)) entityOf.set(h, entityOf.get(origin)!);
         }
       }
       for (const [value, origin] of valueHits) {
-        for (const start of findWord(folded, value, false)) {
-          hits.push({ ...origin, doc: doc.id, page: page.page, start, end: start + value.length, source: "propagation" });
+        for (const { start, end } of findValue(folded, value)) {
+          hits.push({ ...origin, doc: doc.id, page: page.page, start, end, source: "propagation" });
         }
       }
     }

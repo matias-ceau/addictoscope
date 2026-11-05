@@ -1,0 +1,1332 @@
+{
+  "dossier": "bupre-grossesse",
+  "model": "openai/gpt-oss-120b",
+  "textOnly": true,
+  "ranAt": "2026-11-05T12:49:06.874Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 4,
+      "redactions": {
+        "ETABLISSEMENT": 8,
+        "ADRESSE": 9,
+        "TEL": 5,
+        "PATIENT": 6,
+        "DOSSIER": 4,
+        "NAISSANCE": 5,
+        "IPP": 4,
+        "VILLE": 5,
+        "SOIGNANT": 23,
+        "PROCHE": 12,
+        "NIR": 1,
+        "PERSONNE": 2
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 10
+      },
+      "end": {
+        "page": 0,
+        "line": 24
+      },
+      "date": "2024-01-15",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Suivi psychiatrique du 15/01/2024, patiente stable sous BHD 8 mg/j, aucune mésusage, projet de grossesse discuté."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 25
+      },
+      "end": {
+        "page": 0,
+        "line": 30
+      },
+      "date": "2024-03-04",
+      "kind": "Observation infirmière",
+      "authorRole": "IDE",
+      "summary": "Observation infirmière du 04/03/2024, test de grossesse positif, patiente très angoissée, RDV avancé au 07/03."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 31
+      },
+      "end": {
+        "page": 0,
+        "line": 48
+      },
+      "date": "2024-03-07",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Suivi du 07/03/2024, grossesse de 6 SA, maintien BHD 8 mg/j, arrêt du cannabis, introduction de substituts nicotiniques."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 49
+      },
+      "end": {
+        "page": 0,
+        "line": 63
+      },
+      "date": "2024-03-21",
+      "kind": "Entretien social",
+      "authorRole": "Assistante sociale",
+      "summary": "Entretien social du 21/03/2024, recueil de la situation familiale, démarches administratives et logement."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 64
+      },
+      "end": {
+        "page": 0,
+        "line": 67
+      },
+      "date": "2024-04-18",
+      "kind": "Consultation sage-femme",
+      "authorRole": "Sage-femme",
+      "summary": "Consultation sage-femme du 18/04/2024, grossesse de 12 SA, échographie normale, orientation périnatale."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 16
+      },
+      "end": {
+        "page": 1,
+        "line": 29
+      },
+      "date": "2024-05-30",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Suivi du 30/05/2024, consommation d'héroïne occasionnelle, augmentation du BHD à 10 mg/j, anxiété liée à l'accouchement."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 30
+      },
+      "end": {
+        "page": 1,
+        "line": 40
+      },
+      "date": "2024-07-25",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Suivi du 25/07/2024, aucune consommation d'héroïne, augmentation du BHD à 12 mg/j, préparation du staff périnatal."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 41
+      },
+      "end": {
+        "page": 1,
+        "line": 44
+      },
+      "date": "2024-08-14",
+      "kind": "Délivrance",
+      "authorRole": null,
+      "summary": "Délivrance exceptionnelle du 14/08/2024, remise de BHD 10 mg pour 3 jours, patiente fatiguée mais stable."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 45
+      },
+      "end": {
+        "page": 2,
+        "line": 14
+      },
+      "date": "2024-10-03",
+      "kind": "Consultation sage-femme",
+      "authorRole": "Sage-femme",
+      "summary": "Consultation sage-femme du 03/10/2024, accouchement le 29/09/2024, bébé de 2 610 g, syndrome de sevrage néonatal traité."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 15
+      },
+      "end": {
+        "page": 2,
+        "line": 25
+      },
+      "date": "2024-12-12",
+      "kind": "Entretien social",
+      "authorRole": "Assistante sociale",
+      "summary": "Entretien social du 12/12/2024, rupture du couple, demande d'ouverture de droits RSA et révision des APL."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 26
+      },
+      "end": {
+        "page": 2,
+        "line": 43
+      },
+      "date": "2025-01-23",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Suivi du 23/01/2025, épisode dépressif du post‑partum, introduction de sertraline 50 mg, BHD réduite à 10 mg."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 44
+      },
+      "end": {
+        "page": 2,
+        "line": 53
+      },
+      "date": "2025-03-06",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Suivi du 06/03/2025, amélioration avec sertraline 100 mg, BHD 10 mg, suivi psychologique régulier."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 55
+      },
+      "end": {
+        "page": 2,
+        "line": 60
+      },
+      "date": "2025-05-15",
+      "kind": "Observation infirmière",
+      "authorRole": "IDE",
+      "summary": "Observation infirmière du 15/05/2025, consommation d'héroïne isolée, remise d'un nouveau kit naloxone."
+    },
+    {
+      "id": "historique:o14",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 61
+      },
+      "end": {
+        "page": 3,
+        "line": 21
+      },
+      "date": "2025-05-22",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Suivi du 22/05/2025, état clinique stable, poursuite du traitement BHD 10 mg et sertraline 100 mg."
+    },
+    {
+      "id": "historique:o15",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 22
+      },
+      "end": {
+        "page": 3,
+        "line": 34
+      },
+      "date": "2025-09-09",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Suivi du 09/09/2025 : patient a repris le travail à mi‑temps depuis le 01/09, est à la crèche depuis juin et s'est bien adapté, euthymique, plus d'héroïne depuis mai, consommation occasionnelle de cannabis le week‑end, tabac 10 cigarettes/jour avec intention d'arrêter, traitements BHD 12 mg, sertraline 100 mg, patch nicotinique 14 mg + forme orale, point sevrage tabac avec l'IDE tabacologue, prochain rendez‑vous dans 2 mois."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t5",
+        "kind": "substance_use",
+        "label": "Opioïdes (héroïne)"
+      },
+      {
+        "id": "t8",
+        "kind": "substance_use",
+        "label": "Tabac"
+      },
+      {
+        "id": "t9",
+        "kind": "substance_use",
+        "label": "Cannabis"
+      },
+      {
+        "id": "t7",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif du post-partum"
+      },
+      {
+        "id": "t1",
+        "kind": "medication",
+        "label": "Buprénorphine (BHD)"
+      },
+      {
+        "id": "t3",
+        "kind": "medication",
+        "label": "Patch nicotinique 21 mg"
+      },
+      {
+        "id": "t11",
+        "kind": "medication",
+        "label": "Sertraline"
+      },
+      {
+        "id": "t13",
+        "kind": "therapeutic_psycho",
+        "label": "Sevrage tabac"
+      },
+      {
+        "id": "t2",
+        "kind": "life_event",
+        "label": "Grossesse"
+      },
+      {
+        "id": "t4",
+        "kind": "life_event",
+        "label": "Suivi CSAPA"
+      },
+      {
+        "id": "t6",
+        "kind": "life_event",
+        "label": "Accouchement"
+      },
+      {
+        "id": "t10",
+        "kind": "life_event",
+        "label": "Séparation du compagnon"
+      },
+      {
+        "id": "t12",
+        "kind": "life_event",
+        "label": "Retour au travail"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2019",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Stabilité sous BHD 8 mg/j en une prise le matin, depuis mise sous TSO en 2019",
+        "observationIds": [
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "2024-03-04",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Test urinaire de grossesse positif le 04/03/2024",
+        "observationIds": [
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "2024-03-07",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Substituts nicotiniques (patch 21 mg + gommes 2 mg) acceptés le 07/03/2024",
+        "observationIds": [
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e4",
+        "trackId": "t4",
+        "start": "2018",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Suivi au CSAPA depuis 2018, mentionné le 21/03/2024",
+        "observationIds": [
+          "historique:o4"
+        ]
+      },
+      {
+        "id": "e5",
+        "trackId": "t5",
+        "start": "2024-05-15",
+        "end": "2024-05-15",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Trace d'héroïne sniffée mi-mai 2024, rapporté le 30/05/2024",
+        "observationIds": [
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e6",
+        "trackId": "t5",
+        "start": "2024-05-30",
+        "end": null,
+        "ongoing": false,
+        "mode": "craving",
+        "lossOfControl": false,
+        "note": "Craving en fin de journée, sensation de manque légère le soir, 30/05/2024",
+        "observationIds": [
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e7",
+        "trackId": "t1",
+        "start": "2024-05-30",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Majoration BHD à 10 mg/j (6 mg matin +4 mg soir) le 30/05/2024",
+        "observationIds": [
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e8",
+        "trackId": "t1",
+        "start": "2024-07-26",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "BHD 12 mg/j (8+4) à partir du 26/07/2024",
+        "observationIds": [
+          "historique:o7"
+        ]
+      },
+      {
+        "id": "e9",
+        "trackId": "t1",
+        "start": "2024-08-14",
+        "end": "2024-08-16",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Délivrance exceptionnelle de BHD 10 mg pour 3 jours le 14/08/2024",
+        "observationIds": [
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e10",
+        "trackId": "t6",
+        "start": "2024-09-29",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Naissance du fils le 29/09/2024, voie basse, 36 SA +2j",
+        "observationIds": [
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e11",
+        "trackId": "t7",
+        "start": "2024-10-03",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "EPDS à 14, symptômes dépressifs post-partum, constaté le 03/10/2024",
+        "observationIds": [
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e12",
+        "trackId": "t8",
+        "start": "2024-09-29",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Tabac repris à 15 cig/j après l'accouchement, constaté le 03/10/2024",
+        "observationIds": [
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e13",
+        "trackId": "t9",
+        "start": "2024-09-29",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Cannabis un joint le soir pour dormir depuis la sortie de maternité, constaté le 03/10/2024",
+        "observationIds": [
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e14",
+        "trackId": "t10",
+        "start": "2024-12-01",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Le compagnon est parti du domicile début décembre 2024, constaté le 12/12/2024",
+        "observationIds": [
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e15",
+        "trackId": "t7",
+        "start": "2025-01-23",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Tableau d'épisode dépressif caractérisé du post-partum, modéré, constaté le 23/01/2025",
+        "observationIds": [
+          "historique:o11"
+        ]
+      },
+      {
+        "id": "e16",
+        "trackId": "t11",
+        "start": "2025-01-23",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Introduction sertraline 50 mg le matin, 23/01/2025",
+        "observationIds": [
+          "historique:o11"
+        ]
+      },
+      {
+        "id": "e17",
+        "trackId": "t1",
+        "start": "2025-01-06",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "BHD diminuée à 10 mg/j depuis le 06/01/2025",
+        "observationIds": [
+          "historique:o11"
+        ]
+      },
+      {
+        "id": "e18",
+        "trackId": "t11",
+        "start": "2025-02-20",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Augmentation sertraline à 100 mg le 20/02/2025",
+        "observationIds": [
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e19",
+        "trackId": "t9",
+        "start": "2025-03-06",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Cannabis 1 à 2 joints le soir, constaté le 06/03/2025",
+        "observationIds": [
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e20",
+        "trackId": "t8",
+        "start": "2025-03-06",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Tabac 12 cigarettes/j, constaté le 06/03/2025",
+        "observationIds": [
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e21",
+        "trackId": "t5",
+        "start": "2025-05-10",
+        "end": "2025-05-10",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Sniffé de l'héroïne une fois le 10/05/2025, rapporté le 15/05/2025",
+        "observationIds": [
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e22",
+        "trackId": "t12",
+        "start": "2025-09-01",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Reprise du travail à mi-temps le 01/09/2025",
+        "observationIds": [
+          "historique:o15"
+        ]
+      },
+      {
+        "id": "e23",
+        "trackId": "t13",
+        "start": "2025-09-09",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Point sevrage tabac avec l'IDE tabacologue le 09/09/2025",
+        "observationIds": [
+          "historique:o15"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 34747,
+  "usage": {
+    "calls": 3,
+    "promptTokens": 10189,
+    "completionTokens": 15172,
+    "cost": 0.0105
+  },
+  "rawAnswers": [
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 10
+            },
+            "end": {
+              "page": 1,
+              "line": 24
+            },
+            "date": "2024-01-15",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Suivi psychiatrique du 15/01/2024, patiente stable sous BHD 8 mg/j, aucune mésusage, projet de grossesse discuté."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 25
+            },
+            "end": {
+              "page": 1,
+              "line": 30
+            },
+            "date": "2024-03-04",
+            "kind": "Observation infirmière",
+            "author_role": "IDE",
+            "continues_previous": false,
+            "summary": "Observation infirmière du 04/03/2024, test de grossesse positif, patiente très angoissée, RDV avancé au 07/03."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 31
+            },
+            "end": {
+              "page": 1,
+              "line": 48
+            },
+            "date": "2024-03-07",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Suivi du 07/03/2024, grossesse de 6 SA, maintien BHD 8 mg/j, arrêt du cannabis, introduction de substituts nicotiniques."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 49
+            },
+            "end": {
+              "page": 1,
+              "line": 63
+            },
+            "date": "2024-03-21",
+            "kind": "Entretien social",
+            "author_role": "Assistante sociale",
+            "continues_previous": false,
+            "summary": "Entretien social du 21/03/2024, recueil de la situation familiale, démarches administratives et logement."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 64
+            },
+            "end": {
+              "page": 1,
+              "line": 67
+            },
+            "date": "2024-04-18",
+            "kind": "Consultation sage-femme",
+            "author_role": "Sage-femme",
+            "continues_previous": false,
+            "summary": "Consultation sage-femme du 18/04/2024, grossesse de 12 SA, échographie normale, orientation périnatale."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 16
+            },
+            "end": {
+              "page": 2,
+              "line": 29
+            },
+            "date": "2024-05-30",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Suivi du 30/05/2024, consommation d'héroïne occasionnelle, augmentation du BHD à 10 mg/j, anxiété liée à l'accouchement."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 30
+            },
+            "end": {
+              "page": 2,
+              "line": 40
+            },
+            "date": "2024-07-25",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Suivi du 25/07/2024, aucune consommation d'héroïne, augmentation du BHD à 12 mg/j, préparation du staff périnatal."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 41
+            },
+            "end": {
+              "page": 2,
+              "line": 44
+            },
+            "date": "2024-08-14",
+            "kind": "Délivrance",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Délivrance exceptionnelle du 14/08/2024, remise de BHD 10 mg pour 3 jours, patiente fatiguée mais stable."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 45
+            },
+            "end": {
+              "page": 2,
+              "line": 54
+            },
+            "date": "2024-10-03",
+            "kind": "Consultation sage-femme",
+            "author_role": "Sage-femme",
+            "continues_previous": false,
+            "summary": "Consultation sage-femme du 03/10/2024, accouchement le 29/09/2024, bébé de 2 610 g, syndrome de sevrage néonatal traité."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 55
+            },
+            "end": {
+              "page": 3,
+              "line": 14
+            },
+            "date": "2024-10-22",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": true,
+            "summary": "Suivi du 22/10/2024, fatigue intense, troubles du sommeil, reprise du tabac, consommation de cannabis le soir."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 15
+            },
+            "end": {
+              "page": 3,
+              "line": 25
+            },
+            "date": "2024-12-12",
+            "kind": "Entretien social",
+            "author_role": "Assistante sociale",
+            "continues_previous": false,
+            "summary": "Entretien social du 12/12/2024, rupture du couple, demande d'ouverture de droits RSA et révision des APL."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 26
+            },
+            "end": {
+              "page": 3,
+              "line": 43
+            },
+            "date": "2025-01-23",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Suivi du 23/01/2025, épisode dépressif du post‑partum, introduction de sertraline 50 mg, BHD réduite à 10 mg."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 44
+            },
+            "end": {
+              "page": 3,
+              "line": 53
+            },
+            "date": "2025-03-06",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Suivi du 06/03/2025, amélioration avec sertraline 100 mg, BHD 10 mg, suivi psychologique régulier."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 55
+            },
+            "end": {
+              "page": 3,
+              "line": 60
+            },
+            "date": "2025-05-15",
+            "kind": "Observation infirmière",
+            "author_role": "IDE",
+            "continues_previous": false,
+            "summary": "Observation infirmière du 15/05/2025, consommation d'héroïne isolée, remise d'un nouveau kit naloxone."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 61
+            },
+            "end": {
+              "page": 3,
+              "line": 87
+            },
+            "date": "2025-05-22",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Suivi du 22/05/2025, état clinique stable, poursuite du traitement BHD 10 mg et sertraline 100 mg."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 4,
+              "line": 10
+            },
+            "end": {
+              "page": 4,
+              "line": 21
+            },
+            "date": "2025-05-22",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": true,
+            "summary": "Reprise ponctuelle d'héroïne le 10/05, analyse fonctionnelle (solitude du samedi soir, manque d'étayage), aucun contrôle perdu, signes de manque le soir depuis janvier, place en crèche obtenue en juin avec garde maternelle le samedi, thymie stable, traitements BHD 12 mg/j et sertraline 100 mg, prochain rendez‑vous dans 2 mois."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 22
+            },
+            "end": {
+              "page": 4,
+              "line": 34
+            },
+            "date": "2025-09-09",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Suivi du 09/09/2025 : patient a repris le travail à mi‑temps depuis le 01/09, est à la crèche depuis juin et s'est bien adapté, euthymique, plus d'héroïne depuis mai, consommation occasionnelle de cannabis le week‑end, tabac 10 cigarettes/jour avec intention d'arrêter, traitements BHD 12 mg, sertraline 100 mg, patch nicotinique 14 mg + forme orale, point sevrage tabac avec l'IDE tabacologue, prochain rendez‑vous dans 2 mois."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "2 à 3 joints le soir, usage pour couper la journée, observé le 2024-01-15",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "15 cigarettes/jour, observé le 2024-01-15",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Buprénorphine (BHD)",
+            "start": "2019",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Stabilité sous BHD 8 mg/j en une prise le matin, depuis mise sous TSO en 2019",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Grossesse",
+            "start": "2024-03-04",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Test urinaire de grossesse positif le 04/03/2024",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": null,
+            "end": "2024-03-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Arrêt du cannabis depuis le 03/03/2024, rapporté le 04/03/2024",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "15 cigarettes/jour, observé le 07/03/2024",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Patch nicotinique 21 mg",
+            "start": "2024-03-07",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Substituts nicotiniques (patch 21 mg + gommes 2 mg) acceptés le 07/03/2024",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Suivi CSAPA",
+            "start": "2018",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Suivi au CSAPA depuis 2018, mentionné le 21/03/2024",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes (héroïne)",
+            "start": "2024-05-15",
+            "end": "2024-05-15",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Trace d'héroïne sniffée mi-mai 2024, rapporté le 30/05/2024",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes (héroïne)",
+            "start": "2024-05-30",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "craving",
+            "loss_of_control": false,
+            "note": "Craving en fin de journée, sensation de manque légère le soir, 30/05/2024",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Buprénorphine (BHD)",
+            "start": "2024-05-30",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Majoration BHD à 10 mg/j (6 mg matin +4 mg soir) le 30/05/2024",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Buprénorphine (BHD)",
+            "start": "2024-07-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "BHD 12 mg/j (8+4) à partir du 26/07/2024",
+            "observation_ids": [
+              "o7"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Buprénorphine (BHD)",
+            "start": "2024-08-14",
+            "end": "2024-08-16",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Délivrance exceptionnelle de BHD 10 mg pour 3 jours le 14/08/2024",
+            "observation_ids": [
+              "o8"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Accouchement",
+            "start": "2024-09-29",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Naissance du fils le 29/09/2024, voie basse, 36 SA +2j",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif du post-partum",
+            "start": "2024-10-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "EPDS à 14, symptômes dépressifs post-partum, constaté le 03/10/2024",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": "2024-09-29",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Tabac repris à 15 cig/j après l'accouchement, constaté le 03/10/2024",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2024-09-29",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Cannabis un joint le soir pour dormir depuis la sortie de maternité, constaté le 03/10/2024",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Séparation du compagnon",
+            "start": "2024-12-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Le compagnon est parti du domicile début décembre 2024, constaté le 12/12/2024",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif du post-partum",
+            "start": "2025-01-23",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Tableau d'épisode dépressif caractérisé du post-partum, modéré, constaté le 23/01/2025",
+            "observation_ids": [
+              "o11"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Sertraline",
+            "start": "2025-01-23",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Introduction sertraline 50 mg le matin, 23/01/2025",
+            "observation_ids": [
+              "o11"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Buprénorphine (BHD)",
+            "start": "2025-01-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "BHD diminuée à 10 mg/j depuis le 06/01/2025",
+            "observation_ids": [
+              "o11"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Sertraline",
+            "start": "2025-02-20",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Augmentation sertraline à 100 mg le 20/02/2025",
+            "observation_ids": [
+              "o12"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2025-03-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Cannabis 1 à 2 joints le soir, constaté le 06/03/2025",
+            "observation_ids": [
+              "o12"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": "2025-03-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Tabac 12 cigarettes/j, constaté le 06/03/2025",
+            "observation_ids": [
+              "o12"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes (héroïne)",
+            "start": "2025-05-10",
+            "end": "2025-05-10",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Sniffé de l'héroïne une fois le 10/05/2025, rapporté le 15/05/2025",
+            "observation_ids": [
+              "o13"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Retour au travail",
+            "start": "2025-09-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Reprise du travail à mi-temps le 01/09/2025",
+            "observation_ids": [
+              "o15"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Sevrage tabac",
+            "start": "2025-09-09",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Point sevrage tabac avec l'IDE tabacologue le 09/09/2025",
+            "observation_ids": [
+              "o15"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

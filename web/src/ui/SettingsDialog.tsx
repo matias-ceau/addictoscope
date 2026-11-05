@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { emptyPolicy, policyReady } from "../app/settings";
 import type { CloudPolicy } from "../cloud/guard";
+import { MODELS } from "../cloud/models";
 
 const CHOICES: { kind: CloudPolicy["kind"]; title: string; text: string }[] = [
   { kind: "off", title: "Désactivée", text: "Aucun appel à un modèle en ligne. La pseudonymisation reste disponible." },
@@ -58,10 +59,55 @@ export function SettingsDialog(props: { policy: CloudPolicy; onSave: (p: CloudPo
               Clé d'API
               <input type="password" value={draft.apiKey} onChange={(e) => set({ apiKey: e.target.value })} autoComplete="off" />
             </label>
+            {draft.kind === "openrouter-zdr" && (
+              <div className="model-list" role="radiogroup" aria-label="Modèle">
+                {MODELS.map((m) => (
+                  <label key={m.id} className={"choice model-choice" + (draft.model === m.id ? " selected" : "")}>
+                    <input type="radio" name="model" checked={draft.model === m.id} onChange={() => set({ model: m.id })} />
+                    <span>
+                      <strong>
+                        {m.name} <span className="muted small">{m.maker}</span>
+                        {m.tag && <span className="model-tag">{m.tag}</span>}
+                      </strong>
+                      <span className="model-stats">
+                        {m.recall !== undefined && <span title="Part des événements attendus retrouvés sur les 14 dossiers fictifs">{Math.round(m.recall * 100)} % des événements (dossiers fictifs)</span>}
+                        {m.costPerRealDossier !== undefined && <span>{m.costPerRealDossier.toFixed(2)} $ / dossier réel (moyenne mesurée)</span>}
+                      </span>
+                      {m.note && <span className="muted small">{m.note}</span>}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            )}
             <label>
-              Modèle (multimodal, sorties JSON)
+              Découpage en observations
+              <select
+                value={draft.segmentModel ?? ""}
+                onChange={(e) => setDraft({ ...draft, segmentModel: e.target.value || undefined } as CloudPolicy)}
+              >
+                <option value="">Même modèle que la frise</option>
+                {MODELS.filter((m) => m.id !== draft.model).map((m) => (
+                  <option key={m.id} value={m.id}>
+                    {m.name}
+                  </option>
+                ))}
+              </select>
+              <span className="muted small" style={{ fontWeight: 400 }}>
+                Le découpage reçoit les images des pages : c'est la plus grosse part du coût. Claude Haiku 5.5 pour le
+                découpage et Claude Sonnet 5.5 pour la frise : 86 % des événements retrouvés (contre 88 %), coût réduit
+                d'un tiers.
+              </span>
+            </label>
+            <label>
+              Identifiant du modèle (multimodal, sorties JSON)
               <input value={draft.model} onChange={(e) => set({ model: e.target.value })} />
             </label>
+            {draft.kind === "openrouter-zdr" && (
+              <p className="muted small">
+                Rappel : part des événements attendus retrouvés sur 14 dossiers fictifs (un passage). Tous ces modèles sont
+                joints par OpenRouter avec zéro conservation.
+              </p>
+            )}
             <p className="muted small">La clé est conservée dans ce navigateur uniquement.</p>
           </>
         )}

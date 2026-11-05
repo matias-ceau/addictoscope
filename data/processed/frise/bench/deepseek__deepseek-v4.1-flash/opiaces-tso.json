@@ -1,0 +1,1736 @@
+{
+  "dossier": "opiaces-tso",
+  "model": "deepseek/deepseek-v4.1-flash",
+  "ranAt": "2026-11-05T00:43:31.057Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 3,
+      "redactions": {
+        "ETABLISSEMENT": 6,
+        "ADRESSE": 7,
+        "TEL": 4,
+        "PATIENT": 9,
+        "DOSSIER": 3,
+        "NAISSANCE": 4,
+        "IPP": 3,
+        "VILLE": 4,
+        "SOIGNANT": 20,
+        "PROCHE": 13,
+        "PERSONNE": 3,
+        "NIR": 1
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 10
+      },
+      "end": {
+        "page": 0,
+        "line": 28
+      },
+      "date": "2022-03-14",
+      "kind": "Observation médicale",
+      "authorRole": "Interne",
+      "summary": "Patient de 33 ans suivi au CSAPA pour trouble de l'usage des opiacés sous méthadone, vu en remplacement du Dr [SOIGNANT_3] ; renouvellement de la méthadone 60 mg/j, refus de délivrance anticipée, urines positives méthadone et THC."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 29
+      },
+      "end": {
+        "page": 0,
+        "line": 40
+      },
+      "date": "2023-01-12",
+      "kind": "Consultation médicale",
+      "authorRole": "Médecin généraliste",
+      "summary": "Renouvellement TSO méthadone sirop 60 mg/j, délivrance hebdomadaire en pharmacie, rappel du parcours de soins, urines positives méthadone, cannabis et cocaïne, refus du kit naloxone."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 41
+      },
+      "end": {
+        "page": 0,
+        "line": 49
+      },
+      "date": "2023-02-20",
+      "kind": "Observation infirmière",
+      "authorRole": null,
+      "summary": "Patient vu en urgence à la demande de sa compagne après une overdose à l'héroïne et Rivotril le 18/02, hospitalisé 24h en réa puis sorti contre avis médical, kit naloxone remis et formation faite."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 50
+      },
+      "end": {
+        "page": 0,
+        "line": 62
+      },
+      "date": "2023-02-22",
+      "kind": "Consultation psychiatrique",
+      "authorRole": "Psychiatre",
+      "summary": "Consultation après l'overdose du 18/02, reprise d'héroïne occasionnelle depuis décembre dans un contexte de deuil et de tensions de couple, pas de geste suicidaire, augmentation de la méthadone à 70 mg/j et délivrance quotidienne au CSAPA pendant un mois."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 63
+      },
+      "end": {
+        "page": 1,
+        "line": 16
+      },
+      "date": "2023-03-07",
+      "kind": "Entretien éducatif",
+      "authorRole": "Éducateur spécialisé",
+      "summary": "Premier entretien éducatif depuis l'overdose : journée type, projet de travail, importance de sa fille, inscription au PLIE et prochain RDV dans 15 jours."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 17
+      },
+      "end": {
+        "page": 1,
+        "line": 31
+      },
+      "date": "2023-03-28",
+      "kind": "Entretien social",
+      "authorRole": "Assistante sociale",
+      "summary": "Mise à jour du dossier social : situation familiale, ressources RSA et APL, dette de loyer, démarches FSL, récupération du permis et inscription au PLIE."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 32
+      },
+      "end": {
+        "page": 1,
+        "line": 36
+      },
+      "date": "2023-04-13",
+      "kind": "Délivrance",
+      "authorRole": null,
+      "summary": "Délivrance de méthadone 70 mg, patient ok sans odeur d'alcool ni pupilles anormales, demande de repasser en pharmacie, maintien de la délivrance au CSAPA jusqu'au 30/04."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 37
+      },
+      "end": {
+        "page": 1,
+        "line": 45
+      },
+      "date": "2023-05-15",
+      "kind": "Consultation psychiatrique",
+      "authorRole": "Psychiatre",
+      "summary": "Patient stabilisé à 70 mg/j, pas d'héroïne depuis l'overdose, consommation de cannabis et cocaïne, reprise de la délivrance hebdomadaire en pharmacie, poursuite du traitement et discussion sur le passage aux gélules."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 46
+      },
+      "end": {
+        "page": 1,
+        "line": 52
+      },
+      "date": "2023-09-26",
+      "kind": "Observation infirmière",
+      "authorRole": null,
+      "summary": "Patient vu à sa demande, consommation de crack depuis environ 3 semaines, dépenses importantes, troubles du sommeil, menace de partir avec sa fille, urines positives cocaïne et méthadone, RDV médical avancé."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 53
+      },
+      "end": {
+        "page": 1,
+        "line": 63
+      },
+      "date": "2023-10-03",
+      "kind": "Consultation psychiatrique",
+      "authorRole": "Psychiatre",
+      "summary": "Rechute de cocaïne (crack) depuis début septembre, craving et signes de manque, augmentation de la méthadone à 80 mg/j à partir du 12/10, orientation vers le programme RdR crack et information sur les risques pour la garde."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 64
+      },
+      "end": {
+        "page": 1,
+        "line": 66
+      },
+      "date": "2023-10-20",
+      "kind": "Délivrance",
+      "authorRole": null,
+      "summary": "Délivrance de 70 mg de méthadone, RAS, patient pressé."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 67
+      },
+      "end": {
+        "page": 2,
+        "line": 18
+      },
+      "date": "2023-11-14",
+      "kind": "Entretien social",
+      "authorRole": "Assistante sociale",
+      "summary": "Information préoccupante transmise par la PMI le 08/11 concernant les absences scolaires de l'enfant, père en colère, explication de la procédure, contact avec la mère qui confirme les tensions et l'arrêt du crack depuis 2 semaines."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 19
+      },
+      "end": {
+        "page": 2,
+        "line": 27
+      },
+      "date": "2023-11-30",
+      "kind": "Consultation psychiatrique",
+      "authorRole": "Psychiatre",
+      "summary": "Arrêt du crack depuis fin octobre, urines négatives pour la cocaïne, méthadone 80 mg/j sans signes de manque, patient mobilisé par l'information préoccupante, poursuite du traitement et passage aux gélules accepté à partir du 08/01/2024."
+    },
+    {
+      "id": "historique:o14",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 28
+      },
+      "end": {
+        "page": 2,
+        "line": 31
+      },
+      "date": "2024-01-09",
+      "kind": "Délivrance",
+      "authorRole": null,
+      "summary": "Première délivrance de gélules 80 mg (relais du sirop décalé d'un jour), explications sur les prises et le stockage hors de portée de l'enfant, patient content."
+    },
+    {
+      "id": "historique:o15",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 32
+      },
+      "end": {
+        "page": 2,
+        "line": 40
+      },
+      "date": "2024-02-06",
+      "kind": "Entretien éducatif",
+      "authorRole": "Éducateur spécialisé",
+      "summary": "Patient a commencé un chantier d'insertion le 22/01 (26h/semaine), fatigué mais fier, mesure d'AEMO décidée par le juge des enfants, cannabis réduit à 2 joints le soir, plus de cocaïne depuis octobre, tabac 1 paquet/j."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t4",
+        "kind": "substance_use",
+        "label": "Cannabis"
+      },
+      {
+        "id": "t5",
+        "kind": "substance_use",
+        "label": "Opioïdes"
+      },
+      {
+        "id": "t14",
+        "kind": "substance_use",
+        "label": "Benzodiazépines"
+      },
+      {
+        "id": "t22",
+        "kind": "substance_use",
+        "label": "Cocaïne"
+      },
+      {
+        "id": "t2",
+        "kind": "psychiatric",
+        "label": "TDAH"
+      },
+      {
+        "id": "t13",
+        "kind": "psychiatric",
+        "label": "Trouble de la personnalité antisociale (évoqué)"
+      },
+      {
+        "id": "t3",
+        "kind": "medication",
+        "label": "Méthylphénidate"
+      },
+      {
+        "id": "t7",
+        "kind": "medication",
+        "label": "Méthadone"
+      },
+      {
+        "id": "t9",
+        "kind": "medication",
+        "label": "Sofosbuvir/velpatasvir"
+      },
+      {
+        "id": "t16",
+        "kind": "medication",
+        "label": "Naloxone (kit)"
+      },
+      {
+        "id": "t6",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi CSAPA"
+      },
+      {
+        "id": "t15",
+        "kind": "therapeutic_psycho",
+        "label": "Hospitalisation en réanimation"
+      },
+      {
+        "id": "t17",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi psychiatrique"
+      },
+      {
+        "id": "t18",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi éducatif"
+      },
+      {
+        "id": "t19",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi social"
+      },
+      {
+        "id": "t23",
+        "kind": "therapeutic_psycho",
+        "label": "Programme de réduction des risques crack"
+      },
+      {
+        "id": "t1",
+        "kind": "life_event",
+        "label": "Violence paternelle et placements en foyer"
+      },
+      {
+        "id": "t8",
+        "kind": "life_event",
+        "label": "Incarcération"
+      },
+      {
+        "id": "t10",
+        "kind": "life_event",
+        "label": "Permis B suspendu"
+      },
+      {
+        "id": "t11",
+        "kind": "life_event",
+        "label": "Naissance de la fille"
+      },
+      {
+        "id": "t12",
+        "kind": "life_event",
+        "label": "Décès du père"
+      },
+      {
+        "id": "t20",
+        "kind": "life_event",
+        "label": "Inscription au PLIE"
+      },
+      {
+        "id": "t21",
+        "kind": "life_event",
+        "label": "Tensions de couple"
+      },
+      {
+        "id": "t24",
+        "kind": "life_event",
+        "label": "Information préoccupante PMI"
+      },
+      {
+        "id": "t25",
+        "kind": "life_event",
+        "label": "Évaluation sociale ASE"
+      },
+      {
+        "id": "t26",
+        "kind": "life_event",
+        "label": "AEMO"
+      },
+      {
+        "id": "t27",
+        "kind": "life_event",
+        "label": "Chantier d'insertion (espaces verts)"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "1994",
+        "end": "2005",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Enfance marquée par la violence paternelle et des placements en foyer à l'adolescence.",
+        "observationIds": [
+          "historique:o1"
+        ],
+        "fromAge": {
+          "start": [
+            6,
+            11
+          ],
+          "end": [
+            12,
+            17
+          ]
+        }
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "1994",
+        "end": "1999",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Antécédent de TDAH dans l'enfance ; non réévalué à l'âge adulte.",
+        "observationIds": [
+          "historique:o4"
+        ],
+        "fromAge": {
+          "start": [
+            6,
+            11
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "1997",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Selon le patient, à 9 ans pour TDAH.",
+        "observationIds": [
+          "historique:o4"
+        ],
+        "fromAge": {
+          "start": [
+            9,
+            9
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e4",
+        "trackId": "t4",
+        "start": "2002",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Cannabis depuis l'âge de 14 ans. 4-5 joints/j en 2023, joints dès le réveil ; réduit à 2 joints le soir en février 2024.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o5",
+          "historique:o8",
+          "historique:o15"
+        ],
+        "fromAge": {
+          "start": [
+            14,
+            14
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e5",
+        "trackId": "t5",
+        "start": "2005",
+        "end": null,
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Première consommation d'héroïne à 17 ans (o1) / à partir de 18 ans (2006) selon o2 ; d'abord sniffée, puis injectée à partir de 20 ans environ (o1) / IV dès 2009 (o2). Nombreuses périodes de rechute.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2"
+        ],
+        "fromAge": {
+          "start": [
+            17,
+            17
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e6",
+        "trackId": "t6",
+        "start": "2011",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Suivi au CSAPA depuis 2011 ; délivrance méthadone ; délivrance quotidienne au CSAPA du 22/02/2023 au 30/04/2023 ; reprise délivrance hebdomadaire en pharmacie le 02/05/2023.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o4",
+          "historique:o7",
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e7",
+        "trackId": "t7",
+        "start": "2012",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Méthadone au CSAPA depuis 2012 (o2, o8) ; o1 mentionne suivi CSAPA depuis 2011. 60 mg/j puis 70 mg/j le 22/02/2023, 80 mg/j à partir du 12/10/2023. Sirop puis gélules à partir du 08/01/2024.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o4",
+          "historique:o7",
+          "historique:o8",
+          "historique:o10",
+          "historique:o11",
+          "historique:o13",
+          "historique:o14"
+        ]
+      },
+      {
+        "id": "e8",
+        "trackId": "t8",
+        "start": "2014",
+        "end": "2015",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Incarcération 2014-2015 (18 mois) pour trafic de stupéfiants ; méthadone poursuivie en détention. o1 mentionne 'pendant 2 ans'.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e9",
+        "trackId": "t9",
+        "start": "2019",
+        "end": "2019",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Traitement du VHC en 2019, guéri (RVS12).",
+        "observationIds": [
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e10",
+        "trackId": "t10",
+        "start": "2019",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Permis B suspendu depuis 2019 ; démarches pour le récupérer (stage + visite médicale).",
+        "observationIds": [
+          "historique:o5",
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e11",
+        "trackId": "t11",
+        "start": "2020-03",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Fille née en mars 2020.",
+        "observationIds": [
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e12",
+        "trackId": "t12",
+        "start": "2021-08",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Décès du père d'un cancer du poumon en août 2021 ; deuil non élaboré.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o4"
+        ]
+      },
+      {
+        "id": "e13",
+        "trackId": "t13",
+        "start": "2022-03-14",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Évoqué le 14/03/2022, à nuancer le 22/02/2023 (pas d'argument franc).",
+        "observationIds": [
+          "historique:o1",
+          "historique:o4"
+        ]
+      },
+      {
+        "id": "e14",
+        "trackId": "t5",
+        "start": "2022-12",
+        "end": "2023-02-18",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Reprise de l'héroïne occasionnelle depuis décembre 2022, à l'insu de l'équipe, dans un contexte de deuil et de tensions de couple.",
+        "observationIds": [
+          "historique:o4"
+        ]
+      },
+      {
+        "id": "e15",
+        "trackId": "t5",
+        "start": "2023-02-18",
+        "end": null,
+        "ongoing": false,
+        "mode": "intoxication",
+        "lossOfControl": true,
+        "note": "Overdose à domicile le 18/02/2023 après retour sur l'héroïne + 2 cachets de Rivotril ; naloxone par SMUR ; hospitalisation 24h en réanimation ; sortie contre avis médical.",
+        "observationIds": [
+          "historique:o3",
+          "historique:o4"
+        ]
+      },
+      {
+        "id": "e16",
+        "trackId": "t14",
+        "start": "2023-02-18",
+        "end": null,
+        "ongoing": false,
+        "mode": "intoxication",
+        "lossOfControl": true,
+        "note": "Clonazépam/Rivotril acheté dans la rue, pris lors de l'overdose du 18/02/2023.",
+        "observationIds": [
+          "historique:o3",
+          "historique:o4"
+        ]
+      },
+      {
+        "id": "e17",
+        "trackId": "t15",
+        "start": "2023-02-18",
+        "end": "2023-02-19",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "24h en réanimation après overdose ; sortie contre avis médical le dimanche.",
+        "observationIds": [
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e18",
+        "trackId": "t5",
+        "start": "2023-02-18",
+        "end": null,
+        "ongoing": true,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Pas d'héroïne depuis l'overdose (urines opiacés négatives x6 au 15/05/2023).",
+        "observationIds": [
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e19",
+        "trackId": "t16",
+        "start": "2023-02-20",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Kit naloxone proposé le 12/01/2023 (refusé) puis remis le 20/02/2023 après overdose ; formation faite.",
+        "observationIds": [
+          "historique:o2",
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e20",
+        "trackId": "t17",
+        "start": "2023-02-22",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Consultations psychiatriques après l'overdose ; ajustements de méthadone.",
+        "observationIds": [
+          "historique:o4",
+          "historique:o8",
+          "historique:o10",
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e21",
+        "trackId": "t18",
+        "start": "2023-03-07",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Entretiens éducatifs ; suivi rapproché proposé après l'overdose ; poursuite en 2023-2024.",
+        "observationIds": [
+          "historique:o4",
+          "historique:o5",
+          "historique:o10",
+          "historique:o13",
+          "historique:o15"
+        ]
+      },
+      {
+        "id": "e22",
+        "trackId": "t19",
+        "start": "2023-03-28",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Entretiens sociaux ; démarches FSL, permis, PLIE ; information préoccupante.",
+        "observationIds": [
+          "historique:o6",
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e23",
+        "trackId": "t20",
+        "start": "2023-03-28",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Projet d'inscription au PLIE ; démarches en cours.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e24",
+        "trackId": "t21",
+        "start": "2023-02",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Tensions de couple ; menace de partir avec leur fille (26/09/2023) ; confirmées par Mme (14/11/2023).",
+        "observationIds": [
+          "historique:o4",
+          "historique:o9",
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e25",
+        "trackId": "t22",
+        "start": "2023-09-01",
+        "end": "2023-10-31",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": true,
+        "note": "Rechute de cocaïne basée (crack) depuis début septembre 2023, quasi quotidienne ; craving important ; dépenses 300 €/semaine ; arrêt fin octobre 2023.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o10",
+          "historique:o12",
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e26",
+        "trackId": "t22",
+        "start": "2023-10-03",
+        "end": null,
+        "ongoing": false,
+        "mode": "craving",
+        "lossOfControl": true,
+        "note": "Craving important lors de la rechute de crack.",
+        "observationIds": [
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e27",
+        "trackId": "t23",
+        "start": "2023-10-03",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Orientation vers le programme de RdR crack (kits, pipes).",
+        "observationIds": [
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e28",
+        "trackId": "t22",
+        "start": "2023-10-31",
+        "end": null,
+        "ongoing": true,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Arrêt du crack depuis fin octobre 2023 ; urines négatives pour la cocaïne le 21/11/2023 ; plus de cocaïne en février 2024.",
+        "observationIds": [
+          "historique:o12",
+          "historique:o13",
+          "historique:o15"
+        ]
+      },
+      {
+        "id": "e29",
+        "trackId": "t24",
+        "start": "2023-11-08",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Information préoccupante transmise par la PMI le 08/11/2023 (absences répétées à l'école maternelle, père vu 'pas dans son état').",
+        "observationIds": [
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e30",
+        "trackId": "t25",
+        "start": "2023-11-30",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Évaluation sociale par l'ASE en cours au 30/11/2023.",
+        "observationIds": [
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e31",
+        "trackId": "t26",
+        "start": "2024-01",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Mesure d'AEMO décidée par le juge des enfants fin janvier 2024 ; vécue comme une surveillance mais 'ça peut aider'.",
+        "observationIds": [
+          "historique:o15"
+        ]
+      },
+      {
+        "id": "e32",
+        "trackId": "t27",
+        "start": "2024-01-22",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Chantier d'insertion commencé le 22/01/2024, 26h/semaine.",
+        "observationIds": [
+          "historique:o15"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 80119,
+  "usage": {
+    "calls": 2,
+    "promptTokens": 9805,
+    "completionTokens": 44367,
+    "cost": 0.0539
+  },
+  "rawAnswers": [
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 10
+            },
+            "end": {
+              "page": 1,
+              "line": 28
+            },
+            "date": "2022-03-14",
+            "kind": "Observation médicale",
+            "author_role": "Interne",
+            "continues_previous": false,
+            "summary": "Patient de 33 ans suivi au CSAPA pour trouble de l'usage des opiacés sous méthadone, vu en remplacement du Dr [SOIGNANT_3] ; renouvellement de la méthadone 60 mg/j, refus de délivrance anticipée, urines positives méthadone et THC."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 29
+            },
+            "end": {
+              "page": 1,
+              "line": 40
+            },
+            "date": "2023-01-12",
+            "kind": "Consultation médicale",
+            "author_role": "Médecin généraliste",
+            "continues_previous": false,
+            "summary": "Renouvellement TSO méthadone sirop 60 mg/j, délivrance hebdomadaire en pharmacie, rappel du parcours de soins, urines positives méthadone, cannabis et cocaïne, refus du kit naloxone."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 41
+            },
+            "end": {
+              "page": 1,
+              "line": 49
+            },
+            "date": "2023-02-20",
+            "kind": "Observation infirmière",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Patient vu en urgence à la demande de sa compagne après une overdose à l'héroïne et Rivotril le 18/02, hospitalisé 24h en réa puis sorti contre avis médical, kit naloxone remis et formation faite."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 50
+            },
+            "end": {
+              "page": 1,
+              "line": 62
+            },
+            "date": "2023-02-22",
+            "kind": "Consultation psychiatrique",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Consultation après l'overdose du 18/02, reprise d'héroïne occasionnelle depuis décembre dans un contexte de deuil et de tensions de couple, pas de geste suicidaire, augmentation de la méthadone à 70 mg/j et délivrance quotidienne au CSAPA pendant un mois."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 63
+            },
+            "end": {
+              "page": 2,
+              "line": 16
+            },
+            "date": "2023-03-07",
+            "kind": "Entretien éducatif",
+            "author_role": "Éducateur spécialisé",
+            "continues_previous": false,
+            "summary": "Premier entretien éducatif depuis l'overdose : journée type, projet de travail, importance de sa fille, inscription au PLIE et prochain RDV dans 15 jours."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 17
+            },
+            "end": {
+              "page": 2,
+              "line": 31
+            },
+            "date": "2023-03-28",
+            "kind": "Entretien social",
+            "author_role": "Assistante sociale",
+            "continues_previous": false,
+            "summary": "Mise à jour du dossier social : situation familiale, ressources RSA et APL, dette de loyer, démarches FSL, récupération du permis et inscription au PLIE."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 32
+            },
+            "end": {
+              "page": 2,
+              "line": 36
+            },
+            "date": "2023-04-13",
+            "kind": "Délivrance",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Délivrance de méthadone 70 mg, patient ok sans odeur d'alcool ni pupilles anormales, demande de repasser en pharmacie, maintien de la délivrance au CSAPA jusqu'au 30/04."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 37
+            },
+            "end": {
+              "page": 2,
+              "line": 45
+            },
+            "date": "2023-05-15",
+            "kind": "Consultation psychiatrique",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Patient stabilisé à 70 mg/j, pas d'héroïne depuis l'overdose, consommation de cannabis et cocaïne, reprise de la délivrance hebdomadaire en pharmacie, poursuite du traitement et discussion sur le passage aux gélules."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 46
+            },
+            "end": {
+              "page": 2,
+              "line": 52
+            },
+            "date": "2023-09-26",
+            "kind": "Observation infirmière",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Patient vu à sa demande, consommation de crack depuis environ 3 semaines, dépenses importantes, troubles du sommeil, menace de partir avec sa fille, urines positives cocaïne et méthadone, RDV médical avancé."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 53
+            },
+            "end": {
+              "page": 2,
+              "line": 63
+            },
+            "date": "2023-10-03",
+            "kind": "Consultation psychiatrique",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Rechute de cocaïne (crack) depuis début septembre, craving et signes de manque, augmentation de la méthadone à 80 mg/j à partir du 12/10, orientation vers le programme RdR crack et information sur les risques pour la garde."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 64
+            },
+            "end": {
+              "page": 2,
+              "line": 66
+            },
+            "date": "2023-10-20",
+            "kind": "Délivrance",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Délivrance de 70 mg de méthadone, RAS, patient pressé."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 67
+            },
+            "end": {
+              "page": 3,
+              "line": 18
+            },
+            "date": "2023-11-14",
+            "kind": "Entretien social",
+            "author_role": "Assistante sociale",
+            "continues_previous": false,
+            "summary": "Information préoccupante transmise par la PMI le 08/11 concernant les absences scolaires de l'enfant, père en colère, explication de la procédure, contact avec la mère qui confirme les tensions et l'arrêt du crack depuis 2 semaines."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 19
+            },
+            "end": {
+              "page": 3,
+              "line": 27
+            },
+            "date": "2023-11-30",
+            "kind": "Consultation psychiatrique",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Arrêt du crack depuis fin octobre, urines négatives pour la cocaïne, méthadone 80 mg/j sans signes de manque, patient mobilisé par l'information préoccupante, poursuite du traitement et passage aux gélules accepté à partir du 08/01/2024."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 28
+            },
+            "end": {
+              "page": 3,
+              "line": 31
+            },
+            "date": "2024-01-09",
+            "kind": "Délivrance",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Première délivrance de gélules 80 mg (relais du sirop décalé d'un jour), explications sur les prises et le stockage hors de portée de l'enfant, patient content."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 32
+            },
+            "end": {
+              "page": 3,
+              "line": 40
+            },
+            "date": "2024-02-06",
+            "kind": "Entretien éducatif",
+            "author_role": "Éducateur spécialisé",
+            "continues_previous": false,
+            "summary": "Patient a commencé un chantier d'insertion le 22/01 (26h/semaine), fatigué mais fier, mesure d'AEMO décidée par le juge des enfants, cannabis réduit à 2 joints le soir, plus de cocaïne depuis octobre, tabac 1 paquet/j."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "life_event",
+            "label": "Violence paternelle et placements en foyer",
+            "start": null,
+            "end": null,
+            "start_age": "enfance",
+            "end_age": "adolescence",
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Enfance marquée par la violence paternelle et des placements en foyer à l'adolescence.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "TDAH",
+            "start": null,
+            "end": null,
+            "start_age": "enfance",
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Antécédent de TDAH dans l'enfance ; non réévalué à l'âge adulte.",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Méthylphénidate",
+            "start": null,
+            "end": null,
+            "start_age": 9,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Selon le patient, à 9 ans pour TDAH.",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": null,
+            "end": null,
+            "start_age": 14,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Cannabis depuis l'âge de 14 ans. 4-5 joints/j en 2023, joints dès le réveil ; réduit à 2 joints le soir en février 2024.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o5",
+              "o8",
+              "o15"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes",
+            "start": null,
+            "end": null,
+            "start_age": 17,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Première consommation d'héroïne à 17 ans (o1) / à partir de 18 ans (2006) selon o2 ; d'abord sniffée, puis injectée à partir de 20 ans environ (o1) / IV dès 2009 (o2). Nombreuses périodes de rechute.",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi CSAPA",
+            "start": "2011",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Suivi au CSAPA depuis 2011 ; délivrance méthadone ; délivrance quotidienne au CSAPA du 22/02/2023 au 30/04/2023 ; reprise délivrance hebdomadaire en pharmacie le 02/05/2023.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o4",
+              "o7",
+              "o8"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Méthadone",
+            "start": "2012",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Méthadone au CSAPA depuis 2012 (o2, o8) ; o1 mentionne suivi CSAPA depuis 2011. 60 mg/j puis 70 mg/j le 22/02/2023, 80 mg/j à partir du 12/10/2023. Sirop puis gélules à partir du 08/01/2024.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o4",
+              "o7",
+              "o8",
+              "o10",
+              "o11",
+              "o13",
+              "o14"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Incarcération",
+            "start": "2014",
+            "end": "2015",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Incarcération 2014-2015 (18 mois) pour trafic de stupéfiants ; méthadone poursuivie en détention. o1 mentionne 'pendant 2 ans'.",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Hépatite C",
+            "start": null,
+            "end": "2019",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "VHC traité en 2019 (sofosbuvir/velpatasvir), guéri (RVS12).",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Sofosbuvir/velpatasvir",
+            "start": "2019",
+            "end": "2019",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Traitement du VHC en 2019, guéri (RVS12).",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Permis B suspendu",
+            "start": "2019",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Permis B suspendu depuis 2019 ; démarches pour le récupérer (stage + visite médicale).",
+            "observation_ids": [
+              "o5",
+              "o6"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Naissance de la fille",
+            "start": "2020-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Fille née en mars 2020.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Décès du père",
+            "start": "2021-08",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Décès du père d'un cancer du poumon en août 2021 ; deuil non élaboré.",
+            "observation_ids": [
+              "o1",
+              "o4"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Trouble de la personnalité antisociale (évoqué)",
+            "start": "2022-03-14",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Évoqué le 14/03/2022, à nuancer le 22/02/2023 (pas d'argument franc).",
+            "observation_ids": [
+              "o1",
+              "o4"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes",
+            "start": "2022-12",
+            "end": "2023-02-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Reprise de l'héroïne occasionnelle depuis décembre 2022, à l'insu de l'équipe, dans un contexte de deuil et de tensions de couple.",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cocaïne",
+            "start": null,
+            "end": "2023-09-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Cocaïne 'de temps en temps en soirée' (12/01/2023), 1 à 2 fois par mois (15/05/2023), avant passage au crack.",
+            "observation_ids": [
+              "o2",
+              "o8"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes",
+            "start": "2023-02-18",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": true,
+            "note": "Overdose à domicile le 18/02/2023 après retour sur l'héroïne + 2 cachets de Rivotril ; naloxone par SMUR ; hospitalisation 24h en réanimation ; sortie contre avis médical.",
+            "observation_ids": [
+              "o3",
+              "o4"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Benzodiazépines",
+            "start": "2023-02-18",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": true,
+            "note": "Clonazépam/Rivotril acheté dans la rue, pris lors de l'overdose du 18/02/2023.",
+            "observation_ids": [
+              "o3",
+              "o4"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en réanimation",
+            "start": "2023-02-18",
+            "end": "2023-02-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "24h en réanimation après overdose ; sortie contre avis médical le dimanche.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes",
+            "start": "2023-02-18",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Pas d'héroïne depuis l'overdose (urines opiacés négatives x6 au 15/05/2023).",
+            "observation_ids": [
+              "o8"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Naloxone (kit)",
+            "start": "2023-02-20",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Kit naloxone proposé le 12/01/2023 (refusé) puis remis le 20/02/2023 après overdose ; formation faite.",
+            "observation_ids": [
+              "o2",
+              "o3"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychiatrique",
+            "start": "2023-02-22",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Consultations psychiatriques après l'overdose ; ajustements de méthadone.",
+            "observation_ids": [
+              "o4",
+              "o8",
+              "o10",
+              "o13"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi éducatif",
+            "start": "2023-03-07",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entretiens éducatifs ; suivi rapproché proposé après l'overdose ; poursuite en 2023-2024.",
+            "observation_ids": [
+              "o4",
+              "o5",
+              "o10",
+              "o13",
+              "o15"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi social",
+            "start": "2023-03-28",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entretiens sociaux ; démarches FSL, permis, PLIE ; information préoccupante.",
+            "observation_ids": [
+              "o6",
+              "o12"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Inscription au PLIE",
+            "start": "2023-03-28",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Projet d'inscription au PLIE ; démarches en cours.",
+            "observation_ids": [
+              "o5",
+              "o6"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Dette de loyer",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Dette de 1 800 euros auprès du bailleur social ; dossier FSL.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Tensions de couple",
+            "start": "2023-02",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Tensions de couple ; menace de partir avec leur fille (26/09/2023) ; confirmées par Mme (14/11/2023).",
+            "observation_ids": [
+              "o4",
+              "o9",
+              "o12"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cocaïne",
+            "start": "2023-09-01",
+            "end": "2023-10-31",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": true,
+            "note": "Rechute de cocaïne basée (crack) depuis début septembre 2023, quasi quotidienne ; craving important ; dépenses 300 €/semaine ; arrêt fin octobre 2023.",
+            "observation_ids": [
+              "o9",
+              "o10",
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cocaïne",
+            "start": "2023-10-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "craving",
+            "loss_of_control": true,
+            "note": "Craving important lors de la rechute de crack.",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Programme de réduction des risques crack",
+            "start": "2023-10-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Orientation vers le programme de RdR crack (kits, pipes).",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cocaïne",
+            "start": "2023-10-31",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Arrêt du crack depuis fin octobre 2023 ; urines négatives pour la cocaïne le 21/11/2023 ; plus de cocaïne en février 2024.",
+            "observation_ids": [
+              "o12",
+              "o13",
+              "o15"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Information préoccupante PMI",
+            "start": "2023-11-08",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Information préoccupante transmise par la PMI le 08/11/2023 (absences répétées à l'école maternelle, père vu 'pas dans son état').",
+            "observation_ids": [
+              "o12"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Évaluation sociale ASE",
+            "start": "2023-11-30",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Évaluation sociale par l'ASE en cours au 30/11/2023.",
+            "observation_ids": [
+              "o13"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "AEMO",
+            "start": "2024-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Mesure d'AEMO décidée par le juge des enfants fin janvier 2024 ; vécue comme une surveillance mais 'ça peut aider'.",
+            "observation_ids": [
+              "o15"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Chantier d'insertion (espaces verts)",
+            "start": "2024-01-22",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Chantier d'insertion commencé le 22/01/2024, 26h/semaine.",
+            "observation_ids": [
+              "o15"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Tabac 1 paquet/j.",
+            "observation_ids": [
+              "o2",
+              "o15"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

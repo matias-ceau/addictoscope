@@ -1,0 +1,960 @@
+{
+  "dossier": "tabac-infarctus",
+  "model": "deepseek/deepseek-v4.1-flash",
+  "textOnly": true,
+  "ranAt": "2026-11-05T14:30:53.879Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 2,
+      "redactions": {
+        "ETABLISSEMENT": 4,
+        "ADRESSE": 5,
+        "TEL": 3,
+        "PATIENT": 4,
+        "DOSSIER": 2,
+        "NAISSANCE": 2,
+        "IPP": 2,
+        "VILLE": 3,
+        "SOIGNANT": 16,
+        "PROCHE": 1
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 11
+      },
+      "end": {
+        "page": 0,
+        "line": 26
+      },
+      "date": "2024-10-08",
+      "kind": "Consultation tabacologie",
+      "authorRole": "IDE tabacologue",
+      "summary": "Première consultation de tabacologie chez une patiente de 51 ans, fumeuse à 10 cig/j après un infarctus, avec Fagerström 8 et projet d'arrêt au 15/10."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 27
+      },
+      "end": {
+        "page": 0,
+        "line": 39
+      },
+      "date": "2024-10-10",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Consultation psychiatrique conjointe retrouvant une anxiété centrée sur le cœur, une consommation tabagique résiduelle et proposant un traitement par varénicline avec suivi hebdomadaire."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 40
+      },
+      "end": {
+        "page": 0,
+        "line": 45
+      },
+      "date": "2024-10-22",
+      "kind": "Consultation tabacologie",
+      "authorRole": "IDE tabacologue",
+      "summary": "Consultation de tabacologie à une semaine d'arrêt confirmant l'abstinence, avec nausées matinales sous varénicline et craving post-café."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 46
+      },
+      "end": {
+        "page": 0,
+        "line": 51
+      },
+      "date": "2024-11-19",
+      "kind": "Consultation tabacologie",
+      "authorRole": "IDE tabacologue",
+      "summary": "Consultation de tabacologie après arrêt de la varénicline pour effets indésirables, relais par patch et gommes, abstinence maintenue et prise de poids de 3 kg."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 52
+      },
+      "end": {
+        "page": 0,
+        "line": 59
+      },
+      "date": "2025-01-14",
+      "kind": "Consultation tabacologie",
+      "authorRole": "IDE tabacologue",
+      "summary": "Consultation de tabacologie après reprise du tabac à 8 cig/j dans un contexte de conflit professionnel, avec proposition de patch et vapoteuse."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 60
+      },
+      "end": {
+        "page": 1,
+        "line": 15
+      },
+      "date": "2025-02-04",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Observation psychiatrique de suivi montrant une anxiété majorée depuis la reprise du travail, un trouble de l'adaptation et la poursuite du suivi tabacologique avec patch et vapoteuse."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 16
+      },
+      "end": {
+        "page": 1,
+        "line": 22
+      },
+      "date": "2025-03-11",
+      "kind": "Entretien psychologique",
+      "authorRole": "Psychologue",
+      "summary": "Deuxième séance de TCC centrée sur la psychoéducation des alertes cardiaques et l'exposition progressive à l'effort, avec reprise de la marche."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 23
+      },
+      "end": {
+        "page": 1,
+        "line": 27
+      },
+      "date": "2025-04-15",
+      "kind": "Consultation tabacologie",
+      "authorRole": "IDE tabacologue",
+      "summary": "Consultation de tabacologie confirmant l'arrêt du tabac depuis le 01/04, vapoteuse seule, arrêt des patchs et orientation diététique pour une prise de poids de 6 kg."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 28
+      },
+      "end": {
+        "page": 1,
+        "line": 36
+      },
+      "date": "2025-06-24",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre",
+      "summary": "Observation psychiatrique de suivi montrant une nette diminution de l'anxiété sous TCC, un sommeil correct et la fin du suivi psychiatrique."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 37
+      },
+      "end": {
+        "page": 1,
+        "line": 42
+      },
+      "date": "2025-09-30",
+      "kind": "Consultation tabacologie",
+      "authorRole": "IDE tabacologue",
+      "summary": "Consultation de tabacologie à six mois sans tabac, vapoteuse à 3 mg/mL, poids stabilisé et bilan cardiologique rassurant."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t1",
+        "kind": "substance_use",
+        "label": "Tabac"
+      },
+      {
+        "id": "t2",
+        "kind": "substance_use",
+        "label": "Cannabis"
+      },
+      {
+        "id": "t11",
+        "kind": "psychiatric",
+        "label": "Trouble de l'adaptation avec anxiété et humeur dépressive"
+      },
+      {
+        "id": "t3",
+        "kind": "somatic",
+        "label": "Infarctus du myocarde"
+      },
+      {
+        "id": "t8",
+        "kind": "somatic",
+        "label": "Prise de poids"
+      },
+      {
+        "id": "t6",
+        "kind": "medication",
+        "label": "Varénicline"
+      },
+      {
+        "id": "t7",
+        "kind": "medication",
+        "label": "Patch nicotinique 21 mg"
+      },
+      {
+        "id": "t10",
+        "kind": "medication",
+        "label": "Vapoteuse (nicotine)"
+      },
+      {
+        "id": "t4",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi tabacologique"
+      },
+      {
+        "id": "t5",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi psychiatrique"
+      },
+      {
+        "id": "t12",
+        "kind": "therapeutic_psycho",
+        "label": "TCC"
+      },
+      {
+        "id": "t9",
+        "kind": "life_event",
+        "label": "Reprise du travail"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "1986",
+        "end": "2024-09-03",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Fume depuis l'âge de 14 ans ; 25 cig/j avant l'IDM (≈38 PA), Fagerström 8 ; arrêt à l'hôpital lors de l'IDM du 03/09/2024.",
+        "observationIds": [
+          "historique:o1"
+        ],
+        "fromAge": {
+          "start": [
+            14,
+            14
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "1990",
+        "end": "1997",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Cannabis entre 18 et 25 ans, plus depuis.",
+        "observationIds": [
+          "historique:o2"
+        ],
+        "fromAge": {
+          "start": [
+            18,
+            18
+          ],
+          "end": [
+            25,
+            25
+          ]
+        }
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "2024-09-03",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "IDM du 03/09/2024, stent sur l'IVA ; réadaptation cardiaque ; bilan cardiologique de septembre 2025 rassurant (FEVG 55 %).",
+        "observationIds": [
+          "historique:o1",
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e4",
+        "trackId": "t1",
+        "start": "2024-09",
+        "end": "2024-10-15",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Reprise de « quelques-unes » au retour à domicile après l'IDM, 10 cig/j le 08/10/2024 ; arrêt total fixé au 15/10/2024.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e5",
+        "trackId": "t4",
+        "start": "2024-10-08",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Première consultation IDE tabacologue le 08/10/2024, suivi hebdomadaire le premier mois puis espacé ; poursuivi au 30/09/2025.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o3",
+          "historique:o4",
+          "historique:o5",
+          "historique:o8",
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e6",
+        "trackId": "t5",
+        "start": "2024-10-10",
+        "end": "2025-06-24",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Consultations des 10/10/2024, 04/02/2025 et 24/06/2025 ; fin du suivi psychiatrique le 24/06/2025, recontact possible.",
+        "observationIds": [
+          "historique:o2",
+          "historique:o6",
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e7",
+        "trackId": "t6",
+        "start": "2024-10-10",
+        "end": "2024-11-12",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "0,5 mg/j J1-J3, 0,5 x 2 J4-J7 puis 1 mg x 2, arrêt du tabac à J8 (15/10) ; arrêtée par la patiente le 12/11/2024 (nausées persistantes, cauchemars).",
+        "observationIds": [
+          "historique:o2",
+          "historique:o3",
+          "historique:o4"
+        ]
+      },
+      {
+        "id": "e8",
+        "trackId": "t1",
+        "start": "2024-10-22",
+        "end": null,
+        "ongoing": false,
+        "mode": "craving",
+        "lossOfControl": false,
+        "note": "Craving surtout après le café et en voiture, sous varénicline ; stratégies revues.",
+        "observationIds": [
+          "historique:o3"
+        ]
+      },
+      {
+        "id": "e9",
+        "trackId": "t7",
+        "start": "2024-11-19",
+        "end": "2025-01-14",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Relais de la varénicline (avec gommes 2 mg) ; patchs arrêtés lors de la reprise du tabac en janvier 2025.",
+        "observationIds": [
+          "historique:o4",
+          "historique:o5"
+        ]
+      },
+      {
+        "id": "e10",
+        "trackId": "t8",
+        "start": "2024-11-19",
+        "end": "2025-09-30",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "+3 kg le 19/11/2024, +6 kg le 15/04/2025 (orientation diététicienne), poids stabilisé le 30/09/2025.",
+        "observationIds": [
+          "historique:o4",
+          "historique:o8",
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e11",
+        "trackId": "t9",
+        "start": "2025-01-06",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Reprise du travail le 06/01/2025 avec conflit avec sa responsable ; associée à la reprise du tabac et à une majoration de l'anxiété.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e12",
+        "trackId": "t1",
+        "start": "2025-01-06",
+        "end": "2025-04-01",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": true,
+        "note": "Reprise du tabac à la reprise du travail : « une cigarette pour souffler » puis 8 cig/j ; plus de cigarette depuis le 01/04/2025.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e13",
+        "trackId": "t7",
+        "start": "2025-01-14",
+        "end": "2025-04-15",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Reprise proposée le 14/01/2025 avec la vapoteuse ; patch arrêté avant le 15/04/2025.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o8"
+        ]
+      },
+      {
+        "id": "e14",
+        "trackId": "t10",
+        "start": "2025-01-14",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "E-liquide 12 mg/mL puis 6 mg/mL (24/06/2025) et 3 mg/mL (30/09/2025) ; projet d'arrêt de la vape d'ici la fin d'année 2025.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o6",
+          "historique:o8",
+          "historique:o9",
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e15",
+        "trackId": "t11",
+        "start": "2025-02-04",
+        "end": "2025-06-24",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Diagnostic posé le 04/02/2025 dans les suites de l'infarctus (HAD A 14, D 9 ; anxiété majorée depuis la reprise du travail, ruminations cardiaques, insomnie) ; nette diminution avec la TCC, fin du suivi le 24/06/2025.",
+        "observationIds": [
+          "historique:o6",
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e16",
+        "trackId": "t12",
+        "start": "2025-02-04",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "TCC proposée le 04/02/2025 ; 2e séance le 11/03/2025 (psychoéducation sur la boucle anxiété-palpitations-vérification, exposition progressive à l'effort) ; bénéfice sur l'anxiété au 24/06/2025.",
+        "observationIds": [
+          "historique:o6",
+          "historique:o7",
+          "historique:o9"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 76295,
+  "usage": {
+    "calls": 2,
+    "promptTokens": 6463,
+    "completionTokens": 15879,
+    "cost": 0.0098
+  },
+  "rawAnswers": [
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 11
+            },
+            "end": {
+              "page": 1,
+              "line": 26
+            },
+            "date": "2024-10-08",
+            "kind": "Consultation tabacologie",
+            "author_role": "IDE tabacologue",
+            "continues_previous": false,
+            "summary": "Première consultation de tabacologie chez une patiente de 51 ans, fumeuse à 10 cig/j après un infarctus, avec Fagerström 8 et projet d'arrêt au 15/10."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 27
+            },
+            "end": {
+              "page": 1,
+              "line": 39
+            },
+            "date": "2024-10-10",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Consultation psychiatrique conjointe retrouvant une anxiété centrée sur le cœur, une consommation tabagique résiduelle et proposant un traitement par varénicline avec suivi hebdomadaire."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 40
+            },
+            "end": {
+              "page": 1,
+              "line": 45
+            },
+            "date": "2024-10-22",
+            "kind": "Consultation tabacologie",
+            "author_role": "IDE tabacologue",
+            "continues_previous": false,
+            "summary": "Consultation de tabacologie à une semaine d'arrêt confirmant l'abstinence, avec nausées matinales sous varénicline et craving post-café."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 46
+            },
+            "end": {
+              "page": 1,
+              "line": 51
+            },
+            "date": "2024-11-19",
+            "kind": "Consultation tabacologie",
+            "author_role": "IDE tabacologue",
+            "continues_previous": false,
+            "summary": "Consultation de tabacologie après arrêt de la varénicline pour effets indésirables, relais par patch et gommes, abstinence maintenue et prise de poids de 3 kg."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 52
+            },
+            "end": {
+              "page": 1,
+              "line": 59
+            },
+            "date": "2025-01-14",
+            "kind": "Consultation tabacologie",
+            "author_role": "IDE tabacologue",
+            "continues_previous": false,
+            "summary": "Consultation de tabacologie après reprise du tabac à 8 cig/j dans un contexte de conflit professionnel, avec proposition de patch et vapoteuse."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 60
+            },
+            "end": {
+              "page": 2,
+              "line": 15
+            },
+            "date": "2025-02-04",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Observation psychiatrique de suivi montrant une anxiété majorée depuis la reprise du travail, un trouble de l'adaptation et la poursuite du suivi tabacologique avec patch et vapoteuse."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 16
+            },
+            "end": {
+              "page": 2,
+              "line": 22
+            },
+            "date": "2025-03-11",
+            "kind": "Entretien psychologique",
+            "author_role": "Psychologue",
+            "continues_previous": false,
+            "summary": "Deuxième séance de TCC centrée sur la psychoéducation des alertes cardiaques et l'exposition progressive à l'effort, avec reprise de la marche."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 23
+            },
+            "end": {
+              "page": 2,
+              "line": 27
+            },
+            "date": "2025-04-15",
+            "kind": "Consultation tabacologie",
+            "author_role": "IDE tabacologue",
+            "continues_previous": false,
+            "summary": "Consultation de tabacologie confirmant l'arrêt du tabac depuis le 01/04, vapoteuse seule, arrêt des patchs et orientation diététique pour une prise de poids de 6 kg."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 28
+            },
+            "end": {
+              "page": 2,
+              "line": 36
+            },
+            "date": "2025-06-24",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Psychiatre",
+            "continues_previous": false,
+            "summary": "Observation psychiatrique de suivi montrant une nette diminution de l'anxiété sous TCC, un sommeil correct et la fin du suivi psychiatrique."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 37
+            },
+            "end": {
+              "page": 2,
+              "line": 42
+            },
+            "date": "2025-09-30",
+            "kind": "Consultation tabacologie",
+            "author_role": "IDE tabacologue",
+            "continues_previous": false,
+            "summary": "Consultation de tabacologie à six mois sans tabac, vapoteuse à 3 mg/mL, poids stabilisé et bilan cardiologique rassurant."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": null,
+            "end": "2024-09-03",
+            "start_age": 14,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Fume depuis l'âge de 14 ans ; 25 cig/j avant l'IDM (≈38 PA), Fagerström 8 ; arrêt à l'hôpital lors de l'IDM du 03/09/2024.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": null,
+            "end": null,
+            "start_age": 18,
+            "end_age": 25,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Cannabis entre 18 et 25 ans, plus depuis.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Un verre de vin au dîner, inchangé (10/10/2024 et 24/06/2025).",
+            "observation_ids": [
+              "o2",
+              "o9"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Infarctus du myocarde",
+            "start": "2024-09-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "IDM du 03/09/2024, stent sur l'IVA ; réadaptation cardiaque ; bilan cardiologique de septembre 2025 rassurant (FEVG 55 %).",
+            "observation_ids": [
+              "o1",
+              "o10"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": "2024-09",
+            "end": "2024-10-15",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Reprise de « quelques-unes » au retour à domicile après l'IDM, 10 cig/j le 08/10/2024 ; arrêt total fixé au 15/10/2024.",
+            "observation_ids": [
+              "o1",
+              "o3"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi tabacologique",
+            "start": "2024-10-08",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Première consultation IDE tabacologue le 08/10/2024, suivi hebdomadaire le premier mois puis espacé ; poursuivi au 30/09/2025.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3",
+              "o4",
+              "o5",
+              "o8",
+              "o10"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychiatrique",
+            "start": "2024-10-10",
+            "end": "2025-06-24",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Consultations des 10/10/2024, 04/02/2025 et 24/06/2025 ; fin du suivi psychiatrique le 24/06/2025, recontact possible.",
+            "observation_ids": [
+              "o2",
+              "o6",
+              "o9"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Varénicline",
+            "start": "2024-10-10",
+            "end": "2024-11-12",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "0,5 mg/j J1-J3, 0,5 x 2 J4-J7 puis 1 mg x 2, arrêt du tabac à J8 (15/10) ; arrêtée par la patiente le 12/11/2024 (nausées persistantes, cauchemars).",
+            "observation_ids": [
+              "o2",
+              "o3",
+              "o4"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": "2024-10-22",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "craving",
+            "loss_of_control": false,
+            "note": "Craving surtout après le café et en voiture, sous varénicline ; stratégies revues.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Patch nicotinique 21 mg",
+            "start": "2024-11-19",
+            "end": "2025-01-14",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Relais de la varénicline (avec gommes 2 mg) ; patchs arrêtés lors de la reprise du tabac en janvier 2025.",
+            "observation_ids": [
+              "o4",
+              "o5"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Prise de poids",
+            "start": "2024-11-19",
+            "end": "2025-09-30",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "+3 kg le 19/11/2024, +6 kg le 15/04/2025 (orientation diététicienne), poids stabilisé le 30/09/2025.",
+            "observation_ids": [
+              "o4",
+              "o8",
+              "o10"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Reprise du travail",
+            "start": "2025-01-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Reprise du travail le 06/01/2025 avec conflit avec sa responsable ; associée à la reprise du tabac et à une majoration de l'anxiété.",
+            "observation_ids": [
+              "o5",
+              "o6"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": "2025-01-06",
+            "end": "2025-04-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": true,
+            "note": "Reprise du tabac à la reprise du travail : « une cigarette pour souffler » puis 8 cig/j ; plus de cigarette depuis le 01/04/2025.",
+            "observation_ids": [
+              "o5",
+              "o8"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Patch nicotinique 21 mg",
+            "start": "2025-01-14",
+            "end": "2025-04-15",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Reprise proposée le 14/01/2025 avec la vapoteuse ; patch arrêté avant le 15/04/2025.",
+            "observation_ids": [
+              "o5",
+              "o8"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Vapoteuse (nicotine)",
+            "start": "2025-01-14",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "E-liquide 12 mg/mL puis 6 mg/mL (24/06/2025) et 3 mg/mL (30/09/2025) ; projet d'arrêt de la vape d'ici la fin d'année 2025.",
+            "observation_ids": [
+              "o5",
+              "o6",
+              "o8",
+              "o9",
+              "o10"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Trouble de l'adaptation avec anxiété et humeur dépressive",
+            "start": "2025-02-04",
+            "end": "2025-06-24",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Diagnostic posé le 04/02/2025 dans les suites de l'infarctus (HAD A 14, D 9 ; anxiété majorée depuis la reprise du travail, ruminations cardiaques, insomnie) ; nette diminution avec la TCC, fin du suivi le 24/06/2025.",
+            "observation_ids": [
+              "o6",
+              "o9"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "TCC",
+            "start": "2025-02-04",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "TCC proposée le 04/02/2025 ; 2e séance le 11/03/2025 (psychoéducation sur la boucle anxiété-palpitations-vérification, exposition progressive à l'effort) ; bénéfice sur l'anxiété au 24/06/2025.",
+            "observation_ids": [
+              "o6",
+              "o7",
+              "o9"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

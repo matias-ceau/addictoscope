@@ -1,0 +1,970 @@
+{
+  "dossier": "jeu-bipolaire",
+  "model": "google/gemini-3.1-flash-lite",
+  "ranAt": "2026-11-05T12:19:42.280Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 4,
+      "redactions": {
+        "ETABLISSEMENT": 12,
+        "ADRESSE": 9,
+        "VILLE": 5,
+        "TEL": 5,
+        "PATIENT": 7,
+        "DOSSIER": 4,
+        "SOIGNANT": 19,
+        "PERSONNE": 5,
+        "NAISSANCE": 4,
+        "IPP": 4
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 15
+      },
+      "end": {
+        "page": 0,
+        "line": 24
+      },
+      "date": "2025-09-23",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Le patient est euthymique, sans pratique de jeux, avec un traitement par lithium et lamotrigine bien toléré."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 25
+      },
+      "end": {
+        "page": 0,
+        "line": 37
+      },
+      "date": "2025-07-01",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Le patient est stable, sans signe d'hypomanie ni pratique de jeux, avec un plan de crise mis en place."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 38
+      },
+      "end": {
+        "page": 0,
+        "line": 44
+      },
+      "date": "2025-04-15",
+      "kind": "Entretien psychologique",
+      "authorRole": "Psychologue",
+      "summary": "Le patient rapporte des achats de jeux de grattage en mars et travaille sur l'illusion de contrôle."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 45
+      },
+      "end": {
+        "page": 0,
+        "line": 55
+      },
+      "date": "2025-01-14",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Amélioration thymique nette, reprise des activités et absence de paris sportifs."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 15
+      },
+      "end": {
+        "page": 1,
+        "line": 28
+      },
+      "date": "2024-11-26",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Épisode dépressif caractérisé avec idées de mort passives, nécessitant une introduction de lamotrigine."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 29
+      },
+      "end": {
+        "page": 1,
+        "line": 37
+      },
+      "date": "2024-10-15",
+      "kind": "Entretien social",
+      "authorRole": "Assistante sociale",
+      "summary": "Validation du plan de surendettement sur 7 ans et mise sous tutelle financière par l'épouse."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 38
+      },
+      "end": {
+        "page": 1,
+        "line": 47
+      },
+      "date": "2024-09-10",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Le patient est euthymique, a repris le travail et a débuté une thérapie de couple."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 48
+      },
+      "end": {
+        "page": 1,
+        "line": 57
+      },
+      "date": "2024-07-09",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Entretien téléphonique confirmant l'arrêt des paris et l'acceptation de sécuriser ses comptes bancaires."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 15
+      },
+      "end": {
+        "page": 2,
+        "line": 28
+      },
+      "date": "2024-06-25",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Épisode hypomaniaque avec reprise des paris et pertes financières, nécessitant un ajustement thérapeutique."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 29
+      },
+      "end": {
+        "page": 2,
+        "line": 36
+      },
+      "date": "2024-04-16",
+      "kind": "Entretien psychologique",
+      "authorRole": "Psychologue",
+      "summary": "Premier entretien de TCC explorant l'historique des jeux et les distorsions cognitives du patient."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 37
+      },
+      "end": {
+        "page": 2,
+        "line": 41
+      },
+      "date": "2024-03-26",
+      "kind": "Entretien infirmier",
+      "authorRole": "IDE",
+      "summary": "Suivi de la lithiémie à J10 avec bonne tolérance clinique."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 42
+      },
+      "end": {
+        "page": 2,
+        "line": 50
+      },
+      "date": "2024-03-05",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Bilan pré-lithium normal et introduction du traitement par lithium."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 51
+      },
+      "end": {
+        "page": 3,
+        "line": 21
+      },
+      "date": "2024-02-01",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Consultation de suivi avec l'épouse."
+    },
+    {
+      "id": "historique:o14",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 22
+      },
+      "end": {
+        "page": 3,
+        "line": 43
+      },
+      "date": "2024-01-18",
+      "kind": "Motif de l'évaluation",
+      "authorRole": null,
+      "summary": "Premier entretien suite à la découverte de crédits à la consommation contractés par le patient pour des paris sportifs."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t1",
+        "kind": "substance_use",
+        "label": "Tabac"
+      },
+      {
+        "id": "t2",
+        "kind": "substance_use",
+        "label": "Jeu d'argent"
+      },
+      {
+        "id": "t3",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif"
+      },
+      {
+        "id": "t4",
+        "kind": "psychiatric",
+        "label": "Trouble bipolaire de type II"
+      },
+      {
+        "id": "t11",
+        "kind": "psychiatric",
+        "label": "Épisode hypomaniaque"
+      },
+      {
+        "id": "t12",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif caractérisé"
+      },
+      {
+        "id": "t5",
+        "kind": "medication",
+        "label": "Lithium"
+      },
+      {
+        "id": "t6",
+        "kind": "medication",
+        "label": "Quétiapine"
+      },
+      {
+        "id": "t7",
+        "kind": "medication",
+        "label": "Lamotrigine"
+      },
+      {
+        "id": "t8",
+        "kind": "therapeutic_psycho",
+        "label": "Interdiction volontaire de jeux"
+      },
+      {
+        "id": "t9",
+        "kind": "therapeutic_psycho",
+        "label": "TCC Jeu"
+      },
+      {
+        "id": "t10",
+        "kind": "life_event",
+        "label": "Surendettement"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2019",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Vapote depuis 2019, ancien fumeur 15 PA.",
+        "observationIds": [
+          "historique:o14"
+        ]
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "2018",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Paris sportifs en ligne depuis 2018, quotidien depuis 2022. Perte de contrôle datée au confinement.",
+        "observationIds": [
+          "historique:o14",
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "2010",
+        "end": "2010",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Premier épisode dépressif traité par MG.",
+        "observationIds": [
+          "historique:o14"
+        ]
+      },
+      {
+        "id": "e4",
+        "trackId": "t3",
+        "start": "2016",
+        "end": "2016",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Second épisode dépressif, traité par paroxétine.",
+        "observationIds": [
+          "historique:o14"
+        ]
+      },
+      {
+        "id": "e5",
+        "trackId": "t4",
+        "start": "2024-02",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Diagnostic retenu en remplacement de la dépression récurrente.",
+        "observationIds": [
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e6",
+        "trackId": "t5",
+        "start": "2024-03",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Introduction 400mg, majoré à 800mg en juin 2024.",
+        "observationIds": [
+          "historique:o12",
+          "historique:o9",
+          "historique:o7"
+        ]
+      },
+      {
+        "id": "e7",
+        "trackId": "t6",
+        "start": "2024-06",
+        "end": "2025-05",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Introduite en juin 2024, arrêtée en mai 2025.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o7",
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e8",
+        "trackId": "t7",
+        "start": "2024-11",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Introduction pour épisode dépressif, titration jusqu'à 150mg.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o4",
+          "historique:o1"
+        ]
+      },
+      {
+        "id": "e9",
+        "trackId": "t8",
+        "start": "2024-01-29",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Interdiction ANJ pour 3 ans.",
+        "observationIds": [
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e10",
+        "trackId": "t9",
+        "start": "2024-04",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Suivi psychologique spécialisé.",
+        "observationIds": [
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e11",
+        "trackId": "t10",
+        "start": "2024-10-08",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Plan de rééchelonnement sur 7 ans accepté.",
+        "observationIds": [
+          "historique:o6"
+        ]
+      },
+      {
+        "id": "e12",
+        "trackId": "t11",
+        "start": "2024-06",
+        "end": "2024-06",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Épisode d'une dizaine de jours avec reprise des paris.",
+        "observationIds": [
+          "historique:o9"
+        ]
+      },
+      {
+        "id": "e13",
+        "trackId": "t12",
+        "start": "2024-11",
+        "end": "2025-01",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Épisode avec aboulie et idées de mort passives.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o4"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 14330,
+  "usage": {
+    "calls": 3,
+    "promptTokens": 15181,
+    "completionTokens": 3648,
+    "cost": 0.0093
+  },
+  "rawAnswers": [
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 1,
+              "line": 15
+            },
+            "end": {
+              "page": 1,
+              "line": 24
+            },
+            "date": "2025-09-23",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Le patient est euthymique, sans pratique de jeux, avec un traitement par lithium et lamotrigine bien toléré."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 25
+            },
+            "end": {
+              "page": 1,
+              "line": 37
+            },
+            "date": "2025-07-01",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Le patient est stable, sans signe d'hypomanie ni pratique de jeux, avec un plan de crise mis en place."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 38
+            },
+            "end": {
+              "page": 1,
+              "line": 44
+            },
+            "date": "2025-04-15",
+            "kind": "Entretien psychologique",
+            "author_role": "Psychologue",
+            "continues_previous": false,
+            "summary": "Le patient rapporte des achats de jeux de grattage en mars et travaille sur l'illusion de contrôle."
+          },
+          {
+            "start": {
+              "page": 1,
+              "line": 45
+            },
+            "end": {
+              "page": 1,
+              "line": 55
+            },
+            "date": "2025-01-14",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Amélioration thymique nette, reprise des activités et absence de paris sportifs."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 15
+            },
+            "end": {
+              "page": 2,
+              "line": 28
+            },
+            "date": "2024-11-26",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Épisode dépressif caractérisé avec idées de mort passives, nécessitant une introduction de lamotrigine."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 29
+            },
+            "end": {
+              "page": 2,
+              "line": 37
+            },
+            "date": "2024-10-15",
+            "kind": "Entretien social",
+            "author_role": "Assistante sociale",
+            "continues_previous": false,
+            "summary": "Validation du plan de surendettement sur 7 ans et mise sous tutelle financière par l'épouse."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 38
+            },
+            "end": {
+              "page": 2,
+              "line": 47
+            },
+            "date": "2024-09-10",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Le patient est euthymique, a repris le travail et a débuté une thérapie de couple."
+          },
+          {
+            "start": {
+              "page": 2,
+              "line": 48
+            },
+            "end": {
+              "page": 2,
+              "line": 57
+            },
+            "date": "2024-07-09",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Entretien téléphonique confirmant l'arrêt des paris et l'acceptation de sécuriser ses comptes bancaires."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 15
+            },
+            "end": {
+              "page": 3,
+              "line": 28
+            },
+            "date": "2024-06-25",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Épisode hypomaniaque avec reprise des paris et pertes financières, nécessitant un ajustement thérapeutique."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 29
+            },
+            "end": {
+              "page": 3,
+              "line": 36
+            },
+            "date": "2024-04-16",
+            "kind": "Entretien psychologique",
+            "author_role": "Psychologue",
+            "continues_previous": false,
+            "summary": "Premier entretien de TCC explorant l'historique des jeux et les distorsions cognitives du patient."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 37
+            },
+            "end": {
+              "page": 3,
+              "line": 41
+            },
+            "date": "2024-03-26",
+            "kind": "Entretien infirmier",
+            "author_role": "IDE",
+            "continues_previous": false,
+            "summary": "Suivi de la lithiémie à J10 avec bonne tolérance clinique."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 42
+            },
+            "end": {
+              "page": 3,
+              "line": 50
+            },
+            "date": "2024-03-05",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Bilan pré-lithium normal et introduction du traitement par lithium."
+          },
+          {
+            "start": {
+              "page": 3,
+              "line": 51
+            },
+            "end": {
+              "page": 3,
+              "line": 55
+            },
+            "date": "2024-02-01",
+            "kind": "Observation psychiatrique de suivi",
+            "author_role": "Médecin",
+            "continues_previous": false,
+            "summary": "Consultation de suivi avec l'épouse."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "segmentation",
+      "content": {
+        "observations": [
+          {
+            "start": {
+              "page": 4,
+              "line": 15
+            },
+            "end": {
+              "page": 4,
+              "line": 21
+            },
+            "date": "2024-01-29",
+            "kind": "Suivi",
+            "author_role": null,
+            "continues_previous": true,
+            "summary": "Le patient a effectué une interdiction volontaire de jeux et le diagnostic de trouble bipolaire de type II a été retenu."
+          },
+          {
+            "start": {
+              "page": 4,
+              "line": 22
+            },
+            "end": {
+              "page": 4,
+              "line": 43
+            },
+            "date": "2024-01-18",
+            "kind": "Motif de l'évaluation",
+            "author_role": null,
+            "continues_previous": false,
+            "summary": "Premier entretien suite à la découverte de crédits à la consommation contractés par le patient pour des paris sportifs."
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Consommation de 3 à 4 bières pendant les matchs.",
+            "observation_ids": [
+              "o1",
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": "2019",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Vapote depuis 2019, ancien fumeur 15 PA.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Jeu d'argent",
+            "start": "2018",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Paris sportifs en ligne depuis 2018, quotidien depuis 2022. Perte de contrôle datée au confinement.",
+            "observation_ids": [
+              "o1",
+              "o5"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif",
+            "start": "2010",
+            "end": "2010",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Premier épisode dépressif traité par MG.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif",
+            "start": "2016",
+            "end": "2016",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Second épisode dépressif, traité par paroxétine.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Trouble bipolaire de type II",
+            "start": "2024-02",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Diagnostic retenu en remplacement de la dépression récurrente.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Lithium",
+            "start": "2024-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Introduction 400mg, majoré à 800mg en juin 2024.",
+            "observation_ids": [
+              "o3",
+              "o6",
+              "o8"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Quétiapine",
+            "start": "2024-06",
+            "end": "2025-05",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Introduite en juin 2024, arrêtée en mai 2025.",
+            "observation_ids": [
+              "o6",
+              "o8",
+              "o13"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Lamotrigine",
+            "start": "2024-11",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Introduction pour épisode dépressif, titration jusqu'à 150mg.",
+            "observation_ids": [
+              "o10",
+              "o11",
+              "o14"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Interdiction volontaire de jeux",
+            "start": "2024-01-29",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Interdiction ANJ pour 3 ans.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "TCC Jeu",
+            "start": "2024-04",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Suivi psychologique spécialisé.",
+            "observation_ids": [
+              "o5"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Surendettement",
+            "start": "2024-10-08",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Plan de rééchelonnement sur 7 ans accepté.",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode hypomaniaque",
+            "start": "2024-06",
+            "end": "2024-06",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Épisode d'une dizaine de jours avec reprise des paris.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif caractérisé",
+            "start": "2024-11",
+            "end": "2025-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Épisode avec aboulie et idées de mort passives.",
+            "observation_ids": [
+              "o10",
+              "o11"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
