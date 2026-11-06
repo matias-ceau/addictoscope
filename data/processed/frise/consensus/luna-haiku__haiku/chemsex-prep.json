@@ -1,0 +1,3526 @@
+{
+  "dossier": "chemsex-prep",
+  "model": "openai/gpt-6-luna + anthropic/claude-haiku-5.5, arbitre anthropic/claude-haiku-5.5",
+  "readers": [
+    "openai/gpt-6-luna",
+    "anthropic/claude-haiku-5.5"
+  ],
+  "arbiter": "anthropic/claude-haiku-5.5",
+  "observationsFrom": "bench/anthropic__claude-haiku-5.5",
+  "ranAt": "2026-11-06T00:40:12.871Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 5,
+      "redactions": {
+        "ETABLISSEMENT": 15,
+        "ADRESSE": 11,
+        "VILLE": 6,
+        "TEL": 6,
+        "PATIENT": 8,
+        "DOSSIER": 5,
+        "SOIGNANT": 23,
+        "PERSONNE": 5,
+        "NAISSANCE": 5,
+        "IPP": 5,
+        "PROCHE": 3,
+        "EMAIL": 1
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 19
+      },
+      "end": {
+        "page": 0,
+        "line": 31
+      },
+      "date": "2025-06-17",
+      "kind": "psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Patient euthymique sans nouvelle session depuis avril, tolérance correcte de l'escitalopram, souhait d'arrêt discuté après l'été, PrEP poursuivie, traitement renouvelé pour 3 mois."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 32
+      },
+      "end": {
+        "page": 0,
+        "line": 44
+      },
+      "date": "2025-04-15",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Consommation de 3-MMC le 05/04 sans GHB ni injection, craving les jours suivants, rappels de réduction des risques, traitement inchangé et rendez-vous dans 2 mois."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 45
+      },
+      "end": {
+        "page": 0,
+        "line": 55
+      },
+      "date": "2025-02-18",
+      "kind": "psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Patient abstinent depuis octobre, reprise à temps plein, nouvelle relation, thymie neutre à légèrement positive sans idées noires, escitalopram 15 mg poursuivi et rendez-vous dans 2 mois."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 56
+      },
+      "end": {
+        "page": 1,
+        "line": 29
+      },
+      "date": "2024-12-03",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Patient revenant sur la rechute d'octobre, qu'il minimise, sans consommation depuis, thymie légèrement abaissée sans idées suicidaires, escitalopram 15 mg inchangé et rendez-vous dans 1 mois."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 30
+      },
+      "end": {
+        "page": 1,
+        "line": 39
+      },
+      "date": "2024-11-05",
+      "kind": "entretien psychologique",
+      "authorRole": "psychologue",
+      "summary": "Sixième séance après la rechute d'octobre, travail sur le tunnel précédant les sessions et les alternatives comportementales, décision de supprimer les applications de rencontre."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 40
+      },
+      "end": {
+        "page": 1,
+        "line": 52
+      },
+      "date": "2024-10-22",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Entretien téléphonique après rechute de sessions 3-MMC et GHB les 12/10 et 19/10, idées noires passives sans intention, hospitalisation proposée et refusée, rendez-vous en présentiel le 25/10."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 53
+      },
+      "end": {
+        "page": 1,
+        "line": 64
+      },
+      "date": "2024-09-10",
+      "kind": "psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Reprise du travail en mi-temps thérapeutique, fatigabilité, séparation récente avec tristesse, absence de GHB et de 3-MMC depuis juillet, escitalopram 15 mg inchangé."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 19
+      },
+      "end": {
+        "page": 2,
+        "line": 29
+      },
+      "date": "2024-07-30",
+      "kind": "psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Syphilis traitée, abstinence GHB depuis juin, une session de 3-MMC mi-juillet, thymie remontée, prolongation d'arrêt de travail jusqu'au 01/09 puis mi-temps thérapeutique."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 30
+      },
+      "end": {
+        "page": 2,
+        "line": 39
+      },
+      "date": "2024-07-09",
+      "kind": "entretien infirmier",
+      "authorRole": "IDE",
+      "summary": "Entretien de suivi après la sortie de sevrage : pas de GHB, bilan biologique avec recontamination syphilitique probable, orientation au CeGIDD et mise à jour des coordonnées."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 40
+      },
+      "end": {
+        "page": 2,
+        "line": 52
+      },
+      "date": "2024-06-20",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "médecin",
+      "summary": "Suivi après sevrage GHB sévère en hospitalisation, diazépam arrêté à la sortie, baclofène en décroissance, escitalopram majoré à 15 mg et arrêt de travail prolongé."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 53
+      },
+      "end": {
+        "page": 2,
+        "line": 60
+      },
+      "date": "2024-06-03",
+      "kind": "Cadre de Santé",
+      "authorRole": "cadre de santé",
+      "summary": "Coordination avec l'unité de sevrage pour une entrée le 10/06 pour sevrage GHB/GBL, consignes données au patient de ne pas arrêter brutalement le GBL et de ne pas conduire."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 19
+      },
+      "end": {
+        "page": 3,
+        "line": 33
+      },
+      "date": "2024-05-21",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Consultation urgente à sa demande après coma au GHB avec intubation, révélant une prise quotidienne de GBL à domicile avec probable dépendance physique ; demande d'arrêt et d'hospitalisation pour sevrage, arrêt de travail de 3 semaines."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 34
+      },
+      "end": {
+        "page": 3,
+        "line": 43
+      },
+      "date": "2024-04-16",
+      "kind": "entretien psychologique",
+      "authorRole": "Psychologue",
+      "summary": "Premier entretien psychologique : patient évoquant la honte liée à l'usage de chems dans sa sexualité et sa solitude, avec objectifs de compréhension des sessions et de sexualité sans produits, rythme toutes les 2 semaines."
+    },
+    {
+      "id": "historique:o14",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 44
+      },
+      "end": {
+        "page": 3,
+        "line": 54
+      },
+      "date": "2024-03-28",
+      "kind": "psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Consultation après une session de 36h à la 3-MMC et GHB, avec descente difficile, idées noires passives sans idées suicidaires actives et clinique évocatrice d'un épisode dépressif modéré ; introduction d'escitalopram 10 mg."
+    },
+    {
+      "id": "historique:o15",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 55
+      },
+      "end": {
+        "page": 4,
+        "line": 40
+      },
+      "date": "2024-03-12",
+      "kind": "motif de l'évaluation",
+      "authorRole": null,
+      "summary": "Premier entretien d'évaluation adressé par un infectiologue du CeGIDD pour PrEP ; bilan des antécédents, substances (3-MMC, GHB/GBL, alcool), mode de vie, avec conduite de réduction des risques, bilan sanguin et orientation vers un psychologue."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t4",
+        "kind": "substance_use",
+        "label": "GHB/GBL"
+      },
+      {
+        "id": "t11",
+        "kind": "substance_use",
+        "label": "3-MMC"
+      },
+      {
+        "id": "t3",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif"
+      },
+      {
+        "id": "t2",
+        "kind": "somatic",
+        "label": "Syphilis"
+      },
+      {
+        "id": "t15",
+        "kind": "somatic",
+        "label": "Recontamination syphilitique probable"
+      },
+      {
+        "id": "t16",
+        "kind": "somatic",
+        "label": "Coma après consommation de GBL et d’alcool"
+      },
+      {
+        "id": "t17",
+        "kind": "somatic",
+        "label": "Syphilis (recontamination probable), traitée au CeGIDD"
+      },
+      {
+        "id": "t18",
+        "kind": "somatic",
+        "label": "Coma au GHB avec intubation"
+      },
+      {
+        "id": "t1",
+        "kind": "medication",
+        "label": "Ténofovir/emtricitabine (PrEP)"
+      },
+      {
+        "id": "t7",
+        "kind": "medication",
+        "label": "Diazépam"
+      },
+      {
+        "id": "t8",
+        "kind": "medication",
+        "label": "Baclofène"
+      },
+      {
+        "id": "t9",
+        "kind": "medication",
+        "label": "Escitalopram"
+      },
+      {
+        "id": "t5",
+        "kind": "therapeutic_psycho",
+        "label": "Demande d’hospitalisation pour sevrage GHB/GBL"
+      },
+      {
+        "id": "t10",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi psychologique"
+      },
+      {
+        "id": "t6",
+        "kind": "life_event",
+        "label": "Arrêt de travail"
+      },
+      {
+        "id": "t12",
+        "kind": "life_event",
+        "label": "Séparation du compagnon"
+      },
+      {
+        "id": "t13",
+        "kind": "life_event",
+        "label": "Reprise du travail à temps plein"
+      },
+      {
+        "id": "t14",
+        "kind": "life_event",
+        "label": "Nouvelle relation"
+      },
+      {
+        "id": "t19",
+        "kind": "life_event",
+        "label": "Relation de couple (couple ouvert)"
+      },
+      {
+        "id": "t20",
+        "kind": "life_event",
+        "label": "Reprise à mi-temps thérapeutique"
+      },
+      {
+        "id": "t21",
+        "kind": "life_event",
+        "label": "Vie cachée dans une petite ville"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2019",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "PrEP en continu, bonne observance ; poursuivie en juin 2025.",
+        "observationIds": [
+          "historique:o15",
+          "historique:o1"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "2022",
+        "end": "2022",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Syphilis traitée en 2022.",
+        "observationIds": [
+          "historique:o15"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "2011",
+        "end": "2013",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Épisode vers 25 ans, traité quelques mois par le médecin généraliste, sans hospitalisation ni tentative de suicide.",
+        "observationIds": [
+          "historique:o15"
+        ],
+        "consensus": "agreed",
+        "fromAge": {
+          "start": [
+            24,
+            26
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e4",
+        "trackId": "t4",
+        "start": "2024-01",
+        "end": "2024-06-10",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Prise quotidienne de GBL à domicile toutes les 2 à 3 heures, y compris la nuit, « pour dormir et pour tenir » ; tremblements au réveil et anxiété entre les prises. Consigne de ne pas arrêter brutalement avant l’entrée en sevrage.",
+        "observationIds": [
+          "historique:o12",
+          "historique:o11"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e5",
+        "trackId": "t4",
+        "start": "2024-05-18",
+        "end": "2024-05-18",
+        "ongoing": false,
+        "mode": "intoxication",
+        "lossOfControl": false,
+        "note": "Coma après consommation de GBL avec alcool lors d’une session ; retrouvé inconscient, pris en charge par le SAMU, intubé et admis une nuit en réanimation.",
+        "observationIds": [
+          "historique:o12"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e6",
+        "trackId": "t5",
+        "start": "2024-05-21",
+        "end": "2024-06-17",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Entrée en unité de sevrage le 10/06 ; hospitalisation de 7 jours, sortie rapportée le 17/06.",
+        "observationIds": [
+          "historique:o12",
+          "historique:o11",
+          "historique:o10",
+          "historique:o9"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e7",
+        "trackId": "t6",
+        "start": "2024-05-21",
+        "end": "2024-09-01",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Arrêt de travail de 3 semaines demandé en mai, puis prolongé ; reprise en mi-temps thérapeutique le 02/09.",
+        "observationIds": [
+          "historique:o12",
+          "historique:o10",
+          "historique:o8",
+          "historique:o7"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e8",
+        "trackId": "t4",
+        "start": "2024-06-10",
+        "end": "2024-06-17",
+        "ongoing": false,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Sevrage hospitalier sévère durant les 48 premières heures : tremblements, agitation, insomnie totale et tachycardie ; pas de confusion ni de crise.",
+        "observationIds": [
+          "historique:o10",
+          "historique:o11",
+          "historique:o9"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e9",
+        "trackId": "t7",
+        "start": "2024-06-10",
+        "end": "2024-06-17",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Administré à doses élevées pendant le sevrage ; arrêté à la sortie.",
+        "observationIds": [
+          "historique:o10"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e10",
+        "trackId": "t8",
+        "start": "2024-06-10",
+        "end": "2024-07",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Utilisé pendant le sevrage ; 30 mg/j à la sortie, avec décroissance prévue sur deux semaines.",
+        "observationIds": [
+          "historique:o10"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e11",
+        "trackId": "t9",
+        "start": "2024-03-28",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Introduit à 10 mg en mars 2024, majoré à 15 mg le 20/06/2024 ; poursuivi à 15 mg en juin 2025. Une diminution est envisagée ultérieurement, sans arrêt engagé.",
+        "observationIds": [
+          "historique:o14",
+          "historique:o10",
+          "historique:o7",
+          "historique:o4",
+          "historique:o3",
+          "historique:o2",
+          "historique:o1"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e12",
+        "trackId": "t10",
+        "start": "2024-04-16",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Entretiens toutes les deux semaines ; objectifs de comprendre les déclencheurs des sessions et de retrouver une sexualité sans produits. Travail sur la chaîne comportementale et les alternatives après la rechute d’octobre.",
+        "observationIds": [
+          "historique:o13",
+          "historique:o5",
+          "historique:o4",
+          "historique:o2"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e13",
+        "trackId": "t11",
+        "start": "2024-10-12",
+        "end": "2024-10-19",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Sessions avec slam les deux week-ends précédant le 22/10 ; le 03/12, le patient revient sur octobre et rapporte une seule session, le 12/10.",
+        "observationIds": [
+          "historique:o6",
+          "historique:o5",
+          "historique:o4"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e14",
+        "trackId": "t12",
+        "start": "2024-09",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Départ du domicile début septembre ; tristesse et pleurs, mais dit « tenir ». Le départ de l’appartement vide est cité comme contexte de la rechute d’octobre.",
+        "observationIds": [
+          "historique:o7",
+          "historique:o6"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e15",
+        "trackId": "t13",
+        "start": "2025-02-01",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Reprise à temps plein depuis le 01/02/2025, avec bonne réintégration dans l’équipe.",
+        "observationIds": [
+          "historique:o3"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e16",
+        "trackId": "t14",
+        "start": "2025-01",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Relation commencée quelques semaines avant le 18/02 ; couple fermé « pour l’instant » en juin, choix assumé.",
+        "observationIds": [
+          "historique:o3",
+          "historique:o1"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e17",
+        "trackId": "t15",
+        "start": "2024-07-09",
+        "end": "2024-07-25",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "TPHA/VDRL positifs ; traitement par une injection d’Extencilline au CeGIDD le 25/07.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o8"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e18",
+        "trackId": "t11",
+        "start": "2020",
+        "end": "2025-04-05",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Chemsex depuis le premier confinement selon o11 ; « depuis environ 3 ans » en 03/2024 ; sniffée puis injectée (slam) depuis environ 6 mois avant 03/2024 ; sessions un week-end sur deux de 24 à 48h. Dernière consommation signalée : sniff le 05/04/2025.",
+        "observationIds": [
+          "historique:o15",
+          "historique:o5",
+          "historique:o2",
+          "historique:o1"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e19",
+        "trackId": "t4",
+        "start": "2020",
+        "end": "2024-06-10",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Pendant les sessions (« pour la désinhibition et pour tenir ») selon 03/2024 ; le patient ne précisait pas d'usage hors sessions. Dernière prise avant l'entrée en sevrage le 10/06/2024.",
+        "observationIds": [
+          "historique:o15",
+          "historique:o12",
+          "historique:o8"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e20",
+        "trackId": "t16",
+        "start": "2024-05-18",
+        "end": "2024-05-19",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Coma, intubation et une nuit en réanimation ; sortie le 19/05.",
+        "observationIds": [
+          "historique:o12"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e21",
+        "trackId": "t4",
+        "start": "2024-10-12",
+        "end": "2024-10-19",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Reprise rapportée avec les sessions de 3-MMC en octobre ; le récit du 03/12 la rapporte lors d’une seule session, le 12/10.",
+        "observationIds": [
+          "historique:o6",
+          "historique:o4"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e22",
+        "trackId": "t11",
+        "start": "2025-04-05",
+        "end": "2025-04-05",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Une consommation sniffée lors d’une soirée d’anniversaire, sans GHB, sans injection et sans rapport sexuel associé ; vécue comme un faux pas.",
+        "observationIds": [
+          "historique:o2"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e23",
+        "trackId": "t11",
+        "start": "2025-04-06",
+        "end": null,
+        "ongoing": false,
+        "mode": "craving",
+        "lossOfControl": false,
+        "note": "Craving les jours suivant la consommation du 05/04 ; le patient a appelé sa psychologue.",
+        "observationIds": [
+          "historique:o2"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e24",
+        "trackId": "t17",
+        "start": "2024-07-09",
+        "end": "2024-07-25",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Bilan positif (TPHA/VDRL) le 09/07/2024, recontamination probable ; traitement par extencilline au CeGIDD le 25/07/2024.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o8"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e25",
+        "trackId": "t11",
+        "start": "2024-03-23",
+        "end": "2024-03-24",
+        "ongoing": false,
+        "mode": "intoxication",
+        "lossOfControl": false,
+        "note": "Session d'environ 36h, 6 injections de 3-MMC, GHB « toutes les heures » ; descente très difficile jusqu'au mercredi.",
+        "observationIds": [
+          "historique:o14"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e26",
+        "trackId": "t11",
+        "start": "2024-07",
+        "end": "2024-07",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Une session sniffée mi-juillet, sans GHB, avec un ami, sans sexe ; sortie précoce par « peur de lui-même ».",
+        "observationIds": [
+          "historique:o8"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e27",
+        "trackId": "t18",
+        "start": "2024-05-18",
+        "end": "2024-05-19",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Coma GBL + alcool, intubation et une nuit en réanimation ; sortie le 19/05.",
+        "observationIds": [
+          "historique:o12"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e28",
+        "trackId": "t19",
+        "start": "2018",
+        "end": "2024-09",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "En couple depuis 6 ans en 03/2024 ; séparation début septembre 2024.",
+        "observationIds": [
+          "historique:o15",
+          "historique:o7"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e29",
+        "trackId": "t20",
+        "start": "2024-09-02",
+        "end": "2025-01-31",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Reprise en mi-temps thérapeutique depuis le 02/09/2024 ; temps plein à partir du 01/02/2025.",
+        "observationIds": [
+          "historique:o7",
+          "historique:o3"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e30",
+        "trackId": "t21",
+        "start": "1993",
+        "end": "2007",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Enfance dans une petite ville où il s'est « caché » jusqu'à ses 20 ans.",
+        "observationIds": [
+          "historique:o13"
+        ],
+        "consensus": "arbitrated",
+        "fromAge": {
+          "start": [
+            6,
+            11
+          ],
+          "end": [
+            20,
+            20
+          ]
+        }
+      }
+    ],
+    "undated": []
+  },
+  "consensus": {
+    "readers": 2,
+    "agreed": 17,
+    "disputed": 19,
+    "kept": 16,
+    "dropped": 3,
+    "unarbitrated": 0
+  },
+  "readings": [
+    {
+      "model": "openai/gpt-6-luna",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t4",
+            "kind": "substance_use",
+            "label": "3-MMC"
+          },
+          {
+            "id": "t5",
+            "kind": "substance_use",
+            "label": "GHB/GBL"
+          },
+          {
+            "id": "t3",
+            "kind": "psychiatric",
+            "label": "Épisode dépressif"
+          },
+          {
+            "id": "t2",
+            "kind": "somatic",
+            "label": "Syphilis"
+          },
+          {
+            "id": "t6",
+            "kind": "somatic",
+            "label": "Coma après consommation de GBL et d’alcool"
+          },
+          {
+            "id": "t16",
+            "kind": "somatic",
+            "label": "Recontamination syphilitique probable"
+          },
+          {
+            "id": "t1",
+            "kind": "medication",
+            "label": "Ténofovir/emtricitabine (PrEP)"
+          },
+          {
+            "id": "t9",
+            "kind": "medication",
+            "label": "Diazépam"
+          },
+          {
+            "id": "t10",
+            "kind": "medication",
+            "label": "Baclofène"
+          },
+          {
+            "id": "t11",
+            "kind": "medication",
+            "label": "Escitalopram"
+          },
+          {
+            "id": "t7",
+            "kind": "therapeutic_psycho",
+            "label": "Demande d’hospitalisation pour sevrage GHB/GBL"
+          },
+          {
+            "id": "t12",
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychologique"
+          },
+          {
+            "id": "t17",
+            "kind": "therapeutic_psycho",
+            "label": "Orientation au CeGIDD pour syphilis"
+          },
+          {
+            "id": "t8",
+            "kind": "life_event",
+            "label": "Arrêt de travail"
+          },
+          {
+            "id": "t13",
+            "kind": "life_event",
+            "label": "Séparation du compagnon"
+          },
+          {
+            "id": "t14",
+            "kind": "life_event",
+            "label": "Reprise du travail à temps plein"
+          },
+          {
+            "id": "t15",
+            "kind": "life_event",
+            "label": "Nouvelle relation"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2019",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "PrEP en continu, bonne observance ; poursuivie en juin 2025.",
+            "observationIds": [
+              "historique:o15",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e2",
+            "trackId": "t2",
+            "start": "2022",
+            "end": "2022",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Syphilis traitée en 2022.",
+            "observationIds": [
+              "historique:o15"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t3",
+            "start": "2011",
+            "end": "2013",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Épisode vers 25 ans, traité quelques mois par le médecin généraliste, sans hospitalisation ni tentative de suicide.",
+            "observationIds": [
+              "historique:o15"
+            ],
+            "fromAge": {
+              "start": [
+                24,
+                26
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e4",
+            "trackId": "t4",
+            "start": "2021-03",
+            "end": "2024-07",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Usage en sessions de chemsex environ un week-end sur deux, 24 à 48 h ; sniff au début puis injection (slam) depuis environ septembre 2023. En entretien psychologique, situe le début des sessions au premier confinement.",
+            "observationIds": [
+              "historique:o15",
+              "historique:o13",
+              "historique:o9",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t5",
+            "start": "2021-03",
+            "end": "2024-05-18",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Pris pendant les sessions ; usage décrit pour la désinhibition et pour tenir. La fréquence en session est rapportée comme horaire en mars 2024.",
+            "observationIds": [
+              "historique:o15",
+              "historique:o14",
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t5",
+            "start": "2024-01",
+            "end": "2024-06-10",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": true,
+            "note": "Prise quotidienne de GBL à domicile toutes les 2 à 3 heures, y compris la nuit, « pour dormir et pour tenir » ; tremblements au réveil et anxiété entre les prises. Consigne de ne pas arrêter brutalement avant l’entrée en sevrage.",
+            "observationIds": [
+              "historique:o12",
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e7",
+            "trackId": "t5",
+            "start": "2024-05-18",
+            "end": "2024-05-18",
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": false,
+            "note": "Coma après consommation de GBL avec alcool lors d’une session ; retrouvé inconscient, pris en charge par le SAMU, intubé et admis une nuit en réanimation.",
+            "observationIds": [
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t6",
+            "start": "2024-05-18",
+            "end": "2024-05-19",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Coma, intubation et une nuit en réanimation ; sortie le 19/05.",
+            "observationIds": [
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t7",
+            "start": "2024-05-21",
+            "end": "2024-06-17",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entrée en unité de sevrage le 10/06 ; hospitalisation de 7 jours, sortie rapportée le 17/06.",
+            "observationIds": [
+              "historique:o12",
+              "historique:o11",
+              "historique:o10",
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t8",
+            "start": "2024-05-21",
+            "end": "2024-09-01",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Arrêt de travail de 3 semaines demandé en mai, puis prolongé ; reprise en mi-temps thérapeutique le 02/09.",
+            "observationIds": [
+              "historique:o12",
+              "historique:o10",
+              "historique:o8",
+              "historique:o7"
+            ]
+          },
+          {
+            "id": "e11",
+            "trackId": "t5",
+            "start": "2024-06-10",
+            "end": "2024-06-17",
+            "ongoing": false,
+            "mode": "sevrage",
+            "lossOfControl": false,
+            "note": "Sevrage hospitalier sévère durant les 48 premières heures : tremblements, agitation, insomnie totale et tachycardie ; pas de confusion ni de crise.",
+            "observationIds": [
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e12",
+            "trackId": "t9",
+            "start": "2024-06-10",
+            "end": "2024-06-17",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Administré à doses élevées pendant le sevrage ; arrêté à la sortie.",
+            "observationIds": [
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t10",
+            "start": "2024-06-10",
+            "end": "2024-07",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Utilisé pendant le sevrage ; 30 mg/j à la sortie, avec décroissance prévue sur deux semaines.",
+            "observationIds": [
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t11",
+            "start": "2024-03-28",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Introduit à 10 mg en mars 2024, majoré à 15 mg le 20/06/2024 ; poursuivi à 15 mg en juin 2025. Une diminution est envisagée ultérieurement, sans arrêt engagé.",
+            "observationIds": [
+              "historique:o14",
+              "historique:o10",
+              "historique:o7",
+              "historique:o4",
+              "historique:o3",
+              "historique:o2",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t12",
+            "start": "2024-04-16",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entretiens toutes les deux semaines ; objectifs de comprendre les déclencheurs des sessions et de retrouver une sexualité sans produits. Travail sur la chaîne comportementale et les alternatives après la rechute d’octobre.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o5",
+              "historique:o4",
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e16",
+            "trackId": "t5",
+            "start": "2024-06-10",
+            "end": "2024-10-19",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Aucun GHB rapporté après l’entrée en sevrage jusqu’à la reprise de sessions en octobre ; une session avec GHB rapportée le 12/10, puis usage les deux week-ends précédant l’entretien téléphonique du 22/10 selon le récit initial.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o8",
+              "historique:o7",
+              "historique:o6",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e17",
+            "trackId": "t4",
+            "start": "2024-10-12",
+            "end": "2024-10-19",
+            "ongoing": false,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Sessions avec slam les deux week-ends précédant le 22/10 ; le 03/12, le patient revient sur octobre et rapporte une seule session, le 12/10.",
+            "observationIds": [
+              "historique:o6",
+              "historique:o5",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e18",
+            "trackId": "t5",
+            "start": "2024-10-12",
+            "end": "2024-10-19",
+            "ongoing": false,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Reprise rapportée avec les sessions de 3-MMC en octobre ; le récit du 03/12 la rapporte lors d’une seule session, le 12/10.",
+            "observationIds": [
+              "historique:o6",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e19",
+            "trackId": "t13",
+            "start": "2024-09",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Départ du domicile début septembre ; tristesse et pleurs, mais dit « tenir ». Le départ de l’appartement vide est cité comme contexte de la rechute d’octobre.",
+            "observationIds": [
+              "historique:o7",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e20",
+            "trackId": "t14",
+            "start": "2025-02-01",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Reprise à temps plein depuis le 01/02/2025, avec bonne réintégration dans l’équipe.",
+            "observationIds": [
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e21",
+            "trackId": "t15",
+            "start": "2025-01",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Relation commencée quelques semaines avant le 18/02 ; couple fermé « pour l’instant » en juin, choix assumé.",
+            "observationIds": [
+              "historique:o3",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e22",
+            "trackId": "t4",
+            "start": "2025-04-05",
+            "end": "2025-04-05",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Une consommation sniffée lors d’une soirée d’anniversaire, sans GHB, sans injection et sans rapport sexuel associé ; vécue comme un faux pas.",
+            "observationIds": [
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e23",
+            "trackId": "t4",
+            "start": "2025-04-06",
+            "end": null,
+            "ongoing": false,
+            "mode": "craving",
+            "lossOfControl": false,
+            "note": "Craving les jours suivant la consommation du 05/04 ; le patient a appelé sa psychologue.",
+            "observationIds": [
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e24",
+            "trackId": "t16",
+            "start": "2024-07-09",
+            "end": "2024-07-25",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "TPHA/VDRL positifs ; traitement par une injection d’Extencilline au CeGIDD le 25/07.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e25",
+            "trackId": "t17",
+            "start": "2024-07-09",
+            "end": "2024-07-25",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Orientation après bilan positif ; rendez-vous et traitement au CeGIDD le 25/07.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o8"
+            ]
+          }
+        ],
+        "undated": []
+      }
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t1",
+            "kind": "substance_use",
+            "label": "3-MMC"
+          },
+          {
+            "id": "t2",
+            "kind": "substance_use",
+            "label": "GHB/GBL"
+          },
+          {
+            "id": "t3",
+            "kind": "psychiatric",
+            "label": "Épisode dépressif"
+          },
+          {
+            "id": "t4",
+            "kind": "somatic",
+            "label": "Syphilis"
+          },
+          {
+            "id": "t5",
+            "kind": "somatic",
+            "label": "Coma au GHB avec intubation"
+          },
+          {
+            "id": "t6",
+            "kind": "medication",
+            "label": "Ténofovir/emtricitabine (PrEP)"
+          },
+          {
+            "id": "t7",
+            "kind": "medication",
+            "label": "Escitalopram"
+          },
+          {
+            "id": "t8",
+            "kind": "medication",
+            "label": "Diazépam"
+          },
+          {
+            "id": "t9",
+            "kind": "medication",
+            "label": "Baclofène"
+          },
+          {
+            "id": "t10",
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en unité de sevrage GHB"
+          },
+          {
+            "id": "t11",
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychologique"
+          },
+          {
+            "id": "t12",
+            "kind": "therapeutic_psycho",
+            "label": "Groupe de parole de l'association communautaire"
+          },
+          {
+            "id": "t13",
+            "kind": "life_event",
+            "label": "Relation de couple (couple ouvert)"
+          },
+          {
+            "id": "t14",
+            "kind": "life_event",
+            "label": "Séparation"
+          },
+          {
+            "id": "t15",
+            "kind": "life_event",
+            "label": "Arrêt de travail"
+          },
+          {
+            "id": "t16",
+            "kind": "life_event",
+            "label": "Reprise à mi-temps thérapeutique"
+          },
+          {
+            "id": "t17",
+            "kind": "life_event",
+            "label": "Reprise du travail à temps plein"
+          },
+          {
+            "id": "t18",
+            "kind": "life_event",
+            "label": "Nouvelle relation"
+          },
+          {
+            "id": "t19",
+            "kind": "life_event",
+            "label": "Vie cachée dans une petite ville"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2020",
+            "end": "2025-04-05",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Chemsex depuis le premier confinement selon o11 ; « depuis environ 3 ans » en 03/2024 ; sniffée puis injectée (slam) depuis environ 6 mois avant 03/2024 ; sessions un week-end sur deux de 24 à 48h. Dernière consommation signalée : sniff le 05/04/2025.",
+            "observationIds": [
+              "historique:o15",
+              "historique:o5",
+              "historique:o2",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e2",
+            "trackId": "t1",
+            "start": "2024-03-23",
+            "end": "2024-03-24",
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": false,
+            "note": "Session d'environ 36h, 6 injections de 3-MMC, GHB « toutes les heures » ; descente très difficile jusqu'au mercredi.",
+            "observationIds": [
+              "historique:o14"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t1",
+            "start": "2024-07",
+            "end": "2024-07",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Une session sniffée mi-juillet, sans GHB, avec un ami, sans sexe ; sortie précoce par « peur de lui-même ».",
+            "observationIds": [
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e4",
+            "trackId": "t1",
+            "start": "2024-10-12",
+            "end": "2024-10-19",
+            "ongoing": false,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Rechute : slam de 3-MMC + GHB lors de sessions (12/10 et 19/10 selon l'entretien du 22/10 ; « une seule session », le 12/10, selon le 03/12). Pas de perte de connaissance.",
+            "observationIds": [
+              "historique:o6",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t2",
+            "start": "2020",
+            "end": "2024-06-10",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Pendant les sessions (« pour la désinhibition et pour tenir ») selon 03/2024 ; le patient ne précisait pas d'usage hors sessions. Dernière prise avant l'entrée en sevrage le 10/06/2024.",
+            "observationIds": [
+              "historique:o15",
+              "historique:o12",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t2",
+            "start": "2024-01",
+            "end": "2024-06-10",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": true,
+            "note": "Prise quotidienne de GBL à domicile toutes les 2-3 heures, y compris la nuit, depuis le début de l'année 2024 (révélée le 21/05) ; dépendance physique probable.",
+            "observationIds": [
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e7",
+            "trackId": "t2",
+            "start": "2024-05-18",
+            "end": "2024-05-19",
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": true,
+            "note": "Coma au GBL associé à l'alcool lors d'une session ; retrouvé inconscient, SAMU, intubation, réanimation ; sortie le 19/05.",
+            "observationIds": [
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t2",
+            "start": "2024-06-10",
+            "end": "2024-06-17",
+            "ongoing": false,
+            "mode": "sevrage",
+            "lossOfControl": false,
+            "note": "Sevrage sévère les 48 premières heures (tremblements, agitation, insomnie totale, tachycardie), contrôlé par diazépam et baclofène, sans confusion ni crise. Sortie le 17/06 selon o6 (14/06 selon o7).",
+            "observationIds": [
+              "historique:o11",
+              "historique:o10",
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t3",
+            "start": "2011",
+            "end": "2013",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "« vers 25 ans » : épisode dépressif traité par le MG pendant quelques mois ; pas d'hospitalisation, pas de tentative de suicide.",
+            "observationIds": [
+              "historique:o15"
+            ],
+            "fromAge": {
+              "start": [
+                24,
+                26
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e10",
+            "trackId": "t3",
+            "start": "2024-03",
+            "end": "2025-02",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Épisode dépressif caractérisé d'intensité modérée évoluant depuis plusieurs mois, majoré par les descentes (28/03/2024) ; thymie basse en 03/2024 ; amélioration nette en 02/2025.",
+            "observationIds": [
+              "historique:o15",
+              "historique:o14",
+              "historique:o8",
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e11",
+            "trackId": "t4",
+            "start": "2022",
+            "end": "2022",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Syphilis traitée en 2022.",
+            "observationIds": [
+              "historique:o15"
+            ]
+          },
+          {
+            "id": "e12",
+            "trackId": "t4",
+            "start": "2024-07-09",
+            "end": "2024-07-25",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Recontamination probable (TPHA/VDRL positifs le 09/07) ; traitée le 25/07 au CeGIDD par extencilline une injection.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t5",
+            "start": "2024-05-18",
+            "end": "2024-05-19",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Coma GBL + alcool, intubation et une nuit en réanimation ; sortie le 19/05.",
+            "observationIds": [
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t6",
+            "start": "2019",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "PrEP en continu depuis 2019, bonne observance ; suivi trimestriel au CeGIDD à jour (06/2025).",
+            "observationIds": [
+              "historique:o15",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t7",
+            "start": "2024-03-28",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Introduit à 10 mg ; majoré à 15 mg le 20/06/2024 ; diminution à discuter après l'été 2025.",
+            "observationIds": [
+              "historique:o14",
+              "historique:o10",
+              "historique:o7",
+              "historique:o4",
+              "historique:o3",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e16",
+            "trackId": "t8",
+            "start": "2024-06-10",
+            "end": "2024-06-17",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Doses élevées pendant le sevrage GHB ; arrêté à la sortie.",
+            "observationIds": [
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e17",
+            "trackId": "t9",
+            "start": "2024-06-10",
+            "end": "2024-07",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Associé au diazépam pendant le sevrage ; 30 mg/j en décroissance sur 2 semaines à partir de 06/2024.",
+            "observationIds": [
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e18",
+            "trackId": "t10",
+            "start": "2024-06-10",
+            "end": "2024-06-17",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entrée confirmée le 10/06 pour sevrage GHB/GBL, durée prévue 7 à 10 jours ; sortie le 17/06 selon o6 (14/06 selon o7).",
+            "observationIds": [
+              "historique:o11",
+              "historique:o10",
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e19",
+            "trackId": "t11",
+            "start": "2024-04-16",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Premier entretien le 16/04/2024, rythme toutes les 2 semaines ; 6e séance le 05/11/2024.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o5"
+            ]
+          },
+          {
+            "id": "e20",
+            "trackId": "t12",
+            "start": "2024-12-03",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Intérêt exprimé, coordonnées données ; participation non confirmée dans les observations.",
+            "observationIds": [
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e21",
+            "trackId": "t13",
+            "start": "2018",
+            "end": "2024-09",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "En couple depuis 6 ans en 03/2024 ; séparation début septembre 2024.",
+            "observationIds": [
+              "historique:o15",
+              "historique:o7"
+            ]
+          },
+          {
+            "id": "e22",
+            "trackId": "t14",
+            "start": "2024-09",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Départ du compagnon début septembre ; tristesse, pleurs, dit « tenir ».",
+            "observationIds": [
+              "historique:o7",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e23",
+            "trackId": "t15",
+            "start": "2024-05-21",
+            "end": "2024-09-01",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Arrêt de 3 semaines à partir du 21/05, prolongé jusqu'au 01/09.",
+            "observationIds": [
+              "historique:o12",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e24",
+            "trackId": "t16",
+            "start": "2024-09-02",
+            "end": "2025-01-31",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Reprise en mi-temps thérapeutique depuis le 02/09/2024 ; temps plein à partir du 01/02/2025.",
+            "observationIds": [
+              "historique:o7",
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e25",
+            "trackId": "t17",
+            "start": "2025-02-01",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Reprise à temps plein, bonne réintégration dans l'équipe.",
+            "observationIds": [
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e26",
+            "trackId": "t18",
+            "start": "2025-01",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Rencontre en dehors des applications « depuis quelques semaines » (02/2025) ; couple fermé « pour l'instant » (06/2025).",
+            "observationIds": [
+              "historique:o3",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e27",
+            "trackId": "t19",
+            "start": "1993",
+            "end": "2007",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Enfance dans une petite ville où il s'est « caché » jusqu'à ses 20 ans.",
+            "observationIds": [
+              "historique:o13"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": [
+                20,
+                20
+              ]
+            }
+          }
+        ],
+        "undated": []
+      }
+    },
+    {
+      "model": "union",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t4",
+            "kind": "substance_use",
+            "label": "3-MMC"
+          },
+          {
+            "id": "t5",
+            "kind": "substance_use",
+            "label": "GHB/GBL"
+          },
+          {
+            "id": "t3",
+            "kind": "psychiatric",
+            "label": "Épisode dépressif"
+          },
+          {
+            "id": "t2",
+            "kind": "somatic",
+            "label": "Syphilis"
+          },
+          {
+            "id": "t6",
+            "kind": "somatic",
+            "label": "Coma après consommation de GBL et d’alcool"
+          },
+          {
+            "id": "t16",
+            "kind": "somatic",
+            "label": "Recontamination syphilitique probable"
+          },
+          {
+            "id": "t18",
+            "kind": "somatic",
+            "label": "Coma au GHB avec intubation"
+          },
+          {
+            "id": "t1",
+            "kind": "medication",
+            "label": "Ténofovir/emtricitabine (PrEP)"
+          },
+          {
+            "id": "t9",
+            "kind": "medication",
+            "label": "Diazépam"
+          },
+          {
+            "id": "t10",
+            "kind": "medication",
+            "label": "Baclofène"
+          },
+          {
+            "id": "t11",
+            "kind": "medication",
+            "label": "Escitalopram"
+          },
+          {
+            "id": "t7",
+            "kind": "therapeutic_psycho",
+            "label": "Demande d’hospitalisation pour sevrage GHB/GBL"
+          },
+          {
+            "id": "t12",
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychologique"
+          },
+          {
+            "id": "t17",
+            "kind": "therapeutic_psycho",
+            "label": "Orientation au CeGIDD pour syphilis"
+          },
+          {
+            "id": "t19",
+            "kind": "therapeutic_psycho",
+            "label": "Groupe de parole de l'association communautaire"
+          },
+          {
+            "id": "t8",
+            "kind": "life_event",
+            "label": "Arrêt de travail"
+          },
+          {
+            "id": "t13",
+            "kind": "life_event",
+            "label": "Séparation du compagnon"
+          },
+          {
+            "id": "t14",
+            "kind": "life_event",
+            "label": "Reprise du travail à temps plein"
+          },
+          {
+            "id": "t15",
+            "kind": "life_event",
+            "label": "Nouvelle relation"
+          },
+          {
+            "id": "t20",
+            "kind": "life_event",
+            "label": "Relation de couple (couple ouvert)"
+          },
+          {
+            "id": "t21",
+            "kind": "life_event",
+            "label": "Reprise à mi-temps thérapeutique"
+          },
+          {
+            "id": "t22",
+            "kind": "life_event",
+            "label": "Vie cachée dans une petite ville"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2019",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "PrEP en continu, bonne observance ; poursuivie en juin 2025.",
+            "observationIds": [
+              "historique:o15",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e2",
+            "trackId": "t2",
+            "start": "2022",
+            "end": "2022",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Syphilis traitée en 2022.",
+            "observationIds": [
+              "historique:o15"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t3",
+            "start": "2011",
+            "end": "2013",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Épisode vers 25 ans, traité quelques mois par le médecin généraliste, sans hospitalisation ni tentative de suicide.",
+            "observationIds": [
+              "historique:o15"
+            ],
+            "fromAge": {
+              "start": [
+                24,
+                26
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e4",
+            "trackId": "t4",
+            "start": "2021-03",
+            "end": "2024-07",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Usage en sessions de chemsex environ un week-end sur deux, 24 à 48 h ; sniff au début puis injection (slam) depuis environ septembre 2023. En entretien psychologique, situe le début des sessions au premier confinement.",
+            "observationIds": [
+              "historique:o15",
+              "historique:o13",
+              "historique:o9",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t5",
+            "start": "2021-03",
+            "end": "2024-05-18",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Pris pendant les sessions ; usage décrit pour la désinhibition et pour tenir. La fréquence en session est rapportée comme horaire en mars 2024.",
+            "observationIds": [
+              "historique:o15",
+              "historique:o14",
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t5",
+            "start": "2024-01",
+            "end": "2024-06-10",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": true,
+            "note": "Prise quotidienne de GBL à domicile toutes les 2 à 3 heures, y compris la nuit, « pour dormir et pour tenir » ; tremblements au réveil et anxiété entre les prises. Consigne de ne pas arrêter brutalement avant l’entrée en sevrage.",
+            "observationIds": [
+              "historique:o12",
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e7",
+            "trackId": "t5",
+            "start": "2024-05-18",
+            "end": "2024-05-18",
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": false,
+            "note": "Coma après consommation de GBL avec alcool lors d’une session ; retrouvé inconscient, pris en charge par le SAMU, intubé et admis une nuit en réanimation.",
+            "observationIds": [
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t6",
+            "start": "2024-05-18",
+            "end": "2024-05-19",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Coma, intubation et une nuit en réanimation ; sortie le 19/05.",
+            "observationIds": [
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t7",
+            "start": "2024-05-21",
+            "end": "2024-06-17",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entrée en unité de sevrage le 10/06 ; hospitalisation de 7 jours, sortie rapportée le 17/06.",
+            "observationIds": [
+              "historique:o12",
+              "historique:o11",
+              "historique:o10",
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t8",
+            "start": "2024-05-21",
+            "end": "2024-09-01",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Arrêt de travail de 3 semaines demandé en mai, puis prolongé ; reprise en mi-temps thérapeutique le 02/09.",
+            "observationIds": [
+              "historique:o12",
+              "historique:o10",
+              "historique:o8",
+              "historique:o7"
+            ]
+          },
+          {
+            "id": "e11",
+            "trackId": "t5",
+            "start": "2024-06-10",
+            "end": "2024-06-17",
+            "ongoing": false,
+            "mode": "sevrage",
+            "lossOfControl": false,
+            "note": "Sevrage hospitalier sévère durant les 48 premières heures : tremblements, agitation, insomnie totale et tachycardie ; pas de confusion ni de crise.",
+            "observationIds": [
+              "historique:o10",
+              "historique:o11",
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e12",
+            "trackId": "t9",
+            "start": "2024-06-10",
+            "end": "2024-06-17",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Administré à doses élevées pendant le sevrage ; arrêté à la sortie.",
+            "observationIds": [
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t10",
+            "start": "2024-06-10",
+            "end": "2024-07",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Utilisé pendant le sevrage ; 30 mg/j à la sortie, avec décroissance prévue sur deux semaines.",
+            "observationIds": [
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t11",
+            "start": "2024-03-28",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Introduit à 10 mg en mars 2024, majoré à 15 mg le 20/06/2024 ; poursuivi à 15 mg en juin 2025. Une diminution est envisagée ultérieurement, sans arrêt engagé.",
+            "observationIds": [
+              "historique:o14",
+              "historique:o10",
+              "historique:o7",
+              "historique:o4",
+              "historique:o3",
+              "historique:o2",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t12",
+            "start": "2024-04-16",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entretiens toutes les deux semaines ; objectifs de comprendre les déclencheurs des sessions et de retrouver une sexualité sans produits. Travail sur la chaîne comportementale et les alternatives après la rechute d’octobre.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o5",
+              "historique:o4",
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e16",
+            "trackId": "t5",
+            "start": "2024-06-10",
+            "end": "2024-10-19",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Aucun GHB rapporté après l’entrée en sevrage jusqu’à la reprise de sessions en octobre ; une session avec GHB rapportée le 12/10, puis usage les deux week-ends précédant l’entretien téléphonique du 22/10 selon le récit initial.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o8",
+              "historique:o7",
+              "historique:o6",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e17",
+            "trackId": "t4",
+            "start": "2024-10-12",
+            "end": "2024-10-19",
+            "ongoing": false,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Sessions avec slam les deux week-ends précédant le 22/10 ; le 03/12, le patient revient sur octobre et rapporte une seule session, le 12/10.",
+            "observationIds": [
+              "historique:o6",
+              "historique:o5",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e18",
+            "trackId": "t5",
+            "start": "2024-10-12",
+            "end": "2024-10-19",
+            "ongoing": false,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Reprise rapportée avec les sessions de 3-MMC en octobre ; le récit du 03/12 la rapporte lors d’une seule session, le 12/10.",
+            "observationIds": [
+              "historique:o6",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e19",
+            "trackId": "t13",
+            "start": "2024-09",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Départ du domicile début septembre ; tristesse et pleurs, mais dit « tenir ». Le départ de l’appartement vide est cité comme contexte de la rechute d’octobre.",
+            "observationIds": [
+              "historique:o7",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e20",
+            "trackId": "t14",
+            "start": "2025-02-01",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Reprise à temps plein depuis le 01/02/2025, avec bonne réintégration dans l’équipe.",
+            "observationIds": [
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e21",
+            "trackId": "t15",
+            "start": "2025-01",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Relation commencée quelques semaines avant le 18/02 ; couple fermé « pour l’instant » en juin, choix assumé.",
+            "observationIds": [
+              "historique:o3",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e22",
+            "trackId": "t4",
+            "start": "2025-04-05",
+            "end": "2025-04-05",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Une consommation sniffée lors d’une soirée d’anniversaire, sans GHB, sans injection et sans rapport sexuel associé ; vécue comme un faux pas.",
+            "observationIds": [
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e23",
+            "trackId": "t4",
+            "start": "2025-04-06",
+            "end": null,
+            "ongoing": false,
+            "mode": "craving",
+            "lossOfControl": false,
+            "note": "Craving les jours suivant la consommation du 05/04 ; le patient a appelé sa psychologue.",
+            "observationIds": [
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e24",
+            "trackId": "t16",
+            "start": "2024-07-09",
+            "end": "2024-07-25",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "TPHA/VDRL positifs ; traitement par une injection d’Extencilline au CeGIDD le 25/07.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e25",
+            "trackId": "t17",
+            "start": "2024-07-09",
+            "end": "2024-07-25",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Orientation après bilan positif ; rendez-vous et traitement au CeGIDD le 25/07.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e26",
+            "trackId": "t4",
+            "start": "2024-03-23",
+            "end": "2024-03-24",
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": false,
+            "note": "Session d'environ 36h, 6 injections de 3-MMC, GHB « toutes les heures » ; descente très difficile jusqu'au mercredi.",
+            "observationIds": [
+              "historique:o14"
+            ]
+          },
+          {
+            "id": "e27",
+            "trackId": "t4",
+            "start": "2024-07",
+            "end": "2024-07",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Une session sniffée mi-juillet, sans GHB, avec un ami, sans sexe ; sortie précoce par « peur de lui-même ».",
+            "observationIds": [
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e28",
+            "trackId": "t18",
+            "start": "2024-05-18",
+            "end": "2024-05-19",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Coma GBL + alcool, intubation et une nuit en réanimation ; sortie le 19/05.",
+            "observationIds": [
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e29",
+            "trackId": "t19",
+            "start": "2024-12-03",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Intérêt exprimé, coordonnées données ; participation non confirmée dans les observations.",
+            "observationIds": [
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e30",
+            "trackId": "t20",
+            "start": "2018",
+            "end": "2024-09",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "En couple depuis 6 ans en 03/2024 ; séparation début septembre 2024.",
+            "observationIds": [
+              "historique:o15",
+              "historique:o7"
+            ]
+          },
+          {
+            "id": "e31",
+            "trackId": "t21",
+            "start": "2024-09-02",
+            "end": "2025-01-31",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Reprise en mi-temps thérapeutique depuis le 02/09/2024 ; temps plein à partir du 01/02/2025.",
+            "observationIds": [
+              "historique:o7",
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e32",
+            "trackId": "t22",
+            "start": "1993",
+            "end": "2007",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Enfance dans une petite ville où il s'est « caché » jusqu'à ses 20 ans.",
+            "observationIds": [
+              "historique:o13"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": [
+                20,
+                20
+              ]
+            }
+          }
+        ],
+        "undated": []
+      }
+    }
+  ],
+  "elapsedMs": 66968,
+  "usage": {
+    "calls": 3,
+    "promptTokens": 19283,
+    "completionTokens": 21592,
+    "cost": 0.0128,
+    "by": {
+      "openai/gpt-6-luna frise": 0.002674925,
+      "anthropic/claude-haiku-5.5 frise": 0.006614,
+      "anthropic/claude-haiku-5.5 arbitrage": 0.0035229
+    }
+  },
+  "rawAnswers": [
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "medication",
+            "label": "Ténofovir/emtricitabine (PrEP)",
+            "start": "2019",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "PrEP en continu, bonne observance ; poursuivie en juin 2025.",
+            "observation_ids": [
+              "o1",
+              "o15"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Syphilis",
+            "start": "2022",
+            "end": "2022",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Syphilis traitée en 2022.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif",
+            "start": null,
+            "end": null,
+            "start_age": [
+              24,
+              26
+            ],
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Épisode vers 25 ans, traité quelques mois par le médecin généraliste, sans hospitalisation ni tentative de suicide.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "3-MMC",
+            "start": "2021-03",
+            "end": "2024-07",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Usage en sessions de chemsex environ un week-end sur deux, 24 à 48 h ; sniff au début puis injection (slam) depuis environ septembre 2023. En entretien psychologique, situe le début des sessions au premier confinement.",
+            "observation_ids": [
+              "o1",
+              "o3",
+              "o7",
+              "o8"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "GHB/GBL",
+            "start": "2021-03",
+            "end": "2024-05-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Pris pendant les sessions ; usage décrit pour la désinhibition et pour tenir. La fréquence en session est rapportée comme horaire en mars 2024.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o4"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Deux à trois verres le week-end hors sessions en mars 2024 ; deux verres le samedi, sans ivresse, en juin 2025. Association avec GBL lors de la session du 18/05/2024.",
+            "observation_ids": [
+              "o1",
+              "o4",
+              "o15"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Poppers",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Usage occasionnel, rapporté en mars 2024 et juin 2025.",
+            "observation_ids": [
+              "o1",
+              "o15"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Non-fumeur en mars 2024.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif caractérisé d’intensité modérée",
+            "start": null,
+            "end": "2024-07-30",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Évolue depuis plusieurs mois au 28/03/2024 ; tristesse, anhédonie, retrait et culpabilité, majorés par les descentes. Amélioration de la thymie rapportée en juillet.",
+            "observation_ids": [
+              "o2",
+              "o6",
+              "o8",
+              "o9",
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "GHB/GBL",
+            "start": "2024-01",
+            "end": "2024-06-10",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Prise quotidienne de GBL à domicile toutes les 2 à 3 heures, y compris la nuit, « pour dormir et pour tenir » ; tremblements au réveil et anxiété entre les prises. Consigne de ne pas arrêter brutalement avant l’entrée en sevrage.",
+            "observation_ids": [
+              "o4",
+              "o5"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "GHB/GBL",
+            "start": "2024-05-18",
+            "end": "2024-05-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": false,
+            "note": "Coma après consommation de GBL avec alcool lors d’une session ; retrouvé inconscient, pris en charge par le SAMU, intubé et admis une nuit en réanimation.",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Coma après consommation de GBL et d’alcool",
+            "start": "2024-05-18",
+            "end": "2024-05-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Coma, intubation et une nuit en réanimation ; sortie le 19/05.",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Demande d’hospitalisation pour sevrage GHB/GBL",
+            "start": "2024-05-21",
+            "end": "2024-06-17",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entrée en unité de sevrage le 10/06 ; hospitalisation de 7 jours, sortie rapportée le 17/06.",
+            "observation_ids": [
+              "o4",
+              "o5",
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Arrêt de travail",
+            "start": "2024-05-21",
+            "end": "2024-09-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Arrêt de travail de 3 semaines demandé en mai, puis prolongé ; reprise en mi-temps thérapeutique le 02/09.",
+            "observation_ids": [
+              "o4",
+              "o6",
+              "o8",
+              "o9"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "GHB/GBL",
+            "start": "2024-06-10",
+            "end": "2024-06-17",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Sevrage hospitalier sévère durant les 48 premières heures : tremblements, agitation, insomnie totale et tachycardie ; pas de confusion ni de crise.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Diazépam",
+            "start": "2024-06-10",
+            "end": "2024-06-17",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Administré à doses élevées pendant le sevrage ; arrêté à la sortie.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Baclofène",
+            "start": "2024-06-10",
+            "end": "2024-07",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Utilisé pendant le sevrage ; 30 mg/j à la sortie, avec décroissance prévue sur deux semaines.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Escitalopram",
+            "start": "2024-03-28",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Introduit à 10 mg en mars 2024, majoré à 15 mg le 20/06/2024 ; poursuivi à 15 mg en juin 2025. Une diminution est envisagée ultérieurement, sans arrêt engagé.",
+            "observation_ids": [
+              "o2",
+              "o6",
+              "o9",
+              "o12",
+              "o13",
+              "o14",
+              "o15"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychologique",
+            "start": "2024-04-16",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entretiens toutes les deux semaines ; objectifs de comprendre les déclencheurs des sessions et de retrouver une sexualité sans produits. Travail sur la chaîne comportementale et les alternatives après la rechute d’octobre.",
+            "observation_ids": [
+              "o3",
+              "o11",
+              "o12",
+              "o14"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "GHB/GBL",
+            "start": "2024-06-10",
+            "end": "2024-10-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Aucun GHB rapporté après l’entrée en sevrage jusqu’à la reprise de sessions en octobre ; une session avec GHB rapportée le 12/10, puis usage les deux week-ends précédant l’entretien téléphonique du 22/10 selon le récit initial.",
+            "observation_ids": [
+              "o7",
+              "o8",
+              "o9",
+              "o10",
+              "o12"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "3-MMC",
+            "start": "2024-10-12",
+            "end": "2024-10-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Sessions avec slam les deux week-ends précédant le 22/10 ; le 03/12, le patient revient sur octobre et rapporte une seule session, le 12/10.",
+            "observation_ids": [
+              "o10",
+              "o11",
+              "o12"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "GHB/GBL",
+            "start": "2024-10-12",
+            "end": "2024-10-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Reprise rapportée avec les sessions de 3-MMC en octobre ; le récit du 03/12 la rapporte lors d’une seule session, le 12/10.",
+            "observation_ids": [
+              "o10",
+              "o12"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Séparation du compagnon",
+            "start": "2024-09",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Départ du domicile début septembre ; tristesse et pleurs, mais dit « tenir ». Le départ de l’appartement vide est cité comme contexte de la rechute d’octobre.",
+            "observation_ids": [
+              "o9",
+              "o10"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Reprise du travail à temps plein",
+            "start": "2025-02-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Reprise à temps plein depuis le 01/02/2025, avec bonne réintégration dans l’équipe.",
+            "observation_ids": [
+              "o13"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Nouvelle relation",
+            "start": "2025-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Relation commencée quelques semaines avant le 18/02 ; couple fermé « pour l’instant » en juin, choix assumé.",
+            "observation_ids": [
+              "o13",
+              "o15"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "3-MMC",
+            "start": "2025-04-05",
+            "end": "2025-04-05",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Une consommation sniffée lors d’une soirée d’anniversaire, sans GHB, sans injection et sans rapport sexuel associé ; vécue comme un faux pas.",
+            "observation_ids": [
+              "o14"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "3-MMC",
+            "start": "2025-04-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "craving",
+            "loss_of_control": false,
+            "note": "Craving les jours suivant la consommation du 05/04 ; le patient a appelé sa psychologue.",
+            "observation_ids": [
+              "o14"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Recontamination syphilitique probable",
+            "start": "2024-07-09",
+            "end": "2024-07-25",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "TPHA/VDRL positifs ; traitement par une injection d’Extencilline au CeGIDD le 25/07.",
+            "observation_ids": [
+              "o7",
+              "o8"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Orientation au CeGIDD pour syphilis",
+            "start": "2024-07-09",
+            "end": "2024-07-25",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Orientation après bilan positif ; rendez-vous et traitement au CeGIDD le 25/07.",
+            "observation_ids": [
+              "o7",
+              "o8"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "3-MMC",
+            "start": "2020",
+            "end": "2025-04-05",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Chemsex depuis le premier confinement selon o11 ; « depuis environ 3 ans » en 03/2024 ; sniffée puis injectée (slam) depuis environ 6 mois avant 03/2024 ; sessions un week-end sur deux de 24 à 48h. Dernière consommation signalée : sniff le 05/04/2025.",
+            "observation_ids": [
+              "o1",
+              "o11",
+              "o14",
+              "o15"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "3-MMC",
+            "start": "2024-03-23",
+            "end": "2024-03-24",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": false,
+            "note": "Session d'environ 36h, 6 injections de 3-MMC, GHB « toutes les heures » ; descente très difficile jusqu'au mercredi.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "3-MMC",
+            "start": "2024-07",
+            "end": "2024-07",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Une session sniffée mi-juillet, sans GHB, avec un ami, sans sexe ; sortie précoce par « peur de lui-même ».",
+            "observation_ids": [
+              "o8"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "3-MMC",
+            "start": "2024-10-12",
+            "end": "2024-10-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Rechute : slam de 3-MMC + GHB lors de sessions (12/10 et 19/10 selon l'entretien du 22/10 ; « une seule session », le 12/10, selon le 03/12). Pas de perte de connaissance.",
+            "observation_ids": [
+              "o10",
+              "o12"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "GHB/GBL",
+            "start": "2020",
+            "end": "2024-06-10",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Pendant les sessions (« pour la désinhibition et pour tenir ») selon 03/2024 ; le patient ne précisait pas d'usage hors sessions. Dernière prise avant l'entrée en sevrage le 10/06/2024.",
+            "observation_ids": [
+              "o1",
+              "o4",
+              "o8"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "GHB/GBL",
+            "start": "2024-01",
+            "end": "2024-06-10",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Prise quotidienne de GBL à domicile toutes les 2-3 heures, y compris la nuit, depuis le début de l'année 2024 (révélée le 21/05) ; dépendance physique probable.",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "GHB/GBL",
+            "start": "2024-05-18",
+            "end": "2024-05-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": true,
+            "note": "Coma au GBL associé à l'alcool lors d'une session ; retrouvé inconscient, SAMU, intubation, réanimation ; sortie le 19/05.",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "GHB/GBL",
+            "start": "2024-06-10",
+            "end": "2024-06-17",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Sevrage sévère les 48 premières heures (tremblements, agitation, insomnie totale, tachycardie), contrôlé par diazépam et baclofène, sans confusion ni crise. Sortie le 17/06 selon o6 (14/06 selon o7).",
+            "observation_ids": [
+              "o5",
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "2-3 verres le week-end hors sessions (03/2024) ; 2 verres le samedi, sans ivresse (06/2025).",
+            "observation_ids": [
+              "o1",
+              "o15"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Poppers",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Consommation occasionnelle (03/2024 et 06/2025).",
+            "observation_ids": [
+              "o1",
+              "o15"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif",
+            "start": null,
+            "end": null,
+            "start_age": [
+              24,
+              26
+            ],
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "« vers 25 ans » : épisode dépressif traité par le MG pendant quelques mois ; pas d'hospitalisation, pas de tentative de suicide.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif",
+            "start": "2024-03",
+            "end": "2025-02",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Épisode dépressif caractérisé d'intensité modérée évoluant depuis plusieurs mois, majoré par les descentes (28/03/2024) ; thymie basse en 03/2024 ; amélioration nette en 02/2025.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o8",
+              "o13"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Syphilis",
+            "start": "2022",
+            "end": "2022",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Syphilis traitée en 2022.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Syphilis",
+            "start": "2024-07-09",
+            "end": "2024-07-25",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Recontamination probable (TPHA/VDRL positifs le 09/07) ; traitée le 25/07 au CeGIDD par extencilline une injection.",
+            "observation_ids": [
+              "o7",
+              "o8"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Coma au GHB avec intubation",
+            "start": "2024-05-18",
+            "end": "2024-05-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Coma GBL + alcool, intubation et une nuit en réanimation ; sortie le 19/05.",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Ténofovir/emtricitabine (PrEP)",
+            "start": "2019",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "PrEP en continu depuis 2019, bonne observance ; suivi trimestriel au CeGIDD à jour (06/2025).",
+            "observation_ids": [
+              "o1",
+              "o15"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Escitalopram",
+            "start": "2024-03-28",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Introduit à 10 mg ; majoré à 15 mg le 20/06/2024 ; diminution à discuter après l'été 2025.",
+            "observation_ids": [
+              "o2",
+              "o6",
+              "o9",
+              "o12",
+              "o13",
+              "o15"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Diazépam",
+            "start": "2024-06-10",
+            "end": "2024-06-17",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Doses élevées pendant le sevrage GHB ; arrêté à la sortie.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Baclofène",
+            "start": "2024-06-10",
+            "end": "2024-07",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Associé au diazépam pendant le sevrage ; 30 mg/j en décroissance sur 2 semaines à partir de 06/2024.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en unité de sevrage GHB",
+            "start": "2024-06-10",
+            "end": "2024-06-17",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entrée confirmée le 10/06 pour sevrage GHB/GBL, durée prévue 7 à 10 jours ; sortie le 17/06 selon o6 (14/06 selon o7).",
+            "observation_ids": [
+              "o5",
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychologique",
+            "start": "2024-04-16",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Premier entretien le 16/04/2024, rythme toutes les 2 semaines ; 6e séance le 05/11/2024.",
+            "observation_ids": [
+              "o3",
+              "o11"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Groupe de parole de l'association communautaire",
+            "start": "2024-12-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Intérêt exprimé, coordonnées données ; participation non confirmée dans les observations.",
+            "observation_ids": [
+              "o12"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Relation de couple (couple ouvert)",
+            "start": "2018",
+            "end": "2024-09",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "En couple depuis 6 ans en 03/2024 ; séparation début septembre 2024.",
+            "observation_ids": [
+              "o1",
+              "o9"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Séparation",
+            "start": "2024-09",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Départ du compagnon début septembre ; tristesse, pleurs, dit « tenir ».",
+            "observation_ids": [
+              "o9",
+              "o10"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Arrêt de travail",
+            "start": "2024-05-21",
+            "end": "2024-09-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Arrêt de 3 semaines à partir du 21/05, prolongé jusqu'au 01/09.",
+            "observation_ids": [
+              "o4",
+              "o8"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Reprise à mi-temps thérapeutique",
+            "start": "2024-09-02",
+            "end": "2025-01-31",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Reprise en mi-temps thérapeutique depuis le 02/09/2024 ; temps plein à partir du 01/02/2025.",
+            "observation_ids": [
+              "o9",
+              "o13"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Reprise du travail à temps plein",
+            "start": "2025-02-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Reprise à temps plein, bonne réintégration dans l'équipe.",
+            "observation_ids": [
+              "o13"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Nouvelle relation",
+            "start": "2025-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Rencontre en dehors des applications « depuis quelques semaines » (02/2025) ; couple fermé « pour l'instant » (06/2025).",
+            "observation_ids": [
+              "o13",
+              "o15"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Vie cachée dans une petite ville",
+            "start": null,
+            "end": null,
+            "start_age": "enfance",
+            "end_age": 20,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Enfance dans une petite ville où il s'est « caché » jusqu'à ses 20 ans.",
+            "observation_ids": [
+              "o3"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "schema": "arbitrage",
+      "content": {
+        "decisions": [
+          {
+            "id": "d1",
+            "verdict": "keep",
+            "variant": 2,
+            "event": null
+          },
+          {
+            "id": "d2",
+            "verdict": "keep",
+            "variant": 2,
+            "event": null
+          },
+          {
+            "id": "d3",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d4",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d5",
+            "verdict": "drop",
+            "variant": null,
+            "event": null
+          },
+          {
+            "id": "d6",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d17",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d13",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d19",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d7",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d15",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d8",
+            "verdict": "drop",
+            "variant": null,
+            "event": null
+          },
+          {
+            "id": "d12",
+            "verdict": "keep",
+            "variant": null,
+            "event": {
+              "kind": "somatic",
+              "label": "Syphilis (recontamination probable), traitée au CeGIDD",
+              "start": "2024-07-09",
+              "end": "2024-07-25",
+              "start_age": null,
+              "end_age": null,
+              "ongoing": false,
+              "mode": null,
+              "loss_of_control": false,
+              "note": "Bilan positif (TPHA/VDRL) le 09/07/2024, recontamination probable ; traitement par extencilline au CeGIDD le 25/07/2024.",
+              "observation_ids": [
+                "o7",
+                "o8"
+              ]
+            }
+          },
+          {
+            "id": "d14",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d18",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d9",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d16",
+            "verdict": "drop",
+            "variant": null,
+            "event": null
+          },
+          {
+            "id": "d10",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d11",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          }
+        ]
+      }
+    }
+  ]
+}

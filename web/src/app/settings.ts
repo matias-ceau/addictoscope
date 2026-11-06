@@ -33,6 +33,7 @@ export function emptyPolicy(kind: CloudPolicy["kind"]): CloudPolicy {
 
 export function policyReady(p: CloudPolicy): boolean {
   if (p.kind === "off") return false;
+  if (p.consensus && (p.consensus.readers.length < 2 || !p.consensus.arbiter)) return false;
   if (p.kind === "openrouter-zdr") return p.apiKey.trim().length > 0 && p.model.trim().length > 0;
   return /^https:\/\//.test(p.url) && p.model.trim().length > 0;
 }

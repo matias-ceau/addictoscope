@@ -1,5 +1,6 @@
 /** Orchestrates the cloud analysis of verified documents. */
-import { segmentationPolicy, type CloudPolicy } from "../cloud/guard";
+import { consensusPolicies, segmentationPolicy, type CloudPolicy } from "../cloud/guard";
+import { buildConsensusTimeline } from "../notebook/consensus";
 import type { Detection, PageText } from "../core/types";
 import { birthYearFromDetections } from "../notebook/age";
 import type { Manifest } from "../core/verify";
@@ -65,14 +66,17 @@ export async function analyse(
       })),
     );
   }
-  const timeline = await buildTimeline({
+  const input = {
     observations,
     pagesByDoc: Object.fromEntries(docs.map((d) => [d.id, d.pages])),
     manifests: Object.fromEntries(docs.map((d) => [d.id, d.manifest])),
     policy,
-    onProgress: (done, total) => onProgress({ step: "timeline", done, total }),
+    onProgress: (done: number, total: number) => onProgress({ step: "timeline", done, total }),
     fetchImpl,
     birthYear,
-  });
+  };
+  // Consensus: the readers build the frise, the arbiter settles their disagreements.
+  const consensus = consensusPolicies(policy);
+  const timeline = consensus ? await buildConsensusTimeline({ ...input, consensus }) : await buildTimeline(input);
   return { observations, timeline };
 }

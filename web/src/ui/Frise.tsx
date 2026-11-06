@@ -191,6 +191,12 @@ export function Frise(props: {
         <span className="muted small">
           {timeline.events.length} événements · {datedTracks.size} pistes
           {timeline.undated.length > 0 && ` · ${timeline.undated.length} non datés`}
+          {timeline.consensus && (
+            <span title="Ce que toutes les lectures trouvent est gardé ; un modèle plus fort tranche le reste, en ne voyant que les observations concernées">
+              {` · consensus de ${timeline.consensus.readers} lectures : ${timeline.consensus.agreed} accords, ${timeline.consensus.kept} gardés et ${timeline.consensus.dropped} écartés par l'arbitre`}
+              {timeline.consensus.unarbitrated > 0 && `, ${timeline.consensus.unarbitrated} non arbitrés`}
+            </span>
+          )}
         </span>
         {longHistory && mode === "chart" && (
           <div className="segmented" role="group" aria-label="Période affichée">
@@ -341,6 +347,8 @@ export function Frise(props: {
                 </span>
                 {ageNote(hover.e) && <span className="muted small">{ageNote(hover.e)}</span>}
                 {hover.e.note && <span>{hover.e.note}</span>}
+                {hover.e.consensus === "arbitrated" && <span className="muted small">Désaccord entre les lectures, tranché par l'arbitre</span>}
+                {hover.e.consensus === "unarbitrated" && <span className="muted small">Désaccord entre les lectures, non arbitré (gardé tel que lu)</span>}
                 <span className="muted small">Cliquer pour ouvrir la source</span>
               </div>
             )}

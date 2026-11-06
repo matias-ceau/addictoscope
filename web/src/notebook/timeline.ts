@@ -87,6 +87,8 @@ export interface TimelineInput {
   /** Patient's birth year, known locally (detections): turns ages into
    *  years after the model has answered. Never sent to the model. */
   birthYear?: number | null;
+  /** Characters of observation text per call (default CHARS_PER_CALL). */
+  charsPerCall?: number;
 }
 
 export interface RawEvent {
@@ -102,6 +104,8 @@ export interface RawEvent {
   loss_of_control: boolean;
   note: string;
   observation_ids: string[];
+  /** Set by the consensus (consensus.ts), never by the model. */
+  consensus?: TimelineEvent["consensus"];
 }
 
 function observationText(o: Observation, shortId: string, pages: PageText[], repeated: Set<string>): string {
@@ -111,7 +115,19 @@ function observationText(o: Observation, shortId: string, pages: PageText[], rep
   return `### ${shortId} — ${o.date ?? "date inconnue"} — ${o.kind}${o.authorRole ? ` (${o.authorRole})` : ""}\n${body}`;
 }
 
-export async function buildTimeline(input: TimelineInput): Promise<Timeline> {
+/** Observations as the model sees them: short ids, unique across documents, and their text. */
+export interface PreparedObservations {
+  /** Chronological order. */
+  sorted: Observation[];
+  /** "o1" -> app observation id. */
+  realId: Map<string, string>;
+  /** App observation id -> "o1". */
+  shortId: Map<string, string>;
+  /** App observation id -> the text sent for it. */
+  text: Map<string, string>;
+}
+
+export function prepareObservations(input: Pick<TimelineInput, "observations" | "pagesByDoc">): PreparedObservations {
   const repeatedByDoc = Object.fromEntries(
     Object.entries(input.pagesByDoc).map(([doc, pages]) => [doc, repeatedLines(pages)]),
   );
@@ -121,19 +137,30 @@ export async function buildTimeline(input: TimelineInput): Promise<Timeline> {
   // event was then dropped for want of a known source.
   const realId = new Map(sorted.map((o, i) => [`o${i + 1}`, o.id]));
   const shortId = new Map([...realId].map(([short, id]) => [id, short]));
+  const text = new Map(
+    sorted.map((o) => [o.id, observationText(o, shortId.get(o.id)!, input.pagesByDoc[o.doc] ?? [], repeatedByDoc[o.doc] ?? new Set())]),
+  );
+  return { sorted, realId, shortId, text };
+}
 
-  // Pack observations into calls of bounded size.
+/** Pack observations into calls of bounded size. */
+export function packObservations(obs: Observation[], text: Map<string, string>, limit = CHARS_PER_CALL): { text: string; docs: Set<string> }[] {
   const batches: { text: string; docs: Set<string> }[] = [];
-  for (const o of sorted) {
-    const text = observationText(o, shortId.get(o.id)!, input.pagesByDoc[o.doc] ?? [], repeatedByDoc[o.doc] ?? new Set());
+  for (const o of obs) {
+    const t = text.get(o.id)!;
     const last = batches.at(-1);
-    if (!last || last.text.length + text.length > CHARS_PER_CALL) batches.push({ text, docs: new Set([o.doc]) });
+    if (!last || last.text.length + t.length > limit) batches.push({ text: t, docs: new Set([o.doc]) });
     else {
-      last.text += "\n\n" + text;
+      last.text += "\n\n" + t;
       last.docs.add(o.doc);
     }
   }
+  return batches;
+}
 
+/** One reading of the observations by the model: raw events, sources as app ids, not yet assembled. */
+export async function readEvents(input: TimelineInput, prepared = prepareObservations(input)): Promise<RawEvent[]> {
+  const batches = packObservations(prepared.sorted, prepared.text, input.charsPerCall);
   const raw: RawEvent[] = [];
   let done = 0;
   for (const batch of batches) {
@@ -150,12 +177,21 @@ export async function buildTimeline(input: TimelineInput): Promise<Timeline> {
       fetchImpl: input.fetchImpl,
     });
     for (const e of result.events ?? []) {
-      raw.push({ ...e, observation_ids: (e.observation_ids ?? []).map((id) => realId.get(id) ?? id) });
+      raw.push({ ...e, observation_ids: (e.observation_ids ?? []).map((id) => prepared.realId.get(id) ?? id) });
     }
     input.onProgress?.(++done, batches.length);
   }
-  const lastObservation = input.observations.map((o) => o.date).filter((d): d is string => Boolean(d)).sort().at(-1) ?? null;
-  return assembleTimeline(raw, new Set(input.observations.map((o) => o.id)), input.birthYear ?? null, lastObservation);
+  return raw;
+}
+
+/** Date of the last dated observation, the bound for ages. */
+export function lastObservationDate(observations: Observation[]): string | null {
+  return observations.map((o) => o.date).filter((d): d is string => Boolean(d)).sort().at(-1) ?? null;
+}
+
+export async function buildTimeline(input: TimelineInput): Promise<Timeline> {
+  const raw = await readEvents(input);
+  return assembleTimeline(raw, new Set(input.observations.map((o) => o.id)), input.birthYear ?? null, lastObservationDate(input.observations));
 }
 
 function normaliseLabel(s: string): string {
@@ -224,6 +260,7 @@ export function assembleTimeline(
       lossOfControl: Boolean(e.loss_of_control) && kind === "substance_use",
       note: (e.note ?? "").trim(),
       observationIds: sources,
+      ...(e.consensus ? { consensus: e.consensus } : {}),
     };
 
     let start: string;

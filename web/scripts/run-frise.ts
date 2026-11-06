@@ -27,7 +27,7 @@ import type { PageText } from "../src/core/types";
 import { buildManifest } from "../src/core/verify";
 import { birthYearFromDetections } from "../src/notebook/age";
 import { segmentDocument } from "../src/notebook/segment";
-import { buildTimeline } from "../src/notebook/timeline";
+import { ARBITER, friseSettings, friseStep, READERS, reusedObservations } from "./frise-step";
 import { detectCorpus } from "../src/pii/detect";
 
 const ROOT = resolve(__dirname, "../..");
@@ -42,8 +42,8 @@ const IMAGE_ZOOM = 1.3;
 const arg = (name: string) => process.argv.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
 const apiKey = process.env.OPENROUTER_API_KEY;
 if (!apiKey) throw new Error("OPENROUTER_API_KEY is not set");
-const model = arg("model") ?? DEFAULT_MODEL;
-const policy: CloudPolicy = { kind: "openrouter-zdr", apiKey, model };
+const model = READERS.length ? `${READERS.join(" + ")}, arbitre ${ARBITER}` : (arg("model") ?? DEFAULT_MODEL);
+const policy = { kind: "openrouter-zdr" as const, apiKey, model: arg("model") ?? DEFAULT_MODEL };
 /** --segment-model: a cheaper model for the segmentation only (the frise keeps --model). */
 const segmentModel = arg("segment-model");
 /** --text-only: numbered lines without the page images (text-only models; measures what the images add). */
@@ -57,6 +57,8 @@ const readPages = (doc: ReturnType<typeof openPdf>): PageText[] =>
 
 /** fetch with retries on rate limits and server errors, recording usage. */
 const usage = { calls: 0, promptTokens: 0, completionTokens: 0, cost: 0 };
+/** Cost by model and step ("model frise"), for a consensus run. */
+let costBy: Record<string, number> = {};
 /** Raw model answers, kept to tell model errors from validation drops. */
 let rawAnswers: { schema: string; content: unknown }[] = [];
 const fetchImpl = (async (url: string, init: RequestInit) => {
@@ -74,7 +76,10 @@ const fetchImpl = (async (url: string, init: RequestInit) => {
       // With the user's own provider key (BYOK), OpenRouter reports 0 and the
       // provider bills upstream_inference_cost directly.
       usage.cost += data?.usage?.cost || data?.usage?.cost_details?.upstream_inference_cost || 0;
-      const schema = JSON.parse(String(init.body)).response_format?.json_schema?.name;
+      const body = JSON.parse(String(init.body));
+      const schema = body.response_format?.json_schema?.name;
+      const key = `${body.model} ${schema}`;
+      costBy[key] = (costBy[key] ?? 0) + (data?.usage?.cost || data?.usage?.cost_details?.upstream_inference_cost || 0);
       let content: unknown = data?.choices?.[0]?.message?.content;
       try {
         content = JSON.parse(String(content).replace(/^```(?:json)?\s*|\s*```$/g, ""));
@@ -104,6 +109,7 @@ async function runDossier(slug: string) {
   const pagesByDoc: Record<string, PageText[]> = {};
   const manifests: Record<string, Awaited<ReturnType<typeof buildManifest>>> = {};
 
+  const reused = reusedObservations(FRISE, slug, new Set(sources.map((s) => s.id)));
   for (const src of sources) {
     const accepted = detections.filter((d) => d.doc === src.id && d.accepted);
     const output = redactPdf(src.bytes, accepted.map((d) => ({ page: d.page, rects: d.rects, label: d.label })));
@@ -117,23 +123,28 @@ async function runDossier(slug: string) {
     console.log(`${slug}/${src.id}: ${outPages.length} pages, ${accepted.length} masked, ${manifest.leaks.length} leaks, ${planted} planted identifiers left`);
     if (!manifest.verified || planted > 0) continue; // the guard would refuse the first, a reviewer the second
 
+    pagesByDoc[src.id] = outPages;
+    manifests[src.id] = manifest;
+    if (reused) {
+      observations.push(...reused.filter((o) => o.doc === src.id));
+      continue;
+    }
     const images: Record<number, string> = {};
     if (!TEXT_ONLY) for (const p of outPages) images[p.page] = `data:image/png;base64,${Buffer.from(renderPagePng(outDoc, p.page, IMAGE_ZOOM)).toString("base64")}`;
     const obs = await segmentDocument({ doc: src.id, pages: outPages, images, manifest, policy: segmentPolicy, fetchImpl });
     console.log(`  ${obs.length} observations`);
     observations.push(...obs);
-    pagesByDoc[src.id] = outPages;
-    manifests[src.id] = manifest;
   }
 
   const birthYear = birthYearFromDetections(detections);
-  const timeline = await buildTimeline({ observations, pagesByDoc, manifests, policy, fetchImpl, birthYear });
+  const { timeline, consensus, readings } = await friseStep({ observations, pagesByDoc, manifests, policy, fetchImpl, birthYear }, policy);
+  if (consensus) console.log(`  consensus: ${JSON.stringify(consensus)}`);
   const fromAge = timeline.events.filter((e) => e.fromAge).length;
   console.log(
     `  frise: ${timeline.tracks.length} tracks, ${timeline.events.length} events (${fromAge} dated from an age), ` +
       `${timeline.undated.length} undated; birth year ${birthYear === null ? "unknown" : "known"}`,
   );
-  return { dossier: slug, model, ...(segmentModel ? { segmentModel } : {}), ...(TEXT_ONLY ? { textOnly: true } : {}), ranAt: new Date().toISOString(), review: "automatic detections accepted as they are", docs, observations, timeline };
+  return { dossier: slug, model, ...(segmentModel ? { segmentModel } : {}), ...(TEXT_ONLY ? { textOnly: true } : {}), ...friseSettings(), ranAt: new Date().toISOString(), review: "automatic detections accepted as they are", docs, observations, timeline, ...(consensus ? { consensus, readings } : {}) };
 }
 
 mkdirSync(OUT, { recursive: true });
@@ -147,6 +158,7 @@ for (const slug of slugs) {
   if (process.argv.includes("--resume") && existsSync(resolve(OUT, `${slug}.json`)) && "timeline" in JSON.parse(readFileSync(resolve(OUT, `${slug}.json`), "utf8"))) continue;
   const before = { ...usage };
   rawAnswers = [];
+  costBy = {};
   const t0 = Date.now();
   let result;
   try {
@@ -164,6 +176,6 @@ for (const slug of slugs) {
     completionTokens: usage.completionTokens - before.completionTokens,
     cost: Number((usage.cost - before.cost).toFixed(4)),
   };
-  writeFileSync(resolve(OUT, `${slug}.json`), JSON.stringify({ ...result, elapsedMs, usage: spent, rawAnswers }, null, 2) + "\n");
+  writeFileSync(resolve(OUT, `${slug}.json`), JSON.stringify({ ...result, elapsedMs, usage: { ...spent, by: costBy }, rawAnswers }, null, 2) + "\n");
 }
 console.log(`total: ${usage.calls} calls, ${usage.promptTokens} + ${usage.completionTokens} tokens, $${usage.cost.toFixed(3)}`);

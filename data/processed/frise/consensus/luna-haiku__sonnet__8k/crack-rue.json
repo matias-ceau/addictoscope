@@ -1,0 +1,4837 @@
+{
+  "dossier": "crack-rue",
+  "model": "openai/gpt-6-luna + anthropic/claude-haiku-5.5, arbitre anthropic/claude-sonnet-5.5",
+  "readers": [
+    "openai/gpt-6-luna",
+    "anthropic/claude-haiku-5.5"
+  ],
+  "arbiter": "anthropic/claude-sonnet-5.5",
+  "charsPerCall": 8000,
+  "observationsFrom": "bench/anthropic__claude-haiku-5.5",
+  "ranAt": "2026-11-06T00:44:39.506Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 4,
+      "redactions": {
+        "ETABLISSEMENT": 8,
+        "ADRESSE": 9,
+        "TEL": 6,
+        "PATIENT": 9,
+        "DOSSIER": 4,
+        "NAISSANCE": 5,
+        "IPP": 4,
+        "VILLE": 5,
+        "SOIGNANT": 26,
+        "PERSONNE": 3,
+        "PROCHE": 4
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 11
+      },
+      "end": {
+        "page": 0,
+        "line": 19
+      },
+      "date": "2023-09-06",
+      "kind": "entretien éducatif",
+      "authorRole": "éducateur spécialisé",
+      "summary": "Premier passage au CAARUD orienté par la maraude, avec consommation de crack et d'alcool, récupération de matériel et demande d'un médecin, RDV pris avec le Dr [SOIGNANT_3] le 14/09."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 20
+      },
+      "end": {
+        "page": 0,
+        "line": 38
+      },
+      "date": "2023-09-14",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Premier entretien psychiatrique : contexte de violences et d'abus, tableau compatible avec un TSPT complexe, consommations de crack et d'alcool, conclusions de RDV bihebdomadaires, dépistages et lien avec l'ASS pour l'hébergement."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 39
+      },
+      "end": {
+        "page": 0,
+        "line": 42
+      },
+      "date": "2023-10-03",
+      "kind": "observation infirmière",
+      "authorRole": "infirmière",
+      "summary": "Dépistages TROD VIH et VHC négatifs, sérologie VHB négative avec première injection vaccinale, soins de brûlures et surveillance d'une toux."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 43
+      },
+      "end": {
+        "page": 0,
+        "line": 56
+      },
+      "date": "2023-10-25",
+      "kind": "entretien social",
+      "authorRole": "assistante sociale",
+      "summary": "Domiciliation administrative, demande de rouvrir le RSA et de CSS, demande SIAO sans réponse, et point sur la situation de son fils confié à la grand-mère paternelle avec visites médiatisées non réalisées."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 57
+      },
+      "end": {
+        "page": 1,
+        "line": 11
+      },
+      "date": "2023-11-21",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Agression sexuelle récente avec plainte et examen UMJ, majoration des reviviscences et cauchemars, mise en place de prazosine avec titration et hydroxyzine si besoin, RDV à une semaine."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 12
+      },
+      "end": {
+        "page": 1,
+        "line": 21
+      },
+      "date": "2024-01-16",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Mise à l'abri hivernale avec amélioration du sommeil, cauchemars diminués sous prazosine 3 mg, crack en baisse, poursuite de la prazosine associée à l'hydroxyzine et RDV à deux semaines."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 22
+      },
+      "end": {
+        "page": 1,
+        "line": 28
+      },
+      "date": "2024-02-13",
+      "kind": "entretien éducatif",
+      "authorRole": "éducateur spécialisé",
+      "summary": "Annonce du décès par overdose de son ex-compagnon survenu le 10/02, patiente sidérée, consommation accrue depuis trois jours, RDV médical avancé."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 29
+      },
+      "end": {
+        "page": 1,
+        "line": 40
+      },
+      "date": "2024-02-20",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Deuil ambivalent après le décès de l'ex-compagnon, idées de mort passives sans scénario, consommations en hausse, hospitalisation proposée et refusée, naloxone remise et RDV à une semaine."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 41
+      },
+      "end": {
+        "page": 1,
+        "line": 45
+      },
+      "date": "2024-04-09",
+      "kind": "observation infirmière",
+      "authorRole": "infirmière",
+      "summary": "Retour d'hospitalisation du 28/03 au 04/04 pour pneumopathie, sevrage alcool sous diazépam sans complication, antibiotiques terminés, patiente déclarant ne pas avoir consommé de crack depuis la sortie."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 46
+      },
+      "end": {
+        "page": 1,
+        "line": 56
+      },
+      "date": "2024-04-23",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Consommations de crack et d'alcool en baisse après hospitalisation, motivation accrue pour un hébergement stable, soutien à la candidature en CHRS et poursuite de la prazosine 3 mg."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 57
+      },
+      "end": {
+        "page": 2,
+        "line": 12
+      },
+      "date": "2024-06-11",
+      "kind": "entretien social",
+      "authorRole": "assistante sociale",
+      "summary": "Entrée en CHRS le 03/06/2024 en chambre individuelle, RSA rétabli et CSS accordée, puis transmission de la demande de reprise des visites médiatisées au service de l'ASE avec nouveau numéro de téléphone."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 13
+      },
+      "end": {
+        "page": 2,
+        "line": 20
+      },
+      "date": "2024-07-02",
+      "kind": "entretien éducatif",
+      "authorRole": "éducateur spécialisé",
+      "summary": "Installation au CHRS depuis le 10/06 avec chambre décorée, visite médiatisée avec son fils le 28/06 vécue avec émotion, consommation de crack limitée à une fois par semaine le samedi."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 21
+      },
+      "end": {
+        "page": 2,
+        "line": 32
+      },
+      "date": "2024-09-17",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Crack une fois par semaine et arrêt des bières fortes, persistance des reviviscences et de l'évitement, introduction de sertraline 50 mg, prazosine poursuivie, orientation vers l'EMDR et RDV à un mois."
+    },
+    {
+      "id": "historique:o14",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 33
+      },
+      "end": {
+        "page": 2,
+        "line": 37
+      },
+      "date": "2024-10-08",
+      "kind": "observation infirmière",
+      "authorRole": "infirmière",
+      "summary": "Appel de l'éducatrice du CHRS signalant 2 à 3 bières le soir en chambre sans alcoolisation massive ni violence, situation à reprendre avec la patiente et le psychiatre."
+    },
+    {
+      "id": "historique:o15",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 38
+      },
+      "end": {
+        "page": 2,
+        "line": 49
+      },
+      "date": "2025-01-14",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Trois séances d'EMDR avec bénéfice partiel, moins de cauchemars, dernier crack le 24/12, bières réduites à une à deux le soir, sertraline augmentée à 100 mg et RDV à six semaines."
+    },
+    {
+      "id": "historique:o16",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 50
+      },
+      "end": {
+        "page": 2,
+        "line": 61
+      },
+      "date": "2025-03-25",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Rechute de crack après la convocation au procès de son agresseur, arrêt spontané et signalement à l'éducatrice, anxiété marquée sans idées suicidaires, EMDR poursuivi, hydroxyzine si besoin et RDV à un mois."
+    },
+    {
+      "id": "historique:o17",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 62
+      },
+      "end": {
+        "page": 3,
+        "line": 13
+      },
+      "date": "2025-06-03",
+      "kind": "entretien social",
+      "authorRole": "assistante sociale",
+      "summary": "Entretien social de juin 2025 dont le contenu n'est pas reporté dans les pages fournies, observation seulement initiée en fin de document."
+    },
+    {
+      "id": "historique:o18",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 14
+      },
+      "end": {
+        "page": 3,
+        "line": 22
+      },
+      "date": "2025-07-01",
+      "kind": "psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Patient vu dans son nouveau logement, sans crack depuis mars, alcool 1 à 2 bières le week-end, tabac 15 cigarettes/j, cauchemars rares et reviviscences moins intenses, thymie neutre ; poursuite sertraline 100 mg et prazosine 3 mg, RDV dans 2 mois."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t1",
+        "kind": "substance_use",
+        "label": "Crack"
+      },
+      {
+        "id": "t2",
+        "kind": "substance_use",
+        "label": "Alcool"
+      },
+      {
+        "id": "t27",
+        "kind": "substance_use",
+        "label": "Cannabis"
+      },
+      {
+        "id": "t28",
+        "kind": "substance_use",
+        "label": "Tabac"
+      },
+      {
+        "id": "t3",
+        "kind": "psychiatric",
+        "label": "Idées de mort passives"
+      },
+      {
+        "id": "t29",
+        "kind": "psychiatric",
+        "label": "TSPT complexe"
+      },
+      {
+        "id": "t30",
+        "kind": "psychiatric",
+        "label": "Anxiété liée au procès"
+      },
+      {
+        "id": "t33",
+        "kind": "psychiatric",
+        "label": "Thymie triste"
+      },
+      {
+        "id": "t4",
+        "kind": "somatic",
+        "label": "Brûlures superficielles des doigts et des lèvres"
+      },
+      {
+        "id": "t5",
+        "kind": "somatic",
+        "label": "Toux grasse"
+      },
+      {
+        "id": "t6",
+        "kind": "somatic",
+        "label": "Pneumopathie"
+      },
+      {
+        "id": "t7",
+        "kind": "medication",
+        "label": "Vaccin contre l’hépatite B"
+      },
+      {
+        "id": "t8",
+        "kind": "medication",
+        "label": "Prazosine"
+      },
+      {
+        "id": "t9",
+        "kind": "medication",
+        "label": "Hydroxyzine"
+      },
+      {
+        "id": "t10",
+        "kind": "medication",
+        "label": "Diazépam"
+      },
+      {
+        "id": "t11",
+        "kind": "medication",
+        "label": "Antibiotiques"
+      },
+      {
+        "id": "t12",
+        "kind": "medication",
+        "label": "Naloxone"
+      },
+      {
+        "id": "t13",
+        "kind": "medication",
+        "label": "Sertraline"
+      },
+      {
+        "id": "t34",
+        "kind": "medication",
+        "label": "Vaccination VHB (1ère injection)"
+      },
+      {
+        "id": "t14",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi psychiatrique"
+      },
+      {
+        "id": "t15",
+        "kind": "therapeutic_psycho",
+        "label": "CAARUD"
+      },
+      {
+        "id": "t16",
+        "kind": "therapeutic_psycho",
+        "label": "Hospitalisation en médecine"
+      },
+      {
+        "id": "t17",
+        "kind": "therapeutic_psycho",
+        "label": "EMDR au centre de psychotraumatologie"
+      },
+      {
+        "id": "t18",
+        "kind": "life_event",
+        "label": "Placement en foyer"
+      },
+      {
+        "id": "t19",
+        "kind": "life_event",
+        "label": "Violences intrafamiliales et abus sexuels"
+      },
+      {
+        "id": "t20",
+        "kind": "life_event",
+        "label": "Expulsion du logement et sans-domicile"
+      },
+      {
+        "id": "t21",
+        "kind": "life_event",
+        "label": "Accès à une résidence sociale"
+      },
+      {
+        "id": "t22",
+        "kind": "life_event",
+        "label": "Hébergement du fils chez sa grand-mère paternelle"
+      },
+      {
+        "id": "t23",
+        "kind": "life_event",
+        "label": "Visites médiatisées avec le fils"
+      },
+      {
+        "id": "t24",
+        "kind": "life_event",
+        "label": "Agression sexuelle"
+      },
+      {
+        "id": "t25",
+        "kind": "life_event",
+        "label": "Décès de l’ex-compagnon"
+      },
+      {
+        "id": "t26",
+        "kind": "life_event",
+        "label": "Convocation au tribunal pour le procès de son agresseur"
+      },
+      {
+        "id": "t31",
+        "kind": "life_event",
+        "label": "Hébergement en CHRS"
+      },
+      {
+        "id": "t32",
+        "kind": "life_event",
+        "label": "Démarches d'hébergement (SIAO, appels au 115)"
+      },
+      {
+        "id": "t35",
+        "kind": "life_event",
+        "label": "Mise à l'abri hivernale"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2025-03",
+        "end": "2025-03",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Rechute trois jours de suite début mars après la convocation au tribunal, puis arrêt spontané.",
+        "observationIds": [
+          "historique:o16",
+          "historique:o18"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "2024-03-28",
+        "end": "2024-04-04",
+        "ongoing": false,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Sevrage alcool sous diazépam pendant l’hospitalisation, sans complication.",
+        "observationIds": [
+          "historique:o9"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "2024-02-20",
+        "end": "2024-02-20",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Idées de mort passives sans scénario ni intention ; son fils est cité comme facteur protecteur.",
+        "observationIds": [
+          "historique:o8"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e4",
+        "trackId": "t4",
+        "start": "2023-10-03",
+        "end": "2023-10-03",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Soins réalisés ; matériel de réduction des risques et crèmes pour les lèvres également récupérés au CAARUD.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o3"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e5",
+        "trackId": "t5",
+        "start": "2023-09",
+        "end": "2023-10-03",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Toux grasse depuis trois semaines, sans fièvre, à surveiller.",
+        "observationIds": [
+          "historique:o3"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e6",
+        "trackId": "t6",
+        "start": "2024-03-28",
+        "end": "2024-04-04",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hospitalisation pour fièvre, toux et crachats noirs ; amélioration après traitement antibiotique.",
+        "observationIds": [
+          "historique:o9"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e7",
+        "trackId": "t7",
+        "start": "2023-10-03",
+        "end": "2023-10-03",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Première injection ; sérologie VHB non immunisée.",
+        "observationIds": [
+          "historique:o3"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e8",
+        "trackId": "t8",
+        "start": "2023-11-21",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Début à 1 mg le soir avec augmentation progressive jusqu’à 3 mg ; traitement poursuivi, tension correcte et cauchemars améliorés.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o6",
+          "historique:o10",
+          "historique:o13",
+          "historique:o15",
+          "historique:o18",
+          "historique:o16"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e9",
+        "trackId": "t9",
+        "start": "2023-11-21",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Prescrite à 25 mg si besoin, maximum deux prises par jour ; reprise si besoin en mars 2025.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o6",
+          "historique:o16"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e10",
+        "trackId": "t10",
+        "start": "2024-03-28",
+        "end": "2024-04-04",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Utilisé pour le sevrage alcool pendant l’hospitalisation.",
+        "observationIds": [
+          "historique:o9"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e11",
+        "trackId": "t11",
+        "start": "2024-04-04",
+        "end": "2024-04-04",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Traitement prescrit à la sortie d’hospitalisation, terminé au 09/04.",
+        "observationIds": [
+          "historique:o9"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e12",
+        "trackId": "t12",
+        "start": "2024-02-20",
+        "end": "2024-02-20",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Naloxone remise ; consomme parfois avec des usagers d’opioïdes.",
+        "observationIds": [
+          "historique:o8"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e13",
+        "trackId": "t13",
+        "start": "2024-09-17",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Introduite à 50 mg ; dose de 100 mg rapportée en janvier 2025 et poursuivie en juillet 2025.",
+        "observationIds": [
+          "historique:o13",
+          "historique:o15",
+          "historique:o18"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e14",
+        "trackId": "t14",
+        "start": "2023-09-14",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Entretiens de suivi psychiatrique réguliers, parfois avancés selon l’état clinique.",
+        "observationIds": [
+          "historique:o2",
+          "historique:o5",
+          "historique:o6",
+          "historique:o8",
+          "historique:o10",
+          "historique:o13",
+          "historique:o15",
+          "historique:o16",
+          "historique:o18"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e15",
+        "trackId": "t15",
+        "start": "2023-09-06",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Premier passage après orientation par l’équipe de maraude ; récupération de matériel de réduction des risques et accompagnement éducatif.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o7",
+          "historique:o12"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e16",
+        "trackId": "t16",
+        "start": "2024-03-28",
+        "end": "2024-04-04",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hospitalisation pour pneumopathie ; sevrage alcool sous diazépam.",
+        "observationIds": [
+          "historique:o9"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e17",
+        "trackId": "t17",
+        "start": "2024-12",
+        "end": "2025-03-25",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Trois séances commencées en décembre 2024 ; EMDR poursuivi en mars 2025.",
+        "observationIds": [
+          "historique:o15",
+          "historique:o16",
+          "historique:o13"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e18",
+        "trackId": "t18",
+        "start": "2002",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Placement en foyer à 12 ans, dans un contexte de violences intrafamiliales et d’abus sexuels dans l’enfance.",
+        "observationIds": [
+          "historique:o2"
+        ],
+        "consensus": "agreed",
+        "fromAge": {
+          "start": [
+            12,
+            12
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e19",
+        "trackId": "t19",
+        "start": "1996",
+        "end": "2001",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Violences intrafamiliales et abus sexuels rapportés dans l’enfance.",
+        "observationIds": [
+          "historique:o2"
+        ],
+        "consensus": "agreed",
+        "fromAge": {
+          "start": [
+            6,
+            11
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e20",
+        "trackId": "t20",
+        "start": "2022",
+        "end": "2024-06-03",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Sans domicile depuis l’expulsion de son logement en 2022 ; dort notamment sous une tente, chez des connaissances ou en mise à l’abri hivernale. Entrée en CHRS le 03/06/2024.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o6",
+          "historique:o11",
+          "historique:o4",
+          "historique:o17"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e21",
+        "trackId": "t21",
+        "start": "2025-05-26",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Accès à un studio avec bail d’un an renouvelable ; fière de son nouveau logement en juillet.",
+        "observationIds": [
+          "historique:o17",
+          "historique:o18"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e22",
+        "trackId": "t22",
+        "start": "2021",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Son fils vit chez sa grand-mère paternelle depuis 2021.",
+        "observationIds": [
+          "historique:o4",
+          "historique:o11"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e23",
+        "trackId": "t23",
+        "start": "2024-06-28",
+        "end": "2025-06",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Première visite médiatisée revue le 2024-06-28 (une heure). Visites sans médiatisation un samedi sur deux à partir de juin 2025, décidées par le juge des enfants.",
+        "observationIds": [
+          "historique:o4",
+          "historique:o11",
+          "historique:o12",
+          "historique:o17"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e24",
+        "trackId": "t24",
+        "start": "2023-11",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Agression sexuelle par un inconnu sous un pont la semaine précédant le 21/11 ; plainte déposée le lendemain et examen aux UMJ réalisé.",
+        "observationIds": [
+          "historique:o5"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e25",
+        "trackId": "t25",
+        "start": "2024-02-10",
+        "end": "2024-02-10",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Retrouvé mort d’une overdose dans un squat ; vécu ambivalent, avec chagrin, soulagement et culpabilité.",
+        "observationIds": [
+          "historique:o7",
+          "historique:o8"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e26",
+        "trackId": "t26",
+        "start": "2025-03",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "La convocation est suivie d’une rechute de crack ; procès ensuite renvoyé.",
+        "observationIds": [
+          "historique:o16"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e27",
+        "trackId": "t1",
+        "start": "2015",
+        "end": "2025-03",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Fume du crack « depuis ses 25 ans » (o1) ; « depuis 6 ans environ » en 09/2023 (o2). 1 à 2 g/j quand elle a de l'argent, perte de contrôle franche. Jusqu'à 3 g/j après le décès de son ex-compagnon (02/2024), puis diminution (1 jour sur 2, 2 à 3 fois par semaine, 1 fois par semaine). Dernier crack le 24/12 (o15), puis rechute de 3 jours début mars 2025 après la convocation au tribunal. Pas de crack depuis mars 2025 (o18).",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o6",
+          "historique:o8",
+          "historique:o9",
+          "historique:o10",
+          "historique:o12",
+          "historique:o13",
+          "historique:o15",
+          "historique:o16",
+          "historique:o18"
+        ],
+        "consensus": "arbitrated",
+        "fromAge": {
+          "start": [
+            25,
+            25
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e28",
+        "trackId": "t1",
+        "start": "2024-04-04",
+        "end": "2024-04-09",
+        "ongoing": false,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Dit ne pas avoir touché au crack depuis sa sortie d'hospitalisation le 04/04 (observation du 09/04). Le 23/04, consommation réduite à 2 à 3 fois par semaine.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o10"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e29",
+        "trackId": "t2",
+        "start": "2023-09-06",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Boit des bières fortes dès le premier passage (2023-09). Le 2023-09-14 : 6 bières fortes de 50 cL par jour, tremblements le matin. Puis 4 à 5 par jour en janvier 2024 et 3 par jour en avril 2024. Elle dit ne plus boire de bières fortes depuis l'entrée au CHRS (septembre 2024). En octobre 2024, 2 à 3 bières le soir en chambre « en cachette ». En janvier 2025, 1 à 2 le soir. En juillet 2025, 1 à 2 bières le week-end. Le début de la consommation n'est pas daté.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o6",
+          "historique:o8",
+          "historique:o10",
+          "historique:o13",
+          "historique:o14",
+          "historique:o15",
+          "historique:o18"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e30",
+        "trackId": "t27",
+        "start": "2023-09-14",
+        "end": null,
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Usage occasionnel rapporté.",
+        "observationIds": [
+          "historique:o2"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e31",
+        "trackId": "t28",
+        "start": "2023-09-14",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "20 cigarettes par jour en septembre 2023 ; 15 cigarettes par jour en juillet 2025.",
+        "observationIds": [
+          "historique:o2",
+          "historique:o18"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e32",
+        "trackId": "t29",
+        "start": "2023-09-14",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Tableau jugé compatible avec un TSPT complexe : hypervigilance, cauchemars, reviviscences et évitement. Symptômes persistants, avec amélioration rapportée en juillet 2025.",
+        "observationIds": [
+          "historique:o2",
+          "historique:o5",
+          "historique:o10",
+          "historique:o13",
+          "historique:o15",
+          "historique:o18"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e33",
+        "trackId": "t30",
+        "start": "2025-03",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Anxiété importante après la convocation au tribunal ; pas d’idées suicidaires.",
+        "observationIds": [
+          "historique:o16"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e34",
+        "trackId": "t31",
+        "start": "2024-06-03",
+        "end": "2025-05-26",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Entrée en CHRS avec chambre individuelle ; installation rapportée le 10/06. Fin de la prise en charge lors de l’accès à une résidence sociale.",
+        "observationIds": [
+          "historique:o11",
+          "historique:o12",
+          "historique:o14",
+          "historique:o15",
+          "historique:o17"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e35",
+        "trackId": "t32",
+        "start": "2023-10-25",
+        "end": "2024-06-03",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Demande SIAO faite le 2023-10-25, appels au 115 la plupart des soirs sans succès ; soutien de la candidature en CHRS en avril 2024 ; entrée en CHRS le 2024-06-03.",
+        "observationIds": [
+          "historique:o4",
+          "historique:o10",
+          "historique:o11"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e36",
+        "trackId": "t33",
+        "start": "2023-09",
+        "end": "2025-07",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Thymie triste à l'entrée (2023-09), humeur triste de fond en 2024-09, anxiété importante en 2025-03 ; thymie neutre en 2025-07 avec projets.",
+        "observationIds": [
+          "historique:o2",
+          "historique:o13",
+          "historique:o16",
+          "historique:o18"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e37",
+        "trackId": "t34",
+        "start": "2023-10-03",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Sérologie VHB : non immunisée ; première injection de vaccin faite le 2023-10-03. TROD VIH et VHC négatifs.",
+        "observationIds": [
+          "historique:o3"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e38",
+        "trackId": "t35",
+        "start": "2024-01-08",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Mise à l'abri hivernale depuis le 08/01 (gymnase, places 115) ; dort mieux.",
+        "observationIds": [
+          "historique:o6"
+        ],
+        "consensus": "arbitrated"
+      }
+    ],
+    "undated": []
+  },
+  "consensus": {
+    "readers": 2,
+    "agreed": 26,
+    "disputed": 15,
+    "kept": 13,
+    "dropped": 2,
+    "unarbitrated": 0
+  },
+  "readings": [
+    {
+      "model": "openai/gpt-6-luna",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t1",
+            "kind": "substance_use",
+            "label": "Crack"
+          },
+          {
+            "id": "t2",
+            "kind": "substance_use",
+            "label": "Alcool"
+          },
+          {
+            "id": "t3",
+            "kind": "substance_use",
+            "label": "Cannabis"
+          },
+          {
+            "id": "t4",
+            "kind": "substance_use",
+            "label": "Tabac"
+          },
+          {
+            "id": "t5",
+            "kind": "psychiatric",
+            "label": "TSPT complexe"
+          },
+          {
+            "id": "t6",
+            "kind": "psychiatric",
+            "label": "Idées de mort passives"
+          },
+          {
+            "id": "t7",
+            "kind": "psychiatric",
+            "label": "Anxiété liée au procès"
+          },
+          {
+            "id": "t8",
+            "kind": "somatic",
+            "label": "Brûlures superficielles des doigts et des lèvres"
+          },
+          {
+            "id": "t9",
+            "kind": "somatic",
+            "label": "Toux grasse"
+          },
+          {
+            "id": "t10",
+            "kind": "somatic",
+            "label": "Pneumopathie"
+          },
+          {
+            "id": "t11",
+            "kind": "medication",
+            "label": "Vaccin contre l’hépatite B"
+          },
+          {
+            "id": "t12",
+            "kind": "medication",
+            "label": "Prazosine"
+          },
+          {
+            "id": "t13",
+            "kind": "medication",
+            "label": "Hydroxyzine"
+          },
+          {
+            "id": "t14",
+            "kind": "medication",
+            "label": "Diazépam"
+          },
+          {
+            "id": "t15",
+            "kind": "medication",
+            "label": "Antibiotiques"
+          },
+          {
+            "id": "t16",
+            "kind": "medication",
+            "label": "Naloxone"
+          },
+          {
+            "id": "t17",
+            "kind": "medication",
+            "label": "Sertraline"
+          },
+          {
+            "id": "t18",
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychiatrique"
+          },
+          {
+            "id": "t19",
+            "kind": "therapeutic_psycho",
+            "label": "CAARUD"
+          },
+          {
+            "id": "t20",
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en médecine"
+          },
+          {
+            "id": "t21",
+            "kind": "therapeutic_psycho",
+            "label": "EMDR au centre de psychotraumatologie"
+          },
+          {
+            "id": "t22",
+            "kind": "therapeutic_psycho",
+            "label": "Orientation vers le centre de psychotraumatologie"
+          },
+          {
+            "id": "t23",
+            "kind": "life_event",
+            "label": "Placement en foyer"
+          },
+          {
+            "id": "t24",
+            "kind": "life_event",
+            "label": "Violences intrafamiliales et abus sexuels"
+          },
+          {
+            "id": "t25",
+            "kind": "life_event",
+            "label": "Expulsion du logement et sans-domicile"
+          },
+          {
+            "id": "t26",
+            "kind": "life_event",
+            "label": "Hébergement en CHRS"
+          },
+          {
+            "id": "t27",
+            "kind": "life_event",
+            "label": "Accès à une résidence sociale"
+          },
+          {
+            "id": "t28",
+            "kind": "life_event",
+            "label": "Hébergement du fils chez sa grand-mère paternelle"
+          },
+          {
+            "id": "t29",
+            "kind": "life_event",
+            "label": "Visites médiatisées avec son fils"
+          },
+          {
+            "id": "t30",
+            "kind": "life_event",
+            "label": "Agression sexuelle"
+          },
+          {
+            "id": "t31",
+            "kind": "life_event",
+            "label": "Décès de l’ex-compagnon"
+          },
+          {
+            "id": "t32",
+            "kind": "life_event",
+            "label": "Convocation au tribunal pour le procès de son agresseur"
+          },
+          {
+            "id": "t33",
+            "kind": "life_event",
+            "label": "Demande de logement et démarches sociales"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2015",
+            "end": null,
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": true,
+            "note": "Fume du crack depuis l’âge de 25 ans. Usage de 1 à 2 g/j quand elle a de l’argent en septembre 2023, jusqu’à 3 g/j après le décès de son ex-compagnon, puis diminution. Dernière consommation signalée le 24/12/2024, puis rechute début mars 2025 ; rapporte ne plus en consommer depuis mars.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o6",
+              "historique:o7",
+              "historique:o8",
+              "historique:o9",
+              "historique:o10",
+              "historique:o12",
+              "historique:o13",
+              "historique:o15",
+              "historique:o16",
+              "historique:o18"
+            ],
+            "fromAge": {
+              "start": [
+                25,
+                25
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e2",
+            "trackId": "t1",
+            "start": "2024-04-04",
+            "end": "2024-04-23",
+            "ongoing": false,
+            "mode": "sevrage",
+            "lossOfControl": false,
+            "note": "Dit ne pas avoir consommé depuis sa sortie d’hospitalisation le 04/04 ; consommation ensuite réduite à 2 ou 3 fois par semaine.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t1",
+            "start": "2025-03",
+            "end": "2025-03",
+            "ongoing": false,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Rechute trois jours de suite début mars après la convocation au tribunal, puis arrêt spontané.",
+            "observationIds": [
+              "historique:o16"
+            ]
+          },
+          {
+            "id": "e4",
+            "trackId": "t2",
+            "start": "2023-09-14",
+            "end": null,
+            "ongoing": true,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Six bières fortes de 50 cL par jour avec tremblements matinaux en septembre 2023 ; consommation ensuite variable. Dit ne plus boire de bières fortes après l’entrée au CHRS, mais reconnaît 2 à 3 bières le soir en octobre, puis 1 à 2 le soir en janvier 2025 et 1 à 2 le week-end en juillet 2025.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o6",
+              "historique:o8",
+              "historique:o10",
+              "historique:o13",
+              "historique:o14",
+              "historique:o15",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t2",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": "sevrage",
+            "lossOfControl": false,
+            "note": "Sevrage alcool sous diazépam pendant l’hospitalisation, sans complication.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t3",
+            "start": "2023-09-14",
+            "end": null,
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Usage occasionnel rapporté.",
+            "observationIds": [
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e7",
+            "trackId": "t4",
+            "start": "2023-09-14",
+            "end": null,
+            "ongoing": true,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "20 cigarettes par jour en septembre 2023 ; 15 cigarettes par jour en juillet 2025.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t5",
+            "start": "2023-09-14",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Tableau jugé compatible avec un TSPT complexe : hypervigilance, cauchemars, reviviscences et évitement. Symptômes persistants, avec amélioration rapportée en juillet 2025.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o5",
+              "historique:o10",
+              "historique:o13",
+              "historique:o15",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t6",
+            "start": "2024-02-20",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Idées de mort passives sans scénario ni intention ; son fils est cité comme facteur protecteur.",
+            "observationIds": [
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t7",
+            "start": "2025-03",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Anxiété importante après la convocation au tribunal ; pas d’idées suicidaires.",
+            "observationIds": [
+              "historique:o16"
+            ]
+          },
+          {
+            "id": "e11",
+            "trackId": "t8",
+            "start": "2023-10-03",
+            "end": "2023-10-03",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Soins réalisés ; matériel de réduction des risques et crèmes pour les lèvres également récupérés au CAARUD.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e12",
+            "trackId": "t9",
+            "start": "2023-09",
+            "end": "2023-10-03",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Toux grasse depuis trois semaines, sans fièvre, à surveiller.",
+            "observationIds": [
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t10",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Hospitalisation pour fièvre, toux et crachats noirs ; amélioration après traitement antibiotique.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t11",
+            "start": "2023-10-03",
+            "end": "2023-10-03",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Première injection ; sérologie VHB non immunisée.",
+            "observationIds": [
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t12",
+            "start": "2023-11-21",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Début à 1 mg le soir avec augmentation progressive jusqu’à 3 mg ; traitement poursuivi, tension correcte et cauchemars améliorés.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o6",
+              "historique:o10",
+              "historique:o13",
+              "historique:o15",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e16",
+            "trackId": "t13",
+            "start": "2023-11-21",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Prescrite à 25 mg si besoin, maximum deux prises par jour ; reprise si besoin en mars 2025.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o6",
+              "historique:o16"
+            ]
+          },
+          {
+            "id": "e17",
+            "trackId": "t14",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Utilisé pour le sevrage alcool pendant l’hospitalisation.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e18",
+            "trackId": "t15",
+            "start": "2024-04-04",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Traitement prescrit à la sortie d’hospitalisation, terminé au 09/04.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e19",
+            "trackId": "t16",
+            "start": "2024-02-20",
+            "end": "2024-02-20",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Naloxone remise ; consomme parfois avec des usagers d’opioïdes.",
+            "observationIds": [
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e20",
+            "trackId": "t17",
+            "start": "2024-09-17",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Introduite à 50 mg ; dose de 100 mg rapportée en janvier 2025 et poursuivie en juillet 2025.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o15",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e21",
+            "trackId": "t18",
+            "start": "2023-09-14",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entretiens de suivi psychiatrique réguliers, parfois avancés selon l’état clinique.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o5",
+              "historique:o6",
+              "historique:o8",
+              "historique:o10",
+              "historique:o13",
+              "historique:o15",
+              "historique:o16",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e22",
+            "trackId": "t19",
+            "start": "2023-09-06",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Premier passage après orientation par l’équipe de maraude ; récupération de matériel de réduction des risques et accompagnement éducatif.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o7",
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e23",
+            "trackId": "t20",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Hospitalisation pour pneumopathie ; sevrage alcool sous diazépam.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e24",
+            "trackId": "t21",
+            "start": "2024-12",
+            "end": "2025-03-25",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Trois séances commencées en décembre 2024 ; EMDR poursuivi en mars 2025.",
+            "observationIds": [
+              "historique:o15",
+              "historique:o16"
+            ]
+          },
+          {
+            "id": "e25",
+            "trackId": "t22",
+            "start": "2024-09-17",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Orientation pour EMDR ; liste d’attente annoncée de deux à trois mois.",
+            "observationIds": [
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e26",
+            "trackId": "t23",
+            "start": "2002",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Placement en foyer à 12 ans, dans un contexte de violences intrafamiliales et d’abus sexuels dans l’enfance.",
+            "observationIds": [
+              "historique:o2"
+            ],
+            "fromAge": {
+              "start": [
+                12,
+                12
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e27",
+            "trackId": "t24",
+            "start": "1996",
+            "end": "2001",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Violences intrafamiliales et abus sexuels rapportés dans l’enfance.",
+            "observationIds": [
+              "historique:o2"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e28",
+            "trackId": "t25",
+            "start": "2022",
+            "end": "2024-06-03",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Sans domicile depuis l’expulsion de son logement en 2022 ; dort notamment sous une tente, chez des connaissances ou en mise à l’abri hivernale. Entrée en CHRS le 03/06/2024.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o6",
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e29",
+            "trackId": "t26",
+            "start": "2024-06-03",
+            "end": "2025-05-26",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entrée en CHRS avec chambre individuelle ; installation rapportée le 10/06. Fin de la prise en charge lors de l’accès à une résidence sociale.",
+            "observationIds": [
+              "historique:o11",
+              "historique:o12",
+              "historique:o14",
+              "historique:o15",
+              "historique:o17"
+            ]
+          },
+          {
+            "id": "e30",
+            "trackId": "t27",
+            "start": "2025-05-26",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Accès à un studio avec bail d’un an renouvelable ; fière de son nouveau logement en juillet.",
+            "observationIds": [
+              "historique:o17",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e31",
+            "trackId": "t28",
+            "start": "2021",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Son fils vit chez sa grand-mère paternelle depuis 2021.",
+            "observationIds": [
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e32",
+            "trackId": "t29",
+            "start": "2024-06",
+            "end": "2025-06",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Visite médiatisée réalisée le 28/06/2024 après une période sans visites ; en juin 2025, les droits sont élargis à des visites sans médiatisation.",
+            "observationIds": [
+              "historique:o4",
+              "historique:o11",
+              "historique:o12",
+              "historique:o17"
+            ]
+          },
+          {
+            "id": "e33",
+            "trackId": "t30",
+            "start": "2023-11",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Agression sexuelle par un inconnu sous un pont la semaine précédant le 21/11 ; plainte déposée le lendemain et examen aux UMJ réalisé.",
+            "observationIds": [
+              "historique:o5"
+            ]
+          },
+          {
+            "id": "e34",
+            "trackId": "t31",
+            "start": "2024-02-10",
+            "end": "2024-02-10",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Retrouvé mort d’une overdose dans un squat ; vécu ambivalent, avec chagrin, soulagement et culpabilité.",
+            "observationIds": [
+              "historique:o7",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e35",
+            "trackId": "t32",
+            "start": "2025-03",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "La convocation est suivie d’une rechute de crack ; procès ensuite renvoyé.",
+            "observationIds": [
+              "historique:o16"
+            ]
+          },
+          {
+            "id": "e36",
+            "trackId": "t33",
+            "start": "2023-10-25",
+            "end": "2024-06-11",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Demande SIAO et appels au 115 ; RSA rétabli et CSS accordée en juin 2024.",
+            "observationIds": [
+              "historique:o4",
+              "historique:o11"
+            ]
+          }
+        ],
+        "undated": []
+      }
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t1",
+            "kind": "substance_use",
+            "label": "Crack"
+          },
+          {
+            "id": "t2",
+            "kind": "substance_use",
+            "label": "Alcool"
+          },
+          {
+            "id": "t3",
+            "kind": "psychiatric",
+            "label": "TSPT complexe"
+          },
+          {
+            "id": "t4",
+            "kind": "psychiatric",
+            "label": "Thymie triste"
+          },
+          {
+            "id": "t5",
+            "kind": "psychiatric",
+            "label": "Idées de mort passives"
+          },
+          {
+            "id": "t6",
+            "kind": "somatic",
+            "label": "Brûlures superficielles des doigts et des lèvres"
+          },
+          {
+            "id": "t7",
+            "kind": "somatic",
+            "label": "Toux grasse"
+          },
+          {
+            "id": "t8",
+            "kind": "somatic",
+            "label": "Non-immunité VHB"
+          },
+          {
+            "id": "t9",
+            "kind": "somatic",
+            "label": "Pneumopathie"
+          },
+          {
+            "id": "t10",
+            "kind": "medication",
+            "label": "Prazosine"
+          },
+          {
+            "id": "t11",
+            "kind": "medication",
+            "label": "Hydroxyzine"
+          },
+          {
+            "id": "t12",
+            "kind": "medication",
+            "label": "Vaccin VHB"
+          },
+          {
+            "id": "t13",
+            "kind": "medication",
+            "label": "Diazépam"
+          },
+          {
+            "id": "t14",
+            "kind": "medication",
+            "label": "Antibiotiques"
+          },
+          {
+            "id": "t15",
+            "kind": "medication",
+            "label": "Naloxone"
+          },
+          {
+            "id": "t16",
+            "kind": "medication",
+            "label": "Sertraline"
+          },
+          {
+            "id": "t17",
+            "kind": "therapeutic_psycho",
+            "label": "CAARUD"
+          },
+          {
+            "id": "t18",
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychiatrique ambulatoire"
+          },
+          {
+            "id": "t19",
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation proposée (refusée)"
+          },
+          {
+            "id": "t20",
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en médecine (pneumopathie, sevrage alcool)"
+          },
+          {
+            "id": "t21",
+            "kind": "therapeutic_psycho",
+            "label": "CHRS"
+          },
+          {
+            "id": "t22",
+            "kind": "therapeutic_psycho",
+            "label": "EMDR (centre de psychotraumatologie)"
+          },
+          {
+            "id": "t23",
+            "kind": "life_event",
+            "label": "Sans domicile"
+          },
+          {
+            "id": "t24",
+            "kind": "life_event",
+            "label": "Mise à l'abri hivernale"
+          },
+          {
+            "id": "t25",
+            "kind": "life_event",
+            "label": "Placement en foyer"
+          },
+          {
+            "id": "t26",
+            "kind": "life_event",
+            "label": "Violences intrafamiliales et abus sexuels dans l'enfance"
+          },
+          {
+            "id": "t27",
+            "kind": "life_event",
+            "label": "Fils placé chez la grand-mère paternelle"
+          },
+          {
+            "id": "t28",
+            "kind": "life_event",
+            "label": "Agression sexuelle"
+          },
+          {
+            "id": "t29",
+            "kind": "life_event",
+            "label": "Décès de l'ex-compagnon (overdose)"
+          },
+          {
+            "id": "t30",
+            "kind": "life_event",
+            "label": "Visites médiatisées avec le fils"
+          },
+          {
+            "id": "t31",
+            "kind": "life_event",
+            "label": "Procès de l'agresseur"
+          },
+          {
+            "id": "t32",
+            "kind": "life_event",
+            "label": "Accès à un logement"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2017",
+            "end": "2025-03",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": true,
+            "note": "Crack fumé depuis environ 6 ans à l'observation du 2023-09-14 (1 à 2 g/j quand elle a de l'argent, perte de contrôle franche). « Depuis ses 25 ans » selon o1. Majoration à 3 g/j en 2024-02, diminution progressive ensuite (1 fois par semaine en 2024-07 et 2024-09). Dernier crack le 2024-12-24, puis rechute début mars 2025. Pas de crack depuis mars 2025 selon o18.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o6",
+              "historique:o8",
+              "historique:o10",
+              "historique:o12",
+              "historique:o13",
+              "historique:o15",
+              "historique:o16",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e2",
+            "trackId": "t1",
+            "start": "2025-03",
+            "end": "2025-03",
+            "ongoing": false,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Rechute de 3 jours début mars 2025 après la convocation au tribunal pour le procès de l'agresseur ; arrêt spontané, en a parlé à son éducatrice.",
+            "observationIds": [
+              "historique:o16",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t1",
+            "start": "2024-02-20",
+            "end": "2024-04-09",
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": true,
+            "note": "Majoration des consommations après le décès de l'ex-compagnon : crack jusqu'à 3 g/j. Après l'hospitalisation, réduction à 2 à 3 fois par semaine ; « pas touché au caillou » depuis la sortie selon o9.",
+            "observationIds": [
+              "historique:o8",
+              "historique:o9",
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e4",
+            "trackId": "t2",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": "sevrage",
+            "lossOfControl": false,
+            "note": "Sevrage alcool sous diazépam pendant l'hospitalisation en médecine, sans complication.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t3",
+            "start": "1996",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Tableau compatible avec un TSPT complexe (2023-09) : hypervigilance, cauchemars quasi quotidiens, reviviscences, évitement. Majoré après l'agression de 2023-11. Persistance des reviviscences diurnes, évitement et hypervigilance en 2024-09 ; diminution des cauchemars et des reviviscences nocturnes après l'EMDR ; reviviscences moins intenses en 2025-07.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o5",
+              "historique:o13",
+              "historique:o15",
+              "historique:o16",
+              "historique:o18"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e6",
+            "trackId": "t4",
+            "start": "2023-09",
+            "end": "2025-07",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Thymie triste à l'entrée (2023-09), humeur triste de fond en 2024-09, anxiété importante en 2025-03 ; thymie neutre en 2025-07 avec projets.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o13",
+              "historique:o16",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e7",
+            "trackId": "t5",
+            "start": "2024-02-20",
+            "end": "2024-02-20",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Idées de mort passives, sans scénario ni intention, après le décès de l'ex-compagnon. Le fils est cité comme facteur protecteur. Hospitalisation proposée et refusée.",
+            "observationIds": [
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t6",
+            "start": "2023-09-06",
+            "end": "2023-10-03",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Brûlures liées au mode de consommation (crack, pipes en verre). Soins infirmiers faits le 2023-10-03.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t7",
+            "start": "2023-09",
+            "end": "2023-10",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Toux grasse depuis 3 semaines au 2023-10-03, sans fièvre ; à surveiller. Précédait la pneumopathie de 2024-03.",
+            "observationIds": [
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t8",
+            "start": "2023-10-03",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Sérologie VHB non immunisée ; première injection de vaccin le 2023-10-03. TROD VIH et VHC négatifs.",
+            "observationIds": [
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e11",
+            "trackId": "t9",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Hospitalisée en médecine pour pneumopathie (fièvre, toux, crachats noirs). Antibiotiques terminés à la sortie, va mieux.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e12",
+            "trackId": "t10",
+            "start": "2023-11-21",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Débutée à 1 mg le soir, palier de 1 mg/semaine jusqu'à 3 mg (surveillance TA). Cauchemars réduits sous 3 mg ; maintenue en 2025-07.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o6",
+              "historique:o10",
+              "historique:o13",
+              "historique:o15",
+              "historique:o16",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t11",
+            "start": "2023-11-21",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "25 mg si besoin, max 2/j, pour la nuit. Reprise si besoin en 2025-03.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o6",
+              "historique:o16"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t12",
+            "start": "2023-10-03",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Première injection le 2023-10-03 ; suite du schéma vaccinal non documentée.",
+            "observationIds": [
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t13",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Prescrit pendant le sevrage alcool à l'hôpital.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e16",
+            "trackId": "t14",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Traitement de la pneumopathie, terminé à la sortie.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e17",
+            "trackId": "t15",
+            "start": "2024-02-20",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Naloxone remise, car elle consomme parfois avec des usagers d'opioïdes.",
+            "observationIds": [
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e18",
+            "trackId": "t16",
+            "start": "2024-09-17",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Introduite à 50 mg en 2024-09, 100 mg en 2025-01 ; poursuivie en 2025-07.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o15",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e19",
+            "trackId": "t17",
+            "start": "2023-09-06",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Premier passage à l'accueil du CAARUD, orienté par l'équipe de maraude. Récupération de matériel de consommation ; passage couplé aux rendez-vous psychiatriques.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e20",
+            "trackId": "t18",
+            "start": "2023-09-14",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Premier entretien le 2023-09-14, puis rendez-vous toutes les 2 semaines puis espacés (1 mois en 2025).",
+            "observationIds": [
+              "historique:o2",
+              "historique:o5",
+              "historique:o6",
+              "historique:o8",
+              "historique:o10",
+              "historique:o13",
+              "historique:o15",
+              "historique:o16",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e21",
+            "trackId": "t19",
+            "start": "2024-02-20",
+            "end": "2024-02-20",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Hospitalisation en unité d'addictologie ou psychiatrie proposée après la majoration des consommations ; refus.",
+            "observationIds": [
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e22",
+            "trackId": "t20",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Hospitalisation en médecine pour pneumopathie, avec sevrage alcool sous diazépam.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e23",
+            "trackId": "t21",
+            "start": "2024-06-03",
+            "end": "2025-05-26",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entrée en CHRS le 2024-06-03 en chambre individuelle (installée le 10/06 selon o12). Fin de la prise en charge CHRS à l'accès à la résidence sociale le 2025-05-26.",
+            "observationIds": [
+              "historique:o11",
+              "historique:o12",
+              "historique:o17"
+            ]
+          },
+          {
+            "id": "e24",
+            "trackId": "t22",
+            "start": "2024-12",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Orientation en 2024-09 (liste d'attente 2-3 mois). EMDR commencé en décembre 2024, 3 séances à 2025-01 ; poursuivi en 2025-03.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o15",
+              "historique:o16"
+            ]
+          },
+          {
+            "id": "e25",
+            "trackId": "t23",
+            "start": "2022",
+            "end": "2025-05-26",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Sans domicile depuis l'expulsion de son logement en 2022 ; dort sous une tente ou chez des connaissances. Accès à une résidence sociale le 2025-05-26.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o4",
+              "historique:o17"
+            ]
+          },
+          {
+            "id": "e26",
+            "trackId": "t24",
+            "start": "2024-01-08",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Mise à l'abri hivernale depuis le 08/01 (gymnase, places 115) ; dort mieux.",
+            "observationIds": [
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e27",
+            "trackId": "t25",
+            "start": "2002",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Placement en foyer à 12 ans, dans un contexte de violences intrafamiliales.",
+            "observationIds": [
+              "historique:o2"
+            ],
+            "fromAge": {
+              "start": [
+                12,
+                12
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e28",
+            "trackId": "t26",
+            "start": "1996",
+            "end": "2001",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Violences intrafamiliales et abus sexuels dans l'enfance, rapportés lors du premier entretien psychiatrique.",
+            "observationIds": [
+              "historique:o2"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e29",
+            "trackId": "t27",
+            "start": "2021",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Fils (9 ans en 2023) vivant chez la grand-mère paternelle depuis 2021. Visites médiatisées non réalisées pendant un an, reprise demandée en 2024-06.",
+            "observationIds": [
+              "historique:o4",
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e30",
+            "trackId": "t28",
+            "start": "2023-11",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Agression sexuelle la semaine précédant le 2023-11-21, la nuit sous un pont, par un inconnu. Plainte déposée le lendemain, examen aux UMJ.",
+            "observationIds": [
+              "historique:o5"
+            ]
+          },
+          {
+            "id": "e31",
+            "trackId": "t29",
+            "start": "2024-02-10",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Décès de l'ex-compagnon le 2024-02-10 par overdose dans un squat ; vécu ambivalent, soulagement et culpabilité.",
+            "observationIds": [
+              "historique:o7",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e32",
+            "trackId": "t30",
+            "start": "2024-06-28",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Première visite médiatisée revue le 2024-06-28 (une heure). Visites sans médiatisation un samedi sur deux à partir de juin 2025, décidées par le juge des enfants.",
+            "observationIds": [
+              "historique:o12",
+              "historique:o17"
+            ]
+          },
+          {
+            "id": "e33",
+            "trackId": "t31",
+            "start": "2025-03",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Convocation au tribunal en 2025-03 pour le procès de l'agresseur ; procès renvoyé. Anxiété importante, rechute de crack dans les suites.",
+            "observationIds": [
+              "historique:o16"
+            ]
+          },
+          {
+            "id": "e34",
+            "trackId": "t32",
+            "start": "2025-05-26",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Studio en résidence sociale, bail d'un an renouvelable, accès le 2025-05-26. Fière de son logement en 2025-07.",
+            "observationIds": [
+              "historique:o17",
+              "historique:o18"
+            ]
+          }
+        ],
+        "undated": []
+      }
+    },
+    {
+      "model": "union",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t1",
+            "kind": "substance_use",
+            "label": "Crack"
+          },
+          {
+            "id": "t2",
+            "kind": "substance_use",
+            "label": "Alcool"
+          },
+          {
+            "id": "t3",
+            "kind": "substance_use",
+            "label": "Cannabis"
+          },
+          {
+            "id": "t4",
+            "kind": "substance_use",
+            "label": "Tabac"
+          },
+          {
+            "id": "t5",
+            "kind": "psychiatric",
+            "label": "TSPT complexe"
+          },
+          {
+            "id": "t6",
+            "kind": "psychiatric",
+            "label": "Idées de mort passives"
+          },
+          {
+            "id": "t7",
+            "kind": "psychiatric",
+            "label": "Anxiété liée au procès"
+          },
+          {
+            "id": "t34",
+            "kind": "psychiatric",
+            "label": "Thymie triste"
+          },
+          {
+            "id": "t8",
+            "kind": "somatic",
+            "label": "Brûlures superficielles des doigts et des lèvres"
+          },
+          {
+            "id": "t9",
+            "kind": "somatic",
+            "label": "Toux grasse"
+          },
+          {
+            "id": "t10",
+            "kind": "somatic",
+            "label": "Pneumopathie"
+          },
+          {
+            "id": "t35",
+            "kind": "somatic",
+            "label": "Non-immunité VHB"
+          },
+          {
+            "id": "t11",
+            "kind": "medication",
+            "label": "Vaccin contre l’hépatite B"
+          },
+          {
+            "id": "t12",
+            "kind": "medication",
+            "label": "Prazosine"
+          },
+          {
+            "id": "t13",
+            "kind": "medication",
+            "label": "Hydroxyzine"
+          },
+          {
+            "id": "t14",
+            "kind": "medication",
+            "label": "Diazépam"
+          },
+          {
+            "id": "t15",
+            "kind": "medication",
+            "label": "Antibiotiques"
+          },
+          {
+            "id": "t16",
+            "kind": "medication",
+            "label": "Naloxone"
+          },
+          {
+            "id": "t17",
+            "kind": "medication",
+            "label": "Sertraline"
+          },
+          {
+            "id": "t18",
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychiatrique"
+          },
+          {
+            "id": "t19",
+            "kind": "therapeutic_psycho",
+            "label": "CAARUD"
+          },
+          {
+            "id": "t20",
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en médecine"
+          },
+          {
+            "id": "t21",
+            "kind": "therapeutic_psycho",
+            "label": "EMDR au centre de psychotraumatologie"
+          },
+          {
+            "id": "t22",
+            "kind": "therapeutic_psycho",
+            "label": "Orientation vers le centre de psychotraumatologie"
+          },
+          {
+            "id": "t36",
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation proposée (refusée)"
+          },
+          {
+            "id": "t23",
+            "kind": "life_event",
+            "label": "Placement en foyer"
+          },
+          {
+            "id": "t24",
+            "kind": "life_event",
+            "label": "Violences intrafamiliales et abus sexuels"
+          },
+          {
+            "id": "t25",
+            "kind": "life_event",
+            "label": "Expulsion du logement et sans-domicile"
+          },
+          {
+            "id": "t26",
+            "kind": "life_event",
+            "label": "Hébergement en CHRS"
+          },
+          {
+            "id": "t27",
+            "kind": "life_event",
+            "label": "Accès à une résidence sociale"
+          },
+          {
+            "id": "t28",
+            "kind": "life_event",
+            "label": "Hébergement du fils chez sa grand-mère paternelle"
+          },
+          {
+            "id": "t29",
+            "kind": "life_event",
+            "label": "Visites médiatisées avec le fils"
+          },
+          {
+            "id": "t30",
+            "kind": "life_event",
+            "label": "Agression sexuelle"
+          },
+          {
+            "id": "t31",
+            "kind": "life_event",
+            "label": "Décès de l’ex-compagnon"
+          },
+          {
+            "id": "t32",
+            "kind": "life_event",
+            "label": "Convocation au tribunal pour le procès de son agresseur"
+          },
+          {
+            "id": "t33",
+            "kind": "life_event",
+            "label": "Demande de logement et démarches sociales"
+          },
+          {
+            "id": "t37",
+            "kind": "life_event",
+            "label": "Mise à l'abri hivernale"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2015",
+            "end": null,
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": true,
+            "note": "Fume du crack depuis l’âge de 25 ans. Usage de 1 à 2 g/j quand elle a de l’argent en septembre 2023, jusqu’à 3 g/j après le décès de son ex-compagnon, puis diminution. Dernière consommation signalée le 24/12/2024, puis rechute début mars 2025 ; rapporte ne plus en consommer depuis mars.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o6",
+              "historique:o7",
+              "historique:o8",
+              "historique:o9",
+              "historique:o10",
+              "historique:o12",
+              "historique:o13",
+              "historique:o15",
+              "historique:o16",
+              "historique:o18"
+            ],
+            "fromAge": {
+              "start": [
+                25,
+                25
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e2",
+            "trackId": "t1",
+            "start": "2024-04-04",
+            "end": "2024-04-23",
+            "ongoing": false,
+            "mode": "sevrage",
+            "lossOfControl": false,
+            "note": "Dit ne pas avoir consommé depuis sa sortie d’hospitalisation le 04/04 ; consommation ensuite réduite à 2 ou 3 fois par semaine.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t1",
+            "start": "2025-03",
+            "end": "2025-03",
+            "ongoing": false,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Rechute trois jours de suite début mars après la convocation au tribunal, puis arrêt spontané.",
+            "observationIds": [
+              "historique:o16",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e4",
+            "trackId": "t2",
+            "start": "2023-09-14",
+            "end": null,
+            "ongoing": true,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Six bières fortes de 50 cL par jour avec tremblements matinaux en septembre 2023 ; consommation ensuite variable. Dit ne plus boire de bières fortes après l’entrée au CHRS, mais reconnaît 2 à 3 bières le soir en octobre, puis 1 à 2 le soir en janvier 2025 et 1 à 2 le week-end en juillet 2025.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o6",
+              "historique:o8",
+              "historique:o10",
+              "historique:o13",
+              "historique:o14",
+              "historique:o15",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t2",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": "sevrage",
+            "lossOfControl": false,
+            "note": "Sevrage alcool sous diazépam pendant l’hospitalisation, sans complication.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t3",
+            "start": "2023-09-14",
+            "end": null,
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Usage occasionnel rapporté.",
+            "observationIds": [
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e7",
+            "trackId": "t4",
+            "start": "2023-09-14",
+            "end": null,
+            "ongoing": true,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "20 cigarettes par jour en septembre 2023 ; 15 cigarettes par jour en juillet 2025.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t5",
+            "start": "2023-09-14",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Tableau jugé compatible avec un TSPT complexe : hypervigilance, cauchemars, reviviscences et évitement. Symptômes persistants, avec amélioration rapportée en juillet 2025.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o5",
+              "historique:o10",
+              "historique:o13",
+              "historique:o15",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t6",
+            "start": "2024-02-20",
+            "end": "2024-02-20",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Idées de mort passives sans scénario ni intention ; son fils est cité comme facteur protecteur.",
+            "observationIds": [
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t7",
+            "start": "2025-03",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Anxiété importante après la convocation au tribunal ; pas d’idées suicidaires.",
+            "observationIds": [
+              "historique:o16"
+            ]
+          },
+          {
+            "id": "e11",
+            "trackId": "t8",
+            "start": "2023-10-03",
+            "end": "2023-10-03",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Soins réalisés ; matériel de réduction des risques et crèmes pour les lèvres également récupérés au CAARUD.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e12",
+            "trackId": "t9",
+            "start": "2023-09",
+            "end": "2023-10-03",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Toux grasse depuis trois semaines, sans fièvre, à surveiller.",
+            "observationIds": [
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t10",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Hospitalisation pour fièvre, toux et crachats noirs ; amélioration après traitement antibiotique.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t11",
+            "start": "2023-10-03",
+            "end": "2023-10-03",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Première injection ; sérologie VHB non immunisée.",
+            "observationIds": [
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t12",
+            "start": "2023-11-21",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Début à 1 mg le soir avec augmentation progressive jusqu’à 3 mg ; traitement poursuivi, tension correcte et cauchemars améliorés.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o6",
+              "historique:o10",
+              "historique:o13",
+              "historique:o15",
+              "historique:o18",
+              "historique:o16"
+            ]
+          },
+          {
+            "id": "e16",
+            "trackId": "t13",
+            "start": "2023-11-21",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Prescrite à 25 mg si besoin, maximum deux prises par jour ; reprise si besoin en mars 2025.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o6",
+              "historique:o16"
+            ]
+          },
+          {
+            "id": "e17",
+            "trackId": "t14",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Utilisé pour le sevrage alcool pendant l’hospitalisation.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e18",
+            "trackId": "t15",
+            "start": "2024-04-04",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Traitement prescrit à la sortie d’hospitalisation, terminé au 09/04.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e19",
+            "trackId": "t16",
+            "start": "2024-02-20",
+            "end": "2024-02-20",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Naloxone remise ; consomme parfois avec des usagers d’opioïdes.",
+            "observationIds": [
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e20",
+            "trackId": "t17",
+            "start": "2024-09-17",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Introduite à 50 mg ; dose de 100 mg rapportée en janvier 2025 et poursuivie en juillet 2025.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o15",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e21",
+            "trackId": "t18",
+            "start": "2023-09-14",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entretiens de suivi psychiatrique réguliers, parfois avancés selon l’état clinique.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o5",
+              "historique:o6",
+              "historique:o8",
+              "historique:o10",
+              "historique:o13",
+              "historique:o15",
+              "historique:o16",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e22",
+            "trackId": "t19",
+            "start": "2023-09-06",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Premier passage après orientation par l’équipe de maraude ; récupération de matériel de réduction des risques et accompagnement éducatif.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o7",
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e23",
+            "trackId": "t20",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Hospitalisation pour pneumopathie ; sevrage alcool sous diazépam.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e24",
+            "trackId": "t21",
+            "start": "2024-12",
+            "end": "2025-03-25",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Trois séances commencées en décembre 2024 ; EMDR poursuivi en mars 2025.",
+            "observationIds": [
+              "historique:o15",
+              "historique:o16",
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e25",
+            "trackId": "t22",
+            "start": "2024-09-17",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Orientation pour EMDR ; liste d’attente annoncée de deux à trois mois.",
+            "observationIds": [
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e26",
+            "trackId": "t23",
+            "start": "2002",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Placement en foyer à 12 ans, dans un contexte de violences intrafamiliales et d’abus sexuels dans l’enfance.",
+            "observationIds": [
+              "historique:o2"
+            ],
+            "fromAge": {
+              "start": [
+                12,
+                12
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e27",
+            "trackId": "t24",
+            "start": "1996",
+            "end": "2001",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Violences intrafamiliales et abus sexuels rapportés dans l’enfance.",
+            "observationIds": [
+              "historique:o2"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e28",
+            "trackId": "t25",
+            "start": "2022",
+            "end": "2024-06-03",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Sans domicile depuis l’expulsion de son logement en 2022 ; dort notamment sous une tente, chez des connaissances ou en mise à l’abri hivernale. Entrée en CHRS le 03/06/2024.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o6",
+              "historique:o11",
+              "historique:o4",
+              "historique:o17"
+            ]
+          },
+          {
+            "id": "e29",
+            "trackId": "t26",
+            "start": "2024-06-03",
+            "end": "2025-05-26",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entrée en CHRS avec chambre individuelle ; installation rapportée le 10/06. Fin de la prise en charge lors de l’accès à une résidence sociale.",
+            "observationIds": [
+              "historique:o11",
+              "historique:o12",
+              "historique:o14",
+              "historique:o15",
+              "historique:o17"
+            ]
+          },
+          {
+            "id": "e30",
+            "trackId": "t27",
+            "start": "2025-05-26",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Accès à un studio avec bail d’un an renouvelable ; fière de son nouveau logement en juillet.",
+            "observationIds": [
+              "historique:o17",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e31",
+            "trackId": "t28",
+            "start": "2021",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Son fils vit chez sa grand-mère paternelle depuis 2021.",
+            "observationIds": [
+              "historique:o4",
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e32",
+            "trackId": "t29",
+            "start": "2024-06-28",
+            "end": "2025-06",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Première visite médiatisée revue le 2024-06-28 (une heure). Visites sans médiatisation un samedi sur deux à partir de juin 2025, décidées par le juge des enfants.",
+            "observationIds": [
+              "historique:o4",
+              "historique:o11",
+              "historique:o12",
+              "historique:o17"
+            ]
+          },
+          {
+            "id": "e33",
+            "trackId": "t30",
+            "start": "2023-11",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Agression sexuelle par un inconnu sous un pont la semaine précédant le 21/11 ; plainte déposée le lendemain et examen aux UMJ réalisé.",
+            "observationIds": [
+              "historique:o5"
+            ]
+          },
+          {
+            "id": "e34",
+            "trackId": "t31",
+            "start": "2024-02-10",
+            "end": "2024-02-10",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Retrouvé mort d’une overdose dans un squat ; vécu ambivalent, avec chagrin, soulagement et culpabilité.",
+            "observationIds": [
+              "historique:o7",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e35",
+            "trackId": "t32",
+            "start": "2025-03",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "La convocation est suivie d’une rechute de crack ; procès ensuite renvoyé.",
+            "observationIds": [
+              "historique:o16"
+            ]
+          },
+          {
+            "id": "e36",
+            "trackId": "t33",
+            "start": "2023-10-25",
+            "end": "2024-06-11",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Demande SIAO et appels au 115 ; RSA rétabli et CSS accordée en juin 2024.",
+            "observationIds": [
+              "historique:o4",
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e37",
+            "trackId": "t34",
+            "start": "2023-09",
+            "end": "2025-07",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Thymie triste à l'entrée (2023-09), humeur triste de fond en 2024-09, anxiété importante en 2025-03 ; thymie neutre en 2025-07 avec projets.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o13",
+              "historique:o16",
+              "historique:o18"
+            ]
+          },
+          {
+            "id": "e38",
+            "trackId": "t35",
+            "start": "2023-10-03",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Sérologie VHB non immunisée ; première injection de vaccin le 2023-10-03. TROD VIH et VHC négatifs.",
+            "observationIds": [
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e39",
+            "trackId": "t36",
+            "start": "2024-02-20",
+            "end": "2024-02-20",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Hospitalisation en unité d'addictologie ou psychiatrie proposée après la majoration des consommations ; refus.",
+            "observationIds": [
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e40",
+            "trackId": "t37",
+            "start": "2024-01-08",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Mise à l'abri hivernale depuis le 08/01 (gymnase, places 115) ; dort mieux.",
+            "observationIds": [
+              "historique:o6"
+            ]
+          }
+        ],
+        "undated": []
+      }
+    }
+  ],
+  "elapsedMs": 75791,
+  "usage": {
+    "calls": 6,
+    "promptTokens": 28949,
+    "completionTokens": 20954,
+    "cost": 0.0999,
+    "by": {
+      "openai/gpt-6-luna frise": 0.00273108,
+      "anthropic/claude-haiku-5.5 frise": 0.00579,
+      "anthropic/claude-sonnet-5.5 arbitrage": 0.09138600000000001
+    }
+  },
+  "rawAnswers": [
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Crack",
+            "start": null,
+            "end": null,
+            "start_age": 25,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Fume du crack depuis l’âge de 25 ans. Usage de 1 à 2 g/j quand elle a de l’argent en septembre 2023, jusqu’à 3 g/j après le décès de son ex-compagnon, puis diminution. Dernière consommation signalée le 24/12/2024, puis rechute début mars 2025 ; rapporte ne plus en consommer depuis mars.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o6",
+              "o7",
+              "o8",
+              "o9",
+              "o10",
+              "o12",
+              "o13",
+              "o15",
+              "o16",
+              "o18"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Crack",
+            "start": "2024-04-04",
+            "end": "2024-04-23",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Dit ne pas avoir consommé depuis sa sortie d’hospitalisation le 04/04 ; consommation ensuite réduite à 2 ou 3 fois par semaine.",
+            "observation_ids": [
+              "o9",
+              "o10"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Crack",
+            "start": "2025-03",
+            "end": "2025-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Rechute trois jours de suite début mars après la convocation au tribunal, puis arrêt spontané.",
+            "observation_ids": [
+              "o16"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2023-09-14",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Six bières fortes de 50 cL par jour avec tremblements matinaux en septembre 2023 ; consommation ensuite variable. Dit ne plus boire de bières fortes après l’entrée au CHRS, mais reconnaît 2 à 3 bières le soir en octobre, puis 1 à 2 le soir en janvier 2025 et 1 à 2 le week-end en juillet 2025.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o6",
+              "o8",
+              "o10",
+              "o13",
+              "o14",
+              "o15",
+              "o18"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Sevrage alcool sous diazépam pendant l’hospitalisation, sans complication.",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2023-09-14",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Usage occasionnel rapporté.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": "2023-09-14",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "20 cigarettes par jour en septembre 2023 ; 15 cigarettes par jour en juillet 2025.",
+            "observation_ids": [
+              "o2",
+              "o18"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "TSPT complexe",
+            "start": "2023-09-14",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Tableau jugé compatible avec un TSPT complexe : hypervigilance, cauchemars, reviviscences et évitement. Symptômes persistants, avec amélioration rapportée en juillet 2025.",
+            "observation_ids": [
+              "o2",
+              "o5",
+              "o10",
+              "o13",
+              "o15",
+              "o18"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Idées de mort passives",
+            "start": "2024-02-20",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Idées de mort passives sans scénario ni intention ; son fils est cité comme facteur protecteur.",
+            "observation_ids": [
+              "o8"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Anxiété liée au procès",
+            "start": "2025-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Anxiété importante après la convocation au tribunal ; pas d’idées suicidaires.",
+            "observation_ids": [
+              "o16"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Brûlures superficielles des doigts et des lèvres",
+            "start": "2023-10-03",
+            "end": "2023-10-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Soins réalisés ; matériel de réduction des risques et crèmes pour les lèvres également récupérés au CAARUD.",
+            "observation_ids": [
+              "o1",
+              "o3"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Toux grasse",
+            "start": "2023-09",
+            "end": "2023-10-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Toux grasse depuis trois semaines, sans fièvre, à surveiller.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Pneumopathie",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hospitalisation pour fièvre, toux et crachats noirs ; amélioration après traitement antibiotique.",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Vaccin contre l’hépatite B",
+            "start": "2023-10-03",
+            "end": "2023-10-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Première injection ; sérologie VHB non immunisée.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Prazosine",
+            "start": "2023-11-21",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Début à 1 mg le soir avec augmentation progressive jusqu’à 3 mg ; traitement poursuivi, tension correcte et cauchemars améliorés.",
+            "observation_ids": [
+              "o5",
+              "o6",
+              "o10",
+              "o13",
+              "o15",
+              "o18"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Hydroxyzine",
+            "start": "2023-11-21",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Prescrite à 25 mg si besoin, maximum deux prises par jour ; reprise si besoin en mars 2025.",
+            "observation_ids": [
+              "o5",
+              "o6",
+              "o16"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Diazépam",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Utilisé pour le sevrage alcool pendant l’hospitalisation.",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Antibiotiques",
+            "start": "2024-04-04",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Traitement prescrit à la sortie d’hospitalisation, terminé au 09/04.",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Naloxone",
+            "start": "2024-02-20",
+            "end": "2024-02-20",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Naloxone remise ; consomme parfois avec des usagers d’opioïdes.",
+            "observation_ids": [
+              "o8"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Sertraline",
+            "start": "2024-09-17",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Introduite à 50 mg ; dose de 100 mg rapportée en janvier 2025 et poursuivie en juillet 2025.",
+            "observation_ids": [
+              "o13",
+              "o15",
+              "o18"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychiatrique",
+            "start": "2023-09-14",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entretiens de suivi psychiatrique réguliers, parfois avancés selon l’état clinique.",
+            "observation_ids": [
+              "o2",
+              "o5",
+              "o6",
+              "o8",
+              "o10",
+              "o13",
+              "o15",
+              "o16",
+              "o18"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "CAARUD",
+            "start": "2023-09-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Premier passage après orientation par l’équipe de maraude ; récupération de matériel de réduction des risques et accompagnement éducatif.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o7",
+              "o12"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en médecine",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hospitalisation pour pneumopathie ; sevrage alcool sous diazépam.",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "EMDR au centre de psychotraumatologie",
+            "start": "2024-12",
+            "end": "2025-03-25",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Trois séances commencées en décembre 2024 ; EMDR poursuivi en mars 2025.",
+            "observation_ids": [
+              "o15",
+              "o16"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Orientation vers le centre de psychotraumatologie",
+            "start": "2024-09-17",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Orientation pour EMDR ; liste d’attente annoncée de deux à trois mois.",
+            "observation_ids": [
+              "o13"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Placement en foyer",
+            "start": null,
+            "end": null,
+            "start_age": 12,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Placement en foyer à 12 ans, dans un contexte de violences intrafamiliales et d’abus sexuels dans l’enfance.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Violences intrafamiliales et abus sexuels",
+            "start": null,
+            "end": null,
+            "start_age": "enfance",
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Violences intrafamiliales et abus sexuels rapportés dans l’enfance.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Relation avec un compagnon violent",
+            "start": null,
+            "end": "2022",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Relation de plusieurs années avec un homme violent ; séparation en 2022, avec des croisements réguliers par la suite.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Expulsion du logement et sans-domicile",
+            "start": "2022",
+            "end": "2024-06-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Sans domicile depuis l’expulsion de son logement en 2022 ; dort notamment sous une tente, chez des connaissances ou en mise à l’abri hivernale. Entrée en CHRS le 03/06/2024.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o6",
+              "o11"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Hébergement en CHRS",
+            "start": "2024-06-03",
+            "end": "2025-05-26",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entrée en CHRS avec chambre individuelle ; installation rapportée le 10/06. Fin de la prise en charge lors de l’accès à une résidence sociale.",
+            "observation_ids": [
+              "o11",
+              "o12",
+              "o14",
+              "o15",
+              "o17"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Accès à une résidence sociale",
+            "start": "2025-05-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Accès à un studio avec bail d’un an renouvelable ; fière de son nouveau logement en juillet.",
+            "observation_ids": [
+              "o17",
+              "o18"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Hébergement du fils chez sa grand-mère paternelle",
+            "start": "2021",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Son fils vit chez sa grand-mère paternelle depuis 2021.",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Visites médiatisées avec son fils",
+            "start": "2024-06",
+            "end": "2025-06",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Visite médiatisée réalisée le 28/06/2024 après une période sans visites ; en juin 2025, les droits sont élargis à des visites sans médiatisation.",
+            "observation_ids": [
+              "o4",
+              "o11",
+              "o12",
+              "o17"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Agression sexuelle",
+            "start": "2023-11",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Agression sexuelle par un inconnu sous un pont la semaine précédant le 21/11 ; plainte déposée le lendemain et examen aux UMJ réalisé.",
+            "observation_ids": [
+              "o5"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Décès de l’ex-compagnon",
+            "start": "2024-02-10",
+            "end": "2024-02-10",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Retrouvé mort d’une overdose dans un squat ; vécu ambivalent, avec chagrin, soulagement et culpabilité.",
+            "observation_ids": [
+              "o7",
+              "o8"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Convocation au tribunal pour le procès de son agresseur",
+            "start": "2025-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "La convocation est suivie d’une rechute de crack ; procès ensuite renvoyé.",
+            "observation_ids": [
+              "o16"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Demande de logement et démarches sociales",
+            "start": "2023-10-25",
+            "end": "2024-06-11",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Demande SIAO et appels au 115 ; RSA rétabli et CSS accordée en juin 2024.",
+            "observation_ids": [
+              "o4",
+              "o11"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Crack",
+            "start": "2017",
+            "end": "2025-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Crack fumé depuis environ 6 ans à l'observation du 2023-09-14 (1 à 2 g/j quand elle a de l'argent, perte de contrôle franche). « Depuis ses 25 ans » selon o1. Majoration à 3 g/j en 2024-02, diminution progressive ensuite (1 fois par semaine en 2024-07 et 2024-09). Dernier crack le 2024-12-24, puis rechute début mars 2025. Pas de crack depuis mars 2025 selon o18.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o6",
+              "o8",
+              "o10",
+              "o12",
+              "o13",
+              "o15",
+              "o16",
+              "o18"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Crack",
+            "start": "2025-03",
+            "end": "2025-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Rechute de 3 jours début mars 2025 après la convocation au tribunal pour le procès de l'agresseur ; arrêt spontané, en a parlé à son éducatrice.",
+            "observation_ids": [
+              "o16",
+              "o18"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Crack",
+            "start": "2024-02-20",
+            "end": "2024-04-09",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": true,
+            "note": "Majoration des consommations après le décès de l'ex-compagnon : crack jusqu'à 3 g/j. Après l'hospitalisation, réduction à 2 à 3 fois par semaine ; « pas touché au caillou » depuis la sortie selon o9.",
+            "observation_ids": [
+              "o8",
+              "o9",
+              "o10"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Bières fortes : 6 de 50 cL par jour en 2023-09 avec tremblements matinaux ; 4 à 5/j en 2024-01, 3/j en 2024-04. Arrêt des bières fortes à l'entrée au CHRS (2024-06) selon o13, mais 2 à 3 bières le soir en chambre « en cachette » en 2024-10, puis 1 à 2 le soir en 2025-01. 1 à 2 bières le week-end en 2025-07.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o6",
+              "o8",
+              "o10",
+              "o13",
+              "o14",
+              "o15",
+              "o18"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Sevrage alcool sous diazépam pendant l'hospitalisation en médecine, sans complication.",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Consommation occasionnelle décrite en 2023-09 ; pas d'autre précision.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "20 cigarettes/j en 2023-09 ; 15 cigarettes/j en 2025-07.",
+            "observation_ids": [
+              "o2",
+              "o18"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "TSPT complexe",
+            "start": null,
+            "end": null,
+            "start_age": "enfance",
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Tableau compatible avec un TSPT complexe (2023-09) : hypervigilance, cauchemars quasi quotidiens, reviviscences, évitement. Majoré après l'agression de 2023-11. Persistance des reviviscences diurnes, évitement et hypervigilance en 2024-09 ; diminution des cauchemars et des reviviscences nocturnes après l'EMDR ; reviviscences moins intenses en 2025-07.",
+            "observation_ids": [
+              "o2",
+              "o5",
+              "o13",
+              "o15",
+              "o16",
+              "o18"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Thymie triste",
+            "start": "2023-09",
+            "end": "2025-07",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Thymie triste à l'entrée (2023-09), humeur triste de fond en 2024-09, anxiété importante en 2025-03 ; thymie neutre en 2025-07 avec projets.",
+            "observation_ids": [
+              "o2",
+              "o13",
+              "o16",
+              "o18"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Idées de mort passives",
+            "start": "2024-02-20",
+            "end": "2024-02-20",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Idées de mort passives, sans scénario ni intention, après le décès de l'ex-compagnon. Le fils est cité comme facteur protecteur. Hospitalisation proposée et refusée.",
+            "observation_ids": [
+              "o8"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Brûlures superficielles des doigts et des lèvres",
+            "start": "2023-09-06",
+            "end": "2023-10-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Brûlures liées au mode de consommation (crack, pipes en verre). Soins infirmiers faits le 2023-10-03.",
+            "observation_ids": [
+              "o1",
+              "o3"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Toux grasse",
+            "start": "2023-09",
+            "end": "2023-10",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Toux grasse depuis 3 semaines au 2023-10-03, sans fièvre ; à surveiller. Précédait la pneumopathie de 2024-03.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Non-immunité VHB",
+            "start": "2023-10-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Sérologie VHB non immunisée ; première injection de vaccin le 2023-10-03. TROD VIH et VHC négatifs.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Pneumopathie",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hospitalisée en médecine pour pneumopathie (fièvre, toux, crachats noirs). Antibiotiques terminés à la sortie, va mieux.",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Prazosine",
+            "start": "2023-11-21",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Débutée à 1 mg le soir, palier de 1 mg/semaine jusqu'à 3 mg (surveillance TA). Cauchemars réduits sous 3 mg ; maintenue en 2025-07.",
+            "observation_ids": [
+              "o5",
+              "o6",
+              "o10",
+              "o13",
+              "o15",
+              "o16",
+              "o18"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Hydroxyzine",
+            "start": "2023-11-21",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "25 mg si besoin, max 2/j, pour la nuit. Reprise si besoin en 2025-03.",
+            "observation_ids": [
+              "o5",
+              "o6",
+              "o16"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Vaccin VHB",
+            "start": "2023-10-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Première injection le 2023-10-03 ; suite du schéma vaccinal non documentée.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Diazépam",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Prescrit pendant le sevrage alcool à l'hôpital.",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Antibiotiques",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Traitement de la pneumopathie, terminé à la sortie.",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Naloxone",
+            "start": "2024-02-20",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Naloxone remise, car elle consomme parfois avec des usagers d'opioïdes.",
+            "observation_ids": [
+              "o8"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Sertraline",
+            "start": "2024-09-17",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Introduite à 50 mg en 2024-09, 100 mg en 2025-01 ; poursuivie en 2025-07.",
+            "observation_ids": [
+              "o13",
+              "o15",
+              "o18"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "CAARUD",
+            "start": "2023-09-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Premier passage à l'accueil du CAARUD, orienté par l'équipe de maraude. Récupération de matériel de consommation ; passage couplé aux rendez-vous psychiatriques.",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi psychiatrique ambulatoire",
+            "start": "2023-09-14",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Premier entretien le 2023-09-14, puis rendez-vous toutes les 2 semaines puis espacés (1 mois en 2025).",
+            "observation_ids": [
+              "o2",
+              "o5",
+              "o6",
+              "o8",
+              "o10",
+              "o13",
+              "o15",
+              "o16",
+              "o18"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation proposée (refusée)",
+            "start": "2024-02-20",
+            "end": "2024-02-20",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hospitalisation en unité d'addictologie ou psychiatrie proposée après la majoration des consommations ; refus.",
+            "observation_ids": [
+              "o8"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en médecine (pneumopathie, sevrage alcool)",
+            "start": "2024-03-28",
+            "end": "2024-04-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hospitalisation en médecine pour pneumopathie, avec sevrage alcool sous diazépam.",
+            "observation_ids": [
+              "o9"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "CHRS",
+            "start": "2024-06-03",
+            "end": "2025-05-26",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entrée en CHRS le 2024-06-03 en chambre individuelle (installée le 10/06 selon o12). Fin de la prise en charge CHRS à l'accès à la résidence sociale le 2025-05-26.",
+            "observation_ids": [
+              "o11",
+              "o12",
+              "o17"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "EMDR (centre de psychotraumatologie)",
+            "start": "2024-12",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Orientation en 2024-09 (liste d'attente 2-3 mois). EMDR commencé en décembre 2024, 3 séances à 2025-01 ; poursuivi en 2025-03.",
+            "observation_ids": [
+              "o13",
+              "o15",
+              "o16"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Sans domicile",
+            "start": "2022",
+            "end": "2025-05-26",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Sans domicile depuis l'expulsion de son logement en 2022 ; dort sous une tente ou chez des connaissances. Accès à une résidence sociale le 2025-05-26.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o4",
+              "o17"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Mise à l'abri hivernale",
+            "start": "2024-01-08",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Mise à l'abri hivernale depuis le 08/01 (gymnase, places 115) ; dort mieux.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Placement en foyer",
+            "start": null,
+            "end": null,
+            "start_age": 12,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Placement en foyer à 12 ans, dans un contexte de violences intrafamiliales.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Violences intrafamiliales et abus sexuels dans l'enfance",
+            "start": null,
+            "end": null,
+            "start_age": "enfance",
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Violences intrafamiliales et abus sexuels dans l'enfance, rapportés lors du premier entretien psychiatrique.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Relation avec un compagnon violent",
+            "start": null,
+            "end": "2022",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Relation de plusieurs années avec un homme violent ; séparée depuis 2022 mais le croise régulièrement.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Fils placé chez la grand-mère paternelle",
+            "start": "2021",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Fils (9 ans en 2023) vivant chez la grand-mère paternelle depuis 2021. Visites médiatisées non réalisées pendant un an, reprise demandée en 2024-06.",
+            "observation_ids": [
+              "o4",
+              "o11"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Agression sexuelle",
+            "start": "2023-11",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Agression sexuelle la semaine précédant le 2023-11-21, la nuit sous un pont, par un inconnu. Plainte déposée le lendemain, examen aux UMJ.",
+            "observation_ids": [
+              "o5"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Décès de l'ex-compagnon (overdose)",
+            "start": "2024-02-10",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Décès de l'ex-compagnon le 2024-02-10 par overdose dans un squat ; vécu ambivalent, soulagement et culpabilité.",
+            "observation_ids": [
+              "o7",
+              "o8"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Visites médiatisées avec le fils",
+            "start": "2024-06-28",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Première visite médiatisée revue le 2024-06-28 (une heure). Visites sans médiatisation un samedi sur deux à partir de juin 2025, décidées par le juge des enfants.",
+            "observation_ids": [
+              "o12",
+              "o17"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Procès de l'agresseur",
+            "start": "2025-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Convocation au tribunal en 2025-03 pour le procès de l'agresseur ; procès renvoyé. Anxiété importante, rechute de crack dans les suites.",
+            "observation_ids": [
+              "o16"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Accès à un logement",
+            "start": "2025-05-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Studio en résidence sociale, bail d'un an renouvelable, accès le 2025-05-26. Fière de son logement en 2025-07.",
+            "observation_ids": [
+              "o17",
+              "o18"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "schema": "arbitrage",
+      "content": {
+        "decisions": [
+          {
+            "id": "d1",
+            "verdict": "keep",
+            "variant": null,
+            "event": {
+              "kind": "substance_use",
+              "label": "Crack",
+              "start": null,
+              "end": "2025-03",
+              "start_age": 25,
+              "end_age": null,
+              "ongoing": false,
+              "mode": "usage",
+              "loss_of_control": true,
+              "note": "Fume du crack « depuis ses 25 ans » (o1) ; « depuis 6 ans environ » en 09/2023 (o2). 1 à 2 g/j quand elle a de l'argent, perte de contrôle franche. Jusqu'à 3 g/j après le décès de son ex-compagnon (02/2024), puis diminution (1 jour sur 2, 2 à 3 fois par semaine, 1 fois par semaine). Dernier crack le 24/12 (o15), puis rechute de 3 jours début mars 2025 après la convocation au tribunal. Pas de crack depuis mars 2025 (o18).",
+              "observation_ids": [
+                "o1",
+                "o2",
+                "o6",
+                "o8",
+                "o9",
+                "o10",
+                "o12",
+                "o13",
+                "o15",
+                "o16",
+                "o18"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "schema": "arbitrage",
+      "content": {
+        "decisions": [
+          {
+            "id": "d3",
+            "verdict": "keep",
+            "variant": null,
+            "event": {
+              "kind": "substance_use",
+              "label": "Alcool",
+              "start": "2023-09-06",
+              "end": null,
+              "start_age": null,
+              "end_age": null,
+              "ongoing": true,
+              "mode": "usage",
+              "loss_of_control": false,
+              "note": "Boit des bières fortes dès le premier passage (2023-09). Le 2023-09-14 : 6 bières fortes de 50 cL par jour, tremblements le matin. Puis 4 à 5 par jour en janvier 2024 et 3 par jour en avril 2024. Elle dit ne plus boire de bières fortes depuis l'entrée au CHRS (septembre 2024). En octobre 2024, 2 à 3 bières le soir en chambre « en cachette ». En janvier 2025, 1 à 2 le soir. En juillet 2025, 1 à 2 bières le week-end. Le début de la consommation n'est pas daté.",
+              "observation_ids": [
+                "o1",
+                "o2",
+                "o6",
+                "o8",
+                "o10",
+                "o13",
+                "o14",
+                "o15",
+                "o18"
+              ]
+            }
+          },
+          {
+            "id": "d4",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d5",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          }
+        ]
+      }
+    },
+    {
+      "schema": "arbitrage",
+      "content": {
+        "decisions": [
+          {
+            "id": "d6",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d9",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d12",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d13",
+            "verdict": "keep",
+            "variant": null,
+            "event": {
+              "kind": "medication",
+              "label": "Vaccination VHB (1ère injection)",
+              "start": "2023-10-03",
+              "end": null,
+              "start_age": null,
+              "end_age": null,
+              "ongoing": false,
+              "mode": null,
+              "loss_of_control": false,
+              "note": "Sérologie VHB : non immunisée ; première injection de vaccin faite le 2023-10-03. TROD VIH et VHC négatifs.",
+              "observation_ids": [
+                "o3"
+              ]
+            }
+          },
+          {
+            "id": "d11",
+            "verdict": "keep",
+            "variant": null,
+            "event": {
+              "kind": "life_event",
+              "label": "Démarches d'hébergement (SIAO, appels au 115)",
+              "start": "2023-10-25",
+              "end": "2024-06-03",
+              "start_age": null,
+              "end_age": null,
+              "ongoing": false,
+              "mode": null,
+              "loss_of_control": false,
+              "note": "Demande SIAO faite le 2023-10-25, appels au 115 la plupart des soirs sans succès ; soutien de la candidature en CHRS en avril 2024 ; entrée en CHRS le 2024-06-03.",
+              "observation_ids": [
+                "o4",
+                "o10",
+                "o11"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "schema": "arbitrage",
+      "content": {
+        "decisions": [
+          {
+            "id": "d15",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d2",
+            "verdict": "keep",
+            "variant": null,
+            "event": {
+              "kind": "substance_use",
+              "label": "Crack",
+              "start": "2024-04-04",
+              "end": "2024-04-09",
+              "start_age": null,
+              "end_age": null,
+              "ongoing": false,
+              "mode": "sevrage",
+              "loss_of_control": false,
+              "note": "Dit ne pas avoir touché au crack depuis sa sortie d'hospitalisation le 04/04 (observation du 09/04). Le 23/04, consommation réduite à 2 à 3 fois par semaine.",
+              "observation_ids": [
+                "o9",
+                "o10"
+              ]
+            }
+          },
+          {
+            "id": "d14",
+            "verdict": "drop",
+            "variant": null,
+            "event": null
+          },
+          {
+            "id": "d10",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d8",
+            "verdict": "drop",
+            "variant": null,
+            "event": null
+          },
+          {
+            "id": "d7",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          }
+        ]
+      }
+    }
+  ]
+}
