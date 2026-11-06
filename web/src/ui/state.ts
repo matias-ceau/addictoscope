@@ -15,7 +15,7 @@ export interface SourceDocState {
   progress?: { done: number; total: number; phase: "text" | "ocr" };
   pages: PageText[];
   /** Local AI model pass: runs in the background after the rules. */
-  ner?: { status: "running" | "done" | "unavailable"; done: number; total: number; spans?: Record<number, NerSpan[]> };
+  ner?: { status: "running" | "done" | "unavailable" | "skipped"; done: number; total: number; spans?: Record<number, NerSpan[]> };
   output?: Uint8Array;
   /** The pseudonymized output re-read from scratch (what the cloud model reads). */
   outPages?: PageText[];
