@@ -1,3 +1,89 @@
+# SPEC — Bibliothèque de dossiers : toutes les étapes, préremplies
+
+Statut : validée et implémentée le 06/11/2026 (branche `dev/demo-library`).
+
+Objectif : montrer en une seule interface tout le processus sur plusieurs
+dossiers déjà traités. C'est l'application elle-même, ouverte avec une
+bibliothèque de dossiers dans une barre latérale. Pour chaque dossier, on voit
+la pseudonymisation, le découpage en observations, les événements et périodes,
+puis la frise. Le code est générique et public ; le contenu d'une bibliothèque
+(dossiers et analyses) vient d'un dossier servi à côté de l'application, privé
+si besoin.
+
+## Ouverture
+
+- `?library=<chemin>/library.json` : l'application s'ouvre en mode
+  bibliothèque, sans écran d'accueil. Sans ce paramètre, rien ne change.
+- `library.json` : `{ title, groups: [{ title, dossiers: [{ slug, title,
+  summary, docs: [{ file, title }], analysis: "<fichier>", key?: "<fichier>"
+  }] }] }`. Les fichiers sont relatifs à `library.json`. Une analyse a le format
+  de « Enregistrer l'analyse » (`kind: "analysis"`) ; la table, le format de
+  la table de ré-identification (noms réels → pseudonymes).
+
+## Barre latérale
+
+- Les groupes (par exemple « Dossiers réels » et « Dossiers fictifs »), puis
+  pour chaque dossier son titre, son résumé, le nombre de documents et
+  d'événements, et un état (« à ouvrir », « en cours », « prêt »).
+- Cliquer un dossier l'affiche. Le premier dossier s'ouvre au chargement.
+  Un dossier déjà ouvert garde son état dans la session : y revenir est
+  immédiat.
+- La barre se replie pour laisser la place à la frise.
+
+## Pour chaque dossier
+
+1. **Documents et pseudonymisation** : les fichiers passent par le chemin
+   normal de l'application, sur le poste : lecture, détection par règles
+   (comme pour les passages enregistrés ; le modèle local n'est pas lancé),
+   toutes les détections acceptées,
+   masquage, relecture et vérification. Le panneau de relecture et le
+   parcours en six étapes restent visibles : on voit ce qui a été masqué
+   et pourquoi.
+2. **Observations** (nouvel onglet, à côté de « Document » et « Frise ») :
+   la liste des observations découpées, par document et dans l'ordre
+   chronologique (date, type, rôle de l'auteur, résumé, page et ligne).
+   Cliquer une observation ouvre la page pseudonymisée, surlignée.
+   L'onglet sert aussi hors bibliothèque, après une analyse.
+3. **Événements et périodes, frise** : l'analyse enregistrée est chargée à la
+   place de l'appel au modèle, comme « Rouvrir une analyse ». La frise et sa
+   vue tableau sont celles de l'application. Un bandeau indique « Analyse
+   enregistrée : <modèle>, <date>, <coût> ». Rien ne part en ligne :
+   l'indicateur reste sur « Tout reste sur ce poste ».
+4. **Noms réels** : avec une table fournie, la bascule « Noms réels /
+   Pseudonymes » remet les vrais noms sur le poste, comme après
+   « Rouvrir une analyse » avec sa table. Sans table, c'est la table issue
+   des détections de la session.
+
+## Cas limites
+
+- Un document illisible ou absent : le dossier s'ouvre avec les autres, une
+  erreur est affichée sur le document manquant.
+- Une analyse qui cite une observation d'un document absent : l'événement
+  reste affiché, sans lien vers la source (comportement de « Rouvrir »).
+- Un `library.json` illisible : message d'erreur et écran d'accueil normal.
+
+## Tests
+
+- Unitaires : lecture et validation de `library.json` (groupes, chemins
+  relatifs, erreurs) ; ordre et regroupement de la liste des observations.
+- e2e (données fictives) : bibliothèque de deux dossiers fictifs construite
+  depuis `data/anonymized`. On vérifie la barre latérale, l'ouverture
+  automatique du premier dossier, la détection faite, les onglets
+  Observations et Frise remplis, le passage au second dossier et le retour,
+  et aucun appel réseau.
+- `scripts/build-library.ts` construit la bibliothèque fictive
+  (`--runs=age1`) ; le constructeur des dossiers réels reste dans le dépôt
+  privé.
+
+## Non-objectifs
+
+- Pas d'appel au modèle en mode bibliothèque (analyses enregistrées seulement).
+- Pas de modification des dossiers depuis l'interface (pas d'ajout ni de
+  retrait de document).
+- Pas de nouveau calcul de la frise : c'est celle du passage enregistré.
+
+---
+
 # SPEC — Frise par consensus : plusieurs lectures, arbitrage des désaccords
 
 Statut : validée et implémentée le 06/11/2026 (branche `dev/frise-consensus`) ;

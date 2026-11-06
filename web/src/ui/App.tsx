@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "r
 
 import { analyse } from "../app/analysis";
 import { demoFiles, loadRecording, type DemoDossier } from "../app/demo";
+import { loadDossierAnalysis, loadDossierFiles, loadDossierKey, remapAnalysis, type Library, type LibraryDossier } from "../app/library";
 import { clearLedger } from "../cloud/ledger";
 import { modelName } from "../cloud/models";
 import { replayFetch } from "../cloud/replay";
@@ -23,6 +24,7 @@ import { DataStatus, Journal } from "./Journal";
 import { Journey, journeySteps } from "./Journey";
 import { DropOverlay } from "./DropOverlay";
 import { Frise } from "./Frise";
+import { Observations } from "./Observations";
 import { ReviewPanel } from "./ReviewPanel";
 import { Sources } from "./Sources";
 import { mergeDetections, reducer, type SourceDocState } from "./state";
@@ -32,12 +34,22 @@ import { Welcome } from "./Welcome";
 
 let docCounter = 0;
 
-export function App() {
+/** Where a library dossier is: shown in the sidebar. */
+export type LibraryDossierStatus = "loading" | "ready" | "error";
+
+export interface LibraryProps {
+  lib: Library;
+  dossier: LibraryDossier;
+  onStatus?: (status: LibraryDossierStatus) => void;
+}
+
+export function App(props: { library?: LibraryProps } = {}) {
+  const library = props.library;
   const [state, dispatch] = useReducer(reducer, { docs: [], detections: [] });
   const stateRef = useRef(state);
   stateRef.current = state;
   const [view, setView] = useState<"original" | "pseudo">("original");
-  const [mainView, setMainView] = useState<"doc" | "frise">("doc");
+  const [mainView, setMainView] = useState<"doc" | "observations" | "frise">("doc");
   const [policy, setPolicy] = useState<CloudPolicy>(loadPolicy);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [analysis, setAnalysis] = useState<AnalysisState>({ status: "idle" });
@@ -51,17 +63,24 @@ export function App() {
   const [reopened, setReopened] = useState<{ saved: SavedAnalysis; keyTable?: KeyTable } | null>(null);
   const [keyFile, setKeyFile] = useState<Uint8Array | null>(null);
   const [reopenError, setReopenError] = useState<string | null>(null);
+  /** Library: table of the saved analysis (label -> real value), when given. */
+  const [libraryKey, setLibraryKey] = useState<KeyTable | undefined>();
 
   const redetect = useCallback(() => {
     const ready = stateRef.current.docs.filter((d) => d.pages.length && d.status !== "reading" && d.status !== "error");
     const fresh = detectCorpus(ready.map((d) => ({ id: d.id, pages: d.pages, ner: d.ner?.spans })));
-    dispatch({ type: "detections", detections: mergeDetections(stateRef.current.detections, fresh) });
+    const action = { type: "detections" as const, detections: mergeDetections(stateRef.current.detections, fresh) };
+    dispatch(action);
+    // Read right away by an automatic pseudonymisation (library), before the next render.
+    stateRef.current = reducer(stateRef.current, action);
   }, []);
 
   const addFiles = useCallback(
-    async (files: File[]) => {
+    async (files: File[], opts: { ner?: boolean } = {}): Promise<string[]> => {
+      const ids: string[] = [];
       for (const file of files) {
         const id = `doc${++docCounter}`;
+        ids.push(id);
         const raw = new Uint8Array(await file.arrayBuffer());
         const kind = inputKind(file.name, raw);
         const doc: SourceDocState = {
@@ -89,6 +108,12 @@ export function App() {
           dispatch({ type: "patch", id, patch });
           stateRef.current = reducer(stateRef.current, { type: "patch", id, patch });
           redetect();
+          if (opts.ner === false) {
+            const ner = { status: "skipped" as const, done: 0, total: 0 };
+            dispatch({ type: "patch", id, patch: { ner } });
+            stateRef.current = reducer(stateRef.current, { type: "patch", id, patch: { ner } });
+            continue;
+          }
           // Second opinion from the local AI model, in the background: the
           // reviewer can start on the rule-based detections meanwhile, and
           // the next file is read without waiting for it.
@@ -107,6 +132,7 @@ export function App() {
           dispatch({ type: "patch", id, patch: { status: "error", error: String((err as Error).message ?? err) } });
         }
       }
+      return ids;
     },
     [redetect],
   );
@@ -163,6 +189,56 @@ export function App() {
     }
   }, [policy, demo, demoSource]);
 
+  // Library: the dossier goes through the local path on its own (every
+  // detection accepted, as for the recorded run), then its saved analysis
+  // stands in for the call to the model. Nothing is sent.
+  const onLibraryStatus = library?.onStatus;
+  const libraryStarted = useRef(false);
+  useEffect(() => {
+    // Once per dossier (the ref survives StrictMode's second mount; the
+    // library keeps every opened dossier mounted).
+    if (!library || libraryStarted.current) return;
+    libraryStarted.current = true;
+    const { lib, dossier } = library;
+    void (async () => {
+      onLibraryStatus?.("loading");
+      try {
+        const files = await loadDossierFiles(lib, dossier);
+        const ids: Record<string, string> = {};
+        for (const [i, f] of files.entries()) {
+          if (f instanceof Error) {
+            const id = `doc${++docCounter}`;
+            dispatch({ type: "add", doc: { id, name: dossier.docs[i].file, pseudoName: "", bytes: new Uint8Array(), status: "error", pages: [], error: f.message } });
+            continue;
+          }
+          const [id] = await addFiles([f], { ner: false });
+          ids[dossier.docs[i].id] = id;
+        }
+        for (const id of Object.values(ids)) {
+          if (stateRef.current.docs.find((d) => d.id === id)?.status === "review") await pseudonymise(id);
+        }
+        const [saved, key] = await Promise.all([loadDossierAnalysis(lib, dossier), loadDossierKey(lib, dossier)]);
+        const analysed = remapAnalysis(saved, ids);
+        setLibraryKey(key);
+        setAnalysis({
+          status: "done",
+          observations: analysed.observations,
+          timeline: analysed.timeline,
+          docs: Object.values(ids),
+          model: analysed.model,
+          replayed: true,
+        });
+        dispatch({ type: "select", id: Object.values(ids)[0] ?? stateRef.current.docs[0]?.id });
+        onLibraryStatus?.("ready");
+      } catch (err) {
+        setAnalysis({ status: "error", error: String((err as Error).message ?? err) });
+        onLibraryStatus?.("error");
+      }
+    })();
+    // One run per dossier: the library mounts one App per dossier.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const openDemo = useCallback(
     async (d: DemoDossier) => {
       setDemo(d);
@@ -214,9 +290,10 @@ export function App() {
 
   /** Labels of the analysed documents -> real values, for the frise only (local). */
   const keyTable = useMemo(() => {
+    if (libraryKey) return libraryKey;
     const docs = new Set(analysis.docs ?? []);
     return keyTableFromDetections(state.detections.filter((d) => docs.has(d.doc)));
-  }, [state.detections, analysis.docs]);
+  }, [state.detections, analysis.docs, libraryKey]);
 
   /** Jump from a frise event to the observation it came from, highlighted:
    *  on the original page when the frise shows real names, else the pseudonymized one. */
@@ -241,7 +318,7 @@ export function App() {
   );
 
   const selected = state.docs.find((d) => d.id === state.selectedDoc);
-  const replayMode = demo !== null && demoSource !== "live";
+  const replayMode = Boolean(library) || (demo !== null && demoSource !== "live");
   const steps = journeySteps(
     state.docs,
     analysis,
@@ -268,6 +345,11 @@ export function App() {
             </svg>
           </span>
           addictoscope
+          {library && (
+            <span className="demo-ribbon library-ribbon" title="Dossier déjà analysé : frise enregistrée, rien n'est envoyé">
+              {library.dossier.title}
+            </span>
+          )}
           {demo && (
             <span className="demo-ribbon" title="Dossier entièrement inventé, pour la démonstration">
               Dossier fictif · démonstration
@@ -280,16 +362,19 @@ export function App() {
             <button role="tab" aria-selected={mainView === "doc"} onClick={() => setMainView("doc")}>
               Documents
             </button>
+            <button role="tab" aria-selected={mainView === "observations"} onClick={() => setMainView("observations")}>
+              Observations
+            </button>
             <button role="tab" aria-selected={mainView === "frise"} onClick={() => setMainView("frise")}>
               Frise
             </button>
           </div>
         )}
-        <DataStatus demo={replayMode} onOpen={() => setJournalOpen(true)} />
+        <DataStatus demo={replayMode && !library} onOpen={() => setJournalOpen(true)} />
         <button className="cloud-badge" onClick={() => setSettingsOpen(true)} title="Réglages de l'IA en ligne">
           IA en ligne : {policy.kind === "off" ? "désactivée" : policy.kind === "openrouter-zdr" ? "OpenRouter ZDR" : "point d'accès HDS"}
         </button>
-        {(state.docs.length > 0 || reopened) && (
+        {!library && (state.docs.length > 0 || reopened) && (
           <button className="cloud-badge" onClick={closeAll} title="Fermer tous les documents et revenir à l'accueil">
             {demo ? "Quitter la démonstration" : "Tout fermer"}
           </button>
@@ -309,6 +394,10 @@ export function App() {
             onImportKey={(files) => void reopen(files)}
           />
         </main>
+      ) : state.docs.length === 0 && library ? (
+        <main className="workspace single">
+          <p className="library-loading muted">Ouverture du dossier…</p>
+        </main>
       ) : state.docs.length === 0 ? (
         <Welcome onFiles={addFiles} onDemo={openDemo} onReopen={(f) => void reopen(f)} reopenError={reopenError} />
       ) : (
@@ -321,8 +410,12 @@ export function App() {
             onRemove={removeDoc}
             onFiles={addFiles}
           />
+          {mainView === "observations" && analysis.observations && (
+            <Observations observations={analysis.observations} docNames={docNames} keyTable={keyTable} onOpenSource={openSource} />
+          )}
           {mainView === "frise" && analysis.timeline && (
             <Frise
+              key={libraryKey ? "library-key" : "session-key"}
               timeline={analysis.timeline}
               observations={analysis.observations ?? []}
               keyTable={keyTable}
@@ -330,7 +423,9 @@ export function App() {
               onSave={saveAnalysis}
               source={
                 analysis.model &&
-                `Analyse : ${modelName(analysis.model)}${analysis.replayed ? ", réponses enregistrées rejouées (aucun envoi)" : ", OpenRouter sans conservation"}`
+                (library
+                  ? `Analyse enregistrée : ${modelName(analysis.model)}${library.dossier.cost !== undefined ? `, ${library.dossier.cost.toFixed(2).replace(".", ",")} $` : ""} (aucun envoi)`
+                  : `Analyse : ${modelName(analysis.model)}${analysis.replayed ? ", réponses enregistrées rejouées (aucun envoi)" : ", OpenRouter sans conservation"}`)
               }
             />
           )}
@@ -368,7 +463,7 @@ export function App() {
           )}
         </main>
       )}
-      <DropOverlay onFiles={addFiles} />
+      {!library && <DropOverlay onFiles={addFiles} />}
       {keyFile && <KeyPrompt data={keyFile} onKey={onKey} onClose={() => setKeyFile(null)} />}
       {journalOpen && <Journal onClose={() => setJournalOpen(false)} realValues={realValues} docNames={docNames} />}
       {settingsOpen && (

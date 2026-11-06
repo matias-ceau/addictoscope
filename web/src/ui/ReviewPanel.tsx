@@ -197,6 +197,9 @@ export function ReviewPanel(props: {
             {doc.ner?.status === "done" && (
               <p className="small ai-done">✓ Relu aussi par l'IA locale (modèle de reconnaissance des noms, sur ce poste)</p>
             )}
+            {doc.ner?.status === "skipped" && (
+              <p className="small muted">Détection par règles seulement, comme pour l'analyse enregistrée de ce dossier.</p>
+            )}
             {doc.ner?.status === "unavailable" && (
               <p className="small muted">IA locale indisponible : détection par règles uniquement.</p>
             )}

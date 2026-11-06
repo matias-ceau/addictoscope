@@ -147,6 +147,18 @@ et Claude Haiku 5.5) montrent l'écart de qualité et de coût.
 cd web && npx vite-node scripts/build-demo.ts --runs=age1,bench/openai__gpt-6-luna,bench/anthropic__claude-haiku-5.5
 ```
 
+### Bibliothèque de dossiers déjà analysés
+
+`?library=<chemin>/library.json` ouvre l'application avec une barre latérale
+de dossiers. Chacun passe sur le poste par la détection, le masquage et la
+vérification, puis son analyse enregistrée (observations et frise) s'affiche
+sans appel au modèle. L'onglet « Observations » montre le découpage dont la
+frise est issue. Bibliothèque des 14 dossiers fictifs :
+
+```bash
+cd web && npx vite-node scripts/build-library.ts   # → public/library/, ouvrir ?library=library/library.json
+```
+
 ### Choix du modèle et coût
 
 Banc d'essai de modèles via OpenRouter (05/11/2026), tous en zéro
