@@ -9,7 +9,7 @@ export function useLedger(): OutboundEntry[] {
 
 const time = (t: number) => new Date(t).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 const size = (b: number) => (b > 1e6 ? `${(b / 1e6).toFixed(1)} Mo` : `${Math.max(1, Math.round(b / 1e3))} ko`);
-const SCHEMA_LABEL: Record<string, string> = { segmentation: "Découpage en observations", frise: "Construction de la frise" };
+const SCHEMA_LABEL: Record<string, string> = { segmentation: "Découpage en observations", frise: "Construction de la frise", arbitrage: "Arbitrage des désaccords" };
 
 /** Top-bar pill: where the data is right now, from the journal. */
 export function DataStatus({ demo, onOpen }: { demo: boolean; onOpen: () => void }) {

@@ -1,0 +1,3302 @@
+{
+  "dossier": "cannabis-jeune",
+  "model": "openai/gpt-6-luna + anthropic/claude-haiku-5.5, arbitre anthropic/claude-sonnet-5.5",
+  "readers": [
+    "openai/gpt-6-luna",
+    "anthropic/claude-haiku-5.5"
+  ],
+  "arbiter": "anthropic/claude-sonnet-5.5",
+  "charsPerCall": 8000,
+  "observationsFrom": "bench/anthropic__claude-haiku-5.5",
+  "ranAt": "2026-11-06T00:40:43.260Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 2,
+      "redactions": {
+        "ETABLISSEMENT": 4,
+        "ADRESSE": 4,
+        "TEL": 3,
+        "PATIENT": 11,
+        "DOSSIER": 2,
+        "NAISSANCE": 2,
+        "IPP": 2,
+        "VILLE": 2,
+        "SOIGNANT": 14,
+        "PERSONNE": 2,
+        "PROCHE": 3,
+        "EMAIL": 1
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    },
+    "urgences": {
+      "pages": 1,
+      "redactions": {
+        "ETABLISSEMENT": 1,
+        "PATIENT": 1,
+        "NAISSANCE": 1,
+        "DOSSIER": 1,
+        "ADRESSE": 1,
+        "VILLE": 1,
+        "PERSONNE": 1,
+        "TEL": 1,
+        "SOIGNANT": 2
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 11
+      },
+      "end": {
+        "page": 0,
+        "line": 23
+      },
+      "date": "2024-02-15",
+      "kind": "Premier entretien CJC",
+      "authorRole": "Éducatrice spécialisée",
+      "summary": "Première consultation CJC à la demande de la mère : cannabis quotidien (6 à 8 joints/jour), arrêt du BTS, vomissements aux urgences, alcool occasionnel, rendez-vous convenu avec le psychologue."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 24
+      },
+      "end": {
+        "page": 0,
+        "line": 31
+      },
+      "date": "2024-03-04",
+      "kind": "Entretien CJC",
+      "authorRole": "Éducatrice spécialisée",
+      "summary": "Retour aux urgences pour vomissements ; évocation du syndrome d'hyperémèse cannabinoïde et consommation estimée à 10 à 12 joints par jour."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 32
+      },
+      "end": {
+        "page": 0,
+        "line": 42
+      },
+      "date": "2024-03-12",
+      "kind": "Entretien psychologique",
+      "authorRole": "Psychologue",
+      "summary": "Premier entretien psychologique : anxiété chronique avec crises d'angoisse, difficultés attentionnelles anciennes, ASRS positif, et proposition de TCC et évaluation psychiatrique."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 43
+      },
+      "end": {
+        "page": 0,
+        "line": 50
+      },
+      "date": "2024-03-18",
+      "kind": "Entretien CJC",
+      "authorRole": "Éducatrice spécialisée",
+      "summary": "Nouvelle passage aux urgences et UHCD d'une nuit pour vomissements, avec conseil d'arrêt complet du cannabis et RDV psychiatrique avancé au 26/03."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 51
+      },
+      "end": {
+        "page": 0,
+        "line": 65
+      },
+      "date": "2024-03-26",
+      "kind": "Consultation psychiatrique",
+      "authorRole": "Psychiatre",
+      "summary": "Évaluation psychiatrique : trouble de l'usage du cannabis sévère avec hyperémèse, trouble panique probable, TDAH à réévaluer, alcoolisations ponctuelles ; arrêt du cannabis convenu au 01/04 et hydroxyzine si besoin."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 66
+      },
+      "end": {
+        "page": 1,
+        "line": 14
+      },
+      "date": "2024-04-09",
+      "kind": "Entretien psychologique",
+      "authorRole": "Psychologue",
+      "summary": "Suivi psychologique : arrêt du cannabis depuis le 1er avril avec nuits difficiles, exercices de respiration et exposition graduée, crise d'angoisse dans le tram gérée seule."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 15
+      },
+      "end": {
+        "page": 1,
+        "line": 24
+      },
+      "date": "2024-04-30",
+      "kind": "Entretien CJC",
+      "authorRole": "Éducatrice spécialisée",
+      "summary": "Reprise du cannabis (2 à 3 joints le soir) après une dispute familiale, recherche d'un emploi saisonnier, et rappel du cadre de confidentialité à la mère."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 25
+      },
+      "end": {
+        "page": 1,
+        "line": 39
+      },
+      "date": "2024-05-21",
+      "kind": "Consultation psychiatrique",
+      "authorRole": "Interne",
+      "summary": "Réévaluation en l'absence du psychiatre : réduction du cannabis, amélioration attentionnelle pendant l'abstinence, TDAH non retenu à ce stade, poursuite de la TCC et suivi CJC."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 40
+      },
+      "end": {
+        "page": 1,
+        "line": 51
+      },
+      "date": "2024-06-18",
+      "kind": "Consultation psychiatrique",
+      "authorRole": "Psychiatre",
+      "summary": "Relecture de la note précédente : TDAH en cours d'évaluation et bilan neuropsychologique demandé, alcoolisation importante avec trou noir, prévention de l'alcool abordée, RDV en septembre."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 52
+      },
+      "end": {
+        "page": 1,
+        "line": 59
+      },
+      "date": "2024-09-17",
+      "kind": "Entretien CJC",
+      "authorRole": "Éducatrice spécialisée",
+      "summary": "Retour de saison : emploi au camping, cannabis limité au week-end, absence de vomissements depuis mars, projet de formation et ambiance familiale apaisée."
+    },
+    {
+      "id": "urgences:o1",
+      "doc": "urgences",
+      "start": {
+        "page": 0,
+        "line": 1
+      },
+      "end": {
+        "page": 0,
+        "line": 24
+      },
+      "date": "2024-03-17",
+      "kind": "compte rendu de passage aux urgences",
+      "authorRole": "médecin (urgences)",
+      "summary": "Passage aux urgences du 17 au 18/03/2024 pour vomissements incoercibles et douleurs abdominales dans un contexte de consommation quotidienne de cannabis, retenu en UHCD, avec diagnostic de syndrome d'hyperémèse cannabinoïde et conseil d'arrêt du cannabis."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t1",
+        "kind": "substance_use",
+        "label": "Cannabis"
+      },
+      {
+        "id": "t2",
+        "kind": "substance_use",
+        "label": "Tabac"
+      },
+      {
+        "id": "t13",
+        "kind": "substance_use",
+        "label": "Alcool"
+      },
+      {
+        "id": "t4",
+        "kind": "psychiatric",
+        "label": "Trouble panique avec agoraphobie probable"
+      },
+      {
+        "id": "t5",
+        "kind": "psychiatric",
+        "label": "Plaintes attentionnelles"
+      },
+      {
+        "id": "t12",
+        "kind": "psychiatric",
+        "label": "TDAH en cours d’évaluation"
+      },
+      {
+        "id": "t3",
+        "kind": "somatic",
+        "label": "Syndrome d'hyperémèse cannabinoïde"
+      },
+      {
+        "id": "t17",
+        "kind": "somatic",
+        "label": "Déshydratation modérée et hypokaliémie"
+      },
+      {
+        "id": "t6",
+        "kind": "medication",
+        "label": "Halopéridol"
+      },
+      {
+        "id": "t7",
+        "kind": "medication",
+        "label": "Hydroxyzine"
+      },
+      {
+        "id": "t8",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi CJC"
+      },
+      {
+        "id": "t9",
+        "kind": "therapeutic_psycho",
+        "label": "TCC"
+      },
+      {
+        "id": "t14",
+        "kind": "therapeutic_psycho",
+        "label": "Consultation psychiatrique"
+      },
+      {
+        "id": "t16",
+        "kind": "therapeutic_psycho",
+        "label": "Entretien CJC"
+      },
+      {
+        "id": "t18",
+        "kind": "therapeutic_psycho",
+        "label": "Hospitalisation UHCD"
+      },
+      {
+        "id": "t10",
+        "kind": "life_event",
+        "label": "Arrêt du BTS"
+      },
+      {
+        "id": "t11",
+        "kind": "life_event",
+        "label": "Départ du père"
+      },
+      {
+        "id": "t15",
+        "kind": "life_event",
+        "label": "Emploi saisonnier au camping"
+      },
+      {
+        "id": "t19",
+        "kind": "life_event",
+        "label": "Dispute avec le petit ami (séparation)"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2017",
+        "end": "2018",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Début rapporté « vers 14 ans » puis « depuis l'âge de 15 ans » ; usage quotidien depuis le confinement.",
+        "observationIds": [
+          "historique:o1",
+          "urgences:o1",
+          "historique:o2",
+          "historique:o5",
+          "historique:o8"
+        ],
+        "consensus": "agreed",
+        "fromAge": {
+          "start": [
+            14,
+            15
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e2",
+        "trackId": "t1",
+        "start": "2024-04",
+        "end": null,
+        "ongoing": true,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Reprise le 23 ou 24 avril après une dispute et une séparation ; 2 à 3 joints le soir, notamment pour dormir. Usage encore rapporté le 21 mai.",
+        "observationIds": [
+          "historique:o7",
+          "historique:o8"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e3",
+        "trackId": "t1",
+        "start": "2024-04-01",
+        "end": "2024-04-22",
+        "ongoing": false,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Première semaine après l'arrêt : insomnie, rêves intenses, irritabilité et baisse de l'appétit, ensuite revenu.",
+        "observationIds": [
+          "historique:o6",
+          "historique:o5"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e4",
+        "trackId": "t2",
+        "start": "2024-03-17",
+        "end": null,
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Environ 10 cigarettes par jour, tabac roulé.",
+        "observationIds": [
+          "urgences:o1",
+          "historique:o5",
+          "historique:o6"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e5",
+        "trackId": "t3",
+        "start": "2024-02-10",
+        "end": "2024-03-17",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Trois épisodes de vomissements avec passages aux urgences les 10/02, 02/03 et 17/03 ; soulagement par des douches très chaudes. Aucun vomissement rapporté après l'arrêt puis la reprise du cannabis.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "urgences:o1",
+          "historique:o5",
+          "historique:o6",
+          "historique:o7",
+          "historique:o8",
+          "historique:o4"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e6",
+        "trackId": "t4",
+        "start": "2015",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Crises d'angoisse depuis le lycée, plus fréquentes depuis l'été précédent l'entretien du 12/03/2024 ; anxiété anticipatoire marquée. Anxiété améliorée sous TCC en mai.",
+        "observationIds": [
+          "historique:o3",
+          "historique:o5",
+          "historique:o6",
+          "historique:o8"
+        ],
+        "consensus": "agreed",
+        "fromAge": {
+          "start": [
+            12,
+            17
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e7",
+        "trackId": "t5",
+        "start": "2009",
+        "end": "2024-05-21",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Difficultés anciennes rapportées ; amélioration nette pendant l'abstinence. TDAH non retenu après réévaluation.",
+        "observationIds": [
+          "historique:o3",
+          "historique:o8",
+          "historique:o5"
+        ],
+        "consensus": "agreed",
+        "fromAge": {
+          "start": [
+            6,
+            11
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e8",
+        "trackId": "t6",
+        "start": "2024-03-17",
+        "end": "2024-03-17",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "2,5 mg IV aux urgences, avec amélioration nette.",
+        "observationIds": [
+          "urgences:o1"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e9",
+        "trackId": "t7",
+        "start": "2024-03-26",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "25 mg si besoin pour l'anxiété et le sommeil, maximum deux prises par jour ; prise 2 à 3 fois par semaine en mai.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o8"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e10",
+        "trackId": "t8",
+        "start": "2024-02-15",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Entretiens et suivi CJC ; poursuite confirmée en mai.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "urgences:o1",
+          "historique:o4",
+          "historique:o7",
+          "historique:o8"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e11",
+        "trackId": "t9",
+        "start": "2024-03-12",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Suivi proposé puis poursuivi ; exercices de respiration et exposition graduée aux transports en commun.",
+        "observationIds": [
+          "historique:o3",
+          "historique:o5",
+          "historique:o6",
+          "historique:o8"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e12",
+        "trackId": "t10",
+        "start": "2024-01",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Arrêt du BTS MCO en janvier, car elle n'arrivait plus à se lever.",
+        "observationIds": [
+          "historique:o1"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e13",
+        "trackId": "t11",
+        "start": "2009",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Son père est parti quand elle avait 6 ans ; contacts rares.",
+        "observationIds": [
+          "historique:o3"
+        ],
+        "consensus": "agreed",
+        "fromAge": {
+          "start": [
+            6,
+            6
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e14",
+        "trackId": "t12",
+        "start": "2009",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Difficultés rapportées dès le primaire ; TDAH non exclu. Bilan neuropsychologique demandé.",
+        "observationIds": [
+          "historique:o9"
+        ],
+        "consensus": "agreed",
+        "fromAge": {
+          "start": [
+            6,
+            11
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e15",
+        "trackId": "t13",
+        "start": "2024-06",
+        "end": "2024-06",
+        "ongoing": false,
+        "mode": "intoxication",
+        "lossOfControl": false,
+        "note": "Alcoolisation importante lors d’un anniversaire début juin, avec trou noir.",
+        "observationIds": [
+          "historique:o9"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e16",
+        "trackId": "t7",
+        "start": "2024-06-18",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Mentionnée comme traitement à prendre si besoin.",
+        "observationIds": [
+          "historique:o9"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e17",
+        "trackId": "t14",
+        "start": "2024-06-18",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Évaluation du TDAH et prévention autour de l’alcool en soirée.",
+        "observationIds": [
+          "historique:o9"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e18",
+        "trackId": "t15",
+        "start": "2024-07-01",
+        "end": "2024-09",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "A travaillé tout l’été au camping ; retour de saison en septembre.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o10"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e19",
+        "trackId": "t1",
+        "start": "2024-06-18",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "2 joints par jour (06/2024). En 09/2024 : quelques joints le week-end seulement, aucun en semaine pendant la saison.",
+        "observationIds": [
+          "historique:o10",
+          "historique:o9"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e20",
+        "trackId": "t16",
+        "start": "2024-09-17",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Entretien après le retour de saison.",
+        "observationIds": [
+          "historique:o10"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e21",
+        "trackId": "t1",
+        "start": "2017",
+        "end": "2024-04-01",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Début vers 14 ans (3e), quotidien depuis le confinement (le dossier note aussi quotidien depuis 15 ans aux urgences). 6 à 8 joints par jour le 15/02/2024, puis 10 à 12 ou plus en mars. Arrêt déclaré à partir du 1er avril 2024, confirmé le 09/04 (sevrage sans vomissements).",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "urgences:o1",
+          "historique:o5",
+          "historique:o6"
+        ],
+        "consensus": "arbitrated",
+        "fromAge": {
+          "start": [
+            14,
+            14
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e22",
+        "trackId": "t1",
+        "start": "2024-04-01",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Abstinence rapportée pendant environ trois semaines ; reprise le 23 ou 24 avril.",
+        "observationIds": [
+          "historique:o6",
+          "historique:o7",
+          "historique:o8"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e23",
+        "trackId": "t17",
+        "start": "2024-03-17",
+        "end": "2024-03-18",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Constatées lors du passage aux urgences pour vomissements ; hydratation IV et supplémentation potassique.",
+        "observationIds": [
+          "urgences:o1"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e24",
+        "trackId": "t18",
+        "start": "2024-03-17",
+        "end": "2024-03-18",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Gardée une nuit en UHCD après passage aux urgences pour syndrome d'hyperémèse cannabinoïde.",
+        "observationIds": [
+          "urgences:o1",
+          "historique:o4"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e25",
+        "trackId": "t19",
+        "start": "2024-04",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Dispute vers le 23-24/04, petit ami qu'elle a quitté ensuite. Le petit ami consommait aussi (o1). Contexte de la rechute.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o7"
+        ],
+        "consensus": "arbitrated"
+      }
+    ],
+    "undated": []
+  },
+  "consensus": {
+    "readers": 2,
+    "agreed": 20,
+    "disputed": 9,
+    "kept": 8,
+    "dropped": 1,
+    "unarbitrated": 0
+  },
+  "readings": [
+    {
+      "model": "openai/gpt-6-luna",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t1",
+            "kind": "substance_use",
+            "label": "Cannabis"
+          },
+          {
+            "id": "t2",
+            "kind": "substance_use",
+            "label": "Alcool"
+          },
+          {
+            "id": "t3",
+            "kind": "substance_use",
+            "label": "Tabac"
+          },
+          {
+            "id": "t6",
+            "kind": "psychiatric",
+            "label": "Trouble panique avec agoraphobie probable"
+          },
+          {
+            "id": "t7",
+            "kind": "psychiatric",
+            "label": "Plaintes attentionnelles"
+          },
+          {
+            "id": "t16",
+            "kind": "psychiatric",
+            "label": "TDAH en cours d’évaluation"
+          },
+          {
+            "id": "t4",
+            "kind": "somatic",
+            "label": "Syndrome d'hyperémèse cannabinoïde"
+          },
+          {
+            "id": "t5",
+            "kind": "somatic",
+            "label": "Déshydratation modérée et hypokaliémie"
+          },
+          {
+            "id": "t8",
+            "kind": "medication",
+            "label": "Halopéridol"
+          },
+          {
+            "id": "t9",
+            "kind": "medication",
+            "label": "Hydroxyzine"
+          },
+          {
+            "id": "t10",
+            "kind": "therapeutic_psycho",
+            "label": "Suivi CJC"
+          },
+          {
+            "id": "t11",
+            "kind": "therapeutic_psycho",
+            "label": "TCC"
+          },
+          {
+            "id": "t12",
+            "kind": "therapeutic_psycho",
+            "label": "Passages aux urgences et UHCD"
+          },
+          {
+            "id": "t13",
+            "kind": "therapeutic_psycho",
+            "label": "Évaluation psychiatrique"
+          },
+          {
+            "id": "t17",
+            "kind": "therapeutic_psycho",
+            "label": "Consultation psychiatrique"
+          },
+          {
+            "id": "t19",
+            "kind": "therapeutic_psycho",
+            "label": "Entretien CJC"
+          },
+          {
+            "id": "t14",
+            "kind": "life_event",
+            "label": "Arrêt du BTS"
+          },
+          {
+            "id": "t15",
+            "kind": "life_event",
+            "label": "Départ du père"
+          },
+          {
+            "id": "t18",
+            "kind": "life_event",
+            "label": "Emploi saisonnier au camping"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2017",
+            "end": "2018",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Début rapporté « vers 14 ans » puis « depuis l'âge de 15 ans » ; usage quotidien depuis le confinement.",
+            "observationIds": [
+              "historique:o1",
+              "urgences:o1"
+            ],
+            "fromAge": {
+              "start": [
+                14,
+                15
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e2",
+            "trackId": "t1",
+            "start": "2024-02-15",
+            "end": "2024-04-01",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Au 15/02 : 6 à 8 joints par jour, puis 10 à 12 ou plus par jour en mars. Arrêt complet déclaré à partir du 1er avril.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "urgences:o1",
+              "historique:o5",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t1",
+            "start": "2024-04-01",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Abstinence rapportée pendant environ trois semaines ; reprise le 23 ou 24 avril.",
+            "observationIds": [
+              "historique:o6",
+              "historique:o7",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e4",
+            "trackId": "t1",
+            "start": "2024-04",
+            "end": null,
+            "ongoing": true,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Reprise le 23 ou 24 avril après une dispute et une séparation ; 2 à 3 joints le soir, notamment pour dormir. Usage encore rapporté le 21 mai.",
+            "observationIds": [
+              "historique:o7",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t1",
+            "start": "2024-04-01",
+            "end": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "lossOfControl": false,
+            "note": "Première semaine après l'arrêt : insomnie, rêves intenses, irritabilité et baisse de l'appétit, ensuite revenu.",
+            "observationIds": [
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t2",
+            "start": "2024-03-26",
+            "end": null,
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Alcoolisations ponctuelles importantes le week-end, 5 à 8 verres ; auparavant décrites comme quelques verres en soirée.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o5"
+            ]
+          },
+          {
+            "id": "e7",
+            "trackId": "t3",
+            "start": "2024-03-17",
+            "end": null,
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Environ 10 cigarettes par jour, tabac roulé.",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o5"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t4",
+            "start": "2024-02-10",
+            "end": "2024-03-17",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Trois épisodes de vomissements avec passages aux urgences les 10/02, 02/03 et 17/03 ; soulagement par des douches très chaudes. Aucun vomissement rapporté après l'arrêt puis la reprise du cannabis.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "urgences:o1",
+              "historique:o5",
+              "historique:o6",
+              "historique:o7",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t5",
+            "start": "2024-03-17",
+            "end": "2024-03-18",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Constatées lors du passage aux urgences pour vomissements ; hydratation IV et supplémentation potassique.",
+            "observationIds": [
+              "urgences:o1"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t6",
+            "start": "2015",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Crises d'angoisse depuis le lycée, plus fréquentes depuis l'été précédent l'entretien du 12/03/2024 ; anxiété anticipatoire marquée. Anxiété améliorée sous TCC en mai.",
+            "observationIds": [
+              "historique:o3",
+              "historique:o5",
+              "historique:o6",
+              "historique:o8"
+            ],
+            "fromAge": {
+              "start": [
+                12,
+                17
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e11",
+            "trackId": "t7",
+            "start": "2009",
+            "end": "2024-05-21",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Difficultés anciennes rapportées ; amélioration nette pendant l'abstinence. TDAH non retenu après réévaluation.",
+            "observationIds": [
+              "historique:o3",
+              "historique:o8"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e12",
+            "trackId": "t8",
+            "start": "2024-03-17",
+            "end": "2024-03-17",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "2,5 mg IV aux urgences, avec amélioration nette.",
+            "observationIds": [
+              "urgences:o1"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t9",
+            "start": "2024-03-26",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "25 mg si besoin pour l'anxiété et le sommeil, maximum deux prises par jour ; prise 2 à 3 fois par semaine en mai.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t10",
+            "start": "2024-02-15",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entretiens et suivi CJC ; poursuite confirmée en mai.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "urgences:o1",
+              "historique:o4",
+              "historique:o7",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t11",
+            "start": "2024-03-12",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Suivi proposé puis poursuivi ; exercices de respiration et exposition graduée aux transports en commun.",
+            "observationIds": [
+              "historique:o3",
+              "historique:o5",
+              "historique:o6",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e16",
+            "trackId": "t12",
+            "start": "2024-02-10",
+            "end": "2024-03-18",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Trois passages pour vomissements ; séjour en UHCD du 17 au 18 mars.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "urgences:o1",
+              "historique:o4",
+              "historique:o5"
+            ]
+          },
+          {
+            "id": "e17",
+            "trackId": "t13",
+            "start": "2024-03-26",
+            "end": "2024-05-21",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Évaluation du trouble panique, du cannabis et des plaintes attentionnelles ; réévaluation en mai, TDAH non retenu.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e18",
+            "trackId": "t14",
+            "start": "2024-01",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Arrêt du BTS MCO en janvier, car elle n'arrivait plus à se lever.",
+            "observationIds": [
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e19",
+            "trackId": "t15",
+            "start": "2009",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Son père est parti quand elle avait 6 ans ; contacts rares.",
+            "observationIds": [
+              "historique:o3"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                6
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e20",
+            "trackId": "t16",
+            "start": "2009",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Difficultés rapportées dès le primaire ; TDAH non exclu. Bilan neuropsychologique demandé.",
+            "observationIds": [
+              "historique:o9"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e21",
+            "trackId": "t2",
+            "start": "2024-06",
+            "end": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": false,
+            "note": "Alcoolisation importante lors d’un anniversaire début juin, avec trou noir.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e22",
+            "trackId": "t9",
+            "start": "2024-06-18",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Mentionnée comme traitement à prendre si besoin.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e23",
+            "trackId": "t17",
+            "start": "2024-06-18",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Évaluation du TDAH et prévention autour de l’alcool en soirée.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e24",
+            "trackId": "t18",
+            "start": "2024-07-01",
+            "end": "2024-09",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "A travaillé tout l’été au camping ; retour de saison en septembre.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e25",
+            "trackId": "t1",
+            "start": "2024-07",
+            "end": null,
+            "ongoing": true,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Quelques joints le week-end seulement ; aucun en semaine pendant la saison.",
+            "observationIds": [
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e26",
+            "trackId": "t19",
+            "start": "2024-09-17",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entretien après le retour de saison.",
+            "observationIds": [
+              "historique:o10"
+            ]
+          }
+        ],
+        "undated": []
+      }
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t1",
+            "kind": "substance_use",
+            "label": "Cannabis"
+          },
+          {
+            "id": "t2",
+            "kind": "substance_use",
+            "label": "Alcool"
+          },
+          {
+            "id": "t3",
+            "kind": "substance_use",
+            "label": "Tabac"
+          },
+          {
+            "id": "t4",
+            "kind": "psychiatric",
+            "label": "Trouble panique avec agoraphobie (probable)"
+          },
+          {
+            "id": "t5",
+            "kind": "psychiatric",
+            "label": "Difficultés attentionnelles (TDAH non retenu)"
+          },
+          {
+            "id": "t15",
+            "kind": "psychiatric",
+            "label": "TDAH (en cours d'évaluation, non exclu)"
+          },
+          {
+            "id": "t6",
+            "kind": "somatic",
+            "label": "Syndrome d'hyperémèse cannabinoïde"
+          },
+          {
+            "id": "t7",
+            "kind": "medication",
+            "label": "Halopéridol"
+          },
+          {
+            "id": "t8",
+            "kind": "medication",
+            "label": "Hydroxyzine"
+          },
+          {
+            "id": "t9",
+            "kind": "therapeutic_psycho",
+            "label": "Suivi CJC (consultation jeunes consommateurs)"
+          },
+          {
+            "id": "t10",
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation UHCD"
+          },
+          {
+            "id": "t11",
+            "kind": "therapeutic_psycho",
+            "label": "TCC (psychologue)"
+          },
+          {
+            "id": "t17",
+            "kind": "therapeutic_psycho",
+            "label": "Consultation psychiatrique"
+          },
+          {
+            "id": "t18",
+            "kind": "therapeutic_psycho",
+            "label": "Consultation jeunes consommateurs (CJC)"
+          },
+          {
+            "id": "t12",
+            "kind": "life_event",
+            "label": "Arrêt des études (BTS MCO)"
+          },
+          {
+            "id": "t13",
+            "kind": "life_event",
+            "label": "Départ du père"
+          },
+          {
+            "id": "t14",
+            "kind": "life_event",
+            "label": "Dispute avec le petit ami (séparation)"
+          },
+          {
+            "id": "t16",
+            "kind": "life_event",
+            "label": "Emploi saisonnier au camping"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2016",
+            "end": null,
+            "ongoing": true,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Début « depuis la 3e (vers 14 ans) » (o1) ; « depuis l'âge de 15 ans » (o4). Quotidien depuis le confinement, 6-8 joints/j en février, 10-12/j en mars. Réduction après l'arrêt du 01/04, 2-3 joints le soir depuis fin avril (o9).",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "urgences:o1",
+              "historique:o5",
+              "historique:o8"
+            ],
+            "fromAge": {
+              "start": [
+                13,
+                15
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e2",
+            "trackId": "t1",
+            "start": "2024-04-01",
+            "end": "2024-04-22",
+            "ongoing": false,
+            "mode": "sevrage",
+            "lossOfControl": false,
+            "note": "Arrêt décidé le 01/04 (accord de la patiente). Nuits difficiles la première semaine, insomnie, rêves intenses, irritabilité, appétit coupé.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t1",
+            "start": "2024-04",
+            "end": null,
+            "ongoing": true,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Reprise « il y a une semaine » (le 23 ou le 24/04), après une dispute avec le petit ami ; 2-3 joints le soir « pour dormir ». Toujours présente à o9 (21/05).",
+            "observationIds": [
+              "historique:o7",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e4",
+            "trackId": "t2",
+            "start": "2024-02-15",
+            "end": null,
+            "ongoing": true,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Initialement « pas vraiment, quelques verres en soirée ». Réévalué le 26/03 : alcoolisations ponctuelles le week-end, 5 à 8 verres. Date de début réelle non précisée.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o5"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t3",
+            "start": "2024-02-15",
+            "end": null,
+            "ongoing": true,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "10 cigarettes par jour (urgences 17/03), tabac roulé, une dizaine par jour (26/03). Continue de fumer à côté de la patiente (o7).",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o5",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t4",
+            "start": "2015",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Crises d'angoisse depuis le lycée, plus fréquentes depuis l'été 2023 (peur de mourir, palpitations, besoin de sortir des lieux clos). Pas d'épisode dépressif caractérisé ni d'idée suicidaire (26/03).",
+            "observationIds": [
+              "historique:o3",
+              "historique:o5",
+              "historique:o6",
+              "historique:o8"
+            ],
+            "fromAge": {
+              "start": [
+                12,
+                17
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e7",
+            "trackId": "t5",
+            "start": "2009",
+            "end": "2014",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Difficultés d'attention anciennes, « dans la lune » à l'école. TDAH évoqué puis non retenu le 21/05 : amélioration de la concentration pendant l'abstinence, troubles liés au cannabis.",
+            "observationIds": [
+              "historique:o3",
+              "historique:o5",
+              "historique:o8"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e8",
+            "trackId": "t6",
+            "start": "2024-02-10",
+            "end": "2024-03-18",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Passages aux urgences le 10/02, 02/03 et 17/03/2024 pour vomissements, soulagés par des douches chaudes. Hospitalisation UHCD du 17 au 18/03. Pas de récidive signalée au 21/05.",
+            "observationIds": [
+              "historique:o2",
+              "urgences:o1",
+              "historique:o4",
+              "historique:o5",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t7",
+            "start": "2024-03-17",
+            "end": "2024-03-18",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Halopéridol 2,5 mg IV aux urgences, amélioration nette des vomissements.",
+            "observationIds": [
+              "urgences:o1"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t8",
+            "start": "2024-03-26",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "25 mg si besoin, 2 par jour au maximum, pour l'anxiété et le sommeil. Prise 2-3 fois par semaine au 21/05.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e11",
+            "trackId": "t9",
+            "start": "2024-02-15",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Premier entretien le 15/02/2024 avec l'éducatrice spécialisée ; entretiens de suivi réguliers, prochaine revue prévue (o9).",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o4",
+              "historique:o7",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e12",
+            "trackId": "t10",
+            "start": "2024-03-17",
+            "end": "2024-03-18",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Gardée une nuit en UHCD après passage aux urgences pour syndrome d'hyperémèse cannabinoïde.",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t11",
+            "start": "2024-03-12",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Premier entretien psychologique le 12/03 ; TCC pour l'anxiété et le plan de réduction. Exercices de respiration et exposition graduée (avril).",
+            "observationIds": [
+              "historique:o3",
+              "historique:o5",
+              "historique:o6",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t12",
+            "start": "2024-01",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Arrêt du BTS MCO en janvier 2024 : « je n'arrivais plus à me lever ».",
+            "observationIds": [
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t13",
+            "start": "2009",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Père « parti quand j'avais 6 ans », contacts rares. Relation conflictuelle avec la mère.",
+            "observationIds": [
+              "historique:o3"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                6
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e16",
+            "trackId": "t14",
+            "start": "2024-04",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Dispute vers le 23-24/04, petit ami qu'elle a quitté ensuite. Le petit ami consommait aussi (o1). Contexte de la rechute.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o7"
+            ]
+          },
+          {
+            "id": "e17",
+            "trackId": "t1",
+            "start": "2024-06-18",
+            "end": null,
+            "ongoing": true,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "2 joints par jour (06/2024). En 09/2024 : quelques joints le week-end seulement, aucun en semaine pendant la saison.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e18",
+            "trackId": "t2",
+            "start": "2024-06",
+            "end": "2024-06",
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": false,
+            "note": "Alcoolisation importante lors d'un anniversaire début juin, avec trou noir. Prévention autour de l'alcool en soirée abordée.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e19",
+            "trackId": "t15",
+            "start": "2009",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Difficultés dès le primaire, bulletins scolaires à l'appui. Amélioration attentionnelle pendant l'abstinence ne suffit pas à l'écarter. Bilan neuropsychologique demandé (délai d'environ 6 mois).",
+            "observationIds": [
+              "historique:o9"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e20",
+            "trackId": "t8",
+            "start": "2024-06-18",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Prescrite si besoin lors de la consultation psychiatrique du 18/06/2024.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e21",
+            "trackId": "t16",
+            "start": "2024-07-01",
+            "end": "2024-09",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Emploi saisonnier dans un camping à partir du 1er juillet 2024, travail tout l'été ; ressenti comme « les meilleurs mois depuis longtemps ».",
+            "observationIds": [
+              "historique:o9",
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e22",
+            "trackId": "t17",
+            "start": "2024-06-18",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Consultation psychiatrique du 18/06/2024 ; RDV prévu en septembre après la saison.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e23",
+            "trackId": "t18",
+            "start": "2024-09-17",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entretien CJC du 17/09/2024 avec éducatrice spécialisée. Projet de reprise de formation (BTS en alternance ?) évoqué.",
+            "observationIds": [
+              "historique:o10"
+            ]
+          }
+        ],
+        "undated": []
+      }
+    },
+    {
+      "model": "union",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t1",
+            "kind": "substance_use",
+            "label": "Cannabis"
+          },
+          {
+            "id": "t2",
+            "kind": "substance_use",
+            "label": "Alcool"
+          },
+          {
+            "id": "t3",
+            "kind": "substance_use",
+            "label": "Tabac"
+          },
+          {
+            "id": "t6",
+            "kind": "psychiatric",
+            "label": "Trouble panique avec agoraphobie probable"
+          },
+          {
+            "id": "t7",
+            "kind": "psychiatric",
+            "label": "Plaintes attentionnelles"
+          },
+          {
+            "id": "t16",
+            "kind": "psychiatric",
+            "label": "TDAH en cours d’évaluation"
+          },
+          {
+            "id": "t4",
+            "kind": "somatic",
+            "label": "Syndrome d'hyperémèse cannabinoïde"
+          },
+          {
+            "id": "t5",
+            "kind": "somatic",
+            "label": "Déshydratation modérée et hypokaliémie"
+          },
+          {
+            "id": "t8",
+            "kind": "medication",
+            "label": "Halopéridol"
+          },
+          {
+            "id": "t9",
+            "kind": "medication",
+            "label": "Hydroxyzine"
+          },
+          {
+            "id": "t10",
+            "kind": "therapeutic_psycho",
+            "label": "Suivi CJC"
+          },
+          {
+            "id": "t11",
+            "kind": "therapeutic_psycho",
+            "label": "TCC"
+          },
+          {
+            "id": "t12",
+            "kind": "therapeutic_psycho",
+            "label": "Passages aux urgences et UHCD"
+          },
+          {
+            "id": "t13",
+            "kind": "therapeutic_psycho",
+            "label": "Évaluation psychiatrique"
+          },
+          {
+            "id": "t17",
+            "kind": "therapeutic_psycho",
+            "label": "Consultation psychiatrique"
+          },
+          {
+            "id": "t19",
+            "kind": "therapeutic_psycho",
+            "label": "Entretien CJC"
+          },
+          {
+            "id": "t14",
+            "kind": "life_event",
+            "label": "Arrêt du BTS"
+          },
+          {
+            "id": "t15",
+            "kind": "life_event",
+            "label": "Départ du père"
+          },
+          {
+            "id": "t18",
+            "kind": "life_event",
+            "label": "Emploi saisonnier au camping"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2017",
+            "end": "2018",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Début rapporté « vers 14 ans » puis « depuis l'âge de 15 ans » ; usage quotidien depuis le confinement.",
+            "observationIds": [
+              "historique:o1",
+              "urgences:o1",
+              "historique:o2",
+              "historique:o5",
+              "historique:o8"
+            ],
+            "fromAge": {
+              "start": [
+                14,
+                15
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e2",
+            "trackId": "t1",
+            "start": "2024-02-15",
+            "end": "2024-04-01",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Au 15/02 : 6 à 8 joints par jour, puis 10 à 12 ou plus par jour en mars. Arrêt complet déclaré à partir du 1er avril.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "urgences:o1",
+              "historique:o5",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t1",
+            "start": "2024-04-01",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Abstinence rapportée pendant environ trois semaines ; reprise le 23 ou 24 avril.",
+            "observationIds": [
+              "historique:o6",
+              "historique:o7",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e4",
+            "trackId": "t1",
+            "start": "2024-04",
+            "end": null,
+            "ongoing": true,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Reprise le 23 ou 24 avril après une dispute et une séparation ; 2 à 3 joints le soir, notamment pour dormir. Usage encore rapporté le 21 mai.",
+            "observationIds": [
+              "historique:o7",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t1",
+            "start": "2024-04-01",
+            "end": "2024-04-22",
+            "ongoing": false,
+            "mode": "sevrage",
+            "lossOfControl": false,
+            "note": "Première semaine après l'arrêt : insomnie, rêves intenses, irritabilité et baisse de l'appétit, ensuite revenu.",
+            "observationIds": [
+              "historique:o6",
+              "historique:o5"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t2",
+            "start": "2024-03-26",
+            "end": null,
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Alcoolisations ponctuelles importantes le week-end, 5 à 8 verres ; auparavant décrites comme quelques verres en soirée.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o5"
+            ]
+          },
+          {
+            "id": "e7",
+            "trackId": "t3",
+            "start": "2024-03-17",
+            "end": null,
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Environ 10 cigarettes par jour, tabac roulé.",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o5",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t4",
+            "start": "2024-02-10",
+            "end": "2024-03-17",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Trois épisodes de vomissements avec passages aux urgences les 10/02, 02/03 et 17/03 ; soulagement par des douches très chaudes. Aucun vomissement rapporté après l'arrêt puis la reprise du cannabis.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "urgences:o1",
+              "historique:o5",
+              "historique:o6",
+              "historique:o7",
+              "historique:o8",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t5",
+            "start": "2024-03-17",
+            "end": "2024-03-18",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Constatées lors du passage aux urgences pour vomissements ; hydratation IV et supplémentation potassique.",
+            "observationIds": [
+              "urgences:o1"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t6",
+            "start": "2015",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Crises d'angoisse depuis le lycée, plus fréquentes depuis l'été précédent l'entretien du 12/03/2024 ; anxiété anticipatoire marquée. Anxiété améliorée sous TCC en mai.",
+            "observationIds": [
+              "historique:o3",
+              "historique:o5",
+              "historique:o6",
+              "historique:o8"
+            ],
+            "fromAge": {
+              "start": [
+                12,
+                17
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e11",
+            "trackId": "t7",
+            "start": "2009",
+            "end": "2024-05-21",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Difficultés anciennes rapportées ; amélioration nette pendant l'abstinence. TDAH non retenu après réévaluation.",
+            "observationIds": [
+              "historique:o3",
+              "historique:o8",
+              "historique:o5"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e12",
+            "trackId": "t8",
+            "start": "2024-03-17",
+            "end": "2024-03-17",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "2,5 mg IV aux urgences, avec amélioration nette.",
+            "observationIds": [
+              "urgences:o1"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t9",
+            "start": "2024-03-26",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "25 mg si besoin pour l'anxiété et le sommeil, maximum deux prises par jour ; prise 2 à 3 fois par semaine en mai.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t10",
+            "start": "2024-02-15",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entretiens et suivi CJC ; poursuite confirmée en mai.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "urgences:o1",
+              "historique:o4",
+              "historique:o7",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t11",
+            "start": "2024-03-12",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Suivi proposé puis poursuivi ; exercices de respiration et exposition graduée aux transports en commun.",
+            "observationIds": [
+              "historique:o3",
+              "historique:o5",
+              "historique:o6",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e16",
+            "trackId": "t12",
+            "start": "2024-02-10",
+            "end": "2024-03-18",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Trois passages pour vomissements ; séjour en UHCD du 17 au 18 mars.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "urgences:o1",
+              "historique:o4",
+              "historique:o5"
+            ]
+          },
+          {
+            "id": "e17",
+            "trackId": "t13",
+            "start": "2024-03-26",
+            "end": "2024-05-21",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Évaluation du trouble panique, du cannabis et des plaintes attentionnelles ; réévaluation en mai, TDAH non retenu.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e18",
+            "trackId": "t14",
+            "start": "2024-01",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Arrêt du BTS MCO en janvier, car elle n'arrivait plus à se lever.",
+            "observationIds": [
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e19",
+            "trackId": "t15",
+            "start": "2009",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Son père est parti quand elle avait 6 ans ; contacts rares.",
+            "observationIds": [
+              "historique:o3"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                6
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e20",
+            "trackId": "t16",
+            "start": "2009",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Difficultés rapportées dès le primaire ; TDAH non exclu. Bilan neuropsychologique demandé.",
+            "observationIds": [
+              "historique:o9"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e21",
+            "trackId": "t2",
+            "start": "2024-06",
+            "end": "2024-06",
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": false,
+            "note": "Alcoolisation importante lors d’un anniversaire début juin, avec trou noir.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e22",
+            "trackId": "t9",
+            "start": "2024-06-18",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Mentionnée comme traitement à prendre si besoin.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e23",
+            "trackId": "t17",
+            "start": "2024-06-18",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Évaluation du TDAH et prévention autour de l’alcool en soirée.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e24",
+            "trackId": "t18",
+            "start": "2024-07-01",
+            "end": "2024-09",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "A travaillé tout l’été au camping ; retour de saison en septembre.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e25",
+            "trackId": "t1",
+            "start": "2024-06-18",
+            "end": null,
+            "ongoing": true,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "2 joints par jour (06/2024). En 09/2024 : quelques joints le week-end seulement, aucun en semaine pendant la saison.",
+            "observationIds": [
+              "historique:o10",
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e26",
+            "trackId": "t19",
+            "start": "2024-09-17",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entretien après le retour de saison.",
+            "observationIds": [
+              "historique:o10"
+            ]
+          }
+        ],
+        "undated": []
+      }
+    }
+  ],
+  "elapsedMs": 82707,
+  "usage": {
+    "calls": 7,
+    "promptTokens": 26303,
+    "completionTokens": 17543,
+    "cost": 0.0637,
+    "by": {
+      "anthropic/claude-haiku-5.5 frise": 0.0048637,
+      "openai/gpt-6-luna frise": 0.0039056,
+      "anthropic/claude-sonnet-5.5 arbitrage": 0.054896
+    }
+  },
+  "rawAnswers": [
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": null,
+            "end": null,
+            "start_age": [
+              13,
+              15
+            ],
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Début « depuis la 3e (vers 14 ans) » (o1) ; « depuis l'âge de 15 ans » (o4). Quotidien depuis le confinement, 6-8 joints/j en février, 10-12/j en mars. Réduction après l'arrêt du 01/04, 2-3 joints le soir depuis fin avril (o9).",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o4",
+              "o6",
+              "o9"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2024-04-01",
+            "end": "2024-04-22",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Arrêt décidé le 01/04 (accord de la patiente). Nuits difficiles la première semaine, insomnie, rêves intenses, irritabilité, appétit coupé.",
+            "observation_ids": [
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2024-04",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Reprise « il y a une semaine » (le 23 ou le 24/04), après une dispute avec le petit ami ; 2-3 joints le soir « pour dormir ». Toujours présente à o9 (21/05).",
+            "observation_ids": [
+              "o8",
+              "o9"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2024-02-15",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Initialement « pas vraiment, quelques verres en soirée ». Réévalué le 26/03 : alcoolisations ponctuelles le week-end, 5 à 8 verres. Date de début réelle non précisée.",
+            "observation_ids": [
+              "o1",
+              "o6"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": "2024-02-15",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "10 cigarettes par jour (urgences 17/03), tabac roulé, une dizaine par jour (26/03). Continue de fumer à côté de la patiente (o7).",
+            "observation_ids": [
+              "o4",
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Trouble panique avec agoraphobie (probable)",
+            "start": null,
+            "end": null,
+            "start_age": "adolescence",
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Crises d'angoisse depuis le lycée, plus fréquentes depuis l'été 2023 (peur de mourir, palpitations, besoin de sortir des lieux clos). Pas d'épisode dépressif caractérisé ni d'idée suicidaire (26/03).",
+            "observation_ids": [
+              "o3",
+              "o6",
+              "o7",
+              "o9"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Difficultés attentionnelles (TDAH non retenu)",
+            "start": null,
+            "end": null,
+            "start_age": "enfance",
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Difficultés d'attention anciennes, « dans la lune » à l'école. TDAH évoqué puis non retenu le 21/05 : amélioration de la concentration pendant l'abstinence, troubles liés au cannabis.",
+            "observation_ids": [
+              "o3",
+              "o6",
+              "o9"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Syndrome d'hyperémèse cannabinoïde",
+            "start": "2024-02-10",
+            "end": "2024-03-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Passages aux urgences le 10/02, 02/03 et 17/03/2024 pour vomissements, soulagés par des douches chaudes. Hospitalisation UHCD du 17 au 18/03. Pas de récidive signalée au 21/05.",
+            "observation_ids": [
+              "o2",
+              "o4",
+              "o5",
+              "o6",
+              "o9"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Halopéridol",
+            "start": "2024-03-17",
+            "end": "2024-03-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Halopéridol 2,5 mg IV aux urgences, amélioration nette des vomissements.",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Hydroxyzine",
+            "start": "2024-03-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "25 mg si besoin, 2 par jour au maximum, pour l'anxiété et le sommeil. Prise 2-3 fois par semaine au 21/05.",
+            "observation_ids": [
+              "o6",
+              "o9"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi CJC (consultation jeunes consommateurs)",
+            "start": "2024-02-15",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Premier entretien le 15/02/2024 avec l'éducatrice spécialisée ; entretiens de suivi réguliers, prochaine revue prévue (o9).",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o5",
+              "o8",
+              "o9"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation UHCD",
+            "start": "2024-03-17",
+            "end": "2024-03-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Gardée une nuit en UHCD après passage aux urgences pour syndrome d'hyperémèse cannabinoïde.",
+            "observation_ids": [
+              "o4",
+              "o5"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "TCC (psychologue)",
+            "start": "2024-03-12",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Premier entretien psychologique le 12/03 ; TCC pour l'anxiété et le plan de réduction. Exercices de respiration et exposition graduée (avril).",
+            "observation_ids": [
+              "o3",
+              "o6",
+              "o7",
+              "o9"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Arrêt des études (BTS MCO)",
+            "start": "2024-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Arrêt du BTS MCO en janvier 2024 : « je n'arrivais plus à me lever ».",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Départ du père",
+            "start": null,
+            "end": null,
+            "start_age": 6,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Père « parti quand j'avais 6 ans », contacts rares. Relation conflictuelle avec la mère.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Dispute avec le petit ami (séparation)",
+            "start": "2024-04",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Dispute vers le 23-24/04, petit ami qu'elle a quitté ensuite. Le petit ami consommait aussi (o1). Contexte de la rechute.",
+            "observation_ids": [
+              "o1",
+              "o8"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2024-06-18",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "2 joints par jour (06/2024). En 09/2024 : quelques joints le week-end seulement, aucun en semaine pendant la saison.",
+            "observation_ids": [
+              "o10",
+              "o11"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2024-06",
+            "end": "2024-06",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": false,
+            "note": "Alcoolisation importante lors d'un anniversaire début juin, avec trou noir. Prévention autour de l'alcool en soirée abordée.",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "TDAH (en cours d'évaluation, non exclu)",
+            "start": null,
+            "end": null,
+            "start_age": "enfance",
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Difficultés dès le primaire, bulletins scolaires à l'appui. Amélioration attentionnelle pendant l'abstinence ne suffit pas à l'écarter. Bilan neuropsychologique demandé (délai d'environ 6 mois).",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Hydroxyzine",
+            "start": "2024-06-18",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Prescrite si besoin lors de la consultation psychiatrique du 18/06/2024.",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Vomissements",
+            "start": null,
+            "end": "2024-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Pas de vomissements depuis mars 2024 (date de début non précisée).",
+            "observation_ids": [
+              "o11"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Emploi saisonnier au camping",
+            "start": "2024-07-01",
+            "end": "2024-09",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Emploi saisonnier dans un camping à partir du 1er juillet 2024, travail tout l'été ; ressenti comme « les meilleurs mois depuis longtemps ».",
+            "observation_ids": [
+              "o10",
+              "o11"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Consultation psychiatrique",
+            "start": "2024-06-18",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Consultation psychiatrique du 18/06/2024 ; RDV prévu en septembre après la saison.",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Consultation jeunes consommateurs (CJC)",
+            "start": "2024-09-17",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entretien CJC du 17/09/2024 avec éducatrice spécialisée. Projet de reprise de formation (BTS en alternance ?) évoqué.",
+            "observation_ids": [
+              "o11"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": null,
+            "end": null,
+            "start_age": [
+              14,
+              15
+            ],
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Début rapporté « vers 14 ans » puis « depuis l'âge de 15 ans » ; usage quotidien depuis le confinement.",
+            "observation_ids": [
+              "o1",
+              "o4"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2024-02-15",
+            "end": "2024-04-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Au 15/02 : 6 à 8 joints par jour, puis 10 à 12 ou plus par jour en mars. Arrêt complet déclaré à partir du 1er avril.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o4",
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2024-04-01",
+            "end": "2024-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Abstinence rapportée pendant environ trois semaines ; reprise le 23 ou 24 avril.",
+            "observation_ids": [
+              "o7",
+              "o8",
+              "o9"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2024-04",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Reprise le 23 ou 24 avril après une dispute et une séparation ; 2 à 3 joints le soir, notamment pour dormir. Usage encore rapporté le 21 mai.",
+            "observation_ids": [
+              "o8",
+              "o9"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2024-04-01",
+            "end": "2024-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Première semaine après l'arrêt : insomnie, rêves intenses, irritabilité et baisse de l'appétit, ensuite revenu.",
+            "observation_ids": [
+              "o7"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2024-03-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Alcoolisations ponctuelles importantes le week-end, 5 à 8 verres ; auparavant décrites comme quelques verres en soirée.",
+            "observation_ids": [
+              "o1",
+              "o6"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": "2024-03-17",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Environ 10 cigarettes par jour, tabac roulé.",
+            "observation_ids": [
+              "o4",
+              "o6"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Syndrome d'hyperémèse cannabinoïde",
+            "start": "2024-02-10",
+            "end": "2024-03-17",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Trois épisodes de vomissements avec passages aux urgences les 10/02, 02/03 et 17/03 ; soulagement par des douches très chaudes. Aucun vomissement rapporté après l'arrêt puis la reprise du cannabis.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o4",
+              "o6",
+              "o7",
+              "o8",
+              "o9"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Déshydratation modérée et hypokaliémie",
+            "start": "2024-03-17",
+            "end": "2024-03-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Constatées lors du passage aux urgences pour vomissements ; hydratation IV et supplémentation potassique.",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Trouble panique avec agoraphobie probable",
+            "start": null,
+            "end": null,
+            "start_age": "adolescence",
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Crises d'angoisse depuis le lycée, plus fréquentes depuis l'été précédent l'entretien du 12/03/2024 ; anxiété anticipatoire marquée. Anxiété améliorée sous TCC en mai.",
+            "observation_ids": [
+              "o3",
+              "o6",
+              "o7",
+              "o9"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Plaintes attentionnelles",
+            "start": null,
+            "end": "2024-05-21",
+            "start_age": "enfance",
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Difficultés anciennes rapportées ; amélioration nette pendant l'abstinence. TDAH non retenu après réévaluation.",
+            "observation_ids": [
+              "o3",
+              "o9"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Halopéridol",
+            "start": "2024-03-17",
+            "end": "2024-03-17",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "2,5 mg IV aux urgences, avec amélioration nette.",
+            "observation_ids": [
+              "o4"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Hydroxyzine",
+            "start": "2024-03-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "25 mg si besoin pour l'anxiété et le sommeil, maximum deux prises par jour ; prise 2 à 3 fois par semaine en mai.",
+            "observation_ids": [
+              "o6",
+              "o9"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi CJC",
+            "start": "2024-02-15",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entretiens et suivi CJC ; poursuite confirmée en mai.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o4",
+              "o5",
+              "o8",
+              "o9"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "TCC",
+            "start": "2024-03-12",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Suivi proposé puis poursuivi ; exercices de respiration et exposition graduée aux transports en commun.",
+            "observation_ids": [
+              "o3",
+              "o6",
+              "o7",
+              "o9"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Passages aux urgences et UHCD",
+            "start": "2024-02-10",
+            "end": "2024-03-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Trois passages pour vomissements ; séjour en UHCD du 17 au 18 mars.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o4",
+              "o5",
+              "o6"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Évaluation psychiatrique",
+            "start": "2024-03-26",
+            "end": "2024-05-21",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Évaluation du trouble panique, du cannabis et des plaintes attentionnelles ; réévaluation en mai, TDAH non retenu.",
+            "observation_ids": [
+              "o6",
+              "o9"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Arrêt du BTS",
+            "start": "2024-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Arrêt du BTS MCO en janvier, car elle n'arrivait plus à se lever.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Départ du père",
+            "start": null,
+            "end": null,
+            "start_age": 6,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Son père est parti quand elle avait 6 ans ; contacts rares.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Séparation du petit ami",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Elle indique avoir quitté son petit ami après une dispute, avant la reprise du cannabis rapportée le 30/04.",
+            "observation_ids": [
+              "o8"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "psychiatric",
+            "label": "TDAH en cours d’évaluation",
+            "start": null,
+            "end": null,
+            "start_age": "enfance",
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Difficultés rapportées dès le primaire ; TDAH non exclu. Bilan neuropsychologique demandé.",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": null,
+            "end": "2024-06",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Deux joints par jour au 18/06/2024.",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2024-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": false,
+            "note": "Alcoolisation importante lors d’un anniversaire début juin, avec trou noir.",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Hydroxyzine",
+            "start": "2024-06-18",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Mentionnée comme traitement à prendre si besoin.",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Consultation psychiatrique",
+            "start": "2024-06-18",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Évaluation du TDAH et prévention autour de l’alcool en soirée.",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Emploi saisonnier au camping",
+            "start": "2024-07-01",
+            "end": "2024-09",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "A travaillé tout l’été au camping ; retour de saison en septembre.",
+            "observation_ids": [
+              "o10",
+              "o11"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2024-07",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Quelques joints le week-end seulement ; aucun en semaine pendant la saison.",
+            "observation_ids": [
+              "o11"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Vomissements",
+            "start": null,
+            "end": "2024-03",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Aucun vomissement depuis mars 2024.",
+            "observation_ids": [
+              "o11"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Entretien CJC",
+            "start": "2024-09-17",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entretien après le retour de saison.",
+            "observation_ids": [
+              "o11"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "schema": "arbitrage",
+      "content": {
+        "decisions": [
+          {
+            "id": "d1",
+            "verdict": "keep",
+            "variant": null,
+            "event": {
+              "kind": "substance_use",
+              "label": "Cannabis",
+              "start": null,
+              "end": "2024-04-01",
+              "start_age": 14,
+              "end_age": null,
+              "ongoing": false,
+              "mode": "usage",
+              "loss_of_control": false,
+              "note": "Début vers 14 ans (3e), quotidien depuis le confinement (le dossier note aussi quotidien depuis 15 ans aux urgences). 6 à 8 joints par jour le 15/02/2024, puis 10 à 12 ou plus en mars. Arrêt déclaré à partir du 1er avril 2024, confirmé le 09/04 (sevrage sans vomissements).",
+              "observation_ids": [
+                "o1",
+                "o2",
+                "o4",
+                "o6",
+                "o7"
+              ]
+            }
+          },
+          {
+            "id": "d3",
+            "verdict": "keep",
+            "variant": null,
+            "event": {
+              "kind": "substance_use",
+              "label": "Alcool",
+              "start": null,
+              "end": null,
+              "start_age": null,
+              "end_age": null,
+              "ongoing": true,
+              "mode": "usage",
+              "loss_of_control": false,
+              "note": "Au premier entretien : « pas vraiment », quelques verres en soirée. Réévalué le 26/03/2024 : alcoolisations ponctuelles importantes le week-end (5 à 8 verres). Date de début non précisée.",
+              "observation_ids": [
+                "o1",
+                "o6"
+              ]
+            }
+          },
+          {
+            "id": "d5",
+            "verdict": "keep",
+            "variant": 2,
+            "event": null
+          }
+        ]
+      }
+    },
+    {
+      "schema": "arbitrage",
+      "content": {
+        "decisions": [
+          {
+            "id": "d7",
+            "verdict": "keep",
+            "variant": 2,
+            "event": null
+          },
+          {
+            "id": "d4",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d6",
+            "verdict": "drop",
+            "variant": null,
+            "event": null
+          },
+          {
+            "id": "d2",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          }
+        ]
+      }
+    },
+    {
+      "schema": "arbitrage",
+      "content": {
+        "decisions": [
+          {
+            "id": "d8",
+            "verdict": "keep",
+            "variant": null,
+            "event": {
+              "kind": "substance_use",
+              "label": "Cannabis",
+              "start": null,
+              "end": null,
+              "start_age": null,
+              "end_age": null,
+              "ongoing": true,
+              "mode": "usage",
+              "loss_of_control": false,
+              "note": "2 joints par jour au 18/06/2024 ; en septembre 2024, quelques joints le week-end seulement, aucun en semaine pendant la saison estivale.",
+              "observation_ids": [
+                "o10",
+                "o11"
+              ]
+            }
+          },
+          {
+            "id": "d9",
+            "verdict": "keep",
+            "variant": 2,
+            "event": null
+          }
+        ]
+      }
+    }
+  ]
+}

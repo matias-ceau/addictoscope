@@ -1,0 +1,2312 @@
+{
+  "dossier": "antalgiques-opioides",
+  "model": "openai/gpt-6-luna + anthropic/claude-haiku-5.5, arbitre anthropic/claude-haiku-5.5",
+  "readers": [
+    "openai/gpt-6-luna",
+    "anthropic/claude-haiku-5.5"
+  ],
+  "arbiter": "anthropic/claude-haiku-5.5",
+  "observationsFrom": "bench/anthropic__claude-haiku-5.5",
+  "ranAt": "2026-11-06T00:35:22.437Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 4,
+      "redactions": {
+        "ETABLISSEMENT": 12,
+        "ADRESSE": 9,
+        "VILLE": 5,
+        "TEL": 5,
+        "PATIENT": 5,
+        "DOSSIER": 4,
+        "SOIGNANT": 18,
+        "PERSONNE": 4,
+        "NAISSANCE": 5,
+        "IPP": 4,
+        "PROCHE": 2
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 19
+      },
+      "end": {
+        "page": 0,
+        "line": 28
+      },
+      "date": "2025-10-28",
+      "kind": "psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Suivi à J14 de la première injection de buprénorphine LP mensuelle, bonne tolérance, pas de signe de manque, douleurs stables EVA 4, deuxième injection prévue le 11/11 et RDV en décembre."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 29
+      },
+      "end": {
+        "page": 0,
+        "line": 34
+      },
+      "date": "2025-10-14",
+      "kind": "entretien infirmier",
+      "authorRole": "IDE",
+      "summary": "Première injection sous-cutanée de buprénorphine LP 96 mg réalisée avec surveillance d'une heure sans incident, explications sur la prochaine injection, tabac toujours à 10 cigarettes par jour."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 35
+      },
+      "end": {
+        "page": 0,
+        "line": 47
+      },
+      "date": "2025-09-09",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Patiente triste après le départ de son fils pour ses études sans effondrement thymique, pas de reprise d'oxycodone, accord pour une buprénorphine LP injectable mensuelle, relais prévu le 14/10."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 48
+      },
+      "end": {
+        "page": 0,
+        "line": 57
+      },
+      "date": "2025-06-17",
+      "kind": "psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Thymie meilleure avec activité physique, reprise d'oxycodone en avril reconnue, buprénorphine diminuée à 14 mg/j à sa demande sans manque, RDV en septembre."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 58
+      },
+      "end": {
+        "page": 1,
+        "line": 29
+      },
+      "date": "2025-05-06",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Reprise d'oxycodone pendant trois jours mi-avril lors d'une poussée douloureuse, boîtes rapportées à la pharmacie, craving faible, plan de crise douleur écrit avec le CETD, buprénorphine maintenue à 16 mg."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 30
+      },
+      "end": {
+        "page": 1,
+        "line": 34
+      },
+      "date": "2025-03-11",
+      "kind": "entretien infirmier",
+      "authorRole": "IDE",
+      "summary": "Urines positives à la buprénorphine et négatives aux opiacés, oxycodone et benzodiazépines, pas d'alcool, tabac à 10 cigarettes par jour sans signe de manque."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 35
+      },
+      "end": {
+        "page": 1,
+        "line": 42
+      },
+      "date": "2025-01-21",
+      "kind": "somatique de suivi",
+      "authorRole": null,
+      "summary": "Compte rendu du CETD : lombalgie chronique post-arthrodèse et fibromyalgie, pas d'indication chirurgicale, programme de rééducation, avis favorable au maintien de la buprénorphine en deux prises."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 43
+      },
+      "end": {
+        "page": 1,
+        "line": 55
+      },
+      "date": "2024-11-26",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Épisode dépressif d'intensité moyenne probablement ancien, sans idées suicidaires, duloxétine débutée à 30 mg puis augmentée à 60 mg, orientation vers le CETD."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 56
+      },
+      "end": {
+        "page": 2,
+        "line": 22
+      },
+      "date": "2024-11-05",
+      "kind": "entretien social",
+      "authorRole": "Assistante sociale",
+      "summary": "Ancienne agent d'entretien licenciée pour inaptitude, indemnités chômage jusqu'en mars 2025, démarches de RQTH et de pension d'invalidité, revenu stable assuré par le mari chauffeur."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 23
+      },
+      "end": {
+        "page": 2,
+        "line": 33
+      },
+      "date": "2024-10-15",
+      "kind": "psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "À J15 de l'induction, buprénorphine 16 mg/j en deux prises avec douleurs EVA 6/10 sans oxycodone, deux comprimés de tramadol pris sans effet, tramadol déconseillé en association."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 34
+      },
+      "end": {
+        "page": 2,
+        "line": 43
+      },
+      "date": "2024-10-01",
+      "kind": "psychiatrique de suivi",
+      "authorRole": "Médecin",
+      "summary": "Induction de buprénorphine réalisée au CSAPA le 30/09 avec COWS à 13 puis dose ajustée, pas de manque au jour 2, kit de naloxone remis et formation du mari."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 44
+      },
+      "end": {
+        "page": 2,
+        "line": 49
+      },
+      "date": "2024-09-19",
+      "kind": "entretien infirmier",
+      "authorRole": "IDE",
+      "summary": "Préparation de l'induction avec explications sur le délai sans opioïde, urines positives à l'oxycodone et au tramadol, patiente déclarant prendre des antalgiques forts depuis cinq ans."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 50
+      },
+      "end": {
+        "page": 3,
+        "line": 32
+      },
+      "date": "2024-09-11",
+      "kind": "motif de l'évaluation",
+      "authorRole": null,
+      "summary": "Premier entretien après un passage aux urgences pour somnolence, chute et bradypnée nécessitant une naloxone par le SMUR, antécédents de lombalgie chronique et de fibromyalgie."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t4",
+        "kind": "substance_use",
+        "label": "Opioïdes"
+      },
+      {
+        "id": "t3",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif caractérisé"
+      },
+      {
+        "id": "t1",
+        "kind": "somatic",
+        "label": "Lombalgie chronique"
+      },
+      {
+        "id": "t6",
+        "kind": "medication",
+        "label": "Buprénorphine"
+      },
+      {
+        "id": "t7",
+        "kind": "medication",
+        "label": "Duloxétine"
+      },
+      {
+        "id": "t9",
+        "kind": "medication",
+        "label": "Naloxone"
+      },
+      {
+        "id": "t12",
+        "kind": "medication",
+        "label": "Buprénorphine LP injectable mensuelle"
+      },
+      {
+        "id": "t5",
+        "kind": "therapeutic_psycho",
+        "label": "CSAPA"
+      },
+      {
+        "id": "t10",
+        "kind": "therapeutic_psycho",
+        "label": "CETD (centre d'étude et de traitement de la douleur)"
+      },
+      {
+        "id": "t11",
+        "kind": "therapeutic_psycho",
+        "label": "Entretien avec l'assistante sociale"
+      },
+      {
+        "id": "t13",
+        "kind": "therapeutic_psycho",
+        "label": "Passage aux urgences"
+      },
+      {
+        "id": "t14",
+        "kind": "therapeutic_psycho",
+        "label": "Activité physique adaptée (APA)"
+      },
+      {
+        "id": "t2",
+        "kind": "life_event",
+        "label": "Licenciement pour inaptitude"
+      },
+      {
+        "id": "t8",
+        "kind": "life_event",
+        "label": "Départ du fils pour ses études"
+      },
+      {
+        "id": "t15",
+        "kind": "life_event",
+        "label": "Démarches RQTH et pension d'invalidité"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2021",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Lombalgie chronique après arthrodèse L4-L5 en 2021 ; douleurs persistantes.",
+        "observationIds": [
+          "historique:o13",
+          "historique:o11",
+          "historique:o10",
+          "historique:o8",
+          "historique:o7",
+          "historique:o5",
+          "historique:o4",
+          "historique:o1"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "2023-06",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Licenciée de son emploi d'agent d'entretien ; indemnités chômage jusqu'en mars 2025.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o8"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "2023-06",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Intensité moyenne, probablement depuis le licenciement ; thymie meilleure en juin 2025, sans effondrement thymique en septembre.",
+        "observationIds": [
+          "historique:o8",
+          "historique:o4",
+          "historique:o3",
+          "historique:o13"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e4",
+        "trackId": "t4",
+        "start": "2020",
+        "end": "2024-10-15",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Tramadol depuis 2020, puis oxycodone depuis 2021. Oxycodone prescrite à 60 mg/j, mais prises réelles jusqu'à environ 120 mg/j, avec prescriptions de plusieurs médecins et ajout de tramadol. Dernière oxycodone le 29/09/2024 ; prise de deux comprimés de tramadol le 15/10 « pour voir ». Usage décrit comme apaisant et permettant d'« oublier » ; trouble de l'usage sévère.",
+        "observationIds": [
+          "historique:o13",
+          "historique:o12",
+          "historique:o11",
+          "historique:o10"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e5",
+        "trackId": "t4",
+        "start": "2024-08-17",
+        "end": null,
+        "ongoing": false,
+        "mode": "intoxication",
+        "lossOfControl": true,
+        "note": "Somnolence, chute et bradypnée ; retrouvée par son fils et prise en charge par le SMUR avec naloxone.",
+        "observationIds": [
+          "historique:o13"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e6",
+        "trackId": "t5",
+        "start": "2024-09-11",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Premier entretien, préparation puis induction de buprénorphine ; suivi et délivrance coordonnée des opioïdes.",
+        "observationIds": [
+          "historique:o13",
+          "historique:o12",
+          "historique:o11",
+          "historique:o10",
+          "historique:o8",
+          "historique:o5",
+          "historique:o4",
+          "historique:o3",
+          "historique:o2",
+          "historique:o1"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e7",
+        "trackId": "t6",
+        "start": "2024-09-30",
+        "end": "2025-10-13",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Induction au CSAPA après dernière prise d'oxycodone le 29/09 ; 16 mg/j, puis 14 mg/j à partir du 01/06/2025. Relais par injection sous-cutanée LP mensuelle 96 mg le 14/10/2025.",
+        "observationIds": [
+          "historique:o13",
+          "historique:o11",
+          "historique:o10",
+          "historique:o8",
+          "historique:o7",
+          "historique:o6",
+          "historique:o5",
+          "historique:o4",
+          "historique:o3",
+          "historique:o2",
+          "historique:o1"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e8",
+        "trackId": "t7",
+        "start": "2024-11-26",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Initiée à 30 mg/j, avec augmentation prévue à 60 mg à J15 ; 60 mg/j rapportés en juin et septembre 2025.",
+        "observationIds": [
+          "historique:o8",
+          "historique:o4",
+          "historique:o3"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e9",
+        "trackId": "t4",
+        "start": "2025-04",
+        "end": "2025-04",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Reprise d'oxycodone lors d'une poussée douloureuse, rapportée comme ayant duré trois jours ; en juin, la patiente dit en avoir pris « une seule fois ». A rapporté les boîtes à la pharmacie ; craving faible ensuite.",
+        "observationIds": [
+          "historique:o5",
+          "historique:o4",
+          "historique:o3"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e10",
+        "trackId": "t8",
+        "start": "2025-09-01",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Départ à Toulouse ; tristesse attendue et impression que « la maison est vide », sans effondrement thymique.",
+        "observationIds": [
+          "historique:o3"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e11",
+        "trackId": "t9",
+        "start": "2024-10-01",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Kit remis et formation de son mari.",
+        "observationIds": [
+          "historique:o11"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e12",
+        "trackId": "t10",
+        "start": "2024-11-26",
+        "end": "2025-01-13",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Orientation le 26/11/2024, consultation le 13/01/2025. Programme : activité physique adaptée, TENS, balnéothérapie. Avis favorable au maintien de la buprénorphine en 2 prises. Plan de crise douleur écrit.",
+        "observationIds": [
+          "historique:o8",
+          "historique:o7",
+          "historique:o5"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e13",
+        "trackId": "t11",
+        "start": "2024-11-05",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Entretien social ; démarches de RQTH et de demande de pension d'invalidité.",
+        "observationIds": [
+          "historique:o9"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e14",
+        "trackId": "t4",
+        "start": "2024-09-30",
+        "end": "2024-10-02",
+        "ongoing": false,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Induction par buprénorphine au CSAPA le 30/09/2024, COWS à 13 à l'arrivée, 4 mg puis 4 mg à H2, J2 à 12 mg. Nausées légères, pas de manque au J1.",
+        "observationIds": [
+          "historique:o11"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e15",
+        "trackId": "t12",
+        "start": "2025-10-14",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Première injection sous-cutanée 96 mg le 14/10/2025 (abdomen), bien tolérée. Deuxième injection prévue le 11/11/2025.",
+        "observationIds": [
+          "historique:o3",
+          "historique:o2",
+          "historique:o1"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e16",
+        "trackId": "t13",
+        "start": "2024-08-17",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Passage aux urgences après intoxication opioïde, adressée ensuite par le MG.",
+        "observationIds": [
+          "historique:o13"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e17",
+        "trackId": "t14",
+        "start": "2025-01-13",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Marche 30 min par jour et piscine 1 fois par semaine en 06/2025.",
+        "observationIds": [
+          "historique:o7",
+          "historique:o4"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e18",
+        "trackId": "t15",
+        "start": "2024-11-05",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "RQTH et demande de pension d'invalidité auprès de la CPAM. Le mari (chauffeur) est le seul revenu stable.",
+        "observationIds": [
+          "historique:o9"
+        ],
+        "consensus": "arbitrated"
+      }
+    ],
+    "undated": []
+  },
+  "consensus": {
+    "readers": 2,
+    "agreed": 10,
+    "disputed": 10,
+    "kept": 10,
+    "dropped": 0,
+    "unarbitrated": 0
+  },
+  "readings": [
+    {
+      "model": "openai/gpt-6-luna",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t4",
+            "kind": "substance_use",
+            "label": "Opioïdes"
+          },
+          {
+            "id": "t6",
+            "kind": "substance_use",
+            "label": "Tabac"
+          },
+          {
+            "id": "t3",
+            "kind": "psychiatric",
+            "label": "Épisode dépressif caractérisé"
+          },
+          {
+            "id": "t1",
+            "kind": "somatic",
+            "label": "Lombalgie chronique"
+          },
+          {
+            "id": "t9",
+            "kind": "somatic",
+            "label": "Fibromyalgie"
+          },
+          {
+            "id": "t7",
+            "kind": "medication",
+            "label": "Buprénorphine"
+          },
+          {
+            "id": "t8",
+            "kind": "medication",
+            "label": "Naloxone"
+          },
+          {
+            "id": "t11",
+            "kind": "medication",
+            "label": "Duloxétine"
+          },
+          {
+            "id": "t5",
+            "kind": "therapeutic_psycho",
+            "label": "CSAPA"
+          },
+          {
+            "id": "t10",
+            "kind": "therapeutic_psycho",
+            "label": "CETD"
+          },
+          {
+            "id": "t12",
+            "kind": "therapeutic_psycho",
+            "label": "Entretien avec l'assistante sociale"
+          },
+          {
+            "id": "t2",
+            "kind": "life_event",
+            "label": "Licenciement pour inaptitude"
+          },
+          {
+            "id": "t13",
+            "kind": "life_event",
+            "label": "Départ du fils pour ses études"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2021",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Lombalgie chronique après arthrodèse L4-L5 en 2021 ; douleurs persistantes.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o11",
+              "historique:o10",
+              "historique:o8",
+              "historique:o7",
+              "historique:o5",
+              "historique:o4",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e2",
+            "trackId": "t2",
+            "start": "2023-06",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Licenciée de son emploi d'agent d'entretien ; indemnités chômage jusqu'en mars 2025.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t3",
+            "start": "2023-06",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Intensité moyenne, probablement depuis le licenciement ; thymie meilleure en juin 2025, sans effondrement thymique en septembre.",
+            "observationIds": [
+              "historique:o8",
+              "historique:o4",
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e4",
+            "trackId": "t4",
+            "start": "2020",
+            "end": "2024-10-15",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": true,
+            "note": "Tramadol depuis 2020, puis oxycodone depuis 2021. Oxycodone prescrite à 60 mg/j, mais prises réelles jusqu'à environ 120 mg/j, avec prescriptions de plusieurs médecins et ajout de tramadol. Dernière oxycodone le 29/09/2024 ; prise de deux comprimés de tramadol le 15/10 « pour voir ». Usage décrit comme apaisant et permettant d'« oublier » ; trouble de l'usage sévère.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o12",
+              "historique:o11",
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t4",
+            "start": "2024-08-17",
+            "end": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": true,
+            "note": "Somnolence, chute et bradypnée ; retrouvée par son fils et prise en charge par le SMUR avec naloxone.",
+            "observationIds": [
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t5",
+            "start": "2024-09-11",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Premier entretien, préparation puis induction de buprénorphine ; suivi et délivrance coordonnée des opioïdes.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o12",
+              "historique:o11",
+              "historique:o10",
+              "historique:o8",
+              "historique:o5",
+              "historique:o4",
+              "historique:o3",
+              "historique:o2",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e7",
+            "trackId": "t6",
+            "start": "2024-09-11",
+            "end": null,
+            "ongoing": true,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "10 cigarettes par jour ; pas prête à arrêter en mars 2025.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o6",
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t7",
+            "start": "2024-09-30",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Induction au CSAPA après dernière prise d'oxycodone le 29/09 ; 16 mg/j, puis 14 mg/j à partir du 01/06/2025. Relais par injection sous-cutanée LP mensuelle 96 mg le 14/10/2025.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o11",
+              "historique:o10",
+              "historique:o8",
+              "historique:o7",
+              "historique:o6",
+              "historique:o5",
+              "historique:o4",
+              "historique:o3",
+              "historique:o2",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t8",
+            "start": "2024-10-01",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Kit remis et formation de son mari.",
+            "observationIds": [
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t9",
+            "start": "2025-01-13",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Syndrome fibromyalgique mentionné au compte rendu du CETD ; fibromyalgie évoquée antérieurement.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o7"
+            ]
+          },
+          {
+            "id": "e11",
+            "trackId": "t10",
+            "start": "2025-01-13",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Avis sans indication chirurgicale ; programme d'activité physique adaptée, TENS et balnéothérapie, puis plan de crise douleur écrit.",
+            "observationIds": [
+              "historique:o8",
+              "historique:o7",
+              "historique:o5",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e12",
+            "trackId": "t11",
+            "start": "2024-11-26",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Initiée à 30 mg/j, avec augmentation prévue à 60 mg à J15 ; 60 mg/j rapportés en juin et septembre 2025.",
+            "observationIds": [
+              "historique:o8",
+              "historique:o4",
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t12",
+            "start": "2024-11-05",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entretien social ; démarches de RQTH et de demande de pension d'invalidité.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t4",
+            "start": "2025-04",
+            "end": "2025-04",
+            "ongoing": false,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Reprise d'oxycodone lors d'une poussée douloureuse, rapportée comme ayant duré trois jours ; en juin, la patiente dit en avoir pris « une seule fois ». A rapporté les boîtes à la pharmacie ; craving faible ensuite.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t13",
+            "start": "2025-09-01",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Départ à Toulouse ; tristesse attendue et impression que « la maison est vide », sans effondrement thymique.",
+            "observationIds": [
+              "historique:o3"
+            ]
+          }
+        ],
+        "undated": []
+      }
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t1",
+            "kind": "substance_use",
+            "label": "Opioïdes"
+          },
+          {
+            "id": "t3",
+            "kind": "psychiatric",
+            "label": "Épisode dépressif caractérisé"
+          },
+          {
+            "id": "t2",
+            "kind": "somatic",
+            "label": "Lombalgie chronique post-arthrodèse L4-L5"
+          },
+          {
+            "id": "t4",
+            "kind": "medication",
+            "label": "Buprénorphine sublinguale (BHD)"
+          },
+          {
+            "id": "t5",
+            "kind": "medication",
+            "label": "Buprénorphine LP injectable mensuelle"
+          },
+          {
+            "id": "t6",
+            "kind": "medication",
+            "label": "Duloxétine"
+          },
+          {
+            "id": "t7",
+            "kind": "therapeutic_psycho",
+            "label": "Prise en charge CSAPA"
+          },
+          {
+            "id": "t8",
+            "kind": "therapeutic_psycho",
+            "label": "Passage aux urgences"
+          },
+          {
+            "id": "t9",
+            "kind": "therapeutic_psycho",
+            "label": "CETD (centre d'étude et de traitement de la douleur)"
+          },
+          {
+            "id": "t10",
+            "kind": "therapeutic_psycho",
+            "label": "Activité physique adaptée (APA)"
+          },
+          {
+            "id": "t11",
+            "kind": "life_event",
+            "label": "Licenciement pour inaptitude"
+          },
+          {
+            "id": "t12",
+            "kind": "life_event",
+            "label": "Démarches RQTH et pension d'invalidité"
+          },
+          {
+            "id": "t13",
+            "kind": "life_event",
+            "label": "Départ du fils pour ses études"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2020",
+            "end": "2024-09-29",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Tramadol depuis 2020, oxycodone depuis la chirurgie (2021). Prescrit 60 mg/j, en réalité environ 120 mg/j d'oxycodone LP/LI plus ordonnances des urgences et d'un second médecin, et tramadol. Effet recherché « ça m'apaise », prises le soir pour « oublier ». Dernière prise d'oxycodone le 29/09/2024.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o12",
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e2",
+            "trackId": "t1",
+            "start": "2024-08-17",
+            "end": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": false,
+            "note": "Somnolence, chute, bradypnée, retrouvée par son fils, naloxone par le SMUR, passage aux urgences le 17/08/2024.",
+            "observationIds": [
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t1",
+            "start": "2024-09-30",
+            "end": "2024-10-02",
+            "ongoing": false,
+            "mode": "sevrage",
+            "lossOfControl": false,
+            "note": "Induction par buprénorphine au CSAPA le 30/09/2024, COWS à 13 à l'arrivée, 4 mg puis 4 mg à H2, J2 à 12 mg. Nausées légères, pas de manque au J1.",
+            "observationIds": [
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e4",
+            "trackId": "t1",
+            "start": "2025-04",
+            "end": "2025-04",
+            "ongoing": false,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Reprise d'oxycodone pendant 3 jours mi-avril 2025 lors d'une poussée douloureuse, avec d'anciennes boîtes retrouvées. Déclarée « une seule fois » le 17/06/2025. Pas de surdosage, craving faible depuis.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o4",
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t2",
+            "start": "2021",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Arthrodèse L4-L5 en 2021. Pas d'indication chirurgicale selon le CETD (01/2025). Douleur EVA 4 à 6/10.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o7",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t3",
+            "start": "2023-06",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Thymie basse, anhédonie, fatigue, culpabilité (11/2024), d'intensité moyenne, probablement ancien, depuis le licenciement. Pas d'idées suicidaires. Thymie meilleure en 06/2025, pas d'effondrement en 09/2025.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o8",
+              "historique:o4",
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e7",
+            "trackId": "t4",
+            "start": "2024-09-30",
+            "end": "2025-10-13",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Induction le 30/09/2024 à 16 mg/j en 2 prises, réduite à 14 mg/j à sa demande depuis le 01/06/2025. Relais par injection mensuelle, dernière prise le 13/10/2025.",
+            "observationIds": [
+              "historique:o11",
+              "historique:o10",
+              "historique:o5",
+              "historique:o4",
+              "historique:o3",
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t5",
+            "start": "2025-10-14",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Première injection sous-cutanée 96 mg le 14/10/2025 (abdomen), bien tolérée. Deuxième injection prévue le 11/11/2025.",
+            "observationIds": [
+              "historique:o3",
+              "historique:o2",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t6",
+            "start": "2024-11-26",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "30 mg puis 60 mg à J15 (douleur et thymie). 60 mg maintenue en 06/2025 et 09/2025.",
+            "observationIds": [
+              "historique:o8",
+              "historique:o4",
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t7",
+            "start": "2024-09-11",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Premier entretien le 11/09/2024, puis suivi psychiatrique. Unique prescripteur d'opioïdes, kit de naloxone remis avec formation du mari.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o11",
+              "historique:o10",
+              "historique:o5",
+              "historique:o3",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e11",
+            "trackId": "t8",
+            "start": "2024-08-17",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Passage aux urgences après intoxication opioïde, adressée ensuite par le MG.",
+            "observationIds": [
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e12",
+            "trackId": "t9",
+            "start": "2024-11-26",
+            "end": "2025-01-13",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Orientation le 26/11/2024, consultation le 13/01/2025. Programme : activité physique adaptée, TENS, balnéothérapie. Avis favorable au maintien de la buprénorphine en 2 prises. Plan de crise douleur écrit.",
+            "observationIds": [
+              "historique:o8",
+              "historique:o7",
+              "historique:o5"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t10",
+            "start": "2025-01-13",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Marche 30 min par jour et piscine 1 fois par semaine en 06/2025.",
+            "observationIds": [
+              "historique:o7",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t11",
+            "start": "2023-06",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Ancienne agent d'entretien, licenciée pour inaptitude en juin 2023. Indemnités chômage jusqu'en mars 2025.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t12",
+            "start": "2024-11-05",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "RQTH et demande de pension d'invalidité auprès de la CPAM. Le mari (chauffeur) est le seul revenu stable.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e16",
+            "trackId": "t13",
+            "start": "2025-09-01",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Le fils est parti pour ses études à Toulouse. Tristesse attendue, « la maison est vide ».",
+            "observationIds": [
+              "historique:o3"
+            ]
+          }
+        ],
+        "undated": []
+      }
+    },
+    {
+      "model": "union",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t4",
+            "kind": "substance_use",
+            "label": "Opioïdes"
+          },
+          {
+            "id": "t6",
+            "kind": "substance_use",
+            "label": "Tabac"
+          },
+          {
+            "id": "t3",
+            "kind": "psychiatric",
+            "label": "Épisode dépressif caractérisé"
+          },
+          {
+            "id": "t1",
+            "kind": "somatic",
+            "label": "Lombalgie chronique"
+          },
+          {
+            "id": "t9",
+            "kind": "somatic",
+            "label": "Fibromyalgie"
+          },
+          {
+            "id": "t7",
+            "kind": "medication",
+            "label": "Buprénorphine"
+          },
+          {
+            "id": "t8",
+            "kind": "medication",
+            "label": "Naloxone"
+          },
+          {
+            "id": "t11",
+            "kind": "medication",
+            "label": "Duloxétine"
+          },
+          {
+            "id": "t14",
+            "kind": "medication",
+            "label": "Buprénorphine LP injectable mensuelle"
+          },
+          {
+            "id": "t5",
+            "kind": "therapeutic_psycho",
+            "label": "CSAPA"
+          },
+          {
+            "id": "t10",
+            "kind": "therapeutic_psycho",
+            "label": "CETD"
+          },
+          {
+            "id": "t12",
+            "kind": "therapeutic_psycho",
+            "label": "Entretien avec l'assistante sociale"
+          },
+          {
+            "id": "t15",
+            "kind": "therapeutic_psycho",
+            "label": "Passage aux urgences"
+          },
+          {
+            "id": "t16",
+            "kind": "therapeutic_psycho",
+            "label": "Activité physique adaptée (APA)"
+          },
+          {
+            "id": "t2",
+            "kind": "life_event",
+            "label": "Licenciement pour inaptitude"
+          },
+          {
+            "id": "t13",
+            "kind": "life_event",
+            "label": "Départ du fils pour ses études"
+          },
+          {
+            "id": "t17",
+            "kind": "life_event",
+            "label": "Démarches RQTH et pension d'invalidité"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2021",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Lombalgie chronique après arthrodèse L4-L5 en 2021 ; douleurs persistantes.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o11",
+              "historique:o10",
+              "historique:o8",
+              "historique:o7",
+              "historique:o5",
+              "historique:o4",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e2",
+            "trackId": "t2",
+            "start": "2023-06",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Licenciée de son emploi d'agent d'entretien ; indemnités chômage jusqu'en mars 2025.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o8"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t3",
+            "start": "2023-06",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Intensité moyenne, probablement depuis le licenciement ; thymie meilleure en juin 2025, sans effondrement thymique en septembre.",
+            "observationIds": [
+              "historique:o8",
+              "historique:o4",
+              "historique:o3",
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e4",
+            "trackId": "t4",
+            "start": "2020",
+            "end": "2024-10-15",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": true,
+            "note": "Tramadol depuis 2020, puis oxycodone depuis 2021. Oxycodone prescrite à 60 mg/j, mais prises réelles jusqu'à environ 120 mg/j, avec prescriptions de plusieurs médecins et ajout de tramadol. Dernière oxycodone le 29/09/2024 ; prise de deux comprimés de tramadol le 15/10 « pour voir ». Usage décrit comme apaisant et permettant d'« oublier » ; trouble de l'usage sévère.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o12",
+              "historique:o11",
+              "historique:o10"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t4",
+            "start": "2024-08-17",
+            "end": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": true,
+            "note": "Somnolence, chute et bradypnée ; retrouvée par son fils et prise en charge par le SMUR avec naloxone.",
+            "observationIds": [
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t5",
+            "start": "2024-09-11",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Premier entretien, préparation puis induction de buprénorphine ; suivi et délivrance coordonnée des opioïdes.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o12",
+              "historique:o11",
+              "historique:o10",
+              "historique:o8",
+              "historique:o5",
+              "historique:o4",
+              "historique:o3",
+              "historique:o2",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e7",
+            "trackId": "t6",
+            "start": "2024-09-11",
+            "end": null,
+            "ongoing": true,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "10 cigarettes par jour ; pas prête à arrêter en mars 2025.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o6",
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t7",
+            "start": "2024-09-30",
+            "end": "2025-10-13",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Induction au CSAPA après dernière prise d'oxycodone le 29/09 ; 16 mg/j, puis 14 mg/j à partir du 01/06/2025. Relais par injection sous-cutanée LP mensuelle 96 mg le 14/10/2025.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o11",
+              "historique:o10",
+              "historique:o8",
+              "historique:o7",
+              "historique:o6",
+              "historique:o5",
+              "historique:o4",
+              "historique:o3",
+              "historique:o2",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t8",
+            "start": "2024-10-01",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Kit remis et formation de son mari.",
+            "observationIds": [
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t9",
+            "start": "2025-01-13",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Syndrome fibromyalgique mentionné au compte rendu du CETD ; fibromyalgie évoquée antérieurement.",
+            "observationIds": [
+              "historique:o13",
+              "historique:o7"
+            ]
+          },
+          {
+            "id": "e11",
+            "trackId": "t10",
+            "start": "2025-01-13",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Avis sans indication chirurgicale ; programme d'activité physique adaptée, TENS et balnéothérapie, puis plan de crise douleur écrit.",
+            "observationIds": [
+              "historique:o8",
+              "historique:o7",
+              "historique:o5",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e12",
+            "trackId": "t11",
+            "start": "2024-11-26",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Initiée à 30 mg/j, avec augmentation prévue à 60 mg à J15 ; 60 mg/j rapportés en juin et septembre 2025.",
+            "observationIds": [
+              "historique:o8",
+              "historique:o4",
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t12",
+            "start": "2024-11-05",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entretien social ; démarches de RQTH et de demande de pension d'invalidité.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t4",
+            "start": "2025-04",
+            "end": "2025-04",
+            "ongoing": false,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Reprise d'oxycodone lors d'une poussée douloureuse, rapportée comme ayant duré trois jours ; en juin, la patiente dit en avoir pris « une seule fois ». A rapporté les boîtes à la pharmacie ; craving faible ensuite.",
+            "observationIds": [
+              "historique:o5",
+              "historique:o4",
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t13",
+            "start": "2025-09-01",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Départ à Toulouse ; tristesse attendue et impression que « la maison est vide », sans effondrement thymique.",
+            "observationIds": [
+              "historique:o3"
+            ]
+          },
+          {
+            "id": "e16",
+            "trackId": "t4",
+            "start": "2024-09-30",
+            "end": "2024-10-02",
+            "ongoing": false,
+            "mode": "sevrage",
+            "lossOfControl": false,
+            "note": "Induction par buprénorphine au CSAPA le 30/09/2024, COWS à 13 à l'arrivée, 4 mg puis 4 mg à H2, J2 à 12 mg. Nausées légères, pas de manque au J1.",
+            "observationIds": [
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e17",
+            "trackId": "t14",
+            "start": "2025-10-14",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Première injection sous-cutanée 96 mg le 14/10/2025 (abdomen), bien tolérée. Deuxième injection prévue le 11/11/2025.",
+            "observationIds": [
+              "historique:o3",
+              "historique:o2",
+              "historique:o1"
+            ]
+          },
+          {
+            "id": "e18",
+            "trackId": "t15",
+            "start": "2024-08-17",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Passage aux urgences après intoxication opioïde, adressée ensuite par le MG.",
+            "observationIds": [
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e19",
+            "trackId": "t16",
+            "start": "2025-01-13",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Marche 30 min par jour et piscine 1 fois par semaine en 06/2025.",
+            "observationIds": [
+              "historique:o7",
+              "historique:o4"
+            ]
+          },
+          {
+            "id": "e20",
+            "trackId": "t17",
+            "start": "2024-11-05",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "RQTH et demande de pension d'invalidité auprès de la CPAM. Le mari (chauffeur) est le seul revenu stable.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          }
+        ],
+        "undated": []
+      }
+    }
+  ],
+  "elapsedMs": 40193,
+  "usage": {
+    "calls": 3,
+    "promptTokens": 13744,
+    "completionTokens": 12410,
+    "cost": 0.0076,
+    "by": {
+      "anthropic/claude-haiku-5.5 frise": 0.0036968,
+      "openai/gpt-6-luna frise": 0.002053425,
+      "anthropic/claude-haiku-5.5 arbitrage": 0.0018965
+    }
+  },
+  "rawAnswers": [
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes",
+            "start": "2020",
+            "end": "2024-09-29",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Tramadol depuis 2020, oxycodone depuis la chirurgie (2021). Prescrit 60 mg/j, en réalité environ 120 mg/j d'oxycodone LP/LI plus ordonnances des urgences et d'un second médecin, et tramadol. Effet recherché « ça m'apaise », prises le soir pour « oublier ». Dernière prise d'oxycodone le 29/09/2024.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes",
+            "start": "2024-08-17",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": false,
+            "note": "Somnolence, chute, bradypnée, retrouvée par son fils, naloxone par le SMUR, passage aux urgences le 17/08/2024.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes",
+            "start": "2024-09-30",
+            "end": "2024-10-02",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Induction par buprénorphine au CSAPA le 30/09/2024, COWS à 13 à l'arrivée, 4 mg puis 4 mg à H2, J2 à 12 mg. Nausées légères, pas de manque au J1.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes",
+            "start": "2025-04",
+            "end": "2025-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Reprise d'oxycodone pendant 3 jours mi-avril 2025 lors d'une poussée douloureuse, avec d'anciennes boîtes retrouvées. Déclarée « une seule fois » le 17/06/2025. Pas de surdosage, craving faible depuis.",
+            "observation_ids": [
+              "o9",
+              "o10",
+              "o11"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "10 cigarettes par jour, pas prête à arrêter.",
+            "observation_ids": [
+              "o1",
+              "o8",
+              "o12"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Lombalgie chronique post-arthrodèse L4-L5",
+            "start": "2021",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Arthrodèse L4-L5 en 2021. Pas d'indication chirurgicale selon le CETD (01/2025). Douleur EVA 4 à 6/10.",
+            "observation_ids": [
+              "o1",
+              "o7",
+              "o13"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Syndrome fibromyalgique",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Fibromyalgie évoquée à la première évaluation, confirmée par le CETD en 01/2025.",
+            "observation_ids": [
+              "o1",
+              "o7"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif caractérisé",
+            "start": "2023-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Thymie basse, anhédonie, fatigue, culpabilité (11/2024), d'intensité moyenne, probablement ancien, depuis le licenciement. Pas d'idées suicidaires. Thymie meilleure en 06/2025, pas d'effondrement en 09/2025.",
+            "observation_ids": [
+              "o1",
+              "o6",
+              "o10",
+              "o11"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Buprénorphine sublinguale (BHD)",
+            "start": "2024-09-30",
+            "end": "2025-10-13",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Induction le 30/09/2024 à 16 mg/j en 2 prises, réduite à 14 mg/j à sa demande depuis le 01/06/2025. Relais par injection mensuelle, dernière prise le 13/10/2025.",
+            "observation_ids": [
+              "o3",
+              "o4",
+              "o9",
+              "o10",
+              "o11",
+              "o12"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Buprénorphine LP injectable mensuelle",
+            "start": "2025-10-14",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Première injection sous-cutanée 96 mg le 14/10/2025 (abdomen), bien tolérée. Deuxième injection prévue le 11/11/2025.",
+            "observation_ids": [
+              "o11",
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Duloxétine",
+            "start": "2024-11-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "30 mg puis 60 mg à J15 (douleur et thymie). 60 mg maintenue en 06/2025 et 09/2025.",
+            "observation_ids": [
+              "o6",
+              "o10",
+              "o11"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Prise en charge CSAPA",
+            "start": "2024-09-11",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Premier entretien le 11/09/2024, puis suivi psychiatrique. Unique prescripteur d'opioïdes, kit de naloxone remis avec formation du mari.",
+            "observation_ids": [
+              "o1",
+              "o3",
+              "o4",
+              "o9",
+              "o11",
+              "o13"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Passage aux urgences",
+            "start": "2024-08-17",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Passage aux urgences après intoxication opioïde, adressée ensuite par le MG.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "CETD (centre d'étude et de traitement de la douleur)",
+            "start": "2024-11-26",
+            "end": "2025-01-13",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Orientation le 26/11/2024, consultation le 13/01/2025. Programme : activité physique adaptée, TENS, balnéothérapie. Avis favorable au maintien de la buprénorphine en 2 prises. Plan de crise douleur écrit.",
+            "observation_ids": [
+              "o6",
+              "o7",
+              "o9"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Activité physique adaptée (APA)",
+            "start": "2025-01-13",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Marche 30 min par jour et piscine 1 fois par semaine en 06/2025.",
+            "observation_ids": [
+              "o7",
+              "o10"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Licenciement pour inaptitude",
+            "start": "2023-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Ancienne agent d'entretien, licenciée pour inaptitude en juin 2023. Indemnités chômage jusqu'en mars 2025.",
+            "observation_ids": [
+              "o5",
+              "o6"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Démarches RQTH et pension d'invalidité",
+            "start": "2024-11-05",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "RQTH et demande de pension d'invalidité auprès de la CPAM. Le mari (chauffeur) est le seul revenu stable.",
+            "observation_ids": [
+              "o5"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Départ du fils pour ses études",
+            "start": "2025-09-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Le fils est parti pour ses études à Toulouse. Tristesse attendue, « la maison est vide ».",
+            "observation_ids": [
+              "o11"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "somatic",
+            "label": "Lombalgie chronique",
+            "start": "2021",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Lombalgie chronique après arthrodèse L4-L5 en 2021 ; douleurs persistantes.",
+            "observation_ids": [
+              "o1",
+              "o3",
+              "o4",
+              "o6",
+              "o7",
+              "o9",
+              "o10",
+              "o13"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Licenciement pour inaptitude",
+            "start": "2023-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Licenciée de son emploi d'agent d'entretien ; indemnités chômage jusqu'en mars 2025.",
+            "observation_ids": [
+              "o5",
+              "o6"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif caractérisé",
+            "start": "2023-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Intensité moyenne, probablement depuis le licenciement ; thymie meilleure en juin 2025, sans effondrement thymique en septembre.",
+            "observation_ids": [
+              "o6",
+              "o10",
+              "o11"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes",
+            "start": "2020",
+            "end": "2024-10-15",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Tramadol depuis 2020, puis oxycodone depuis 2021. Oxycodone prescrite à 60 mg/j, mais prises réelles jusqu'à environ 120 mg/j, avec prescriptions de plusieurs médecins et ajout de tramadol. Dernière oxycodone le 29/09/2024 ; prise de deux comprimés de tramadol le 15/10 « pour voir ». Usage décrit comme apaisant et permettant d'« oublier » ; trouble de l'usage sévère.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3",
+              "o4"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes",
+            "start": "2024-08-17",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": true,
+            "note": "Somnolence, chute et bradypnée ; retrouvée par son fils et prise en charge par le SMUR avec naloxone.",
+            "observation_ids": [
+              "o1"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "CSAPA",
+            "start": "2024-09-11",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Premier entretien, préparation puis induction de buprénorphine ; suivi et délivrance coordonnée des opioïdes.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3",
+              "o4",
+              "o6",
+              "o9",
+              "o10",
+              "o11",
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": "2024-09-11",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "10 cigarettes par jour ; pas prête à arrêter en mars 2025.",
+            "observation_ids": [
+              "o1",
+              "o8",
+              "o12"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Buprénorphine",
+            "start": "2024-09-30",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Induction au CSAPA après dernière prise d'oxycodone le 29/09 ; 16 mg/j, puis 14 mg/j à partir du 01/06/2025. Relais par injection sous-cutanée LP mensuelle 96 mg le 14/10/2025.",
+            "observation_ids": [
+              "o1",
+              "o3",
+              "o4",
+              "o6",
+              "o7",
+              "o8",
+              "o9",
+              "o10",
+              "o11",
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Naloxone",
+            "start": "2024-10-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Kit remis et formation de son mari.",
+            "observation_ids": [
+              "o3"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Fibromyalgie",
+            "start": "2025-01-13",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Syndrome fibromyalgique mentionné au compte rendu du CETD ; fibromyalgie évoquée antérieurement.",
+            "observation_ids": [
+              "o1",
+              "o7"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "CETD",
+            "start": "2025-01-13",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Avis sans indication chirurgicale ; programme d'activité physique adaptée, TENS et balnéothérapie, puis plan de crise douleur écrit.",
+            "observation_ids": [
+              "o6",
+              "o7",
+              "o9",
+              "o10"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Duloxétine",
+            "start": "2024-11-26",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Initiée à 30 mg/j, avec augmentation prévue à 60 mg à J15 ; 60 mg/j rapportés en juin et septembre 2025.",
+            "observation_ids": [
+              "o6",
+              "o10",
+              "o11"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Entretien avec l'assistante sociale",
+            "start": "2024-11-05",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entretien social ; démarches de RQTH et de demande de pension d'invalidité.",
+            "observation_ids": [
+              "o5"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Opioïdes",
+            "start": "2025-04",
+            "end": "2025-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Reprise d'oxycodone lors d'une poussée douloureuse, rapportée comme ayant duré trois jours ; en juin, la patiente dit en avoir pris « une seule fois ». A rapporté les boîtes à la pharmacie ; craving faible ensuite.",
+            "observation_ids": [
+              "o9",
+              "o10"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Départ du fils pour ses études",
+            "start": "2025-09-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Départ à Toulouse ; tristesse attendue et impression que « la maison est vide », sans effondrement thymique.",
+            "observation_ids": [
+              "o11"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "schema": "arbitrage",
+      "content": {
+        "decisions": [
+          {
+            "id": "d1",
+            "verdict": "keep",
+            "variant": 2,
+            "event": null
+          },
+          {
+            "id": "d3",
+            "verdict": "keep",
+            "variant": 2,
+            "event": null
+          },
+          {
+            "id": "d8",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d2",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d6",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d5",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d10",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d4",
+            "verdict": "keep",
+            "variant": 2,
+            "event": null
+          },
+          {
+            "id": "d9",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d7",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          }
+        ]
+      }
+    }
+  ]
+}

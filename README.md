@@ -111,6 +111,15 @@ OpenAI.
    et l'analyse s'enregistre en `.json` pseudonymisé, à rouvrir plus tard
    avec la table chiffrée `.axkey` (« Rouvrir une analyse »).
 
+5. **Frise par consensus (facultatif)** : dans « IA en ligne », section
+   « Construction de la frise », deux ou trois modèles lisent le dossier
+   chacun de leur côté, sur le même découpage. Ce qu'ils trouvent ensemble
+   est gardé ; un modèle arbitre ne reçoit que les désaccords et les
+   observations qu'ils citent, et garde, corrige ou écarte chacun. La frise
+   indique le nombre d'accords et de décisions de l'arbitre, et chaque
+   événement dit d'où il vient. Un désaccord que l'arbitre n'a pas tranché
+   est gardé, signalé « non arbitré ».
+
 ### Où sont les données
 
 - Un **parcours** en six étapes, sous la barre du haut, indique pour chacune
@@ -173,6 +182,28 @@ l'application réessaie une fois une réponse vide ou illisible.
 ```bash
 cd web && npx vite-node scripts/run-frise.ts --model=<id> [--segment-model=<id>] [--text-only] [--resume] --out=bench/<id avec __>
 uv run python scripts/compare_models.py
+```
+
+Frise par consensus (06/11/2026, [comparaison](data/processed/frise/comparaison-consensus.md)),
+lecteurs GPT-6 Luna et Claude Haiku 5.5 sur la segmentation de Haiku :
+
+| Passage | Rappel (fictifs) | Coût de la frise d'un dossier réel | Frise de Sonnet retrouvée (réels) |
+|---|---|---|---|
+| lots de 24 000 caractères, arbitre Sonnet | 80 % | 0,45 $ | 58 % |
+| lots de 24 000 caractères, arbitre Haiku | 81 % | – | – |
+| **lots de 8 000 caractères, arbitre Haiku** | – | **0,13 $** | **67 %** |
+| lots de 8 000 caractères, arbitre Sonnet | 82 % | – | – |
+
+L'arbitre fait à peu près aussi bien que la simple réunion des lectures ;
+l'arbitre Sonnet ne vaut pas son prix. Le levier est la taille des lots : en
+8 000 caractères, chaque lecteur bon marché retrouve environ 11 points de plus
+de la frise de Sonnet sur les dossiers réels. Par défaut l'application garde un
+seul modèle et des lots de 24 000 caractères.
+
+```bash
+cd web && npx vite-node scripts/run-frise.ts --readers=<id>,<id> --arbiter=<id> [--chars=8000] \
+  --observations-from=bench/anthropic__claude-haiku-5.5 --out=consensus/<nom>
+uv run python scripts/score_consensus.py data/processed/frise/consensus/<nom>
 ```
 
 ## Installation (Python)

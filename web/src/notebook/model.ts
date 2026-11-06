@@ -57,6 +57,9 @@ export interface TimelineEvent {
   lossOfControl: boolean;
   note: string;
   observationIds: string[];
+  /** Frise by consensus: every reading had it, the arbiter kept it, or it
+   *  was kept as read for want of a decision. Absent for a single reading. */
+  consensus?: "agreed" | "arbitrated" | "unarbitrated";
   /** Present when a bound was computed from an age: drawn as approximate. */
   fromAge?: { start: AgeRange | null; end: AgeRange | null };
 }
@@ -68,11 +71,25 @@ export type UndatedEvent = Omit<TimelineEvent, "start" | "end" | "fromAge"> & {
   endAge: AgeRange | null;
 };
 
+export interface ConsensusStats {
+  readers: number;
+  /** Events every reading had, compatibly. */
+  agreed: number;
+  disputed: number;
+  /** Disputes the arbiter kept (possibly corrected). */
+  kept: number;
+  dropped: number;
+  /** Disputes kept as read because the arbiter gave no usable decision. */
+  unarbitrated: number;
+}
+
 export interface Timeline {
   tracks: Track[];
   events: TimelineEvent[];
   /** Missing from frises made before ages were handled: read as []. */
   undated: UndatedEvent[];
+  /** Present when the frise was built by consensus. */
+  consensus?: ConsensusStats;
 }
 
 /** A timeline read from older JSON (no `undated`) brought to the current shape. */

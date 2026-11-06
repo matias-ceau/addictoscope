@@ -1,0 +1,2448 @@
+{
+  "dossier": "cannabis-justice",
+  "model": "openai/gpt-6-luna + anthropic/claude-haiku-5.5, arbitre anthropic/claude-sonnet-5.5",
+  "readers": [
+    "openai/gpt-6-luna",
+    "anthropic/claude-haiku-5.5"
+  ],
+  "arbiter": "anthropic/claude-sonnet-5.5",
+  "charsPerCall": 8000,
+  "observationsFrom": "bench/anthropic__claude-haiku-5.5",
+  "ranAt": "2026-11-06T00:41:24.219Z",
+  "review": "automatic detections accepted as they are",
+  "docs": {
+    "historique": {
+      "pages": 3,
+      "redactions": {
+        "ETABLISSEMENT": 6,
+        "ADRESSE": 7,
+        "TEL": 4,
+        "PATIENT": 8,
+        "DOSSIER": 3,
+        "NAISSANCE": 3,
+        "IPP": 3,
+        "VILLE": 4,
+        "SOIGNANT": 17,
+        "PROCHE": 2,
+        "PERSONNE": 1
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    },
+    "urgences": {
+      "pages": 1,
+      "redactions": {
+        "ETABLISSEMENT": 1,
+        "PATIENT": 1,
+        "NAISSANCE": 1,
+        "DOSSIER": 1,
+        "ADRESSE": 1,
+        "VILLE": 1,
+        "PROCHE": 1,
+        "TEL": 1,
+        "SOIGNANT": 2
+      },
+      "verified": true,
+      "leaks": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 11
+      },
+      "end": {
+        "page": 0,
+        "line": 21
+      },
+      "date": "2024-06-11",
+      "kind": "entretien éducatif CJC",
+      "authorRole": "éducatrice spécialisée",
+      "summary": "Premier rendez-vous à la consultation jeunes consommateurs, orienté par le juge, avec consommation quotidienne de cannabis et attestation de présence remise."
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 22
+      },
+      "end": {
+        "page": 0,
+        "line": 39
+      },
+      "date": "2024-06-25",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Premier entretien psychiatrique sous obligation de soins, avec usage important de cannabis, d'alcool et de tabac, suspicion de TDAH et absence d'élément psychotique."
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 40
+      },
+      "end": {
+        "page": 0,
+        "line": 47
+      },
+      "date": "2024-07-09",
+      "kind": "entretien éducatif CJC",
+      "authorRole": "éducatrice spécialisée",
+      "summary": "Appel au CPIP/SPIP limité à la présence et à la régularité du suivi, et patient déclarant avoir réduit sa consommation pour le juge."
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 48
+      },
+      "end": {
+        "page": 0,
+        "line": 52
+      },
+      "date": "2024-09-03",
+      "kind": "entretien éducatif CJC",
+      "authorRole": "éducatrice spécialisée",
+      "summary": "Deux rendez-vous manqués en août, retour après courrier du SPIP, consommations inchangées et recherche d'un patron d'apprentissage."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 53
+      },
+      "end": {
+        "page": 0,
+        "line": 64
+      },
+      "date": "2024-09-24",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Anamnèse développementale avec la mère évoquant un TDAH probable, bilan neuropsychologique demandé et absence d'élément psychotique."
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 65
+      },
+      "end": {
+        "page": 1,
+        "line": 22
+      },
+      "date": "2024-11-26",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Hospitalisation en psychiatrie après urgences du 08/11 pour épisode psychotique aigu attribué aux cannabinoïdes de synthèse, traitement par rispéridone 2 mg et abstinence déclarée."
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 23
+      },
+      "end": {
+        "page": 1,
+        "line": 29
+      },
+      "date": "2024-12-10",
+      "kind": "entretien éducatif CJC",
+      "authorRole": "éducatrice spécialisée",
+      "summary": "Patient abstinent depuis novembre à l'exception de deux joints en soirée, craving le soir, soutien de sa compagne et attestation remise au SPIP."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 30
+      },
+      "end": {
+        "page": 1,
+        "line": 39
+      },
+      "date": "2025-01-21",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Abstinence déclarée et urines négatives au THC, rispéridone 1 mg sans symptôme psychotique, arrêt prévu au 01/03 si stabilité."
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 40
+      },
+      "end": {
+        "page": 1,
+        "line": 50
+      },
+      "date": "2025-03-18",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Arrêt de la rispéridone sans résurgence délirante, reprise du cannabis, TDAH confirmé au bilan neuropsychologique et méthylphénidate différé."
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 51
+      },
+      "end": {
+        "page": 1,
+        "line": 57
+      },
+      "date": "2025-05-06",
+      "kind": "entretien éducatif CJC",
+      "authorRole": "éducatrice spécialisée",
+      "summary": "Contrat d'apprentissage en mécanique auto trouvé pour le 01/09, consommations de cannabis du week-end en baisse et mise à jour des coordonnées."
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 58
+      },
+      "end": {
+        "page": 2,
+        "line": 16
+      },
+      "date": "2025-07-01",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": null,
+      "summary": "Patient stable depuis l'arrêt de la rispéridone, avec cannabis le samedi et tabac, puis introduction d'un essai de méthylphénidate LP 18 mg après inquiétudes en apprentissage."
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 17
+      },
+      "end": {
+        "page": 2,
+        "line": 27
+      },
+      "date": "2025-09-16",
+      "kind": "observation psychiatrique de suivi",
+      "authorRole": "psychiatre",
+      "summary": "Méthylphénidate LP 36 mg avec meilleure concentration, pas d'élément psychotique, cannabis occasionnel et ordonnance sécurisée de 28 jours."
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 28
+      },
+      "end": {
+        "page": 2,
+        "line": 33
+      },
+      "date": "2025-10-28",
+      "kind": "entretien éducatif CJC",
+      "authorRole": "éducatrice spécialisée",
+      "summary": "Dernière attestation pour le SPIP avant fin du sursis le 14/11/2025, patient souhaitant poursuivre de façon non obligatoire avec relais médical et CJC à la demande."
+    },
+    {
+      "id": "urgences:o1",
+      "doc": "urgences",
+      "start": {
+        "page": 0,
+        "line": 1
+      },
+      "end": {
+        "page": 0,
+        "line": 25
+      },
+      "date": "2024-11-08",
+      "kind": "Compte rendu de passage aux urgences",
+      "authorRole": "médecin",
+      "summary": "Passage aux urgences d'un jeune homme de 19 ans amené par les pompiers pour épisode psychotique aigu après consommation de cannabinoïdes de synthèse, traité par loxapine, puis hospitalisé en soins libres en psychiatrie."
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t3",
+        "kind": "substance_use",
+        "label": "Cannabis"
+      },
+      {
+        "id": "t5",
+        "kind": "substance_use",
+        "label": "Cannabinoïdes de synthèse (PTC)"
+      },
+      {
+        "id": "t14",
+        "kind": "substance_use",
+        "label": "Cannabinoïdes de synthèse (vape « PTC »)"
+      },
+      {
+        "id": "t4",
+        "kind": "psychiatric",
+        "label": "TDAH, présentation combinée"
+      },
+      {
+        "id": "t6",
+        "kind": "psychiatric",
+        "label": "Épisode psychotique aigu induit par des cannabinoïdes de synthèse"
+      },
+      {
+        "id": "t9",
+        "kind": "medication",
+        "label": "Loxapine"
+      },
+      {
+        "id": "t10",
+        "kind": "medication",
+        "label": "Rispéridone"
+      },
+      {
+        "id": "t12",
+        "kind": "medication",
+        "label": "Méthylphénidate"
+      },
+      {
+        "id": "t7",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi CJC et soins psychiatriques"
+      },
+      {
+        "id": "t8",
+        "kind": "therapeutic_psycho",
+        "label": "Hospitalisation en psychiatrie"
+      },
+      {
+        "id": "t13",
+        "kind": "therapeutic_psycho",
+        "label": "Bilan neuropsychologique"
+      },
+      {
+        "id": "t1",
+        "kind": "life_event",
+        "label": "Sursis probatoire et obligation de soins"
+      },
+      {
+        "id": "t2",
+        "kind": "life_event",
+        "label": "Interruption du CAP"
+      },
+      {
+        "id": "t11",
+        "kind": "life_event",
+        "label": "Contrat d’apprentissage en mécanique automobile"
+      },
+      {
+        "id": "t15",
+        "kind": "life_event",
+        "label": "Faits : conduite sous stupéfiants et refus d'obtempérer"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "2024-05-14",
+        "end": "2025-11-14",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Sursis probatoire de 18 mois après une conduite sous stupéfiants et un refus d’obtempérer ; suivi vérifié par le SPIP.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o3",
+          "historique:o13"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e2",
+        "trackId": "t2",
+        "start": "2023",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "CAP interrompu en 2023 ; sans activité au premier entretien psychiatrique.",
+        "observationIds": [
+          "historique:o2"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e3",
+        "trackId": "t3",
+        "start": "2018",
+        "end": "2024-11-08",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Début rapporté à 13 ans puis à 14 ans. Usage quotidien, 8 à 10 joints par jour, tolérance et irritabilité/insomnie à l’arrêt ; réduction temporaire à 6–8 joints par jour avant l’arrêt déclaré du 08/11/2024.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o3",
+          "historique:o4",
+          "urgences:o1",
+          "historique:o6"
+        ],
+        "consensus": "agreed",
+        "fromAge": {
+          "start": [
+            13,
+            14
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e4",
+        "trackId": "t4",
+        "start": "2011",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Agitation, oublis et impulsivité rapportés depuis la maternelle ; TDAH confirmé au bilan neuropsychologique de février 2025.",
+        "observationIds": [
+          "historique:o2",
+          "historique:o5",
+          "historique:o9",
+          "historique:o11",
+          "historique:o12"
+        ],
+        "consensus": "agreed",
+        "fromAge": {
+          "start": [
+            6,
+            11
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e5",
+        "trackId": "t5",
+        "start": "2024-11-08",
+        "end": null,
+        "ongoing": false,
+        "mode": "intoxication",
+        "lossOfControl": false,
+        "note": "Vapotage d’un liquide acheté sur un réseau social, suivi dans l’heure d’une angoisse, d’idées de persécution et de voix menaçantes.",
+        "observationIds": [
+          "urgences:o1",
+          "historique:o6"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e6",
+        "trackId": "t6",
+        "start": "2024-11-08",
+        "end": "2024-11-19",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Persécution et hallucinations auditives après vapotage de PTC avec cannabis ; résolution en quelques jours sous rispéridone. Sortie d’hospitalisation le 19/11 ; pas de symptôme psychotique ensuite.",
+        "observationIds": [
+          "urgences:o1",
+          "historique:o6",
+          "historique:o8",
+          "historique:o9",
+          "historique:o11",
+          "historique:o12"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e7",
+        "trackId": "t7",
+        "start": "2024-06-11",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Entretiens éducatifs et psychiatriques, entretiens motivationnels et suivi dans le cadre de l’obligation de soins ; souhaite poursuivre la CJC à la demande après la fin du sursis.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o3",
+          "historique:o4",
+          "historique:o5",
+          "historique:o6",
+          "historique:o7",
+          "historique:o8",
+          "historique:o9",
+          "historique:o10",
+          "historique:o11",
+          "historique:o12",
+          "historique:o13"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e8",
+        "trackId": "t8",
+        "start": "2024-11-08",
+        "end": "2024-11-19",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hospitalisation en soins libres après le passage aux urgences pour épisode psychotique aigu.",
+        "observationIds": [
+          "urgences:o1",
+          "historique:o6"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e9",
+        "trackId": "t9",
+        "start": "2024-11-08",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Prise de 50 mg per os aux urgences.",
+        "observationIds": [
+          "urgences:o1"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e10",
+        "trackId": "t10",
+        "start": "2024-11-08",
+        "end": "2025-03-01",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Traitement à 2 mg après l’épisode psychotique, diminué à 1 mg fin décembre ; arrêté le 01/03/2025 sans résurgence délirante.",
+        "observationIds": [
+          "historique:o6",
+          "historique:o8",
+          "historique:o9",
+          "historique:o11"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e11",
+        "trackId": "t3",
+        "start": "2025-02",
+        "end": "2025-09-16",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Reprise rapportée depuis février : 1 à 2 joints le week-end, puis un joint de temps en temps le week-end.",
+        "observationIds": [
+          "historique:o9",
+          "historique:o10",
+          "historique:o11",
+          "historique:o12"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e12",
+        "trackId": "t11",
+        "start": "2025-09-01",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Contrat trouvé en mai ; apprentissage commencé le 01/09/2025.",
+        "observationIds": [
+          "historique:o10",
+          "historique:o12",
+          "historique:o11"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e13",
+        "trackId": "t12",
+        "start": "2025-07-01",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "LP 18 mg le matin, avec augmentation prévue à 36 mg après 15 jours ; dose de 36 mg rapportée en septembre, avec amélioration de la concentration et baisse légère de l’appétit.",
+        "observationIds": [
+          "historique:o11",
+          "historique:o12",
+          "historique:o9"
+        ],
+        "consensus": "agreed"
+      },
+      {
+        "id": "e14",
+        "trackId": "t3",
+        "start": "2024-12",
+        "end": null,
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Deux joints lors d’une soirée au début du mois, puis dit ne rien avoir fumé.",
+        "observationIds": [
+          "historique:o7"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e15",
+        "trackId": "t13",
+        "start": "2025-02",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Bilan concluant à un TDAH de présentation combinée.",
+        "observationIds": [
+          "historique:o9"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e16",
+        "trackId": "t14",
+        "start": "2024-11-08",
+        "end": "2024-11-08",
+        "ongoing": false,
+        "mode": "intoxication",
+        "lossOfControl": false,
+        "note": "Vape d'un liquide « PTC » acheté sur un réseau social, en plus de cannabis fumé le même soir, suivie d'un épisode psychotique aigu (persécution, hallucinations auditives) ; retenu comme trouble psychotique induit par les cannabinoïdes de synthèse. Les cannabinoïdes de synthèse ne sont pas détectés aux toxiques urinaires.",
+        "observationIds": [
+          "urgences:o1",
+          "historique:o6"
+        ],
+        "consensus": "arbitrated"
+      },
+      {
+        "id": "e17",
+        "trackId": "t15",
+        "start": "2024-02",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Conduite d'un scooter sous cannabis avec refus d'obtempérer, à l'origine de la mesure judiciaire.",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2"
+        ],
+        "consensus": "arbitrated"
+      }
+    ],
+    "undated": []
+  },
+  "consensus": {
+    "readers": 2,
+    "agreed": 13,
+    "disputed": 6,
+    "kept": 6,
+    "dropped": 0,
+    "unarbitrated": 0
+  },
+  "readings": [
+    {
+      "model": "openai/gpt-6-luna",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t3",
+            "kind": "substance_use",
+            "label": "Cannabis"
+          },
+          {
+            "id": "t4",
+            "kind": "substance_use",
+            "label": "Alcool"
+          },
+          {
+            "id": "t5",
+            "kind": "substance_use",
+            "label": "Tabac"
+          },
+          {
+            "id": "t7",
+            "kind": "substance_use",
+            "label": "Cannabinoïdes de synthèse (PTC)"
+          },
+          {
+            "id": "t6",
+            "kind": "psychiatric",
+            "label": "TDAH, présentation combinée"
+          },
+          {
+            "id": "t8",
+            "kind": "psychiatric",
+            "label": "Épisode psychotique aigu induit par des cannabinoïdes de synthèse"
+          },
+          {
+            "id": "t11",
+            "kind": "medication",
+            "label": "Loxapine"
+          },
+          {
+            "id": "t12",
+            "kind": "medication",
+            "label": "Rispéridone"
+          },
+          {
+            "id": "t15",
+            "kind": "medication",
+            "label": "Méthylphénidate"
+          },
+          {
+            "id": "t9",
+            "kind": "therapeutic_psycho",
+            "label": "Suivi CJC et soins psychiatriques"
+          },
+          {
+            "id": "t10",
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en psychiatrie"
+          },
+          {
+            "id": "t13",
+            "kind": "therapeutic_psycho",
+            "label": "Bilan neuropsychologique"
+          },
+          {
+            "id": "t1",
+            "kind": "life_event",
+            "label": "Sursis probatoire et obligation de soins"
+          },
+          {
+            "id": "t2",
+            "kind": "life_event",
+            "label": "Interruption du CAP"
+          },
+          {
+            "id": "t14",
+            "kind": "life_event",
+            "label": "Contrat d’apprentissage en mécanique automobile"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2024-05-14",
+            "end": "2025-11-14",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Sursis probatoire de 18 mois après une conduite sous stupéfiants et un refus d’obtempérer ; suivi vérifié par le SPIP.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o3",
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e2",
+            "trackId": "t2",
+            "start": "2023",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "CAP interrompu en 2023 ; sans activité au premier entretien psychiatrique.",
+            "observationIds": [
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t3",
+            "start": "2018",
+            "end": "2024-11-08",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Début rapporté à 13 ans puis à 14 ans. Usage quotidien, 8 à 10 joints par jour, tolérance et irritabilité/insomnie à l’arrêt ; réduction temporaire à 6–8 joints par jour avant l’arrêt déclaré du 08/11/2024.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o3",
+              "historique:o4",
+              "urgences:o1",
+              "historique:o6"
+            ],
+            "fromAge": {
+              "start": [
+                13,
+                14
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e4",
+            "trackId": "t4",
+            "start": "2024-06-25",
+            "end": "2025-09-16",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Consommation rapportée le samedi : 6 à 8 bières avec ivresses, puis 4 bières et enfin 2 à 3 bières en soirée ; baisse signalée en mai 2025.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o8",
+              "historique:o10",
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t5",
+            "start": "2024-06-25",
+            "end": "2025-07-01",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "10 cigarettes par jour en juin 2024 ; 8 par jour en juillet 2025.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t6",
+            "start": "2011",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Agitation, oublis et impulsivité rapportés depuis la maternelle ; TDAH confirmé au bilan neuropsychologique de février 2025.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o5",
+              "historique:o9",
+              "historique:o11",
+              "historique:o12"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e7",
+            "trackId": "t7",
+            "start": "2024-11-08",
+            "end": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": false,
+            "note": "Vapotage d’un liquide acheté sur un réseau social, suivi dans l’heure d’une angoisse, d’idées de persécution et de voix menaçantes.",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t8",
+            "start": "2024-11-08",
+            "end": "2024-11-19",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Persécution et hallucinations auditives après vapotage de PTC avec cannabis ; résolution en quelques jours sous rispéridone. Sortie d’hospitalisation le 19/11 ; pas de symptôme psychotique ensuite.",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o6",
+              "historique:o8",
+              "historique:o9",
+              "historique:o11",
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t9",
+            "start": "2024-06-11",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entretiens éducatifs et psychiatriques, entretiens motivationnels et suivi dans le cadre de l’obligation de soins ; souhaite poursuivre la CJC à la demande après la fin du sursis.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o3",
+              "historique:o4",
+              "historique:o5",
+              "historique:o6",
+              "historique:o7",
+              "historique:o8",
+              "historique:o9",
+              "historique:o10",
+              "historique:o11",
+              "historique:o12",
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t10",
+            "start": "2024-11-08",
+            "end": "2024-11-19",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Hospitalisation en soins libres après le passage aux urgences pour épisode psychotique aigu.",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e11",
+            "trackId": "t11",
+            "start": "2024-11-08",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Prise de 50 mg per os aux urgences.",
+            "observationIds": [
+              "urgences:o1"
+            ]
+          },
+          {
+            "id": "e12",
+            "trackId": "t12",
+            "start": "2024-11-08",
+            "end": "2025-03-01",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Traitement à 2 mg après l’épisode psychotique, diminué à 1 mg fin décembre ; arrêté le 01/03/2025 sans résurgence délirante.",
+            "observationIds": [
+              "historique:o6",
+              "historique:o8",
+              "historique:o9",
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t3",
+            "start": "2024-12",
+            "end": null,
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Deux joints lors d’une soirée au début du mois, puis dit ne rien avoir fumé.",
+            "observationIds": [
+              "historique:o7"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t3",
+            "start": "2025-02",
+            "end": "2025-09-16",
+            "ongoing": false,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Reprise rapportée depuis février : 1 à 2 joints le week-end, puis un joint de temps en temps le week-end.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o10",
+              "historique:o11",
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t13",
+            "start": "2025-02",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Bilan concluant à un TDAH de présentation combinée.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e16",
+            "trackId": "t14",
+            "start": "2025-09-01",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Contrat trouvé en mai ; apprentissage commencé le 01/09/2025.",
+            "observationIds": [
+              "historique:o10",
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e17",
+            "trackId": "t15",
+            "start": "2025-07-01",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "LP 18 mg le matin, avec augmentation prévue à 36 mg après 15 jours ; dose de 36 mg rapportée en septembre, avec amélioration de la concentration et baisse légère de l’appétit.",
+            "observationIds": [
+              "historique:o11",
+              "historique:o12"
+            ]
+          }
+        ],
+        "undated": []
+      }
+    },
+    {
+      "model": "anthropic/claude-haiku-5.5",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t1",
+            "kind": "substance_use",
+            "label": "Cannabis"
+          },
+          {
+            "id": "t2",
+            "kind": "substance_use",
+            "label": "Cannabinoïdes de synthèse (vape « PTC »)"
+          },
+          {
+            "id": "t3",
+            "kind": "psychiatric",
+            "label": "TDAH (présentation combinée)"
+          },
+          {
+            "id": "t4",
+            "kind": "psychiatric",
+            "label": "Trouble psychotique induit par les cannabinoïdes de synthèse"
+          },
+          {
+            "id": "t5",
+            "kind": "medication",
+            "label": "Loxapine"
+          },
+          {
+            "id": "t6",
+            "kind": "medication",
+            "label": "Rispéridone"
+          },
+          {
+            "id": "t7",
+            "kind": "medication",
+            "label": "Méthylphénidate LP"
+          },
+          {
+            "id": "t8",
+            "kind": "therapeutic_psycho",
+            "label": "Consultation jeunes consommateurs (CJC)"
+          },
+          {
+            "id": "t9",
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en psychiatrie (soins libres)"
+          },
+          {
+            "id": "t10",
+            "kind": "life_event",
+            "label": "Sursis probatoire avec obligation de soins (SPIP)"
+          },
+          {
+            "id": "t11",
+            "kind": "life_event",
+            "label": "Faits : conduite sous stupéfiants et refus d'obtempérer"
+          },
+          {
+            "id": "t12",
+            "kind": "life_event",
+            "label": "Interruption du CAP"
+          },
+          {
+            "id": "t13",
+            "kind": "life_event",
+            "label": "Apprentissage en mécanique auto"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2018",
+            "end": null,
+            "ongoing": true,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Fume depuis l'âge de 13 ans (o1) ; « depuis 14 ans » selon o2. 8 à 10 joints/j (herbe et résine), tolérance, irritabilité et insomnie à l'arrêt (06/2024). Baisse déclarée à 6 joints/j (07/2024) puis 6 à 8/j (09/2024).",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o3",
+              "historique:o4"
+            ],
+            "fromAge": {
+              "start": [
+                13,
+                13
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e2",
+            "trackId": "t1",
+            "start": "2024-11-08",
+            "end": "2024-11-08",
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": false,
+            "note": "Cannabis fumé le soir du 08/11/2024 après vapotage de « PTC », suivi d'un épisode psychotique aigu (THC positif aux urines).",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t1",
+            "start": "2024-12",
+            "end": "2024-12",
+            "ongoing": false,
+            "mode": "craving",
+            "lossOfControl": false,
+            "note": "Craving le soir, fait du vélo pour « tenir ». Dit avoir fumé 2 joints à une soirée début décembre, puis rien.",
+            "observationIds": [
+              "historique:o7"
+            ]
+          },
+          {
+            "id": "e4",
+            "trackId": "t1",
+            "start": "2025-02",
+            "end": null,
+            "ongoing": true,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Reprise du cannabis depuis février 2025 : 1 à 2 joints le week-end, « pas plus » (03/2025) ; 1 à 2 joints le samedi (07/2025) ; un joint de temps en temps le week-end (09/2025).",
+            "observationIds": [
+              "historique:o9",
+              "historique:o11",
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t2",
+            "start": "2024-11-08",
+            "end": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": false,
+            "note": "Vape « PTC » achetée sur un réseau social. Cannabinoïdes de synthèse suspectés, non détectés au dépistage urinaire. Épisode psychotique aigu associé.",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t3",
+            "start": "2011",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Agitation « depuis la maternelle », redoublement du CP, impulsivité (anamnèse avec la mère, 09/2024). ASRS positif (06/2024). Bilan neuropsychologique de février 2025 : TDAH présentation combinée confirmé.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o5",
+              "historique:o9"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e7",
+            "trackId": "t4",
+            "start": "2024-11-08",
+            "end": "2024-11-19",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Persécution et hallucinations auditives après vape « PTC » et cannabis. Résolution en quelques jours sous rispéridone. Critique partielle au suivi (11/2024). Pas d'élément délirant depuis.",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o6",
+              "historique:o8",
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t5",
+            "start": "2024-11-08",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "50 mg per os aux urgences pour agitation et idées de persécution.",
+            "observationIds": [
+              "urgences:o1"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t6",
+            "start": "2024-11",
+            "end": "2025-03-01",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "2 mg puis 1 mg depuis fin décembre 2024. Arrêt le 01/03/2025 si stabilité, sans résurgence délirante.",
+            "observationIds": [
+              "historique:o6",
+              "historique:o8",
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t7",
+            "start": "2025-07",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Discuté en 03/2025 puis différé. Essai débuté en 07/2025 à 18 mg le matin, 36 mg après 15 jours. Meilleure concentration et moins d'impulsivité, appétit un peu diminué (09/2025).",
+            "observationIds": [
+              "historique:o9",
+              "historique:o11",
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e11",
+            "trackId": "t8",
+            "start": "2024-06-11",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Premier RDV le 11/06/2024, venu sur injonction du juge. Entretiens motivationnels en alternance éducatrice / médecin. Relais proposé en 10/2025 : suivi « de temps en temps », sans obligation.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o3",
+              "historique:o4",
+              "historique:o7",
+              "historique:o10",
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e12",
+            "trackId": "t9",
+            "start": "2024-11-08",
+            "end": "2024-11-19",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Passage aux urgences le 08/11/2024 (amené par les pompiers à la demande de la mère), transfert en psychiatrie le jour même. Sortie le 19/11/2024.",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t10",
+            "start": "2024-05-14",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Jugement du 14/05/2024 (« en avril » selon o1) : sursis probatoire 18 mois. Attestations mensuelles au SPIP. Fin du sursis prévue le 14/11/2025.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o3",
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t11",
+            "start": "2024-02",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Conduite d'un scooter sous cannabis avec refus d'obtempérer, à l'origine de la mesure judiciaire.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t12",
+            "start": "2023",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "CAP interrompu en 2023. Scolarité chaotique avec exclusions au collège. Sans activité jusqu'à la rentrée en apprentissage.",
+            "observationIds": [
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e16",
+            "trackId": "t13",
+            "start": "2025-09-01",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Contrat trouvé en 05/2025, début le 01/09/2025. « Le patron est cool » (09/2025). Inquiétude initiale de « ne pas tenir » (attention, oublis).",
+            "observationIds": [
+              "historique:o10",
+              "historique:o11",
+              "historique:o12"
+            ]
+          }
+        ],
+        "undated": []
+      }
+    },
+    {
+      "model": "union",
+      "timeline": {
+        "tracks": [
+          {
+            "id": "t3",
+            "kind": "substance_use",
+            "label": "Cannabis"
+          },
+          {
+            "id": "t4",
+            "kind": "substance_use",
+            "label": "Alcool"
+          },
+          {
+            "id": "t5",
+            "kind": "substance_use",
+            "label": "Tabac"
+          },
+          {
+            "id": "t7",
+            "kind": "substance_use",
+            "label": "Cannabinoïdes de synthèse (PTC)"
+          },
+          {
+            "id": "t6",
+            "kind": "psychiatric",
+            "label": "TDAH, présentation combinée"
+          },
+          {
+            "id": "t8",
+            "kind": "psychiatric",
+            "label": "Épisode psychotique aigu induit par des cannabinoïdes de synthèse"
+          },
+          {
+            "id": "t11",
+            "kind": "medication",
+            "label": "Loxapine"
+          },
+          {
+            "id": "t12",
+            "kind": "medication",
+            "label": "Rispéridone"
+          },
+          {
+            "id": "t15",
+            "kind": "medication",
+            "label": "Méthylphénidate"
+          },
+          {
+            "id": "t9",
+            "kind": "therapeutic_psycho",
+            "label": "Suivi CJC et soins psychiatriques"
+          },
+          {
+            "id": "t10",
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en psychiatrie"
+          },
+          {
+            "id": "t13",
+            "kind": "therapeutic_psycho",
+            "label": "Bilan neuropsychologique"
+          },
+          {
+            "id": "t1",
+            "kind": "life_event",
+            "label": "Sursis probatoire et obligation de soins"
+          },
+          {
+            "id": "t2",
+            "kind": "life_event",
+            "label": "Interruption du CAP"
+          },
+          {
+            "id": "t14",
+            "kind": "life_event",
+            "label": "Contrat d’apprentissage en mécanique automobile"
+          },
+          {
+            "id": "t16",
+            "kind": "life_event",
+            "label": "Faits : conduite sous stupéfiants et refus d'obtempérer"
+          }
+        ],
+        "events": [
+          {
+            "id": "e1",
+            "trackId": "t1",
+            "start": "2024-05-14",
+            "end": "2025-11-14",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Sursis probatoire de 18 mois après une conduite sous stupéfiants et un refus d’obtempérer ; suivi vérifié par le SPIP.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o3",
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e2",
+            "trackId": "t2",
+            "start": "2023",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "CAP interrompu en 2023 ; sans activité au premier entretien psychiatrique.",
+            "observationIds": [
+              "historique:o2"
+            ]
+          },
+          {
+            "id": "e3",
+            "trackId": "t3",
+            "start": "2018",
+            "end": "2024-11-08",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Début rapporté à 13 ans puis à 14 ans. Usage quotidien, 8 à 10 joints par jour, tolérance et irritabilité/insomnie à l’arrêt ; réduction temporaire à 6–8 joints par jour avant l’arrêt déclaré du 08/11/2024.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o3",
+              "historique:o4",
+              "urgences:o1",
+              "historique:o6"
+            ],
+            "fromAge": {
+              "start": [
+                13,
+                14
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e4",
+            "trackId": "t4",
+            "start": "2024-06-25",
+            "end": "2025-09-16",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Consommation rapportée le samedi : 6 à 8 bières avec ivresses, puis 4 bières et enfin 2 à 3 bières en soirée ; baisse signalée en mai 2025.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o8",
+              "historique:o10",
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e5",
+            "trackId": "t5",
+            "start": "2024-06-25",
+            "end": "2025-07-01",
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "10 cigarettes par jour en juin 2024 ; 8 par jour en juillet 2025.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e6",
+            "trackId": "t6",
+            "start": "2011",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Agitation, oublis et impulsivité rapportés depuis la maternelle ; TDAH confirmé au bilan neuropsychologique de février 2025.",
+            "observationIds": [
+              "historique:o2",
+              "historique:o5",
+              "historique:o9",
+              "historique:o11",
+              "historique:o12"
+            ],
+            "fromAge": {
+              "start": [
+                6,
+                11
+              ],
+              "end": null
+            }
+          },
+          {
+            "id": "e7",
+            "trackId": "t7",
+            "start": "2024-11-08",
+            "end": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": false,
+            "note": "Vapotage d’un liquide acheté sur un réseau social, suivi dans l’heure d’une angoisse, d’idées de persécution et de voix menaçantes.",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e8",
+            "trackId": "t8",
+            "start": "2024-11-08",
+            "end": "2024-11-19",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Persécution et hallucinations auditives après vapotage de PTC avec cannabis ; résolution en quelques jours sous rispéridone. Sortie d’hospitalisation le 19/11 ; pas de symptôme psychotique ensuite.",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o6",
+              "historique:o8",
+              "historique:o9",
+              "historique:o11",
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e9",
+            "trackId": "t9",
+            "start": "2024-06-11",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Entretiens éducatifs et psychiatriques, entretiens motivationnels et suivi dans le cadre de l’obligation de soins ; souhaite poursuivre la CJC à la demande après la fin du sursis.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2",
+              "historique:o3",
+              "historique:o4",
+              "historique:o5",
+              "historique:o6",
+              "historique:o7",
+              "historique:o8",
+              "historique:o9",
+              "historique:o10",
+              "historique:o11",
+              "historique:o12",
+              "historique:o13"
+            ]
+          },
+          {
+            "id": "e10",
+            "trackId": "t10",
+            "start": "2024-11-08",
+            "end": "2024-11-19",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Hospitalisation en soins libres après le passage aux urgences pour épisode psychotique aigu.",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e11",
+            "trackId": "t11",
+            "start": "2024-11-08",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Prise de 50 mg per os aux urgences.",
+            "observationIds": [
+              "urgences:o1"
+            ]
+          },
+          {
+            "id": "e12",
+            "trackId": "t12",
+            "start": "2024-11-08",
+            "end": "2025-03-01",
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Traitement à 2 mg après l’épisode psychotique, diminué à 1 mg fin décembre ; arrêté le 01/03/2025 sans résurgence délirante.",
+            "observationIds": [
+              "historique:o6",
+              "historique:o8",
+              "historique:o9",
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e13",
+            "trackId": "t3",
+            "start": "2024-12",
+            "end": null,
+            "ongoing": false,
+            "mode": "usage",
+            "lossOfControl": false,
+            "note": "Deux joints lors d’une soirée au début du mois, puis dit ne rien avoir fumé.",
+            "observationIds": [
+              "historique:o7"
+            ]
+          },
+          {
+            "id": "e14",
+            "trackId": "t3",
+            "start": "2025-02",
+            "end": "2025-09-16",
+            "ongoing": false,
+            "mode": "rechute",
+            "lossOfControl": false,
+            "note": "Reprise rapportée depuis février : 1 à 2 joints le week-end, puis un joint de temps en temps le week-end.",
+            "observationIds": [
+              "historique:o9",
+              "historique:o10",
+              "historique:o11",
+              "historique:o12"
+            ]
+          },
+          {
+            "id": "e15",
+            "trackId": "t13",
+            "start": "2025-02",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Bilan concluant à un TDAH de présentation combinée.",
+            "observationIds": [
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e16",
+            "trackId": "t14",
+            "start": "2025-09-01",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Contrat trouvé en mai ; apprentissage commencé le 01/09/2025.",
+            "observationIds": [
+              "historique:o10",
+              "historique:o12",
+              "historique:o11"
+            ]
+          },
+          {
+            "id": "e17",
+            "trackId": "t15",
+            "start": "2025-07-01",
+            "end": null,
+            "ongoing": true,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "LP 18 mg le matin, avec augmentation prévue à 36 mg après 15 jours ; dose de 36 mg rapportée en septembre, avec amélioration de la concentration et baisse légère de l’appétit.",
+            "observationIds": [
+              "historique:o11",
+              "historique:o12",
+              "historique:o9"
+            ]
+          },
+          {
+            "id": "e18",
+            "trackId": "t3",
+            "start": "2024-11-08",
+            "end": "2024-11-08",
+            "ongoing": false,
+            "mode": "intoxication",
+            "lossOfControl": false,
+            "note": "Cannabis fumé le soir du 08/11/2024 après vapotage de « PTC », suivi d'un épisode psychotique aigu (THC positif aux urines).",
+            "observationIds": [
+              "urgences:o1",
+              "historique:o6"
+            ]
+          },
+          {
+            "id": "e19",
+            "trackId": "t16",
+            "start": "2024-02",
+            "end": null,
+            "ongoing": false,
+            "mode": null,
+            "lossOfControl": false,
+            "note": "Conduite d'un scooter sous cannabis avec refus d'obtempérer, à l'origine de la mesure judiciaire.",
+            "observationIds": [
+              "historique:o1",
+              "historique:o2"
+            ]
+          }
+        ],
+        "undated": []
+      }
+    }
+  ],
+  "elapsedMs": 40959,
+  "usage": {
+    "calls": 4,
+    "promptTokens": 15935,
+    "completionTokens": 12619,
+    "cost": 0.0356,
+    "by": {
+      "openai/gpt-6-luna frise": 0.00186342,
+      "anthropic/claude-haiku-5.5 frise": 0.0042998,
+      "anthropic/claude-sonnet-5.5 arbitrage": 0.029464
+    }
+  },
+  "rawAnswers": [
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "life_event",
+            "label": "Sursis probatoire et obligation de soins",
+            "start": "2024-05-14",
+            "end": "2025-11-14",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Sursis probatoire de 18 mois après une conduite sous stupéfiants et un refus d’obtempérer ; suivi vérifié par le SPIP.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3",
+              "o14"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Interruption du CAP",
+            "start": "2023",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "CAP interrompu en 2023 ; sans activité au premier entretien psychiatrique.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": null,
+            "end": "2024-11-08",
+            "start_age": [
+              13,
+              14
+            ],
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Début rapporté à 13 ans puis à 14 ans. Usage quotidien, 8 à 10 joints par jour, tolérance et irritabilité/insomnie à l’arrêt ; réduction temporaire à 6–8 joints par jour avant l’arrêt déclaré du 08/11/2024.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3",
+              "o4",
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2024-06-25",
+            "end": "2025-09-16",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Consommation rapportée le samedi : 6 à 8 bières avec ivresses, puis 4 bières et enfin 2 à 3 bières en soirée ; baisse signalée en mai 2025.",
+            "observation_ids": [
+              "o2",
+              "o9",
+              "o11",
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": "2024-06-25",
+            "end": "2025-07-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "10 cigarettes par jour en juin 2024 ; 8 par jour en juillet 2025.",
+            "observation_ids": [
+              "o2",
+              "o12"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "TDAH, présentation combinée",
+            "start": null,
+            "end": null,
+            "start_age": "enfance",
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Agitation, oublis et impulsivité rapportés depuis la maternelle ; TDAH confirmé au bilan neuropsychologique de février 2025.",
+            "observation_ids": [
+              "o2",
+              "o5",
+              "o10",
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabinoïdes de synthèse (PTC)",
+            "start": "2024-11-08",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": false,
+            "note": "Vapotage d’un liquide acheté sur un réseau social, suivi dans l’heure d’une angoisse, d’idées de persécution et de voix menaçantes.",
+            "observation_ids": [
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode psychotique aigu induit par des cannabinoïdes de synthèse",
+            "start": "2024-11-08",
+            "end": "2024-11-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Persécution et hallucinations auditives après vapotage de PTC avec cannabis ; résolution en quelques jours sous rispéridone. Sortie d’hospitalisation le 19/11 ; pas de symptôme psychotique ensuite.",
+            "observation_ids": [
+              "o6",
+              "o7",
+              "o9",
+              "o10",
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi CJC et soins psychiatriques",
+            "start": "2024-06-11",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entretiens éducatifs et psychiatriques, entretiens motivationnels et suivi dans le cadre de l’obligation de soins ; souhaite poursuivre la CJC à la demande après la fin du sursis.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3",
+              "o4",
+              "o5",
+              "o7",
+              "o8",
+              "o9",
+              "o10",
+              "o11",
+              "o12",
+              "o13",
+              "o14"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en psychiatrie",
+            "start": "2024-11-08",
+            "end": "2024-11-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hospitalisation en soins libres après le passage aux urgences pour épisode psychotique aigu.",
+            "observation_ids": [
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Loxapine",
+            "start": "2024-11-08",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Prise de 50 mg per os aux urgences.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Rispéridone",
+            "start": "2024-11-08",
+            "end": "2025-03-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Traitement à 2 mg après l’épisode psychotique, diminué à 1 mg fin décembre ; arrêté le 01/03/2025 sans résurgence délirante.",
+            "observation_ids": [
+              "o7",
+              "o9",
+              "o10",
+              "o12"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2024-12",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Deux joints lors d’une soirée au début du mois, puis dit ne rien avoir fumé.",
+            "observation_ids": [
+              "o8"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2025-02",
+            "end": "2025-09-16",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Reprise rapportée depuis février : 1 à 2 joints le week-end, puis un joint de temps en temps le week-end.",
+            "observation_ids": [
+              "o10",
+              "o11",
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Bilan neuropsychologique",
+            "start": "2025-02",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Bilan concluant à un TDAH de présentation combinée.",
+            "observation_ids": [
+              "o10"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Contrat d’apprentissage en mécanique automobile",
+            "start": "2025-09-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Contrat trouvé en mai ; apprentissage commencé le 01/09/2025.",
+            "observation_ids": [
+              "o11",
+              "o13"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Méthylphénidate",
+            "start": "2025-07-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "LP 18 mg le matin, avec augmentation prévue à 36 mg après 15 jours ; dose de 36 mg rapportée en septembre, avec amélioration de la concentration et baisse légère de l’appétit.",
+            "observation_ids": [
+              "o12",
+              "o13"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": null,
+            "end": null,
+            "start_age": 13,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Fume depuis l'âge de 13 ans (o1) ; « depuis 14 ans » selon o2. 8 à 10 joints/j (herbe et résine), tolérance, irritabilité et insomnie à l'arrêt (06/2024). Baisse déclarée à 6 joints/j (07/2024) puis 6 à 8/j (09/2024).",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3",
+              "o4"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2024-11-08",
+            "end": "2024-11-08",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": false,
+            "note": "Cannabis fumé le soir du 08/11/2024 après vapotage de « PTC », suivi d'un épisode psychotique aigu (THC positif aux urines).",
+            "observation_ids": [
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2024-12",
+            "end": "2024-12",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "craving",
+            "loss_of_control": false,
+            "note": "Craving le soir, fait du vélo pour « tenir ». Dit avoir fumé 2 joints à une soirée début décembre, puis rien.",
+            "observation_ids": [
+              "o8"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": "2025-02",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Reprise du cannabis depuis février 2025 : 1 à 2 joints le week-end, « pas plus » (03/2025) ; 1 à 2 joints le samedi (07/2025) ; un joint de temps en temps le week-end (09/2025).",
+            "observation_ids": [
+              "o10",
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabinoïdes de synthèse (vape « PTC »)",
+            "start": "2024-11-08",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "intoxication",
+            "loss_of_control": false,
+            "note": "Vape « PTC » achetée sur un réseau social. Cannabinoïdes de synthèse suspectés, non détectés au dépistage urinaire. Épisode psychotique aigu associé.",
+            "observation_ids": [
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "6 à 8 bières le samedi soir, avec ivresses (06/2024). 4 bières le samedi (01/2025), en baisse (05/2025), 2 à 3 bières en soirée (09/2025). Date de début non précisée.",
+            "observation_ids": [
+              "o2",
+              "o9",
+              "o11",
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": null,
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "10 cigarettes/j (06/2024), 8 cigarettes/j (07/2025). Date de début non précisée.",
+            "observation_ids": [
+              "o2",
+              "o12"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "TDAH (présentation combinée)",
+            "start": null,
+            "end": null,
+            "start_age": "enfance",
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Agitation « depuis la maternelle », redoublement du CP, impulsivité (anamnèse avec la mère, 09/2024). ASRS positif (06/2024). Bilan neuropsychologique de février 2025 : TDAH présentation combinée confirmé.",
+            "observation_ids": [
+              "o2",
+              "o5",
+              "o10"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Trouble psychotique induit par les cannabinoïdes de synthèse",
+            "start": "2024-11-08",
+            "end": "2024-11-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Persécution et hallucinations auditives après vape « PTC » et cannabis. Résolution en quelques jours sous rispéridone. Critique partielle au suivi (11/2024). Pas d'élément délirant depuis.",
+            "observation_ids": [
+              "o6",
+              "o7",
+              "o9",
+              "o10"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Loxapine",
+            "start": "2024-11-08",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "50 mg per os aux urgences pour agitation et idées de persécution.",
+            "observation_ids": [
+              "o6"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Rispéridone",
+            "start": "2024-11",
+            "end": "2025-03-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "2 mg puis 1 mg depuis fin décembre 2024. Arrêt le 01/03/2025 si stabilité, sans résurgence délirante.",
+            "observation_ids": [
+              "o7",
+              "o9",
+              "o10"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Méthylphénidate LP",
+            "start": "2025-07",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Discuté en 03/2025 puis différé. Essai débuté en 07/2025 à 18 mg le matin, 36 mg après 15 jours. Meilleure concentration et moins d'impulsivité, appétit un peu diminué (09/2025).",
+            "observation_ids": [
+              "o10",
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Consultation jeunes consommateurs (CJC)",
+            "start": "2024-06-11",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Premier RDV le 11/06/2024, venu sur injonction du juge. Entretiens motivationnels en alternance éducatrice / médecin. Relais proposé en 10/2025 : suivi « de temps en temps », sans obligation.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3",
+              "o4",
+              "o8",
+              "o11",
+              "o14"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation en psychiatrie (soins libres)",
+            "start": "2024-11-08",
+            "end": "2024-11-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Passage aux urgences le 08/11/2024 (amené par les pompiers à la demande de la mère), transfert en psychiatrie le jour même. Sortie le 19/11/2024.",
+            "observation_ids": [
+              "o6",
+              "o7"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Sursis probatoire avec obligation de soins (SPIP)",
+            "start": "2024-05-14",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Jugement du 14/05/2024 (« en avril » selon o1) : sursis probatoire 18 mois. Attestations mensuelles au SPIP. Fin du sursis prévue le 14/11/2025.",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o3",
+              "o14"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Faits : conduite sous stupéfiants et refus d'obtempérer",
+            "start": "2024-02",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Conduite d'un scooter sous cannabis avec refus d'obtempérer, à l'origine de la mesure judiciaire.",
+            "observation_ids": [
+              "o1",
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Interruption du CAP",
+            "start": "2023",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "CAP interrompu en 2023. Scolarité chaotique avec exclusions au collège. Sans activité jusqu'à la rentrée en apprentissage.",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Apprentissage en mécanique auto",
+            "start": "2025-09-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Contrat trouvé en 05/2025, début le 01/09/2025. « Le patron est cool » (09/2025). Inquiétude initiale de « ne pas tenir » (attention, oublis).",
+            "observation_ids": [
+              "o11",
+              "o12",
+              "o13"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "schema": "arbitrage",
+      "content": {
+        "decisions": [
+          {
+            "id": "d6",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          },
+          {
+            "id": "d1",
+            "verdict": "keep",
+            "variant": 2,
+            "event": null
+          },
+          {
+            "id": "d2",
+            "verdict": "keep",
+            "variant": 2,
+            "event": null
+          },
+          {
+            "id": "d5",
+            "verdict": "keep",
+            "variant": null,
+            "event": {
+              "kind": "substance_use",
+              "label": "Cannabinoïdes de synthèse (vape « PTC »)",
+              "start": "2024-11-08",
+              "end": "2024-11-08",
+              "start_age": null,
+              "end_age": null,
+              "ongoing": false,
+              "mode": "intoxication",
+              "loss_of_control": false,
+              "note": "Vape d'un liquide « PTC » acheté sur un réseau social, en plus de cannabis fumé le même soir, suivie d'un épisode psychotique aigu (persécution, hallucinations auditives) ; retenu comme trouble psychotique induit par les cannabinoïdes de synthèse. Les cannabinoïdes de synthèse ne sont pas détectés aux toxiques urinaires.",
+              "observation_ids": [
+                "o6",
+                "o7"
+              ]
+            }
+          },
+          {
+            "id": "d3",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          }
+        ]
+      }
+    },
+    {
+      "schema": "arbitrage",
+      "content": {
+        "decisions": [
+          {
+            "id": "d4",
+            "verdict": "keep",
+            "variant": 1,
+            "event": null
+          }
+        ]
+      }
+    }
+  ]
+}

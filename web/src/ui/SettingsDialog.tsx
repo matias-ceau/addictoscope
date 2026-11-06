@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { emptyPolicy, policyReady } from "../app/settings";
-import type { CloudPolicy } from "../cloud/guard";
+import type { CloudPolicy, ConsensusModels } from "../cloud/guard";
 import { MODELS } from "../cloud/models";
 
 const CHOICES: { kind: CloudPolicy["kind"]; title: string; text: string }[] = [
@@ -79,6 +79,7 @@ export function SettingsDialog(props: { policy: CloudPolicy; onSave: (p: CloudPo
                 ))}
               </div>
             )}
+            {draft.kind === "openrouter-zdr" && <ConsensusChoice draft={draft} onChange={setDraft} />}
             <label>
               Découpage en observations
               <select
@@ -129,5 +130,61 @@ export function SettingsDialog(props: { policy: CloudPolicy; onSave: (p: CloudPo
         </div>
       </div>
     </div>
+  );
+}
+
+const DEFAULT_CONSENSUS: ConsensusModels = {
+  readers: ["openai/gpt-6-luna", "anthropic/claude-haiku-5.5"],
+  // Measured (SPEC.md): Sonnet as arbiter finds nothing more and costs ten times the readings.
+  arbiter: "anthropic/claude-haiku-5.5",
+};
+
+/** One model builds the frise, or several read it and a stronger one settles their disagreements. */
+function ConsensusChoice({ draft, onChange }: { draft: Extract<CloudPolicy, { kind: "openrouter-zdr" }>; onChange: (p: CloudPolicy) => void }) {
+  const c = draft.consensus;
+  const toggle = (id: string) => {
+    if (!c) return;
+    const readers = c.readers.includes(id) ? c.readers.filter((r) => r !== id) : [...c.readers, id].slice(-3);
+    onChange({ ...draft, consensus: { ...c, readers } });
+  };
+  return (
+    <fieldset className="consensus">
+      <legend>Construction de la frise</legend>
+      <label className="inline">
+        <input type="radio" name="frise-mode" checked={!c} onChange={() => onChange({ ...draft, consensus: undefined })} />
+        Un seul modèle (celui choisi ci-dessus)
+      </label>
+      <label className="inline">
+        <input type="radio" name="frise-mode" checked={Boolean(c)} onChange={() => onChange({ ...draft, consensus: DEFAULT_CONSENSUS })} />
+        Consensus : plusieurs lectures, un arbitre pour les désaccords
+      </label>
+      {c && (
+        <>
+          <span className="muted small">
+            Lecteurs (2 ou 3) : chacun construit la frise. Ce qu'ils trouvent tous est gardé ; l'arbitre ne reçoit que les
+            désaccords et les observations qui les concernent.
+          </span>
+          <div className="reader-list">
+            {MODELS.map((m) => (
+              <label key={m.id} className="inline">
+                <input type="checkbox" checked={c.readers.includes(m.id)} onChange={() => toggle(m.id)} />
+                {m.name}
+              </label>
+            ))}
+          </div>
+          <label>
+            Arbitre
+            <select value={c.arbiter} onChange={(e) => onChange({ ...draft, consensus: { ...c, arbiter: e.target.value } })}>
+              {MODELS.map((m) => (
+                <option key={m.id} value={m.id}>
+                  {m.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          {c.readers.length < 2 && <span className="small error-text">Choisir au moins deux lecteurs.</span>}
+        </>
+      )}
+    </fieldset>
   );
 }

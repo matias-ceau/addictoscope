@@ -1,0 +1,71 @@
+/**
+ * The frise step shared by run-frise.ts (fictional dossiers) and
+ * eval/run_frise_real.ts (real dossiers): one model, or a consensus
+ * (--readers=<id>,<id> --arbiter=<id>, SPEC.md), with --chars=<n> for the
+ * size of each call and --observations-from=<folder> to reuse the
+ * segmentation of an earlier run (only the frise step then varies).
+ */
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+import type { CloudPolicy } from "../src/cloud/guard";
+import { buildConsensusTimeline, groupEvents, mergeAgreed, type ConsensusStats } from "../src/notebook/consensus";
+import type { Observation, Timeline } from "../src/notebook/model";
+import { assembleTimeline, buildTimeline, lastObservationDate, type RawEvent, type TimelineInput } from "../src/notebook/timeline";
+
+const arg = (name: string) => process.argv.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
+
+export const READERS = arg("readers")?.split(",").filter(Boolean) ?? [];
+export const ARBITER = arg("arbiter");
+export const CHARS = arg("chars") ? Number(arg("chars")) : undefined;
+export const OBSERVATIONS_FROM = arg("observations-from");
+if (READERS.length === 1 || (READERS.length > 0 && !ARBITER)) throw new Error("--readers needs at least two models and --arbiter");
+
+/** Settings to record in the run's JSON. */
+export const friseSettings = () => ({
+  ...(READERS.length ? { readers: READERS, arbiter: ARBITER } : {}),
+  ...(CHARS ? { charsPerCall: CHARS } : {}),
+  ...(OBSERVATIONS_FROM ? { observationsFrom: OBSERVATIONS_FROM } : {}),
+});
+
+/** Observations of an earlier run of this dossier, for the documents sent now; null when not asked. */
+export function reusedObservations(base: string, slug: string, docs: Set<string>): Observation[] | null {
+  if (!OBSERVATIONS_FROM) return null;
+  const path = resolve(base, OBSERVATIONS_FROM, `${slug}.json`);
+  if (!existsSync(path)) throw new Error(`no earlier run to take the observations from (${OBSERVATIONS_FROM})`);
+  const run = JSON.parse(readFileSync(path, "utf8")) as { observations?: Observation[] };
+  if (!run.observations) throw new Error(`the earlier run has no observations (${OBSERVATIONS_FROM})`);
+  return run.observations.filter((o) => docs.has(o.doc));
+}
+
+export interface FriseResult {
+  timeline: Timeline;
+  consensus?: ConsensusStats;
+  /** Consensus: each reader's own frise on the same observations (single-model baselines), and their union without arbiter ("union"). */
+  readings?: { model: string; timeline: Timeline }[];
+}
+
+export async function friseStep(input: TimelineInput, policy: Extract<CloudPolicy, { kind: "openrouter-zdr" }>): Promise<FriseResult> {
+  const withChars = { ...input, policy, ...(CHARS ? { charsPerCall: CHARS } : {}) };
+  if (!READERS.length) return { timeline: await buildTimeline(withChars) };
+  let runs: RawEvent[][] = [];
+  const timeline = await buildConsensusTimeline({
+    ...withChars,
+    consensus: { readers: READERS.map((model) => ({ ...policy, model })), arbiter: { ...policy, model: ARBITER! } },
+    onReadings: (r) => (runs = r),
+  });
+  const known = new Set(input.observations.map((o) => o.id));
+  const last = lastObservationDate(input.observations);
+  const assemble = (raw: RawEvent[]) => assembleTimeline(raw, known, input.birthYear ?? null, last);
+  // Union without arbiter: agreements merged, every dispute kept as first read.
+  const union = groupEvents(runs).map((g) => {
+    const present = g.members.filter((m): m is RawEvent => m !== null);
+    return g.agreed ? mergeAgreed(present) : present[0];
+  });
+  const readings = [
+    ...runs.map((raw, i) => ({ model: READERS[i], timeline: assemble(raw) })),
+    { model: "union", timeline: assemble(union) },
+  ];
+  const { consensus, ...rest } = timeline;
+  return { timeline: rest, consensus, readings };
+}

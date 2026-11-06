@@ -1,3 +1,186 @@
+# SPEC — Frise par consensus : plusieurs lectures, arbitrage des désaccords
+
+Statut : validée et implémentée le 06/11/2026 (branche `dev/frise-consensus`) ;
+résultats mesurés ci-dessous (« Résultats »).
+
+Objectif : approcher la frise du modèle de référence (Sonnet) pour environ
+0,20 à 0,30 $ par dossier au lieu d'environ 1,20 $. Plusieurs modèles bon
+marché lisent le dossier ; ce qu'ils trouvent ensemble est gardé ; un modèle
+plus fort tranche **seulement les désaccords**, en ne voyant que les
+observations concernées.
+
+Pourquoi : sur 6 dossiers réels, GPT-6 Luna seul retrouve 45 % de la frise de
+référence, Haiku seul 50 %, **leur réunion 63 %** et quatre modèles 73 %. Ne
+garder que ce que la majorité trouve fait tomber à 31 % : les modèles se
+trompent différemment, il faut réunir puis trier, pas voter. (Simulation hors
+ligne sur les passages existants ; accord avec la référence, pas rappel.)
+
+## Principe
+
+1. **Segmentation une seule fois** (modèle de segmentation actuel). Toutes les
+   lectures portent sur les mêmes observations : c'est ce qui permet de les
+   comparer par leurs sources.
+2. **Lectures** : la frise est produite par chacun des modèles « lecteurs »
+   (par défaut 2 : GPT-6 Luna et Haiku 5.5), avec le prompt et le schéma
+   actuels (`TIMELINE_SYSTEM`, `TIMELINE_SCHEMA`), indépendamment, en
+   parallèle.
+3. **Rapprochement, en local** : les événements bruts (`RawEvent`, avant
+   `assembleTimeline`) des lectures sont appariés un à un. Chaque groupe
+   d'événements appariés est :
+   - **accord** : trouvé par toutes les lectures, et compatible (même piste,
+     dates compatibles à la précision commune, même mode) → gardé tel quel,
+     sources réunies, date la plus précise ;
+   - **désaccord** : trouvé par une partie des lectures seulement, ou trouvé
+     par toutes mais incompatible (dates, mode, piste) → envoyé à l'arbitre.
+4. **Arbitrage** : un modèle plus fort (par défaut Sonnet 5.5) reçoit, pour
+   chaque désaccord, les variantes proposées (piste, libellé, dates, mode,
+   note) et **le texte des seules observations citées** par ces variantes. Il
+   répond pour chaque désaccord : `keep` (une variante, éventuellement
+   corrigée) ou `drop` (non étayé par les observations). Les observations qui
+   ne portent aucun désaccord ne lui sont jamais envoyées.
+5. **Assemblage** : accords + désaccords gardés passent par
+   `assembleTimeline` (validation, âges, pistes), comme aujourd'hui.
+
+Limite assumée : ce qu'aucune lecture ne trouve, l'arbitre ne le rattrape pas
+(il ne voit que les désaccords). Plafond mesuré : 63 % à deux lecteurs, 73 %
+à quatre.
+
+## Rapprochement (règle)
+
+Deux événements de lectures différentes sont candidats à l'appariement si :
+- même `kind` (sinon : candidat « autre piste », traité comme désaccord) ;
+- libellés proches (même normalisation que `normaliseLabel`, puis similarité
+  de libellé comme `label_similarity` de `frise_eval.py`, seuil 0,5) ;
+- au moins une observation source en commun, **ou** des dates de début
+  compatibles.
+
+Appariement glouton un à un, meilleur score d'abord (libellé, date, mode,
+sources communes), comme `match_timeline`. Un groupe contient au plus un
+événement par lecture. Antécédents datés par l'âge : comparés sur
+`start_age`.
+
+## Arbitrage (requête)
+
+- Passe par `chatJson` : garde `assertSendable` sur les manifestes des
+  documents dont une observation est envoyée, journal des envois, ZDR. Le
+  journal distingue les appels : « lecture 1/2 », « lecture 2/2 »,
+  « arbitrage ».
+- Lots bornés comme les lectures (`CHARS_PER_CALL`) : désaccords groupés par
+  observations, une observation n'est envoyée qu'une fois par lot.
+- Schéma : `{ decisions: [{ id, verdict: "keep" | "drop", event: RawEvent | null }] }`
+  ; `id` = identifiant court du désaccord (« d1 »…). Un désaccord sans
+  décision valide est **gardé** dans la variante la plus fréquente, marqué
+  non arbitré (on ne perd pas un événement sur une panne).
+- Prompt : « Pour chaque désaccord, dis si l'événement est écrit dans les
+  observations ; garde la variante fidèle au texte, corrige-la au besoin ;
+  n'invente rien. »
+
+## Interfaces
+
+```ts
+// src/notebook/consensus.ts
+export interface ConsensusPolicy { readers: CloudPolicy[]; arbiter: CloudPolicy }
+export interface EventGroup { id: string; members: (RawEvent | null)[]; agreed: boolean }
+export function groupEvents(runs: RawEvent[][]): EventGroup[];          // pur, testé
+export async function buildConsensusTimeline(input: TimelineInput & { consensus: ConsensusPolicy }): Promise<Timeline & { consensus: ConsensusStats }>;
+export interface ConsensusStats { readers: number; agreed: number; disputed: number; kept: number; dropped: number; unarbitrated: number }
+```
+
+`buildTimeline` est découpée pour exposer `readEvents(input): Promise<RawEvent[]>`
+(une lecture, sans assemblage) ; son comportement ne change pas.
+
+## Application
+
+- Réglages : « Frise » → « Un modèle » (actuel) ou « Consensus » ; en
+  consensus, choix des lecteurs (2 ou 3, parmi les modèles mesurés) et de
+  l'arbitre. Coût estimé affiché à partir des moyennes mesurées.
+- Frise : un événement venu d'un arbitrage porte la mention « arbitré » au
+  survol ; en-tête : « N lectures, X accords, Y désaccords arbitrés ».
+- Parcours et journal : chaque lecture et l'arbitrage sont des envois
+  distincts, avec leur coût.
+- Par défaut : inchangé (un modèle). Le consensus devient le défaut
+  seulement si la mesure le justifie (décision de l'utilisateur).
+
+## Mesure
+
+- Dossiers fictifs (14, `verite.json`) : **rappel vrai**, sans dépendre de
+  la référence → c'est la mesure qui tranche. Comparer : Sonnet seul,
+  Luna seul, Luna + Haiku réunis sans arbitre, Luna + Haiku + arbitre Sonnet,
+  idem avec arbitre Haiku.
+- Dossiers réels (6, dépôt privé) : accord avec la frise de référence, coût
+  par dossier, nombre de désaccords, part gardée par l'arbitre.
+- Taille des lots : `CHARS_PER_CALL` actuel (24 000) puis 8 000, pour voir
+  si des lots plus petits améliorent les lectures bon marché.
+- Scripts : `run-frise.ts` et `run_frise_real.ts` acceptent
+  `--readers=<id>,<id> --arbiter=<id>` ; enregistrent les lectures brutes,
+  les groupes et les décisions (identifiants et comptes ; le texte reste
+  dans le fichier privé, jamais affiché).
+
+## Résultats (06/11/2026)
+
+Segmentation partagée (Haiku), lecteurs GPT-6 Luna et Claude Haiku 5.5.
+Détail : `data/processed/frise/comparaison-consensus.md` (fictifs) ; dépôt
+privé pour les réels.
+
+Dossiers fictifs, rappel vrai (320 événements ; Sonnet seul sur la même
+segmentation : 86 %) :
+
+| Passage | Luna | Haiku | Union | Consensus | Coût frise (14 dossiers) |
+|---|---|---|---|---|---|
+| lots de 24 000, arbitre Sonnet | 78 % | 75 % | 83 % | 80 % | 0,71 $ |
+| lots de 24 000, arbitre Haiku | 74 % | 78 % | 83 % | 81 % | 0,16 $ |
+| lots de 8 000, arbitre Sonnet | 81 % | 79 % | 85 % | 82 % | 1,00 $ |
+
+Dossiers réels (6, part de la frise de référence retrouvée, 688 événements) :
+
+| Passage | Luna | Haiku | Union | Consensus | Coût frise par dossier |
+|---|---|---|---|---|---|
+| lots de 24 000, arbitre Sonnet | 49 % | 50 % | 58 % | 58 % | 0,45 $ |
+| lots de 8 000, arbitre Haiku | 60 % | 61 % | 68 % | 67 % | 0,13 $ |
+
+Constats :
+
+- L'arbitre ne fait pas mieux que la simple réunion des lectures (« union ») :
+  il écarte peu (5 à 10 % des désaccords) et ne retrouve rien. L'arbitre
+  Sonnet coûte dix fois les lectures pour aucun gain ; l'arbitre Haiku est
+  presque gratuit et revient à l'union.
+- Les lots plus petits (8 000 caractères) sont le vrai levier : chaque
+  lecteur bon marché gagne environ 11 points sur les dossiers réels, et 3 à
+  4 points sur les fictifs (de l'ordre de la variation d'un passage à
+  l'autre). Ils produisent aussi plus d'événements (sur les
+  réels, 334 hors référence au lieu de 109 : vrais détails ou bruit, la
+  référence ne permet pas de trancher).
+- Meilleur compromis mesuré : Luna + Haiku en lots de 8 000, arbitre Haiku,
+  ≈ 0,13 $ de frise par dossier réel (plus la segmentation Haiku), 67 % de la
+  frise de Sonnet ; Sonnet seul coûte 1,17 $.
+- Défaut de l'application inchangé (un modèle, lots de 24 000) : passer au
+  consensus ou aux lots de 8 000 par défaut reste une décision de
+  l'utilisateur.
+
+## Tests (données fictives)
+
+- `groupEvents` : accord exact ; même événement daté à des précisions
+  différentes (accord, date la plus précise) ; dates incompatibles
+  (désaccord) ; événement d'une seule lecture (désaccord) ; même libellé sur
+  deux pistes (désaccord « autre piste ») ; un groupe ne prend jamais deux
+  événements d'une même lecture ; antécédent par l'âge.
+- Arbitrage (fetch simulé) : seules les observations des désaccords sont
+  dans la requête (aucune autre) ; `drop` retire ; `keep` avec correction
+  remplace ; réponse vide ou incomplète → désaccords gardés non arbitrés ;
+  aucun désaccord → aucun appel à l'arbitre.
+- Garde : un document non vérifié bloque lectures et arbitrage.
+
+## Non-objectifs
+
+- Pas de vote à la majorité seul (mesuré : il fait perdre la moitié).
+- Pas de consensus pour la segmentation (une seule, partagée).
+- Pas d'enregistrement de démonstration en consensus dans ce lot (plus tard,
+  si le mode est retenu).
+- L'arbitre ne relit pas le dossier entier : ce serait refaire la frise au
+  prix de Sonnet.
+
+---
+
 # SPEC — Démonstration de bout en bout et transparence des envois
 
 Statut : en cours (branche `dev/demo-and-cheaper-models`), 05/11/2026.

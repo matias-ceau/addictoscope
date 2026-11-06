@@ -5,10 +5,16 @@
  */
 import type { Manifest } from "../core/verify";
 
+/** Frise by consensus (SPEC.md): model ids of the readers and of the arbiter. */
+export interface ConsensusModels {
+  readers: string[];
+  arbiter: string;
+}
+
 export type CloudPolicy =
   | { kind: "off" }
-  | { kind: "openrouter-zdr"; apiKey: string; model: string; segmentModel?: string }
-  | { kind: "custom-endpoint"; url: string; apiKey: string; model: string; segmentModel?: string };
+  | { kind: "openrouter-zdr"; apiKey: string; model: string; segmentModel?: string; consensus?: ConsensusModels }
+  | { kind: "custom-endpoint"; url: string; apiKey: string; model: string; segmentModel?: string; consensus?: ConsensusModels };
 
 export class CloudRefused extends Error {}
 
@@ -27,6 +33,12 @@ export function openRouterPrivacyFields() {
   // Not require_parameters: it leaves no ZDR endpoint for some models (404).
   // An empty or unreadable answer is tried once more instead (client.ts).
   return { provider: { zdr: true, data_collection: "deny" as const } };
+}
+
+/** The readers and the arbiter of a consensus frise, or null for a single model. */
+export function consensusPolicies(p: CloudPolicy): { readers: CloudPolicy[]; arbiter: CloudPolicy } | null {
+  if (p.kind === "off" || !p.consensus || p.consensus.readers.length < 2 || !p.consensus.arbiter) return null;
+  return { readers: p.consensus.readers.map((model) => ({ ...p, model })), arbiter: { ...p, model: p.consensus.arbiter } };
 }
 
 /** The policy for the segmentation: its own model if one is set (often a
