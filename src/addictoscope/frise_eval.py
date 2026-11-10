@@ -361,8 +361,10 @@ def expected_observations(dossier_dir) -> dict[str, list[str | None]]:
             "notes.txt" if pdf.stem == "historique" else f"{pdf.stem}.txt"
         )
         text = source.read_text(encoding="utf8")
-        dates = [f"{y}-{m}-{d}" for d, m, y in NOTE_HEADER.findall(text)]
-        out[pdf.stem] = dates if dates else [None]
+        dates: list[str | None] = [
+            f"{y}-{m}-{d}" for d, m, y in NOTE_HEADER.findall(text)
+        ]
+        out[pdf.stem] = dates or [None]
     return out
 
 

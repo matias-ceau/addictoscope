@@ -22,6 +22,7 @@ from __future__ import annotations
 import json
 import statistics
 import sys
+from collections.abc import Sequence
 from pathlib import Path
 
 from addictoscope.frise_eval import (
@@ -70,7 +71,7 @@ def pct(n: float, d: float) -> str:
     return f"{100 * n / d:.0f} %" if d else "–"
 
 
-def spread(values: list[float], fmt="{:.0f}") -> str:
+def spread(values: Sequence[float], fmt: str = "{:.0f}") -> str:
     if len(values) == 1:
         return fmt.format(values[0])
     return f"{fmt.format(statistics.mean(values))} ({fmt.format(min(values))}–{fmt.format(max(values))})"
@@ -139,16 +140,16 @@ def main(argv: list[str]) -> None:
     w(
         f"# Frise des dossiers fictifs{'' if root == 'dossiers' else ' longs'}, notée contre `verite.json`\n"
     )
-    per = " ou ".join(str(k) for k in runs_per_dossier)
+    passes = " ou ".join(str(k) for k in runs_per_dossier)
     if from_files:
         w(
             f"- Demandes de l'application ({', '.join(models)}) écrites dans des fichiers et répondues par des "
-            f"sous-agents, une demande par sous-agent, sans rien d'autre sous les yeux ; {per} passage(s) par dossier ; "
+            f"sous-agents, une demande par sous-agent, sans rien d'autre sous les yeux ; {passes} passage(s) par dossier ; "
             "aucun appel payant."
         )
     else:
         w(
-            f"- Modèle : {', '.join(models)} ; {per} passage(s) par dossier ; coût total {cost:.2f} $."
+            f"- Modèle : {', '.join(models)} ; {passes} passage(s) par dossier ; coût total {cost:.2f} $."
         )
     w(
         f"- Dates des passages : {min(m['ranAt'] for m in runs_meta)[:10]} → {max(m['ranAt'] for m in runs_meta)[:10]}."
