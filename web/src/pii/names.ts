@@ -68,6 +68,15 @@ export function afterPlaceCue(text: string, start: number): boolean {
   return /(?:^|[^\p{L}])(?:à|au|aux|en|vers|sur|de|du|d['’])\s*$/u.test(text.slice(Math.max(0, start - 12), start));
 }
 
+/**
+ * Does the word starting at `start` follow "Saint-", "Sainte ", "St-"? Then it
+ * names a saint, so a place (a district, a hospital, a town): "quartier
+ * Saint-Jean" is not the person Jean, and places stay readable.
+ */
+export function afterSaint(text: string, start: number): boolean {
+  return /(?<![\p{L}\p{N}])(?:saint|sainte|st|ste)[- ]$/iu.test(text.slice(Math.max(0, start - 8), start));
+}
+
 export function isParticle(t: string): boolean {
   return PARTICLES.has(normaliseName(t));
 }
@@ -249,9 +258,21 @@ export function findNameSpans(text: string, { contextOnly = false } = {}): NameS
   const word = new RegExp(String.raw`(?<![${U}${L}])(${NAME_TOKEN})(?![${U}${L}])`, "g");
   while ((m = word.exec(text))) {
     const t = m[1];
-    if (FIRST_NAMES.has(t) && !LONE_NAME_STOPWORDS.has(t)) {
+    // "Jean-Claude" alone: a compound whose parts are all known first names.
+    const known = (FIRST_NAMES.has(t) && !LONE_NAME_STOPWORDS.has(t)) || (t.includes("-") && isFirstName(t));
+    if (known && !afterSaint(text, m.index)) {
       spans.push({ start: m.index, end: m.index + t.length, category: "PERSONNE" });
     }
+  }
+
+  // A nickname in quotes right after a full name: 'M. Jean-Luc MARTINEAU, "Jeannot"'.
+  const nickname = new RegExp(String.raw`(${NAME_TOKEN})[ \t]+(${NAME_TOKEN})[ \t]*,?[ \t]*(?:dite?[ \t]+)?["«“][ \t]*(${NAME_TOKEN})[ \t]*["»”]`, "g");
+  while ((m = nickname.exec(text))) {
+    const [, a, b, nick] = m;
+    const fullName = (isFirstName(a) && isCapsWord(b) && isNameToken(b)) || (isCapsWord(a) && isNameToken(a) && isFirstName(b));
+    if (!fullName || !isNameToken(nick) || COMMON_WORDS.has(normaliseName(nick))) continue;
+    const start = m.index + m[0].lastIndexOf(nick);
+    spans.push({ start, end: start + nick.length, category: "PERSONNE" });
   }
 
   return spans;

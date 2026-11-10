@@ -44,6 +44,9 @@ export interface Track {
   id: string;
   kind: TrackKind;
   label: string;
+  /** The other labels the same thing was read under, once its tracks were
+   *  regrouped ("Hépatite C" also read as "VHC"). */
+  aliases?: string[];
 }
 
 export interface TimelineEvent {
@@ -62,11 +65,33 @@ export interface TimelineEvent {
   consensus?: "agreed" | "arbitrated" | "unarbitrated";
   /** Present when a bound was computed from an age: drawn as approximate. */
   fromAge?: { start: AgeRange | null; end: AgeRange | null };
+  /** The text gives no start ("HTA traitée", "arrêté en mai"): the event is
+   *  placed at the first observation that mentions it, or at its end when it
+   *  ended before. Drawn as approximate. */
+  startUnknown?: true;
+  /** Regroupement (consolidate.ts): the tellings merged into this event. */
+  tellings?: Telling[];
+}
+
+/** One mention of a fact, as read in one lot, before the tellings were merged. */
+export interface Telling {
+  /** null when that telling gave no start. */
+  start: string | null;
+  end: string | null;
+  note: string;
+  observationIds: string[];
+}
+
+/** Do two tellings give dates that cannot both be right ("2013", "2014-10-14")?
+ *  A coarser date that contains the other ("2014", "2014-10") is not a disagreement. */
+export function tellingsDisagree(tellings: Telling[] | undefined): boolean {
+  const starts = [...new Set((tellings ?? []).flatMap((t) => (t.start ? [t.start] : [])))];
+  return starts.some((a, i) => starts.slice(i + 1).some((b) => !a.startsWith(b) && !b.startsWith(a)));
 }
 
 /** An antecedent told by age that could not be placed on the axis (no birth
  *  date known locally, or a year past the last observation). */
-export type UndatedEvent = Omit<TimelineEvent, "start" | "end" | "fromAge"> & {
+export type UndatedEvent = Omit<TimelineEvent, "start" | "end" | "fromAge" | "startUnknown" | "tellings"> & {
   startAge: AgeRange;
   endAge: AgeRange | null;
 };
@@ -83,6 +108,20 @@ export interface ConsensusStats {
   unarbitrated: number;
 }
 
+/** What the regroupement did to a frise read in several lots (SPEC.md). */
+export interface ConsolidationStats {
+  /** Independent lots the frise was read in. */
+  lots: number;
+  tracksBefore: number;
+  tracksAfter: number;
+  eventsBefore: number;
+  eventsAfter: number;
+  /** Merged events whose tellings give dates that cannot both be right. */
+  discordant: number;
+  /** The call failed: the frise is the one read, not regrouped. */
+  failed?: string;
+}
+
 export interface Timeline {
   tracks: Track[];
   events: TimelineEvent[];
@@ -90,6 +129,8 @@ export interface Timeline {
   undated: UndatedEvent[];
   /** Present when the frise was built by consensus. */
   consensus?: ConsensusStats;
+  /** Present when the frise was read in several lots and regrouped. */
+  consolidation?: ConsolidationStats;
 }
 
 /** A timeline read from older JSON (no `undated`) brought to the current shape. */

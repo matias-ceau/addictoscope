@@ -4,14 +4,17 @@
  * (--readers=<id>,<id> --arbiter=<id>, SPEC.md), with --chars=<n> for the
  * size of each call and --observations-from=<folder> to reuse the
  * segmentation of an earlier run (only the frise step then varies).
+ * --consolidate: a frise read in several lots is regrouped, as in the app
+ * (src/notebook/consolidate.ts); the frise as read is kept beside it.
  */
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 import type { CloudPolicy } from "../src/cloud/guard";
 import { buildConsensusTimeline, groupEvents, mergeAgreed, type ConsensusStats } from "../src/notebook/consensus";
+import { consolidateTimeline } from "../src/notebook/consolidate";
 import type { Observation, Timeline } from "../src/notebook/model";
-import { assembleTimeline, buildTimeline, lastObservationDate, type RawEvent, type TimelineInput } from "../src/notebook/timeline";
+import { assembleTimeline, buildTimeline, lastObservationDate, lotCount, observationDates, type RawEvent, type TimelineInput } from "../src/notebook/timeline";
 
 const arg = (name: string) => process.argv.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
 
@@ -19,6 +22,7 @@ export const READERS = arg("readers")?.split(",").filter(Boolean) ?? [];
 export const ARBITER = arg("arbiter");
 export const CHARS = arg("chars") ? Number(arg("chars")) : undefined;
 export const OBSERVATIONS_FROM = arg("observations-from");
+export const CONSOLIDATE = process.argv.includes("--consolidate");
 if (READERS.length === 1 || (READERS.length > 0 && !ARBITER)) throw new Error("--readers needs at least two models and --arbiter");
 
 /** Settings to record in the run's JSON. */
@@ -26,6 +30,7 @@ export const friseSettings = () => ({
   ...(READERS.length ? { readers: READERS, arbiter: ARBITER } : {}),
   ...(CHARS ? { charsPerCall: CHARS } : {}),
   ...(OBSERVATIONS_FROM ? { observationsFrom: OBSERVATIONS_FROM } : {}),
+  ...(CONSOLIDATE ? { consolidate: true } : {}),
 });
 
 /** Observations of an earlier run of this dossier, for the documents sent now; null when not asked. */
@@ -40,12 +45,22 @@ export function reusedObservations(base: string, slug: string, docs: Set<string>
 
 export interface FriseResult {
   timeline: Timeline;
+  /** --consolidate, several lots: the frise as read, before the regroupement. */
+  timelineRead?: Timeline;
   consensus?: ConsensusStats;
   /** Consensus: each reader's own frise on the same observations (single-model baselines), and their union without arbiter ("union"). */
   readings?: { model: string; timeline: Timeline }[];
 }
 
 export async function friseStep(input: TimelineInput, policy: Extract<CloudPolicy, { kind: "openrouter-zdr" }>): Promise<FriseResult> {
+  const result = await readStep(input, policy);
+  const lots = CONSOLIDATE ? lotCount({ ...input, ...(CHARS ? { charsPerCall: CHARS } : {}) }) : 1;
+  if (lots < 2) return result;
+  const regrouped = await consolidateTimeline(result.timeline, { ...input, policy: ARBITER ? { ...policy, model: ARBITER } : policy }, lots);
+  return { ...result, timeline: regrouped, timelineRead: result.timeline };
+}
+
+async function readStep(input: TimelineInput, policy: Extract<CloudPolicy, { kind: "openrouter-zdr" }>): Promise<FriseResult> {
   const withChars = { ...input, policy, ...(CHARS ? { charsPerCall: CHARS } : {}) };
   if (!READERS.length) return { timeline: await buildTimeline(withChars) };
   let runs: RawEvent[][] = [];
@@ -56,7 +71,7 @@ export async function friseStep(input: TimelineInput, policy: Extract<CloudPolic
   });
   const known = new Set(input.observations.map((o) => o.id));
   const last = lastObservationDate(input.observations);
-  const assemble = (raw: RawEvent[]) => assembleTimeline(raw, known, input.birthYear ?? null, last);
+  const assemble = (raw: RawEvent[]) => assembleTimeline(raw, known, input.birthYear ?? null, last, observationDates(input.observations));
   // Union without arbiter: agreements merged, every dispute kept as first read.
   const union = groupEvents(runs).map((g) => {
     const present = g.members.filter((m): m is RawEvent => m !== null);

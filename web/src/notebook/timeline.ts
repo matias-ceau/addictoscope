@@ -10,6 +10,8 @@ import type { Manifest } from "../core/verify";
 import { linesBetween, repeatedLines } from "./lines";
 import { parseAge } from "./age";
 import {
+  dateEnd,
+  dateStart,
   isPartialDate,
   TRACK_KINDS,
   USAGE_MODES,
@@ -89,6 +91,21 @@ export interface TimelineInput {
   birthYear?: number | null;
   /** Characters of observation text per call (default CHARS_PER_CALL). */
   charsPerCall?: number;
+  /** false: an event with neither a start nor an age is dropped, as before
+   *  such events were placed at their first mention — to replay a recording
+   *  made then and rebuild the frise that run produced. */
+  placeUnknownStarts?: boolean;
+}
+
+/** Independent lots the observations are read in: one call each. */
+export function lotCount(input: Pick<TimelineInput, "observations" | "pagesByDoc" | "charsPerCall">): number {
+  const prepared = prepareObservations(input);
+  return packObservations(prepared.sorted, prepared.text, input.charsPerCall).length;
+}
+
+/** Observation id -> its date, for `assembleTimeline`. */
+export function observationDates(observations: Observation[]): Map<string, string | null> {
+  return new Map(observations.map((o) => [o.id, o.date]));
 }
 
 export interface RawEvent {
@@ -191,7 +208,8 @@ export function lastObservationDate(observations: Observation[]): string | null 
 
 export async function buildTimeline(input: TimelineInput): Promise<Timeline> {
   const raw = await readEvents(input);
-  return assembleTimeline(raw, new Set(input.observations.map((o) => o.id)), input.birthYear ?? null, lastObservationDate(input.observations));
+  const dates = observationDates(input.observations);
+  return assembleTimeline(raw, new Set(dates.keys()), input.birthYear ?? null, lastObservationDate(input.observations), input.placeUnknownStarts === false ? undefined : dates);
 }
 
 function normaliseLabel(s: string): string {
@@ -205,12 +223,19 @@ function normaliseLabel(s: string): string {
  * end = birthYear + b when a < b and nothing else ends the event. An age
  * with no birth year, or resolving past `lastObservation` (the date of the
  * last dated observation; no bound when it is omitted), goes to `undated`.
+ *
+ * An event with neither a start nor an age is placed when `observationDates`
+ * is given and the text still says where it stands: still going on, or ended
+ * at a known date ("HTA traitée", "acamprosate arrêté mi-août"). It starts at
+ * the first observation that mentions it — or is a point at its end when it
+ * ended before — and is marked `startUnknown`. Otherwise it is dropped.
  */
 export function assembleTimeline(
   raw: RawEvent[],
   knownObservations: Set<string>,
   birthYear: number | null = null,
   lastObservation: string | null = null,
+  observationDates?: Map<string, string | null>,
 ): Timeline {
   const tracks: Track[] = [];
   const trackOf = new Map<string, Track>();
@@ -248,9 +273,12 @@ export function assembleTimeline(
     if (!(TRACK_KINDS as readonly string[]).includes(e.kind)) continue;
     const dated = isPartialDate(e.start);
     const startAge = dated ? null : parseAge(e.start_age);
-    if (!dated && !startAge) continue; // neither a date nor a readable age
     const sources = (e.observation_ids ?? []).filter((id) => knownObservations.has(id));
     if (sources.length === 0) continue; // nothing on the frise without a source
+    // No start told: the first observation that mentions it, when the text says it lasts or when it ended.
+    const firstMention = sources.map((id) => observationDates?.get(id)).filter(isPartialDate).sort()[0];
+    const placeable = !dated && !startAge && firstMention !== undefined && (isPartialDate(e.end) || Boolean(e.ongoing));
+    if (!dated && !startAge && !placeable) continue; // neither a date nor a readable age
     const kind = e.kind as TrackKind;
     const mode = kind === "substance_use" && (USAGE_MODES as readonly string[]).includes(e.mode ?? "") ? (e.mode as TimelineEvent["mode"]) : null;
     const endAge = parseAge(e.end_age);
@@ -266,7 +294,15 @@ export function assembleTimeline(
     let start: string;
     let end: string | null = null;
     let fromAge: TimelineEvent["fromAge"];
-    if (dated) {
+    if (placeable) {
+      const ended = isPartialDate(e.end) ? e.end : null;
+      // "Arrêté en 2017", read in 2022: all that is known is the end.
+      if (ended && dateEnd(ended) < dateStart(firstMention!)) start = ended;
+      else {
+        start = firstMention!;
+        end = ended;
+      }
+    } else if (dated) {
       start = e.start as string;
       if (isPartialDate(e.end) && e.end >= start) end = e.end;
       else if (endAge) {
@@ -309,8 +345,9 @@ export function assembleTimeline(
       start,
       end,
       ...common,
-      ongoing: common.ongoing && !end,
+      ongoing: common.ongoing && !end && !(placeable && start !== firstMention),
       ...(fromAge ? { fromAge } : {}),
+      ...(placeable ? { startUnknown: true as const } : {}),
     };
     seen.set(key, event);
     events.push(event);

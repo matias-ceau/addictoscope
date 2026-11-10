@@ -31,7 +31,7 @@ export function journeySteps(docs: SourceDocState[], analysis: AnalysisState, on
       ? "Réponses enregistrées d'un vrai passage : rien n'est envoyé"
       : online === "off"
         ? "IA en ligne désactivée : rien ne peut partir"
-        : "Seuls le texte et les images des pages pseudonymisées partent, sans conservation (ZDR)";
+        : "Seul le texte pseudonymisé part, sans conservation (ZDR) ; l'image des pages aussi quand la mise en page n'est pas reconnue";
   return [
     { id: "depot", title: "Dépôt", place: "local", status: status(any, !any), detail: "Les fichiers sont ouverts dans ce navigateur, sans envoi" },
     { id: "detection", title: "Détection", place: "local", status: status(read, reading), detail: "Règles et modèle d'IA local repèrent noms, dates, numéros" },

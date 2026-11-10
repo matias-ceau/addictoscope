@@ -15,6 +15,7 @@ import {
   assembleTimeline,
   CHARS_PER_CALL,
   lastObservationDate,
+  observationDates,
   prepareObservations,
   readEvents,
   TIMELINE_SCHEMA,
@@ -378,7 +379,7 @@ export async function buildConsensusTimeline(
     }
   }
 
-  const timeline = assembleTimeline(kept, known, input.birthYear ?? null, lastObservationDate(input.observations));
+  const timeline = assembleTimeline(kept, known, input.birthYear ?? null, lastObservationDate(input.observations), input.placeUnknownStarts === false ? undefined : observationDates(input.observations));
   return { ...timeline, consensus: stats };
 }
 

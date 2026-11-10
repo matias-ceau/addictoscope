@@ -9,7 +9,7 @@ export function useLedger(): OutboundEntry[] {
 
 const time = (t: number) => new Date(t).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 const size = (b: number) => (b > 1e6 ? `${(b / 1e6).toFixed(1)} Mo` : `${Math.max(1, Math.round(b / 1e3))} ko`);
-const SCHEMA_LABEL: Record<string, string> = { segmentation: "Découpage en observations", frise: "Construction de la frise", arbitrage: "Arbitrage des désaccords" };
+const SCHEMA_LABEL: Record<string, string> = { segmentation: "Découpage en observations", frise: "Construction de la frise", arbitrage: "Arbitrage des désaccords", regroupement: "Regroupement des doublons (sans texte d'observation)" };
 
 /** Top-bar pill: where the data is right now, from the journal. */
 export function DataStatus({ demo, onOpen }: { demo: boolean; onOpen: () => void }) {
@@ -123,7 +123,8 @@ export function Journal(props: { onClose: () => void; realValues: string[]; docN
         </div>
         <ul className="never-sent">
           <li>Jamais envoyés : les documents d'origine, la table de correspondance (étiquette → vrai nom), la date de naissance complète.</li>
-          <li>Envoyés seulement après masquage et vérification : texte et images des pages pseudonymisées (l'année de naissance y reste, en clair).</li>
+          <li>Envoyé seulement après masquage et vérification : le texte des pages pseudonymisées (l'année de naissance y reste, en clair).</li>
+          <li>Le découpage en observations se fait sur ce poste quand la mise en page est reconnue ; sinon le modèle reçoit aussi l'image des pages pseudonymisées.</li>
           <li>Le journal reste en mémoire dans ce navigateur : il n'est ni enregistré ni transmis.</li>
         </ul>
         {entries.length === 0 ? (

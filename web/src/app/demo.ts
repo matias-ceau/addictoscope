@@ -14,6 +14,8 @@ export interface DemoRecordingInfo {
   file: string;
   model: string;
   cost: number;
+  /** The run was answered without a paid call: `cost` is what it would have cost. */
+  costEstimated?: boolean;
   elapsedMs: number | null;
   events: number;
   /** Expected events (verite.json) found by this recorded run. */

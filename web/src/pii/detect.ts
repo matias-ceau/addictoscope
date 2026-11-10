@@ -8,7 +8,7 @@ import { rectsForSpan } from "../core/geometry";
 import { rowSpanToPage, visualRows } from "../core/pagetext";
 import type { Category, Detection, DetectionSource, PageText } from "../core/types";
 import { PERSON_CATEGORIES } from "../core/types";
-import { afterPlaceCue, COMMON_WORDS, findNameSpans, nameTokens, normaliseName, trimModelPerson } from "./names";
+import { afterPlaceCue, afterSaint, COMMON_WORDS, findNameSpans, nameTokens, normaliseName, trimModelPerson } from "./names";
 import type { NerSpan } from "./ner";
 import { findRuleSpans } from "./rules";
 
@@ -280,6 +280,8 @@ export function detectCorpus(docs: SourceDoc[]): Detection[] {
           for (const at of findWord(folded, token, COMMON_WORDS.has(token))) {
             const original = page.text.slice(at, at + token.length);
             if (e.firstNames.has(token) && original[0] !== original[0].toUpperCase()) continue;
+            // "Saint-Jean", "Sainte-Anne": a place, left readable; the verifier makes the same call.
+            if (afterSaint(page.text, at)) continue;
             const { start, end } = wholeCompound(page.text, at, at + token.length);
             const h: Hit = { doc: doc.id, page: page.page, start, end, category: e.category, source: "propagation" };
             hits.push(h);

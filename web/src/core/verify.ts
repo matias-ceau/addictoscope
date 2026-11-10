@@ -4,7 +4,7 @@
  * look for anything that should have been removed.
  */
 import { foldChars } from "../pii/detect";
-import { afterPlaceCue, COMMON_WORDS, isFirstName, isParticle, normaliseName } from "../pii/names";
+import { afterPlaceCue, afterSaint, COMMON_WORDS, isFirstName, isParticle, normaliseName } from "../pii/names";
 import { findRuleSpans } from "../pii/rules";
 import type { Detection, PageText } from "./types";
 import { PERSON_CATEGORIES } from "./types";
@@ -65,6 +65,7 @@ export function findLeaks(outputPages: PageText[], accepted: Detection[], places
         const written = orig.slice(m.index, m.index + n.length);
         if (spelling === "upper" && written !== written.toUpperCase()) continue;
         if (placeSet.has(n) && afterPlaceCue(orig, m.index)) continue;
+        if (afterSaint(orig, m.index)) continue; // "Saint-Jean": a place, as the detector decided
         leaks.push({ page: page.page, text: n, reason: "known-identifier" });
         break;
       }
