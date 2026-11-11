@@ -15,6 +15,8 @@ export interface AnalysisState {
   /** Model of the last run, and whether its answers were replayed. */
   model?: string;
   replayed?: boolean;
+  /** Per document of the last run: observations found here by rules, or by the model. */
+  segmentedBy?: Record<string, "rules" | "model">;
 }
 
 /** In the demonstration: which recording to replay, or "live". */
@@ -28,10 +30,21 @@ export interface DemoAnalysis {
 
 const dollars = (n: number) => (n < 0.01 ? `${n.toFixed(3)} $` : `${n.toFixed(2)} $`);
 
+/** Where the observations were split: said plainly, it decides whether page images left this machine. */
+function segmentationNote(by?: Record<string, "rules" | "model">): string | null {
+  const how = Object.values(by ?? {});
+  if (!how.length) return null;
+  const local = how.filter((h) => h === "rules").length;
+  if (local === how.length) return "Découpage en observations fait sur ce poste (mise en page reconnue) : aucune image de page envoyée.";
+  if (local === 0) return "Découpage en observations par le modèle, à partir du texte et des images des pages pseudonymisées.";
+  return `Découpage en observations fait sur ce poste pour ${local} document(s) sur ${how.length} ; pour les autres, par le modèle (texte et images des pages pseudonymisées).`;
+}
+
 function progressLabel(p?: AnalysisProgress): string {
   if (!p) return "Préparation…";
   if (p.step === "images") return `Préparation des pages ${p.done}/${p.total}`;
   if (p.step === "segment") return `Découpage des observations ${p.done}/${p.total}`;
+  if (p.step === "consolidate") return "Regroupement des doublons…";
   return `Construction de la frise ${p.done}/${p.total}`;
 }
 
@@ -70,7 +83,10 @@ export function AnalysisCard(props: {
                       {Math.round((100 * r.score.found) / r.score.expected)} % des événements attendus
                     </span>
                   )}
-                  <span>{dollars(r.cost)}</span>
+                  <span title={r.costEstimated ? "Passage sans appel payant : coût estimé d'après les caractères échangés" : undefined}>
+                    {r.costEstimated ? "≈ " : ""}
+                    {dollars(r.cost)}
+                  </span>
                   {r.elapsedMs ? <span>{Math.round(r.elapsedMs / 1000)} s</span> : null}
                 </span>
                 <span className="muted small">Réponses enregistrées d'un vrai passage · aucun envoi</span>
@@ -139,6 +155,9 @@ export function AnalysisCard(props: {
           </span>
           <button onClick={props.onShowFrise}>Voir la frise</button>
         </div>
+      )}
+      {analysis.status === "done" && segmentationNote(analysis.segmentedBy) && (
+        <p className="small muted">{segmentationNote(analysis.segmentedBy)}</p>
       )}
     </div>
   );

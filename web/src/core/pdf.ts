@@ -5,7 +5,7 @@
 import * as mupdf from "mupdf";
 
 import { padRect, textBand } from "./geometry";
-import { buildPageText } from "./pagetext";
+import { buildPageText, inlineLabels } from "./pagetext";
 import type { PageText, Rect } from "./types";
 
 /** Below this many characters a page is treated as a scan and OCR'd. */
@@ -61,7 +61,7 @@ export function extractPageText(doc: mupdf.Document, index: number): PageText {
     },
   });
 
-  return buildPageText(index, width, height, lines, "pdf");
+  return buildPageText(index, width, height, inlineLabels(lines), "pdf");
 }
 
 /** Render a page to PNG bytes at the given zoom (1 = 72 dpi). */

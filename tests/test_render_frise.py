@@ -163,11 +163,43 @@ def test_age_based_events_are_drawn(render_frise, tmp_path):
     assert "Ivresses de [PATIENT] à l'adolescence." in page
 
 
+def test_a_regrouped_frise_shows_its_mentions_and_the_labels_set_aside(
+    render_frise, tmp_path
+):
+    run = app_run()
+    track = run["timeline"]["tracks"][0]
+    track["aliases"] = ["Boissons avec [PROCHE_1]"]
+    first, second, third = run["timeline"]["events"][:3]
+    first["tellings"] = [
+        {"start": "2019", "end": None, "note": "", "observationIds": []},
+        {"start": "2019-04", "end": None, "note": "", "observationIds": []},
+    ]
+    second["tellings"] = [
+        {"start": "2022", "end": None, "note": "", "observationIds": []},
+        {"start": "2023-02-10", "end": None, "note": "", "observationIds": []},
+    ]
+    second["startUnknown"] = True
+    path = tmp_path / "run.json"
+    path.write_text(json.dumps(run, ensure_ascii=False), encoding="utf-8")
+    table = tmp_path / "table.json"
+    table.write_text(json.dumps(KEY, ensure_ascii=False), encoding="utf-8")
+    out = tmp_path / "out.html"
+    assert render_frise.main([str(path), "-o", str(out), "--key", str(table)]) == 0
+    page = out.read_text(encoding="utf-8")
+    assert "2 mentions regroupées" in page
+    assert "dates discordantes selon les observations : 2022 · 2023-02-10" in page
+    assert "début non précisé dans le texte" in page
+    assert "Boissons avec BRUNEL Anatole" in page and "[PROCHE_1]" not in page
+    assert third.get("tellings") is None
+
+
 def test_texts_replace_summaries_and_take_the_key(render_frise, tmp_path):
     run = tmp_path / "run.json"
     run.write_text(json.dumps(app_run()), encoding="utf-8")
     texts = tmp_path / "texts.json"
-    full = "Entretien avec [PATIENT] ce jour, appel de [SOIGNANT_2] : ivresses dès 14 ans."
+    full = (
+        "Entretien avec [PATIENT] ce jour, appel de [SOIGNANT_2] : ivresses dès 14 ans."
+    )
     texts.write_text(json.dumps({"historique:o1": full}), encoding="utf-8")
     table = tmp_path / "table.json"
     table.write_text(json.dumps(KEY), encoding="utf-8")
@@ -176,10 +208,14 @@ def test_texts_replace_summaries_and_take_the_key(render_frise, tmp_path):
     render_frise.main([str(run), "--texts", str(texts), "-o", str(plain)])
     page = plain.read_text(encoding="utf-8")
     assert "Entretien avec [PATIENT] ce jour" in page
-    assert "Appel de [SOIGNANT_9]." in page  # an observation without full text keeps its summary
+    assert (
+        "Appel de [SOIGNANT_9]." in page
+    )  # an observation without full text keeps its summary
 
     real = tmp_path / "real.html"
-    render_frise.main([str(run), "--texts", str(texts), "--key", str(table), "-o", str(real)])
+    render_frise.main(
+        [str(run), "--texts", str(texts), "--key", str(table), "-o", str(real)]
+    )
     page = real.read_text(encoding="utf-8")
     assert "Entretien avec VASSEUR Maëlys ce jour, appel de LEROY Martine" in page
     assert "[SOIGNANT_2]" not in page

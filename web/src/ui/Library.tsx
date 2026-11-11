@@ -74,6 +74,7 @@ export function Library(props: { url: string }) {
                         {d.summary && <span className="library-summary">{d.summary}</span>}
                         <span className="library-meta">
                           {d.docs.length} document{d.docs.length > 1 ? "s" : ""}
+                          {d.pages !== undefined ? ` · ${d.pages} page${d.pages > 1 ? "s" : ""}` : ""}
                           {d.events !== undefined ? ` · ${d.events} événements` : ""}
                           <span className={`library-status ${st}`}>{STATUS_LABEL[st]}</span>
                         </span>

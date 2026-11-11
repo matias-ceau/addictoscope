@@ -10,7 +10,8 @@ const PLANTED: string[] = JSON.parse(readFileSync(resolve(DATA, "ground_truth.js
 /**
  * A stand-in for the cloud model: it answers the two prompts from the text
  * it is sent (observation titles, observation ids), so the whole flow can
- * be tested without an API key. It does not judge model quality.
+ * be tested without an API key. It does not judge model quality. The export
+ * dropped below is split by rules: only the frise prompt is expected.
  */
 function fakeModel(route: Route, sent: string[]) {
   const body = route.request().postDataJSON();
@@ -72,15 +73,17 @@ test("analyse a verified document into a frise, sending nothing identifying", as
   await expect(page.locator(".frise .event")).toHaveCount(4);
   await page.screenshot({ path: "test-results/frise.png" });
 
-  // What left the browser: pseudonymized pages only, routed with ZDR.
-  expect(sent.length).toBeGreaterThanOrEqual(2);
+  // What left the browser: one frise request, routed with ZDR. The layout is
+  // a known export, so the observations were found here: no segmentation
+  // request, no page image.
+  expect(sent.map((body) => JSON.parse(body).response_format.json_schema.name)).toEqual(["frise"]);
   const fold = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").toUpperCase();
   for (const body of sent) {
     expect(JSON.parse(body).provider).toEqual({ zdr: true, data_collection: "deny" });
     const textOnly = fold(body.replace(/data:image\/png;base64,[A-Za-z0-9+/=]+/g, ""));
     for (const id of PLANTED) expect(textOnly, id).not.toContain(fold(id));
   }
-  expect(sent[0]).toContain("data:image/png;base64,");
+  expect(sent[0]).not.toContain("data:image/");
 
   // Table view and jump back to the source observation.
   await page.getByRole("tab", { name: "Tableau" }).click();

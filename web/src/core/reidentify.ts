@@ -77,8 +77,17 @@ export function reidentify(text: string, table: KeyTable): string {
 export function reidentifyTimeline(t: Timeline, table: KeyTable): Timeline {
   return {
     ...t,
-    tracks: t.tracks.map((x) => ({ ...x, label: reidentify(x.label, table) })),
-    events: t.events.map((e) => ({ ...e, note: reidentify(e.note, table) })),
+    tracks: t.tracks.map((x) => ({
+      ...x,
+      label: reidentify(x.label, table),
+      ...(x.aliases ? { aliases: x.aliases.map((a) => reidentify(a, table)) } : {}),
+    })),
+    events: t.events.map((e) => ({
+      ...e,
+      note: reidentify(e.note, table),
+      // The mentions regrouped into the event carry their own notes.
+      ...(e.tellings ? { tellings: e.tellings.map((m) => ({ ...m, note: reidentify(m.note, table) })) } : {}),
+    })),
     undated: (t.undated ?? []).map((e) => ({ ...e, note: reidentify(e.note, table) })),
   };
 }

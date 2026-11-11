@@ -5,7 +5,7 @@ import { demoFiles, loadRecording, type DemoDossier } from "../app/demo";
 import { loadDossierAnalysis, loadDossierFiles, loadDossierKey, remapAnalysis, type Library, type LibraryDossier } from "../app/library";
 import { clearLedger } from "../cloud/ledger";
 import { modelName } from "../cloud/models";
-import { replayFetch } from "../cloud/replay";
+import { hasConsolidation, replayFetch } from "../cloud/replay";
 import { parseAnalysis, serializeAnalysis, type SavedAnalysis } from "../app/saved";
 import type { KeyEntry } from "../core/keyfile";
 import { keyTableFromEntries, type KeyTable } from "../core/reidentify";
@@ -174,12 +174,19 @@ export function App(props: { library?: LibraryProps } = {}) {
       const recording = demo && demoSource !== "live" ? demo.recordings.find((r) => r.file === demoSource) : undefined;
       const replay = recording ? await loadRecording(demo!, recording) : undefined;
       const runPolicy: CloudPolicy = replay ? { kind: "openrouter-zdr", apiKey: "", model: replay.model } : policy;
+      // A recording made before the rules replays as its run went: every
+      // document split by the model, events without a start dropped.
+      const before = Boolean(replay && replay.segmentation !== "rules-first");
       const result = await analyse(
         docs.map((d) => ({ id: d.id, pages: d.outPages!, manifest: d.manifest })),
         runPolicy,
         (progress) => setAnalysis((a) => ({ ...a, progress })),
         stateRef.current.detections,
         replay ? replayFetch(replay, 700) : undefined,
+        before ? "model" : "rules-first",
+        // Regrouped only if that run was.
+        replay ? hasConsolidation(replay) : true,
+        !before,
       );
       const model = runPolicy.kind === "off" ? undefined : runPolicy.model;
       setAnalysis({ status: "done", ...result, docs: docs.map((d) => d.id), model, replayed: Boolean(replay) });
@@ -424,7 +431,7 @@ export function App(props: { library?: LibraryProps } = {}) {
               source={
                 analysis.model &&
                 (library
-                  ? `Analyse enregistrée : ${modelName(analysis.model)}${library.dossier.cost !== undefined ? `, ${library.dossier.cost.toFixed(2).replace(".", ",")} $` : ""} (aucun envoi)`
+                  ? `Analyse enregistrée : ${modelName(analysis.model)}${library.dossier.cost !== undefined ? `, ${library.dossier.costEstimated ? "coût estimé " : ""}${library.dossier.cost.toFixed(2).replace(".", ",")} $` : ""} (aucun envoi)`
                   : `Analyse : ${modelName(analysis.model)}${analysis.replayed ? ", réponses enregistrées rejouées (aucun envoi)" : ", OpenRouter sans conservation"}`)
               }
             />

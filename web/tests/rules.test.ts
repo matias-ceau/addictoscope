@@ -329,6 +329,44 @@ describe("gaps seen on real exports", () => {
     expect(names("Docteur Hélène\nCOMPTE RENDU\nPraticien hospitalier").filter(([, t]) => t === "COMPTE RENDU")).toEqual([]);
   });
 
+  describe("identifiers left on the long fictional dossiers", () => {
+    it("masks a named residence, with its flat, and leaves ordinary uses of the word", () => {
+      expect(hits("A emménagé dans un T2 (résidence Les Glycines), content.")).toContainEqual(["ADRESSE", "résidence Les Glycines"]);
+      expect(hits("Domicile : résidence Les Glycines, appt 12, 33210 Langon")).toContainEqual(["ADRESSE", "résidence Les Glycines, appt 12"]);
+      expect(hits("ADRESSE RESIDENCE DU PARC, APPT 7, 33700 MERIGNAC")).toContainEqual(["ADRESSE", "RESIDENCE DU PARC, APPT 7"]);
+      expect(hits("Enfants en résidence alternée. Résidence principale à Pessac.").filter(([c]) => c === "ADRESSE")).toEqual([]);
+    });
+
+    it("takes a compound of known first names standing alone", () => {
+      expect(names("Revient sur son père. Jean-Claude, représentant en vins, buvait.")).toContainEqual(["PERSONNE", "Jean-Claude"]);
+      expect(names("Hospitalisé à Saint-Martin.").map(([, t]) => t)).not.toContain("Saint-Martin");
+    });
+
+    it("takes a nickname in quotes after a full name, and every later use of it", () => {
+      const text = 'Vit avec M. Jean-Luc MARTINEAU, "Nounours", rencontré en 2017.\nApéro avec Nounours à partir de 17h.';
+      expect(names(text)).toContainEqual(["PERSONNE", "Nounours"]);
+      const { out, leaks } = redacted(text);
+      expect(out).not.toMatch(/Nounours|MARTINEAU|Jean-Luc/);
+      expect(leaks).toEqual([]);
+      // Not a quoted word after any capitals: the name before must be a full name.
+      expect(names('Score AUDIT, "Positif", à refaire.').map(([, t]) => t)).not.toContain("Positif");
+    });
+
+    it("knows recent first names, alone or before a surname", () => {
+      expect(names("Elle garde Lyam le mercredi.")).toContainEqual(["PERSONNE", "Lyam"]);
+      expect(names("En couple avec Naïs BERTHOUMIEU, 24 ans.")).toContainEqual(["PERSONNE", "Naïs BERTHOUMIEU"]);
+    });
+
+    it("leaves a saint's name to the place, in the masking and in the verification", () => {
+      const { out, leaks } = redacted("Vit avec son compagnon Jean-Luc MARTINEAU. Pharmacie du quartier Saint-Jean, puis hôpital Sainte-Anne. Jean est venu.");
+      expect(out).toContain("quartier Saint-Jean");
+      expect(out).toContain("Sainte-Anne");
+      expect(out).not.toMatch(/Jean est venu|MARTINEAU/);
+      expect(leaks).toEqual([]);
+      expect(redacted("Vu avec Jean ce matin, parti à Saint-Jean-de-Luz.").out).toContain("Saint-Jean-de-Luz");
+    });
+  });
+
   describe("names found by the local model", () => {
     const nerAt = (text: string, value: string, nth = 0): Record<number, NerSpan[]> => {
       let start = -1;

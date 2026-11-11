@@ -28,7 +28,10 @@ export interface LibraryDossier {
   key?: string;
   /** Cost of the recorded run, in dollars, when known. */
   cost?: number;
-  /** Number of events of the frise, shown in the sidebar. */
+  /** The run was answered without a paid call: `cost` is what it would have cost. */
+  costEstimated?: boolean;
+  /** Pages of the dossier and events of its frise, shown in the sidebar. */
+  pages?: number;
   events?: number;
 }
 
@@ -86,6 +89,8 @@ export function parseLibrary(text: string, base: string): Library {
           analysis: safePath(d.analysis, "l'analyse"),
           ...(d.key !== undefined ? { key: safePath(d.key, "la table") } : {}),
           ...(typeof d.cost === "number" ? { cost: d.cost } : {}),
+          ...(d.costEstimated === true ? { costEstimated: true } : {}),
+          ...(typeof d.pages === "number" ? { pages: d.pages } : {}),
           ...(typeof d.events === "number" ? { events: d.events } : {}),
         };
       }),

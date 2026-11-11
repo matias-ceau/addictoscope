@@ -7,6 +7,39 @@ import { expect, test } from "@playwright/test";
 const DEMO = resolve(dirname(fileURLToPath(import.meta.url)), "../public/demo");
 const index = JSON.parse(readFileSync(resolve(DEMO, "index.json"), "utf8"));
 const crack = index.dossiers.find((d: { slug: string }) => d.slug === "crack-rue");
+const long = index.dossiers.find((d: { slug: string }) => d.slug === "opiaces-parcours");
+
+test("a long dossier is read in several lots, then its duplicates are regrouped", async ({ page }) => {
+  test.setTimeout(480_000);
+  const outbound: string[] = [];
+  await page.route("https://openrouter.ai/**", (route) => {
+    outbound.push(route.request().url());
+    return route.abort();
+  });
+  await page.goto("/");
+  expect(long.docs[0].pages).toBeGreaterThanOrEqual(20);
+  await page.getByRole("button", { name: /Dossier long/ }).click();
+  await expect(page.getByText("Dossier fictif · démonstration")).toBeVisible();
+  await expect(page.getByText(/Relu aussi par l'IA locale/)).toBeVisible({ timeout: 300_000 });
+  await page.getByRole("button", { name: "Pseudonymiser ce document" }).click();
+  await expect(page.getByText("Document pseudonymisé et vérifié")).toBeVisible({ timeout: 60_000 });
+
+  await page.getByRole("button", { name: /Analyser le dossier \(rejoué\)/ }).click();
+  await expect(page.locator(".frise .event").first()).toBeVisible({ timeout: 60_000 });
+  // Same frise as the recorded run: same lots, same regroupement, rebuilt here.
+  await expect(page.locator(".frise .event")).toHaveCount(long.recordings[0].events);
+  await expect(page.getByText(/lu en \d+ lots, doublons regroupés/)).toBeVisible();
+
+  // One request per lot, and one more for the regroupement, which carries no observation text.
+  await page.locator(".data-status").click();
+  const entries = page.locator(".journal-entry");
+  await expect(entries.first()).toBeVisible();
+  const n = await entries.count();
+  expect(n).toBeGreaterThanOrEqual(3);
+  await expect(page.getByText("Regroupement des doublons (sans texte d'observation)")).toHaveCount(1);
+  await expect(page.locator(".journal-check.good")).toHaveCount(n);
+  expect(outbound).toEqual([]);
+});
 
 test("the demonstration runs the whole process on a fictional dossier, sending nothing", async ({ page }) => {
   // No key, and any request to a model would be a failure.

@@ -11,9 +11,18 @@ export interface Recording {
   cost: number;
   /** Duration of the recorded run, in milliseconds. */
   elapsedMs: number;
-  /** Answers in call order, by schema name ("segmentation", "frise"). */
+  /** Answers in call order, by schema name ("segmentation", "frise", "regroupement"). */
   answers: { schema: string; content: unknown }[];
+  /** "rules-first": the run split the documents it recognised by rules, so it
+   *  holds segmentation answers for the others only. Absent in recordings
+   *  made before the rules: every document was split by the model, and an
+   *  event without a start was dropped instead of placed at its first mention. */
+  segmentation?: "rules-first";
 }
+
+/** Did the recorded run regroup its frise? Recordings made before did not:
+ *  they are replayed without that call. */
+export const hasConsolidation = (rec: Recording): boolean => rec.answers.some((a) => a.schema === "regroupement");
 
 const replays = new WeakSet<object>();
 

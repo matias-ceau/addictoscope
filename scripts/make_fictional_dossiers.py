@@ -11,7 +11,10 @@ makes real records hard to read and to pseudonymise:
 - statements that contradict each other (age at first use, doses,
   diagnoses) while the story as a whole stays coherent.
 
-Each dossier lives in data/anonymized/dossiers/<slug>/:
+Each dossier lives in data/anonymized/dossiers/<slug>/ (short ones, a few
+pages: layout and pseudonymisation cases) or data/anonymized/dossiers-longs/<slug>/
+(20 to 30 pages over several years, with an intake observation that retraces
+the whole trajectory: the cases the frise is evaluated on):
 
     verite.json   what a careful reader knows: identity, the identifiers
                   planted in each document, the timeline (frise) to expect,
@@ -28,7 +31,9 @@ in two layouts, chosen by the document's type in verite.json: "historique"
 patient row with admission number, referring doctor and care units on
 every page). Notes are drawn in the order of notes.txt: oldest first for
 the historique dossiers, newest first for the fiche ones, as that export
-does. Other documents:
+does. A long dossier keeps notes.txt chronological whatever its layout and
+sets "reverse": true on a fiche document, which is then drawn newest first.
+Other documents:
 [entete], [colonne], [champs] and [corps] sections. In every source, "~"
 joins words that must stay on one line (phone numbers, addresses).
 
@@ -37,11 +42,18 @@ tests check that every one is gone after redaction. Run after
 make_synthetic_pdfs.py, which rewrites that file:
 
     uv run python scripts/make_fictional_dossiers.py
+    uv run python scripts/make_fictional_dossiers.py --check --only <slug>
+
+--check renders the PDFs and reports their size without touching
+ground_truth.json (safe while several dossiers are being written). The PDFs
+are drawn without a creation date, so a second run gives the same bytes.
 """
+
 from __future__ import annotations
 
 import json
 import re
+import sys
 import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
@@ -51,7 +63,7 @@ from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfgen.canvas import Canvas
 
 DATA = Path(__file__).resolve().parent.parent / "data" / "anonymized"
-DOSSIERS = DATA / "dossiers"
+ROOTS = (DATA / "dossiers", DATA / "dossiers-longs")
 W, H = A4
 LEFT, RIGHT = 40, W - 40
 BOTTOM = 45
@@ -65,7 +77,15 @@ FONTS = {
     "letter": ("Helvetica", 10),
     "letter-bold": ("Helvetica-Bold", 10),
 }
-LEADING = {"title": 14, "meta": 11, "body": 12.5, "small": 9.5, "small-bold": 9.5, "letter": 13.5, "letter-bold": 13.5}
+LEADING = {
+    "title": 14,
+    "meta": 11,
+    "body": 12.5,
+    "small": 9.5,
+    "small-bold": 9.5,
+    "letter": 13.5,
+    "letter-bold": 13.5,
+}
 
 
 def fold(s: str) -> str:
@@ -96,18 +116,31 @@ def wrap(text: str, style: str, width: float) -> list[str]:
 
 
 def paragraph(text: str, style: str, x: float, width: float) -> list[Line]:
-    return [Line(style, t, x) for t in wrap(text, style, width)] if text.strip() else [Line("body", "", x)]
+    return (
+        [Line(style, t, x) for t in wrap(text, style, width)]
+        if text.strip()
+        else [Line("body", "", x)]
+    )
 
 
 # --- record export (historique) -------------------------------------------------
 
+
 def parse_notes(source: str) -> list[dict]:
     notes = []
-    for block in re.split(r"^### ", source, flags=re.M)[1:]:
+    for block in re.split(r"^### ", source, flags=re.MULTILINE)[1:]:
         head, _, body = block.partition("\n")
         date, title, author, role, validation = [p.strip() for p in head.split("|")]
-        notes.append({"date": date, "title": title, "author": author, "role": role,
-                      "validation": validation, "body": body.strip("\n")})
+        notes.append(
+            {
+                "date": date,
+                "title": title,
+                "author": author,
+                "role": role,
+                "validation": validation,
+                "body": body.strip("\n"),
+            }
+        )
     return notes
 
 
@@ -124,7 +157,12 @@ def validation_line(note: dict) -> str:
 def historique_lines(notes: list[dict]) -> list[Line]:
     lines: list[Line] = []
     for note in notes:
-        lines += paragraph(f"{note['title']} du {note['date']} (Urgence : Bas)", "title", LEFT, RIGHT - LEFT)
+        lines += paragraph(
+            f"{note['title']} du {note['date']} (Urgence : Bas)",
+            "title",
+            LEFT,
+            RIGHT - LEFT,
+        )
         lines.append(Line("meta", validation_line(note)))
         for text in note["body"].split("\n"):
             lines += paragraph(text, "body", LEFT, RIGHT - LEFT)
@@ -151,7 +189,9 @@ def header_box(c: Canvas, header: dict, export: dict, page: int, total: int) -> 
     return top - 115
 
 
-def render_historique(path: Path, notes: list[dict], header: dict, export: dict) -> list[str]:
+def render_historique(
+    path: Path, notes: list[dict], header: dict, export: dict
+) -> list[str]:
     lines = historique_lines(notes)
     body_top = H - 30 - 115
     per_page = int((body_top - BOTTOM) // LEADING["body"])
@@ -170,9 +210,13 @@ def render_historique(path: Path, notes: list[dict], header: dict, export: dict)
     if current:
         pages.append(current)
     assert per_page > 0
-    c = Canvas(str(path), pagesize=A4)
+    c = Canvas(str(path), pagesize=A4, invariant=1)
     c.setTitle("Historique des observations")
-    drawn = [*header["establishment"], *header["patient"], f"Edité le {export['edited']} par {export['by']}"]
+    drawn = [
+        *header["establishment"],
+        *header["patient"],
+        f"Edité le {export['edited']} par {export['by']}",
+    ]
     for n, page in enumerate(pages, start=1):
         y = header_box(c, header, export, n, len(pages))
         for line in page:
@@ -208,12 +252,21 @@ def fiche_validation_line(note: dict) -> str:
 def fiche_lines(notes: list[dict]) -> list[Line]:
     lines: list[Line] = []
     for note in notes:
-        lines += paragraph(f"{note['title']} du {note['date']} (Urgence : Bas)", "title", LEFT, RIGHT - LEFT)
+        lines += paragraph(
+            f"{note['title']} du {note['date']} (Urgence : Bas)",
+            "title",
+            LEFT,
+            RIGHT - LEFT,
+        )
         lines.append(Line("meta", fiche_validation_line(note)))
         lines.append(Line("body", ""))
         for text in note["body"].split("\n"):
             # Section labels sit slightly left of the text, as in the export.
-            x = LEFT + 4 if text.strip() in ("Observations :", "Conclusions :") else LEFT + 8
+            x = (
+                LEFT + 4
+                if text.strip() in ("Observations :", "Conclusions :")
+                else LEFT + 8
+            )
             lines += paragraph(text, "body", x, RIGHT - x)
         lines.append(Line("body", ""))
         lines.append(Line("body", ""))
@@ -224,14 +277,23 @@ def fiche_header(c: Canvas, header: dict, page: int, total: int) -> list[str]:
     """The per-page block of the fiche export; returns the strings it drew."""
     drawn: list[str] = []
 
-    def put(x: float, y: float, text: str, font: str = "Helvetica", size: float = 8, right: bool = False) -> None:
+    def put(
+        x: float,
+        y: float,
+        text: str,
+        font: str = "Helvetica",
+        size: float = 8,
+        right: bool = False,
+    ) -> None:
         c.setFont(font, size)
         (c.drawRightString if right else c.drawString)(x, y, text)
         drawn.append(text)
 
     y = FICHE_TOP
     for i, text in enumerate(header["establishment"]):
-        put(32, y, text, "Helvetica-Bold" if i == 0 else "Helvetica", 9 if i == 0 else 8)
+        put(
+            32, y, text, "Helvetica-Bold" if i == 0 else "Helvetica", 9 if i == 0 else 8
+        )
         y -= 10
     y -= 6
     for i, text in enumerate(header["contact"]):
@@ -267,7 +329,7 @@ def render_fiche(path: Path, notes: list[dict], header: dict) -> list[str]:
         y -= step
     if current:
         pages.append(current)
-    c = Canvas(str(path), pagesize=A4)
+    c = Canvas(str(path), pagesize=A4, invariant=1)
     c.setTitle("Fiche d'observations")
     drawn: list[str] = []
     for n, page in enumerate(pages, start=1):
@@ -285,6 +347,7 @@ def render_fiche(path: Path, notes: list[dict], header: dict) -> list[str]:
 
 # --- letters and reports ----------------------------------------------------------
 
+
 def sections(source: str) -> dict[str, list[str]]:
     out: dict[str, list[str]] = {}
     name = None
@@ -301,7 +364,7 @@ def render_document(path: Path, source: str) -> list[str]:
     """A letter with a letterhead column ([colonne]) or a report with a
     label/value table ([champs]), then its body ([corps])."""
     s = sections(source)
-    c = Canvas(str(path), pagesize=A4)
+    c = Canvas(str(path), pagesize=A4, invariant=1)
     c.setTitle("Document")
     drawn: list[str] = []
     y = H - 50
@@ -353,35 +416,70 @@ def render_document(path: Path, source: str) -> list[str]:
     return drawn
 
 
-def build(slug: str) -> dict[str, list[str]]:
-    folder = DOSSIERS / slug
+def build(folder: Path) -> tuple[dict[str, list[str]], dict[str, int]]:
+    """Render one dossier; returns its planted identifiers by ground-truth key
+    and the number of pages of each document."""
     truth = json.loads((folder / "verite.json").read_text())
     planted: dict[str, list[str]] = {}
+    pages: dict[str, int] = {}
     for name, doc in truth["documents"].items():
         source = (folder / doc["source"]).read_text()
+        # Long dossiers keep notes.txt chronological; the fiche export draws
+        # the newest note first ("reverse": true).
+        notes = (
+            parse_notes(source)[:: -1 if doc.get("reverse") else 1]
+            if doc["type"] in ("historique", "fiche")
+            else []
+        )
         if doc["type"] == "historique":
-            drawn = render_historique(folder / name, parse_notes(source), truth["header"], truth["export"])
+            drawn = render_historique(
+                folder / name, notes, truth["header"], truth["export"]
+            )
         elif doc["type"] == "fiche":
-            drawn = render_fiche(folder / name, parse_notes(source), truth["header"])
+            drawn = render_fiche(folder / name, notes, truth["header"])
         else:
             drawn = render_document(folder / name, source)
         text = fold("\n".join(drawn))
         for identifier in doc["identifiers"]:
             # On one line, as the tests read it back (ignoring case and accents).
-            assert fold(identifier) in text, f"{slug}/{name}: {identifier!r} not drawn on one line"
-        planted[f"dossiers/{slug}/{name}"] = doc["identifiers"]
-    return planted
+            assert fold(identifier) in text, (
+                f"{folder.name}/{name}: {identifier!r} not drawn on one line"
+            )
+        planted[f"{folder.parent.name}/{folder.name}/{name}"] = doc["identifiers"]
+        pages[name] = page_count(folder / name)
+    return planted, pages
 
 
-def main() -> None:
+def page_count(pdf: Path) -> int:
+    return len(re.findall(rb"/Type\s*/Page\b", pdf.read_bytes()))
+
+
+def main(argv: list[str]) -> None:
+    check = "--check" in argv
+    only = argv[argv.index("--only") + 1] if "--only" in argv else None
     truth_path = DATA / "ground_truth.json"
     ground_truth = json.loads(truth_path.read_text())
-    for folder in sorted(p for p in DOSSIERS.iterdir() if (p / "verite.json").exists()):
-        planted = build(folder.name)
+    folders = sorted(
+        p
+        for root in ROOTS
+        if root.exists()
+        for p in root.iterdir()
+        if (p / "verite.json").exists()
+    )
+    for folder in folders:
+        if only and folder.name != only:
+            continue
+        planted, pages = build(folder)
         ground_truth.update(planted)
-        print(f"{folder.name}: {', '.join(planted)}")
-    truth_path.write_text(json.dumps(ground_truth, ensure_ascii=False, indent=2) + "\n")
+        print(
+            f"{folder.parent.name}/{folder.name}: "
+            + ", ".join(f"{name} ({n} p.)" for name, n in pages.items())
+        )
+    if not check:
+        truth_path.write_text(
+            json.dumps(ground_truth, ensure_ascii=False, indent=2) + "\n"
+        )
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])

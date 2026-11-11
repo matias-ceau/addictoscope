@@ -1,3 +1,181 @@
+# SPEC — Dossiers longs : 20 à 30 pages, découpage par règles, regroupement des doublons
+
+Contexte : l'outil n'a d'intérêt que sur des dossiers trop longs pour être
+relus à chaque consultation. Les quatorze dossiers fictifs de
+`data/anonymized/dossiers/` font 2 à 5 pages et commencent rarement par une
+observation d'entrée : ils restent des cas de mise en page et de
+pseudonymisation. La frise est désormais évaluée sur six dossiers fictifs
+**de la taille des vrais** (`data/anonymized/dossiers-longs/`, 21 à 26 pages,
+74 à 76 observations, 4 à 9 ans de suivi), et sans appel payant.
+
+## A. Dossiers fictifs longs
+
+Recette, format et calibrage : `data/anonymized/dossiers-longs/README.md`.
+L'essentiel :
+
+- une **observation d'entrée** de 700 à 1 400 mots qui retrace tout le
+  parcours, presque tout daté par l'âge ou de façon approximative ;
+- des **éléments révélés tard** (confiés des années après, retrouvés dans un
+  courrier), dont certains corrigent l'observation d'entrée ;
+- des rappels d'antécédents recopiés d'une note à l'autre, du bruit
+  (rendez-vous manqués, renouvellements) ;
+- structure calée sur des **comptes** mesurés sur de vrais exports (pages,
+  mots, nombre et longueur des observations) : aucun contenu réel n'a servi ;
+- dans `verite.json`, chaque événement porte une origine : `intake`,
+  `follow_up` ou `late` ; le rappel est rendu par origine.
+
+Contrôle : `uv run python scripts/check_long_dossier.py [<slug>]` (forme de la
+vérité, sources existantes, origines cohérentes, taille).
+
+## B. Découpage par règles
+
+Un export dont la mise en page est connue est découpé en observations **sur le
+poste, sans appel** (`web/src/notebook/segment-rules.ts`) : chaque observation
+commence par une ligne de titre que des règles reconnaissent.
+
+- Deux mises en page : l'export hospitalier (« Observation médicale de suivi
+  du 14/03/2022 », suivie de « Validé par … le … ») et l'historique Word
+  (« 14/03/2022 10:30 : Observation de suivi ( … ) »).
+- Les titres sont cherchés dans l'ordre de lecture de la page, qui n'est pas
+  toujours celui de la couche texte.
+- Mise en page non reconnue : le document est découpé par le modèle, comme
+  avant (`segmentRulesFirst`). Un enregistrement de démonstration fait avant
+  les règles est rejoué avec le découpage par le modèle.
+- L'application indique, par document, qui a découpé (`segmentedBy`).
+
+Mesure : 451 observations rendues sur 451 attendues sur les six dossiers longs
+(l'historique par règles ; les trois courriers d'une page par le modèle).
+
+## C. Regroupement des doublons d'un dossier long
+
+**Problème mesuré.** La frise est lue par lots indépendants de 24 000
+caractères, et le dossier raconte lui-même plusieurs fois le passé (entrée,
+synthèses, courriers). Sur les six dossiers : 725 pistes pour 404 attendues,
+1 194 événements pour 532 attendus ; le même traitement apparaît sur trois
+lignes sous trois intitulés.
+
+**Principe.** Quand la frise a été lue en au moins deux lots, **une demande de
+plus** (`regroupement`) montre au modèle les pistes et les événements déjà
+trouvés — intitulé, dates, début de la note, dates des sources — **sans aucun
+texte d'observation**, et lui demande lesquels désignent la même chose. Le code
+fusionne ensuite (`web/src/notebook/consolidate.ts`) ; le modèle n'ajoute ni
+ne retire aucun événement.
+
+**Règles locales** (rien de ce que le modèle répond n'est pris sans contrôle) :
+
+- un groupe ne réunit que des pistes de la **même catégorie**, des événements
+  d'une même piste (après regroupement des pistes) et du même mode ; un
+  identifiant inconnu ou cité deux fois est ignoré ;
+- l'**intitulé** gardé est toujours l'un de ceux qui ont été lus : celui que
+  le modèle a recopié, sinon celui de la piste qui porte le plus
+  d'événements. Les autres restent sur la piste (`aliases`), affichés au
+  survol (« aussi lu : … ») et ré-identifiés en local comme le reste ;
+- le **début** et la **fin** gardés sont ceux d'une des mentions regroupées ;
+  les sources sont réunies ;
+- chaque mention regroupée reste sur l'événement (`tellings`) : « 3 mentions
+  regroupées », et **« dates discordantes selon les observations »** quand
+  deux mentions donnent des débuts incompatibles (2013 et 14/10/2014) ;
+- un événement dont aucun lot n'a lu le début est dessiné en pointillé
+  (`startUnknown`, « début non précisé dans le texte ») ;
+- la demande échoue ou sa réponse est inutilisable : la frise reste telle que
+  lue, et l'application le dit (« doublons non regroupés »).
+
+**Interfaces.** `consolidateTimeline(read, input, lots)` ;
+`analyse(…, consolidate = true)` ; `Timeline.consolidation` (`lots`,
+`tracksBefore`, `tracksAfter`, `eventsBefore`, `eventsAfter`, `discordant`, `failed`) ;
+`Track.aliases`, `TimelineEvent.tellings`, `TimelineEvent.startUnknown`.
+Étape affichée : « Regroupement des doublons… » ; journal : « Regroupement des
+doublons (sans texte d'observation) ». Un enregistrement de démonstration sans
+réponse `regroupement` est rejoué sans cette demande.
+
+**Mesure** (`data/processed/frise/rapport-longs.md`, section « Regroupement des
+doublons », frise lue → frise regroupée) :
+
+| | Lue | Regroupée |
+|---|---|---|
+| Pistes (404 attendues) | 725 | 553 |
+| Événements produits | 1 194 | 852 |
+| Événements attendus trouvés | 477/532 (90 %) | 468/532 (88 %) |
+| Précision (borne basse) | 40 % | 55 % |
+| Fin compatible | 201/307 | 207/307 |
+| « En cours » juste | 408/477 | 418/468 |
+
+Neuf événements ne sont plus « trouvés » : quatre ont leur date attendue parmi
+les mentions regroupées (le début d'un trouble et son diagnostic des années
+plus tard), deux sont des faits proches fusionnés à tort (une séparation et le
+divorce qui suit), les autres n'étaient justes que par chance dans la frise
+lue. 69 événements portent un signalement de dates discordantes. La demande
+coûte environ 0,05 $ par dossier.
+
+## D. Passages sans appel payant
+
+`npx vite-node scripts/run-frise.ts --root=dossiers-longs --answers=<dossier>
+--consolidate --out=longs/<nom>` (depuis `web/`) : chaque demande que
+l'application enverrait est écrite dans `<hash>.request.md` (consigne, schéma
+de réponse, message ; texte seul, sans image de page) et sa réponse lue dans
+`<hash>.answer.json` (`web/scripts/file-transport.ts`).
+
+- Le hash couvre le modèle, le schéma et tout le texte : la même demande
+  retrouve sa réponse, tout changement de consigne ou de texte redemande.
+- Une demande sans réponse reçoit une réponse vide et est listée ; on relance
+  une fois les réponses écrites — par un agent à qui l'on ne donne que ce
+  fichier, ou par une personne.
+- Le passage enregistre les caractères échangés par type de demande ; le
+  rapport en tire un **coût estimé** (÷ 3 caractères par jeton envoyé, ÷ 1,47
+  par jeton reçu, prix du modèle par défaut) : environ **0,57 $ par dossier
+  long**, 3,40 $ les six. Une estimation, pas une facture.
+- **Relecture simulée** : les détections automatiques sont acceptées telles
+  quelles, et les identifiants plantés que les règles ont laissés lisibles
+  sont masqués à la main avant l'envoi, comme le ferait le relecteur ; ils
+  sont comptés (1 sur les six dossiers).
+
+L'application, elle, continue d'appeler le modèle par l'API ; seuls les
+passages d'évaluation et de démonstration passent par des fichiers.
+
+## E. Notation
+
+`uv run python scripts/score_frise.py --root=dossiers-longs
+data/processed/frise/longs/<nom>` → `rapport-longs.md` et `rapport-longs.json`
+(trouvés, attendus et coût estimé par dossier, lus par les constructeurs de la
+démonstration et de la bibliothèque).
+
+- Appariement un pour un : même piste, intitulé proche, début compatible.
+- Sur une piste de consommation, une molécule opioïde vaut pour sa classe.
+  Les rapports des dossiers courts datent d'avant cette règle : elle y
+  ajouterait un événement trouvé (282/320 au lieu de 281 pour `age1`).
+- Une piste regroupée répond à tous les intitulés sous lesquels elle a été lue.
+- Rappel par origine (entrée 104/119, suivi 304/344, révélé tard 60/69) et par
+  piste ; les événements « en plus » sont listés pour relecture (la précision
+  est une borne basse).
+
+## F. Démonstration et bibliothèque
+
+- Démonstration : un dossier long (`opiaces-parcours`, 26 pages) en tête de
+  l'accueil ; l'application refait tout sur le poste et rejoue les quatre
+  lots puis le regroupement. Coût affiché « ≈ », estimé.
+- Bibliothèque : deux groupes, « Dossiers longs (20 à 30 pages) » puis
+  « Dossiers courts » ; pages et événements dans la barre latérale ;
+  « coût estimé » pour un passage sans appel payant.
+
+## Tests (données fictives)
+
+`web/tests/consolidate.test.ts` (règles de fusion, intitulés, mentions,
+échecs), `web/tests/segment-rules.test.ts` (les deux mises en page, ordre de
+lecture, repli sur le modèle), `tests/test_frise_eval.py` (pistes regroupées,
+dates sous la barre), `tests/test_render_frise.py`, `web/e2e/demo.spec.ts`
+(dossier long rejoué avec regroupement), `web/e2e/library.spec.ts`.
+
+## Non-objectifs
+
+- Pas de seconde lecture du texte par la demande de regroupement : elle ne
+  voit que ce qui a été trouvé.
+- Pas de fusion par règles seules (intitulés trop variables), ni de seuil
+  d'écart de dates : un traitement re-mentionné des années plus tard est le
+  même traitement.
+- Les contradictions plantées ne sont pas notées automatiquement ; les dates
+  discordantes signalées en sont une première trace.
+- Les dossiers réels ne sont pas rejoués ici.
+
 # SPEC — Bibliothèque de dossiers : toutes les étapes, préremplies
 
 Statut : validée et implémentée le 06/11/2026 (branche `dev/demo-library`).

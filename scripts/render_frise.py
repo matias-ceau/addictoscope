@@ -42,6 +42,7 @@ the labels in all the text of the page, and ``--banner real`` replaces the
 
     uv run python scripts/render_frise.py <run>.json --key <slug>.key.json -o <slug>.reel.html
 """
+
 from __future__ import annotations
 
 import argparse
@@ -54,9 +55,16 @@ from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
-from addictoscope.frise_eval import _CANON, GENERIC, STOPWORDS, fold, label_tokens  # noqa: E402
+from addictoscope.frise_eval import _CANON, GENERIC, STOPWORDS, fold, label_tokens
 
-KIND_ORDER = ["life_event", "substance_use", "psychiatric", "somatic", "medication", "therapeutic_psycho"]
+KIND_ORDER = [
+    "life_event",
+    "substance_use",
+    "psychiatric",
+    "somatic",
+    "medication",
+    "therapeutic_psycho",
+]
 KIND_LABEL = {
     "life_event": "Événements de vie",
     "substance_use": "Consommations",
@@ -81,7 +89,12 @@ MODE_LABEL = {
     "rechute": "rechute",
     "craving": "craving",
 }
-CERTAINTY_LABEL = {"exact": "date exacte", "month": "mois", "year": "année", "approx": "date approximative"}
+CERTAINTY_LABEL = {
+    "exact": "date exacte",
+    "month": "mois",
+    "year": "année",
+    "approx": "date approximative",
+}
 BANNERS = {
     "synthetic": "Données synthétiques (dossier entièrement inventé)",
     "real": "Dossier réel pseudonymisé (usage privé, ne pas diffuser)",
@@ -98,7 +111,7 @@ def format_age(age: list[int] | None) -> str:
 
 
 def age_note(from_age: dict | None) -> str | None:
-    """"d'après l'âge : 14 ans" for an event whose dates were computed from an age."""
+    """ "d'après l'âge : 14 ans" for an event whose dates were computed from an age."""
     if not from_age:
         return None
     start, end = from_age.get("start"), from_age.get("end")
@@ -107,6 +120,22 @@ def age_note(from_age: dict | None) -> str | None:
     if start:
         return f"d'après l'âge : {format_age(start)}"
     return f"fin d'après l'âge : {format_age(end)}" if end else None
+
+
+def mentions_note(tellings: list[dict] | None) -> str | None:
+    """What a regrouped event says of the mentions merged into it, as the app
+    does (web/src/ui/Frise.tsx:dateNotes): dates that cannot all be right are
+    shown, otherwise the number of mentions."""
+    if not tellings:
+        return None
+    starts = sorted({t["start"] for t in tellings if t.get("start")})
+    if any(
+        not a.startswith(b) and not b.startswith(a)
+        for i, a in enumerate(starts)
+        for b in starts[i + 1 :]
+    ):
+        return "dates discordantes selon les observations : " + " · ".join(starts)
+    return f"{len(tellings)} mentions regroupées"
 
 
 def load_key(path: Path) -> dict[str, str]:
@@ -120,8 +149,12 @@ def reidentifier(labels: dict[str, str]):
     """Replace every known label in a text (longest first); unknown labels stay."""
     if not labels:
         return lambda text: text
-    rx = re.compile("|".join(re.escape(k) for k in sorted(labels, key=len, reverse=True)))
-    return lambda text: rx.sub(lambda m: labels[m.group()], text) if isinstance(text, str) else text
+    rx = re.compile(
+        "|".join(re.escape(k) for k in sorted(labels, key=len, reverse=True))
+    )
+    return lambda text: (
+        rx.sub(lambda m: labels[m.group()], text) if isinstance(text, str) else text
+    )
 
 
 def reidentify(data: dict, labels: dict[str, str]) -> dict:
@@ -129,6 +162,7 @@ def reidentify(data: dict, labels: dict[str, str]) -> dict:
     sub = reidentifier(labels)
     for t in data["tracks"]:
         t["label"] = sub(t["label"])
+        t["aliases"] = [sub(a) for a in t.get("aliases", [])]
     for e in data["events"] + data["undated"]:
         e["note"] = sub(e["note"])
         e["sources"] = [sub(x) for x in e["sources"]]
@@ -152,8 +186,10 @@ def parse_partial(s: str, end: bool) -> date:
     return date(y, m, d)
 
 
-NOTE_HEADER = re.compile(r"^### (\d{2}/\d{2}/\d{4}) \| ([^|]*)\|[^|]*\|([^|]*)\|.*$", re.M)
-TAG_LINE = re.compile(r"^\[[a-z_]+\]\s*$", re.M)
+NOTE_HEADER = re.compile(
+    r"^### (\d{2}/\d{2}/\d{4}) \| ([^|]*)\|[^|]*\|([^|]*)\|.*$", re.MULTILINE
+)
+TAG_LINE = re.compile(r"^\[[a-z_]+\]\s*$", re.MULTILINE)
 
 
 def identity_masker(identifiers: list[str]):
@@ -170,7 +206,7 @@ def identity_masker(identifiers: list[str]):
             continue
         body = r"[\s~]+".join(words)
         pats.append(rf"(?<![\w]){body}(?![\w])")
-    rx = re.compile("|".join(pats), re.I) if pats else None
+    rx = re.compile("|".join(pats), re.IGNORECASE) if pats else None
     return (lambda text: rx.sub("[identité]", text)) if rx else (lambda text: text)
 
 
@@ -191,17 +227,29 @@ def dossier_observations(raw: dict, folder: Path) -> dict[str, dict]:
         heads = list(NOTE_HEADER.finditer(text))
         if not heads:
             body = mask(TAG_LINE.sub("", text)).strip()
-            out[stem] = {"label": doc.get("type", stem), "date": None, "text": re.sub(r"\n{3,}", "\n\n", body)}
+            out[stem] = {
+                "label": doc.get("type", stem),
+                "date": None,
+                "text": re.sub(r"\n{3,}", "\n\n", body),
+            }
             continue
         for i, h in enumerate(heads):
             end = heads[i + 1].start() if i + 1 < len(heads) else len(text)
             d, kind, role = h.group(1), h.group(2).strip(), h.group(3).strip()
-            out[f"{stem} {d}"] = {"label": f"{kind} · {role}", "date": d, "text": mask(text[h.end():end]).strip()}
+            out[f"{stem} {d}"] = {
+                "label": f"{kind} · {role}",
+                "date": d,
+                "text": mask(text[h.end() : end]).strip(),
+            }
     return out
 
 
 def _tokens(text: str) -> set[str]:
-    words = [w for w in re.findall(r"[a-z0-9]+", fold(text)) if w not in STOPWORDS and w not in GENERIC]
+    words = [
+        w
+        for w in re.findall(r"[a-z0-9]+", fold(text))
+        if w not in STOPWORDS and w not in GENERIC
+    ]
     return {_CANON.get(w, w[:6]) for w in words if len(w) > 2 or w.isdigit()}
 
 
@@ -265,7 +313,15 @@ def load(path: Path, notes: Path | None = None, texts: Path | None = None) -> di
                 }
             )
     else:  # app run: tracks + events citing observations
-        tracks = [{"id": t["id"], "kind": t["kind"], "label": t["label"]} for t in tl["tracks"]]
+        tracks = [
+            {
+                "id": t["id"],
+                "kind": t["kind"],
+                "label": t["label"],
+                "aliases": t.get("aliases") or [],
+            }
+            for t in tl["tracks"]
+        ]
         for e in tl["events"]:
             srcs = []
             for oid in e.get("observationIds", []):
@@ -281,7 +337,11 @@ def load(path: Path, notes: Path | None = None, texts: Path | None = None) -> di
                     "mode": e.get("mode"),
                     "loss": bool(e.get("lossOfControl")),
                     "certainty": None,
-                    "ageNote": age_note(e.get("fromAge")),
+                    # Drawn as approximate: a date worked out from an age, or the date of a first mention.
+                    "ageNote": "début non précisé dans le texte"
+                    if e.get("startUnknown")
+                    else age_note(e.get("fromAge")),
+                    "mentions": mentions_note(e.get("tellings")),
                     "note": e.get("note", ""),
                     "sources": srcs,
                 }
@@ -291,8 +351,14 @@ def load(path: Path, notes: Path | None = None, texts: Path | None = None) -> di
     if not isinstance(tl, list):
         track_of = {t["id"]: t for t in tracks}
         for u in tl.get("undated") or []:
-            track = track_of.get(u.get("trackId"), {"kind": "life_event", "label": "Autre"})
-            srcs = [f"{obs[oid]['doc']} {obs[oid]['date'] or 's.d.'}" for oid in u.get("observationIds", []) if oid in obs]
+            track = track_of.get(
+                u.get("trackId"), {"kind": "life_event", "label": "Autre"}
+            )
+            srcs = [
+                f"{obs[oid]['doc']} {obs[oid]['date'] or 's.d.'}"
+                for oid in u.get("observationIds", [])
+                if oid in obs
+            ]
             undated.append(
                 {
                     "kind": track["kind"],
@@ -312,23 +378,45 @@ def load(path: Path, notes: Path | None = None, texts: Path | None = None) -> di
             e["sources"] = [src for src in e["sources"] if src not in observations]
     else:
         observations = {
-            o["id"]: {"label": f"{o['doc']} · {o['kind']}", "date": o.get("date"), "text": o["summary"], "summary_only": True}
+            o["id"]: {
+                "label": f"{o['doc']} · {o['kind']}",
+                "date": o.get("date"),
+                "text": o["summary"],
+                "summary_only": True,
+            }
             for o in raw.get("observations", [])
         }
         if notes:
-            full = dossier_observations(json.loads((notes / "verite.json").read_text(encoding="utf-8")), notes)
+            full = dossier_observations(
+                json.loads((notes / "verite.json").read_text(encoding="utf-8")), notes
+            )
             for o in raw.get("observations", []):
-                day = "/".join(reversed(o["date"].split("-"))) if o.get("date") else None
+                day = (
+                    "/".join(reversed(o["date"].split("-"))) if o.get("date") else None
+                )
                 note = full.get(f"{o['doc']} {day}") or full.get(o["doc"])
                 if note:
-                    observations[o["id"]] = {"label": f"{o['doc']} · {o['kind']}", "date": o.get("date"), "text": note["text"]}
+                    observations[o["id"]] = {
+                        "label": f"{o['doc']} · {o['kind']}",
+                        "date": o.get("date"),
+                        "text": note["text"],
+                    }
         if texts:
             full_texts = json.loads(texts.read_text(encoding="utf-8"))
             for o in raw.get("observations", []):
-                if isinstance(full_texts.get(o["id"]), str) and full_texts[o["id"]].strip():
-                    observations[o["id"]] = {"label": f"{o['doc']} · {o['kind']}", "date": o.get("date"), "text": full_texts[o["id"]].strip()}
+                if (
+                    isinstance(full_texts.get(o["id"]), str)
+                    and full_texts[o["id"]].strip()
+                ):
+                    observations[o["id"]] = {
+                        "label": f"{o['doc']} · {o['kind']}",
+                        "date": o.get("date"),
+                        "text": full_texts[o["id"]].strip(),
+                    }
         for e, raw_e in zip(events, tl["events"]):
-            e["evidence"] = [oid for oid in raw_e.get("observationIds", []) if oid in observations]
+            e["evidence"] = [
+                oid for oid in raw_e.get("observationIds", []) if oid in observations
+            ]
     return {
         "dossier": raw.get("dossier") or path.parent.name,
         "tracks": tracks,
@@ -359,7 +447,12 @@ def prepare(data: dict) -> dict:
     for e in data["events"]:
         label = next(t["label"] for t in data["tracks"] if t["id"] == e["track"])
         e["evidence"] = [
-            {"id": oid, "marks": [] if data["obs"][oid].get("summary_only") else evidence_marks(data["obs"][oid]["text"], label, e["note"])}
+            {
+                "id": oid,
+                "marks": []
+                if data["obs"][oid].get("summary_only")
+                else evidence_marks(data["obs"][oid]["text"], label, e["note"]),
+            }
             for oid in e["evidence"]
         ]
     # Tracks holding only undated antecedents are listed under the frise instead.
@@ -376,7 +469,13 @@ def prepare(data: dict) -> dict:
         first[e["track"]] = min(first.get(e["track"], e["s"]), e["s"])
     data["tracks"].sort(key=lambda t: (order[t["kind"]], first.get(t["id"], "9999")))
     data["kinds"] = [
-        {"id": k, "label": KIND_LABEL[k], "light": KIND_COLOR[k][0], "dark": KIND_COLOR[k][1]} for k in kinds
+        {
+            "id": k,
+            "label": KIND_LABEL[k],
+            "light": KIND_COLOR[k][0],
+            "dark": KIND_COLOR[k][1],
+        }
+        for k in kinds
     ]
     data["modeLabel"] = MODE_LABEL
     data["certaintyLabel"] = CERTAINTY_LABEL
@@ -539,7 +638,7 @@ function drawMain() {
     } else {
       const cut = W < 600 ? 13 : 24;
       const lab = r.track.label.length > cut ? r.track.label.slice(0, cut - 1) + "…" : r.track.label;
-      el("text", {x: 12, y: y + 17, class: "mute"}, svg, lab).appendChild(Object.assign(document.createElementNS(NS, "title"), {textContent: r.track.label}));
+      el("text", {x: 12, y: y + 17, class: "mute"}, svg, lab).appendChild(Object.assign(document.createElementNS(NS, "title"), {textContent: r.track.label + ((r.track.aliases || []).length ? ` (aussi lu : ${r.track.aliases.join(" · ")})` : "")}));
       for (const e of EVENTS.filter(e => e.track === r.track.id)) {
         if (e.b < view[0] || e.a > view[1]) continue;
         const grp = el("g", {class: "ev", "data-i": e.i}, g);
@@ -587,6 +686,7 @@ function select(i) {
   if (e.mode) bits.push(MODE_LABEL(e.mode));
   if (e.certainty) bits.push(D.certaintyLabel[e.certainty] || e.certainty);
   if (e.ageNote) bits.push(e.ageNote);
+  if (e.mentions) bits.push(e.mentions);
   if (e.loss) bits.push("⚡ perte de contrôle");
   document.getElementById("detail").innerHTML =
     `<b>${esc(e.label)}</b> <span class="k">· ${esc(kindOf[e.kind].label)} · ${when}${bits.length ? " · " + esc(bits.join(" · ")) : ""}</span>` +
@@ -656,7 +756,7 @@ addPreset("−", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[
 addPreset("+", () => { const c = (view[0] + view[1]) / 2, h = (view[1] - view[0]) / 4; setView(c - h, c + h); });
 document.getElementById("legend").innerHTML =
   `<span><span class="sw" style="background:#888;opacity:.55"></span>usage</span><span><span class="sw" style="background:#888;opacity:.85"></span>intoxication</span>` +
-  `<span><span class="sw" style="background:#888"></span>rechute</span><span><span class="sw" style="background:#888;opacity:.45;border:1px dashed #888"></span>date approximative ou d'après l'âge</span>` +
+  `<span><span class="sw" style="background:#888"></span>rechute</span><span><span class="sw" style="background:#888;opacity:.45;border:1px dashed #888"></span>date approximative, d'après l'âge ou début non précisé</span>` +
   `<span style="color:#e11d48">⚡ perte de contrôle</span><span>◆ événement sans durée</span><span>▶ en cours</span>`;
 document.getElementById("main").addEventListener("wheel", (ev) => {
   if (!ev.ctrlKey && !ev.shiftKey) return;
@@ -687,7 +787,9 @@ def undated_html(undated: list[dict]) -> str:
             age += f" → {format_age(u['endAge'])}"
         elif u.get("ongoing"):
             age += " → en cours"
-        bits = [f"<b>{esc(u['label'])}</b> <span class=\"k\">· {esc(KIND_LABEL.get(u['kind'], u['kind']))}"]
+        bits = [
+            f'<b>{esc(u["label"])}</b> <span class="k">· {esc(KIND_LABEL.get(u["kind"], u["kind"]))}'
+        ]
         if u.get("mode"):
             bits.append(f" · {esc(MODE_LABEL.get(u['mode'], u['mode']))}")
         bits.append(f" · {esc(age)}</span>")
@@ -716,10 +818,26 @@ def render(data: dict, banner: str = BANNERS["synthetic"]) -> str:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("frise", type=Path, help="verite.json of a fictional dossier, or an app run (JSON)")
-    ap.add_argument("--notes", type=Path, help="for an app run: the fictional dossier folder, to show full notes")
-    ap.add_argument("--texts", type=Path, help="for an app run: {observation id: full pseudonymised text}, shown in place of summaries")
-    ap.add_argument("--key", type=Path, help='correspondence table {"labels": {"[PATIENT]": "..."}}: real values in place of labels')
+    ap.add_argument(
+        "frise",
+        type=Path,
+        help="verite.json of a fictional dossier, or an app run (JSON)",
+    )
+    ap.add_argument(
+        "--notes",
+        type=Path,
+        help="for an app run: the fictional dossier folder, to show full notes",
+    )
+    ap.add_argument(
+        "--texts",
+        type=Path,
+        help="for an app run: {observation id: full pseudonymised text}, shown in place of summaries",
+    )
+    ap.add_argument(
+        "--key",
+        type=Path,
+        help='correspondence table {"labels": {"[PATIENT]": "..."}}: real values in place of labels',
+    )
     ap.add_argument(
         "--banner",
         default=None,
@@ -737,7 +855,10 @@ def main(argv: list[str] | None = None) -> int:
         banner = BANNERS.get(args.banner or "synthetic", args.banner)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(render(data, banner), encoding="utf-8")
-    print(f"{args.out}: {len(data['events'])} événements, {len(data['tracks'])} pistes", file=sys.stderr)
+    print(
+        f"{args.out}: {len(data['events'])} événements, {len(data['tracks'])} pistes",
+        file=sys.stderr,
+    )
     return 0
 
 

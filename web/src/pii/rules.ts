@@ -111,6 +111,15 @@ const RULES: Rule[] = [
       "gi",
     ),
   },
+  // A named residence, with or without the flat: "résidence Les Tilleuls, appt 12", "RESIDENCE LES HORTENSIAS".
+  {
+    category: "ADRESSE",
+    re: new RegExp(
+      String.raw`\b(?:[Rr][ée]sidence|R[ÉE]SIDENCE)[ \t]+(?:(?:[Dd]e|[Dd]u|[Dd]es|[Ll]a|[Ll]e|[Ll]es|DE|DU|DES|LA|LE|LES)[ \t]+|[dlDL]['’])?[${UPPER}][${UPPER}${LOWER}'’-]+(?:[ \t]+[${UPPER}][${UPPER}${LOWER}'’-]+){0,2}` +
+        String.raw`(?:,?[ \t]*(?:[Aa]ppt?\.?|APPT?\.?|[Aa]ppartement|APPARTEMENT|[Bb][âa]t(?:iment)?\.?|B[ÂA]T(?:IMENT)?\.?|[Ee]sc(?:alier)?\.?|[Pp]orte|[ée]tage)[ \t]*(?:n°[ \t]*)?[${UPPER}\d]{1,4}(?![${UPPER}${LOWER}\d]))*`,
+      "g",
+    ),
+  },
   // A letterhead street line without a number: "RUE DES GLYCINES", "Avenue Foch".
   {
     category: "ADRESSE",

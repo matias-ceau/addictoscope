@@ -129,6 +129,40 @@ describe("timeline assembly", () => {
     expect(t.events).toHaveLength(1);
     expect(t.events[0].observationIds).toEqual(["d:o1", "d:o2"]);
   });
+
+  describe("an event the text gives no start for", () => {
+    const dates = new Map([["d:o1", "2022-04-05"], ["d:o2", "2022-09-20"]]);
+    const known = new Set(dates.keys());
+    const noStart = (o: Parameters<typeof raw>[0]) => raw({ kind: "medication", label: "Acamprosate", start: null, mode: null, ...o });
+
+    it("starts at its first mention when it is still going on", () => {
+      const t = assembleTimeline([noStart({ ongoing: true, observation_ids: ["d:o2", "d:o1"] })], known, null, null, dates);
+      expect(t.events[0]).toMatchObject({ start: "2022-04-05", end: null, ongoing: true, startUnknown: true });
+    });
+
+    it("runs from its first mention to its end when it stops later", () => {
+      const t = assembleTimeline([noStart({ end: "2022-08" })], known, null, null, dates);
+      expect(t.events[0]).toMatchObject({ start: "2022-04-05", end: "2022-08", ongoing: false, startUnknown: true });
+    });
+
+    it("is a point at its end when it ended before anyone wrote about it", () => {
+      const t = assembleTimeline([noStart({ end: "2017", ongoing: true })], known, null, null, dates);
+      expect(t.events[0]).toMatchObject({ start: "2017", end: null, ongoing: false, startUnknown: true });
+    });
+
+    it("is dropped when nothing places it: no end, not going on, or no dated source", () => {
+      expect(assembleTimeline([noStart({})], known, null, null, dates).events).toEqual([]);
+      expect(assembleTimeline([noStart({ ongoing: true })], known, null, null, new Map([["d:o1", null]])).events).toEqual([]);
+      // Without the observation dates (older callers), as before.
+      expect(assembleTimeline([noStart({ ongoing: true })], known).events).toEqual([]);
+    });
+
+    it("leaves a told start alone", () => {
+      const t = assembleTimeline([raw({ ongoing: true })], known, null, null, dates);
+      expect(t.events[0].start).toBe("2024-04");
+      expect(t.events[0].startUnknown).toBeUndefined();
+    });
+  });
 });
 
 describe("timeline building", () => {
@@ -158,6 +192,23 @@ describe("timeline building", () => {
     expect(sent).toContain("### o2 — 2024-05-02");
     expect(sent).not.toContain("historique:o1");
     expect(t.events.map((e) => e.observationIds)).toEqual([["historique:o1"], ["courrier:o1"], ["courrier:o1"]]);
+  });
+
+  // A recording made before events without a start were placed is replayed
+  // as its run went: the frise rebuilt is the one that was scored then.
+  it("places an event without a start at its first mention, unless told to drop it as older runs did", async () => {
+    const input = () => ({
+      observations: [obs("historique:o1", "historique", "2024-04-15", 1)],
+      pagesByDoc: docPages,
+      manifests: { historique: verified },
+      policy,
+      fetchImpl: fakeFetch([{ events: [{ ...event(["o1"]), start: null, ongoing: true }] }], []),
+    });
+    const placed = await buildTimeline(input());
+    expect(placed.events).toHaveLength(1);
+    expect(placed.events[0]).toMatchObject({ start: "2024-04-15", startUnknown: true });
+    const dropped = await buildTimeline({ ...input(), placeUnknownStarts: false });
+    expect(dropped.events).toHaveLength(0);
   });
 });
 

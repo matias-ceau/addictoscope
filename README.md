@@ -135,13 +135,15 @@ OpenAI.
 
 ### Démonstration (données fictives, sans clé)
 
-L'accueil propose quatre dossiers entièrement inventés. Lecture, détection,
+L'accueil propose cinq dossiers entièrement inventés, dont un dossier long de
+26 pages (neuf ans de suivi, lu en quatre lots puis regroupé). Lecture, détection,
 relecture, masquage et vérification s'exécutent pour de vrai ; l'analyse IA
 rejoue les réponses enregistrées d'un vrai passage du modèle
 (`web/public/demo/`, construit par `scripts/build-demo.ts`) : la garde, les
 requêtes, les contrôles et la ré-identification tournent, seul le réseau est
-remplacé. Trois enregistrements par dossier (Claude Sonnet 5.5, GPT-6 Luna
-et Claude Haiku 5.5) montrent l'écart de qualité et de coût.
+remplacé. Trois enregistrements par dossier court (Claude Sonnet 5.5, GPT-6
+Luna et Claude Haiku 5.5) montrent l'écart de qualité et de coût ; le dossier
+long vient avec son passage sans appel payant (coût estimé).
 
 ```bash
 cd web && npx vite-node scripts/build-demo.ts --runs=age1,bench/openai__gpt-6-luna,bench/anthropic__claude-haiku-5.5
@@ -153,7 +155,8 @@ cd web && npx vite-node scripts/build-demo.ts --runs=age1,bench/openai__gpt-6-lu
 de dossiers. Chacun passe sur le poste par la détection, le masquage et la
 vérification, puis son analyse enregistrée (observations et frise) s'affiche
 sans appel au modèle. L'onglet « Observations » montre le découpage dont la
-frise est issue. Bibliothèque des 14 dossiers fictifs :
+frise est issue. Bibliothèque des dossiers fictifs, en deux groupes : les 6
+dossiers longs (20 à 30 pages), puis les 14 dossiers courts :
 
 ```bash
 cd web && npx vite-node scripts/build-library.ts   # → public/library/, ouvrir ?library=library/library.json
@@ -247,6 +250,30 @@ Le premier script suit le chemin de l'application sur chaque dossier de
 `data/processed/frise/run1/`. Le second compare chaque frise à la frise
 attendue de `verite.json` et écrit `data/processed/frise/rapport.md`.
 
+#### Dossiers longs, sans appel payant
+
+La frise est évaluée sur six dossiers fictifs de la taille des vrais
+([`data/anonymized/dossiers-longs/`](data/anonymized/dossiers-longs/README.md) :
+21 à 26 pages, une observation d'entrée qui retrace le parcours, des éléments
+révélés tard). Les demandes que l'application enverrait sont écrites dans des
+fichiers et répondues par des agents, une demande chacun (SPEC.md, « Dossiers
+longs »). Les 33 demandes et leurs réponses sont dans
+`data/processed/frise/answers/longs-regroupe1/` : le passage se rejoue à
+l'identique, sans rien envoyer, tant que les consignes ne changent pas :
+
+```bash
+cd web && npx vite-node scripts/run-frise.ts --root=dossiers-longs --answers=../data/processed/frise/answers/longs-regroupe1 --consolidate --out=longs/regroupe1
+uv run python scripts/score_frise.py --root=dossiers-longs data/processed/frise/longs/regroupe1   # → rapport-longs.md
+uv run python scripts/check_long_dossier.py                                                       # contrôle des dossiers
+```
+
+Résultat ([rapport](data/processed/frise/rapport-longs.md)) : 468 des 532
+événements attendus retrouvés (88 %), autant pour les antécédents rapportés à
+l'entrée (87 %) que pour les éléments révélés tard (87 %) ; chaque note
+découpée par règles, sans appel ; environ 0,57 $ par dossier au prix de l'API
+(estimation). Le regroupement des doublons ramène la frise de 725 à 553 pistes
+(404 attendues) et la borne basse de précision de 40 % à 55 %.
+
 Frise interactive (une page HTML autonome, lisible sur téléphone), à partir
 d'un passage, avec le texte complet des notes (identités masquées) :
 
@@ -271,6 +298,10 @@ installé : `PW_CHROMIUM=/usr/bin/chromium npm run e2e`.
   source ([rapport](data/processed/frise/rapport.md) ; frises interactives
   dans `data/processed/frise/interactive/`). À évaluer encore sur des
   dossiers réels.
+- ✅ Dossiers longs : six dossiers fictifs de 21 à 26 pages, découpage par
+  règles des exports connus, regroupement des doublons d'une frise lue en
+  plusieurs lots, évaluation sans appel payant : 88 % des 532 événements
+  attendus ([rapport](data/processed/frise/rapport-longs.md)).
 - ✅ Démonstration de bout en bout sur données fictives, journal des envois,
   ré-identification locale, export et réouverture d'une analyse.
 - ⏳ Jalon 3 : questions sur le dossier avec renvoi à la page source.

@@ -8,9 +8,11 @@ import {
   dateStart,
   TRACK_KIND_LABEL,
   TRACK_KINDS,
+  tellingsDisagree,
   type Observation,
   type Timeline,
   type TimelineEvent,
+  type Track,
   type TrackKind,
   withUndated,
 } from "../notebook/model";
@@ -43,6 +45,24 @@ function ageNote(e: TimelineEvent): string | null {
   if (start && end) return `d'après l'âge : ${formatAge(start)} → ${formatAge(end)}`;
   if (start) return `d'après l'âge : ${formatAge(start)}`;
   return end ? `fin d'après l'âge : ${formatAge(end)}` : null;
+}
+
+/** Where an event's dates come from, when it is not simply the date written. */
+/** A track's label, with the other labels its regrouped tracks were read under. */
+export function trackTitle(t: Track): string {
+  return t.aliases?.length ? `${t.label} (aussi lu : ${t.aliases.join(" · ")})` : t.label;
+}
+
+export function dateNotes(e: TimelineEvent): string[] {
+  const notes: string[] = [];
+  const age = ageNote(e);
+  if (age) notes.push(age);
+  if (e.startUnknown) notes.push("début non précisé dans le texte");
+  if (e.tellings && tellingsDisagree(e.tellings)) {
+    const starts = [...new Set(e.tellings.flatMap((t) => (t.start ? [t.start] : [])))].sort();
+    notes.push(`dates discordantes selon les observations : ${starts.map(formatDate).join(" · ")}`);
+  } else if (e.tellings) notes.push(`${e.tellings.length} mentions regroupées`);
+  return notes;
 }
 
 function ticks(min: number, max: number): { t: number; label: string; major: boolean }[] {
@@ -140,12 +160,12 @@ export function Frise(props: {
   // Layout: one section per kind that has tracks, one row per track (tracks
   // holding only undated antecedents are listed below the frise instead).
   const datedTracks = new Set(timeline.events.map((e) => e.trackId));
-  const rows: ({ type: "head"; kind: TrackKind } | { type: "track"; trackId: string; label: string; kind: TrackKind })[] = [];
+  const rows: ({ type: "head"; kind: TrackKind } | { type: "track"; trackId: string; label: string; title: string; kind: TrackKind })[] = [];
   for (const kind of TRACK_KINDS) {
     const tracks = timeline.tracks.filter((t) => t.kind === kind && datedTracks.has(t.id));
     if (!tracks.length) continue;
     rows.push({ type: "head", kind });
-    for (const t of tracks) rows.push({ type: "track", trackId: t.id, label: t.label, kind });
+    for (const t of tracks) rows.push({ type: "track", trackId: t.id, label: t.label, title: trackTitle(t), kind });
   }
   const rowY: Record<string, number> = {};
   let y = AXIS_H;
@@ -195,6 +215,18 @@ export function Frise(props: {
             <span title="Ce que toutes les lectures trouvent est gardé ; un modèle plus fort tranche le reste, en ne voyant que les observations concernées">
               {` · consensus de ${timeline.consensus.readers} lectures : ${timeline.consensus.agreed} accords, ${timeline.consensus.kept} gardés et ${timeline.consensus.dropped} écartés par l'arbitre`}
               {timeline.consensus.unarbitrated > 0 && `, ${timeline.consensus.unarbitrated} non arbitrés`}
+            </span>
+          )}
+          {timeline.consolidation && !timeline.consolidation.failed && (
+            <span title="Un dossier long est lu par lots indépendants et raconte plusieurs fois le même fait : un appel de plus, sans aucun texte d'observation, dit ce qui désigne la même chose. Chaque mention regroupée reste visible sur l'événement.">
+              {` · lu en ${timeline.consolidation.lots} lots, doublons regroupés (${timeline.consolidation.eventsBefore} → ${timeline.consolidation.eventsAfter} événements`}
+              {timeline.consolidation.discordant > 0 && `, ${timeline.consolidation.discordant} avec des dates discordantes`}
+              {")"}
+            </span>
+          )}
+          {timeline.consolidation?.failed && (
+            <span className="error-text" title={timeline.consolidation.failed}>
+              {` · lu en ${timeline.consolidation.lots} lots, doublons non regroupés (l'appel a échoué)`}
             </span>
           )}
         </span>
@@ -289,7 +321,7 @@ export function Frise(props: {
                     <line x1={LABEL_W} x2={width - PAD_R} y1={top + ROW_H / 2} y2={top + ROW_H / 2} className="lane-line" />
                     <text x={24} y={top + ROW_H / 2 + 4} className="lane-label">
                       {r.label.length > 22 ? r.label.slice(0, 21) + "…" : r.label}
-                      <title>{r.label}</title>
+                      <title>{r.title}</title>
                     </text>
                   </g>
                 );
@@ -299,9 +331,9 @@ export function Frise(props: {
                 const cy = rowY[e.trackId] + ROW_H / 2;
                 const x0 = x(dateStart(e.start));
                 const endT = e.end ? dateEnd(e.end) : e.ongoing && lastObservation ? dateEnd(lastObservation) : null;
-                const fill = { fill: `var(--kind-${kind})`, ...(e.fromAge ? { stroke: `var(--kind-${kind})` } : {}) };
+                const fill = { fill: `var(--kind-${kind})`, ...(e.fromAge || e.startUnknown ? { stroke: `var(--kind-${kind})` } : {}) };
                 const early = zoomed && !e.ongoing && dateEnd(e.end ?? e.start) < min ? " early" : "";
-                const approx = (e.fromAge ? " approx" : "") + early;
+                const approx = (e.fromAge || e.startUnknown ? " approx" : "") + early;
                 const handlers = {
                   onMouseEnter: (ev: React.MouseEvent) =>
                     setHover({ e, x: ev.clientX - (chart.current?.getBoundingClientRect().left ?? 0), y: cy }),
@@ -345,7 +377,11 @@ export function Frise(props: {
                   {hover.e.end ? ` → ${formatDate(hover.e.end)}` : hover.e.ongoing ? " → en cours" : ""}
                   {hover.e.lossOfControl ? " · perte de contrôle" : ""}
                 </span>
-                {ageNote(hover.e) && <span className="muted small">{ageNote(hover.e)}</span>}
+                {dateNotes(hover.e).map((n) => (
+                  <span key={n} className="muted small">
+                    {n}
+                  </span>
+                ))}
                 {hover.e.note && <span>{hover.e.note}</span>}
                 {hover.e.consensus === "arbitrated" && <span className="muted small">Désaccord entre les lectures, tranché par l'arbitre</span>}
                 {hover.e.consensus === "unarbitrated" && <span className="muted small">Désaccord entre les lectures, non arbitré (gardé tel que lu)</span>}
@@ -354,7 +390,7 @@ export function Frise(props: {
             )}
             <p className="legend-note small muted">
               ▬ période · ● événement ponctuel · ▸ toujours en cours · ◆ perte de contrôle · teinte pâle : craving · contour
-              pointillé : date calculée d'après l'âge
+              pointillé : date calculée d'après l'âge, ou début non précisé
             </p>
           </div>
         )}
@@ -375,7 +411,11 @@ export function Frise(props: {
                   <td className="nowrap">
                     {formatDate(e.start)}
                     {e.end ? ` → ${formatDate(e.end)}` : e.ongoing ? " → en cours" : ""}
-                    {ageNote(e) && <div className="muted small">{ageNote(e)}</div>}
+                    {dateNotes(e).map((n) => (
+                      <div key={n} className="muted small">
+                        {n}
+                      </div>
+                    ))}
                   </td>
                   <td>
                     <span className="swatch" style={{ background: `var(--kind-${kindOf[e.trackId]})` }} />
