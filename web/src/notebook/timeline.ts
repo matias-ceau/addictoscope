@@ -65,17 +65,18 @@ export const TIMELINE_SCHEMA = {
 export const TIMELINE_SYSTEM = `Tu construis la frise chronologique d'un parcours de soins en addictologie (modèle Auriacombe et al., 2018) à partir d'observations cliniques pseudonymisées. Garde les étiquettes ([PATIENT], [SOIGNANT_2]…) telles quelles.
 
 Pistes (kind) :
-- substance_use : une piste par substance (label = « Alcool », « Cannabis », « Opioïdes »…). mode = usage, intoxication, sevrage, rechute ou craving. loss_of_control = true si une perte de contrôle est décrite.
+- substance_use : une piste par objet d'addiction, substance ou comportement (label = « Alcool », « Cannabis », « Opioïdes », « Jeux vidéo », « Jeux d'argent », « Écrans », « Achats », « Sexe », « Alimentation »…). Les addictions sans substance se relèvent comme les autres : début, périodes d'usage, arrêts, reprises. mode = usage, intoxication, sevrage, rechute ou craving. loss_of_control = true si une perte de contrôle est décrite.
 - psychiatric : troubles et épisodes (label = trouble, ex. « Épisode dépressif »).
 - somatic : problèmes somatiques (label = problème).
 - medication : un traitement par piste (label = molécule ; start/end = début/arrêt).
 - therapeutic_psycho : prises en charge (hospitalisation, CSAPA, psychothérapie, groupe…).
-- life_event : événements de vie (rupture, incarcération, emploi, logement, deuil…).
+- life_event : événements de vie (famille : séparation ou divorce des parents, naissance, rupture, deuil ; scolarité, emploi, armée, logement, incarcération…).
 
 Règles :
 - Un événement = une période (start, end) ou un point (end = null, ongoing = false). ongoing = true si toujours en cours à la dernière observation.
 - Dates : la précision réellement connue (YYYY, YYYY-MM ou YYYY-MM-DD) dans start et end ; start_age et end_age restent alors null. Une durée (« depuis 3 ans », « il y a 2 ans ») se date à partir de la date de l'observation.
 - Antécédent daté par l'âge ou par une période de vie (« alcool depuis l'âge de 15 ans », « premiers joints à l'adolescence ») : start = null et start_age à la place ; end_age si la fin est elle aussi racontée par l'âge (sinon end_age = null). Ne calcule jamais l'année toi-même, même si l'année de naissance figure dans le texte : elle est calculée ensuite. Format de l'âge : un nombre (15), un intervalle [12, 17], ou une période : « enfance » (6–11 ans), « adolescence » (12–17 ans), « jeune adulte » (18–25 ans) ; « vers 20 ans » = [19, 21]. La note garde la formulation d'origine (« à 15 ans »).
+- Le parcours d'avant le suivi compte autant que le suivi : relève chaque antécédent raconté (enfance, famille, scolarité, débuts et évolution des usages, soins antérieurs), même dit en passant ou dans une observation tardive.
 - observation_ids : identifiants des observations sources (au moins un). N'invente rien qui ne soit pas écrit.
 - note : courte, factuelle, en français.`;
 
