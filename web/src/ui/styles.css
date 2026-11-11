@@ -419,6 +419,12 @@ button.link { border: 0; background: none; padding: 0 2px; color: var(--accent);
 @media (max-width: 640px) {
   .demo-list { grid-template-columns: 1fr; }
   .flow-zone ol { grid-auto-flow: row; }
+  /* Phone: the status chips go under the name instead of pushing the page wider than the screen. */
+  .topbar { flex-wrap: wrap; padding: 10px 12px; }
+  .brand { flex-wrap: wrap; }
+  .topbar-right { justify-content: flex-start; min-width: 0; }
+  body { overflow-x: clip; }
+  .journey ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .frise .mark.early { opacity: 0.35; }
 .model-list { display: flex; flex-direction: column; gap: 6px; max-height: 300px; overflow: auto; }
