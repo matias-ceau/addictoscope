@@ -17,6 +17,8 @@ export interface AnalysisState {
   replayed?: boolean;
   /** Per document of the last run: observations found here by rules, or by the model. */
   segmentedBy?: Record<string, "rules" | "model">;
+  /** While running: the frise of the previous reading, whose corrections by hand are put back. */
+  corrected?: Timeline;
 }
 
 /** In the demonstration: which recording to replay, or "live". */

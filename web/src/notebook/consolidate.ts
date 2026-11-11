@@ -24,6 +24,10 @@ import {
 } from "./model";
 import type { TimelineInput } from "./timeline";
 
+/** Headings as the model is shown them. Kept apart from the labels on screen:
+ *  rewording a heading here would ask every recorded regroupement anew. */
+const PROMPT_KIND_LABEL = { ...TRACK_KIND_LABEL, substance_use: "Consommations" };
+
 /** Characters of an event's note shown to the model. */
 const NOTE_CHARS = 140;
 /** Source dates shown per event. */
@@ -89,7 +93,7 @@ export function consolidationMessage(timeline: Timeline, observations: Observati
   for (const kind of TRACK_KINDS) {
     const tracks = timeline.tracks.filter((t) => t.kind === kind);
     if (!tracks.length) continue;
-    lines.push("", `## ${TRACK_KIND_LABEL[kind]}`);
+    lines.push("", `## ${PROMPT_KIND_LABEL[kind]}`);
     for (const track of tracks) {
       lines.push("", `### ${track.id} — ${track.label}`);
       for (const e of timeline.events.filter((x) => x.trackId === track.id)) {

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 
 import { analyse } from "../app/analysis";
+import { carryCorrections } from "../notebook/edit";
 import { demoFiles, loadRecording, type DemoDossier } from "../app/demo";
 import { loadDossierAnalysis, loadDossierFiles, loadDossierKey, remapAnalysis, type Library, type LibraryDossier } from "../app/library";
 import { clearLedger } from "../cloud/ledger";
@@ -167,7 +168,7 @@ export function App(props: { library?: LibraryProps } = {}) {
 
   const runAnalysis = useCallback(async () => {
     const docs = stateRef.current.docs.filter((d) => d.status === "done" && d.manifest?.verified && d.outPages);
-    setAnalysis({ status: "running", docs: docs.map((d) => d.id) });
+    setAnalysis((a) => ({ status: "running", docs: docs.map((d) => d.id), corrected: a.timeline ?? a.corrected }));
     try {
       // Demonstration: the recorded answers stand in for the network; the
       // guard, the requests and every local step run as they would live.
@@ -189,7 +190,15 @@ export function App(props: { library?: LibraryProps } = {}) {
         !before,
       );
       const model = runPolicy.kind === "off" ? undefined : runPolicy.model;
-      setAnalysis({ status: "done", ...result, docs: docs.map((d) => d.id), model, replayed: Boolean(replay) });
+      // Corrections made by hand on the previous reading of these documents are put back.
+      setAnalysis((previous) => ({
+        status: "done",
+        ...result,
+        timeline: previous.corrected ? carryCorrections(previous.corrected, result.timeline) : result.timeline,
+        docs: docs.map((d) => d.id),
+        model,
+        replayed: Boolean(replay),
+      }));
       setMainView("frise");
     } catch (err) {
       setAnalysis({ status: "error", error: String((err as Error).message ?? err) });
@@ -396,6 +405,7 @@ export function App(props: { library?: LibraryProps } = {}) {
             key={reopened.keyTable ? "with-key" : "no-key"}
             timeline={reopened.saved.timeline}
             observations={reopened.saved.observations}
+            onChange={(timeline) => setReopened((r) => (r ? { ...r, saved: { ...r.saved, timeline } } : r))}
             keyTable={reopened.keyTable}
             source={`Analyse rouverte${reopened.saved.model ? ` : ${modelName(reopened.saved.model)}` : ""}${reopened.saved.createdAt ? `, enregistrée le ${new Date(reopened.saved.createdAt).toLocaleDateString("fr-FR")}` : ""}`}
             onImportKey={(files) => void reopen(files)}
@@ -428,6 +438,7 @@ export function App(props: { library?: LibraryProps } = {}) {
               keyTable={keyTable}
               onOpenSource={openSource}
               onSave={saveAnalysis}
+              onChange={(timeline) => setAnalysis((x) => ({ ...x, timeline }))}
               source={
                 analysis.model &&
                 (library

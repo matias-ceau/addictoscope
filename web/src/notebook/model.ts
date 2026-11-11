@@ -19,7 +19,7 @@ export const USAGE_MODES = ["usage", "intoxication", "sevrage", "rechute", "crav
 export type UsageMode = (typeof USAGE_MODES)[number];
 
 export const TRACK_KIND_LABEL: Record<TrackKind, string> = {
-  substance_use: "Consommations",
+  substance_use: "Usages et comportements",
   psychiatric: "Psychopathologie",
   somatic: "Somatique",
   medication: "Médicaments",
@@ -71,6 +71,21 @@ export interface TimelineEvent {
   startUnknown?: true;
   /** Regroupement (consolidate.ts): the tellings merged into this event. */
   tellings?: Telling[];
+  /** Corrected by hand on this device (edit.ts): added, or changed. */
+  edited?: "added" | "changed";
+  /** Verdict given by the reader going through the list. */
+  verdict?: "ok" | "wrong";
+  /** Landmark of the "Essentiel" view: forced in (true) or out (false);
+   *  absent, the automatic selection decides. */
+  key?: boolean;
+}
+
+/** An event deleted by hand: kept so that reading the dossier again does
+ *  not bring it back. */
+export interface RemovedEvent {
+  kind: TrackKind;
+  label: string;
+  start: string;
 }
 
 /** One mention of a fact, as read in one lot, before the tellings were merged. */
@@ -131,6 +146,10 @@ export interface Timeline {
   consensus?: ConsensusStats;
   /** Present when the frise was read in several lots and regrouped. */
   consolidation?: ConsolidationStats;
+  /** Events deleted by hand. */
+  removed?: RemovedEvent[];
+  /** What the reader found missing, in their own words. */
+  missing?: string;
 }
 
 /** A timeline read from older JSON (no `undated`) brought to the current shape. */

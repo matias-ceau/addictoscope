@@ -88,6 +88,21 @@ test("analyse a verified document into a frise, sending nothing identifying", as
   // Table view and jump back to the source observation.
   await page.getByRole("tab", { name: "Tableau" }).click();
   await expect(page.locator(".event-table tbody tr")).toHaveCount(4);
+
+  // Corrections by hand: a verdict, a note rewritten, the short view. Nothing more is sent.
+  await page.locator("button.verdict.ok").first().click();
+  await expect(page.getByText("1 vérifié sur 4")).toBeVisible();
+  await page.locator("button.verdict.fix").nth(1).click();
+  await page.getByRole("dialog").getByLabel("Note").fill("note réécrite à la main");
+  await page.getByRole("dialog").getByRole("button", { name: "Enregistrer", exact: true }).click();
+  await expect(page.getByText("1 correction à la main")).toBeVisible();
+  await expect(page.locator(".event-table")).toContainText("note réécrite à la main");
+  await page.getByRole("tab", { name: "Essentiel" }).click();
+  await expect(page.locator("svg.essentiel .landmark").first()).toBeVisible();
+  await page.screenshot({ path: "test-results/essentiel.png" });
+  await page.getByRole("tab", { name: "Tableau" }).click();
+  expect(sent).toHaveLength(1);
+
   await page.locator(".event-table button.link").first().click();
   await expect(page.locator(".source-highlight").first()).toBeVisible();
   await page.screenshot({ path: "test-results/source-jump.png" });

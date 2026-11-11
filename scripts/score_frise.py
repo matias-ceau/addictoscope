@@ -58,7 +58,7 @@ CHECK_FR = {
     "source": "au moins une source attendue",
 }
 KIND_FR = {
-    "substance_use": "Consommations",
+    "substance_use": "Usages et comportements",
     "psychiatric": "Psychopathologie",
     "somatic": "Somatique",
     "medication": "Médicaments",

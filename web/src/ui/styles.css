@@ -489,3 +489,61 @@ fieldset.consensus .reader-list { display: flex; flex-wrap: wrap; gap: 4px 14px;
 .obs-kind { font-size: 0.78rem; color: var(--muted); font-weight: 650; }
 .obs-summary { font-size: 0.86rem; }
 .obs-where { font-size: 0.74rem; color: var(--muted); white-space: nowrap; }
+
+/* Frise: history before follow-up, on its own scale */
+.frise .history-band { fill: var(--surface-2); opacity: 0.55; }
+.frise .history-cut { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.frise .history-label { fill: var(--accent); font-size: 11px; font-weight: 700; }
+
+/* Frise: corrections by hand */
+.frise .mark.edited { stroke: var(--text); stroke-width: 1.8; stroke-dasharray: none; }
+.frise .mark.wrong { opacity: 0.25; }
+.frise .lane-add { fill: var(--accent); font-size: 15px; font-weight: 700; cursor: pointer; }
+.frise .lane-add:hover, .frise .lane-add:focus { fill: var(--text); outline: none; }
+.hand-count { color: var(--warn); }
+.chip.hand { margin-left: 6px; font-size: 0.72rem; }
+.event-editor { width: min(560px, calc(100vw - 24px)); max-height: calc(100vh - 24px); overflow: auto; }
+.editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; margin: 12px 0; }
+.editor-grid label { display: flex; flex-direction: column; gap: 4px; font-size: 0.82rem; font-weight: 600; min-width: 0; }
+.editor-grid label.inline { flex-direction: row; align-items: center; gap: 8px; font-weight: 400; }
+.editor-grid label.wide { grid-column: 1 / -1; }
+.editor-grid input:not([type="checkbox"]), .editor-grid select, .editor-grid textarea, .editor-merge select, .missing textarea {
+  font: inherit; font-weight: 400; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--text); min-width: 0; width: 100%;
+}
+.editor-sources { border-top: 1px solid var(--line); padding-top: 10px; margin-bottom: 10px; }
+.editor-sources p { margin: 4px 0; }
+.editor-sources ul { margin: 4px 0 0; padding-left: 18px; }
+.editor-merge { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
+button.ghost.danger { color: #c0392b; margin-right: auto; }
+
+/* Frise: list to check, event by event */
+.review-progress { margin: 4px 10px 10px; }
+.event-table tr.verdict-ok td { background: var(--ok-soft); }
+.event-table tr.verdict-wrong td { background: var(--warn-soft); text-decoration: line-through; text-decoration-color: var(--warn); }
+.event-table tr.verdict-wrong td.verdicts { text-decoration: none; }
+.verdicts { white-space: nowrap; }
+button.verdict { font: inherit; font-size: 0.8rem; padding: 6px 10px; margin-right: 4px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--text); cursor: pointer; }
+button.verdict.ok[aria-pressed="true"] { background: var(--ok); border-color: var(--ok); color: white; }
+button.verdict.wrong[aria-pressed="true"] { background: var(--warn); border-color: var(--warn); color: white; }
+button.verdict.fix[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: var(--surface); }
+.missing { display: flex; flex-direction: column; gap: 4px; margin: 16px 10px; }
+.essentiel-wrap svg { max-width: 100%; height: auto; border-radius: 10px; }
+
+@media (max-width: 640px) {
+  .editor-grid { grid-template-columns: 1fr; }
+  /* The list becomes one card per event: readable and checkable with a thumb. */
+  .event-table.reviewable thead { display: none; }
+  .event-table.reviewable, .event-table.reviewable tbody, .event-table.reviewable tr, .event-table.reviewable td { display: block; width: 100%; }
+  .event-table.reviewable tr { border: 1px solid var(--line); border-radius: 12px; margin: 0 0 10px; overflow: hidden; }
+  .event-table.reviewable td { border: 0; padding: 6px 12px; white-space: normal; }
+  .event-table.reviewable td.nowrap { font-weight: 700; padding-top: 10px; }
+  .event-table.reviewable td.verdicts { padding-bottom: 12px; }
+  button.verdict { padding: 9px 16px; font-size: 0.9rem; }
+}
+.frise.full { position: fixed; inset: 0; z-index: 30; border-radius: 0; }
+.frise-actions { flex-wrap: wrap; }
+@media (max-width: 640px) {
+  /* On a phone the whole frise scrolls as one page: the header no longer takes half the screen. */
+  .frise.full { display: block; overflow: auto; }
+  .frise.full .frise-body { overflow: visible; }
+}

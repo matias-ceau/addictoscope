@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { friseHtml } from "../app/exportFrise";
 import { reidentifyTimeline, type KeyTable } from "../core/reidentify";
 import { formatAge } from "../notebook/age";
+import { correctionCount, keyEvents, setVerdict } from "../notebook/edit";
 import {
   dateEnd,
   dateStart,
@@ -16,11 +17,12 @@ import {
   type TrackKind,
   withUndated,
 } from "../notebook/model";
+import { linearScale, splitScale, ticks } from "./axis";
+import { downloadSvgAsPng, Essentiel, EventEditor, formatDate, type EditTarget } from "./FriseEdit";
 
 const LABEL_W = 168;
 const ROW_H = 26;
 const HEAD_H = 24;
-const AXIS_H = 28;
 const PAD_R = 16;
 
 const MODE_LABEL: Record<string, string> = {
@@ -30,13 +32,6 @@ const MODE_LABEL: Record<string, string> = {
   rechute: "rechute",
   craving: "craving",
 };
-
-function formatDate(s: string): string {
-  const [y, m, d] = s.split("-");
-  if (d) return `${d}/${m}/${y}`;
-  if (m) return `${m}/${y}`;
-  return y;
-}
 
 /** "d'après l'âge : 14 ans", for a bound computed from an age. */
 function ageNote(e: TimelineEvent): string | null {
@@ -65,27 +60,6 @@ export function dateNotes(e: TimelineEvent): string[] {
   return notes;
 }
 
-function ticks(min: number, max: number): { t: number; label: string; major: boolean }[] {
-  const out: { t: number; label: string; major: boolean }[] = [];
-  const y0 = new Date(min).getUTCFullYear();
-  const y1 = new Date(max).getUTCFullYear();
-  const years = y1 - y0 + 1;
-  const monthStep = years <= 1 ? 1 : years <= 3 ? 3 : 0;
-  for (let y = y0; y <= y1 + 1; y++) {
-    for (let m = 0; m < 12; m += monthStep || 12) {
-      const t = Date.UTC(y, m, 1);
-      if (t < min || t > max) continue;
-      out.push({ t, label: m === 0 ? String(y) : `${String(m + 1).padStart(2, "0")}/${String(y).slice(2)}`, major: m === 0 });
-    }
-  }
-  // Too many year ticks on long histories: keep every 2nd or 5th year.
-  if (!monthStep && out.length > 14) {
-    const step = out.length > 40 ? 5 : 2;
-    return out.filter((x) => new Date(x.t).getUTCFullYear() % step === 0);
-  }
-  return out;
-}
-
 export function Frise(props: {
   timeline: Timeline;
   observations: Observation[];
@@ -99,6 +73,8 @@ export function Frise(props: {
   onImportKey?: (files: File[]) => void;
   /** Where the analysis came from, e.g. "Claude Sonnet 5.5, réponses rejouées". */
   source?: string;
+  /** Corrections by hand: the pseudonymized frise, changed. Absent: read only. */
+  onChange?: (timeline: Timeline) => void;
 }) {
   const hasKey = (props.keyTable?.size ?? 0) > 0;
   const [names, setNames] = useState<"real" | "pseudo">(hasKey ? "real" : "pseudo");
@@ -111,7 +87,14 @@ export function Frise(props: {
   const wrap = useRef<HTMLDivElement>(null);
   const chart = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(900);
-  const [mode, setMode] = useState<"chart" | "table">("chart");
+  const [mode, setMode] = useState<"chart" | "short" | "table">("chart");
+  /** The frise as saved, under its labels: what corrections are written to. */
+  const base = useMemo(() => withUndated(props.timeline), [props.timeline]);
+  const [editing, setEditing] = useState<EditTarget | null>(null);
+  /** The frise over the whole window: side panels leave it little room. */
+  const [full, setFull] = useState(false);
+  const corrections = correctionCount(base);
+  const verdict = (id: string, v: TimelineEvent["verdict"]) => props.onChange?.(setVerdict(base, id, base.events.find((e) => e.id === id)?.verdict === v ? undefined : v));
   const [hover, setHover] = useState<{ e: TimelineEvent; x: number; y: number } | null>(null);
 
   useEffect(() => {
@@ -141,10 +124,14 @@ export function Frise(props: {
   }, [timeline, lastObservation]);
 
   // A life-long history (antecedents from childhood) squeezes a year of
-  // follow-up into a sliver: then the frise opens on the follow-up period.
+  // follow-up into a sliver. The frise still opens on the whole course —
+  // what came before follow-up is half of the story — on an axis in two
+  // parts, each with its own scale; the follow-up alone is one click away.
   const longHistory = followUp !== null && whole.lo < followUp.from && whole.hi - whole.lo > 3 * Math.max(followUp.to - followUp.from, 180 * 864e5);
-  const [span, setSpan] = useState<"followup" | "all">(longHistory ? "followup" : "all");
+  const [span, setSpan] = useState<"followup" | "all">("all");
   const zoomed = span === "followup" && longHistory;
+  const split = longHistory && !zoomed;
+  const AXIS_H = split ? 44 : 28;
 
   const { min, max } = useMemo(() => {
     const lo = zoomed ? followUp!.from : whole.lo;
@@ -155,7 +142,17 @@ export function Frise(props: {
 
   const plotW = width - LABEL_W - PAD_R;
   // Before the window (follow-up view), marks are pinned to its left edge.
-  const x = (t: number) => LABEL_W + ((Math.max(t, min) - min) / (max - min)) * plotW;
+  const scale = split ? splitScale(min, followUp!.from, max) : linearScale(min, max);
+  const x = (t: number) => LABEL_W + scale(t) * plotW;
+  const cut = scale.breakAt;
+  const axisTicks = cut
+    ? [...ticks(min, cut.t - 1, Math.max(2, Math.floor((cut.at * plotW) / 44))), ...ticks(cut.t, max, Math.max(3, Math.floor(((1 - cut.at) * plotW) / 48)))]
+    : ticks(min, max, Math.max(4, Math.floor(plotW / 55)));
+  const birthYear = useMemo(() => {
+    const label = [...(props.keyTable?.keys() ?? [])].find((k) => /^\[NE\(E\) EN \d{4}\]$/.test(k));
+    return label ? Number(/\d{4}/.exec(label)![0]) : null;
+  }, [props.keyTable]);
+  const landmarks = useMemo(() => keyEvents(timeline, followUp?.from ?? null), [timeline, followUp]);
 
   // Layout: one section per kind that has tracks, one row per track (tracks
   // holding only undated antecedents are listed below the frise instead).
@@ -205,12 +202,17 @@ export function Frise(props: {
   };
 
   return (
-    <section className="frise viz-root">
+    <section className={"frise viz-root" + (full ? " full" : "")}>
       <div className="viewer-toolbar">
         <div className="doc-title">Frise chronologique</div>
         <span className="muted small">
           {timeline.events.length} événements · {datedTracks.size} pistes
           {timeline.undated.length > 0 && ` · ${timeline.undated.length} non datés`}
+          {corrections.total > 0 && (
+            <strong className="hand-count" title="Événements ajoutés, modifiés ou supprimés à la main. Ils sont gardés dans l'analyse enregistrée et remis si le dossier est relu.">
+              {` · ${corrections.total} correction${corrections.total > 1 ? "s" : ""} à la main`}
+            </strong>
+          )}
           {timeline.consensus && (
             <span title="Ce que toutes les lectures trouvent est gardé ; un modèle plus fort tranche le reste, en ne voyant que les observations concernées">
               {` · consensus de ${timeline.consensus.readers} lectures : ${timeline.consensus.agreed} accords, ${timeline.consensus.kept} gardés et ${timeline.consensus.dropped} écartés par l'arbitre`}
@@ -232,11 +234,11 @@ export function Frise(props: {
         </span>
         {longHistory && mode === "chart" && (
           <div className="segmented" role="group" aria-label="Période affichée">
-            <button aria-pressed={zoomed} onClick={() => setSpan("followup")} title="Du premier au dernier document">
-              Période de suivi
+            <button aria-pressed={!zoomed} onClick={() => setSpan("all")} title="Antécédents compris, depuis l'enfance : l'avant-suivi et le suivi ont chacun leur échelle">
+              Parcours entier
             </button>
-            <button aria-pressed={!zoomed} onClick={() => setSpan("all")} title="Antécédents compris, depuis l'enfance">
-              Toute l'histoire
+            <button aria-pressed={zoomed} onClick={() => setSpan("followup")} title="Du premier au dernier document">
+              Suivi seul
             </button>
           </div>
         )}
@@ -244,7 +246,10 @@ export function Frise(props: {
           <button role="tab" aria-selected={mode === "chart"} onClick={() => setMode("chart")}>
             Frise
           </button>
-          <button role="tab" aria-selected={mode === "table"} onClick={() => setMode("table")}>
+          <button role="tab" aria-selected={mode === "short"} onClick={() => setMode("short")} title="Une dizaine de repères du parcours, à montrer ou à exporter en image">
+            Essentiel
+          </button>
+          <button role="tab" aria-selected={mode === "table"} onClick={() => setMode("table")} title="Tous les événements en liste, à vérifier un par un">
             Tableau
           </button>
         </div>
@@ -259,6 +264,28 @@ export function Frise(props: {
           </div>
         )}
         <div className="frise-actions">
+          <button className="small-btn" aria-pressed={full} onClick={() => setFull((f) => !f)} title="La frise sur toute la fenêtre">
+            {full ? "Réduire" : "Agrandir"}
+          </button>
+          {props.onChange && (
+            <button className="small-btn" onClick={() => setEditing({ preset: { kind: "life_event", label: "" } })} title="Ajouter à la main un événement que la lecture n'a pas relevé">
+              + Événement
+            </button>
+          )}
+          {mode === "short" && landmarks.length > 0 && (
+            <button
+              className="small-btn"
+              title="Image PNG de la vue « Essentiel », pour une présentation"
+              onClick={() => {
+                const svg = wrap.current?.querySelector<SVGSVGElement>("svg.essentiel");
+                if (!svg) return;
+                if (real && !window.confirm("Cette image peut contenir les vrais noms du patient et des soignants. L'enregistrer sur ce poste ?")) return;
+                downloadSvgAsPng(svg, real ? "essentiel-IDENTIFIANT.png" : "essentiel-pseudonymise.png");
+              }}
+            >
+              Exporter l'image
+            </button>
+          )}
           {mode === "chart" && timeline.events.length > 0 && (
             <button className="small-btn" onClick={exportHtml} title={real ? "Page HTML avec les vrais noms (identifiante)" : "Page HTML pseudonymisée"}>
               Exporter la page
@@ -299,7 +326,19 @@ export function Frise(props: {
         {mode === "chart" && timeline.events.length > 0 && (
           <div className="frise-chart" ref={chart} onMouseLeave={() => setHover(null)}>
             <svg width={width} height={height} role="img" aria-label="Frise chronologique du parcours de soins">
-              {ticks(min, max).map((tk) => (
+              {cut && (
+                <g className="history">
+                  <rect x={LABEL_W} y={AXIS_H - 6} width={x(cut.t) - LABEL_W} height={height - AXIS_H + 6} className="history-band" />
+                  <line x1={x(cut.t)} x2={x(cut.t)} y1={4} y2={height} className="history-cut" />
+                  <text x={x(cut.t) - 6} y={13} textAnchor="end" className="history-label">
+                    Avant le suivi
+                  </text>
+                  <text x={x(cut.t) + 6} y={13} className="history-label">
+                    Suivi (premier document : {formatDate(props.observations.map((o) => o.date).filter(Boolean).sort()[0]!)})
+                  </text>
+                </g>
+              )}
+              {axisTicks.map((tk) => (
                 <g key={tk.t}>
                   <line x1={x(tk.t)} x2={x(tk.t)} y1={AXIS_H - 6} y2={height} className={tk.major ? "grid major" : "grid"} />
                   <text x={x(tk.t) + 3} y={AXIS_H - 10} className="axis-label">
@@ -323,6 +362,19 @@ export function Frise(props: {
                       {r.label.length > 22 ? r.label.slice(0, 21) + "…" : r.label}
                       <title>{r.title}</title>
                     </text>
+                    {props.onChange && (
+                      <text
+                        x={10}
+                        y={top + ROW_H / 2 + 4}
+                        className="lane-add"
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => setEditing({ preset: { kind: r.kind, label: base.tracks.find((t) => t.id === r.trackId)?.label ?? r.label } })}
+                        onKeyDown={(ev) => ev.key === "Enter" && setEditing({ preset: { kind: r.kind, label: base.tracks.find((t) => t.id === r.trackId)?.label ?? r.label } })}
+                      >
+                        +<title>Ajouter un événement sur cette ligne</title>
+                      </text>
+                    )}
                   </g>
                 );
               })}
@@ -333,13 +385,13 @@ export function Frise(props: {
                 const endT = e.end ? dateEnd(e.end) : e.ongoing && lastObservation ? dateEnd(lastObservation) : null;
                 const fill = { fill: `var(--kind-${kind})`, ...(e.fromAge || e.startUnknown ? { stroke: `var(--kind-${kind})` } : {}) };
                 const early = zoomed && !e.ongoing && dateEnd(e.end ?? e.start) < min ? " early" : "";
-                const approx = (e.fromAge || e.startUnknown ? " approx" : "") + early;
+                const approx = (e.fromAge || e.startUnknown ? " approx" : "") + early + (e.edited ? " edited" : "") + (e.verdict === "wrong" ? " wrong" : "");
                 const handlers = {
                   onMouseEnter: (ev: React.MouseEvent) =>
                     setHover({ e, x: ev.clientX - (chart.current?.getBoundingClientRect().left ?? 0), y: cy }),
-                  onClick: () => openSource(e.observationIds[0]),
+                  onClick: () => setEditing({ id: e.id }),
                   tabIndex: 0,
-                  onKeyDown: (ev: React.KeyboardEvent) => ev.key === "Enter" && openSource(e.observationIds[0]),
+                  onKeyDown: (ev: React.KeyboardEvent) => ev.key === "Enter" && setEditing({ id: e.id }),
                   onFocus: () => setHover({ e, x: x0, y: cy }),
                 };
                 return (
@@ -385,29 +437,50 @@ export function Frise(props: {
                 {hover.e.note && <span>{hover.e.note}</span>}
                 {hover.e.consensus === "arbitrated" && <span className="muted small">Désaccord entre les lectures, tranché par l'arbitre</span>}
                 {hover.e.consensus === "unarbitrated" && <span className="muted small">Désaccord entre les lectures, non arbitré (gardé tel que lu)</span>}
-                <span className="muted small">Cliquer pour ouvrir la source</span>
+                {hover.e.edited && <span className="muted small">{hover.e.edited === "added" ? "Ajouté à la main" : "Corrigé à la main"}</span>}
+                <span className="muted small">{props.onChange ? "Cliquer pour voir la source ou corriger" : "Cliquer pour voir la source"}</span>
               </div>
             )}
             <p className="legend-note small muted">
               ▬ période · ● événement ponctuel · ▸ toujours en cours · ◆ perte de contrôle · teinte pâle : craving · contour
-              pointillé : date calculée d'après l'âge, ou début non précisé
+              pointillé : date calculée d'après l'âge, ou début non précisé · contour noir : corrigé à la main
             </p>
           </div>
         )}
 
+        {mode === "short" && timeline.events.length > 0 && (
+          <div className="essentiel-wrap">
+            <Essentiel events={landmarks} timeline={timeline} birthYear={birthYear} followUpFrom={followUp?.from ?? null} width={width} onPick={(e) => setEditing({ id: e.id })} />
+            <p className="legend-note small muted">
+              {landmarks.length} repères choisis automatiquement (premiers usages, pertes de contrôle, événements de vie d'avant le suivi, premiers
+              soins){birthYear ? "" : " ; âges affichés quand l'année de naissance est connue sur ce poste"}. Cadre pointillé : avant le suivi.
+              {props.onChange && " Toucher un repère pour le corriger ou le retirer ; tout événement peut être ajouté depuis sa fiche."}
+            </p>
+          </div>
+        )}
+
+        {mode === "table" && props.onChange && timeline.events.length > 0 && (
+          <p className="review-progress small">
+            <strong>
+              {corrections.verdicts} vérifié{corrections.verdicts > 1 ? "s" : ""} sur {timeline.events.length}
+            </strong>{" "}
+            <span className="muted">— pour chaque événement : juste, faux, ou à corriger. Rien ne quitte ce poste.</span>
+          </p>
+        )}
         {mode === "table" && (
-          <table className="event-table">
+          <table className={"event-table" + (props.onChange ? " reviewable" : "")}>
             <thead>
               <tr>
                 <th>Date</th>
                 <th>Piste</th>
                 <th>Événement</th>
                 <th>Source</th>
+                {props.onChange && <th>Vérification</th>}
               </tr>
             </thead>
             <tbody>
               {sortedEvents.map((e) => (
-                <tr key={e.id}>
+                <tr key={e.id} className={(e.verdict ? `verdict-${e.verdict}` : "") + (e.edited ? " edited" : "")}>
                   <td className="nowrap">
                     {formatDate(e.start)}
                     {e.end ? ` → ${formatDate(e.end)}` : e.ongoing ? " → en cours" : ""}
@@ -425,6 +498,7 @@ export function Frise(props: {
                     {e.mode ? <em>{MODE_LABEL[e.mode]} </em> : null}
                     {e.lossOfControl ? <em>(perte de contrôle) </em> : null}
                     {e.note}
+                    {e.edited && <span className="chip chip-warn hand">{e.edited === "added" ? "ajouté à la main" : "corrigé à la main"}</span>}
                   </td>
                   <td>
                     {e.observationIds.map((id) => (
@@ -433,10 +507,31 @@ export function Frise(props: {
                       </button>
                     ))}
                   </td>
+                  {props.onChange && (
+                    <td className="verdicts">
+                      <button aria-pressed={e.verdict === "ok"} className="verdict ok" onClick={() => verdict(e.id, "ok")}>
+                        Juste
+                      </button>
+                      <button aria-pressed={e.verdict === "wrong"} className="verdict wrong" onClick={() => verdict(e.id, "wrong")}>
+                        Faux
+                      </button>
+                      <button aria-pressed={Boolean(e.edited)} className="verdict fix" onClick={() => setEditing({ id: e.id })}>
+                        Corriger
+                      </button>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>
           </table>
+        )}
+
+        {mode === "table" && props.onChange && (
+          <label className="missing">
+            <strong>Il manque…</strong>
+            <span className="muted small">Ce que la frise aurait dû contenir, avec vos mots ; ou ajoutez-le avec « + Événement ».</span>
+            <textarea rows={3} value={base.missing ?? ""} placeholder="Par exemple : hospitalisation de 2021 non relevée" onChange={(ev) => props.onChange!({ ...base, missing: ev.target.value })} />
+          </label>
         )}
 
         {timeline.undated.length > 0 && (
@@ -469,6 +564,17 @@ export function Frise(props: {
           </section>
         )}
       </div>
+      {editing && (
+        <EventEditor
+          timeline={base}
+          target={editing}
+          observations={props.observations}
+          real={real}
+          onOpenSource={props.onOpenSource ? openSource : undefined}
+          onChange={props.onChange}
+          onClose={() => setEditing(null)}
+        />
+      )}
     </section>
   );
 }

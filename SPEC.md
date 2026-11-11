@@ -680,3 +680,40 @@ ré-identifié (usage privé, ne pas diffuser) ».
 - Frise relancée sur les 14 dossiers fictifs : le rappel des antécédents
   datés par l'âge doit monter. Aujourd'hui, c'est le premier point faible
   (88 % au total).
+
+## Frise : parcours entier, corrections à la main, vue « Essentiel » (11/11/2026)
+
+Demande : la période d'avant le suivi est essentielle et ne doit pas être mise de
+côté ; la frise doit pouvoir être corrigée, y compris sur téléphone ; une vue
+courte doit pouvoir être montrée en réunion.
+
+- **Parcours entier.** La frise s'ouvre toujours sur toute l'histoire. Quand
+  l'histoire est longue devant le suivi, l'axe est en deux parties, chacune à son
+  échelle : l'avant-suivi (25 à 45 % de la largeur, fond teinté) et le suivi,
+  séparés par un trait au premier document. « Suivi seul » reste à un clic.
+- **Fiche d'un événement.** Toucher un événement ouvre sa fiche : rubrique, ligne,
+  début, fin (2013, 05/2013 ou 12/05/2013), en cours, nature, perte de contrôle,
+  note ; observations d'origine avec lien vers la page ; supprimer ; fusionner
+  avec un autre événement de la même ligne. « + » en tête de ligne et
+  « + Événement » ajoutent. La fiche écrit toujours dans la frise pseudonymisée :
+  un vrai nom affiché n'est jamais enregistré.
+- **Liste à vérifier** (onglet Tableau) : Juste, Faux, Corriger par événement,
+  compteur « n vérifiés sur N », champ « Il manque… ». Sur téléphone, une carte
+  par événement.
+- **Essentiel.** Une dizaine de repères choisis par règles simples (premier usage
+  de chaque produit ou comportement, perte de contrôle, événements de vie,
+  premiers soins ; au plus 60 % d'un seul côté du début du suivi), que la fiche
+  permet de forcer ou d'exclure. Âge affiché si l'année de naissance est connue
+  sur le poste. Export en image PNG.
+- **Corrections conservées.** Elles vivent dans la frise (`edited`, `verdict`,
+  `key`, `removed`, `missing`) : « Enregistrer l'analyse » les garde, et une
+  relecture des mêmes documents les remet (`carryCorrections` : suppressions
+  maintenues, événements ajoutés ou modifiés remis à la place de ceux lus à la
+  même ligne et à la même date). Un événement corrigé porte un contour noir.
+- **Agrandir** : la frise sur toute la fenêtre.
+- La rubrique « Consommations » s'appelle « Usages et comportements » à l'écran ;
+  la demande de regroupement garde l'ancien intitulé pour que les réponses
+  enregistrées se rejouent.
+
+Non-objectifs : glisser-déposer sur la frise, historique d'annulation, édition
+des antécédents non datés, stockage automatique dans le navigateur.
