@@ -15,8 +15,9 @@ export function Viewer(props: {
   detections: Detection[];
   focused?: string;
   dispatch: Dispatch<Action>;
-  /** Lines to flash after a jump from the frise. */
-  highlight?: { page: number; rects: Rect[]; key: number };
+  /** Lines to flash after a jump from the frise or the observations: the page to
+   *  scroll to, and the lines of every page the observation runs over. */
+  highlight?: { page: number; rects: Record<number, Rect[]>; key: number };
 }) {
   const { doc, view } = props;
 
@@ -59,7 +60,7 @@ export function Viewer(props: {
             page={page}
             detections={view === "original" ? props.detections.filter((d) => d.page === page.page) : []}
             focused={props.focused}
-            highlight={props.highlight?.page === page.page ? props.highlight : undefined}
+            highlight={props.highlight?.rects[page.page] ? { rects: props.highlight.rects[page.page], key: props.highlight.key } : undefined}
             editable={editable && view === "original"}
             dispatch={props.dispatch}
             sourceDoc={doc.id}

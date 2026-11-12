@@ -6,6 +6,7 @@ import { expect, test } from "@playwright/test";
 
 const LIB = resolve(dirname(fileURLToPath(import.meta.url)), "../public/library");
 const library = JSON.parse(readFileSync(resolve(LIB, "library.json"), "utf8"));
+type Span = { start: { page: number; line: number }; end: { page: number; line: number } };
 type Entry = { slug: string; title: string; events: number; pages: number };
 const groups = library.groups as { title: string; dossiers: Entry[] }[];
 // The first dossier of the sidebar is a long one (20 to 30 pages); then a short one.
@@ -34,6 +35,13 @@ test("a library opens every step of analysed dossiers from a sidebar, sending no
   await expect(first.locator(".obs-item").first()).toBeVisible();
   await first.locator(".obs-item").first().click();
   await expect(first.locator(".viewer")).toBeVisible();
+  // An observation that runs over two pages is highlighted on both.
+  const analysis = JSON.parse(readFileSync(resolve(LIB, dossiers[0].slug, "analysis.json"), "utf8")) as { observations: Span[] };
+  const crossing = analysis.observations.find((o) => o.end.page === o.start.page + 1)!;
+  await first.getByRole("tab", { name: "Observations" }).click();
+  await first.locator(".obs-item", { has: page.getByText(`p. ${crossing.start.page + 1}, l. ${crossing.start.line}`, { exact: true }) }).click();
+  await expect(first.locator(`#page-${crossing.start.page} .source-highlight`).first()).toBeVisible();
+  expect(await first.locator(`#page-${crossing.end.page} .source-highlight`).count()).toBeGreaterThan(0);
   await first.getByRole("tab", { name: "Frise" }).click();
   await expect(first.locator(".frise .event")).toHaveCount(dossiers[0].events);
   // Read in several lots, the duplicates regrouped; answered without a paid call.

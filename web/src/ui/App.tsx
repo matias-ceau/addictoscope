@@ -14,7 +14,7 @@ import { keyTableFromEntries, type KeyTable } from "../core/reidentify";
 import * as engine from "../app/engine";
 import { loadPolicy, policyReady, savePolicy } from "../app/settings";
 import type { CloudPolicy } from "../cloud/guard";
-import { rectsForSpan } from "../core/geometry";
+import { repeatedLines, spanBoxes } from "../notebook/lines";
 import type { Rect } from "../core/types";
 import { inputKind } from "../core/inputs";
 import { keyTableFromDetections } from "../core/reidentify";
@@ -55,7 +55,7 @@ export function App(props: { library?: LibraryProps } = {}) {
   const [policy, setPolicy] = useState<CloudPolicy>(loadPolicy);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [analysis, setAnalysis] = useState<AnalysisState>({ status: "idle" });
-  const [highlight, setHighlight] = useState<{ doc: string; page: number; rects: Rect[]; key: number }>();
+  const [highlight, setHighlight] = useState<{ doc: string; page: number; rects: Record<number, Rect[]>; key: number }>();
   /** The fictional dossier on screen, in the demonstration. */
   const [demo, setDemo] = useState<DemoDossier | null>(null);
   /** Recording replayed by the demonstration's analysis, or "live". */
@@ -322,18 +322,13 @@ export function App(props: { library?: LibraryProps } = {}) {
     (observationId: string, real = false) => {
       const o = analysis.observations?.find((x) => x.id === observationId);
       const doc = stateRef.current.docs.find((d) => d.id === o?.doc);
-      const page = doc?.outPages?.find((p) => p.page === o?.start.page);
-      if (!o || !doc || !page) return;
-      const lines = page.text.split("\n");
-      let start = 0;
-      for (let i = 0; i < o.start.line - 1; i++) start += lines[i].length + 1;
-      let end = start;
-      const lastLine = o.end.page === o.start.page ? o.end.line : lines.length;
-      for (let i = o.start.line - 1; i < lastLine; i++) end += (lines[i]?.length ?? 0) + 1;
+      if (!o || !doc?.outPages) return;
+      // Every page the observation runs over, running headers left out.
+      const rects = spanBoxes(doc.outPages, o.start, o.end, repeatedLines(doc.outPages));
       dispatch({ type: "select", id: doc.id });
       setView(real ? "original" : "pseudo");
       setMainView("doc");
-      setHighlight({ doc: doc.id, page: page.page, rects: rectsForSpan(page, start, end), key: Date.now() });
+      setHighlight({ doc: doc.id, page: o.start.page, rects, key: Date.now() });
     },
     [analysis.observations],
   );
