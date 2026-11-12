@@ -67,7 +67,7 @@ KIND_ORDER = [
 ]
 KIND_LABEL = {
     "life_event": "Événements de vie",
-    "substance_use": "Consommations",
+    "substance_use": "Usages et comportements",
     "psychiatric": "Psychopathologie",
     "somatic": "Somatique",
     "medication": "Médicaments",
