@@ -4,6 +4,15 @@ import type { CloudPolicy } from "../cloud/guard";
 import { modelName } from "../cloud/models";
 import type { Observation, Timeline } from "../notebook/model";
 
+/** What the second pass did, or what it is for. */
+export function proofreadingNote(analysis: Pick<AnalysisState, "timeline" | "proofreadingNow">): string {
+  const p = analysis.timeline?.proofreading;
+  if (analysis.proofreadingNow) return "Relecture de la frise contre le texte…";
+  if (!p) return "Relecture : dates, fins et « en cours » vérifiés contre tout le texte.";
+  if (p.failed) return `Relecture non faite (${p.failed}) : la frise est restée telle quelle.`;
+  return `Relue contre le texte : ${p.fixed} corrigé${p.fixed > 1 ? "s" : ""}, ${p.removed} retiré${p.removed > 1 ? "s" : ""}, ${p.added} ajouté${p.added > 1 ? "s" : ""} sur ${p.checked}.`;
+}
+
 export interface AnalysisState {
   status: "idle" | "running" | "done" | "error";
   progress?: AnalysisProgress;
@@ -19,6 +28,8 @@ export interface AnalysisState {
   segmentedBy?: Record<string, "rules" | "model">;
   /** While running: the frise of the previous reading, whose corrections by hand are put back. */
   corrected?: Timeline;
+  /** The frise is being read again against its text. */
+  proofreadingNow?: boolean;
 }
 
 /** In the demonstration: which recording to replay, or "live". */
@@ -58,6 +69,8 @@ export function AnalysisCard(props: {
   onConfigure: () => void;
   onRun: () => void;
   onShowFrise: () => void;
+  /** Read the frise again against the whole text (one more call); absent when nothing can be sent. */
+  onProofread?: () => void;
   demo?: DemoAnalysis;
 }) {
   const { analysis, demo } = props;
@@ -156,6 +169,16 @@ export function AnalysisCard(props: {
             {analysis.model && ` · ${modelName(analysis.model)}${analysis.replayed ? " (rejoué)" : ""}`}
           </span>
           <button onClick={props.onShowFrise}>Voir la frise</button>
+        </div>
+      )}
+      {analysis.status === "done" && analysis.timeline && (props.onProofread || analysis.timeline.proofreading) && (
+        <div className="analysis-done">
+          <span className="small">{proofreadingNote(analysis)}</span>
+          {props.onProofread && (
+            <button onClick={props.onProofread} disabled={analysis.proofreadingNow} title="Une demande de plus : le modèle relit chaque événement contre tout le texte, corrige les dates et les fins, retire ce qui n'y est pas, ajoute ce qui manque">
+              {analysis.proofreadingNow ? "Relecture…" : analysis.timeline.proofreading ? "Relire encore" : "Relire contre le texte"}
+            </button>
+          )}
         </div>
       )}
       {analysis.status === "done" && segmentationNote(analysis.segmentedBy) && (
