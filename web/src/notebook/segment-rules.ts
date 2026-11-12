@@ -27,7 +27,10 @@ import { repairObservations, segmentDocument, type SegmentInput } from "./segmen
 
 const DAY = String.raw`(\d{2})\/(\d{2})\/(\d{4})`;
 const EXPORT_HEADER = new RegExp(String.raw`^\s*(\S.{1,118}?)\s+du\s+${DAY}\s*(\(\s*Urgence\s*:[^)]*\))?\s*$`);
-const WORD_HEADER = new RegExp(String.raw`^\s*${DAY}\S*\s+\d{2}:\d{2}\s*:\s*(\S.*?)\s*\(\s*([^()]*?)\s*(\))?\s*$`);
+/** A piece of another date may be glued in front of the title ("28/08/2028/08/2025 13:48") in a pasted
+ *  document: the date that stands right before the time is the one of the note. */
+const GLUED = String.raw`[\d/]*?`;
+const WORD_HEADER = new RegExp(String.raw`^\s*${GLUED}${DAY}\s+\d{2}:\d{2}\s*:\s*(\S.*?)\s*\(\s*([^()]*?)\s*(\))?\s*$`);
 const VALIDATION = /^\s*(?:Validé\s+(?:par|automatiquement)|Dernière\s+modification\s+le)\b/;
 /** "Validé par [SOIGNANT_2] - Médecin urgentiste le 15/11/2022 à 03:05" → "Médecin urgentiste". */
 const VALIDATION_ROLE = /\s-\s+(\S.*?)(?:\s+le\s+\d{2}\/\d{2}\/\d{4}.*)?$/;
@@ -232,7 +235,7 @@ interface Title {
   lines: number;
 }
 
-const WORD_START = new RegExp(String.raw`^\s*${DAY}\S*\s+\d{2}:\d{2}\s*:\s*\S`);
+const WORD_START = new RegExp(String.raw`^\s*${GLUED}${DAY}\s+\d{2}:\d{2}\s*:\s*\S`);
 
 function parseTitle(text: string, next?: string): Title | null {
   const wrapped = !WORD_HEADER.test(text) && WORD_START.test(text) && next !== undefined && !WORD_START.test(next);

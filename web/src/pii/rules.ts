@@ -88,6 +88,17 @@ const RULES: Rule[] = [
     accept: (v) => [9, 14].includes(v.replace(/\D/g, "").length) && isLuhnValid(v),
   },
   { category: "TEL", re: /(?:\+33\s?|\b0)[1-9](?:[\s.-]?\d{2}){4}\b/g },
+  // Written with slashes, "05/56/01/02/03": five pairs, which a date followed by an hour never gives.
+  { category: "TEL", re: /(?<![\d/])0[1-9](?:\/\d{2}){4}(?![\d/])/g },
+  // An account name made of a word and a date, "camille010203": it gives a first name and a birth date.
+  {
+    category: "DOSSIER",
+    re: /(?<![A-Za-zÀ-ÿ\d])[A-Za-zÀ-ÿ]{3,}(\d{6})(?!\d)/g,
+    accept: (v) => {
+      const [d, m] = [Number(v.slice(-6, -4)), Number(v.slice(-4, -2))];
+      return d >= 1 && d <= 31 && m >= 1 && m <= 12;
+    },
+  },
   { category: "EMAIL", re: /\b[\w.+-]+@[\w-]+(?:\.[\w-]+)+\b/g },
   {
     category: "NAISSANCE",

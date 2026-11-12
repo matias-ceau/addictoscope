@@ -211,6 +211,19 @@ describe("observations found by rules", () => {
     ]);
   });
 
+  it("dates a Word title by the date that stands right before its time", () => {
+    // A pasted document can leave a piece of another date glued in front of the title.
+    const pages = [
+      plain(0, [
+        "28/08/2028/08/2025 13:48 : Observation éducateur spécialisé ( [SOIGNANT_1] - Educateur spécialisé )",
+        "Absente au rendez-vous.",
+        "14/08/2025 12:54 : Observation psychiatrique de suivi ( [SOIGNANT_2] - Psychiatre )",
+        "Vue ce jour.",
+      ]),
+    ];
+    expect(segmentByRules("historique", pages)!.map((o) => o.date)).toEqual(["2025-08-28", "2025-08-14"]);
+  });
+
   it("keeps a title and a validation line that stand at the same place of every page", () => {
     const one = (page: number, day: string, text: string[]) =>
       plain(page, [`Observation de suivi du ${day}/03/2022`, `Validé par [SOIGNANT_1] - Psychologue le ${day}/03/2022 à 10:00`, ...text]);

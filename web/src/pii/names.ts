@@ -30,6 +30,7 @@ const CAPS_STOPWORDS = new Set(
    CONCLUSION CONCLUSIONS TRAITEMENT TRAITEMENTS ANTECEDENTS ANTÉCÉDENTS HISTOIRE MALADIE EXAMEN CLINIQUE
    SERVICE UNITE UNITÉ POLE PÔLE ADDICTOLOGIE PSYCHIATRIE MEDECINE MÉDECINE CONSULTATION CONSULTATIONS
    FINESS SIRET TEL TÉL FAX MAIL EMAIL GHB GHT LSD MDMA THC CBD OH BZD TSO MSO BHD
+   IMV TS IDS PAA EDC TUS TUA SPDTU SPDRE HDJ CSR USCA AOD DU RDV RAD PEC
    SECOP SMPR CMP CATTP CMPP SPIP JLD JAP UHSA UMD UMP UCSA SAMSAH SAVS ESAT IME ITEP CHRS CADA SIAO PASS EMPP
    MONSIEUR MADAME MADEMOISELLE DOCTEUR PROFESSEUR RPPS ADELI NUM STANDARD COURRIER GROUPE VALIDÉ VALIDE IMPRIMÉ
    CPR GEL INJ SOL AMP MG ML KG UI LP AP ASP NB TTT
@@ -96,6 +97,9 @@ function trimToName(text: string, start: number, end: number, strong = false): {
   const segment = text.slice(start, end);
   let kept = 0;
   let m: RegExpExecArray | null;
+  // "Le GARNIER", "De Vasseur": a particle opens the name when a name word follows it.
+  const particle = /^(\S+) +/.exec(segment);
+  if (particle && PARTICLES.has(particle[1].toUpperCase())) re.lastIndex = particle[0].length;
   while ((m = re.exec(segment))) {
     if (!isNameToken(m[0], strong)) break;
     if (kept > 0 && !/^ +$/.test(segment.slice(kept, m.index))) break;
@@ -215,6 +219,15 @@ const CONTEXT_RULES: ContextRule[] = [
   { re: new RegExp(String.raw`\bde[ \t]+([${U}][${L}]+(?:-[${U}][${L}]+)?[ ]+${CAPS_SURNAME})[ \t]*$`, "gm"), category: "SOIGNANT" },
   // A birth name: "Mme DESMAZURES Corinne, née PELLETIER le 07/09/1972"
   { re: new RegExp(String.raw`\b[Nn]ée?[ \t]+(${NAME_SEQ})`, "g"), category: "PERSONNE" },
+  // The name on the line after a doctor's title: "(Dr" then "Garnier à Talence)"
+  {
+    re: new RegExp(String.raw`\b(?:[Dd][Rr]\.?|[Dd]octeur|DOCTEUR|P[Rr]\.?|[Pp]rofesseur|PROFESSEUR)[ \t]*\n[ \t]*(${NAME_SEQ})`, "g"),
+    category: "SOIGNANT",
+  },
+  // A title glued to the name: "M.Vasseur"
+  { re: new RegExp(String.raw`\bM(?:me|r)?\.([${U}][${L}]{2,}(?:-[${U}][${L}]+)?)`, "g"), category: "PERSONNE", raw: true },
+  // An initial and a surname alone in a parenthesis: "(H. Vasseur)"
+  { re: new RegExp(String.raw`\(([${U}]\.[ ]?[${U}][${L}]{2,}(?:-[${U}][${L}]+)?)\)`, "g"), category: "PERSONNE", raw: true },
   // "Mme MARCHAND", "Monsieur Paul Dupont"
   { re: new RegExp(String.raw`\b${TITLES_CIVIL}[ \t]+(${NAME_SEQ})`, "g"), category: "PERSONNE" },
 ];
