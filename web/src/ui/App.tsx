@@ -152,7 +152,7 @@ export function App(props: { library?: LibraryProps } = {}) {
       const ocrPages = doc.pages.filter((p) => p.source === "ocr").map((p) => p.page);
       const { output, pages } = await engine.redact(
         id,
-        accepted.map((d) => ({ page: d.page, rects: d.rects, label: d.label })),
+        accepted.map((d) => ({ page: d.page, rects: d.rects, label: d.label, zone: d.source === "manual" })),
         ocrPages,
       );
       const places = stateRef.current.detections.filter((d) => d.doc === id && !d.accepted && d.category === "VILLE").map((d) => d.text);

@@ -151,3 +151,30 @@ it("flags an identifier left in the output", () => {
   const accepted = [{ text: "MARCHAND Sylvie", category: "PATIENT" }] as Parameters<typeof findLeaks>[1];
   expect(findLeaks([page], accepted)).toContainEqual({ page: 0, text: "MARCHAND", reason: "known-identifier" });
 });
+
+it("a frame drawn by hand masks its zone only: its words are not looked for elsewhere", () => {
+  const text = "Suivi au CAARUD depuis 2023. Revue au CAARUD.";
+  const word = (t: string, from: number, x: number) => ({ start: text.indexOf(t, from), end: text.indexOf(t, from) + t.length, rect: [x, 10, x + 40, 20] as [number, number, number, number] });
+  const frame = { text: "CAARUD depuis", category: "PERSONNE", source: "manual", page: 0, rects: [[100, 5, 200, 25]] } as unknown as Parameters<typeof findLeaks>[1][number];
+  // The framed words are gone from the zone and still written further on: no leak.
+  const masked = { page: 0, text, words: [word("Suivi", 0, 10), word("Revue", 0, 300), word("CAARUD", 30, 350)] } as unknown as PageText;
+  expect(findLeaks([masked], [frame])).toEqual([]);
+  // A word still readable inside the zone is one.
+  const readable = { page: 0, text, words: [word("CAARUD", 0, 120)] } as unknown as PageText;
+  expect(findLeaks([readable], [frame])).toEqual([{ page: 0, text: "CAARUD", reason: "known-identifier" }]);
+});
+
+it("a frame drawn by hand over several lines leaves none of their text in the file", async () => {
+  const bytes = await toPdf(new TextEncoder().encode(["Premier rang de mots ordinaires", "Deuxieme rang de mots ordinaires", "Troisieme rang de mots ordinaires", "Quatrieme rang de mots ordinaires", "Cinquieme rang de mots ordinaires", "Sixieme rang hors du cadre"].join("\n")), "text");
+  const doc = openPdf(bytes);
+  const page = extractPageText(doc, 0);
+  const inside = page.words.filter((w) => /^(Premier|Deuxieme|Troisieme|Quatrieme|Cinquieme)$/.test(page.text.slice(w.start, w.end)));
+  expect(inside).toHaveLength(5);
+  const frame: [number, number, number, number] = [Math.min(...inside.map((w) => w.rect[0])) - 2, Math.min(...inside.map((w) => w.rect[1])) - 1, Math.max(...inside.map((w) => w.rect[2])) + 2, Math.max(...inside.map((w) => w.rect[3])) + 1];
+  const out = extractPageText(openPdf(redactPdf(bytes, [{ page: 0, rects: [frame], label: "[MASQUE]", zone: true }])), 0);
+  expect(out.text).not.toMatch(/Premier|Deuxieme|Troisieme|Quatrieme|Cinquieme/);
+  expect(out.text).toContain("Sixieme");
+  expect(out.text).toContain("ordinaires");
+  const manual = { text: "x", category: "PERSONNE", source: "manual", page: 0, rects: [frame] } as unknown as Detection;
+  expect(findLeaks([out], [manual])).toEqual([]);
+});

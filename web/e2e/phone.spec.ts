@@ -44,10 +44,7 @@ test("on a phone, a finger on the document scrolls it, and the steps lead to eac
   await swipeUp(page, 120, y + 80, y, 260);
   await expect(page.locator(".box")).toHaveCount(masks + 1);
   await expect(page.getByRole("button", { name: "Masquer une zone" })).toHaveAttribute("aria-pressed", "false");
-  // This frame cuts through ordinary words: taken back before the document is checked.
-  await page.getByRole("button", { name: /Relecture/ }).click();
-  await page.getByRole("checkbox", { name: "Masquer [MASQUE]" }).uncheck();
-  await expect(page.locator(".box.rejected")).toHaveCount(1);
+  // The frame cuts through ordinary words written elsewhere too: the document is verified all the same.
 
   // Each step is a button that brings its stage on screen.
   await page.getByRole("button", { name: /Masquage/ }).click();
