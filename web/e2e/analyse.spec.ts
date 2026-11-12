@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, statSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -100,7 +100,28 @@ test("analyse a verified document into a frise, sending nothing identifying", as
   await page.getByRole("tab", { name: "Essentiel" }).click();
   await expect(page.locator("svg.essentiel .landmark").first()).toBeVisible();
   await page.screenshot({ path: "test-results/essentiel.png" });
+  // The short view exports as a picture.
+  // Real names are on screen: the export asks first, and names the file accordingly.
+  page.once("dialog", (d) => void d.accept());
+  const download = page.waitForEvent("download", { timeout: 20_000 });
+  await page.getByRole("button", { name: "Exporter l'image" }).click();
+  const picture = await download;
+  expect(picture.suggestedFilename()).toBe("essentiel-IDENTIFIANT.png");
+  expect(statSync((await picture.path())!).size).toBeGreaterThan(5_000);
+
+  // An event added by hand on a line, then merged into its neighbour: four events again.
+  await page.locator(".frise").getByRole("tab", { name: "Frise" }).click();
+  await page.locator(".frise .lane-add").first().click();
+  await page.getByRole("dialog").getByLabel("Début").fill("03/2019");
+  await page.getByRole("dialog").getByRole("button", { name: "Enregistrer", exact: true }).click();
+  await expect(page.locator(".frise .event")).toHaveCount(5);
   await page.getByRole("tab", { name: "Tableau" }).click();
+  await page.locator(".event-table tr", { hasText: "ajouté à la main" }).locator("button.verdict.fix").click();
+  await page.getByRole("dialog").getByLabel("Fusionner avec un autre événement de la même ligne").selectOption({ index: 1 });
+  await page.getByRole("dialog").getByRole("button", { name: "Fusionner", exact: true }).click();
+  await expect(page.locator(".event-table tbody tr")).toHaveCount(4);
+  // Kept in this browser without saving, and nothing more was sent.
+  expect(await page.evaluate(() => Object.keys(localStorage).filter((k) => k.startsWith("addictoscope:corrections:")).length)).toBe(1);
   expect(sent).toHaveLength(1);
 
   await page.locator(".event-table button.link").first().click();

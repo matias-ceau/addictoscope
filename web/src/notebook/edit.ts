@@ -228,9 +228,15 @@ export function keyEvents(t: Timeline, followUpFrom: number | null, n = 10): Tim
   const taken = { before: 0, after: 0 };
   const auto: TimelineEvent[] = [];
   const left: TimelineEvent[] = [];
+  // One landmark per name: the same fact read under two headings is shown once.
+  const labelOf = new Map(t.tracks.map((x) => [x.id, fold(x.label)]));
+  const seen = new Set(forced.map((e) => labelOf.get(e.trackId)));
   for (const e of ranked) {
     const side = before(e) ? "before" : "after";
+    const name = labelOf.get(e.trackId);
+    if (seen.has(name)) continue;
     if (auto.length < room && taken[side] < cap) {
+      seen.add(name);
       auto.push(e);
       taken[side]++;
     } else left.push(e);

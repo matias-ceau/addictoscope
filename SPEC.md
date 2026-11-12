@@ -715,5 +715,18 @@ courte doit pouvoir être montrée en réunion.
   la demande de regroupement garde l'ancien intitulé pour que les réponses
   enregistrées se rejouent.
 
+- **Gardées sans enregistrer.** La frise corrigée (pseudonymisée) est aussi
+  gardée dans le navigateur (`localStorage`, clé = empreinte des observations du
+  dossier) et remise quand le même dossier est analysé ou rouvert. Rien n'est
+  envoyé ; une frise sans correction n'est pas gardée.
+- **Texte de l'observation.** La fiche montre, pour chaque observation d'origine,
+  son texte pseudonymisé tel que le modèle l'a lu.
+
 Non-objectifs : glisser-déposer sur la frise, historique d'annulation, édition
-des antécédents non datés, stockage automatique dans le navigateur.
+des antécédents non datés.
+
+Dossiers longs relus avec les consignes élargies (`longs/regroupe2`, 33
+réponses) : rappel 473/532 (89 % ; 468 avant), antécédents de l'entrée 114/119
+(96 % ; 104 avant), suivi 299/344, révélés tard 60/69 ; 822 → 616 lignes,
+précision borne basse 39 % → 54 % ; coût estimé 0,56 $ par dossier. La
+bibliothèque et la démonstration montrent ce passage.

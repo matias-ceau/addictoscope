@@ -2,7 +2,7 @@
  "tool": "addictoscope",
  "kind": "analysis",
  "formatVersion": 1,
- "createdAt": "2026-11-10T22:35:30.409Z",
+ "createdAt": "2026-11-12T01:41:47.137Z",
  "model": "anthropic/claude-sonnet-5.5",
  "replayed": false,
  "observations": [
@@ -18,9 +18,9 @@
     "line": 52
    },
    "date": "2021-02-22",
-   "kind": "courrier de récapitulatif de la prise en charge douloureuse",
-   "authorRole": "médecin responsable du centre d'évaluation et de traitement de la douleur",
-   "summary": "Le centre de la douleur répond à la demande du CSAPA du 17/11/2020 en retraçant le suivi du patient depuis 2014 (accident du travail, arthrodèse, lombalgies chroniques neuropathiques, escalade des antalgiques opioïdes tramadol, oxycodone, fentanyl, prégabaline) et se déclare favorable à la poursuite de la méthadone sans nouvel opioïde antalgique."
+   "kind": "courrier de récapitulatif de prise en charge douloureuse",
+   "authorRole": "médecin, responsable du centre d'évaluation et de traitement de la douleur",
+   "summary": "Le centre de la douleur adresse au CSAPA un récapitulatif du suivi depuis 2014 (accident du travail en 2013 avec arthrodèse et reprise, lombalgies chroniques neuropathiques, antécédent d'alcool sevré en 1999, paliers antalgiques tramadol, oxycodone jusqu'à 120 mg/j, fentanyl 2017-2018, prégabaline, demandes de renouvellement anticipé) et se déclare favorable à la poursuite de la méthadone sans autre opioïde antalgique."
   },
   {
    "id": "historique:o1",
@@ -1212,103 +1212,87 @@
    {
     "id": "t1",
     "kind": "substance_use",
-    "label": "Opioïdes"
+    "label": "Opioïdes (tramadol)"
    },
    {
     "id": "t2",
     "kind": "substance_use",
-    "label": "Tabac"
+    "label": "Opioïdes (fentanyl)"
    },
    {
     "id": "t3",
     "kind": "substance_use",
+    "label": "Opioïdes (oxycodone)",
+    "aliases": [
+     "Oxycodone"
+    ]
+   },
+   {
+    "id": "t4",
+    "kind": "substance_use",
+    "label": "Tabac"
+   },
+   {
+    "id": "t5",
+    "kind": "substance_use",
     "label": "Alcool"
    },
    {
-    "id": "t32",
+    "id": "t51",
+    "kind": "substance_use",
+    "label": "Opioïdes"
+   },
+   {
+    "id": "t52",
     "kind": "substance_use",
     "label": "Prégabaline"
    },
    {
-    "id": "t33",
-    "kind": "substance_use",
-    "label": "Benzodiazépines"
-   },
-   {
-    "id": "t61",
+    "id": "t79",
     "kind": "substance_use",
     "label": "Héroïne"
    },
    {
-    "id": "t15",
+    "id": "t19",
     "kind": "psychiatric",
-    "label": "Thymie abaissée"
+    "label": "Humeur abaissée après l'accident"
    },
    {
-    "id": "t50",
+    "id": "t56",
     "kind": "psychiatric",
-    "label": "Deuil non élaboré de son fils",
+    "label": "Idées suicidaires passées"
+   },
+   {
+    "id": "t57",
+    "kind": "psychiatric",
+    "label": "Deuil non élaboré du fils",
     "aliases": [
      "Deuil traumatique",
-     "Deuil compliqué"
+     "Deuil traumatique et culpabilité (fils)"
     ]
    },
    {
-    "id": "t51",
+    "id": "t58",
     "kind": "psychiatric",
-    "label": "Idées de départ (suicidaires)"
+    "label": "Humeur dépressive"
    },
    {
-    "id": "t52",
-    "kind": "psychiatric",
-    "label": "Thymie basse"
-   },
-   {
-    "id": "t53",
-    "kind": "psychiatric",
-    "label": "Deuil de l'épouse"
-   },
-   {
-    "id": "t67",
+    "id": "t84",
     "kind": "psychiatric",
     "label": "Épisode dépressif caractérisé"
    },
    {
-    "id": "t68",
+    "id": "t85",
     "kind": "psychiatric",
     "label": "Idées de mort passives"
    },
    {
+    "id": "t15",
+    "kind": "somatic",
+    "label": "Fracture lombaire et douleur chronique"
+   },
+   {
     "id": "t16",
-    "kind": "somatic",
-    "label": "Fracture lombaire L1 (arthrodèse)",
-    "aliases": [
-     "Fracture-tassement de L1 (accident du travail)",
-     "Accident du travail, fracture L1",
-     "Fracture de L1"
-    ]
-   },
-   {
-    "id": "t17",
-    "kind": "somatic",
-    "label": "Reprise chirurgicale du rachis",
-    "aliases": [
-     "Reprise chirurgicale rachis",
-     "Reprise chirurgicale rachidienne"
-    ]
-   },
-   {
-    "id": "t18",
-    "kind": "somatic",
-    "label": "Douleur chronique lombaire et radiculalgie droite",
-    "aliases": [
-     "Douleur chronique (lombalgies, radiculalgie L5 droite)",
-     "Douleur chronique (lombalgies, radiculalgie)",
-     "Lombalgies chroniques"
-    ]
-   },
-   {
-    "id": "t19",
     "kind": "somatic",
     "label": "Hypertension artérielle",
     "aliases": [
@@ -1316,204 +1300,276 @@
     ]
    },
    {
-    "id": "t20",
+    "id": "t17",
     "kind": "somatic",
-    "label": "BPCO",
+    "label": "Toux chronique / suspicion de BPCO"
+   },
+   {
+    "id": "t18",
+    "kind": "somatic",
+    "label": "Suspicion de syndrome d'apnées du sommeil"
+   },
+   {
+    "id": "t59",
+    "kind": "somatic",
+    "label": "Fracture de L1 et arthrodèse",
     "aliases": [
-     "Toux chronique, suspicion de BPCO",
-     "BPCO (GOLD 2)"
+     "Fracture-tassement de L1",
+     "Chute d'échafaudage, fracture de L1"
     ]
    },
    {
-    "id": "t21",
+    "id": "t60",
     "kind": "somatic",
-    "label": "Syndrome d'apnées obstructives du sommeil",
+    "label": "Reprise chirurgicale (pseudarthrose)"
+   },
+   {
+    "id": "t61",
+    "kind": "somatic",
+    "label": "Lombalgies chroniques et radiculalgie L5 droite",
     "aliases": [
-     "Suspicion de syndrome d'apnées du sommeil",
+     "Douleur chronique",
+     "Lombalgies chroniques"
+    ]
+   },
+   {
+    "id": "t62",
+    "kind": "somatic",
+    "label": "Somnolence diurne"
+   },
+   {
+    "id": "t63",
+    "kind": "somatic",
+    "label": "Syndrome d'apnées du sommeil sévère",
+    "aliases": [
+     "Syndrome d'apnées obstructives du sommeil sévère",
      "SAOS sévère"
     ]
    },
    {
-    "id": "t22",
+    "id": "t64",
     "kind": "somatic",
-    "label": "Sueurs et constipation sous méthadone"
-   },
-   {
-    "id": "t47",
-    "kind": "somatic",
-    "label": "Chutes à domicile"
-   },
-   {
-    "id": "t48",
-    "kind": "somatic",
-    "label": "Exacerbation de BPCO (surinfection bronchique)"
-   },
-   {
-    "id": "t49",
-    "kind": "somatic",
-    "label": "Pneumopathie d'inhalation"
-   },
-   {
-    "id": "t74",
-    "kind": "somatic",
-    "label": "Allongement du QTc",
+    "label": "BPCO",
     "aliases": [
-     "QTc"
+     "BPCO stade GOLD 2",
+     "BPCO GOLD 2"
     ]
    },
    {
-    "id": "t75",
+    "id": "t65",
+    "kind": "somatic",
+    "label": "Somnolence et chutes à domicile"
+   },
+   {
+    "id": "t66",
+    "kind": "somatic",
+    "label": "Toux et dyspnée majorées"
+   },
+   {
+    "id": "t67",
+    "kind": "somatic",
+    "label": "Exacerbation de BPCO (hospitalisation en pneumologie)"
+   },
+   {
+    "id": "t68",
+    "kind": "somatic",
+    "label": "Surdosage avec détresse respiratoire et pneumopathie d'inhalation"
+   },
+   {
+    "id": "t90",
+    "kind": "somatic",
+    "label": "QTc allongé sous méthadone"
+   },
+   {
+    "id": "t91",
     "kind": "somatic",
     "label": "Chute dans l'escalier"
    },
    {
-    "id": "t95",
-    "kind": "somatic",
-    "label": "Bronchite"
-   },
-   {
-    "id": "t96",
+    "id": "t127",
     "kind": "somatic",
     "label": "Exacerbation de BPCO"
    },
    {
-    "id": "t97",
+    "id": "t128",
     "kind": "somatic",
-    "label": "Appareillage du SAOS"
+    "label": "Bronchite"
    },
    {
-    "id": "t4",
-    "kind": "medication",
-    "label": "Tramadol"
+    "id": "t131",
+    "kind": "somatic",
+    "label": "PPC (SAOS) première période"
    },
    {
-    "id": "t5",
-    "kind": "medication",
-    "label": "Oxycodone"
+    "id": "t132",
+    "kind": "somatic",
+    "label": "PPC (SAOS) reprise"
    },
    {
     "id": "t6",
     "kind": "medication",
-    "label": "Fentanyl transdermique",
-    "aliases": [
-     "Fentanyl"
-    ]
+    "label": "Tramadol"
    },
    {
     "id": "t7",
     "kind": "medication",
-    "label": "Prégabaline"
+    "label": "Fentanyl transdermique",
+    "aliases": [
+     "Fentanyl (patch)"
+    ]
    },
    {
     "id": "t8",
     "kind": "medication",
-    "label": "Alprazolam"
+    "label": "Oxycodone"
    },
    {
     "id": "t9",
     "kind": "medication",
-    "label": "Oxazépam"
+    "label": "Oxycodone (2e prescripteur)"
    },
    {
     "id": "t10",
     "kind": "medication",
+    "label": "Alprazolam"
+   },
+   {
+    "id": "t11",
+    "kind": "medication",
+    "label": "Oxazépam"
+   },
+   {
+    "id": "t12",
+    "kind": "medication",
+    "label": "Prégabaline"
+   },
+   {
+    "id": "t13",
+    "kind": "medication",
     "label": "Méthadone"
    },
    {
-    "id": "t35",
+    "id": "t14",
+    "kind": "medication",
+    "label": "Amlodipine"
+   },
+   {
+    "id": "t54",
     "kind": "medication",
     "label": "Tiotropium"
    },
    {
-    "id": "t62",
+    "id": "t55",
     "kind": "medication",
-    "label": "Méthadone (gélules)"
+    "label": "Corticoïdes et antibiotiques"
    },
    {
-    "id": "t63",
+    "id": "t80",
     "kind": "medication",
     "label": "Duloxétine"
    },
    {
-    "id": "t64",
-    "kind": "medication",
-    "label": "Naloxone nasale"
-   },
-   {
-    "id": "t65",
+    "id": "t81",
     "kind": "medication",
     "label": "Thiamine"
    },
    {
-    "id": "t99",
+    "id": "t82",
     "kind": "medication",
-    "label": "Substituts nicotiniques"
+    "label": "Naloxone"
    },
    {
-    "id": "t100",
+    "id": "t123",
     "kind": "medication",
-    "label": "Corticoïdes"
+    "label": "Méthadone 40 + 20 mg (rupture de stock des gélules 60 mg)"
    },
    {
-    "id": "t11",
+    "id": "t124",
+    "kind": "medication",
+    "label": "Paracétamol"
+   },
+   {
+    "id": "t125",
+    "kind": "medication",
+    "label": "Substituts nicotiniques (patch 21 mg + gommes)"
+   },
+   {
+    "id": "t129",
+    "kind": "medication",
+    "label": "Antibiotique et corticoïdes"
+   },
+   {
+    "id": "t20",
     "kind": "therapeutic_psycho",
-    "label": "Hospitalisation pour rotation vers la méthadone",
+    "label": "Suivi au centre de la douleur (CETD)",
     "aliases": [
-     "Hospitalisation en addictologie"
+     "Centre de la douleur (CETD)"
     ]
    },
    {
-    "id": "t12",
+    "id": "t21",
     "kind": "therapeutic_psycho",
-    "label": "Suivi CSAPA (addictologie, méthadone)",
+    "label": "Suivi CSAPA",
     "aliases": [
-     "Suivi CSAPA",
-     "Suivi en addictologie"
+     "Suivi CSAPA (méthadone)",
+     "CSAPA",
+     "Suivi addictologique (antenne CSAPA)"
     ]
    },
    {
-    "id": "t13",
+    "id": "t22",
     "kind": "therapeutic_psycho",
-    "label": "Entretiens éducatifs"
+    "label": "Hospitalisation d'addictologie",
+    "aliases": [
+     "Hospitalisation, rotation vers la méthadone"
+    ]
    },
    {
-    "id": "t14",
+    "id": "t23",
+    "kind": "therapeutic_psycho",
+    "label": "Accompagnement éducatif",
+    "aliases": [
+     "Éducateur spécialisé"
+    ]
+   },
+   {
+    "id": "t24",
     "kind": "therapeutic_psycho",
     "label": "Suivi social"
    },
    {
-    "id": "t36",
+    "id": "t70",
     "kind": "therapeutic_psycho",
-    "label": "Suivi CETD (douleur)"
+    "label": "Sevrage alcool hospitalier",
+    "aliases": [
+     "Hospitalisation de sevrage alcoolique (clinique des Pins)"
+    ]
    },
    {
-    "id": "t37",
+    "id": "t72",
     "kind": "therapeutic_psycho",
-    "label": "Hospitalisation de sevrage alcool (clinique des Pins)"
+    "label": "Rééducation, TENS et groupe douleur et mouvement"
    },
    {
-    "id": "t39",
+    "id": "t73",
+    "kind": "therapeutic_psycho",
+    "label": "Entretien motivationnel tabac"
+   },
+   {
+    "id": "t74",
+    "kind": "therapeutic_psycho",
+    "label": "Entretien social (permis de conduire)"
+   },
+   {
+    "id": "t75",
     "kind": "therapeutic_psycho",
     "label": "Suivi psychologique",
     "aliases": [
-     "Psychothérapie"
+     "Psychologue"
     ]
    },
    {
-    "id": "t40",
-    "kind": "therapeutic_psycho",
-    "label": "Hospitalisation en pneumologie"
-   },
-   {
-    "id": "t41",
-    "kind": "therapeutic_psycho",
-    "label": "Hospitalisation en réanimation",
-    "aliases": [
-     "Réanimation (surdose)"
-    ]
-   },
-   {
-    "id": "t42",
+    "id": "t76",
     "kind": "therapeutic_psycho",
     "label": "Hospitalisation en unité d'addictologie",
     "aliases": [
@@ -1521,40 +1577,78 @@
     ]
    },
    {
-    "id": "t79",
-    "kind": "therapeutic_psycho",
-    "label": "Passages IDE à domicile"
-   },
-   {
-    "id": "t80",
-    "kind": "therapeutic_psycho",
-    "label": "Accompagnement éducatif"
-   },
-   {
-    "id": "t81",
+    "id": "t78",
     "kind": "therapeutic_psycho",
     "label": "Sevrage ambulatoire de l'alcool"
    },
    {
-    "id": "t103",
+    "id": "t94",
+    "kind": "therapeutic_psycho",
+    "label": "Hospitalisation en pneumologie"
+   },
+   {
+    "id": "t95",
+    "kind": "therapeutic_psycho",
+    "label": "Réanimation"
+   },
+   {
+    "id": "t98",
+    "kind": "therapeutic_psycho",
+    "label": "IDE à domicile"
+   },
+   {
+    "id": "t136",
     "kind": "therapeutic_psycho",
     "label": "Réadaptation respiratoire"
    },
    {
-    "id": "t104",
-    "kind": "therapeutic_psycho",
-    "label": "Tabacologie"
+    "id": "t25",
+    "kind": "life_event",
+    "label": "Père alcoolique"
    },
    {
-    "id": "t23",
+    "id": "t26",
     "kind": "life_event",
-    "label": "Emploi dans le bâtiment",
+    "label": "Naissance et enfance à Cenon"
+   },
+   {
+    "id": "t27",
+    "kind": "life_event",
+    "label": "CAP de maçon"
+   },
+   {
+    "id": "t28",
+    "kind": "life_event",
+    "label": "Emploi : maçon puis chef de chantier",
     "aliases": [
-     "Emploi de maçon puis chef de chantier"
+     "Emploi dans le bâtiment (même entreprise à Lormont)"
     ]
    },
    {
-    "id": "t24",
+    "id": "t29",
+    "kind": "life_event",
+    "label": "Chef de chantier"
+   },
+   {
+    "id": "t30",
+    "kind": "life_event",
+    "label": "Service militaire à Pau"
+   },
+   {
+    "id": "t31",
+    "kind": "life_event",
+    "label": "Mariage"
+   },
+   {
+    "id": "t32",
+    "kind": "life_event",
+    "label": "Naissance de la fille",
+    "aliases": [
+     "Naissance de sa fille"
+    ]
+   },
+   {
+    "id": "t33",
     "kind": "life_event",
     "label": "Accident du travail (chute d'échafaudage)",
     "aliases": [
@@ -1562,233 +1656,285 @@
     ]
    },
    {
-    "id": "t25",
+    "id": "t34",
     "kind": "life_event",
     "label": "Invalidité",
     "aliases": [
-     "Invalidité et licenciement pour inaptitude",
-     "Mise en invalidité"
+     "Invalidité et licenciement pour inaptitude"
     ]
    },
    {
-    "id": "t26",
+    "id": "t35",
     "kind": "life_event",
-    "label": "Contestation du taux d'IPP (CPAM)"
+    "label": "Litige CPAM sur le taux d'IPP"
    },
    {
-    "id": "t27",
+    "id": "t36",
     "kind": "life_event",
-    "label": "Second prescripteur d'oxycodone (Lormont)"
+    "label": "Ordonnances falsifiées"
    },
    {
-    "id": "t28",
-    "kind": "life_event",
-    "label": "Ordonnances d'oxycodone falsifiées"
-   },
-   {
-    "id": "t29",
+    "id": "t37",
     "kind": "life_event",
     "label": "Convocation au commissariat"
    },
    {
-    "id": "t30",
+    "id": "t38",
     "kind": "life_event",
     "label": "Rappel à la loi"
    },
    {
-    "id": "t31",
+    "id": "t39",
     "kind": "life_event",
-    "label": "Contrôle CPAM et protocole de soins"
+    "label": "Contrôle de la CPAM sur les prescriptions"
    },
    {
-    "id": "t54",
+    "id": "t40",
     "kind": "life_event",
-    "label": "Décès de son fils",
+    "label": "Naissance du fils"
+   },
+   {
+    "id": "t41",
+    "kind": "life_event",
+    "label": "Décès du fils par noyade",
     "aliases": [
-     "Mort de son fils (noyade)",
-     "Décès du fils"
+     "Décès du fils",
+     "Décès du fils (noyade)"
     ]
    },
    {
-    "id": "t55",
+    "id": "t42",
+    "kind": "life_event",
+    "label": "Emploi : chef de chantier"
+   },
+   {
+    "id": "t43",
     "kind": "life_event",
     "label": "Suspension de permis pour conduite en état d'ivresse"
    },
    {
-    "id": "t58",
+    "id": "t45",
     "kind": "life_event",
-    "label": "Renoncement au permis poids lourd"
+    "label": "Consolidation et mise en invalidité"
    },
    {
-    "id": "t59",
+    "id": "t46",
     "kind": "life_event",
-    "label": "Cancer du pancréas de l'épouse"
+    "label": "Confinement (COVID)"
    },
    {
-    "id": "t60",
+    "id": "t47",
     "kind": "life_event",
-    "label": "Décès de son épouse",
+    "label": "Restriction de la conduite automobile"
+   },
+   {
+    "id": "t48",
+    "kind": "life_event",
+    "label": "Cancer du pancréas métastatique de l'épouse"
+   },
+   {
+    "id": "t49",
+    "kind": "life_event",
+    "label": "Décès de l'épouse",
     "aliases": [
-     "Décès de l'épouse"
+     "Décès de l'épouse (veuvage)"
     ]
    },
    {
-    "id": "t82",
+    "id": "t50",
     "kind": "life_event",
-    "label": "Mariage"
+    "label": "Vit seul depuis le décès de l'épouse"
    },
    {
-    "id": "t86",
+    "id": "t104",
     "kind": "life_event",
-    "label": "Retraite",
-    "aliases": [
-     "Départ à la retraite"
-    ]
+    "label": "Second prescripteur à Lormont"
    },
    {
-    "id": "t87",
+    "id": "t105",
+    "kind": "life_event",
+    "label": "Retraite"
+   },
+   {
+    "id": "t106",
+    "kind": "life_event",
+    "label": "Isolement social"
+   },
+   {
+    "id": "t107",
     "kind": "life_event",
     "label": "Aide à domicile"
    },
    {
-    "id": "t88",
+    "id": "t108",
+    "kind": "life_event",
+    "label": "Projet de bébé de la fille"
+   },
+   {
+    "id": "t109",
     "kind": "life_event",
     "label": "Vente de la maison de Cenon"
    },
    {
-    "id": "t89",
+    "id": "t110",
     "kind": "life_event",
-    "label": "Installation à Libourne",
+    "label": "Installation à Libourne près de sa fille",
     "aliases": [
      "Déménagement à Libourne"
     ]
    },
    {
-    "id": "t109",
+    "id": "t112",
     "kind": "life_event",
-    "label": "Bénévolat atelier vélos"
+    "label": "Reprise du travail"
    },
    {
-    "id": "t110",
+    "id": "t116",
     "kind": "life_event",
-    "label": "Naissance de son petit-fils"
+    "label": "Visite sur la tombe du fils avec sa fille"
+   },
+   {
+    "id": "t117",
+    "kind": "life_event",
+    "label": "Logement à Cenon"
+   },
+   {
+    "id": "t119",
+    "kind": "life_event",
+    "label": "Pétanque"
+   },
+   {
+    "id": "t120",
+    "kind": "life_event",
+    "label": "Bénévolat à l'atelier de réparation de vélos"
+   },
+   {
+    "id": "t121",
+    "kind": "life_event",
+    "label": "Naissance du petit-fils"
    }
   ],
   "events": [
    {
     "id": "e1",
     "trackId": "t1",
-    "start": "2015",
-    "end": "2019-06-09",
+    "start": "2014",
+    "end": "2016",
     "ongoing": false,
     "mode": "usage",
-    "lossOfControl": true,
-    "note": "Oxycodone de 2015 à juin 2019 avec escalade jusqu'à 280-300 mg/j, fentanyl transdermique 2017-2018, second prescripteur à Lormont 2017-2019, une quinzaine d'ordonnances falsifiées en 2018-2019 (trouble de l'usage d'opioïdes avec nomadisme).",
-    "observationIds": [
-     "historique:o73",
-     "historique:o69",
-     "historique:o67",
-     "historique:o63",
-     "historique:o60",
-     "courrier:o1",
-     "historique:o45",
-     "historique:o26",
-     "historique:o19",
-     "historique:o11",
-     "historique:o9"
-    ],
-    "tellings": [
-     {
-      "start": "2016",
-      "end": "2019-06-09",
-      "note": "Oxycodone après la 2e opération, doses augmentées progressivement ; 160 mg/j déclarés puis 280-300 mg/j depuis l'automne 2018 ; tolérance, temps passé, usage plus que prévu ; dernière interdose le 09/06/2019",
-      "observationIds": [
-       "historique:o73",
-       "historique:o69",
-       "historique:o67",
-       "historique:o63",
-       "historique:o60"
-      ]
-     },
-     {
-      "start": "2017",
-      "end": "2019-06",
-      "note": "Trouble de l'usage d'opioïdes sur oxycodone (jusqu'à 300 mg/j, falsification d'ordonnances, deux prescripteurs) ; demandes de renouvellement anticipé en 2017-2018 ; méthadone depuis 06/2019.",
-      "observationIds": [
-       "courrier:o1",
-       "historique:o45"
-      ]
-     },
-     {
-      "start": "2015",
-      "end": "2019-06",
-      "note": "Oxycodone de 2015 à juin 2019 avec escalade jusqu'à 280-300 mg/j, fentanyl transdermique 2017-2018, second prescripteur à Lormont 2017-2019, une quinzaine d'ordonnances falsifiées en 2018-2019 (trouble de l'usage d'opioïdes avec nomadisme).",
-      "observationIds": [
-       "historique:o26",
-       "historique:o19"
-      ]
-     },
-     {
-      "start": "2015",
-      "end": "2019",
-      "note": "Trouble de l'usage d'opioïdes sur oxycodone, jusqu'à 300 mg/j, deux prescripteurs, ordonnances falsifiées.",
-      "observationIds": [
-       "historique:o11",
-       "historique:o9"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e2",
-    "trackId": "t1",
-    "start": "2019-03",
-    "end": "2019-06-03",
-    "ongoing": false,
-    "mode": "sevrage",
     "lossOfControl": false,
-    "note": "Manques fréquents depuis mars 2019 (« tout réduit » depuis le rappel à la loi) ; sueurs, frissons, diarrhée, jambes sans repos si retard de prise",
-    "observationIds": [
-     "historique:o73",
-     "historique:o69"
-    ]
-   },
-   {
-    "id": "e3",
-    "trackId": "t1",
-    "start": "2019-04-18",
-    "end": null,
-    "ongoing": false,
-    "mode": "craving",
-    "lossOfControl": false,
-    "note": "Craving surtout le matin et le soir",
+    "note": "Tramadol après la première opération, jusqu'à 8 par jour pendant un an ou deux",
     "observationIds": [
      "historique:o73"
     ]
    },
    {
+    "id": "e2",
+    "trackId": "t2",
+    "start": "2016",
+    "end": "2016",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "Patchs de fentanyl pendant 6 mois en 2016, arrêtés (se décollaient)",
+    "observationIds": [
+     "historique:o73"
+    ]
+   },
+   {
+    "id": "e3",
+    "trackId": "t3",
+    "start": "2015",
+    "end": "2019-06-09",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": true,
+    "note": "TUO sur oxycodone, jusqu'à 300 mg/j, deux prescripteurs, ordonnances falsifiées ; antalgiques liés à la douleur après l'accident ; honte de ces ordonnances.",
+    "observationIds": [
+     "historique:o74",
+     "historique:o73",
+     "historique:o69",
+     "historique:o67",
+     "historique:o11",
+     "historique:o9",
+     "historique:o1"
+    ],
+    "tellings": [
+     {
+      "start": "2016",
+      "end": "2019-06-09",
+      "note": "Oxycodone après la 2e opération, doses croissantes sans s'en rendre compte, tolérance, sevrage, craving, perte de contrôle ; dernière interdose le 09/06/2019",
+      "observationIds": [
+       "historique:o74",
+       "historique:o73",
+       "historique:o69",
+       "historique:o67"
+      ]
+     },
+     {
+      "start": "2015",
+      "end": "2019",
+      "note": "TUO sur oxycodone, jusqu'à 300 mg/j, deux prescripteurs, ordonnances falsifiées ; antalgiques liés à la douleur après l'accident ; honte de ces ordonnances.",
+      "observationIds": [
+       "historique:o11",
+       "historique:o9",
+       "historique:o1"
+      ]
+     }
+    ]
+   },
+   {
     "id": "e4",
-    "trackId": "t1",
-    "start": "2019-06-05",
-    "end": "2019-06-14",
+    "trackId": "t3",
+    "start": "2018-09",
+    "end": "2019-06-03",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": true,
+    "note": "Prise réelle de 280 à 300 mg/j depuis l'automne 2018, au-delà des 160 mg déclarés, avec gélules LI toutes les 3 h les mauvais jours",
+    "observationIds": [
+     "historique:o69",
+     "historique:o63",
+     "historique:o60"
+    ]
+   },
+   {
+    "id": "e5",
+    "trackId": "t3",
+    "start": "2019-03",
+    "end": "2019-06-03",
     "ongoing": false,
     "mode": "sevrage",
     "lossOfControl": false,
-    "note": "Manque pendant la rotation vers la méthadone (COWS 12 le 05/06), manque résiduel le soir à la sortie",
+    "note": "Après le rappel à la loi, prétend avoir tout réduit ; manques fréquents depuis mars ; boîte réclamée avec 3 jours d'avance en mai, refusée",
+    "observationIds": [
+     "historique:o69",
+     "historique:o70"
+    ]
+   },
+   {
+    "id": "e6",
+    "trackId": "t3",
+    "start": "2019-06-04",
+    "end": "2019-06-09",
+    "ongoing": false,
+    "mode": "sevrage",
+    "lossOfControl": false,
+    "note": "Sevrage lors de la rotation en hospitalisation : COWS 12 la nuit du 05/06, interdoses oxycodone LI",
     "observationIds": [
      "historique:o68",
      "historique:o67"
     ]
    },
    {
-    "id": "e5",
-    "trackId": "t2",
-    "start": "1975",
+    "id": "e7",
+    "trackId": "t4",
+    "start": "1973",
     "end": null,
     "ongoing": true,
     "mode": "usage",
     "lossOfControl": false,
-    "note": "20 à 25 cig/j « depuis 14 ans » / « depuis l'adolescence » ; essais d'arrêt sans succès (une fois 3 mois) ; Fagerström 7 ; refuse les substituts en octobre 2019",
+    "note": "Fume 20 à 25 cigarettes par jour depuis l'adolescence (« depuis 14 ans » dans l'observation médicale) ; Fagerström 7, essais d'arrêt sans succès ; refuse les substituts en octobre 2019",
     "observationIds": [
      "historique:o74",
      "historique:o73",
@@ -1809,16 +1955,16 @@
     ],
     "fromAge": {
      "start": [
-      14,
-      14
+      12,
+      17
      ],
      "end": null
     },
     "tellings": [
      {
-      "start": "1975",
+      "start": "1973",
       "end": null,
-      "note": "20 à 25 cig/j « depuis 14 ans » / « depuis l'adolescence » ; essais d'arrêt sans succès (une fois 3 mois) ; Fagerström 7 ; refuse les substituts en octobre 2019",
+      "note": "Fume 20 à 25 cigarettes par jour depuis l'adolescence (« depuis 14 ans » dans l'observation médicale) ; Fagerström 7, essais d'arrêt sans succès ; refuse les substituts en octobre 2019",
       "observationIds": [
        "historique:o74",
        "historique:o73",
@@ -1827,9 +1973,9 @@
       ]
      },
      {
-      "start": "2014",
+      "start": null,
       "end": null,
-      "note": "Tabagisme actif relevé en 2014 ; réduit à 15 cig/j (11/2020), remonté à 20 cig/j (11/2021), 10 cig/j depuis l'hospitalisation (01/2022) ; pas prêt à arrêter.",
+      "note": "Tabagisme actif déjà relevé en 2014 (début non daté) ; réduit à 15/j en 11/2020, 20/j en 11/2021, 10/j depuis l'hospitalisation 12/2021 ; refuse les patchs, entretien motivationnel sans suite.",
       "observationIds": [
        "courrier:o1",
        "historique:o52",
@@ -1838,9 +1984,9 @@
       ]
      },
      {
-      "start": null,
+      "start": "2023-04",
       "end": null,
-      "note": "Tabac 15 cigarettes par jour.",
+      "note": "Tabac 15 cigarettes par jour ; début non précisé.",
       "observationIds": [
        "historique:o26",
        "historique:o25"
@@ -1849,7 +1995,7 @@
      {
       "start": null,
       "end": null,
-      "note": "12 cig/j (04/2025), 10-12 (09/2025), 6/j sous patchs puis reprise (10/2025), 10/j (03/2026), 8-10 (05/2026), 8 cig/j (10/2026).",
+      "note": "12 cig/j (04/2025), 10 à 12 (09/2025), 6 par jour avec patchs puis reprise (10/2025), 10 (03/2026), 8 à 10 (05/2026), 8 (10/2026) ; nouvelle tentative d'arrêt avec la tabacologue prévue en 03/2026.",
       "observationIds": [
        "historique:o11",
        "historique:o8",
@@ -1862,27 +2008,41 @@
     ]
    },
    {
-    "id": "e6",
-    "trackId": "t3",
-    "start": "2019-04-18",
-    "end": null,
+    "id": "e8",
+    "trackId": "t4",
+    "start": "1986",
+    "end": "1986",
     "ongoing": false,
-    "mode": "usage",
+    "mode": "sevrage",
     "lossOfControl": false,
-    "note": "Un verre de vin au repas, pas tous les jours ; AUDIT-C à 2 ; pas d'ivresse récente",
+    "note": "Arrêt de 3 mois à la naissance de sa fille",
     "observationIds": [
      "historique:o73"
     ]
    },
    {
-    "id": "e7",
-    "trackId": "t4",
+    "id": "e9",
+    "trackId": "t5",
+    "start": "2019-04-18",
+    "end": null,
+    "ongoing": true,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "Un verre de vin au repas, pas tous les jours ; AUDIT-C à 2 ; pas de problème d'alcool",
+    "observationIds": [
+     "historique:o73"
+    ],
+    "startUnknown": true
+   },
+   {
+    "id": "e10",
+    "trackId": "t6",
     "start": "2013-10",
     "end": "2015-06",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Antalgique, jusqu'à 400 mg/j.",
+    "note": "Jusqu'à 400 mg/j.",
     "observationIds": [
      "historique:o73",
      "courrier:o1",
@@ -1892,7 +2052,7 @@
      {
       "start": "2014",
       "end": "2016",
-      "note": "Après la première opération, jusqu'à 8 par jour, pendant un an ou deux",
+      "note": "Prescrit après la première opération, jusqu'à 8 par jour, un an ou deux",
       "observationIds": [
        "historique:o73"
       ]
@@ -1900,7 +2060,7 @@
      {
       "start": "2013-10",
       "end": "2015-06",
-      "note": "Antalgique, jusqu'à 400 mg/j.",
+      "note": "Jusqu'à 400 mg/j.",
       "observationIds": [
        "courrier:o1"
       ]
@@ -1908,7 +2068,7 @@
      {
       "start": "2013",
       "end": "2015",
-      "note": "Tramadol de 2013 à 2015 (douleur après l'accident du travail).",
+      "note": "Tramadol 2013-2015 pour la douleur après l'accident.",
       "observationIds": [
        "historique:o26"
       ]
@@ -1916,61 +2076,14 @@
     ]
    },
    {
-    "id": "e8",
-    "trackId": "t5",
-    "start": "2015-06",
-    "end": "2019-06-09",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "40 mg/j puis jusqu'à 120 mg/j fin 2016 (oxycodone LP 120 mg/j en 11/2018) ; fin non précisée, méthadone depuis 06/2019 ; plus d'oxycodone prescrite par le CETD au-delà de 120 mg/j.",
-    "observationIds": [
-     "historique:o73",
-     "historique:o69",
-     "historique:o67",
-     "courrier:o1",
-     "historique:o45",
-     "historique:o26"
-    ],
-    "tellings": [
-     {
-      "start": "2016",
-      "end": "2019-06-09",
-      "note": "Après la 2e opération, 2 x 20 mg puis 160 mg/j déclarés (LP 80 x 2 + LI) ; LP arrêtée le 03/06/2019, interdoses LI 10 mg pendant la titration, dernière le 09/06",
-      "observationIds": [
-       "historique:o73",
-       "historique:o69",
-       "historique:o67"
-      ]
-     },
-     {
-      "start": "2015-06",
-      "end": null,
-      "note": "40 mg/j puis jusqu'à 120 mg/j fin 2016 (oxycodone LP 120 mg/j en 11/2018) ; fin non précisée, méthadone depuis 06/2019 ; plus d'oxycodone prescrite par le CETD au-delà de 120 mg/j.",
-      "observationIds": [
-       "courrier:o1",
-       "historique:o45"
-      ]
-     },
-     {
-      "start": "2015",
-      "end": "2019-06",
-      "note": "Oxycodone de 2015 à juin 2019, escalade jusqu'à 280-300 mg/j.",
-      "observationIds": [
-       "historique:o26"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e9",
-    "trackId": "t6",
+    "id": "e11",
+    "trackId": "t7",
     "start": "2017-02",
     "end": "2018-10",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "25 puis 50 et 75 µg/h, avec oxycodone LI en interdoses ; arrêté pour efficacité jugée insuffisante.",
+    "note": "25 puis 50 et 75 µg/h avec oxycodone interdoses ; arrêté pour efficacité jugée insuffisante (le patient parlait de 6 mois en 2016).",
     "observationIds": [
      "historique:o73",
      "courrier:o1",
@@ -1982,7 +2095,7 @@
      {
       "start": "2016",
       "end": "2016",
-      "note": "Patchs « pendant 6 mois en 2016 », arrêtés car ils se décollaient",
+      "note": "Patchs pendant 6 mois en 2016, arrêtés car décollés par la transpiration et sans bénéfice",
       "observationIds": [
        "historique:o73"
       ]
@@ -1990,7 +2103,7 @@
      {
       "start": "2017-02",
       "end": "2018-10",
-      "note": "25 puis 50 et 75 µg/h, avec oxycodone LI en interdoses ; arrêté pour efficacité jugée insuffisante.",
+      "note": "25 puis 50 et 75 µg/h avec oxycodone interdoses ; arrêté pour efficacité jugée insuffisante (le patient parlait de 6 mois en 2016).",
       "observationIds": [
        "courrier:o1",
        "historique:o50"
@@ -2008,56 +2121,67 @@
     ]
    },
    {
-    "id": "e10",
-    "trackId": "t7",
-    "start": "2016-03",
-    "end": null,
-    "ongoing": true,
+    "id": "e12",
+    "trackId": "t8",
+    "start": "2015-06",
+    "end": "2019-06",
+    "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "75 mg x 2 puis 150 mg x 2 en 2017 ; 300 mg/j prescrits en 2021 ; plan de décroissance dès 09/2021 (450 mg/j puis 375 mg/j), décroissance à 300 repoussée par le patient.",
+    "note": "40 mg/j à partir de 06/2015, jusqu'à 120 mg/j fin 2016, LP 120 mg/j en 11/2018 ; doses supérieures non prescrites par le CETD.",
     "observationIds": [
      "historique:o73",
-     "historique:o71",
      "historique:o69",
-     "historique:o61",
-     "historique:o59",
+     "historique:o67",
      "courrier:o1",
-     "historique:o50",
-     "historique:o46",
-     "historique:o45",
-     "historique:o43"
+     "historique:o26"
     ],
     "tellings": [
      {
       "start": "2016",
-      "end": null,
-      "note": "150 mg x 2 depuis 2016 environ (centre de la douleur) pour la jambe ; 300 mg/j encore en janvier 2020 ; « parfois un de plus » à l'entrée",
+      "end": "2019-06-03",
+      "note": "Après la 2e opération, d'abord 2 x 20 mg puis augmentation par le centre de la douleur et le médecin traitant ; 160 mg/j LP déclarés ; arrêt de la LP à l'entrée du 03/06/2019, interdoses LI jusqu'au 09/06",
       "observationIds": [
        "historique:o73",
-       "historique:o71",
        "historique:o69",
-       "historique:o61",
-       "historique:o59"
+       "historique:o67"
       ]
      },
      {
-      "start": "2016-03",
-      "end": null,
-      "note": "75 mg x 2 puis 150 mg x 2 en 2017 ; 300 mg/j prescrits en 2021 ; plan de décroissance dès 09/2021 (450 mg/j puis 375 mg/j), décroissance à 300 repoussée par le patient.",
+      "start": "2015-06",
+      "end": "2019-06",
+      "note": "40 mg/j à partir de 06/2015, jusqu'à 120 mg/j fin 2016, LP 120 mg/j en 11/2018 ; doses supérieures non prescrites par le CETD.",
       "observationIds": [
-       "courrier:o1",
-       "historique:o50",
-       "historique:o46",
-       "historique:o45",
-       "historique:o43"
+       "courrier:o1"
+      ]
+     },
+     {
+      "start": "2015",
+      "end": "2019-06",
+      "note": "Oxycodone de 2015 à juin 2019, escalade jusqu'à 280-300 mg/j.",
+      "observationIds": [
+       "historique:o26"
       ]
      }
     ]
    },
    {
-    "id": "e11",
-    "trackId": "t8",
+    "id": "e13",
+    "trackId": "t9",
+    "start": "2017",
+    "end": "2019-03",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Second prescripteur à Lormont depuis 2017 (peut-être fin 2016), consultation mensuelle payée en liquide, trois pharmacies, plus de 250 mg/j délivrés en moyenne en 2018",
+    "observationIds": [
+     "historique:o60",
+     "historique:o59"
+    ]
+   },
+   {
+    "id": "e14",
+    "trackId": "t10",
     "start": "2014",
     "end": "2019-06-03",
     "ongoing": false,
@@ -2082,7 +2206,7 @@
      {
       "start": "2014",
       "end": "2019",
-      "note": "Alprazolam 2014-2019, remplacé par l'oxazépam.",
+      "note": "Alprazolam 2014-2019.",
       "observationIds": [
        "historique:o26"
       ]
@@ -2090,106 +2214,465 @@
     ]
    },
    {
-    "id": "e12",
-    "trackId": "t9",
-    "start": "2019-06-03",
+    "id": "e15",
+    "trackId": "t11",
+    "start": "2019-06-04",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "50 mg/j (10-10-10-20) en relais de l'alprazolam ; reconduit jusqu'en janvier 2020",
+    "note": "50 mg/j (10-10-10-20), reconduit au suivi",
     "observationIds": [
      "historique:o69",
      "historique:o67",
      "historique:o66",
-     "historique:o64",
      "historique:o59",
      "historique:o55",
      "historique:o52",
-     "courrier:o1",
      "historique:o50",
+     "historique:o46",
+     "historique:o44",
+     "historique:o43",
      "historique:o37",
      "historique:o35",
      "historique:o33",
      "historique:o31",
      "historique:o26",
-     "historique:o24",
-     "historique:o19",
-     "historique:o15",
      "historique:o13"
     ],
     "tellings": [
      {
-      "start": "2019-06-03",
+      "start": "2019-06-04",
       "end": null,
-      "note": "50 mg/j (10-10-10-20) en relais de l'alprazolam ; reconduit jusqu'en janvier 2020",
+      "note": "50 mg/j (10-10-10-20), reconduit au suivi",
       "observationIds": [
        "historique:o69",
        "historique:o67",
        "historique:o66",
-       "historique:o64",
        "historique:o59"
       ]
      },
      {
-      "start": "2020-06",
+      "start": null,
       "end": null,
-      "note": "50 mg/j ; BZD aux urines dès 06/2020, oxazépam cité en 11/2020 ; alprazolam par le médecin traitant mentionné par le CETD ; à ne pas augmenter (SAOS).",
+      "note": "50 mg/j, prudence avec le SAOS (ne pas augmenter) ; BZD positives aux urines 06/2020 ; début non daté.",
       "observationIds": [
        "historique:o55",
        "historique:o52",
-       "courrier:o1",
-       "historique:o50"
+       "historique:o50",
+       "historique:o46",
+       "historique:o44",
+       "historique:o43"
       ]
      },
      {
       "start": "2019-06",
       "end": null,
-      "note": "Oxazépam depuis 06/2019 : 50 mg/j pendant le séjour 2022, 40 mg puis 60 mg pour le sevrage alcool de septembre 2022, 30 mg/j depuis ; réduction à proposer.",
+      "note": "Oxazépam depuis juin 2019 : 50 mg/j en 05/2022, 40 mg, 60 mg pendant le sevrage alcool, puis 30 mg/j ; réduction à proposer.",
       "observationIds": [
+       "historique:o26",
        "historique:o37",
        "historique:o35",
        "historique:o33",
        "historique:o31",
-       "historique:o26",
-       "historique:o24",
-       "historique:o19",
-       "historique:o15",
        "historique:o13"
       ]
      }
     ]
    },
    {
-    "id": "e13",
-    "trackId": "t10",
+    "id": "e16",
+    "trackId": "t12",
+    "start": "2016-03",
+    "end": "2023-02-06",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "75 mg x2 en 03/2016, 150 mg x2 en 2017 ; 300 mg prescrits en 2021 ; décroissance 450 mg/j puis 375 mg/j depuis le 14/10/2021, repoussée à 300 par le patient.",
+    "observationIds": [
+     "historique:o73",
+     "historique:o71",
+     "historique:o69",
+     "historique:o61",
+     "historique:o59",
+     "courrier:o1",
+     "historique:o50",
+     "historique:o46",
+     "historique:o45",
+     "historique:o43",
+     "historique:o39",
+     "historique:o37",
+     "historique:o33",
+     "historique:o31",
+     "historique:o28",
+     "historique:o26"
+    ],
+    "tellings": [
+     {
+      "start": "2016",
+      "end": null,
+      "note": "150 mg x 2 depuis 2016 environ pour la douleur de jambe (CETD), parfois un de plus ; 300 mg/j",
+      "observationIds": [
+       "historique:o73",
+       "historique:o71",
+       "historique:o69",
+       "historique:o61",
+       "historique:o59"
+      ]
+     },
+     {
+      "start": "2016-03",
+      "end": null,
+      "note": "75 mg x2 en 03/2016, 150 mg x2 en 2017 ; 300 mg prescrits en 2021 ; décroissance 450 mg/j puis 375 mg/j depuis le 14/10/2021, repoussée à 300 par le patient.",
+      "observationIds": [
+       "courrier:o1",
+       "historique:o50",
+       "historique:o46",
+       "historique:o45",
+       "historique:o43",
+       "historique:o39"
+      ]
+     },
+     {
+      "start": "2019",
+      "end": "2023-02-06",
+      "note": "Prégabaline 300 mg/j strict en 2022 puis décroissance (225 mg en octobre, 150, 75 en décembre), arrêt le 06/02/2023.",
+      "observationIds": [
+       "historique:o37",
+       "historique:o33",
+       "historique:o31",
+       "historique:o28",
+       "historique:o26"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e17",
+    "trackId": "t13",
     "start": "2019-06-04",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Sirop 30 mg le 04/06 puis 60 mg ; délivrance quotidienne au CSAPA puis en pharmacie depuis fin juillet ; 80 mg/j depuis le 10/09/2019 (manque en fin de journée) ; stable",
+    "note": "Sirop, 30 mg puis titration jusqu'à 60 mg en une prise (sortie 14/06), 80 mg depuis le 10/09/2019 ; délivrance au CSAPA puis en pharmacie depuis fin juillet",
     "observationIds": [
      "historique:o69",
-     "historique:o68",
      "historique:o67",
      "historique:o66",
      "historique:o65",
      "historique:o64",
      "historique:o63",
-     "historique:o61",
-     "historique:o59"
+     "historique:o59",
+     "historique:o56",
+     "historique:o55",
+     "historique:o53",
+     "historique:o52",
+     "historique:o45",
+     "historique:o44",
+     "historique:o43",
+     "historique:o40",
+     "historique:o37",
+     "historique:o26",
+     "historique:o24",
+     "historique:o19",
+     "historique:o18",
+     "historique:o13",
+     "historique:o11",
+     "historique:o8",
+     "historique:o5",
+     "historique:o3",
+     "historique:o1"
+    ],
+    "tellings": [
+     {
+      "start": "2019-06-04",
+      "end": null,
+      "note": "Sirop, 30 mg puis titration jusqu'à 60 mg en une prise (sortie 14/06), 80 mg depuis le 10/09/2019 ; délivrance au CSAPA puis en pharmacie depuis fin juillet",
+      "observationIds": [
+       "historique:o69",
+       "historique:o67",
+       "historique:o66",
+       "historique:o65",
+       "historique:o64",
+       "historique:o63",
+       "historique:o59"
+      ]
+     },
+     {
+      "start": "2019-06",
+      "end": null,
+      "note": "80 mg en 03/2020 (délivrance 14 j), majorée à 100 mg/j le 16/06/2020 ; délivrance 7 j puis 14 j selon les périodes ; 100 mg maintenus.",
+      "observationIds": [
+       "historique:o56",
+       "historique:o55",
+       "historique:o53",
+       "historique:o52",
+       "historique:o45",
+       "historique:o44",
+       "historique:o43",
+       "historique:o40",
+       "historique:o26",
+       "historique:o37",
+       "historique:o24",
+       "historique:o19",
+       "historique:o18",
+       "historique:o13",
+       "historique:o11",
+       "historique:o8",
+       "historique:o5",
+       "historique:o3",
+       "historique:o1"
+      ]
+     }
     ]
    },
    {
-    "id": "e14",
-    "trackId": "t11",
+    "id": "e18",
+    "trackId": "t14",
+    "start": "2019-04-18",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "HTA traitée par amlodipine 5 mg",
+    "observationIds": [
+     "historique:o73"
+    ],
+    "startUnknown": true
+   },
+   {
+    "id": "e19",
+    "trackId": "t15",
+    "start": "2014",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Chute d'un échafaudage (fracture d'une vertèbre lombaire, arthrodèse), reprise chirurgicale un an ou deux plus tard ; douleur lombaire permanente et radiculalgie droite (6-7/10) ; un interne la date de fin 2013",
+    "observationIds": [
+     "historique:o73",
+     "historique:o69",
+     "historique:o63"
+    ]
+   },
+   {
+    "id": "e20",
+    "trackId": "t16",
+    "start": "2019-04-18",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "HTA traitée par amlodipine",
+    "observationIds": [
+     "historique:o73",
+     "courrier:o1",
+     "historique:o26",
+     "historique:o19",
+     "historique:o11"
+    ],
+    "startUnknown": true,
+    "tellings": [
+     {
+      "start": null,
+      "end": null,
+      "note": "HTA traitée par amlodipine",
+      "observationIds": [
+       "historique:o73"
+      ]
+     },
+     {
+      "start": null,
+      "end": null,
+      "note": "Antécédent relevé à la première consultation du CETD (2014) ; début non daté.",
+      "observationIds": [
+       "courrier:o1"
+      ]
+     },
+     {
+      "start": null,
+      "end": null,
+      "note": "HTA mentionnée en 2023, début non précisé.",
+      "observationIds": [
+       "historique:o26",
+       "historique:o19"
+      ]
+     },
+     {
+      "start": null,
+      "end": null,
+      "note": "Hypertension artérielle.",
+      "observationIds": [
+       "historique:o11"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e21",
+    "trackId": "t17",
+    "start": "2019-04-15",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Toux chronique non explorée, crachats matinaux, essoufflement à un étage, SpO2 93 %",
+    "observationIds": [
+     "historique:o74",
+     "historique:o73"
+    ],
+    "startUnknown": true
+   },
+   {
+    "id": "e22",
+    "trackId": "t18",
+    "start": "2019-04",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Ronflements forts, somnolence diurne, désaturations nocturnes à 86-88 % en juin 2019 ; polygraphie demandée mais non faite en septembre",
+    "observationIds": [
+     "historique:o73",
+     "historique:o68",
+     "historique:o67",
+     "historique:o64"
+    ]
+   },
+   {
+    "id": "e23",
+    "trackId": "t19",
+    "start": "2014",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "« Un coup de moins bien » après l'accident, jamais de suivi psy ; thymie légèrement abaissée en 2019, pas d'idées suicidaires",
+    "observationIds": [
+     "historique:o73",
+     "historique:o63"
+    ]
+   },
+   {
+    "id": "e24",
+    "trackId": "t20",
+    "start": "2014-04-03",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Suivi depuis le 03/04/2014 ; avis téléphonique 06/2020 : pas d'opioïde antalgique, méthadone à majorer ; courrier du 22/02/2021, favorable à la méthadone sans autre opioïde.",
+    "observationIds": [
+     "historique:o73",
+     "historique:o71",
+     "historique:o55",
+     "historique:o52",
+     "courrier:o1"
+    ],
+    "tellings": [
+     {
+      "start": "2014",
+      "end": null,
+      "note": "Suivi au centre d'évaluation et traitement de la douleur depuis les premières années après l'accident ; favorable à la rotation",
+      "observationIds": [
+       "historique:o73",
+       "historique:o71"
+      ]
+     },
+     {
+      "start": "2014-04-03",
+      "end": null,
+      "note": "Suivi depuis le 03/04/2014 ; avis téléphonique 06/2020 : pas d'opioïde antalgique, méthadone à majorer ; courrier du 22/02/2021, favorable à la méthadone sans autre opioïde.",
+      "observationIds": [
+       "historique:o55",
+       "historique:o52",
+       "courrier:o1"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e25",
+    "trackId": "t21",
+    "start": "2019-04-15",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Premier accueil infirmier puis suivi médical et délivrance",
+    "observationIds": [
+     "historique:o74",
+     "historique:o73",
+     "historique:o66",
+     "historique:o65",
+     "historique:o56",
+     "historique:o55",
+     "historique:o51",
+     "historique:o45",
+     "historique:o26",
+     "historique:o18",
+     "historique:o16",
+     "historique:o15",
+     "historique:o11",
+     "historique:o3",
+     "historique:o1"
+    ],
+    "tellings": [
+     {
+      "start": "2019-04-15",
+      "end": null,
+      "note": "Premier accueil infirmier puis suivi médical et délivrance",
+      "observationIds": [
+       "historique:o74",
+       "historique:o73",
+       "historique:o66",
+       "historique:o65"
+      ]
+     },
+     {
+      "start": null,
+      "end": null,
+      "note": "Suivi addictologique par le CSAPA ; méthadone depuis 06/2019 ; date d'entrée non précisée.",
+      "observationIds": [
+       "historique:o56",
+       "historique:o55",
+       "historique:o51",
+       "historique:o45"
+      ]
+     },
+     {
+      "start": "2019-04-15",
+      "end": null,
+      "note": "Entrée au CSAPA le 15/04/2019 pour raison judiciaire (« je suis arrivé ici pour la justice, je reste pour moi ») ; suivi à l'antenne de Libourne depuis septembre 2024.",
+      "observationIds": [
+       "historique:o26",
+       "historique:o18",
+       "historique:o16",
+       "historique:o15"
+      ]
+     },
+     {
+      "start": "2019",
+      "end": null,
+      "note": "Environ 6 ans de suivi en 04/2025 ; consultations médicales, passages IDE (ECG trimestriel), consultation à l'antenne de Libourne.",
+      "observationIds": [
+       "historique:o11",
+       "historique:o3",
+       "historique:o1"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e26",
+    "trackId": "t22",
     "start": "2019-06-03",
     "end": "2019-06-14",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Rotation oxycodone vers méthadone, 12 jours, participation aux groupes de l'unité ; entretien familial le 12/06",
+    "note": "Rotation oxycodone vers méthadone, 12 jours, participation aux groupes de l'unité, entretien familial le 12/06",
     "observationIds": [
      "historique:o69",
      "historique:o67",
@@ -2199,7 +2682,7 @@
      {
       "start": "2019-06-03",
       "end": "2019-06-14",
-      "note": "Rotation oxycodone vers méthadone, 12 jours, participation aux groupes de l'unité ; entretien familial le 12/06",
+      "note": "Rotation oxycodone vers méthadone, 12 jours, participation aux groupes de l'unité, entretien familial le 12/06",
       "observationIds": [
        "historique:o69",
        "historique:o67"
@@ -2208,7 +2691,7 @@
      {
       "start": "2019-06",
       "end": null,
-      "note": "Hospitalisation en juin 2019 pour la rotation oxycodone vers méthadone.",
+      "note": "Rotation vers la méthadone en hospitalisation en juin 2019.",
       "observationIds": [
        "historique:o26"
       ]
@@ -2216,95 +2699,28 @@
     ]
    },
    {
-    "id": "e15",
-    "trackId": "t12",
-    "start": "2019-04-15",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Accueil IDE le 15/04/2019, consultations médicales et internes, délivrance de méthadone",
-    "observationIds": [
-     "historique:o74",
-     "historique:o73",
-     "historique:o66",
-     "historique:o65",
-     "historique:o61",
-     "historique:o59",
-     "historique:o56",
-     "historique:o45",
-     "historique:o26",
-     "historique:o19",
-     "historique:o18",
-     "historique:o16",
-     "historique:o15",
-     "historique:o12",
-     "historique:o11",
-     "historique:o3"
-    ],
-    "tellings": [
-     {
-      "start": "2019-04-15",
-      "end": null,
-      "note": "Accueil IDE le 15/04/2019, consultations médicales et internes, délivrance de méthadone",
-      "observationIds": [
-       "historique:o74",
-       "historique:o73",
-       "historique:o66",
-       "historique:o65",
-       "historique:o61",
-       "historique:o59",
-       "historique:o26",
-       "historique:o19",
-       "historique:o18",
-       "historique:o16",
-       "historique:o15",
-       "historique:o12"
-      ]
-     },
-     {
-      "start": "2019-06",
-      "end": null,
-      "note": "Suivi médical, infirmier et social au CSAPA, substitution par méthadone depuis 06/2019.",
-      "observationIds": [
-       "historique:o56",
-       "historique:o45"
-      ]
-     },
-     {
-      "start": "2019",
-      "end": null,
-      "note": "6 ans de suivi en 04/2025, « 7 » en 06/2026 ; RDV tous les 2 à 3 mois, ECG trimestriel.",
-      "observationIds": [
-       "historique:o11",
-       "historique:o3"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e16",
-    "trackId": "t13",
+    "id": "e27",
+    "trackId": "t23",
     "start": "2020-02",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Proposés le 21/01/2020 ; 2e entretien le 18/02/2020 : travail sur les ordonnances, budget, occupations",
+    "note": "Entretiens avec l'éducateur sur les ordonnances et la gestion du quotidien, proposés le 21/01/2020",
     "observationIds": [
      "historique:o59",
      "historique:o58"
     ]
    },
    {
-    "id": "e17",
-    "trackId": "t14",
+    "id": "e28",
+    "trackId": "t24",
     "start": "2019-04-25",
     "end": "2020-02-25",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Bilan social puis suivi (invalidité, litige CPAM, ALD) ; clôture du suivi régulier le 25/02/2020, RDV à la demande",
+    "note": "Assistante sociale (invalidité, litige CPAM, ALD) ; clôture du suivi régulier, RDV à la demande",
     "observationIds": [
      "historique:o72",
      "historique:o62",
@@ -2312,310 +2728,74 @@
     ]
    },
    {
-    "id": "e18",
-    "trackId": "t15",
-    "start": "2019-04-18",
-    "end": "2019-10-15",
+    "id": "e29",
+    "trackId": "t25",
+    "start": "1967",
+    "end": "1972",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Thymie légèrement abaissée, pas d'idées suicidaires ; « un coup de moins bien » après l'accident, jamais de suivi psychiatrique",
+    "note": "Père qui buvait, parfois violent en paroles, jamais de soins ; oncle maternel mort de la boisson",
     "observationIds": [
-     "historique:o73",
-     "historique:o63"
-    ]
-   },
-   {
-    "id": "e19",
-    "trackId": "t16",
-    "start": "2013-10-14",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Chute d'échafaudage d'environ 4 m ; arthrodèse T12-L2 le 16/10/2013 ; reprise chirurgicale le 09/06/2015 pour pseudarthrose (extension à L3) ; consolidation fixée au 31/03/2016.",
-    "observationIds": [
-     "historique:o73",
-     "historique:o63",
-     "courrier:o1",
-     "historique:o26",
-     "historique:o19",
-     "historique:o11"
-    ],
-    "tellings": [
-     {
-      "start": "2014",
-      "end": null,
-      "note": "Chute d'un échafaudage, opéré le lendemain ; daté « en 2014 » à l'entrée et « fin 2013 » en octobre 2019",
-      "observationIds": [
-       "historique:o73",
-       "historique:o63"
-      ]
-     },
-     {
-      "start": "2013-10-14",
-      "end": null,
-      "note": "Chute d'échafaudage d'environ 4 m ; arthrodèse T12-L2 le 16/10/2013 ; reprise chirurgicale le 09/06/2015 pour pseudarthrose (extension à L3) ; consolidation fixée au 31/03/2016.",
-      "observationIds": [
-       "courrier:o1"
-      ]
-     },
-     {
-      "start": "2013-10-14",
-      "end": null,
-      "note": "Chute d'échafaudage de 4 m le 14/10/2013, fracture de L1, arthrodèse T12-L2 le 16/10/2013.",
-      "observationIds": [
-       "historique:o26",
-       "historique:o19"
-      ]
-     },
-     {
-      "start": "2013-10-14",
-      "end": null,
-      "note": "Chute d'un échafaudage (accident du travail), fracture de L1, arthrodèse.",
-      "observationIds": [
-       "historique:o11"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e20",
-    "trackId": "t17",
-    "start": "2015-06-09",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Reprise chirurgicale le 09/06/2015 (deux chirurgies au total).",
-    "observationIds": [
-     "historique:o73",
-     "historique:o26",
-     "historique:o19",
-     "historique:o11"
-    ],
-    "tellings": [
-     {
-      "start": "2016",
-      "end": null,
-      "note": "Réopéré un an ou deux plus tard car « ça ne tenait pas »",
-      "observationIds": [
-       "historique:o73"
-      ]
-     },
-     {
-      "start": "2015-06-09",
-      "end": null,
-      "note": "Reprise chirurgicale le 09/06/2015 (deux chirurgies au total).",
-      "observationIds": [
-       "historique:o26",
-       "historique:o19"
-      ]
-     },
-     {
-      "start": "2015",
-      "end": null,
-      "note": "Reprise de l'arthrodèse en 2015.",
-      "observationIds": [
-       "historique:o11"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e21",
-    "trackId": "t18",
-    "start": "2013-10-14",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Composante neuropathique (DN4 5/10) ; douleur 6-7/10 en 2020-2021 ; le patient dit avoir mal au dos « depuis 1994, en fait ».",
-    "observationIds": [
-     "historique:o73",
-     "historique:o69",
-     "historique:o67",
-     "historique:o64",
-     "historique:o63",
-     "historique:o61",
-     "historique:o56",
-     "historique:o55",
-     "courrier:o1",
-     "historique:o50",
-     "historique:o48",
-     "historique:o37",
-     "historique:o31",
-     "historique:o26",
-     "historique:o24",
-     "historique:o19",
-     "historique:o15",
-     "historique:o13",
-     "historique:o11",
-     "historique:o9",
-     "historique:o5",
-     "historique:o3",
-     "historique:o1"
-    ],
-    "tellings": [
-     {
-      "start": "2014",
-      "end": null,
-      "note": "Douleur permanente cotée 6-7/10 à l'entrée, 5/10 sous méthadone",
-      "observationIds": [
-       "historique:o73",
-       "historique:o69",
-       "historique:o67",
-       "historique:o64",
-       "historique:o63",
-       "historique:o61"
-      ]
-     },
-     {
-      "start": "2013-10-14",
-      "end": null,
-      "note": "Composante neuropathique (DN4 5/10) ; douleur 6-7/10 en 2020-2021 ; le patient dit avoir mal au dos « depuis 1994, en fait ».",
-      "observationIds": [
-       "courrier:o1",
-       "historique:o56",
-       "historique:o55",
-       "historique:o50",
-       "historique:o48"
-      ]
-     },
-     {
-      "start": "2013-10",
-      "end": null,
-      "note": "Lombalgies et radiculalgie droite chroniques, 5-6/10 (6/10 en 2022, 5/10 depuis).",
-      "observationIds": [
-       "historique:o37",
-       "historique:o31",
-       "historique:o26",
-       "historique:o24",
-       "historique:o19",
-       "historique:o15",
-       "historique:o13"
-      ]
-     },
-     {
-      "start": "2013",
-      "end": null,
-      "note": "Douleur 4-5/10 ; 4/10 (04/2025), 5/10 depuis la bronchite (03 et 06/2026), 4/10 (10/2026).",
-      "observationIds": [
-       "historique:o11",
-       "historique:o9",
-       "historique:o5",
-       "historique:o3",
-       "historique:o1"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e22",
-    "trackId": "t19",
-    "start": "2014",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "HTA relevée parmi les antécédents à la première consultation du CETD (2014) ; date de début non précisée.",
-    "observationIds": [
-     "historique:o73",
-     "courrier:o1",
-     "historique:o32",
-     "historique:o26",
-     "historique:o11"
-    ],
-    "tellings": [
-     {
-      "start": null,
-      "end": null,
-      "note": "HTA traitée (amlodipine 5 mg)",
-      "observationIds": [
-       "historique:o73"
-      ]
-     },
-     {
-      "start": "2014",
-      "end": null,
-      "note": "HTA relevée parmi les antécédents à la première consultation du CETD (2014) ; date de début non précisée.",
-      "observationIds": [
-       "courrier:o1"
-      ]
-     },
-     {
-      "start": null,
-      "end": null,
-      "note": "HTA ; TA 138/82 le 27/09/2022.",
-      "observationIds": [
-       "historique:o26",
-       "historique:o32"
-      ]
-     },
-     {
-      "start": null,
-      "end": null,
-      "note": "HTA mentionnée dans la synthèse annuelle.",
-      "observationIds": [
-       "historique:o11"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e23",
-    "trackId": "t20",
-    "start": "2019-04-15",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Toux grasse, crachats matinaux, essoufflement à un étage, non explorée",
-    "observationIds": [
-     "historique:o74",
      "historique:o73"
     ],
-    "startUnknown": true
+    "fromAge": {
+     "start": [
+      6,
+      11
+     ],
+     "end": null
+    }
    },
    {
-    "id": "e24",
-    "trackId": "t21",
-    "start": "2019-04-18",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Ronflements, pauses respiratoires, SpO2 86-88 % la nuit du 05/06 ; polygraphie demandée mais non faite en septembre",
-    "observationIds": [
-     "historique:o73",
-     "historique:o72",
-     "historique:o68",
-     "historique:o67",
-     "historique:o64"
-    ]
-   },
-   {
-    "id": "e25",
-    "trackId": "t22",
-    "start": "2019-07-02",
-    "end": null,
+    "id": "e30",
+    "trackId": "t26",
+    "start": "1967",
+    "end": "1972",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Transpiration abondante et constipation, conseils hygiéno-diététiques, macrogol proposé",
+    "note": "Né et élevé à Cenon, deuxième de deux enfants, mère décédée, sœur cadette à Bayonne",
     "observationIds": [
-     "historique:o65"
-    ]
+     "historique:o73"
+    ],
+    "fromAge": {
+     "start": [
+      6,
+      11
+     ],
+     "end": null
+    }
    },
    {
-    "id": "e26",
-    "trackId": "t23",
+    "id": "e31",
+    "trackId": "t27",
+    "start": "1976",
+    "end": "1978",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "CAP de maçon vers 16 ans",
+    "observationIds": [
+     "historique:o73"
+    ],
+    "fromAge": {
+     "start": [
+      15,
+      17
+     ],
+     "end": null
+    }
+   },
+   {
+    "id": "e32",
+    "trackId": "t28",
     "start": "1977",
-    "end": "2013-10-14",
+    "end": "2013-10",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Maçon puis chef de chantier dans la même entreprise de 1977 à l'accident du travail",
+    "note": "Maçon puis chef de chantier (vers 37 ans) dans la même entreprise de 1977 à l'accident ; licencié pour inaptitude en 2016",
     "observationIds": [
      "historique:o73",
      "historique:o72",
@@ -2625,7 +2805,7 @@
      {
       "start": "1977",
       "end": "2014",
-      "note": "Maçon puis chef de chantier dans la même entreprise de 1977 à l'accident du travail",
+      "note": "Maçon puis chef de chantier (vers 37 ans) dans la même entreprise de 1977 à l'accident ; licencié pour inaptitude en 2016",
       "observationIds": [
        "historique:o73",
        "historique:o72"
@@ -2633,8 +2813,8 @@
      },
      {
       "start": "1977",
-      "end": "2013-10-14",
-      "note": "Maçon puis chef de chantier dans la même entreprise de 1977 à l'accident du travail.",
+      "end": "2013-10",
+      "note": "Maçon puis chef de chantier dans la même entreprise jusqu'à l'accident du travail.",
       "observationIds": [
        "historique:o26"
       ]
@@ -2642,70 +2822,164 @@
     ]
    },
    {
-    "id": "e27",
-    "trackId": "t24",
-    "start": "2013-10-14",
-    "end": null,
+    "id": "e33",
+    "trackId": "t29",
+    "start": "1997",
+    "end": "1999",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Perte du statut de chef de chantier ; le patient situait l'accident de mémoire en 2014.",
+    "note": "Devient chef de chantier vers 37 ans",
+    "observationIds": [
+     "historique:o73"
+    ],
+    "fromAge": {
+     "start": [
+      36,
+      38
+     ],
+     "end": null
+    }
+   },
+   {
+    "id": "e34",
+    "trackId": "t30",
+    "start": "1980",
+    "end": "1980",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Service militaire à Pau en 1980",
+    "observationIds": [
+     "historique:o73"
+    ]
+   },
+   {
+    "id": "e35",
+    "trackId": "t31",
+    "start": "1984",
+    "end": "1984",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Marié depuis 1984, épouse aide-soignante retraitée",
     "observationIds": [
      "historique:o73",
+     "historique:o26"
+    ],
+    "tellings": [
+     {
+      "start": "1984",
+      "end": "1984",
+      "note": "Marié depuis 1984, épouse aide-soignante retraitée",
+      "observationIds": [
+       "historique:o73"
+      ]
+     },
+     {
+      "start": "1984",
+      "end": null,
+      "note": "Marié en 1984 avec l'épouse.",
+      "observationIds": [
+       "historique:o26"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e36",
+    "trackId": "t32",
+    "start": "1986",
+    "end": "1986",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Fille de 33 ans en 2019, mariée, à Libourne ; naissance à l'origine d'un arrêt du tabac de 3 mois",
+    "observationIds": [
+     "historique:o73",
+     "historique:o26"
+    ],
+    "tellings": [
+     {
+      "start": "1986",
+      "end": "1986",
+      "note": "Fille de 33 ans en 2019, mariée, à Libourne ; naissance à l'origine d'un arrêt du tabac de 3 mois",
+      "observationIds": [
+       "historique:o73"
+      ]
+     },
+     {
+      "start": "1986",
+      "end": null,
+      "note": "Naissance de sa fille en 1986.",
+      "observationIds": [
+       "historique:o26"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e37",
+    "trackId": "t33",
+    "start": "2013-10-14",
+    "end": "2014",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Chute d'environ 4 mètres ; le patient situait de mémoire l'accident en 2014.",
+    "observationIds": [
+     "historique:o73",
+     "historique:o72",
      "historique:o63",
      "courrier:o1",
      "historique:o50",
-     "historique:o49",
      "historique:o27",
      "historique:o26",
-     "historique:o11",
-     "historique:o9"
+     "historique:o11"
     ],
     "tellings": [
      {
       "start": "2014",
-      "end": null,
-      "note": "Chute d'un échafaudage de 6 mètres à Lormont ; n'a jamais repris le travail",
+      "end": "2014",
+      "note": "Chute d'un échafaudage de 6 mètres sur un chantier à Lormont ; n'a jamais repris le travail ; un interne le date fin 2013",
       "observationIds": [
        "historique:o73",
+       "historique:o72",
        "historique:o63"
       ]
      },
      {
       "start": "2013-10-14",
       "end": null,
-      "note": "Perte du statut de chef de chantier ; le patient situait l'accident de mémoire en 2014.",
+      "note": "Chute d'environ 4 mètres ; le patient situait de mémoire l'accident en 2014.",
       "observationIds": [
        "courrier:o1",
        "historique:o50",
-       "historique:o49"
+       "historique:o11"
       ]
      },
      {
       "start": "2013-10-14",
       "end": null,
-      "note": "Chute d'échafaudage le 14/10/2013 ; rente AT de 30 % maintenue.",
+      "note": "Chute d'échafaudage, cause de la douleur chronique ; rente AT 30 %.",
       "observationIds": [
        "historique:o26",
-       "historique:o27",
-       "historique:o11",
-       "historique:o9"
+       "historique:o27"
       ]
      }
     ]
    },
    {
-    "id": "e28",
-    "trackId": "t25",
-    "start": "2016-03-31",
+    "id": "e38",
+    "trackId": "t34",
+    "start": "2016",
     "end": "2023-03-01",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Consolidation fixée au 31/03/2016, mise en invalidité dans la foulée.",
+    "note": "Invalidité catégorie 2 en 2016, licenciement pour inaptitude la même année",
     "observationIds": [
      "historique:o72",
-     "courrier:o1",
      "historique:o27",
      "historique:o26",
      "historique:o11"
@@ -2720,17 +2994,9 @@
       ]
      },
      {
-      "start": "2016-03-31",
-      "end": null,
-      "note": "Consolidation fixée au 31/03/2016, mise en invalidité dans la foulée.",
-      "observationIds": [
-       "courrier:o1"
-      ]
-     },
-     {
       "start": "2016",
       "end": "2023-03-01",
-      "note": "Pension d'invalidité depuis 2016, remplacée par la pension de retraite pour inaptitude.",
+      "note": "Pension d'invalidité jusqu'au passage à la retraite.",
       "observationIds": [
        "historique:o26",
        "historique:o27"
@@ -2738,8 +3004,8 @@
      },
      {
       "start": "2016",
-      "end": null,
-      "note": "Invalidité en 2016.",
+      "end": "2023",
+      "note": "Invalidité en 2016, remplacée par la retraite en 2023.",
       "observationIds": [
        "historique:o11"
       ]
@@ -2747,91 +3013,94 @@
     ]
    },
    {
-    "id": "e29",
-    "trackId": "t26",
+    "id": "e39",
+    "trackId": "t35",
     "start": "2017",
     "end": "2020-02-14",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Recours déposé en 2017, audience le 21/11/2019, expertise ordonnée, délibéré du 14/02/2020 : IPP portée de 15 % à 30 %",
+    "note": "Recours déposé en 2017 contre l'IPP de 15 %, audience le 21/11/2019, jugement du 14/02/2020 portant l'IPP à 30 %",
     "observationIds": [
      "historique:o72",
-     "historique:o63",
      "historique:o62",
      "historique:o57"
     ]
    },
    {
-    "id": "e30",
-    "trackId": "t27",
-    "start": "2017",
-    "end": "2019-03",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Consultations mensuelles payées en liquide, délivrances dans trois pharmacies, non déclarées à l'entrée (« un seul prescripteur ») ; début 2017 ou fin 2016",
-    "observationIds": [
-     "historique:o73",
-     "historique:o60",
-     "historique:o59"
-    ]
-   },
-   {
-    "id": "e31",
-    "trackId": "t28",
+    "id": "e40",
+    "trackId": "t36",
     "start": "2018-07",
     "end": "2019-01",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Une quinzaine d'ordonnances falsifiées entre l'été 2018 et janvier 2019, repérées par la pharmacie du Bois-Fleuri ; présentées d'abord comme une seule date corrigée",
+    "note": "Une quinzaine d'ordonnances falsifiées entre l'été 2018 et janvier 2019, repérées par la pharmacie du Bois-Fleuri en janvier ; il avait d'abord parlé d'une seule date corrigée",
     "observationIds": [
      "historique:o74",
      "historique:o73",
-     "historique:o59",
      "historique:o58"
     ]
    },
    {
-    "id": "e32",
-    "trackId": "t29",
+    "id": "e41",
+    "trackId": "t37",
     "start": "2019-02",
-    "end": null,
+    "end": "2019-02",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Convocation en février après le signalement de la pharmacie",
+    "note": "Convocation au commissariat après le signalement de la pharmacie",
     "observationIds": [
      "historique:o73",
      "historique:o58"
     ]
    },
    {
-    "id": "e33",
-    "trackId": "t30",
+    "id": "e42",
+    "trackId": "t38",
     "start": "2019-03",
-    "end": null,
+    "end": "2019-03",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Rappel à la loi par le délégué du procureur pour ordonnance falsifiée, consigne de consulter un centre",
+    "note": "Rappel à la loi par le délégué du procureur pour ordonnance falsifiée, consigne de voir un centre",
     "observationIds": [
      "historique:o74",
      "historique:o73",
      "historique:o72",
      "historique:o26"
+    ],
+    "tellings": [
+     {
+      "start": "2019-03",
+      "end": "2019-03",
+      "note": "Rappel à la loi par le délégué du procureur pour ordonnance falsifiée, consigne de voir un centre",
+      "observationIds": [
+       "historique:o74",
+       "historique:o73",
+       "historique:o72"
+      ]
+     },
+     {
+      "start": "2019-03",
+      "end": null,
+      "note": "Rappel à la loi en mars 2019 pour ordonnances falsifiées (une quinzaine en 2018-2019).",
+      "observationIds": [
+       "historique:o26"
+      ]
+     }
     ]
    },
    {
-    "id": "e34",
-    "trackId": "t31",
+    "id": "e43",
+    "trackId": "t39",
     "start": "2019-11",
-    "end": null,
-    "ongoing": true,
+    "end": "2020-01",
+    "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Courrier de contrôle des prescriptions en novembre 2019, deux prescripteurs révélés (janvier 2020), protocole de soins : prescripteur et pharmacie uniques",
+    "note": "Courrier de contrôle par le service médical, appel du médecin conseil le 07/01/2020, protocole de soins imposé (prescripteur et pharmacie uniques)",
     "observationIds": [
      "historique:o62",
      "historique:o60",
@@ -2839,29 +3108,234 @@
     ]
    },
    {
-    "id": "e35",
-    "trackId": "t3",
-    "start": "1994-08",
-    "end": "1999-03",
+    "id": "e44",
+    "trackId": "t40",
+    "start": "1990",
+    "end": null,
     "ongoing": false,
-    "mode": "usage",
-    "lossOfControl": true,
-    "note": "Trouble de l'usage de l'alcool sévère : boit « beaucoup » dans les années 90, après la mort de son fils, pastis le matin sur le chantier ; non signalé à l'entrée.",
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Fils né en 1990, mort noyé à 4 ans.",
     "observationIds": [
-     "courrier:o1",
-     "historique:o50",
+     "historique:o48"
+    ]
+   },
+   {
+    "id": "e45",
+    "trackId": "t41",
+    "start": "1994-08",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Noyade dans le lac de baignade, en août 1994 ; le patient était à la buvette avec les copains, se dit responsable depuis 27 ans. Retour au travail au bout de trois jours. Longtemps tu aux médecins (disait n'avoir qu'une fille).",
+    "observationIds": [
      "historique:o48",
+     "historique:o45",
+     "historique:o40",
      "historique:o34",
+     "historique:o33",
      "historique:o26",
-     "historique:o19",
      "historique:o11",
      "historique:o9"
     ],
     "tellings": [
      {
       "start": "1994-08",
+      "end": null,
+      "note": "Noyade dans le lac de baignade, en août 1994 ; le patient était à la buvette avec les copains, se dit responsable depuis 27 ans. Retour au travail au bout de trois jours. Longtemps tu aux médecins (disait n'avoir qu'une fille).",
+      "observationIds": [
+       "historique:o48",
+       "historique:o45",
+       "historique:o40"
+      ]
+     },
+     {
+      "start": "1994",
+      "end": null,
+      "note": "Fils mort noyé en 1994 à 4 ans ; révélé en 2021 seulement.",
+      "observationIds": [
+       "historique:o26",
+       "historique:o34",
+       "historique:o33"
+      ]
+     },
+     {
+      "start": "1994-08",
+      "end": null,
+      "note": "Fils mort noyé en août 1994, absent au moment de l'accident ; deuil jamais évoqué avec un soignant avant le suivi.",
+      "observationIds": [
+       "historique:o11",
+       "historique:o9"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e46",
+    "trackId": "t42",
+    "start": "2013-10",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Chef de chantier ; perte du statut et du réseau de collègues après l'accident du travail (« les gars qui m'appelaient chef »). Début non daté.",
+    "observationIds": [
+     "historique:o49",
+     "historique:o45"
+    ],
+    "startUnknown": true
+   },
+   {
+    "id": "e47",
+    "trackId": "t43",
+    "start": "1998",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Suspension de 6 mois, amende, passage devant la commission médicale ; non mentionné à l'accueil.",
+    "observationIds": [
+     "historique:o47"
+    ]
+   },
+   {
+    "id": "e49",
+    "trackId": "t45",
+    "start": "2016-03-31",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Consolidation fixée au 31/03/2016, mise en invalidité dans la foulée.",
+    "observationIds": [
+     "courrier:o1"
+    ]
+   },
+   {
+    "id": "e50",
+    "trackId": "t46",
+    "start": "2020-03",
+    "end": "2020-06",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Plus de pétanque ni de sorties, prise de poids ; reste à la maison avec sa femme.",
+    "observationIds": [
+     "historique:o56",
+     "historique:o55"
+    ]
+   },
+   {
+    "id": "e51",
+    "trackId": "t47",
+    "start": "2020-06-16",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Conduite déconseillée en attendant la polygraphie (endormissement au feu rouge) ; en 11/2020 ne conduit plus que le matin ; renonce au permis poids lourd en 06/2021.",
+    "observationIds": [
+     "historique:o55",
+     "historique:o52",
+     "historique:o47"
+    ]
+   },
+   {
+    "id": "e52",
+    "trackId": "t48",
+    "start": "2021-08",
+    "end": "2022-03-12",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Annoncé fin août 2021, chimiothérapie puis soins palliatifs à domicile (HAD) ; le patient l'accompagne aux séances ; la fille vient tous les deux jours.",
+    "observationIds": [
+     "historique:o46",
+     "historique:o45",
+     "historique:o43",
+     "historique:o42"
+    ]
+   },
+   {
+    "id": "e53",
+    "trackId": "t49",
+    "start": "2022-03-12",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Décédée à domicile ; obsèques à Cenon.",
+    "observationIds": [
+     "historique:o41",
+     "historique:o40",
+     "historique:o37",
+     "historique:o34",
+     "historique:o26",
+     "historique:o11",
+     "historique:o9"
+    ],
+    "tellings": [
+     {
+      "start": "2022-03-12",
+      "end": null,
+      "note": "Décédée à domicile ; obsèques à Cenon.",
+      "observationIds": [
+       "historique:o41",
+       "historique:o40",
+       "historique:o26",
+       "historique:o37",
+       "historique:o34"
+      ]
+     },
+     {
+      "start": "2022-03-12",
+      "end": null,
+      "note": "Veuf depuis le 12/03/2022 ; période de grande détresse ; deuil travaillé (lettre écrite en 2023).",
+      "observationIds": [
+       "historique:o11",
+       "historique:o9"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e54",
+    "trackId": "t50",
+    "start": "2022-03",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Seul dans la maison, la fille passe le week-end ; tout lui rappelle son épouse.",
+    "observationIds": [
+     "historique:o40"
+    ]
+   },
+   {
+    "id": "e55",
+    "trackId": "t5",
+    "start": "1994",
+    "end": "1999-03",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": true,
+    "note": "Consommation importante après la mort du fils (d'abord le soir puis dès le matin, pastis « le matin sur le chantier ») ; « beaucoup » dans les années 90 ; épouse menaçant de partir ; trouble de l'usage sévère noté ensuite. Nié à l'entrée (« jamais eu de problème avec l'alcool »).",
+    "observationIds": [
+     "courrier:o1",
+     "historique:o50",
+     "historique:o48",
+     "historique:o34",
+     "historique:o33",
+     "historique:o26",
+     "historique:o11",
+     "historique:o9"
+    ],
+    "tellings": [
+     {
+      "start": "1994",
       "end": "1999-03",
-      "note": "Trouble de l'usage de l'alcool sévère : boit « beaucoup » dans les années 90, après la mort de son fils, pastis le matin sur le chantier ; non signalé à l'entrée.",
+      "note": "Consommation importante après la mort du fils (d'abord le soir puis dès le matin, pastis « le matin sur le chantier ») ; « beaucoup » dans les années 90 ; épouse menaçant de partir ; trouble de l'usage sévère noté ensuite. Nié à l'entrée (« jamais eu de problème avec l'alcool »).",
       "observationIds": [
        "historique:o50",
        "historique:o48",
@@ -2871,17 +3345,17 @@
      {
       "start": "1994",
       "end": "1999",
-      "note": "Trouble de l'usage d'alcool des années 90 après le décès de son fils (1994), sevrage hospitalier en 1999, abstinence jusqu'en 2022.",
+      "note": "TUAL des années 90 après le décès de son fils ; « j'ai bu pour ne pas entendre le silence ».",
       "observationIds": [
        "historique:o26",
-       "historique:o19",
-       "historique:o34"
+       "historique:o34",
+       "historique:o33"
       ]
      },
      {
       "start": null,
       "end": null,
-      "note": "Trouble de l'usage d'alcool ancien, alcool des années 90 relié au deuil de son fils.",
+      "note": "Trouble d'usage d'alcool ancien (années 90), lié au deuil du fils ; sevré en 1999.",
       "observationIds": [
        "historique:o11",
        "historique:o9"
@@ -2890,56 +3364,79 @@
     ]
    },
    {
-    "id": "e36",
-    "trackId": "t3",
+    "id": "e56",
+    "trackId": "t5",
     "start": "1999-03",
-    "end": "1999-03",
+    "end": "1999",
     "ongoing": false,
     "mode": "sevrage",
     "lossOfControl": false,
-    "note": "Sevrage hospitalier de 3 semaines en mars 1999, clinique des Pins (Lormont).",
+    "note": "Sevrage hospitalier de 3 semaines en mars 1999 (clinique des Pins, Lormont), pour ne pas perdre son épouse et sa fille.",
     "observationIds": [
      "courrier:o1",
      "historique:o50",
+     "historique:o48",
      "historique:o33",
      "historique:o26",
-     "historique:o19",
      "historique:o11"
     ],
     "tellings": [
      {
       "start": "1999-03",
       "end": "1999-03",
-      "note": "Sevrage hospitalier de 3 semaines en mars 1999, clinique des Pins (Lormont).",
+      "note": "Sevrage hospitalier de 3 semaines en mars 1999 (clinique des Pins, Lormont), pour ne pas perdre son épouse et sa fille.",
       "observationIds": [
        "courrier:o1",
-       "historique:o50"
+       "historique:o50",
+       "historique:o48"
       ]
      },
      {
       "start": "1999",
       "end": null,
-      "note": "Sevrage hospitalier en 1999, avec tremblements (\"j'avais tremblé, c'est tout\").",
+      "note": "Sevrage hospitalier en 1999 ; tremblements (« j'avais tremblé, c'est tout »). Abstinence jusqu'en 2022.",
       "observationIds": [
-       "historique:o33",
        "historique:o26",
-       "historique:o19",
+       "historique:o33"
+      ]
+     },
+     {
+      "start": "1999",
+      "end": "1999",
+      "note": "Sevrage en 1999.",
+      "observationIds": [
        "historique:o11"
       ]
      }
     ]
    },
    {
-    "id": "e37",
-    "trackId": "t3",
+    "id": "e57",
+    "trackId": "t5",
+    "start": "1999",
+    "end": "2022-03",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "Abstinence d'alcool fort déclarée depuis 1999, « un verre de vin de temps en temps » ; GGT 38 (01/2021) puis 36 (09/2021) ; note au dossier : TUAL ancien sévère en rémission prolongée.",
+    "observationIds": [
+     "historique:o50",
+     "historique:o46",
+     "courrier:o1"
+    ]
+   },
+   {
+    "id": "e58",
+    "trackId": "t5",
     "start": "2022-04",
     "end": "2022-05-21",
     "ongoing": false,
     "mode": "rechute",
-    "lossOfControl": false,
-    "note": "Après des années d'abstinence déclarée (un verre de vin de temps en temps), sa fille rapporte qu'il boit en cachette (vin, pastis) depuis le décès de son épouse, au moins depuis Pâques ; odeur d'alcool douteuse le 12/04/2022, éthylotest refusé.",
+    "lossOfControl": true,
+    "note": "Reprise début avril 2022, trois semaines après les obsèques : 6 à 8 verres par jour, en cachette, craving le soir ; dernier verre le 21/05.",
     "observationIds": [
      "historique:o40",
+     "historique:o39",
      "historique:o38",
      "historique:o37",
      "historique:o36",
@@ -2948,18 +3445,19 @@
     ],
     "tellings": [
      {
-      "start": "2022-04",
+      "start": "2022-03",
       "end": null,
-      "note": "Après des années d'abstinence déclarée (un verre de vin de temps en temps), sa fille rapporte qu'il boit en cachette (vin, pastis) depuis le décès de son épouse, au moins depuis Pâques ; odeur d'alcool douteuse le 12/04/2022, éthylotest refusé.",
+      "note": "Boit en cachette depuis la mort de l'épouse (vin et pastis dans le garage, au moins depuis Pâques, selon la fille) ; odeur d'alcool incertaine le 12/04, éthylotest refusé ; alcoolémie 1,6 g/L à l'admission en réanimation ; le patient dit ne pas boire d'alcool (04/2022).",
       "observationIds": [
        "historique:o40",
+       "historique:o39",
        "historique:o38"
       ]
      },
      {
       "start": "2022-04",
       "end": "2022-05-21",
-      "note": "Reprise début avril 2022 après les obsèques de l'épouse : 6 à 8 verres par jour (vin, pastis), en cachette, craving le soir ; CDT 2,4 %, GGT 112. Dernier verre le 21/05.",
+      "note": "Reprise début avril 2022, trois semaines après les obsèques : 6 à 8 verres par jour, en cachette, craving le soir ; dernier verre le 21/05.",
       "observationIds": [
        "historique:o37",
        "historique:o36",
@@ -2970,27 +3468,63 @@
     ]
    },
    {
-    "id": "e38",
-    "trackId": "t3",
+    "id": "e59",
+    "trackId": "t5",
     "start": "2022-05-21",
     "end": null,
     "ongoing": false,
     "mode": "intoxication",
     "lossOfControl": false,
-    "note": "Alcoolémie à 1,6 g/L à l'admission en réanimation ; bouteille de vin entamée retrouvée sur la table.",
+    "note": "Alcoolémie 1,6 g/L à l'admission en réanimation, vin pris avec le repas.",
     "observationIds": [
      "historique:o39"
     ]
    },
    {
-    "id": "e40",
-    "trackId": "t1",
+    "id": "e60",
+    "trackId": "t51",
+    "start": "2015-06",
+    "end": "2019-06",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": true,
+    "note": "Oxycodone après le tramadol, jusqu'à 300 mg/j rapporté, falsification d'ordonnances, deux prescripteurs ; demandes de renouvellement anticipé en 2017-2018 ; fin avec l'instauration de la méthadone (06/2019).",
+    "observationIds": [
+     "courrier:o1",
+     "historique:o45",
+     "historique:o26",
+     "historique:o19"
+    ],
+    "tellings": [
+     {
+      "start": "2015-06",
+      "end": "2019-06",
+      "note": "Oxycodone après le tramadol, jusqu'à 300 mg/j rapporté, falsification d'ordonnances, deux prescripteurs ; demandes de renouvellement anticipé en 2017-2018 ; fin avec l'instauration de la méthadone (06/2019).",
+      "observationIds": [
+       "courrier:o1",
+       "historique:o45"
+      ]
+     },
+     {
+      "start": "2015",
+      "end": "2019-06",
+      "note": "Oxycodone avec escalade jusqu'à 280-300 mg/j, second prescripteur à Lormont, ordonnances falsifiées ; trouble de l'usage d'opioïdes.",
+      "observationIds": [
+       "historique:o26",
+       "historique:o19"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e61",
+    "trackId": "t51",
     "start": "2018-11",
-    "end": null,
+    "end": "2018",
     "ongoing": false,
     "mode": "intoxication",
     "lossOfControl": false,
-    "note": "Retrouvé « tout bleu » par son épouse, SAMU, probable naloxone, une nuit aux urgences ; épisode caché aux médecins (rapporté par sa fille).",
+    "note": "Retrouvé « tout bleu » par son épouse, SAMU, probablement naloxone, une nuit aux urgences ; secret demandé à la fille.",
     "observationIds": [
      "historique:o38",
      "historique:o37",
@@ -3000,17 +3534,24 @@
     "tellings": [
      {
       "start": "2018-11",
-      "end": null,
-      "note": "Retrouvé « tout bleu » par son épouse, SAMU, probable naloxone, une nuit aux urgences ; épisode caché aux médecins (rapporté par sa fille).",
+      "end": "2018-11",
+      "note": "Retrouvé « tout bleu » par son épouse, SAMU, probablement naloxone, une nuit aux urgences ; secret demandé à la fille.",
       "observationIds": [
-       "historique:o38",
+       "historique:o38"
+      ]
+     },
+     {
+      "start": "2018-11",
+      "end": null,
+      "note": "Surdose en novembre 2018 (oxycodone, patchs, prégabaline), cachée au CSAPA, révélée par la fille en 2022.",
+      "observationIds": [
        "historique:o37",
        "historique:o26"
       ]
      },
      {
       "start": "2018",
-      "end": null,
+      "end": "2018",
       "note": "Surdose en 2018.",
       "observationIds": [
        "historique:o11"
@@ -3019,38 +3560,40 @@
     ]
    },
    {
-    "id": "e41",
-    "trackId": "t1",
+    "id": "e62",
+    "trackId": "t51",
     "start": "2020-03",
     "end": "2020-06",
     "ongoing": false,
     "mode": "craving",
     "lossOfControl": false,
-    "note": "Dit avoir eu envie d'oxycodone pendant le confinement, sans en prendre ; urines du 09/06 oxycodone négatives.",
+    "note": "Envie d'oxycodone pendant le confinement sans prise ; urines du 09/06 oxycodone négatives.",
     "observationIds": [
      "historique:o55"
     ]
    },
    {
-    "id": "e42",
-    "trackId": "t1",
+    "id": "e63",
+    "trackId": "t51",
     "start": "2020-09",
     "end": "2020-09-18",
     "ongoing": false,
     "mode": "rechute",
     "lossOfControl": false,
-    "note": "Reprise d'oxycodone 20 mg achetée à un ancien collègue, jusqu'à 3 comprimés par jour en plus de la méthadone ; arrêt le 18/09 (boîte finie, peur en conduisant) ; urines du 22/09 positives.",
+    "note": "Reprise d'oxycodone (une boîte et demie de comprimés à 20 mg d'un ancien collègue), jusqu'à 3 cp/j en plus de la méthadone ; urines du 22/09 positives ; arrêt le 18/09 (boîte finie, peur en conduisant).",
     "observationIds": [
      "historique:o53",
+     "historique:o52",
      "historique:o26"
     ],
     "tellings": [
      {
       "start": "2020-09",
       "end": "2020-09-18",
-      "note": "Reprise d'oxycodone 20 mg achetée à un ancien collègue, jusqu'à 3 comprimés par jour en plus de la méthadone ; arrêt le 18/09 (boîte finie, peur en conduisant) ; urines du 22/09 positives.",
+      "note": "Reprise d'oxycodone (une boîte et demie de comprimés à 20 mg d'un ancien collègue), jusqu'à 3 cp/j en plus de la méthadone ; urines du 22/09 positives ; arrêt le 18/09 (boîte finie, peur en conduisant).",
       "observationIds": [
-       "historique:o53"
+       "historique:o53",
+       "historique:o52"
       ]
      },
      {
@@ -3064,14 +3607,14 @@
     ]
    },
    {
-    "id": "e43",
-    "trackId": "t1",
+    "id": "e64",
+    "trackId": "t51",
     "start": "2021-12-10",
     "end": "2021-12-11",
     "ongoing": false,
     "mode": "sevrage",
     "lossOfControl": false,
-    "note": "Syndrome de sevrage sévère (vomissements, diarrhée, tachycardie 120, agitation) après 48 h sans méthadone non prescrite à l'hospitalisation ; reprise le 10/12 au soir, amélioration en 24 h.",
+    "note": "Sevrage sévère de méthadone à l'hôpital (non prescrite à l'entrée le 08/12, aucune prise pendant 48 h) : vomissements, diarrhée, sueurs, tachycardie 120, agitation ; amélioration en 24 h après reprise le 10/12 au soir.",
     "observationIds": [
      "historique:o44",
      "historique:o43",
@@ -3081,7 +3624,7 @@
      {
       "start": "2021-12-10",
       "end": "2021-12-11",
-      "note": "Syndrome de sevrage sévère (vomissements, diarrhée, tachycardie 120, agitation) après 48 h sans méthadone non prescrite à l'hospitalisation ; reprise le 10/12 au soir, amélioration en 24 h.",
+      "note": "Sevrage sévère de méthadone à l'hôpital (non prescrite à l'entrée le 08/12, aucune prise pendant 48 h) : vomissements, diarrhée, sueurs, tachycardie 120, agitation ; amélioration en 24 h après reprise le 10/12 au soir.",
       "observationIds": [
        "historique:o44",
        "historique:o43"
@@ -3090,7 +3633,7 @@
      {
       "start": "2021-12",
       "end": null,
-      "note": "Syndrome de sevrage sévère en décembre 2021 (méthadone omise lors d'un séjour en pneumologie).",
+      "note": "Syndrome de sevrage sévère en décembre 2021, méthadone omise lors de l'hospitalisation en pneumologie.",
       "observationIds": [
        "historique:o26"
       ]
@@ -3098,130 +3641,95 @@
     ]
    },
    {
-    "id": "e44",
-    "trackId": "t1",
+    "id": "e65",
+    "trackId": "t51",
     "start": "2022-05-21",
-    "end": null,
+    "end": "2022-05-24",
     "ongoing": false,
     "mode": "intoxication",
     "lossOfControl": false,
-    "note": "Surdosage : retrouvé inconscient, bradypnée 6/min, myosis, SpO2 70 %, naloxone (perfusion 18 h) ; méthadone à taux élevé, flacon de la semaine moins plein que prévu ; pas d'intention suicidaire retenue.",
+    "note": "Intoxication avec détresse respiratoire (bradypnée 6/min, myosis, SpO2 70 %) : méthadone à taux élevé, flacon pris coupé en deux « pour dormir », avec prégabaline et alcool ; naloxone SMUR puis perfusion 18 h ; pas de geste suicidaire retenu.",
     "observationIds": [
      "historique:o39",
      "historique:o37",
      "historique:o26",
-     "historique:o27",
-     "historique:o25",
      "historique:o11",
      "historique:o9"
-    ]
-   },
-   {
-    "id": "e45",
-    "trackId": "t32",
-    "start": "2019",
-    "end": "2021",
-    "ongoing": false,
-    "mode": "usage",
-    "lossOfControl": true,
-    "note": "Mésusage : 600 à 900 mg/j (jusqu'à 6 gélules de 150 mg certains soirs) au lieu de 300 mg prescrits, boîtes achetées ou anciennes ordonnances ; découvert en 09/2021 ; décroissance à 375 mg/j.",
-    "observationIds": [
-     "historique:o46",
-     "historique:o45",
-     "historique:o43",
-     "historique:o34",
-     "historique:o26",
-     "historique:o19"
     ],
     "tellings": [
      {
-      "start": "2019",
-      "end": null,
-      "note": "Mésusage : 600 à 900 mg/j (jusqu'à 6 gélules de 150 mg certains soirs) au lieu de 300 mg prescrits, boîtes achetées ou anciennes ordonnances ; découvert en 09/2021 ; décroissance à 375 mg/j.",
+      "start": "2022-05-21",
+      "end": "2022-05-24",
+      "note": "Intoxication avec détresse respiratoire (bradypnée 6/min, myosis, SpO2 70 %) : méthadone à taux élevé, flacon pris coupé en deux « pour dormir », avec prégabaline et alcool ; naloxone SMUR puis perfusion 18 h ; pas de geste suicidaire retenu.",
       "observationIds": [
-       "historique:o46",
-       "historique:o45",
-       "historique:o43"
+       "historique:o39"
       ]
      },
      {
-      "start": "2019",
-      "end": "2021",
-      "note": "Mésusage de prégabaline 600-900 mg/j de 2019 à 2021 (\"défoncé au Lyrica\"), puis décroissance.",
+      "start": "2022-05-21",
+      "end": null,
+      "note": "Surdose accidentelle le 21/05/2022 : méthadone fractionnée + prégabaline + oxazépam + alcool ; trouvé par un voisin, réanimation. N'avait pas compris le risque de l'association.",
       "observationIds": [
+       "historique:o37",
        "historique:o26",
-       "historique:o34",
-       "historique:o19"
+       "historique:o11",
+       "historique:o9"
       ]
      }
     ]
    },
    {
-    "id": "e46",
-    "trackId": "t32",
-    "start": "2022-05-21",
-    "end": null,
-    "ongoing": false,
-    "mode": "intoxication",
-    "lossOfControl": false,
-    "note": "Prégabaline dans les toxiques à l'admission ; plaquette de Lyrica presque vide retrouvée ; « quelques » Lyrica le soir.",
-    "observationIds": [
-     "historique:o39"
-    ]
-   },
-   {
-    "id": "e47",
-    "trackId": "t33",
-    "start": "2020-06-09",
-    "end": null,
+    "id": "e66",
+    "trackId": "t52",
+    "start": "2019",
+    "end": "2021",
     "ongoing": false,
     "mode": "usage",
     "lossOfControl": false,
-    "note": "BZD positives aux urines du 09/06/2020 (oxazépam prescrit).",
+    "note": "Mésusage : 600 à 900 mg/j « depuis au moins deux ans » (soit depuis 2019) au lieu de 300 mg prescrits, boîtes achetées sur un parking ou anciennes ordonnances du CETD ; jusqu'à 6 gélules de 150 mg certains soirs après l'annonce du cancer ; découvert 09/2021 ; « quelques » Lyrica avant le surdosage de 05/2022.",
     "observationIds": [
-     "historique:o55"
-    ]
-   },
-   {
-    "id": "e48",
-    "trackId": "t33",
-    "start": "2022-05-21",
-    "end": null,
-    "ongoing": false,
-    "mode": "intoxication",
-    "lossOfControl": false,
-    "note": "Oxazépam retrouvé dans les toxiques lors de l'admission en réanimation.",
-    "observationIds": [
-     "historique:o39"
-    ]
-   },
-   {
-    "id": "e54",
-    "trackId": "t10",
-    "start": "2019-06",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "80 mg/j en 03/2020, majorée à 100 mg/j le 16/06/2020 ; délivrance 14 j puis 7 j (09/2020), à nouveau 14 j (11/2020).",
-    "observationIds": [
-     "historique:o56",
-     "historique:o55",
-     "historique:o53",
-     "historique:o52",
+     "historique:o46",
      "historique:o45",
-     "historique:o11",
-     "historique:o9",
-     "historique:o8",
-     "historique:o5",
-     "historique:o3",
-     "historique:o2",
-     "historique:o1"
+     "historique:o39",
+     "historique:o37",
+     "historique:o34",
+     "historique:o26",
+     "historique:o11"
+    ],
+    "tellings": [
+     {
+      "start": "2019",
+      "end": null,
+      "note": "Mésusage : 600 à 900 mg/j « depuis au moins deux ans » (soit depuis 2019) au lieu de 300 mg prescrits, boîtes achetées sur un parking ou anciennes ordonnances du CETD ; jusqu'à 6 gélules de 150 mg certains soirs après l'annonce du cancer ; découvert 09/2021 ; « quelques » Lyrica avant le surdosage de 05/2022.",
+      "observationIds": [
+       "historique:o46",
+       "historique:o45",
+       "historique:o39"
+      ]
+     },
+     {
+      "start": "2019",
+      "end": "2021",
+      "note": "Mésusage de prégabaline à 600-900 mg/j de 2019 à 2021 ; « défoncé au Lyrica » pendant la maladie de l'épouse ; encore 2 ou 3 prises pour dormir en 2022.",
+      "observationIds": [
+       "historique:o26",
+       "historique:o34",
+       "historique:o37"
+      ]
+     },
+     {
+      "start": null,
+      "end": null,
+      "note": "Prégabaline mésusée, arrêtée en 2023.",
+      "observationIds": [
+       "historique:o11"
+      ]
+     }
     ]
    },
    {
-    "id": "e56",
-    "trackId": "t35",
+    "id": "e74",
+    "trackId": "t54",
     "start": "2020-11",
     "end": null,
     "ongoing": true,
@@ -3233,49 +3741,475 @@
     ]
    },
    {
-    "id": "e57",
-    "trackId": "t36",
-    "start": "2014-04-03",
+    "id": "e75",
+    "trackId": "t55",
+    "start": "2021-12-08",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Pour l'exacerbation de BPCO ; encore en cours à la sortie (17/12/2021).",
+    "observationIds": [
+     "historique:o43"
+    ]
+   },
+   {
+    "id": "e76",
+    "trackId": "t56",
+    "start": "1990",
+    "end": "1999",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "A « pensé à partir » plusieurs fois dans les années 90 ; pas d'idées suicidaires actuelles en 2021 ; aucune en 2021-11 et 2022-04.",
+    "observationIds": [
+     "historique:o48"
+    ]
+   },
+   {
+    "id": "e77",
+    "trackId": "t57",
+    "start": "1994-08",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Suivi au centre d'évaluation et de traitement de la douleur depuis le 03/04/2014 ; rééducation et TENS proposés, peu suivis ; avis CETD de 06/2020 ; courrier de récapitulatif du 22/02/2021.",
+    "note": "Culpabilité, silence à la maison ; deuil central selon la psychologue, y compris dans la douleur (« j'ai mal au dos depuis 1994 »).",
     "observationIds": [
-     "courrier:o1",
-     "historique:o55",
-     "historique:o50"
+     "historique:o48",
+     "historique:o40",
+     "historique:o37",
+     "historique:o34",
+     "historique:o33",
+     "historique:o26",
+     "historique:o11",
+     "historique:o9"
+    ],
+    "tellings": [
+     {
+      "start": "1994-08",
+      "end": null,
+      "note": "Culpabilité, silence à la maison ; deuil central selon la psychologue, y compris dans la douleur (« j'ai mal au dos depuis 1994 »).",
+      "observationIds": [
+       "historique:o48",
+       "historique:o40"
+      ]
+     },
+     {
+      "start": "1994",
+      "end": null,
+      "note": "Décès de son fils noyé à 4 ans en 1994, révélé en 2021 seulement ; jamais retourné sur la tombe avant août 2022.",
+      "observationIds": [
+       "historique:o26",
+       "historique:o34",
+       "historique:o37",
+       "historique:o33"
+      ]
+     },
+     {
+      "start": "1994-08",
+      "end": null,
+      "note": "Deuil traumatique du fils, culpabilité toujours présente mais « elle ne commande plus » ; travaillé en psychothérapie. « J'avais mal depuis 1994, le dos m'a donné une raison ».",
+      "observationIds": [
+       "historique:o11",
+       "historique:o9"
+      ]
+     }
     ]
    },
    {
-    "id": "e58",
-    "trackId": "t37",
+    "id": "e78",
+    "trackId": "t58",
+    "start": "2021-09",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Effondré à l'annonce du cancer de l'épouse (09/2021), thymie basse, pleurs, sommeil 4 h (11/2021) ; après le décès sommeil haché, anorexie, ruminations ; antidépresseur refusé en 04/2022.",
+    "observationIds": [
+     "historique:o46",
+     "historique:o45",
+     "historique:o40"
+    ]
+   },
+   {
+    "id": "e79",
+    "trackId": "t59",
+    "start": "2013-10-14",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Avec recul du mur postérieur ; arthrodèse T12-L2 le 16/10/2013 au CHU.",
+    "observationIds": [
+     "courrier:o1",
+     "historique:o26",
+     "historique:o19",
+     "historique:o11"
+    ],
+    "tellings": [
+     {
+      "start": "2013-10-14",
+      "end": null,
+      "note": "Avec recul du mur postérieur ; arthrodèse T12-L2 le 16/10/2013 au CHU.",
+      "observationIds": [
+       "courrier:o1"
+      ]
+     },
+     {
+      "start": "2013-10-14",
+      "end": null,
+      "note": "Chute de 4 m ; fracture de L1 ; arthrodèse T12-L2 le 16/10/2013, reprise chirurgicale le 09/06/2015.",
+      "observationIds": [
+       "historique:o26",
+       "historique:o19"
+      ]
+     },
+     {
+      "start": "2013-10-14",
+      "end": null,
+      "note": "Fracture de L1 lors de la chute, arthrodèse ensuite.",
+      "observationIds": [
+       "historique:o11"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e80",
+    "trackId": "t60",
+    "start": "2015-06-09",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Extension de l'arthrodèse à L3.",
+    "observationIds": [
+     "courrier:o1"
+    ]
+   },
+   {
+    "id": "e81",
+    "trackId": "t61",
+    "start": "2013-10",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Composante neuropathique (DN4 5/10) ; douleur 6/10 (03/2020), 7/10 (06/2020), 6/10 ensuite ; le patient situe lui-même le début de son mal de dos en 1994.",
+    "observationIds": [
+     "historique:o56",
+     "historique:o55",
+     "historique:o52",
+     "courrier:o1",
+     "historique:o50",
+     "historique:o48",
+     "historique:o37",
+     "historique:o31",
+     "historique:o26",
+     "historique:o19",
+     "historique:o15",
+     "historique:o11",
+     "historique:o9",
+     "historique:o5",
+     "historique:o3",
+     "historique:o1"
+    ],
+    "tellings": [
+     {
+      "start": "2013-10",
+      "end": null,
+      "note": "Composante neuropathique (DN4 5/10) ; douleur 6/10 (03/2020), 7/10 (06/2020), 6/10 ensuite ; le patient situe lui-même le début de son mal de dos en 1994.",
+      "observationIds": [
+       "historique:o56",
+       "historique:o55",
+       "historique:o52",
+       "courrier:o1",
+       "historique:o50",
+       "historique:o48"
+      ]
+     },
+     {
+      "start": "2013-10",
+      "end": null,
+      "note": "Lombalgies et radiculalgie droite chroniques, 5-6/10 puis 5/10 ; 6/10 en 2022.",
+      "observationIds": [
+       "historique:o26",
+       "historique:o37",
+       "historique:o31",
+       "historique:o19",
+       "historique:o15"
+      ]
+     },
+     {
+      "start": null,
+      "end": null,
+      "note": "Douleur 4-5/10 ; 4/10 en 04/2025 et 10/2026, 5/10 en 03 et 06/2026 ; « le dos fait toujours mal ».",
+      "observationIds": [
+       "historique:o11",
+       "historique:o9",
+       "historique:o5",
+       "historique:o3",
+       "historique:o1"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e83",
+    "trackId": "t62",
+    "start": "2020-06-16",
+    "end": "2020-11-17",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Somnolence dans la journée, endormissement au feu rouge ; moins marquée sous appareillage.",
+    "observationIds": [
+     "historique:o55",
+     "historique:o52"
+    ]
+   },
+   {
+    "id": "e84",
+    "trackId": "t63",
+    "start": "2020-10-13",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Polygraphie du 13/10/2020 : IAH 38/h, désaturations jusqu'à 81 % ; appareillé le 05/11/2020, toléré « à moitié ».",
+    "observationIds": [
+     "historique:o52",
+     "historique:o37",
+     "historique:o36",
+     "historique:o32",
+     "historique:o26",
+     "historique:o25",
+     "historique:o11",
+     "historique:o8"
+    ],
+    "tellings": [
+     {
+      "start": "2020-10-13",
+      "end": null,
+      "note": "Polygraphie du 13/10/2020 : IAH 38/h, désaturations jusqu'à 81 % ; appareillé le 05/11/2020, toléré « à moitié ».",
+      "observationIds": [
+       "historique:o52"
+      ]
+     },
+     {
+      "start": "2020",
+      "end": null,
+      "note": "SAOS sévère appareillé en 2020 ; appareil non mis depuis l'hiver 2022-23 (« le tuyau me réveille »), SpO2 nocturne 85 % sans appareil en 2022.",
+      "observationIds": [
+       "historique:o26",
+       "historique:o37",
+       "historique:o36",
+       "historique:o32",
+       "historique:o25"
+      ]
+     },
+     {
+      "start": null,
+      "end": null,
+      "note": "SAOS sévère ; nouvelle polygraphie 02/09/2025 (IAH 41).",
+      "observationIds": [
+       "historique:o11",
+       "historique:o8"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e85",
+    "trackId": "t64",
+    "start": "2020-11",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "EFR : trouble ventilatoire obstructif, VEMS 61 % ; toux et dyspnée.",
+    "observationIds": [
+     "historique:o55",
+     "historique:o52",
+     "historique:o26",
+     "historique:o19",
+     "historique:o11",
+     "historique:o5",
+     "historique:o1"
+    ],
+    "tellings": [
+     {
+      "start": "2020-11",
+      "end": null,
+      "note": "EFR : trouble ventilatoire obstructif, VEMS 61 % ; toux et dyspnée.",
+      "observationIds": [
+       "historique:o55",
+       "historique:o52"
+      ]
+     },
+     {
+      "start": "2021-12",
+      "end": null,
+      "note": "BPCO GOLD 2 ; exacerbation hospitalisée en décembre 2021 ; début de la maladie non précisé.",
+      "observationIds": [
+       "historique:o26",
+       "historique:o19"
+      ]
+     },
+     {
+      "start": null,
+      "end": null,
+      "note": "Suivi pneumologique ; exacerbation début 02/2026 ; essoufflé en 03/2026, amélioré après la réadaptation (10/2026).",
+      "observationIds": [
+       "historique:o11",
+       "historique:o5",
+       "historique:o1"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e86",
+    "trackId": "t65",
+    "start": "2021-06",
+    "end": "2021-08",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Deux chutes à la maison cet été, attribuées au dos, liées à la prégabaline.",
+    "observationIds": [
+     "historique:o46"
+    ]
+   },
+   {
+    "id": "e87",
+    "trackId": "t66",
+    "start": "2021-10-26",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Depuis 2 semaines au 09/11/2021.",
+    "observationIds": [
+     "historique:o45"
+    ]
+   },
+   {
+    "id": "e88",
+    "trackId": "t67",
+    "start": "2021-12-08",
+    "end": "2021-12-17",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Surinfection bronchique, SpO2 84 % aux urgences ; sortie le 17/12 ; méthadone non prescrite à l'entrée.",
+    "observationIds": [
+     "historique:o44",
+     "historique:o43"
+    ]
+   },
+   {
+    "id": "e89",
+    "trackId": "t68",
+    "start": "2022-05-21",
+    "end": "2022-05-24",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Retrouvé inconscient par son voisin, réanimation du CHU, sortie le 24/05.",
+    "observationIds": [
+     "historique:o39"
+    ]
+   },
+   {
+    "id": "e91",
+    "trackId": "t70",
     "start": "1999-03",
     "end": "1999-03",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "3 semaines de clinique à Lormont, « pour ne pas perdre » son épouse et sa fille.",
+    "note": "3 semaines, Lormont.",
     "observationIds": [
      "courrier:o1",
      "historique:o50",
-     "historique:o48"
+     "historique:o26"
+    ],
+    "tellings": [
+     {
+      "start": "1999-03",
+      "end": "1999-03",
+      "note": "3 semaines, Lormont.",
+      "observationIds": [
+       "courrier:o1",
+       "historique:o50"
+      ]
+     },
+     {
+      "start": "1999",
+      "end": null,
+      "note": "Sevrage hospitalier de l'alcool en 1999.",
+      "observationIds": [
+       "historique:o26"
+      ]
+     }
     ]
    },
    {
-    "id": "e60",
-    "trackId": "t39",
+    "id": "e93",
+    "trackId": "t72",
+    "start": "2020-06",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Proposés à plusieurs reprises (kiné relancée 09/2020), peu suivis.",
+    "observationIds": [
+     "historique:o55",
+     "historique:o53",
+     "courrier:o1"
+    ]
+   },
+   {
+    "id": "e94",
+    "trackId": "t73",
+    "start": "2020-11-17",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Pas prêt, à réévaluer.",
+    "observationIds": [
+     "historique:o52"
+    ]
+   },
+   {
+    "id": "e95",
+    "trackId": "t74",
+    "start": "2021-06-22",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Information sur méthadone et conduite ; renonce au poids lourd.",
+    "observationIds": [
+     "historique:o47"
+    ]
+   },
+   {
+    "id": "e96",
+    "trackId": "t75",
     "start": "2021-04-13",
     "end": "2025-07-01",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Entretiens toutes les 3 semaines (douleur, perte de rôle, deuil du fils) ; rapprochement des rendez-vous demandé en 04/2022.",
+    "note": "Proposé le 02/03/2021 ; entretiens toutes les 3 semaines autour de la douleur, de la perte du rôle, du deuil et de l'histoire familiale.",
     "observationIds": [
      "historique:o50",
      "historique:o49",
      "historique:o48",
-     "historique:o40",
      "historique:o35",
      "historique:o34",
      "historique:o26",
@@ -3288,30 +4222,29 @@
      {
       "start": "2021-04-13",
       "end": null,
-      "note": "Entretiens toutes les 3 semaines (douleur, perte de rôle, deuil du fils) ; rapprochement des rendez-vous demandé en 04/2022.",
+      "note": "Proposé le 02/03/2021 ; entretiens toutes les 3 semaines autour de la douleur, de la perte du rôle, du deuil et de l'histoire familiale.",
       "observationIds": [
        "historique:o50",
        "historique:o49",
-       "historique:o48",
-       "historique:o40"
+       "historique:o48"
       ]
      },
      {
-      "start": "2022-06-07",
+      "start": "2022-06",
       "end": null,
-      "note": "Psychologue toutes les 2 semaines puis suivi poursuivi (entretiens de juillet 2022, novembre 2023, mars 2024) ; travail sur le deuil et les moments à risque.",
+      "note": "Suivi psychologique toutes les 2 semaines après la surdose, travail sur le deuil et les rituels.",
       "observationIds": [
        "historique:o35",
        "historique:o34",
-       "historique:o26",
        "historique:o23",
-       "historique:o20"
+       "historique:o20",
+       "historique:o26"
       ]
      },
      {
       "start": "2021-04-13",
       "end": "2025-07-01",
-      "note": "Environ 45 séances, centrée sur le deuil traumatique ; hebdomadaire au moment des deuils, espacée à une fois par mois en 2025 ; fin de suivi d'un commun accord, reprise possible à sa demande.",
+      "note": "Environ 45 séances ; hebdomadaire au moment des deuils, puis mensuel ; centré sur le deuil traumatique du fils ; fin d'un commun accord, reprise possible à sa demande.",
       "observationIds": [
        "historique:o11",
        "historique:o9"
@@ -3320,67 +4253,18 @@
     ]
    },
    {
-    "id": "e61",
-    "trackId": "t40",
-    "start": "2021-12-08",
-    "end": "2021-12-17",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Exacerbation de BPCO ; méthadone non prescrite à l'entrée, sevrage sévère ; sortie sous corticoïdes et antibiotiques.",
-    "observationIds": [
-     "historique:o44",
-     "historique:o43"
-    ]
-   },
-   {
-    "id": "e62",
-    "trackId": "t41",
-    "start": "2022-05-21",
-    "end": "2022-05-24",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Surdosage mixte, pneumopathie d'inhalation traitée ; sortie de réanimation le 24/05/2022.",
-    "observationIds": [
-     "historique:o39",
-     "historique:o37",
-     "historique:o26"
-    ],
-    "tellings": [
-     {
-      "start": "2022-05-21",
-      "end": "2022-05-24",
-      "note": "Surdosage mixte, pneumopathie d'inhalation traitée ; sortie de réanimation le 24/05/2022.",
-      "observationIds": [
-       "historique:o39"
-      ]
-     },
-     {
-      "start": "2022-05-21",
-      "end": "2022-05-24",
-      "note": "Réanimation après la surdose accidentelle du 21/05/2022.",
-      "observationIds": [
-       "historique:o37",
-       "historique:o26"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e63",
-    "trackId": "t42",
+    "id": "e97",
+    "trackId": "t76",
     "start": "2022-05-24",
     "end": "2022-06-03",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Transfert dès le 24/05/2022 après la réanimation ; sa fille est en contact avec l'équipe avec l'accord du patient.",
+    "note": "Transfert depuis la réanimation ; fille associée, kit de naloxone à proposer.",
     "observationIds": [
      "historique:o39",
      "historique:o38",
      "historique:o37",
-     "historique:o36",
      "historique:o35",
      "historique:o26"
     ],
@@ -3388,7 +4272,7 @@
      {
       "start": "2022-05-24",
       "end": null,
-      "note": "Transfert dès le 24/05/2022 après la réanimation ; sa fille est en contact avec l'équipe avec l'accord du patient.",
+      "note": "Transfert depuis la réanimation ; fille associée, kit de naloxone à proposer.",
       "observationIds": [
        "historique:o39",
        "historique:o38"
@@ -3397,10 +4281,9 @@
      {
       "start": "2022-05-24",
       "end": "2022-06-03",
-      "note": "Hospitalisation en unité d'addictologie du 24/05 au 03/06/2022 (10 jours), ventilation nocturne reprise dans le service.",
+      "note": "Hospitalisation de 10 jours en addictologie après la réanimation.",
       "observationIds": [
        "historique:o37",
-       "historique:o36",
        "historique:o35",
        "historique:o26"
       ]
@@ -3408,410 +4291,27 @@
     ]
    },
    {
-    "id": "e67",
-    "trackId": "t21",
-    "start": "2020-10-13",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "SAOS sévère (IAH 38/h, désaturations jusqu'à 81 %) à la polygraphie du 13/10/2020 ; somnolence diurne dès 06/2020 ; appareillé le 05/11, supporté « à moitié » ; conduite limitée au matin.",
-    "observationIds": [
-     "historique:o55",
-     "historique:o53",
-     "historique:o52",
-     "historique:o37",
-     "historique:o36",
-     "historique:o26",
-     "historique:o25",
-     "historique:o11",
-     "historique:o8"
-    ],
-    "tellings": [
-     {
-      "start": "2020-10-13",
-      "end": null,
-      "note": "SAOS sévère (IAH 38/h, désaturations jusqu'à 81 %) à la polygraphie du 13/10/2020 ; somnolence diurne dès 06/2020 ; appareillé le 05/11, supporté « à moitié » ; conduite limitée au matin.",
-      "observationIds": [
-       "historique:o55",
-       "historique:o52",
-       "historique:o53"
-      ]
-     },
-     {
-      "start": "2020",
-      "end": null,
-      "note": "SAOS sévère appareillé en 2020 ; SpO2 nocturne 85 % sans appareil en 2022 ; appareil plus mis depuis l'hiver 2022-2023 (\"le tuyau me réveille\").",
-      "observationIds": [
-       "historique:o37",
-       "historique:o36",
-       "historique:o26",
-       "historique:o25"
-      ]
-     },
-     {
-      "start": null,
-      "end": null,
-      "note": "SAOS sévère, nouvelle polygraphie IAH 41 le 02/09/2025.",
-      "observationIds": [
-       "historique:o11",
-       "historique:o8"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e68",
-    "trackId": "t20",
-    "start": "2020-11",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Trouble ventilatoire obstructif, VEMS 61 % aux EFR ; toux et dyspnée majorées en 11/2021.",
-    "observationIds": [
-     "historique:o52",
-     "historique:o45",
-     "historique:o26",
-     "historique:o19",
-     "historique:o11",
-     "historique:o5",
-     "historique:o1"
-    ],
-    "tellings": [
-     {
-      "start": "2020-11",
-      "end": null,
-      "note": "Trouble ventilatoire obstructif, VEMS 61 % aux EFR ; toux et dyspnée majorées en 11/2021.",
-      "observationIds": [
-       "historique:o52",
-       "historique:o45"
-      ]
-     },
-     {
-      "start": "2021-12",
-      "end": null,
-      "note": "BPCO GOLD 2, exacerbation hospitalisée en décembre 2021 (en pneumologie).",
-      "observationIds": [
-       "historique:o26",
-       "historique:o19"
-      ]
-     },
-     {
-      "start": null,
-      "end": null,
-      "note": "BPCO GOLD 2 ; nouvelle demande de rendez-vous en pneumologie en 04/2025.",
-      "observationIds": [
-       "historique:o11",
-       "historique:o5",
-       "historique:o1"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e69",
-    "trackId": "t47",
-    "start": "2021",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Deux chutes à la maison « cet été », avec somnolence, attribuées au dos par le patient.",
-    "observationIds": [
-     "historique:o46"
-    ]
-   },
-   {
-    "id": "e70",
-    "trackId": "t48",
-    "start": "2021-12-08",
-    "end": "2021-12-17",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "SpO2 84 % aux urgences ; hospitalisation en pneumologie.",
-    "observationIds": [
-     "historique:o44",
-     "historique:o43"
-    ]
-   },
-   {
-    "id": "e71",
-    "trackId": "t49",
-    "start": "2022-05-21",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Traitée en réanimation après le surdosage.",
-    "observationIds": [
-     "historique:o39"
-    ]
-   },
-   {
-    "id": "e72",
-    "trackId": "t50",
-    "start": "1994-08",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Fils noyé à 4 ans, culpabilité depuis 27 ans, jamais évoqué aux médecins ; deuil jugé central par le psychologue ; ruminations en 04/2022.",
-    "observationIds": [
-     "historique:o48",
-     "historique:o40",
-     "historique:o37",
-     "historique:o34",
-     "historique:o33",
-     "historique:o26",
-     "historique:o11",
-     "historique:o9"
-    ],
-    "tellings": [
-     {
-      "start": "1994-08",
-      "end": null,
-      "note": "Fils noyé à 4 ans, culpabilité depuis 27 ans, jamais évoqué aux médecins ; deuil jugé central par le psychologue ; ruminations en 04/2022.",
-      "observationIds": [
-       "historique:o48",
-       "historique:o40"
-      ]
-     },
-     {
-      "start": "1994",
-      "end": null,
-      "note": "Deuil traumatique ancien après la mort de son fils noyé à 4 ans, révélé en 2021 seulement ; jamais retourné sur la tombe avant août 2022.",
-      "observationIds": [
-       "historique:o37",
-       "historique:o34",
-       "historique:o26",
-       "historique:o33"
-      ]
-     },
-     {
-      "start": "1994-08",
-      "end": null,
-      "note": "Deuil traumatique de son fils (noyé en août 1994), jamais évoqué auparavant, puis deuil de son épouse en 2022 ; culpabilité encore présente mais « ne commande plus ».",
-      "observationIds": [
-       "historique:o11",
-       "historique:o9"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e73",
-    "trackId": "t51",
-    "start": "1990",
-    "end": "1999",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Dit avoir « pensé à partir » plusieurs fois dans les années 90 ; pas d'idées suicidaires actuelles en 06/2021, ni en 11/2021 et 04/2022.",
-    "observationIds": [
-     "historique:o48",
-     "historique:o45",
-     "historique:o40"
-    ]
-   },
-   {
-    "id": "e74",
-    "trackId": "t52",
-    "start": "2021-11-09",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Thymie basse, pleurs, sommeil de 4 h, fatigue ; antidépresseur proposé en 04/2022, refusé.",
-    "observationIds": [
-     "historique:o45",
-     "historique:o40"
-    ]
-   },
-   {
-    "id": "e75",
-    "trackId": "t53",
-    "start": "2022-03-12",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Vit seul, sommeil très haché, mange peu, pleurs ; un mois après le décès.",
-    "observationIds": [
-     "historique:o41",
-     "historique:o40"
-    ]
-   },
-   {
-    "id": "e76",
-    "trackId": "t54",
-    "start": "1994-08",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Fils né en 1990, mort noyé à 4 ans dans un lac de baignade, alors qu'il était à la buvette avec des amis.",
-    "observationIds": [
-     "historique:o48",
-     "historique:o34",
-     "historique:o33",
-     "historique:o26",
-     "historique:o11",
-     "historique:o9"
-    ],
-    "tellings": [
-     {
-      "start": "1994-08",
-      "end": null,
-      "note": "Fils né en 1990, mort noyé à 4 ans dans un lac de baignade, alors qu'il était à la buvette avec des amis.",
-      "observationIds": [
-       "historique:o48"
-      ]
-     },
-     {
-      "start": "1994",
-      "end": null,
-      "note": "Fils mort noyé en 1994 à 4 ans.",
-      "observationIds": [
-       "historique:o26",
-       "historique:o34",
-       "historique:o33"
-      ]
-     },
-     {
-      "start": "1994-08",
-      "end": null,
-      "note": "Fils mort noyé en août 1994 ; il était absent au moment de l'accident.",
-      "observationIds": [
-       "historique:o11",
-       "historique:o9"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e77",
-    "trackId": "t55",
-    "start": "1998",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Suspension de 6 mois, amende et passage devant la commission médicale ; non mentionné à l'accueil.",
-    "observationIds": [
-     "historique:o47"
-    ]
-   },
-   {
-    "id": "e80",
-    "trackId": "t58",
-    "start": "2021-06-22",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Renonce au renouvellement de la catégorie poids lourd après information sur la méthadone et les apnées ; conduite déconseillée dès 06/2020 en raison de la somnolence.",
-    "observationIds": [
-     "historique:o47",
-     "historique:o55"
-    ]
-   },
-   {
-    "id": "e81",
-    "trackId": "t59",
-    "start": "2021-08",
-    "end": "2022-03-12",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Cancer avec métastases hépatiques annoncé fin août 2021, chimiothérapie puis soins palliatifs à domicile (HAD) ; il l'accompagne.",
-    "observationIds": [
-     "historique:o46",
-     "historique:o45",
-     "historique:o43",
-     "historique:o42"
-    ]
-   },
-   {
-    "id": "e82",
-    "trackId": "t60",
-    "start": "2022-03-12",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Décédée à domicile le samedi 12/03/2022 ; obsèques à Cenon ; sa fille est présente et passe le week-end ; il vit seul.",
-    "observationIds": [
-     "historique:o41",
-     "historique:o40",
-     "historique:o37",
-     "historique:o34",
-     "historique:o26",
-     "historique:o11",
-     "historique:o9"
-    ],
-    "tellings": [
-     {
-      "start": "2022-03-12",
-      "end": null,
-      "note": "Décédée à domicile le samedi 12/03/2022 ; obsèques à Cenon ; sa fille est présente et passe le week-end ; il vit seul.",
-      "observationIds": [
-       "historique:o41",
-       "historique:o40",
-       "historique:o26",
-       "historique:o37",
-       "historique:o34"
-      ]
-     },
-     {
-      "start": "2022-03-12",
-      "end": null,
-      "note": "Veuf depuis le 12/03/2022.",
-      "observationIds": [
-       "historique:o11",
-       "historique:o9"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e86",
-    "trackId": "t3",
-    "start": "2022-05-31",
-    "end": null,
-    "ongoing": false,
-    "mode": "craving",
-    "lossOfControl": false,
-    "note": "Craving le soir (\"le silence de la maison\"), pas de signe de sevrage à l'entrée dans l'unité.",
-    "observationIds": [
-     "historique:o37"
-    ]
-   },
-   {
-    "id": "e87",
-    "trackId": "t3",
+    "id": "e102",
+    "trackId": "t5",
     "start": "2022-07",
     "end": "2022-09-12",
     "ongoing": false,
     "mode": "rechute",
     "lossOfControl": false,
-    "note": "Reprise de l'alcool depuis fin juillet \"à petites doses\" : 3 à 5 verres de vin le soir, parfois plus le dimanche ; éthylotest positif à 0,22 mg/L le 13/09.",
+    "note": "Reprise fin juillet 2022 : 3 à 5 verres de vin le soir, éthylotest positif le 13/09 (0,22 mg/L) ; veut arrêter « avant que ça recommence comme en 1994 ».",
     "observationIds": [
-     "historique:o33",
-     "historique:o31",
-     "historique:o26"
+     "historique:o33"
     ]
    },
    {
-    "id": "e88",
-    "trackId": "t3",
+    "id": "e103",
+    "trackId": "t5",
     "start": "2022-09-12",
     "end": "2022-09-23",
     "ongoing": false,
     "mode": "sevrage",
     "lossOfControl": false,
-    "note": "Sevrage ambulatoire de l'alcool du 12/09 au 23/09, sans signe de sevrage ; abstinent depuis.",
+    "note": "Sevrage ambulatoire du 12/09 au 23/09, sans signe de sevrage ; abstinence maintenue ensuite (éthylotest 0, GGT 48 puis 31).",
     "observationIds": [
      "historique:o33",
      "historique:o32",
@@ -3820,27 +4320,54 @@
     ]
    },
    {
-    "id": "e89",
-    "trackId": "t3",
+    "id": "e104",
+    "trackId": "t78",
+    "start": "2022-09-12",
+    "end": "2022-09-27",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Oxazépam majoré à 60 mg/j puis décroissance, thiamine, passages IDE à J1, J3, J7 et dernier passage le 27/09 ; fille présente chaque soir.",
+    "observationIds": [
+     "historique:o33",
+     "historique:o32"
+    ]
+   },
+   {
+    "id": "e105",
+    "trackId": "t5",
+    "start": "2022-11-08",
+    "end": null,
+    "ongoing": false,
+    "mode": "craving",
+    "lossOfControl": false,
+    "note": "Pensées d'alcool le soir (« le soir, toujours ») mais pas de reprise.",
+    "observationIds": [
+     "historique:o31"
+    ]
+   },
+   {
+    "id": "e106",
+    "trackId": "t5",
     "start": "2023-11-07",
     "end": null,
     "ongoing": false,
     "mode": "craving",
     "lossOfControl": false,
-    "note": "Évoque l'envie de \"boire un coup pour tenir\" à l'approche des fêtes.",
+    "note": "Envie de « boire un coup pour tenir » à l'approche des fêtes, sans passage à l'acte.",
     "observationIds": [
      "historique:o23"
     ]
    },
    {
-    "id": "e90",
-    "trackId": "t3",
+    "id": "e107",
+    "trackId": "t5",
     "start": "2023-12-23",
     "end": "2024-01-06",
     "ongoing": false,
     "mode": "rechute",
     "lossOfControl": false,
-    "note": "Rechute pendant les fêtes : 4 à 5 bières par jour, seul, arrêt spontané après une chute sans gravité ; pas d'alcool depuis le 06/01/2024.",
+    "note": "Rechute pendant les fêtes : bouteille de vin offerte par un voisin puis 4 à 5 bières par jour, seul ; arrêt spontané après une chute ; naltrexone proposée et refusée ; abstinent depuis.",
     "observationIds": [
      "historique:o22",
      "historique:o21",
@@ -3849,187 +4376,53 @@
     ]
    },
    {
-    "id": "e92",
-    "trackId": "t61",
+    "id": "e109",
+    "trackId": "t79",
     "start": "2018-07",
     "end": "2018-08",
     "ongoing": false,
     "mode": "usage",
     "lossOfControl": false,
-    "note": "Héroïne fumée 5 ou 6 fois en juillet-août 2018 quand l'oxycodone manquait, jamais injectée ; arrêt à la découverte du second médecin, pas d'usage depuis. Révélé en 2023.",
+    "note": "Héroïne fumée sur papier alu, 5 ou 6 fois, jamais injectée, quand l'oxycodone manquait ; fournie par un neveu de l'épouse ; révélé en 2023, pas de consommation depuis.",
     "observationIds": [
-     "historique:o25",
-     "historique:o24"
-    ]
-   },
-   {
-    "id": "e102",
-    "trackId": "t10",
-    "start": "2019-06",
-    "end": "2019-09",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Rotation vers la méthadone en hospitalisation en juin 2019, 60 mg.",
-    "observationIds": [
-     "historique:o26"
-    ]
-   },
-   {
-    "id": "e103",
-    "trackId": "t10",
-    "start": "2019-09",
-    "end": "2020-06",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Méthadone 80 mg en 09/2019.",
-    "observationIds": [
-     "historique:o26"
-    ]
-   },
-   {
-    "id": "e104",
-    "trackId": "t10",
-    "start": "2020-06",
-    "end": "2022-05-31",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Méthadone 100 mg en 06/2020, prise fractionnée jusqu'à la surdose de mai 2022.",
-    "observationIds": [
-     "historique:o26",
-     "historique:o37"
-    ]
-   },
-   {
-    "id": "e105",
-    "trackId": "t10",
-    "start": "2022-05-31",
-    "end": "2023-04-18",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Méthadone réduite à 80 mg/j en une prise le matin (QTc 451 ms), délivrance à 7 jours.",
-    "observationIds": [
-     "historique:o37",
-     "historique:o35",
-     "historique:o33",
-     "historique:o31",
-     "historique:o28",
-     "historique:o26"
-    ]
-   },
-   {
-    "id": "e106",
-    "trackId": "t10",
-    "start": "2023-04-18",
-    "end": "2024-12-20",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Méthadone réduite à 70 mg/j (QTc 472 ms), bien tolérée, douleur 5/10.",
-    "observationIds": [
-     "historique:o26",
      "historique:o25",
      "historique:o24",
-     "historique:o19",
-     "historique:o18",
-     "historique:o15",
-     "historique:o13"
-    ]
-   },
-   {
-    "id": "e107",
-    "trackId": "t10",
-    "start": "2024-12-20",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Méthadone gélules 60 mg/j à partir du 20/12/2024, à sa demande (\"je veux finir avec moins\"), pas de manque.",
-    "observationIds": [
-     "historique:o13",
-     "historique:o12"
-    ]
-   },
-   {
-    "id": "e108",
-    "trackId": "t62",
-    "start": "2024-06-18",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Passage de la méthadone sirop aux gélules à dose égale (70 mg) le 18/06/2024, stockage sécurisé ; délivrance par la pharmacie des Quais depuis le 05/09/2024.",
-    "observationIds": [
-     "historique:o19",
-     "historique:o18",
-     "historique:o17",
-     "historique:o15",
-     "historique:o14",
      "historique:o11",
-     "historique:o3",
-     "historique:o1"
+     "historique:o9"
     ],
     "tellings": [
      {
-      "start": "2024-06-18",
-      "end": null,
-      "note": "Passage de la méthadone sirop aux gélules à dose égale (70 mg) le 18/06/2024, stockage sécurisé ; délivrance par la pharmacie des Quais depuis le 05/09/2024.",
+      "start": "2018-07",
+      "end": "2018-08",
+      "note": "Héroïne fumée sur papier alu, 5 ou 6 fois, jamais injectée, quand l'oxycodone manquait ; fournie par un neveu de l'épouse ; révélé en 2023, pas de consommation depuis.",
       "observationIds": [
-       "historique:o19",
-       "historique:o18",
-       "historique:o17",
-       "historique:o15",
-       "historique:o14"
+       "historique:o25",
+       "historique:o24"
       ]
      },
      {
-      "start": "2024-06",
-      "end": null,
-      "note": "Forme gélules depuis 06/2024 ; 60 mg depuis 12/2024.",
+      "start": "2018",
+      "end": "2018",
+      "note": "Héroïne fumée brièvement en 2018, dite d'abord uniquement à l'infirmière.",
       "observationIds": [
        "historique:o11",
-       "historique:o3",
-       "historique:o1"
+       "historique:o9"
       ]
      }
     ]
    },
    {
-    "id": "e109",
-    "trackId": "t7",
-    "start": "2019",
-    "end": "2023-02-06",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Prégabaline 300 mg/j strict distribuée en 2022, décroissance à 225 mg/j en octobre 2022 puis 150 et 75 mg/j, arrêt le 06/02/2023.",
-    "observationIds": [
-     "historique:o37",
-     "historique:o35",
-     "historique:o33",
-     "historique:o31",
-     "historique:o28",
-     "historique:o26"
-    ]
-   },
-   {
-    "id": "e110",
-    "trackId": "t63",
+    "id": "e122",
+    "trackId": "t80",
     "start": "2022-05-31",
     "end": "2024-12-17",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Duloxétine 30 mg puis 60 mg (depuis le 03/06/2022), antidépresseur et douleurs neuropathiques ; diminuée à 30 mg en octobre 2024, arrêtée le 17/12/2024.",
+    "note": "Duloxétine 30 mg puis 60 mg (antidépresseur et douleurs neuropathiques) ; 30 mg en octobre 2024, arrêt le 17/12/2024 sans rechute dépressive.",
     "observationIds": [
      "historique:o37",
      "historique:o35",
-     "historique:o33",
-     "historique:o31",
-     "historique:o26",
      "historique:o15",
      "historique:o13",
      "historique:o11"
@@ -4038,13 +4431,10 @@
      {
       "start": "2022-05-31",
       "end": "2024-12-17",
-      "note": "Duloxétine 30 mg puis 60 mg (depuis le 03/06/2022), antidépresseur et douleurs neuropathiques ; diminuée à 30 mg en octobre 2024, arrêtée le 17/12/2024.",
+      "note": "Duloxétine 30 mg puis 60 mg (antidépresseur et douleurs neuropathiques) ; 30 mg en octobre 2024, arrêt le 17/12/2024 sans rechute dépressive.",
       "observationIds": [
        "historique:o37",
        "historique:o35",
-       "historique:o33",
-       "historique:o31",
-       "historique:o26",
        "historique:o15",
        "historique:o13"
       ]
@@ -4060,14 +4450,27 @@
     ]
    },
    {
-    "id": "e111",
-    "trackId": "t64",
+    "id": "e123",
+    "trackId": "t81",
+    "start": "2022-09",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Thiamine 250 mg/j pendant le sevrage ambulatoire de l'alcool.",
+    "observationIds": [
+     "historique:o33"
+    ]
+   },
+   {
+    "id": "e124",
+    "trackId": "t82",
     "start": "2022-05-31",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Kit de naloxone nasale, patient et fille formés, voisin formé ; kit toujours à domicile en 2023.",
+    "note": "Kit de naloxone nasale, patient, fille et voisin formés ; rappelé en 2024.",
     "observationIds": [
      "historique:o37",
      "historique:o35",
@@ -4076,54 +4479,33 @@
     ]
    },
    {
-    "id": "e112",
-    "trackId": "t65",
-    "start": "2022-09",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Thiamine 250 mg/j pour le sevrage ambulatoire de l'alcool.",
-    "observationIds": [
-     "historique:o33"
-    ]
-   },
-   {
-    "id": "e114",
-    "trackId": "t67",
+    "id": "e126",
+    "trackId": "t84",
     "start": "2022-05",
     "end": "2024",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Épisode dépressif caractérisé moyen à sévère, réactionnel au deuil de l'épouse (tristesse, anhédonie, perte de poids de 6 kg, culpabilité, insomnie) ; amélioration sous duloxétine, thymie correcte fin 2024.",
+    "note": "EDC moyen à sévère réactionnel au deuil de l'épouse (tristesse, anhédonie, perte de 6 kg depuis mars, culpabilité) ; amélioration progressive, thymie correcte fin 2024.",
     "observationIds": [
      "historique:o37",
-     "historique:o34",
      "historique:o33",
-     "historique:o31",
      "historique:o26",
-     "historique:o24",
-     "historique:o19",
      "historique:o15",
      "historique:o13",
      "historique:o11",
      "historique:o9",
-     "historique:o1"
+     "historique:o8"
     ],
     "tellings": [
      {
       "start": "2022-05",
       "end": null,
-      "note": "Épisode dépressif caractérisé moyen à sévère, réactionnel au deuil de l'épouse (tristesse, anhédonie, perte de poids de 6 kg, culpabilité, insomnie) ; amélioration sous duloxétine, thymie correcte fin 2024.",
+      "note": "EDC moyen à sévère réactionnel au deuil de l'épouse (tristesse, anhédonie, perte de 6 kg depuis mars, culpabilité) ; amélioration progressive, thymie correcte fin 2024.",
       "observationIds": [
        "historique:o37",
-       "historique:o34",
-       "historique:o33",
-       "historique:o31",
        "historique:o26",
-       "historique:o24",
-       "historique:o19",
+       "historique:o33",
        "historique:o15",
        "historique:o13"
       ]
@@ -4131,165 +4513,152 @@
      {
       "start": "2022",
       "end": "2024",
-      "note": "Épisode dépressif caractérisé 2022-2024, en rémission ; thymie bonne ensuite.",
+      "note": "Épisode dépressif caractérisé 2022-2024 après le décès de l'épouse et la surdose, en rémission ; thymie bonne, pas d'idées suicidaires.",
       "observationIds": [
        "historique:o11",
        "historique:o9",
-       "historique:o1"
+       "historique:o8"
       ]
      }
     ]
    },
    {
-    "id": "e115",
-    "trackId": "t68",
+    "id": "e127",
+    "trackId": "t85",
     "start": "2022-05-31",
     "end": "2022-07-05",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Idées de mort passives sans scénario le 31/05/2022 ; plus d'idées suicidaires le 05/07/2022, plus d'idées de mort en 2023.",
+    "note": "Idées de mort passives sans scénario ; plus d'idées suicidaires le 05/07/2022 ; plus d'idées de mort en avril 2023.",
     "observationIds": [
      "historique:o37",
      "historique:o34",
-     "historique:o26",
-     "historique:o24"
+     "historique:o26"
     ]
    },
    {
-    "id": "e122",
-    "trackId": "t74",
-    "start": "2022-05-31",
-    "end": "2024-07-02",
+    "id": "e133",
+    "trackId": "t90",
+    "start": "2022-05",
+    "end": "2024-07",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "QTc 451 ms (05/2022), 472 ms (04/2023, méthadone + duloxétine), 455 ms (06/2023), 452 ms (07/2024) ; kaliémie normale.",
+    "note": "QTc 451 ms (05/2022), 472 ms le 11/04/2023, 455 ms en 06/2023, 452 ms le 02/07/2024.",
     "observationIds": [
      "historique:o37",
      "historique:o26",
      "historique:o25",
-     "historique:o17",
-     "historique:o11",
-     "historique:o7",
-     "historique:o4"
-    ],
-    "tellings": [
-     {
-      "start": "2022-05-31",
-      "end": "2024-07-02",
-      "note": "QTc 451 ms (05/2022), 472 ms (04/2023, méthadone + duloxétine), 455 ms (06/2023), 452 ms (07/2024) ; kaliémie normale.",
-      "observationIds": [
-       "historique:o37",
-       "historique:o26",
-       "historique:o25",
-       "historique:o17"
-      ]
-     },
-     {
-      "start": "2023",
-      "end": null,
-      "note": "QTc ayant motivé la baisse de méthadone à 70 mg en 2023 ; surveillance ECG : 438 ms (03/2025), 436 ms (10/2025), 441 ms (05/2026).",
-      "observationIds": [
-       "historique:o11",
-       "historique:o7",
-       "historique:o4"
-      ]
-     }
+     "historique:o17"
     ]
    },
    {
-    "id": "e123",
-    "trackId": "t75",
+    "id": "e134",
+    "trackId": "t91",
     "start": "2024-01",
     "end": null,
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Chute sans gravité dans l'escalier pendant la rechute d'alcool de fin 2023.",
+    "note": "Chute sans gravité dans l'escalier début janvier 2024.",
     "observationIds": [
      "historique:o22"
     ]
    },
    {
-    "id": "e128",
-    "trackId": "t79",
-    "start": "2022-06-07",
-    "end": "2022-07-07",
+    "id": "e137",
+    "trackId": "t94",
+    "start": "2021-12",
+    "end": null,
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Passage IDE à domicile une fois par semaine pendant un mois.",
+    "note": "Exacerbation de BPCO, méthadone omise.",
+    "observationIds": [
+     "historique:o26"
+    ]
+   },
+   {
+    "id": "e138",
+    "trackId": "t95",
+    "start": "2022-05-21",
+    "end": "2022-05-24",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Réanimation après la surdose.",
+    "observationIds": [
+     "historique:o37",
+     "historique:o26"
+    ]
+   },
+   {
+    "id": "e141",
+    "trackId": "t98",
+    "start": "2022-06",
+    "end": "2022-07",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Passage IDE hebdomadaire à domicile pendant un mois.",
     "observationIds": [
      "historique:o35"
     ]
    },
    {
-    "id": "e129",
-    "trackId": "t80",
-    "start": "2022-06-07",
-    "end": "2022-12-06",
+    "id": "e142",
+    "trackId": "t23",
+    "start": "2022-06",
+    "end": "2022-12",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Éducateur spécialisé pour \"remettre de la vie dans la journée\" ; entretien du 06/12/2022.",
+    "note": "Accompagnement éducatif pour structurer les journées.",
     "observationIds": [
      "historique:o35",
      "historique:o30"
     ]
    },
    {
-    "id": "e130",
-    "trackId": "t81",
-    "start": "2022-09-12",
-    "end": "2022-09-27",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Sevrage ambulatoire avec passages IDE (J1, J3, J7), dernier passage le 27/09/2022 ; renseignements donnés sur les groupes du CSAPA et d'entraide.",
-    "observationIds": [
-     "historique:o33",
-     "historique:o32"
-    ]
-   },
-   {
-    "id": "e131",
-    "trackId": "t14",
+    "id": "e143",
+    "trackId": "t24",
     "start": "2023-03-14",
     "end": "2024-09-10",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Assistante sociale (retraite, aides, déménagement) ; suivi social terminé le 10/09/2024, RDV à la demande.",
+    "note": "Assistante sociale : retraite, aide à domicile, déménagement ; suivi social terminé le 10/09/2024.",
     "observationIds": [
      "historique:o27",
      "historique:o16"
     ]
    },
    {
-    "id": "e132",
-    "trackId": "t82",
-    "start": "1984",
-    "end": null,
+    "id": "e151",
+    "trackId": "t104",
+    "start": "2017",
+    "end": "2019",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Marié en 1984 avec son épouse.",
+    "note": "Nomadisme médical avec second prescripteur et ordonnances falsifiées en 2018-2019.",
     "observationIds": [
-     "historique:o26"
+     "historique:o26",
+     "historique:o25",
+     "historique:o19"
     ]
    },
    {
-    "id": "e137",
-    "trackId": "t86",
+    "id": "e152",
+    "trackId": "t105",
     "start": "2023-03-01",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Retraite le 01/03/2023 (62 ans).",
+    "note": "Passage à la retraite à 62 ans ; pension de retraite pour inaptitude, rente AT maintenue ; réversion refusée.",
     "observationIds": [
-     "historique:o28",
      "historique:o27",
      "historique:o26",
      "historique:o11"
@@ -4298,11 +4667,10 @@
      {
       "start": "2023-03-01",
       "end": null,
-      "note": "Retraite le 01/03/2023 (62 ans).",
+      "note": "Passage à la retraite à 62 ans ; pension de retraite pour inaptitude, rente AT maintenue ; réversion refusée.",
       "observationIds": [
        "historique:o27",
-       "historique:o26",
-       "historique:o28"
+       "historique:o26"
       ]
      },
      {
@@ -4316,14 +4684,27 @@
     ]
    },
    {
-    "id": "e138",
-    "trackId": "t87",
+    "id": "e153",
+    "trackId": "t106",
+    "start": "2023-03",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Vit seul, sort peu hors pétanque du jeudi, dimanche chez sa fille.",
+    "observationIds": [
+     "historique:o27"
+    ]
+   },
+   {
+    "id": "e154",
+    "trackId": "t107",
     "start": "2023-06",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Aide à domicile en place depuis juin 2023 (2 h par semaine, puis 1 h par semaine après le déménagement).",
+    "note": "Aide à domicile en place depuis juin 2023 (2 h par semaine puis 1 h par semaine à Libourne).",
     "observationIds": [
      "historique:o27",
      "historique:o24",
@@ -4331,163 +4712,198 @@
     ]
    },
    {
-    "id": "e139",
-    "trackId": "t88",
+    "id": "e155",
+    "trackId": "t108",
+    "start": "2024-03",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Fille en parcours de PMA ; petit-enfant à venir.",
+    "observationIds": [
+     "historique:o20",
+     "historique:o18"
+    ]
+   },
+   {
+    "id": "e156",
+    "trackId": "t109",
     "start": "2024-06",
     "end": null,
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Vente de la maison signée en juin 2024, projet évoqué depuis 2023 pour se rapprocher de sa fille.",
+    "note": "Vente signée en juin 2024 ; voiture également vendue.",
     "observationIds": [
      "historique:o18",
-     "historique:o16",
-     "historique:o27",
-     "historique:o20"
+     "historique:o16"
     ]
    },
    {
-    "id": "e140",
-    "trackId": "t89",
+    "id": "e157",
+    "trackId": "t110",
     "start": "2024-09-01",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Déménagement le 01/09/2024 dans un T2 à Libourne, à 10 minutes à pied de sa fille ; voiture vendue.",
+    "note": "Appartement T2 à 10 minutes de sa fille ; nouveau médecin traitant et pharmacie.",
     "observationIds": [
+     "historique:o18",
      "historique:o16",
      "historique:o15",
+     "historique:o14",
      "historique:o11",
-     "historique:o10"
+     "historique:o5",
+     "historique:o1"
     ],
     "tellings": [
      {
       "start": "2024-09-01",
       "end": null,
-      "note": "Déménagement le 01/09/2024 dans un T2 à Libourne, à 10 minutes à pied de sa fille ; voiture vendue.",
+      "note": "Appartement T2 à 10 minutes de sa fille ; nouveau médecin traitant et pharmacie.",
       "observationIds": [
+       "historique:o18",
        "historique:o16",
-       "historique:o15"
+       "historique:o15",
+       "historique:o14"
       ]
      },
      {
       "start": "2024-09",
       "end": null,
-      "note": "Vit à Libourne près de sa fille, avait vécu à Cenon ; retrouve « une vie de quartier ».",
+      "note": "Vit à Libourne depuis 09/2024 ; voit sa fille presque tous les jours ; « une vie de quartier ».",
       "observationIds": [
        "historique:o11",
-       "historique:o10"
+       "historique:o5",
+       "historique:o1"
       ]
      }
     ]
    },
    {
-    "id": "e142",
-    "trackId": "t1",
-    "start": "2018",
+    "id": "e159",
+    "trackId": "t112",
+    "start": "2015",
     "end": null,
     "ongoing": false,
-    "mode": "usage",
+    "mode": null,
     "lossOfControl": false,
-    "note": "Héroïne fumée brièvement en 2018, honte évoquée en psychothérapie.",
+    "note": "Reprise du travail en 2015 après arthrodèse.",
     "observationIds": [
-     "historique:o11",
+     "historique:o11"
+    ]
+   },
+   {
+    "id": "e165",
+    "trackId": "t116",
+    "start": "2022-08",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Rituel de deuil travaillé en psychothérapie, avec sa fille.",
+    "observationIds": [
      "historique:o9"
     ]
    },
    {
-    "id": "e144",
-    "trackId": "t32",
-    "start": "2023",
+    "id": "e166",
+    "trackId": "t117",
+    "start": "2024-09",
     "end": null,
     "ongoing": false,
-    "mode": "usage",
+    "mode": null,
     "lossOfControl": false,
-    "note": "Prégabaline mésusée, arrêtée en 2023.",
+    "note": "Vivait à Cenon ; y avait perdu sa « vie de quartier » depuis l'accident. Fin à l'installation à Libourne.",
     "observationIds": [
      "historique:o11"
     ],
     "startUnknown": true
    },
    {
-    "id": "e146",
-    "trackId": "t3",
-    "start": "2022",
-    "end": "2024-01-06",
-    "ongoing": false,
-    "mode": "rechute",
+    "id": "e168",
+    "trackId": "t119",
+    "start": "2025-04",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
     "lossOfControl": false,
-    "note": "Reprise de l'alcool en 2022 avec l'épisode dépressif, rechute en 2023 ; abstinent depuis le 06/01/2024 (éthylotest 0, pas d'alcool aux consultations suivantes jusqu'en 10/2026).",
+    "note": "Pétanque deux fois par semaine ; nommé « responsable du terrain » par le club (06/2025).",
     "observationIds": [
      "historique:o11",
+     "historique:o10",
+     "historique:o9"
+    ]
+   },
+   {
+    "id": "e169",
+    "trackId": "t120",
+    "start": "2025-06",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Deux matinées par semaine dans une association de quartier ; toujours en cours en 10/2026.",
+    "observationIds": [
+     "historique:o10",
      "historique:o9",
      "historique:o1"
     ]
    },
    {
-    "id": "e154",
-    "trackId": "t95",
-    "start": "2026-01-13",
+    "id": "e170",
+    "trackId": "t121",
+    "start": "2025-10",
     "end": null,
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Alité avec une bronchite, vu par le médecin traitant ; RDV de 14 h non honoré.",
+    "note": "Petit-fils né en octobre 2025 (3,2 kg) ; chambre préparée pour les gardes ; il le garde le mercredi en 10/2026.",
     "observationIds": [
-     "historique:o6"
-    ]
-   },
-   {
-    "id": "e155",
-    "trackId": "t96",
-    "start": "2026-02",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Exacerbation début février 2026 traitée à domicile, sans hospitalisation ; récupère, essoufflé au premier étage.",
-    "observationIds": [
-     "historique:o5"
-    ]
-   },
-   {
-    "id": "e157",
-    "trackId": "t97",
-    "start": "2023",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Appareillage abandonné en 2023, à relancer.",
-    "observationIds": [
-     "historique:o11"
-    ],
-    "startUnknown": true
-   },
-   {
-    "id": "e158",
-    "trackId": "t97",
-    "start": "2025-09",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Reprise avec un masque narinaire mieux toléré, 5 à 6 h par nuit ; toutes les nuits en 10/2026.",
-    "observationIds": [
-     "historique:o8",
+     "historique:o10",
+     "historique:o7",
      "historique:o1"
     ]
    },
    {
-    "id": "e162",
-    "trackId": "t9",
+    "id": "e173",
+    "trackId": "t5",
+    "start": "2022",
+    "end": "2024-01-06",
+    "ongoing": false,
+    "mode": "rechute",
+    "lossOfControl": false,
+    "note": "Reprise de l'alcool en 2022 pendant l'épisode dépressif, rechute en 2023 ; abstinent depuis le 06/01/2024 (éthylotest 0 ; pas d'alcool jusqu'en 10/2026, même à la naissance du petit-fils).",
+    "observationIds": [
+     "historique:o11",
+     "historique:o9",
+     "historique:o7",
+     "historique:o1"
+    ]
+   },
+   {
+    "id": "e177",
+    "trackId": "t123",
+    "start": "2026-09-15",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Délivrance provisoire (environ 48 h) de gélules 40 + 20 mg, dose identique, par la pharmacie ; patient informé.",
+    "observationIds": [
+     "historique:o2"
+    ]
+   },
+   {
+    "id": "e179",
+    "trackId": "t11",
     "start": "2025-04-15",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "30 mg ; réduction à 20 mg/j acceptée en 04/2025, 20 mg depuis mai 2025.",
+    "note": "30 mg, réduction à 20 mg/j acceptée le 15/04/2025 (20 mg depuis mai 2025) ; 20 mg encore en 10/2026.",
     "observationIds": [
      "historique:o11",
      "historique:o8",
@@ -4498,14 +4914,27 @@
     "startUnknown": true
    },
    {
-    "id": "e164",
-    "trackId": "t99",
+    "id": "e181",
+    "trackId": "t124",
+    "start": "2025-04-15",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Seul antalgique demandé (aucune demande d'antalgique en dehors du paracétamol).",
+    "observationIds": [
+     "historique:o11"
+    ]
+   },
+   {
+    "id": "e183",
+    "trackId": "t125",
     "start": "2025-09-16",
     "end": "2025-10",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Patch 21 mg + gommes prescrits ; tenu deux semaines avec les patchs puis reprise de cigarettes, patchs abandonnés.",
+    "note": "Prescrits le 16/09/2025 « pour le petit » ; tenu deux semaines puis reprise de quelques cigarettes ; patchs abandonnés (constat 03/2026).",
     "observationIds": [
      "historique:o8",
      "historique:o7",
@@ -4513,88 +4942,98 @@
     ]
    },
    {
-    "id": "e165",
-    "trackId": "t100",
+    "id": "e186",
+    "trackId": "t127",
     "start": "2026-02",
-    "end": "2026-02",
+    "end": null,
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Corticoïdes 5 jours avec antibiotique pour l'exacerbation de BPCO.",
+    "note": "Début février 2026, traitée à domicile (antibiotique, corticoïdes 5 jours) par le médecin traitant, sans hospitalisation ; douleur remontée à 5/10.",
     "observationIds": [
      "historique:o5"
     ]
    },
    {
-    "id": "e168",
-    "trackId": "t80",
+    "id": "e187",
+    "trackId": "t128",
+    "start": "2026-01-13",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Alité avec une bronchite ; méthadone récupérée par la fille avec procuration.",
+    "observationIds": [
+     "historique:o6"
+    ]
+   },
+   {
+    "id": "e188",
+    "trackId": "t129",
+    "start": "2026-02",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Antibiotique et corticoïdes pendant 5 jours pour l'exacerbation de BPCO.",
+    "observationIds": [
+     "historique:o5"
+    ]
+   },
+   {
+    "id": "e190",
+    "trackId": "t131",
+    "start": "2023",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Ventilation PPC abandonnée en 2023, à relancer.",
+    "observationIds": [
+     "historique:o11"
+    ],
+    "startUnknown": true
+   },
+   {
+    "id": "e191",
+    "trackId": "t132",
+    "start": "2025-09",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Reprise avec un masque narinaire mieux toléré, 5 à 6 heures par nuit, moins de somnolence ; utilisée toutes les nuits en 10/2026.",
+    "observationIds": [
+     "historique:o8",
+     "historique:o1"
+    ]
+   },
+   {
+    "id": "e196",
+    "trackId": "t23",
     "start": "2025-06-03",
     "end": "2025-06-03",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Clôture de l'accompagnement éducatif régulier, RDV à sa demande.",
+    "note": "Entretien éducatif à Libourne ; clôture le 03/06/2025, rendez-vous à sa demande.",
     "observationIds": [
      "historique:o10"
     ],
     "startUnknown": true
    },
    {
-    "id": "e169",
-    "trackId": "t103",
+    "id": "e197",
+    "trackId": "t136",
     "start": "2026-05",
     "end": "2026-07",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Proposée en 03/2026, commencée (3 fois par semaine à Libourne) en 05/2026, terminée en juillet 2026.",
+    "note": "Trois fois par semaine à Libourne, commencée avant le 12/05/2026 ; terminée en juillet 2026 ; marche 45 minutes par jour.",
     "observationIds": [
      "historique:o5",
      "historique:o4",
-     "historique:o3",
-     "historique:o1"
-    ]
-   },
-   {
-    "id": "e170",
-    "trackId": "t104",
-    "start": "2026-03-17",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Nouvelle tentative d'arrêt du tabac prévue avec la tabacologue de l'antenne.",
-    "observationIds": [
-     "historique:o5"
-    ]
-   },
-   {
-    "id": "e176",
-    "trackId": "t109",
-    "start": "2025-06",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Bénévole deux matinées par semaine dans un atelier de réparation de vélos (déjà en cours au 03/06/2025) ; nommé responsable du terrain au club de pétanque.",
-    "observationIds": [
-     "historique:o10",
-     "historique:o9",
-     "historique:o1"
-    ]
-   },
-   {
-    "id": "e177",
-    "trackId": "t110",
-    "start": "2025-10",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Naissance prévue en octobre (06/2025), petit-fils né en 2025 ; le garde le mercredi.",
-    "observationIds": [
-     "historique:o10",
-     "historique:o7",
      "historique:o1"
     ]
    }
@@ -4602,11 +5041,11 @@
   "undated": [],
   "consolidation": {
    "lots": 4,
-   "tracksBefore": 110,
-   "tracksAfter": 78,
-   "eventsBefore": 177,
-   "eventsAfter": 114,
-   "discordant": 14
+   "tracksBefore": 136,
+   "tracksAfter": 106,
+   "eventsBefore": 197,
+   "eventsAfter": 130,
+   "discordant": 10
   }
  }
 }

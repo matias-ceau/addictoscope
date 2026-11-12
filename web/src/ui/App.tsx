@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 
 import { analyse } from "../app/analysis";
+import { restoreCorrections, storeCorrections } from "../app/corrections-store";
 import { carryCorrections } from "../notebook/edit";
 import { demoFiles, loadRecording, type DemoDossier } from "../app/demo";
 import { loadDossierAnalysis, loadDossierFiles, loadDossierKey, remapAnalysis, type Library, type LibraryDossier } from "../app/library";
@@ -194,7 +195,8 @@ export function App(props: { library?: LibraryProps } = {}) {
       setAnalysis((previous) => ({
         status: "done",
         ...result,
-        timeline: previous.corrected ? carryCorrections(previous.corrected, result.timeline) : result.timeline,
+        // Those of this session first, else those kept in this browser for the same dossier.
+        timeline: previous.corrected ? carryCorrections(previous.corrected, result.timeline) : restoreCorrections(result.observations, result.timeline),
         docs: docs.map((d) => d.id),
         model,
         replayed: Boolean(replay),
@@ -239,7 +241,7 @@ export function App(props: { library?: LibraryProps } = {}) {
         setAnalysis({
           status: "done",
           observations: analysed.observations,
-          timeline: analysed.timeline,
+          timeline: restoreCorrections(analysed.observations, analysed.timeline),
           docs: Object.values(ids),
           model: analysed.model,
           replayed: true,
@@ -292,7 +294,10 @@ export function App(props: { library?: LibraryProps } = {}) {
     const json = files.find((f) => /\.json$/i.test(f.name));
     const key = files.find((f) => /\.axkey$/i.test(f.name));
     try {
-      if (json) setReopened({ saved: parseAnalysis(await json.text()) });
+      if (json) {
+        const saved = parseAnalysis(await json.text());
+        setReopened({ saved: { ...saved, timeline: restoreCorrections(saved.observations, saved.timeline) } });
+      }
       else if (!reopened) throw new Error("Choisissez le fichier d'analyse (.json), et si vous l'avez sa table de correspondance (.axkey).");
       if (key) setKeyFile(new Uint8Array(await key.arrayBuffer()));
     } catch (err) {
@@ -329,6 +334,23 @@ export function App(props: { library?: LibraryProps } = {}) {
       setView(real ? "original" : "pseudo");
       setMainView("doc");
       setHighlight({ doc: doc.id, page: page.page, rects: rectsForSpan(page, start, end), key: Date.now() });
+    },
+    [analysis.observations],
+  );
+
+  /** The pseudonymized text of an observation, as the model read it: shown on an event's card. */
+  const observationText = useCallback(
+    (observationId: string): string | null => {
+      const o = analysis.observations?.find((x) => x.id === observationId);
+      const doc = stateRef.current.docs.find((d) => d.id === o?.doc);
+      if (!o || !doc?.outPages) return null;
+      const out: string[] = [];
+      for (const p of doc.outPages) {
+        if (p.page < o.start.page || p.page > o.end.page) continue;
+        const lines = p.text.split("\n");
+        out.push(...lines.slice(p.page === o.start.page ? o.start.line - 1 : 0, p.page === o.end.page ? o.end.line : lines.length));
+      }
+      return out.join("\n").trim() || null;
     },
     [analysis.observations],
   );
@@ -405,7 +427,10 @@ export function App(props: { library?: LibraryProps } = {}) {
             key={reopened.keyTable ? "with-key" : "no-key"}
             timeline={reopened.saved.timeline}
             observations={reopened.saved.observations}
-            onChange={(timeline) => setReopened((r) => (r ? { ...r, saved: { ...r.saved, timeline } } : r))}
+            onChange={(timeline) => {
+              storeCorrections(reopened.saved.observations, timeline);
+              setReopened((r) => (r ? { ...r, saved: { ...r.saved, timeline } } : r));
+            }}
             keyTable={reopened.keyTable}
             source={`Analyse rouverte${reopened.saved.model ? ` : ${modelName(reopened.saved.model)}` : ""}${reopened.saved.createdAt ? `, enregistrée le ${new Date(reopened.saved.createdAt).toLocaleDateString("fr-FR")}` : ""}`}
             onImportKey={(files) => void reopen(files)}
@@ -438,7 +463,11 @@ export function App(props: { library?: LibraryProps } = {}) {
               keyTable={keyTable}
               onOpenSource={openSource}
               onSave={saveAnalysis}
-              onChange={(timeline) => setAnalysis((x) => ({ ...x, timeline }))}
+              onChange={(timeline) => {
+                storeCorrections(analysis.observations ?? [], timeline);
+                setAnalysis((x) => ({ ...x, timeline }));
+              }}
+              sourceText={observationText}
               source={
                 analysis.model &&
                 (library

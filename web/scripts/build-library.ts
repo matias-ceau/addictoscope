@@ -3,7 +3,7 @@
  * by the app with ?library=library/library.json (SPEC.md, « Bibliothèque
  * de dossiers »).
  *
- *   npx vite-node scripts/build-library.ts [-- --run=age1 --long-run=longs/regroupe1 --only=alcool-depression,crack-rue --out=<dir>]
+ *   npx vite-node scripts/build-library.ts [-- --run=age1 --long-run=longs/regroupe2 --only=alcool-depression,crack-rue --out=<dir>]
  *
  * Two groups: the long dossiers (20 to 30 pages, an intake observation that
  * retraces the whole journey) and the short ones. Per dossier: its PDFs and
@@ -23,7 +23,7 @@ const FRISE = resolve(ROOT, "data/processed/frise");
 const arg = (name: string) => process.argv.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
 /** In sidebar order: folder of data/anonymized, recorded run, scores of that run. */
 const GROUPS = [
-  { title: "Dossiers longs (20 à 30 pages)", root: "dossiers-longs", run: arg("long-run") ?? "longs/regroupe1", scores: "rapport-longs.json" },
+  { title: "Dossiers longs (20 à 30 pages)", root: "dossiers-longs", run: arg("long-run") ?? "longs/regroupe2", scores: "rapport-longs.json" },
   { title: "Dossiers courts", root: "dossiers", run: arg("run") ?? "age1", scores: "rapport-ages.json" },
 ];
 const ONLY = arg("only")?.split(",");
