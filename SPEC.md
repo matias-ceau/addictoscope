@@ -771,6 +771,13 @@ au lieu de faire défiler, le document entier séparait l'utilisateur du bouton
   reste en haut sur une ligne, la liste des éléments et le bouton d'action
   passent avant les pages du document, la frise vient à l'écran dès qu'elle est
   faite, un dossier s'ouvre en haut de page.
-- Non changé, à décider : un cadre tracé à la main sur des mots ordinaires fait
-  échouer la vérification quand ces mots existent ailleurs dans le document
-  (chaque mot du cadre est cherché partout, comme un nom).
+- Cadre tracé à la main (changé le 12/11/2026, à la demande de l'utilisateur) :
+  il masque une zone, pas un nom. Ses mots ne sont plus cherchés ailleurs dans
+  le document (des mots ordinaires faisaient échouer la vérification) ; à la
+  place, la vérification contrôle que plus aucun mot n'est lisible dans la zone.
+  Conséquence acceptée : encadrer un nom à un endroit ne signale plus qu'il
+  reste lisible ailleurs. Défaut trouvé au passage et corrigé : le texte n'était
+  retiré que sur la bande médiane du cadre (réglage prévu pour une ligne), si
+  bien que les lignes du haut et du bas d'un cadre de plusieurs lignes restaient
+  dans la couche texte du PDF, sous le cache ; le texte est maintenant retiré
+  sur toute la hauteur du cadre.

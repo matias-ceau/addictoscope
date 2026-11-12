@@ -82,6 +82,8 @@ export interface RedactionItem {
   page: number;
   rects: Rect[];
   label: string;
+  /** A zone drawn by hand, several lines high maybe: its text goes over its whole height, not a middle band. */
+  zone?: boolean;
 }
 
 const LABEL_FILL = "0.89 0.91 0.96";
@@ -116,7 +118,11 @@ export function redactPdf(bytes: Uint8Array, items: RedactionItem[]): Uint8Array
     const rects = pageItems.flatMap((item) => item.rects);
     // Text: the middle band of each box, so the neighbouring lines keep
     // their glyphs. Scanned pixels: the whole box.
-    for (const rect of rects) page.createAnnotation("Redact").setRect(textBand(rect, 0.6));
+    for (const item of pageItems)
+      for (const rect of item.rects) {
+        const edge = Math.min(2, (rect[3] - rect[1]) * 0.3);
+        page.createAnnotation("Redact").setRect(item.zone ? [rect[0], rect[1] + edge, rect[2], rect[3] - edge] : textBand(rect, 0.6));
+      }
     page.applyRedactions(
       false,
       mupdf.PDFPage.REDACT_IMAGE_NONE,

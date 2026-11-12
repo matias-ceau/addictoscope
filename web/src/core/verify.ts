@@ -42,7 +42,9 @@ export function findLeaks(outputPages: PageText[], accepted: Detection[], places
   const placeSet = new Set(places.map(fold));
   const needles = new Map<string, Spelling>();
   for (const d of accepted) {
-    if (!d.text) continue;
+    // A frame drawn by hand masks a zone: its words are ordinary ones as often as not, so they
+    // are not looked for elsewhere. The zone itself must come out empty (below).
+    if (!d.text || d.source === "manual") continue;
     needles.set(fold(d.text), "any");
     if (PERSON_CATEGORIES.has(d.category)) {
       for (const t of d.text.split(/[\s'’-]+/)) {
@@ -67,6 +69,19 @@ export function findLeaks(outputPages: PageText[], accepted: Detection[], places
         if (placeSet.has(n) && afterPlaceCue(orig, m.index)) continue;
         if (afterSaint(orig, m.index)) continue; // "Saint-Jean": a place, as the detector decided
         leaks.push({ page: page.page, text: n, reason: "known-identifier" });
+        break;
+      }
+    }
+    for (const d of accepted) {
+      if (d.source !== "manual" || d.page !== page.page) continue;
+      for (const w of page.words ?? []) {
+        const cx = (w.rect[0] + w.rect[2]) / 2;
+        const cy = (w.rect[1] + w.rect[3]) / 2;
+        if (!d.rects.some((r) => cx > r[0] && cx < r[2] && cy > r[1] && cy < r[3])) continue;
+        const text = page.text.slice(w.start, w.end);
+        // The label written in place of what was masked is not a leak.
+        if (!/[\p{L}\p{N}]/u.test(text) || /^\[[A-Z_0-9]+\]?$/.test(text)) continue;
+        leaks.push({ page: page.page, text, reason: "known-identifier" });
         break;
       }
     }
