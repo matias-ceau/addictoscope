@@ -551,3 +551,39 @@ button.verdict.fix[aria-pressed="true"] { background: var(--text); border-color:
 .source-block details { margin-top: 4px; }
 .source-block summary { cursor: pointer; color: var(--accent); }
 .source-text { white-space: pre-wrap; background: var(--surface-2); border-radius: 8px; padding: 8px 10px; margin: 6px 0 0; max-height: 240px; overflow: auto; }
+
+/* Steps lead to the place where they are done. */
+.journey-step { padding: 0; }
+.journey-go { display: flex; align-items: center; gap: 9px; width: 100%; min-width: 0; padding: 7px 10px; border: 0; border-radius: 10px; background: none; text-align: left; cursor: pointer; }
+.journey-go:hover { background: color-mix(in srgb, var(--place) 10%, transparent); }
+.journey-go:focus-visible { outline: 2px solid var(--place); outline-offset: 1px; }
+.journey-detail-where { display: none; font-weight: 700; color: var(--text); }
+.step-target { animation: step-target 1.2s ease-out 1; scroll-margin-top: 8px; }
+@keyframes step-target { from { box-shadow: 0 0 0 3px var(--accent); } to { box-shadow: 0 0 0 3px transparent; } }
+
+/* A finger on a page scrolls it; a frame is drawn by touch only once asked for. */
+.page { touch-action: pan-x pan-y pinch-zoom; }
+.page.drawing { touch-action: none; cursor: crosshair; }
+.draw-toggle.on { background: var(--accent); border-color: var(--accent); color: white; }
+@media (hover: none) { .hint-mouse { display: none; } .page.editable:not(.drawing) { cursor: auto; } }
+
+/* Stacked panes: one page that scrolls as a whole, steps kept in reach at the top. */
+@media (max-width: 980px) {
+  html, body, #root { height: auto; min-height: 100%; }
+  .app { height: auto; min-height: 100dvh; }
+  .workspace { overflow: visible; }
+  .journey { position: sticky; top: 0; z-index: 20; padding: 6px 12px; background: var(--bg); }
+  .journey ol { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 2px; padding: 4px; }
+  .journey-go { flex-direction: column; gap: 3px; padding: 5px 2px; text-align: center; }
+  .journey-text { width: 100%; }
+  .journey-title { font-size: 0.66rem; }
+  .journey-place { display: none; }
+  .journey-detail { margin-top: 4px; font-size: 0.76rem; }
+  .journey-detail-where { display: inline; }
+  .step-target, .frise, .observations, .viewer { scroll-margin-top: calc(var(--journey-h, 110px) + 6px); }
+  /* What there is to do comes before the pages; the document follows, whole. */
+  .workspace > .viewer { order: 3; min-height: 0; overflow: visible; }
+  .workspace > .viewer .pages { overflow: visible; padding: 10px 6px; }
+  .viewer > .viewer-toolbar { position: sticky; top: var(--journey-h, 100px); z-index: 5; border-radius: var(--radius) var(--radius) 0 0; }
+  .review .panel-head + .panel-body.scroll { max-height: 46dvh; }
+}

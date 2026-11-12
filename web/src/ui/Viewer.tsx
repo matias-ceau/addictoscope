@@ -27,6 +27,11 @@ export function Viewer(props: {
   }, [props.highlight?.key]);
   const renderId = view === "pseudo" ? `${doc.id}:pseudo` : doc.id;
   const editable = doc.status === "review";
+  // A finger on a page scrolls it. Drawing a frame by touch is asked for with the button, one frame at a time.
+  const [drawing, setDrawing] = useState(false);
+  useEffect(() => {
+    if (!editable || view !== "original") setDrawing(false);
+  }, [editable, view]);
 
   useEffect(() => {
     if (!props.focused) return;
@@ -49,7 +54,16 @@ export function Viewer(props: {
             </button>
           </div>
         )}
-        {editable && <span className="hint">Cliquez un surlignage pour l'ignorer · tracez un cadre pour masquer une zone</span>}
+        {editable && (
+          <button type="button" className={"small-btn draw-toggle" + (drawing ? " on" : "")} aria-pressed={drawing} onClick={() => setDrawing(!drawing)}>
+            {drawing ? "Annuler le cadre" : "Masquer une zone"}
+          </button>
+        )}
+        {editable && (
+          <span className="hint">
+            {drawing ? "Glissez sur la zone à masquer" : <>Touchez un surlignage pour l'ignorer<span className="hint-mouse"> · à la souris, tracez un cadre pour masquer une zone</span></>}
+          </span>
+        )}
       </div>
       <div className="pages">
         {doc.status === "reading" && doc.pages.length === 0 && <ReadingPlaceholder doc={doc} />}
@@ -62,6 +76,8 @@ export function Viewer(props: {
             focused={props.focused}
             highlight={props.highlight?.rects[page.page] ? { rects: props.highlight.rects[page.page], key: props.highlight.key } : undefined}
             editable={editable && view === "original"}
+            drawing={drawing}
+            onDrawn={() => setDrawing(false)}
             dispatch={props.dispatch}
             sourceDoc={doc.id}
           />
@@ -87,6 +103,9 @@ function PageView(props: {
   detections: Detection[];
   focused?: string;
   editable: boolean;
+  /** Frame drawing asked for with the button: the only way to draw with a finger. */
+  drawing: boolean;
+  onDrawn: () => void;
   dispatch: Dispatch<Action>;
   highlight?: { rects: Rect[]; key: number };
 }) {
@@ -136,6 +155,7 @@ function PageView(props: {
     ];
     setDraft(null);
     if (rect[2] - rect[0] < 4 || rect[3] - rect[1] < 4) return;
+    props.onDrawn();
     const span = spanForRect(page, rect);
     props.dispatch({
       type: "addManual",
@@ -167,16 +187,18 @@ function PageView(props: {
     <div
       ref={ref}
       id={`page-${page.page}`}
-      className={"page" + (props.editable ? " editable" : "")}
+      className={"page" + (props.editable ? " editable" : "") + (props.editable && props.drawing ? " drawing" : "")}
       style={{ aspectRatio: `${page.width} / ${page.height}` }}
       onPointerDown={(e) => {
         if (!props.editable || e.button !== 0 || (e.target as HTMLElement).closest(".box")) return;
+        if (e.pointerType !== "mouse" && !props.drawing) return;
         (e.target as HTMLElement).setPointerCapture(e.pointerId);
         const p = toPage(e);
         setDraft({ from: p, to: p });
       }}
       onPointerMove={(e) => draft && setDraft({ ...draft, to: toPage(e) })}
       onPointerUp={finishDraft}
+      onPointerCancel={() => setDraft(null)}
     >
       {url ? <img src={url} alt={`Page ${page.page + 1}`} draggable={false} /> : <div className="page-skeleton" />}
       {props.detections.flatMap((d) =>

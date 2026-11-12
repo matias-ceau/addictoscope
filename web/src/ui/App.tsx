@@ -350,6 +350,7 @@ export function App(props: { library?: LibraryProps } = {}) {
       if (!o || !doc?.outPages) return;
       // Every page the observation runs over, running headers left out.
       const rects = spanBoxes(doc.outPages, o.start, o.end, repeatedLines(doc.outPages));
+      scrollsItself();
       dispatch({ type: "select", id: doc.id });
       setView(real ? "original" : "pseudo");
       setMainView("doc");
@@ -373,6 +374,58 @@ export function App(props: { library?: LibraryProps } = {}) {
       return out.join("\n").trim() || null;
     },
     [analysis.observations],
+  );
+
+  // Stacked panes (small screen): the view just opened is brought on screen, not left above or below.
+  const firstView = useRef(true);
+  /** Set by what changes the view and scrolls by itself (a step, a jump to a source). */
+  const ownScroll = useRef(false);
+  const scrollsItself = () => {
+    ownScroll.current = true;
+    setTimeout(() => (ownScroll.current = false), 0);
+  };
+  useEffect(() => {
+    if (firstView.current) {
+      firstView.current = false;
+      return;
+    }
+    if (ownScroll.current || !window.matchMedia("(max-width: 980px)").matches) return;
+    const q = mainView === "frise" ? ".frise" : mainView === "observations" ? ".observations" : ".viewer";
+    setTimeout(() => document.querySelector(q)?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+  }, [mainView]);
+
+  // A dossier opens at its top, not at the height where the welcome page had been scrolled.
+  const opened = state.docs.length > 0;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [opened]);
+
+  /** A step of the top bar leads to the place where it is done. */
+  const goStep = useCallback(
+    (id: string) => {
+      scrollsItself();
+      const hasFrise = Boolean(analysis.timeline);
+      const toFrise = id === "frise" && hasFrise;
+      setMainView(toFrise ? "frise" : id === "analyse" || id === "frise" ? (v) => v : "doc");
+      const target: Record<string, string[]> = {
+        depot: [".sources"],
+        detection: [".viewer"],
+        relecture: [".review"],
+        masquage: [".review .panel-foot", ".review"],
+        analyse: [".next-step", ".review .panel-foot", ".review"],
+        frise: toFrise ? [".frise"] : [".next-step", ".review .panel-foot", ".review"],
+      };
+      // After the view has changed.
+      setTimeout(() => {
+        const el = (target[id] ?? []).map((q) => document.querySelector<HTMLElement>(q)).find(Boolean);
+        if (!el) return;
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        el.classList.remove("step-target");
+        void el.offsetWidth;
+        el.classList.add("step-target");
+      }, 0);
+    },
+    [analysis.timeline],
   );
 
   const selected = state.docs.find((d) => d.id === state.selectedDoc);
@@ -439,7 +492,7 @@ export function App(props: { library?: LibraryProps } = {}) {
         )}
         </div>
       </header>
-      {state.docs.length > 0 && <Journey steps={steps} />}
+      {state.docs.length > 0 && <Journey steps={steps} onGo={goStep} />}
 
       {state.docs.length === 0 && reopened ? (
         <main className="workspace single">
@@ -522,7 +575,7 @@ export function App(props: { library?: LibraryProps } = {}) {
                   analysis={analysis}
                   onConfigure={() => setSettingsOpen(true)}
                   onRun={runAnalysis}
-                  onShowFrise={() => setMainView("frise")}
+                  onShowFrise={() => goStep("frise")}
                   onProofread={!replayMode && !analysis.replayed && policyReady(policy) ? proofread : undefined}
                   demo={demo ? { dossier: demo, allVerified, source: demoSource, onSource: setDemoSource } : undefined}
                 />
