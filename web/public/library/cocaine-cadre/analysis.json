@@ -2,7 +2,7 @@
  "tool": "addictoscope",
  "kind": "analysis",
  "formatVersion": 1,
- "createdAt": "2026-11-10T22:35:32.415Z",
+ "createdAt": "2026-11-12T01:41:49.115Z",
  "model": "anthropic/claude-sonnet-5.5",
  "replayed": false,
  "observations": [
@@ -1219,8 +1219,8 @@
    },
    "date": "2023-04-09",
    "kind": "compte rendu de passage aux urgences",
-   "authorRole": "médecin des urgences",
-   "summary": "Passage aux urgences (puis UHCD) d'un homme de 43 ans amené par les pompiers pour idées suicidaires avec scénario lors d'une intoxication à l'alcool (1,92 g/L) et à la cocaïne, avec épisode dépressif au traitement interrompu, sorti le 10/04/2023 chez sa sœur avec rendez-vous au CSAPA le 11/04/2023."
+   "authorRole": "médecin urgentiste",
+   "summary": "Passage aux urgences (arrivée le 09/04/2023, sortie le 10/04 après UHCD) pour crise suicidaire avec scénario, intoxication alcoolique (1,92 g/L) et cocaïne, épisode dépressif avec escitalopram arrêté, sortie chez sa sœur avec rendez-vous au CSAPA le 11/04."
   }
  ],
  "timeline": {
@@ -1246,31 +1246,32 @@
     "label": "Cannabis"
    },
    {
-    "id": "t27",
-    "kind": "substance_use",
-    "label": "Jeu d'argent (paris sportifs en ligne)",
-    "aliases": [
-     "Jeu (paris sportifs en ligne)",
-     "Jeu pathologique (paris sportifs)"
-    ]
-   },
-   {
     "id": "t5",
-    "kind": "psychiatric",
-    "label": "Trouble de l'usage de la cocaïne sévère"
+    "kind": "substance_use",
+    "label": "Jeux d'argent"
    },
    {
     "id": "t6",
-    "kind": "psychiatric",
-    "label": "Trouble de l'usage de l'alcool d'intensité moyenne"
+    "kind": "substance_use",
+    "label": "Écrans"
+   },
+   {
+    "id": "t31",
+    "kind": "substance_use",
+    "label": "Cocaïne fumée (base)"
    },
    {
     "id": "t7",
     "kind": "psychiatric",
-    "label": "Difficultés de concentration, impulsivité (TDAH à explorer)"
+    "label": "Difficultés d'attention et impulsivité (TDAH à évaluer)"
    },
    {
-    "id": "t25",
+    "id": "t8",
+    "kind": "psychiatric",
+    "label": "Coups de mou et descentes tristes"
+   },
+   {
+    "id": "t32",
     "kind": "psychiatric",
     "label": "Épisode dépressif réactionnel",
     "aliases": [
@@ -1278,45 +1279,52 @@
     ]
    },
    {
-    "id": "t35",
-    "kind": "psychiatric",
-    "label": "Irritabilité, anxiété et insomnie"
-   },
-   {
-    "id": "t45",
+    "id": "t33",
     "kind": "psychiatric",
     "label": "Épisode dépressif caractérisé"
    },
    {
-    "id": "t48",
+    "id": "t34",
+    "kind": "psychiatric",
+    "label": "Idées suicidaires"
+   },
+   {
+    "id": "t35",
     "kind": "psychiatric",
     "label": "Crise suicidaire"
    },
    {
-    "id": "t56",
+    "id": "t62",
     "kind": "psychiatric",
-    "label": "TDAH de l'adulte",
-    "aliases": [
-     "TDAH"
-    ]
+    "label": "TDAH"
    },
    {
-    "id": "t8",
-    "kind": "somatic",
-    "label": "Appendicectomie"
+    "id": "t88",
+    "kind": "psychiatric",
+    "label": "Deuil du père"
    },
    {
     "id": "t9",
     "kind": "somatic",
-    "label": "Troubles du sommeil"
+    "label": "Appendicectomie"
    },
    {
     "id": "t10",
     "kind": "somatic",
+    "label": "Troubles du sommeil"
+   },
+   {
+    "id": "t11",
+    "kind": "somatic",
+    "label": "Tension artérielle élevée"
+   },
+   {
+    "id": "t12",
+    "kind": "somatic",
     "label": "Épistaxis et croûtes nasales"
    },
    {
-    "id": "t33",
+    "id": "t36",
     "kind": "somatic",
     "label": "Perforation de la cloison nasale",
     "aliases": [
@@ -1324,119 +1332,142 @@
     ]
    },
    {
-    "id": "t34",
+    "id": "t37",
     "kind": "somatic",
     "label": "Amaigrissement"
    },
    {
-    "id": "t57",
+    "id": "t71",
     "kind": "somatic",
     "label": "Douleur thoracique sous cocaïne"
    },
    {
-    "id": "t59",
+    "id": "t73",
     "kind": "somatic",
     "label": "Élévation des GGT"
    },
    {
-    "id": "t26",
+    "id": "t89",
+    "kind": "somatic",
+    "label": "Insomnie d'endormissement"
+   },
+   {
+    "id": "t90",
+    "kind": "somatic",
+    "label": "Baisse d'appétit et perte de poids"
+   },
+   {
+    "id": "t91",
+    "kind": "somatic",
+    "label": "Père : cancer du poumon métastatique"
+   },
+   {
+    "id": "t38",
     "kind": "medication",
     "label": "Paroxétine"
    },
    {
-    "id": "t46",
+    "id": "t39",
     "kind": "medication",
     "label": "Escitalopram"
    },
    {
-    "id": "t51",
+    "id": "t40",
     "kind": "medication",
     "label": "Oxazépam"
    },
    {
-    "id": "t52",
+    "id": "t41",
     "kind": "medication",
-    "label": "Patch nicotinique",
+    "label": "Substitut nicotinique (patch)",
     "aliases": [
-     "Nicotine (patch)"
+     "Patch nicotinique",
+     "Patchs nicotiniques"
     ]
    },
    {
-    "id": "t60",
+    "id": "t68",
     "kind": "medication",
     "label": "Méthylphénidate LP"
    },
    {
-    "id": "t62",
+    "id": "t69",
     "kind": "medication",
     "label": "Naltrexone"
    },
    {
-    "id": "t79",
+    "id": "t86",
     "kind": "medication",
     "label": "Varénicline"
    },
    {
-    "id": "t11",
-    "kind": "therapeutic_psycho",
-    "label": "Suivi addictologique médical (consultations)"
-   },
-   {
-    "id": "t12",
-    "kind": "therapeutic_psycho",
-    "label": "Suivi infirmier (IDE)"
-   },
-   {
     "id": "t13",
     "kind": "therapeutic_psycho",
-    "label": "Psychothérapie (psychologue)",
+    "label": "Suivi CSAPA",
     "aliases": [
-     "Suivi psychologique",
-     "Psychothérapie"
+     "Suivi addictologique (psychiatre, interne, IDE)"
     ]
    },
    {
     "id": "t14",
     "kind": "therapeutic_psycho",
+    "label": "Bilan biologique, ECG et urines"
+   },
+   {
+    "id": "t15",
+    "kind": "therapeutic_psycho",
+    "label": "Suivi psychologique",
+    "aliases": [
+     "Psychothérapie"
+    ]
+   },
+   {
+    "id": "t16",
+    "kind": "therapeutic_psycho",
     "label": "Groupe de prévention de la rechute",
     "aliases": [
-     "Groupe thérapeutique",
-     "Groupe addictologie"
+     "Groupe éducatif",
+     "Groupe"
     ]
    },
    {
-    "id": "t24",
+    "id": "t17",
     "kind": "therapeutic_psycho",
-    "label": "Suivi addictologue libéral (Bordeaux)",
+    "label": "Consultation ORL demandée"
+   },
+   {
+    "id": "t42",
+    "kind": "therapeutic_psycho",
+    "label": "Médecin traitant"
+   },
+   {
+    "id": "t43",
+    "kind": "therapeutic_psycho",
+    "label": "Suivi addictologique libéral",
     "aliases": [
-     "Suivi en libéral (Dr [SOIGNANT_8])"
+     "Suivi addictologique en libéral"
     ]
    },
    {
-    "id": "t32",
+    "id": "t46",
     "kind": "therapeutic_psycho",
-    "label": "Suivi éducatif individuel mensuel"
+    "label": "Entretiens éducateur spécialisé"
    },
    {
-    "id": "t36",
+    "id": "t47",
     "kind": "therapeutic_psycho",
-    "label": "Suivi CSAPA",
+    "label": "Suivi social",
     "aliases": [
-     "Suivi CSAPA (psychiatre addictologue, IDE)"
+     "Suivi social surendettement"
     ]
    },
    {
-    "id": "t40",
-    "kind": "therapeutic_psycho",
-    "label": "Suivi social (assistante sociale)"
-   },
-   {
-    "id": "t49",
+    "id": "t48",
     "kind": "therapeutic_psycho",
     "label": "Passage aux urgences (UHCD)"
    },
    {
-    "id": "t50",
+    "id": "t49",
     "kind": "therapeutic_psycho",
     "label": "Hospitalisation en addictologie",
     "aliases": [
@@ -1444,119 +1475,128 @@
     ]
    },
    {
-    "id": "t53",
+    "id": "t65",
     "kind": "therapeutic_psycho",
-    "label": "Entretien familial"
+    "label": "Thérapie de couple"
    },
    {
-    "id": "t67",
+    "id": "t66",
     "kind": "therapeutic_psycho",
-    "label": "Thérapie de couple en libéral"
+    "label": "Évaluation TDAH"
    },
    {
-    "id": "t68",
+    "id": "t94",
     "kind": "therapeutic_psycho",
-    "label": "Évaluation du TDAH (ASRS, DIVA 2.0)"
+    "label": "Blocage des sites de jeux"
    },
    {
-    "id": "t82",
+    "id": "t95",
     "kind": "therapeutic_psycho",
-    "label": "Logiciel de blocage des sites de jeux"
-   },
-   {
-    "id": "t83",
-    "kind": "therapeutic_psycho",
-    "label": "Suivi de tabacologie (IDE)"
-   },
-   {
-    "id": "t15",
-    "kind": "life_event",
-    "label": "Séparation des parents",
-    "aliases": [
-     "Parents séparés",
-     "Saisie de la maison familiale et séparation des parents"
-    ]
-   },
-   {
-    "id": "t16",
-    "kind": "life_event",
-    "label": "Entrée dans l'entreprise actuelle"
-   },
-   {
-    "id": "t17",
-    "kind": "life_event",
-    "label": "Mariage"
+    "label": "Consultations de tabacologie IDE"
    },
    {
     "id": "t18",
     "kind": "life_event",
-    "label": "Promotion comme cadre"
+    "label": "Séparation des parents",
+    "aliases": [
+     "Saisie de la maison et séparation des parents"
+    ]
    },
    {
     "id": "t19",
     "kind": "life_event",
-    "label": "Avertissement de l'employeur"
+    "label": "Scolarité (bac puis BTS commercial)"
    },
    {
     "id": "t20",
     "kind": "life_event",
-    "label": "Ultimatum de l'épouse"
+    "label": "Emploi : entrée dans l'entreprise actuelle"
    },
    {
     "id": "t21",
     "kind": "life_event",
-    "label": "Difficulté professionnelle (trimestre raté)"
+    "label": "Mariage"
    },
    {
     "id": "t22",
     "kind": "life_event",
-    "label": "Révélation de la rechute à l'épouse"
+    "label": "Naissance du premier enfant"
    },
    {
     "id": "t23",
     "kind": "life_event",
-    "label": "Réorganisation de l'entreprise"
+    "label": "Naissance du second enfant"
+   },
+   {
+    "id": "t24",
+    "kind": "life_event",
+    "label": "Promotion comme cadre"
+   },
+   {
+    "id": "t25",
+    "kind": "life_event",
+    "label": "Avertissement de l'employeur"
+   },
+   {
+    "id": "t26",
+    "kind": "life_event",
+    "label": "Ultimatum de l'épouse"
+   },
+   {
+    "id": "t27",
+    "kind": "life_event",
+    "label": "Remarque du manager devant l'équipe"
    },
    {
     "id": "t28",
     "kind": "life_event",
-    "label": "Interdiction volontaire de jeux (ANJ)"
+    "label": "Révélation de la rechute à l'épouse"
    },
    {
     "id": "t29",
     "kind": "life_event",
-    "label": "Endettement"
+    "label": "Reprise de la course à pied"
    },
    {
     "id": "t30",
     "kind": "life_event",
-    "label": "Révélation du jeu et des dettes par l'épouse",
-    "aliases": [
-     "Découverte du jeu et des dettes par l'épouse"
-    ]
+    "label": "Réorganisation de l'entreprise"
    },
    {
-    "id": "t37",
+    "id": "t50",
     "kind": "life_event",
-    "label": "Licenciement"
+    "label": "Difficultés professionnelles"
    },
    {
-    "id": "t38",
+    "id": "t51",
     "kind": "life_event",
     "label": "Arrêt de travail"
    },
    {
-    "id": "t39",
+    "id": "t52",
+    "kind": "life_event",
+    "label": "Licenciement"
+   },
+   {
+    "id": "t53",
     "kind": "life_event",
     "label": "Chômage"
    },
    {
-    "id": "t41",
+    "id": "t54",
     "kind": "life_event",
-    "label": "Suspension du permis de conduire"
+    "label": "Suspension du permis de conduire",
+    "aliases": [
+     "Permis suspendu"
+    ]
    },
    {
-    "id": "t42",
+    "id": "t55",
+    "kind": "life_event",
+    "label": "Endettement"
+   },
+   {
+    "id": "t56",
     "kind": "life_event",
     "label": "Séparation conjugale",
     "aliases": [
@@ -1564,68 +1604,94 @@
     ]
    },
    {
-    "id": "t43",
+    "id": "t57",
     "kind": "life_event",
     "label": "Hébergement chez sa sœur",
     "aliases": [
-     "Hébergement chez sa sœur, dettes"
+     "Dettes et hébergement chez sa sœur"
     ]
    },
    {
-    "id": "t44",
+    "id": "t58",
     "kind": "life_event",
-    "label": "Logement en studio (Mérignac)"
+    "label": "Logement en studio"
    },
    {
-    "id": "t47",
+    "id": "t59",
+    "kind": "life_event",
+    "label": "Interdiction volontaire de jeux (ANJ)",
+    "aliases": [
+     "Interdiction volontaire de jeux"
+    ]
+   },
+   {
+    "id": "t60",
     "kind": "life_event",
     "label": "Projet de vente de la maison"
    },
    {
-    "id": "t70",
-    "kind": "life_event",
-    "label": "Redoublement de la 5e et renvoi temporaire en 4e"
-   },
-   {
-    "id": "t71",
+    "id": "t74",
     "kind": "life_event",
     "label": "Accident de voiture sous cocaïne"
    },
    {
-    "id": "t73",
+    "id": "t75",
     "kind": "life_event",
-    "label": "Surendettement (dossier Banque de France)"
-   },
-   {
-    "id": "t74",
-    "kind": "life_event",
-    "label": "Plan de surendettement",
+    "label": "Père joueur pathologique",
     "aliases": [
-     "Plan de surendettement (mesures imposées)"
+     "Père joueur, PMU avec son père"
     ]
    },
    {
-    "id": "t75",
+    "id": "t77",
     "kind": "life_event",
-    "label": "Retour au domicile conjugal"
+    "label": "Difficultés scolaires"
    },
    {
-    "id": "t76",
+    "id": "t78",
+    "kind": "life_event",
+    "label": "Redoublement de la 5e"
+   },
+   {
+    "id": "t79",
+    "kind": "life_event",
+    "label": "Renvoi temporaire en 4e"
+   },
+   {
+    "id": "t80",
+    "kind": "life_event",
+    "label": "Père : éloignement"
+   },
+   {
+    "id": "t84",
+    "kind": "life_event",
+    "label": "Surendettement",
+    "aliases": [
+     "Plan de surendettement"
+    ]
+   },
+   {
+    "id": "t85",
     "kind": "life_event",
     "label": "Formation de remise à niveau en gestion commerciale"
    },
    {
-    "id": "t87",
+    "id": "t96",
     "kind": "life_event",
-    "label": "Nouvel emploi (commercial sédentaire, CDI)"
+    "label": "Révélation du jeu par l'épouse"
    },
    {
-    "id": "t89",
+    "id": "t100",
     "kind": "life_event",
-    "label": "Maladie du père (cancer du poumon métastatique)"
+    "label": "Recherche d'emploi"
    },
    {
-    "id": "t90",
+    "id": "t101",
+    "kind": "life_event",
+    "label": "Emploi de commercial sédentaire (CDI)"
+   },
+   {
+    "id": "t102",
     "kind": "life_event",
     "label": "Décès du père"
    }
@@ -1639,7 +1705,7 @@
     "ongoing": false,
     "mode": "usage",
     "lossOfControl": false,
-    "note": "Première prise « vers 25 ans » (23 ans dans la note du 02/02/2021), en soirée ; usage festif de week-end, toujours sniffé et en groupe, d'abord mensuel puis presque chaque week-end, pendant plusieurs années.",
+    "note": "Première prise vers 25 ans en soirée (23 ans selon o4), usage festif le week-end, sniffée, en groupe, jusqu'à la promotion de 2014",
     "observationIds": [
      "historique:o2",
      "historique:o4",
@@ -1653,7 +1719,28 @@
       25
      ],
      "end": null
-    }
+    },
+    "tellings": [
+     {
+      "start": "2004",
+      "end": "2014",
+      "note": "Première prise vers 25 ans en soirée (23 ans selon o4), usage festif le week-end, sniffée, en groupe, jusqu'à la promotion de 2014",
+      "observationIds": [
+       "historique:o2",
+       "historique:o4",
+       "historique:o15"
+      ]
+     },
+     {
+      "start": "2003",
+      "end": "2005",
+      "note": "Début vers 25 ans en contexte festif.",
+      "observationIds": [
+       "historique:o57",
+       "historique:o46"
+      ]
+     }
+    ]
    },
    {
     "id": "e2",
@@ -1663,47 +1750,22 @@
     "ongoing": false,
     "mode": "usage",
     "lossOfControl": true,
-    "note": "Après la promotion : usage en semaine, solitaire et professionnel, impossibilité de s'arrêter une fois le sachet ouvert ; 3 à 4 g par semaine, 4 jours sur 7, maximum 5 à 6 g un week-end ; arrêts de quelques semaines (deux ou trois fois) sans aide.",
+    "note": "Usage en semaine, solitaire, professionnel depuis la promotion ; 3 à 4 g/semaine ; impossibilité de s'arrêter, nuits blanches, descentes ; trouble de l'usage sévère",
     "observationIds": [
-     "historique:o1",
      "historique:o2",
      "historique:o4",
-     "historique:o15",
-     "historique:o46",
-     "historique:o57"
-    ],
-    "tellings": [
-     {
-      "start": "2014",
-      "end": "2021-01-28",
-      "note": "Après la promotion : usage en semaine, solitaire et professionnel, impossibilité de s'arrêter une fois le sachet ouvert ; 3 à 4 g par semaine, 4 jours sur 7, maximum 5 à 6 g un week-end ; arrêts de quelques semaines (deux ou trois fois) sans aide.",
-      "observationIds": [
-       "historique:o1",
-       "historique:o2",
-       "historique:o4",
-       "historique:o15"
-      ]
-     },
-     {
-      "start": "2014",
-      "end": "2021",
-      "note": "Usage professionnel et solitaire depuis 2014 avec perte de contrôle ; arrêt au CSAPA en 2021 (date masquée).",
-      "observationIds": [
-       "historique:o46",
-       "historique:o57"
-      ]
-     }
+     "historique:o15"
     ]
    },
    {
     "id": "e3",
     "trackId": "t1",
     "start": "2021-01-28",
-    "end": "2021-08",
+    "end": "2021-08-15",
     "ongoing": false,
     "mode": "sevrage",
     "lossOfControl": false,
-    "note": "Arrêt de la cocaïne depuis le jeudi 28/01/2021 ; abstinence maintenue (urines négatives le 16/03), environ six mois et demi.",
+    "note": "Abstinence de six mois et demi, urines négatives en mars",
     "observationIds": [
      "historique:o4",
      "historique:o7",
@@ -1715,12 +1777,12 @@
    {
     "id": "e4",
     "trackId": "t1",
-    "start": "2021-02-02",
-    "end": "2021-03-16",
+    "start": "2021-02",
+    "end": "2021-03",
     "ongoing": false,
     "mode": "craving",
     "lossOfControl": false,
-    "note": "Craving important le soir et en voiture aux endroits d'achat ; en diminution le 16/03, surtout le jeudi soir.",
+    "note": "Craving important le soir et en voiture, en diminution en mars (jeudi soir)",
     "observationIds": [
      "historique:o4",
      "historique:o7"
@@ -1729,29 +1791,33 @@
    {
     "id": "e5",
     "trackId": "t1",
-    "start": "2021-08",
-    "end": "2021-09",
+    "start": "2021-08-15",
+    "end": "2022-04",
     "ongoing": false,
     "mode": "rechute",
     "lossOfControl": false,
-    "note": "Rechute vers le 15 août pendant les vacances au Cap Ferret (« une trace, puis toute la nuit ») ; plusieurs prises la semaine suivante, dont deux soirées en solitaire.",
+    "note": "Rechute pendant les vacances au Cap Ferret, puis usage de week-end 2 à 3 fois par mois, 1 à 1,5 g",
     "observationIds": [
      "historique:o10",
+     "historique:o11",
+     "historique:o12",
      "historique:o15",
      "historique:o57"
     ],
     "tellings": [
      {
-      "start": "2021-08",
-      "end": "2021-09",
-      "note": "Rechute vers le 15 août pendant les vacances au Cap Ferret (« une trace, puis toute la nuit ») ; plusieurs prises la semaine suivante, dont deux soirées en solitaire.",
+      "start": "2021-08-15",
+      "end": "2022-04",
+      "note": "Rechute pendant les vacances au Cap Ferret, puis usage de week-end 2 à 3 fois par mois, 1 à 1,5 g",
       "observationIds": [
        "historique:o10",
+       "historique:o11",
+       "historique:o12",
        "historique:o15"
       ]
      },
      {
-      "start": "2021",
+      "start": "2021-06",
       "end": "2022-04",
       "note": "Rechute à l'été 2021 puis usage de week-end.",
       "observationIds": [
@@ -1763,17 +1829,13 @@
    {
     "id": "e6",
     "trackId": "t1",
-    "start": "2021-09",
-    "end": "2022-04",
+    "start": "2022-03",
+    "end": "2022-03",
     "ongoing": false,
-    "mode": "usage",
+    "mode": "craving",
     "lossOfControl": false,
-    "note": "Usage de week-end : 1 ou 2 fois par week-end puis 2 à 3 soirées par mois, 1 à 1,5 g ; pas d'usage en semaine ni professionnel ; urines positives en septembre et novembre ; pensée d'une « petite trace » avant une réunion en mars sans passage à l'acte.",
+    "note": "Pensée d'une « petite trace » avant une réunion, sans passage à l'acte",
     "observationIds": [
-     "historique:o10",
-     "historique:o11",
-     "historique:o12",
-     "historique:o15",
      "historique:o16"
     ]
    },
@@ -1784,8 +1846,8 @@
     "end": "2022-12-10",
     "ongoing": false,
     "mode": "rechute",
-    "lossOfControl": false,
-    "note": "Reprise d'un usage en semaine depuis début avril 2022 : seul à l'hôtel lors de déplacements, puis les mardi et jeudi, y compris au travail avant des rendez-vous ; environ 3 g par semaine ; reprise par paliers, non dite à l'épouse.",
+    "lossOfControl": true,
+    "note": "Reprise d'un usage en semaine, seul à l'hôtel puis mardi et jeudi, y compris au travail ; environ 3 g/semaine ; rechute d'un usage sévère",
     "observationIds": [
      "historique:o19",
      "historique:o20",
@@ -1800,7 +1862,7 @@
      {
       "start": "2022-04",
       "end": null,
-      "note": "Reprise d'un usage en semaine depuis début avril 2022 : seul à l'hôtel lors de déplacements, puis les mardi et jeudi, y compris au travail avant des rendez-vous ; environ 3 g par semaine ; reprise par paliers, non dite à l'épouse.",
+      "note": "Reprise d'un usage en semaine, seul à l'hôtel puis mardi et jeudi, y compris au travail ; environ 3 g/semaine ; rechute d'un usage sévère",
       "observationIds": [
        "historique:o19"
       ]
@@ -1808,7 +1870,7 @@
      {
       "start": "2022-04",
       "end": "2022-12-10",
-      "note": "Il reconnaît avoir « replongé » depuis avril 2022 ; usage en semaine 3 jours sur 7, puis 3-4 jours par semaine (3 à 4 g), urines positives en septembre, environ 3 g par semaine en novembre ; trouble de l'usage de cocaïne sévère en rechute. Abstinence déclarée depuis le contrôle du 10/12/2022.",
+      "note": "Rechute décrite (« replongé depuis avril ») ; usage 3 à 4 jours par semaine (3 à 4 g), urines positives en septembre, sniff avec perforation septale ; arrêt après le contrôle routier du 10/12",
       "observationIds": [
        "historique:o20",
        "historique:o21",
@@ -1825,11 +1887,11 @@
     "id": "e8",
     "trackId": "t2",
     "start": "1994",
-    "end": "2018",
+    "end": null,
     "ongoing": false,
-    "mode": "usage",
+    "mode": "intoxication",
     "lossOfControl": false,
-    "note": "Premières ivresses vers 15 ans ; consommation sociale importante liée au métier (repas d'affaires, salons).",
+    "note": "Premières ivresses vers 15 ans ; consommation sociale importante dans le métier",
     "observationIds": [
      "historique:o2"
     ],
@@ -1845,11 +1907,11 @@
     "id": "e9",
     "trackId": "t2",
     "start": "2018",
-    "end": "2021-02",
+    "end": "2021-01",
     "ongoing": false,
     "mode": "usage",
     "lossOfControl": false,
-    "note": "Depuis deux à trois ans à l'entrée : consommation quotidienne de 4 à 6 verres (vin, whisky le soir), davantage les soirs de cocaïne, jusqu'à une bouteille de vin et plusieurs whiskys ; pas de sevrage compliqué, ni tremblements, ni consommation matinale. TU alcool d'intensité moyenne.",
+    "note": "Consommation quotidienne de 4 à 6 verres (vin, whisky) depuis deux à trois ans, davantage les soirs de cocaïne ; trouble de l'usage moyen",
     "observationIds": [
      "historique:o2",
      "historique:o4",
@@ -1864,7 +1926,7 @@
     "ongoing": false,
     "mode": "usage",
     "lossOfControl": false,
-    "note": "Consommation réduite : 2-3 verres le soir en février, puis pas d'alcool en semaine sauf exception et 3-4 verres le samedi ; alcool le week-end en avril.",
+    "note": "Alcool réduit : 2-3 verres le soir puis pas d'alcool en semaine, 3-4 verres le samedi",
     "observationIds": [
      "historique:o4",
      "historique:o7",
@@ -1877,9 +1939,9 @@
     "start": "2021-08",
     "end": "2022-04",
     "ongoing": false,
-    "mode": "usage",
+    "mode": "intoxication",
     "lossOfControl": false,
-    "note": "Binge les soirs de cocaïne (vin puis whisky, jusqu'à 8-10 verres), sinon 1-2 verres ; réduction en semaine.",
+    "note": "Binge les soirs de cocaïne (jusqu'à 8-10 verres), sinon 1-2 verres",
     "observationIds": [
      "historique:o10",
      "historique:o12",
@@ -1890,17 +1952,788 @@
     "id": "e12",
     "trackId": "t2",
     "start": "2022-04",
-    "end": "2023-04-11",
+    "end": null,
+    "ongoing": true,
+    "mode": "rechute",
+    "lossOfControl": false,
+    "note": "Reprise d'une consommation quotidienne de 4-5 verres le soir",
+    "observationIds": [
+     "historique:o19"
+    ]
+   },
+   {
+    "id": "e13",
+    "trackId": "t3",
+    "start": "1995",
+    "end": "2026-02-20",
     "ongoing": false,
     "mode": "usage",
     "lossOfControl": false,
-    "note": "Consommation de nouveau quotidienne, 4-5 verres le soir.",
+    "note": "15 à 20 cigarettes par jour depuis 16 ans, plus les soirs de cocaïne ; pas de tentative d'arrêt, refuse d'aborder l'arrêt",
     "observationIds": [
+     "historique:o2",
+     "historique:o8",
+     "historique:o11",
+     "historique:o15",
+     "historique:o65",
+     "historique:o67"
+    ],
+    "fromAge": {
+     "start": [
+      16,
+      16
+     ],
+     "end": null
+    },
+    "tellings": [
+     {
+      "start": "1995",
+      "end": null,
+      "note": "15 à 20 cigarettes par jour depuis 16 ans, plus les soirs de cocaïne ; pas de tentative d'arrêt, refuse d'aborder l'arrêt",
+      "observationIds": [
+       "historique:o2",
+       "historique:o11",
+       "historique:o15",
+       "historique:o8"
+      ]
+     },
+     {
+      "start": "1995",
+      "end": "2026-02-20",
+      "note": "10 à 12 cigarettes par jour « depuis l'âge de 16 ans » (10/j en 12/2025) ; Fagerström 5, CO 18 ppm ; plusieurs tentatives d'arrêt reprises « dès que ça allait mieux ».",
+      "observationIds": [
+       "historique:o65",
+       "historique:o67"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e14",
+    "trackId": "t4",
+    "start": "1991",
+    "end": "1999",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "Consommation au lycée, arrêt vers 20 ans",
+    "observationIds": [
+     "historique:o2"
+    ],
+    "fromAge": {
+     "start": [
+      12,
+      17
+     ],
+     "end": [
+      20,
+      20
+     ]
+    }
+   },
+   {
+    "id": "e15",
+    "trackId": "t5",
+    "start": "2021-01",
+    "end": "2021-01",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "« Je ne joue pas, à part un loto de temps en temps »",
+    "observationIds": [
+     "historique:o2"
+    ]
+   },
+   {
+    "id": "e16",
+    "trackId": "t5",
+    "start": "2022-02",
+    "end": null,
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "Pronostics entre collègues, jeu non exploré en détail ; se ferme quand il est question de dettes en groupe",
+    "observationIds": [
+     "historique:o15",
+     "historique:o17"
+    ]
+   },
+   {
+    "id": "e17",
+    "trackId": "t6",
+    "start": "2022-02",
+    "end": null,
+    "ongoing": true,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "Beaucoup de temps sur son téléphone le soir (matchs, résultats, vidéos) pour combler un sentiment de vide",
+    "observationIds": [
+     "historique:o15",
+     "historique:o16",
+     "historique:o17"
+    ]
+   },
+   {
+    "id": "e18",
+    "trackId": "t7",
+    "start": "1985",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Hyperactivité, impulsivité, besoin de remplir chaque minute déjà enfant, concentration difficile « depuis toujours » masquée par la cocaïne ; pas d'évaluation formelle",
+    "observationIds": [
+     "historique:o2",
+     "historique:o5",
+     "historique:o8",
+     "historique:o15"
+    ],
+    "fromAge": {
+     "start": [
+      6,
+      11
+     ],
+     "end": null
+    }
+   },
+   {
+    "id": "e19",
+    "trackId": "t8",
+    "start": "2021-01-18",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Périodes de « coup de mou » et descentes tristes après les week-ends de consommation ; thymie stable, pas d'idées suicidaires",
+    "observationIds": [
+     "historique:o2",
+     "historique:o12",
+     "historique:o15"
+    ],
+    "startUnknown": true
+   },
+   {
+    "id": "e20",
+    "trackId": "t9",
+    "start": "1991",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Appendicectomie à 12 ans",
+    "observationIds": [
+     "historique:o2"
+    ],
+    "fromAge": {
+     "start": [
+      12,
+      12
+     ],
+     "end": null
+    }
+   },
+   {
+    "id": "e21",
+    "trackId": "t10",
+    "start": "2021-01",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Sommeil de 3 à 5 heures par nuit, perturbé au sevrage puis 6 h en mars, de nouveau 4-5 h",
+    "observationIds": [
+     "historique:o2",
+     "historique:o4",
+     "historique:o7",
+     "historique:o12",
+     "historique:o15",
+     "historique:o19"
+    ]
+   },
+   {
+    "id": "e22",
+    "trackId": "t11",
+    "start": "2021-01",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "TA 142/88 à l'entrée, 138/86 en septembre 2021, 136/84 en février 2022",
+    "observationIds": [
+     "historique:o2",
+     "historique:o11",
+     "historique:o15"
+    ]
+   },
+   {
+    "id": "e23",
+    "trackId": "t12",
+    "start": "2022-04",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Épistaxis répétées depuis quelques semaines, consultation ORL demandée",
+    "observationIds": [
+     "historique:o19"
+    ]
+   },
+   {
+    "id": "e24",
+    "trackId": "t13",
+    "start": "2021-01-18",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Première consultation le 18/01/2021, suivi mensuel puis tous les 15 jours à 2 mois ; premier suivi spécialisé de sa vie",
+    "observationIds": [
+     "historique:o1",
+     "historique:o2",
+     "historique:o3",
+     "historique:o4",
+     "historique:o15",
      "historique:o19",
      "historique:o21",
      "historique:o24",
+     "historique:o28",
+     "urgences:o1",
+     "historique:o46",
+     "historique:o57"
+    ],
+    "tellings": [
+     {
+      "start": "2021-01-18",
+      "end": null,
+      "note": "Première consultation le 18/01/2021, suivi mensuel puis tous les 15 jours à 2 mois ; premier suivi spécialisé de sa vie",
+      "observationIds": [
+       "historique:o1",
+       "historique:o2",
+       "historique:o3",
+       "historique:o4",
+       "historique:o15",
+       "historique:o19"
+      ]
+     },
+     {
+      "start": "2021-01",
+      "end": null,
+      "note": "Suivi psychiatrique et addictologique au CSAPA depuis environ deux ans en janvier 2023 (début approximatif) ; consultations, IDE, hospitalisation refusée en 2022",
+      "observationIds": [
+       "historique:o21",
+       "historique:o24",
+       "historique:o28",
+       "urgences:o1",
+       "historique:o57",
+       "historique:o46"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e25",
+    "trackId": "t14",
+    "start": "2021-01-26",
+    "end": "2021-01-26",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Prise de sang, ECG, urines positives à la cocaïne, AUDIT 17",
+    "observationIds": [
+     "historique:o3",
+     "historique:o4"
+    ]
+   },
+   {
+    "id": "e26",
+    "trackId": "t15",
+    "start": "2021-02-16",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Entretiens tous les 15 jours, bonne alliance",
+    "observationIds": [
+     "historique:o5",
+     "historique:o9",
+     "historique:o15",
+     "historique:o16",
+     "historique:o38",
+     "historique:o42",
+     "historique:o57",
+     "historique:o62",
+     "historique:o68",
+     "historique:o74"
+    ],
+    "tellings": [
+     {
+      "start": "2021-02-16",
+      "end": null,
+      "note": "Entretiens tous les 15 jours, bonne alliance",
+      "observationIds": [
+       "historique:o5",
+       "historique:o9",
+       "historique:o15",
+       "historique:o16"
+      ]
+     },
+     {
+      "start": "2021",
+      "end": null,
+      "note": "Psychologue depuis 2021 ; hebdomadaire en 05/2023, tous les 15 jours en 09/2023, mensuelle en 2025.",
+      "observationIds": [
+       "historique:o57",
+       "historique:o38",
+       "historique:o42"
+      ]
+     },
+     {
+      "start": "2021-02",
+      "end": null,
+      "note": "Psychothérapie depuis février 2021 : tous les 15 jours, puis hebdomadaire après l'hospitalisation d'avril 2023, mensuelle depuis septembre 2025 ; bilans à 4 ans et demi et 5 ans de suivi ; il veut « garder un fil » avec le centre.",
+      "observationIds": [
+       "historique:o62",
+       "historique:o68",
+       "historique:o74"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e27",
+    "trackId": "t16",
+    "start": "2022-01-18",
+    "end": "2022-06-14",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "8 séances de janvier à juin, le mardi soir, animé par l'éducateur ; assidu aux trois premières, jugé utile mais scolaire",
+    "observationIds": [
+     "historique:o12",
+     "historique:o14",
+     "historique:o15",
+     "historique:o16",
+     "historique:o17",
+     "historique:o20",
+     "historique:o66"
+    ],
+    "tellings": [
+     {
+      "start": "2022-01-18",
+      "end": null,
+      "note": "8 séances de janvier à juin, le mardi soir, animé par l'éducateur ; assidu aux trois premières, jugé utile mais scolaire",
+      "observationIds": [
+       "historique:o12",
+       "historique:o14",
+       "historique:o15",
+       "historique:o16",
+       "historique:o17"
+      ]
+     },
+     {
+      "start": null,
+      "end": "2022-06-14",
+      "note": "Groupe de 8 séances, 3 manquées ; entretien individuel de fin de groupe le 14/06/2022",
+      "observationIds": [
+       "historique:o20"
+      ]
+     },
+     {
+      "start": "2022",
+      "end": "2022",
+      "note": "Groupe de 2022 avec l'éducateur, centré sur la cocaïne ; le patient y pariait parfois pendant les pauses.",
+      "observationIds": [
+       "historique:o66"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e28",
+    "trackId": "t17",
+    "start": "2022-05",
+    "end": "2022-05",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Consultation ORL demandée pour les épistaxis ; arrêt de travail proposé et refusé",
+    "observationIds": [
+     "historique:o19"
+    ]
+   },
+   {
+    "id": "e29",
+    "trackId": "t18",
+    "start": "1993",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Parents séparés quand il avait 14 ans, resté avec sa mère ; père souvent sur les routes",
+    "observationIds": [
+     "historique:o2",
+     "historique:o5",
+     "historique:o44",
+     "historique:o45",
+     "historique:o47",
+     "historique:o68"
+    ],
+    "fromAge": {
+     "start": [
+      14,
+      14
+     ],
+     "end": null
+    },
+    "tellings": [
+     {
+      "start": "1993",
+      "end": null,
+      "note": "Parents séparés quand il avait 14 ans, resté avec sa mère ; père souvent sur les routes",
+      "observationIds": [
+       "historique:o2",
+       "historique:o5",
+       "historique:o68"
+      ]
+     },
+     {
+      "start": "1993",
+      "end": null,
+      "note": "Maison familiale saisie l'année de ses 14 ans, mère partie avec les deux enfants.",
+      "observationIds": [
+       "historique:o44",
+       "historique:o45",
+       "historique:o47"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e30",
+    "trackId": "t19",
+    "start": "1991",
+    "end": "1996",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Scolarité correcte, bac puis BTS commercial",
+    "observationIds": [
+     "historique:o2"
+    ],
+    "fromAge": {
+     "start": [
+      12,
+      17
+     ],
+     "end": null
+    }
+   },
+   {
+    "id": "e31",
+    "trackId": "t20",
+    "start": "2006",
+    "end": "2006",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Commercial dans plusieurs entreprises puis entrée en 2006 dans l'entreprise actuelle",
+    "observationIds": [
+     "historique:o2"
+    ]
+   },
+   {
+    "id": "e32",
+    "trackId": "t21",
+    "start": "2009",
+    "end": "2009",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Marié depuis 2009 avec une infirmière scolaire",
+    "observationIds": [
+     "historique:o2"
+    ]
+   },
+   {
+    "id": "e33",
+    "trackId": "t22",
+    "start": "2011",
+    "end": "2011",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Enfant de 9 ans en janvier 2021 (année approximative)",
+    "observationIds": [
+     "historique:o2"
+    ]
+   },
+   {
+    "id": "e34",
+    "trackId": "t23",
+    "start": "2014",
+    "end": "2014",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Enfant de 6 ans en janvier 2021 (année approximative)",
+    "observationIds": [
+     "historique:o2"
+    ]
+   },
+   {
+    "id": "e35",
+    "trackId": "t24",
+    "start": "2014",
+    "end": "2014",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Promotion comme cadre, début de la pression et de l'usage professionnel",
+    "observationIds": [
+     "historique:o2",
+     "historique:o15"
+    ]
+   },
+   {
+    "id": "e36",
+    "trackId": "t25",
+    "start": "2020-12",
+    "end": "2020-12",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Avertissement écrit pour un rendez-vous client manqué",
+    "observationIds": [
+     "historique:o1",
+     "historique:o2"
+    ]
+   },
+   {
+    "id": "e37",
+    "trackId": "t26",
+    "start": "2020-12",
+    "end": "2020-12",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Épouse trouve de la cocaïne dans sa veste mi-décembre : « la dernière fois »",
+    "observationIds": [
+     "historique:o1",
+     "historique:o2"
+    ]
+   },
+   {
+    "id": "e38",
+    "trackId": "t27",
+    "start": "2021-06",
+    "end": "2021-06",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Trimestre « raté », remarque du manager devant l'équipe, effondrement",
+    "observationIds": [
+     "historique:o9"
+    ]
+   },
+   {
+    "id": "e39",
+    "trackId": "t28",
+    "start": "2021-10",
+    "end": "2021-10",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Informe son épouse de la rechute de l'été, qui reste",
+    "observationIds": [
+     "historique:o12",
+     "historique:o15"
+    ]
+   },
+   {
+    "id": "e40",
+    "trackId": "t29",
+    "start": "2021-03",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Course à pied deux fois par semaine « pour remplacer »",
+    "observationIds": [
+     "historique:o7"
+    ]
+   },
+   {
+    "id": "e41",
+    "trackId": "t30",
+    "start": "2022-03",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Réorganisation annoncée, nouveau directeur régional, peur d'être mis au placard",
+    "observationIds": [
+     "historique:o16",
+     "historique:o19"
+    ]
+   },
+   {
+    "id": "e42",
+    "trackId": "t1",
+    "start": "2009",
+    "end": "2023-04-09",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": true,
+    "note": "Consommation de cocaïne depuis l'âge de 30 ans selon le patient, quasi quotidienne début 2023 ; trouble d'usage sévère",
+    "observationIds": [
+     "urgences:o1",
+     "historique:o24"
+    ],
+    "fromAge": {
+     "start": [
+      30,
+      30
+     ],
+     "end": null
+    }
+   },
+   {
+    "id": "e43",
+    "trackId": "t31",
+    "start": "2019-03",
+    "end": "2019-06",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "Cocaïne cuisinée et fumée à la pipe au printemps 2019, 5 ou 6 week-ends, avec un collègue ; arrêt par peur de la dépendance, jamais évoqué avant juin 2022",
+    "observationIds": [
+     "historique:o20",
+     "historique:o21"
+    ]
+   },
+   {
+    "id": "e44",
+    "trackId": "t1",
+    "start": "2015",
+    "end": "2016",
+    "ongoing": false,
+    "mode": "sevrage",
+    "lossOfControl": false,
+    "note": "Consommation de cocaïne motivant un suivi addictologique libéral en 2015 ; arrêt puis abstinence d'environ huit mois en 2015-2016, niée à l'entrée",
+    "observationIds": [
+     "historique:o22"
+    ]
+   },
+   {
+    "id": "e46",
+    "trackId": "t1",
+    "start": "2022-12-10",
+    "end": "2022-12-20",
+    "ongoing": false,
+    "mode": "sevrage",
+    "lossOfControl": false,
+    "note": "Abstinence de 10 jours déclarée après le contrôle routier",
+    "observationIds": [
+     "historique:o27"
+    ]
+   },
+   {
+    "id": "e47",
+    "trackId": "t1",
+    "start": "2023-01",
+    "end": "2023-04-09",
+    "ongoing": false,
+    "mode": "rechute",
+    "lossOfControl": true,
+    "note": "Reprise après les fêtes, 2 à 3 fois par semaine puis 3 soirs sur 7 depuis mars, seul le soir",
+    "observationIds": [
+     "historique:o29",
+     "historique:o32",
+     "historique:o34",
+     "urgences:o1"
+    ]
+   },
+   {
+    "id": "e48",
+    "trackId": "t1",
+    "start": "2023-04-08",
+    "end": null,
+    "ongoing": false,
+    "mode": "intoxication",
+    "lossOfControl": false,
+    "note": "Intoxication aiguë : environ 2 g sniffés entre 20h et 23h, seul, avec une bouteille de whisky ; urines positives",
+    "observationIds": [
+     "urgences:o1",
+     "historique:o34",
+     "historique:o41",
+     "historique:o50",
+     "historique:o53",
+     "historique:o57"
+    ],
+    "tellings": [
+     {
+      "start": "2023-04-08",
+      "end": null,
+      "note": "Intoxication aiguë : environ 2 g sniffés entre 20h et 23h, seul, avec une bouteille de whisky ; urines positives",
+      "observationIds": [
+       "urgences:o1",
+       "historique:o34"
+      ]
+     },
+     {
+      "start": "2023-04-09",
+      "end": null,
+      "note": "Intoxication le 09/04/2023 (crise suicidaire) ; abstinent depuis (urines négatives, 3 mois en 07/2023, 11 mois en 03/2024, 14 mois en 06/2024).",
+      "observationIds": [
+       "historique:o57",
+       "historique:o41",
+       "historique:o50",
+       "historique:o53"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e49",
+    "trackId": "t1",
+    "start": "2023-04-11",
+    "end": "2023-04-27",
+    "ongoing": false,
+    "mode": "craving",
+    "lossOfControl": false,
+    "note": "Craving intense les premiers jours d'hospitalisation, en nette baisse à la sortie",
+    "observationIds": [
+     "historique:o35",
+     "historique:o36",
+     "historique:o37"
+    ]
+   },
+   {
+    "id": "e50",
+    "trackId": "t1",
+    "start": "2023-04-09",
+    "end": null,
+    "ongoing": true,
+    "mode": "sevrage",
+    "lossOfControl": false,
+    "note": "Abstinence de cocaïne depuis le 09/04/2023 à la sortie d'hospitalisation",
+    "observationIds": [
+     "historique:o37"
+    ]
+   },
+   {
+    "id": "e51",
+    "trackId": "t2",
+    "start": "2022-06",
+    "end": "2023-04-10",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "Alcool quotidien : 5-6 verres/j en octobre, 4-6 en janvier, 3-5 en mars, whisky tous les soirs en avril ; réduit à 2-3 verres après le 10/12/2022",
+    "observationIds": [
+     "historique:o21",
+     "historique:o24",
      "historique:o25",
-     "historique:o26",
      "historique:o27",
      "historique:o29",
      "historique:o32",
@@ -1909,22 +2742,13 @@
     ],
     "tellings": [
      {
-      "start": "2022-04",
-      "end": null,
-      "note": "Consommation de nouveau quotidienne, 4-5 verres le soir.",
-      "observationIds": [
-       "historique:o19"
-      ]
-     },
-     {
       "start": "2022-06",
-      "end": "2023-04-11",
-      "note": "Alcool quotidien (5-6 verres/j en octobre 2022, alcoolémie 0,6 g/L au contrôle du 10/12/2022, baisse à deux ou trois verres fin décembre, 4-6 verres/j en janvier, 3-5 en mars, whisky tous les soirs en avril). Trouble de l'usage d'alcool noté en janvier 2023.",
+      "end": "2023-04-10",
+      "note": "Alcool quotidien : 5-6 verres/j en octobre, 4-6 en janvier, 3-5 en mars, whisky tous les soirs en avril ; réduit à 2-3 verres après le 10/12/2022",
       "observationIds": [
        "historique:o21",
        "historique:o24",
        "historique:o25",
-       "historique:o26",
        "historique:o27",
        "historique:o29",
        "historique:o32",
@@ -1942,568 +2766,287 @@
     ]
    },
    {
-    "id": "e13",
-    "trackId": "t3",
-    "start": "1995",
-    "end": "2026-02-20",
+    "id": "e52",
+    "trackId": "t2",
+    "start": "2023-04-08",
+    "end": null,
     "ongoing": false,
-    "mode": "usage",
+    "mode": "intoxication",
     "lossOfControl": false,
-    "note": "15 à 20 cigarettes par jour, plus les soirs de cocaïne ; « depuis 16 ans » (note d'entrée) ou depuis l'âge de 16 ans (synthèse de 2022) ; pas de tentative d'arrêt, refuse d'aborder l'arrêt.",
+    "note": "Intoxication alcoolique aiguë (alcoolémie 1,92 g/L, bouteille de whisky)",
     "observationIds": [
-     "historique:o2",
-     "historique:o4",
-     "historique:o8",
-     "historique:o11",
-     "historique:o15",
      "urgences:o1",
-     "historique:o37",
-     "historique:o41",
-     "historique:o46",
-     "historique:o57",
-     "historique:o65",
-     "historique:o67",
-     "historique:o68",
-     "historique:o70"
-    ],
-    "fromAge": {
-     "start": [
-      16,
-      16
-     ],
-     "end": null
-    },
-    "tellings": [
-     {
-      "start": "1995",
-      "end": null,
-      "note": "15 à 20 cigarettes par jour, plus les soirs de cocaïne ; « depuis 16 ans » (note d'entrée) ou depuis l'âge de 16 ans (synthèse de 2022) ; pas de tentative d'arrêt, refuse d'aborder l'arrêt.",
-      "observationIds": [
-       "historique:o2",
-       "historique:o4",
-       "historique:o8",
-       "historique:o11",
-       "historique:o15"
-      ]
-     },
-     {
-      "start": null,
-      "end": null,
-      "note": "Tabac 15 cigarettes par jour aux urgences le 09/04/2023, 5 cigarettes par jour sous patch à la sortie ; début non précisé.",
-      "observationIds": [
-       "urgences:o1",
-       "historique:o37"
-      ]
-     },
-     {
-      "start": null,
-      "end": null,
-      "note": "5 à 8 cigarettes par jour en 2023, 8 à 10 en 2025.",
-      "observationIds": [
-       "historique:o41",
-       "historique:o46",
-       "historique:o57"
-      ]
-     },
-     {
-      "start": "1995",
-      "end": "2026-02-20",
-      "note": "10 à 12 cigarettes par jour \"depuis l'âge de 16 ans\" ; Fagerström 5, CO 18 ppm en 01/2026 ; arrêt le 20/02/2026.",
-      "observationIds": [
-       "historique:o65",
-       "historique:o67",
-       "historique:o68",
-       "historique:o70"
-      ]
-     }
+     "historique:o34"
     ]
    },
    {
-    "id": "e14",
-    "trackId": "t4",
-    "start": "1994",
-    "end": "2000",
+    "id": "e53",
+    "trackId": "t2",
+    "start": "2023-04-11",
+    "end": "2023-04-21",
     "ongoing": false,
-    "mode": "usage",
+    "mode": "sevrage",
     "lossOfControl": false,
-    "note": "Consommation au lycée, arrêt vers 20 ans.",
+    "note": "Sevrage hospitalier sous oxazépam sans complication, arrêt le 21/04",
     "observationIds": [
-     "historique:o2"
-    ],
-    "fromAge": {
-     "start": [
-      15,
-      18
-     ],
-     "end": [
-      19,
-      21
-     ]
-    }
-   },
-   {
-    "id": "e15",
-    "trackId": "t5",
-    "start": "2021-01-18",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Diagnostic DSM-5 à l'entrée (7 critères) ; en rémission partielle (usage de week-end) en février 2022, puis rechute d'un usage sévère depuis avril 2022.",
-    "observationIds": [
-     "historique:o2",
-     "historique:o15",
-     "historique:o19"
-    ]
-   },
-   {
-    "id": "e16",
-    "trackId": "t6",
-    "start": "2021-01-18",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "4 critères DSM-5 à l'entrée ; amélioré en février 2022.",
-    "observationIds": [
-     "historique:o2",
-     "historique:o15"
-    ]
-   },
-   {
-    "id": "e17",
-    "trackId": "t7",
-    "start": "2021-01-18",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Hyperactivité et impulsivité notées à l'entretien d'entrée ; plaintes de concentration, d'oublis et de désorganisation au travail, présentes « depuis toujours » selon lui ; pas d'évaluation formelle.",
-    "observationIds": [
-     "historique:o2",
-     "historique:o8",
-     "historique:o15"
-    ]
-   },
-   {
-    "id": "e18",
-    "trackId": "t8",
-    "start": "1991",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Appendicectomie à 12 ans.",
-    "observationIds": [
-     "historique:o2"
-    ],
-    "fromAge": {
-     "start": [
-      12,
-      12
-     ],
-     "end": null
-    }
-   },
-   {
-    "id": "e19",
-    "trackId": "t9",
-    "start": "2021-01-18",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Sommeil de 3 à 5 h à l'entrée, très perturbé les premières nuits d'arrêt, meilleur en mars 2021 (6 h), puis sommeil court (5 h fin 2021 et début 2022, 4 h en mai 2022).",
-    "observationIds": [
-     "historique:o2",
-     "historique:o4",
-     "historique:o7",
-     "historique:o12",
-     "historique:o15",
-     "historique:o19"
-    ]
-   },
-   {
-    "id": "e20",
-    "trackId": "t10",
-    "start": "2022-04",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Épistaxis répétées depuis quelques semaines, croûtes nasales ; consultation ORL demandée.",
-    "observationIds": [
-     "historique:o19"
-    ]
-   },
-   {
-    "id": "e21",
-    "trackId": "t11",
-    "start": "2021-01-18",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Première consultation le 18/01/2021 après appel du 12/01 ; suivi par psychiatre addictologue et interne, puis suivi mensuel ; pas de traitement médicamenteux.",
-    "observationIds": [
-     "historique:o1",
-     "historique:o2",
-     "historique:o4",
-     "historique:o8",
-     "historique:o10",
-     "historique:o12",
-     "historique:o15",
-     "historique:o19"
-    ]
-   },
-   {
-    "id": "e22",
-    "trackId": "t12",
-    "start": "2021-01-26",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Bilan biologique, ECG et entretiens avec l'IDE ; contacts téléphoniques ; rappel prévu après le rendez-vous manqué d'avril 2022.",
-    "observationIds": [
-     "historique:o3",
-     "historique:o6",
-     "historique:o11",
-     "historique:o13",
-     "historique:o18"
-    ]
-   },
-   {
-    "id": "e23",
-    "trackId": "t13",
-    "start": "2021-02-16",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Entretiens tous les 15 jours proposés dès le premier entretien du 16/02/2021 ; bonne alliance ; travail sur le besoin de reconnaissance, les vacances à risque et les signaux d'alerte.",
-    "observationIds": [
-     "historique:o5",
-     "historique:o9",
-     "historique:o13",
-     "historique:o15",
-     "historique:o16",
-     "historique:o29",
-     "historique:o31",
+     "historique:o34",
      "historique:o36",
      "historique:o37",
-     "historique:o38",
-     "historique:o42",
-     "historique:o44",
-     "historique:o57",
-     "historique:o62",
-     "historique:o68",
-     "historique:o74"
+     "historique:o57"
     ],
     "tellings": [
      {
-      "start": "2021-02-16",
-      "end": null,
-      "note": "Entretiens tous les 15 jours proposés dès le premier entretien du 16/02/2021 ; bonne alliance ; travail sur le besoin de reconnaissance, les vacances à risque et les signaux d'alerte.",
+      "start": "2023-04-11",
+      "end": "2023-04-21",
+      "note": "Sevrage hospitalier sous oxazépam sans complication, arrêt le 21/04",
       "observationIds": [
-       "historique:o5",
-       "historique:o9",
-       "historique:o13",
-       "historique:o15",
-       "historique:o16"
-      ]
-     },
-     {
-      "start": "2023-01-24",
-      "end": null,
-      "note": "Psychologue déjà en place au 24/01/2023 (« maintenue ») ; entretien le 14/02/2023 ; psychologue hebdomadaire pendant un mois prévu à la sortie.",
-      "observationIds": [
-       "historique:o29",
-       "historique:o31",
+       "historique:o34",
        "historique:o36",
        "historique:o37"
       ]
      },
      {
-      "start": "2021",
-      "end": null,
-      "note": "Séances hebdomadaires jusqu'à l'été 2023, tous les 15 jours dès septembre 2023, puis mensuelles.",
+      "start": "2023-04-11",
+      "end": "2023-04-27",
+      "note": "Sevrage hospitalier pendant l'hospitalisation.",
       "observationIds": [
-       "historique:o38",
-       "historique:o42",
-       "historique:o44",
        "historique:o57"
       ]
-     },
-     {
-      "start": "2021-02",
-      "end": null,
-      "note": "Suivi depuis février 2021 : tous les 15 jours, puis hebdomadaire après l'hospitalisation d'avril 2023, mensuelle depuis septembre 2025.",
-      "observationIds": [
-       "historique:o62",
-       "historique:o68",
-       "historique:o74"
-      ]
      }
     ]
    },
    {
-    "id": "e24",
-    "trackId": "t14",
-    "start": "2022-01-18",
-    "end": "2022-06-14",
+    "id": "e54",
+    "trackId": "t5",
+    "start": "2017",
+    "end": "2023-01",
     "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "8 séances de janvier à juin 2022, le mardi soir, animées par l'éducateur ; première séance le 18/01 ; patient jugeant le groupe utile mais un peu scolaire.",
+    "mode": "usage",
+    "lossOfControl": true,
+    "note": "Paris sportifs en ligne depuis 2017, d'abord sur le foot avec des collègues (pronostics, « petits billets ») ; chasse aux pertes, mensonges, emprunts ; dettes cachées ; perte estimée à plus de 60 000 euros ; révélé en janvier 2023",
     "observationIds": [
-     "historique:o12",
-     "historique:o14",
-     "historique:o15",
-     "historique:o16",
-     "historique:o17",
      "historique:o20",
-     "historique:o66"
+     "historique:o28",
+     "historique:o29",
+     "historique:o31",
+     "historique:o57",
+     "historique:o46",
+     "historique:o50"
+    ]
+   },
+   {
+    "id": "e55",
+    "trackId": "t5",
+    "start": "2020-03",
+    "end": "2023-01",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": true,
+    "note": "Augmentation nette au premier confinement : tous sports, paris en direct, plusieurs comptes, la nuit, mises de 200 à 500 euros",
+    "observationIds": [
+     "historique:o29",
+     "historique:o57"
     ],
     "tellings": [
      {
-      "start": "2022-01-18",
-      "end": null,
-      "note": "8 séances de janvier à juin 2022, le mardi soir, animées par l'éducateur ; première séance le 18/01 ; patient jugeant le groupe utile mais un peu scolaire.",
+      "start": "2020-03",
+      "end": "2023-01",
+      "note": "Augmentation nette au premier confinement : tous sports, paris en direct, plusieurs comptes, la nuit, mises de 200 à 500 euros",
       "observationIds": [
-       "historique:o12",
-       "historique:o14",
-       "historique:o15",
-       "historique:o16",
-       "historique:o17"
+       "historique:o29"
       ]
      },
      {
-      "start": "2022-06-14",
-      "end": null,
-      "note": "Fin de groupe de 8 séances (3 manquées) ; entretien individuel de fin de groupe.",
+      "start": "2020-03",
+      "end": "2020-05",
+      "note": "Paris majorés au confinement.",
       "observationIds": [
-       "historique:o20"
-      ]
-     },
-     {
-      "start": "2022",
-      "end": null,
-      "note": "\"Le groupe de 2022\", où il était question de la cocaïne.",
-      "observationIds": [
-       "historique:o66"
+       "historique:o57"
       ]
      }
     ]
    },
    {
-    "id": "e25",
-    "trackId": "t15",
-    "start": "1993",
+    "id": "e56",
+    "trackId": "t5",
+    "start": "2023-01",
     "end": null,
+    "ongoing": true,
+    "mode": "sevrage",
+    "lossOfControl": false,
+    "note": "Plus de pari depuis fin janvier selon lui, interdiction volontaire de jeux (ANJ) en cours ; paris « dans la tête » en avril",
+    "observationIds": [
+     "historique:o32",
+     "historique:o34"
+    ]
+   },
+   {
+    "id": "e57",
+    "trackId": "t3",
+    "start": "2023-04-09",
+    "end": null,
+    "ongoing": true,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "Tabac 15 cigarettes par jour aux urgences, 5 cig/j à la sortie sous patch",
+    "observationIds": [
+     "urgences:o1",
+     "historique:o37"
+    ],
+    "startUnknown": true
+   },
+   {
+    "id": "e58",
+    "trackId": "t32",
+    "start": "2016",
+    "end": "2016",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Séparation des parents quand il avait 14 ans ; il est resté avec sa mère.",
+    "note": "État dépressif réactionnel après l'arrêt de la cocaïne, bonne évolution sous paroxétine ; minimisé par le patient (« un coup de fatigue »)",
     "observationIds": [
-     "historique:o2",
-     "historique:o44",
+     "historique:o22",
+     "historique:o57"
+    ],
+    "tellings": [
+     {
+      "start": "2016",
+      "end": "2016",
+      "note": "État dépressif réactionnel après l'arrêt de la cocaïne, bonne évolution sous paroxétine ; minimisé par le patient (« un coup de fatigue »)",
+      "observationIds": [
+       "historique:o22"
+      ]
+     },
+     {
+      "start": "2016",
+      "end": null,
+      "note": "Épisode dépressif en 2016, traité par le médecin traitant.",
+      "observationIds": [
+       "historique:o57"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e59",
+    "trackId": "t33",
+    "start": "2023-01",
+    "end": "2023-11",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Tristesse, anhédonie, aboulie, insomnie, perte de 6 kg, idées de mort passives ; EDC d'intensité moyenne depuis janvier 2023",
+    "observationIds": [
+     "historique:o29",
+     "historique:o32",
+     "urgences:o1",
+     "historique:o34",
+     "historique:o37",
+     "historique:o41",
      "historique:o45",
-     "historique:o47",
-     "historique:o68"
+     "historique:o57",
+     "historique:o60",
+     "historique:o68",
+     "historique:o73"
     ],
-    "fromAge": {
-     "start": [
-      14,
-      14
-     ],
-     "end": null
-    },
     "tellings": [
      {
-      "start": "1993",
+      "start": "2023-01",
       "end": null,
-      "note": "Séparation des parents quand il avait 14 ans ; il est resté avec sa mère.",
+      "note": "Tristesse, anhédonie, aboulie, insomnie, perte de 6 kg, idées de mort passives ; EDC d'intensité moyenne depuis janvier 2023",
       "observationIds": [
-       "historique:o2"
+       "historique:o29",
+       "historique:o32",
+       "urgences:o1",
+       "historique:o34",
+       "historique:o37"
       ]
      },
      {
-      "start": "1993",
-      "end": null,
-      "note": "Maison familiale saisie « l'année de ses 14 ans » (dettes de jeu du père), séparation des parents en 1993.",
+      "start": "2023-01",
+      "end": "2023-11",
+      "note": "EDC avec crise suicidaire ; amélioration en 07/2023, thymie normalisée environ un mois avant le 07/11/2023.",
       "observationIds": [
-       "historique:o44",
-       "historique:o45",
-       "historique:o47"
+       "historique:o57",
+       "historique:o41",
+       "historique:o45"
       ]
      },
      {
-      "start": "1993",
+      "start": "2023",
       "end": null,
-      "note": "\"La séparation des parents à ses 14 ans\", après les dettes de jeu du père et la saisie de la maison.",
+      "note": "EDC de 2023, en rémission ; période la plus grave du suivi, après la révélation par l'épouse.",
       "observationIds": [
-       "historique:o68"
+       "historique:o60",
+       "historique:o68",
+       "historique:o73"
       ]
      }
     ]
    },
    {
-    "id": "e26",
-    "trackId": "t16",
-    "start": "2006",
+    "id": "e60",
+    "trackId": "t34",
+    "start": "2023-01-24",
+    "end": "2023-04-27",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Idées de mort passives en janvier-mars, puis crise suicidaire avec scénario (pont d'Aquitaine) le 09/04/2023 ; plus d'idée suicidaire à la sortie, plan de sécurité",
+    "observationIds": [
+     "historique:o29",
+     "historique:o32",
+     "urgences:o1",
+     "historique:o34",
+     "historique:o35",
+     "historique:o36",
+     "historique:o37"
+    ]
+   },
+   {
+    "id": "e61",
+    "trackId": "t35",
+    "start": "2023-04-09",
     "end": null,
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Entré en 2006 dans l'entreprise actuelle de distribution de matériel médical.",
+    "note": "Messages d'adieu à sa sœur, scénario précis, pas de passage à l'acte grâce à l'appel de la sœur",
     "observationIds": [
-     "historique:o2"
+     "urgences:o1",
+     "historique:o34",
+     "historique:o35",
+     "historique:o57"
     ]
    },
    {
-    "id": "e27",
-    "trackId": "t17",
-    "start": "2009",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Marié depuis 2009.",
-    "observationIds": [
-     "historique:o2"
-    ]
-   },
-   {
-    "id": "e28",
-    "trackId": "t18",
-    "start": "2014",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Promotion « il y a six ou sept ans » (2014 selon la synthèse) ; début de l'usage de cocaïne en semaine ; objectifs commerciaux élevés.",
-    "observationIds": [
-     "historique:o2",
-     "historique:o15"
-    ]
-   },
-   {
-    "id": "e29",
-    "trackId": "t19",
-    "start": "2020-12",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Avertissement écrit pour un rendez-vous client manqué (« j'avais fait la nuit »).",
-    "observationIds": [
-     "historique:o1",
-     "historique:o2",
-     "historique:o15"
-    ]
-   },
-   {
-    "id": "e30",
-    "trackId": "t20",
-    "start": "2020-12",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "L'épouse trouve de la cocaïne dans sa veste à la mi-décembre : « la dernière fois » ; elle l'avait déjà découverte une première fois « il y a longtemps ».",
-    "observationIds": [
-     "historique:o1",
-     "historique:o2"
-    ]
-   },
-   {
-    "id": "e31",
-    "trackId": "t21",
-    "start": "2021-06",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Trimestre « raté », remarque du manager devant l'équipe ; colère puis effondrement.",
-    "observationIds": [
-     "historique:o9"
-    ]
-   },
-   {
-    "id": "e32",
-    "trackId": "t22",
-    "start": "2021-10",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Il en parle à son épouse en octobre : « elle l'a mal pris mais elle reste » ; couple fragile.",
-    "observationIds": [
-     "historique:o12",
-     "historique:o15"
-    ]
-   },
-   {
-    "id": "e33",
-    "trackId": "t23",
-    "start": "2022-03",
+    "id": "e62",
+    "trackId": "t36",
+    "start": "2022-06-20",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Réorganisation annoncée, nouveau directeur régional orienté chiffre ; peur d'être « mis au placard » ; pression commerciale citée comme facteur de la reprise.",
+    "note": "Perforation septale d'environ 1 cm constatée à l'ORL le 20/06/2022, soins locaux, arrêt du sniff ; saignements de nez moins fréquents en septembre",
     "observationIds": [
-     "historique:o16",
-     "historique:o19"
-    ]
-   },
-   {
-    "id": "e34",
-    "trackId": "t1",
-    "start": "2009",
-    "end": null,
-    "ongoing": false,
-    "mode": "usage",
-    "lossOfControl": false,
-    "note": "Consommation de cocaïne « depuis l'âge de 30 ans » selon le patient (urgences).",
-    "observationIds": [
-     "urgences:o1"
-    ],
-    "fromAge": {
-     "start": [
-      30,
-      30
-     ],
-     "end": null
-    }
-   },
-   {
-    "id": "e35",
-    "trackId": "t24",
-    "start": "2015",
-    "end": "2015",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Suivi d'environ six mois pour consommation de cocaïne, adressé par le médecin traitant ; nié à l'entrée, confirmé par le patient le 12/07/2022.",
-    "observationIds": [
-     "historique:o22",
+     "historique:o21",
+     "historique:o23",
      "historique:o57"
     ],
     "tellings": [
      {
-      "start": "2015",
-      "end": "2015",
-      "note": "Suivi d'environ six mois pour consommation de cocaïne, adressé par le médecin traitant ; nié à l'entrée, confirmé par le patient le 12/07/2022.",
+      "start": "2022-06-20",
+      "end": null,
+      "note": "Perforation septale d'environ 1 cm constatée à l'ORL le 20/06/2022, soins locaux, arrêt du sniff ; saignements de nez moins fréquents en septembre",
       "observationIds": [
-       "historique:o22"
+       "historique:o21",
+       "historique:o23"
       ]
      },
      {
-      "start": "2015",
+      "start": "2022-06",
       "end": null,
-      "note": "Premier suivi en libéral, 8 mois d'abstinence de cocaïne en 2015, nié à l'entrée.",
+      "note": "Perforation septale en 06/2022, stable, pas d'épistaxis depuis 2023.",
       "observationIds": [
        "historique:o57"
       ]
@@ -2511,27 +3054,27 @@
     ]
    },
    {
-    "id": "e36",
-    "trackId": "t1",
-    "start": "2015",
-    "end": "2016",
+    "id": "e63",
+    "trackId": "t37",
+    "start": "2022-06",
+    "end": "2022-09",
     "ongoing": false,
-    "mode": "sevrage",
+    "mode": null,
     "lossOfControl": false,
-    "note": "Arrêt de la cocaïne après le suivi de 2015, abstinence « de huit mois à peu près » en 2015-2016.",
+    "note": "Perte de 5 kg depuis juin d'après la balance du service, fatigue",
     "observationIds": [
-     "historique:o22"
+     "historique:o23"
     ]
    },
    {
-    "id": "e37",
-    "trackId": "t25",
+    "id": "e64",
+    "trackId": "t38",
     "start": "2016",
     "end": "2016",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "État dépressif réactionnel après l'arrêt de la cocaïne, bonne évolution sous paroxétine ; minimisé par le patient (« un coup de fatigue »), nié à l'entrée.",
+    "note": "Paroxétine 20 mg pendant trois mois pour l'état dépressif de 2016",
     "observationIds": [
      "historique:o22",
      "historique:o57"
@@ -2540,39 +3083,7 @@
      {
       "start": "2016",
       "end": "2016",
-      "note": "État dépressif réactionnel après l'arrêt de la cocaïne, bonne évolution sous paroxétine ; minimisé par le patient (« un coup de fatigue »), nié à l'entrée.",
-      "observationIds": [
-       "historique:o22"
-      ]
-     },
-     {
-      "start": "2016",
-      "end": null,
-      "note": "Épisode dépressif en 2016, traité par paroxétine par le médecin traitant.",
-      "observationIds": [
-       "historique:o57"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e38",
-    "trackId": "t26",
-    "start": "2016",
-    "end": "2016",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Paroxétine 20 mg pendant trois mois pour l'état dépressif de 2016.",
-    "observationIds": [
-     "historique:o22",
-     "historique:o57"
-    ],
-    "tellings": [
-     {
-      "start": "2016",
-      "end": "2016",
-      "note": "Paroxétine 20 mg pendant trois mois pour l'état dépressif de 2016.",
+      "note": "Paroxétine 20 mg pendant trois mois pour l'état dépressif de 2016",
       "observationIds": [
        "historique:o22"
       ]
@@ -2588,165 +3099,167 @@
     ]
    },
    {
-    "id": "e39",
-    "trackId": "t27",
-    "start": "2017",
-    "end": "2023-01",
+    "id": "e65",
+    "trackId": "t39",
+    "start": "2023-03-07",
+    "end": "2023-03-25",
     "ongoing": false,
-    "mode": "usage",
-    "lossOfControl": true,
-    "note": "Paris sportifs en ligne depuis 2017, d'abord sur le foot avec des collègues, augmentation nette au premier confinement en 2020 ; mises de 200 à 500 euros, parfois 2 000 sur un week-end, paris en direct la nuit, chasse aux pertes, mensonges, impossibilité de s'arrêter. Perte estimée à plus de 60 000 euros en cinq ans. ICJE 21/27. Plus de pari depuis fin janvier 2023 selon lui. Dissimulé en deux ans de suivi, révélé par l'épouse le 17/01/2023.",
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Escitalopram 10 mg/j introduit le 07/03 ; arrêté par le patient environ 15 jours avant le 09/04",
     "observationIds": [
-     "historique:o20",
-     "historique:o28",
-     "historique:o29",
-     "historique:o31",
      "historique:o32",
+     "historique:o33",
      "urgences:o1",
-     "historique:o46",
-     "historique:o50",
+     "historique:o36"
+    ]
+   },
+   {
+    "id": "e66",
+    "trackId": "t39",
+    "start": "2023-04-18",
+    "end": "2025-03",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Reprise à 15 mg/j, maintenue à la sortie",
+    "observationIds": [
+     "historique:o36",
+     "historique:o37",
+     "historique:o56",
      "historique:o57",
-     "historique:o66"
+     "historique:o59",
+     "historique:o60"
     ],
     "tellings": [
      {
-      "start": "2017",
-      "end": "2023-01",
-      "note": "Paris sportifs en ligne depuis 2017, d'abord sur le foot avec des collègues, augmentation nette au premier confinement en 2020 ; mises de 200 à 500 euros, parfois 2 000 sur un week-end, paris en direct la nuit, chasse aux pertes, mensonges, impossibilité de s'arrêter. Perte estimée à plus de 60 000 euros en cinq ans. ICJE 21/27. Plus de pari depuis fin janvier 2023 selon lui. Dissimulé en deux ans de suivi, révélé par l'épouse le 17/01/2023.",
-      "observationIds": [
-       "historique:o20",
-       "historique:o28",
-       "historique:o29",
-       "historique:o31",
-       "historique:o32",
-       "urgences:o1"
-      ]
-     },
-     {
-      "start": "2017",
-      "end": "2023-01",
-      "note": "Jeu pathologique, paris sportifs en ligne depuis 2017 (« depuis la coupe du monde 2018 » dans une autre observation), majorés au confinement, révélés par l'épouse en janvier 2023 ; dettes de 41 500 € ; abstinent depuis janvier 2023.",
-      "observationIds": [
-       "historique:o46",
-       "historique:o50",
-       "historique:o57"
-      ]
-     },
-     {
-      "start": "2022",
+      "start": "2023-04-18",
       "end": null,
-      "note": "Il dit qu'en 2022, à l'époque du groupe, il \"jouait déjà tous les soirs\" et pariait parfois pendant les pauses.",
+      "note": "Reprise à 15 mg/j, maintenue à la sortie",
       "observationIds": [
-       "historique:o66"
+       "historique:o36",
+       "historique:o37"
+      ]
+     },
+     {
+      "start": "2023-03",
+      "end": "2025-03",
+      "note": "15 mg puis décroissance 10 mg puis 5 mg début 2025 ; arrêt prévu fin février (o57) puis fin mars (o58) ; arrêté en 03/2025 sans syndrome de sevrage.",
+      "observationIds": [
+       "historique:o57",
+       "historique:o56",
+       "historique:o59"
+      ]
+     },
+     {
+      "start": null,
+      "end": "2025-05-20",
+      "note": "Arrêté avant le 20/05/2025 (date non précisée), thymie euthymique depuis l'arrêt ; prescrit pour l'EDC de 2023.",
+      "observationIds": [
+       "historique:o60"
       ]
      }
     ]
    },
    {
-    "id": "e40",
-    "trackId": "t27",
-    "start": "2023-04",
-    "end": null,
+    "id": "e67",
+    "trackId": "t40",
+    "start": "2023-04-09",
+    "end": "2023-04-21",
     "ongoing": false,
-    "mode": "craving",
-    "lossOfControl": false,
-    "note": "Paris « dans la tête » dans les jours précédant le 11/04/2023, alors qu'il ne joue plus.",
-    "observationIds": [
-     "historique:o34"
-    ]
-   },
-   {
-    "id": "e41",
-    "trackId": "t28",
-    "start": "2023-01-31",
-    "end": null,
-    "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Formulaire de demande rempli avec l'assistante sociale ; demande en cours d'instruction au 07/03/2023.",
+    "note": "Oxazépam 20 mg aux urgences puis protocole de sevrage alcool en décroissance, arrêt le 21/04",
     "observationIds": [
-     "historique:o29",
-     "historique:o30",
-     "historique:o32"
-    ]
-   },
-   {
-    "id": "e42",
-    "trackId": "t29",
-    "start": "2019",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Crédits renouvelables souscrits depuis 2019 à l'insu de l'épouse, prêt personnel de 2021, découvert ; environ 38 000 € recensés hors crédit immobilier (le patient parle d'une vingtaine de milliers). Dossier de surendettement envisagé.",
-    "observationIds": [
-     "historique:o28",
-     "historique:o29",
-     "historique:o30",
      "urgences:o1",
+     "historique:o34",
+     "historique:o35",
+     "historique:o36",
      "historique:o37"
     ]
    },
    {
-    "id": "e43",
-    "trackId": "t30",
-    "start": "2023-01",
-    "end": null,
+    "id": "e68",
+    "trackId": "t41",
+    "start": "2023-04",
+    "end": "2023",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "L'épouse découvre relevés bancaires et courriers de relance la semaine précédant son appel du 17/01/2023.",
+    "note": "Patch nicotinique 21 mg/24h pendant l'hospitalisation, poursuivi à la sortie",
     "observationIds": [
-     "historique:o28",
-     "historique:o68"
+     "historique:o36",
+     "historique:o37",
+     "historique:o41",
+     "historique:o67"
     ],
     "tellings": [
      {
-      "start": "2023-01",
+      "start": "2023-04",
       "end": null,
-      "note": "L'épouse découvre relevés bancaires et courriers de relance la semaine précédant son appel du 17/01/2023.",
+      "note": "Patch nicotinique 21 mg/24h pendant l'hospitalisation, poursuivi à la sortie",
       "observationIds": [
-       "historique:o28"
+       "historique:o36",
+       "historique:o37"
       ]
      },
      {
-      "start": "2023-01",
+      "start": null,
       "end": null,
-      "note": "Vécue comme une catastrophe puis comme une libération ; précède la période la plus grave de 2023.",
+      "note": "Patch arrêté fin juin 2023.",
       "observationIds": [
-       "historique:o68"
+       "historique:o41"
+      ]
+     },
+     {
+      "start": "2023",
+      "end": "2023",
+      "note": "Patchs à l'hôpital en 2023 : « presque arrêté » le tabac, repris ensuite.",
+      "observationIds": [
+       "historique:o67"
       ]
      }
     ]
    },
    {
-    "id": "e44",
-    "trackId": "t1",
-    "start": "2019-03",
-    "end": "2019-05",
-    "ongoing": false,
-    "mode": "usage",
+    "id": "e69",
+    "trackId": "t42",
+    "start": "2008",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
     "lossOfControl": false,
-    "note": "Cocaïne cuisinée et fumée à la pipe (« base ») au printemps 2019, cinq ou six week-ends, avec un collègue ; arrêt par peur de recommencer immédiatement. Jamais évoqué auparavant ; confié à l'éducateur le 14/06/2022 puis confirmé au psychiatre.",
+    "note": "Suivi par le médecin traitant depuis 2008",
     "observationIds": [
-     "historique:o20",
-     "historique:o21",
+     "historique:o22"
+    ]
+   },
+   {
+    "id": "e70",
+    "trackId": "t43",
+    "start": "2015",
+    "end": "2015",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Suivi d'environ six mois par un addictologue libéral à Bordeaux pour la cocaïne, adressé par le médecin traitant ; arrêt ensuite, omis à l'entrée",
+    "observationIds": [
+     "historique:o22",
      "historique:o57"
     ],
     "tellings": [
      {
-      "start": "2019-03",
-      "end": "2019-05",
-      "note": "Cocaïne cuisinée et fumée à la pipe (« base ») au printemps 2019, cinq ou six week-ends, avec un collègue ; arrêt par peur de recommencer immédiatement. Jamais évoqué auparavant ; confié à l'éducateur le 14/06/2022 puis confirmé au psychiatre.",
+      "start": "2015",
+      "end": "2015",
+      "note": "Suivi d'environ six mois par un addictologue libéral à Bordeaux pour la cocaïne, adressé par le médecin traitant ; arrêt ensuite, omis à l'entrée",
       "observationIds": [
-       "historique:o20",
-       "historique:o21"
+       "historique:o22"
       ]
      },
      {
-      "start": "2019",
-      "end": "2019",
-      "note": "Cocaïne fumée quelques week-ends au printemps 2019.",
+      "start": "2015",
+      "end": "2015",
+      "note": "Premier suivi en libéral en 2015 avec 8 mois d'abstinence cocaïne, nié à l'entrée et retrouvé dans le courrier du médecin traitant en 2022.",
       "observationIds": [
        "historique:o57"
       ]
@@ -2754,648 +3267,109 @@
     ]
    },
    {
-    "id": "e46",
-    "trackId": "t32",
+    "id": "e73",
+    "trackId": "t46",
     "start": "2022-06-14",
     "end": null,
-    "ongoing": false,
+    "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Proposition d'un suivi individuel une fois par mois avec l'éducateur, en plus du suivi médical ; accepté.",
+    "note": "Entretien individuel mensuel proposé et accepté, en plus du suivi médical",
     "observationIds": [
      "historique:o20"
     ]
    },
    {
-    "id": "e49",
-    "trackId": "t33",
-    "start": "2022-06-20",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Perforation septale d'environ 1 cm constatée en ORL le 20/06/2022, soins locaux, arrêt impératif du sniff ; saignements de nez moins fréquents en septembre.",
-    "observationIds": [
-     "historique:o21",
-     "historique:o23",
-     "historique:o57"
-    ],
-    "tellings": [
-     {
-      "start": "2022-06-20",
-      "end": null,
-      "note": "Perforation septale d'environ 1 cm constatée en ORL le 20/06/2022, soins locaux, arrêt impératif du sniff ; saignements de nez moins fréquents en septembre.",
-      "observationIds": [
-       "historique:o21",
-       "historique:o23"
-      ]
-     },
-     {
-      "start": "2022-06",
-      "end": null,
-      "note": "Perforation septale stable, pas d'épistaxis depuis 2023.",
-      "observationIds": [
-       "historique:o57"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e50",
-    "trackId": "t34",
-    "start": "2022-06",
-    "end": "2022-09",
+    "id": "e74",
+    "trackId": "t47",
+    "start": "2023-01-31",
+    "end": "2026-06-23",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Perte de 5 kg depuis juin selon la balance de l'IDE (13/09/2022).",
+    "note": "Assistante sociale : orientation en novembre 2022, entretien le 31/01/2023 pour les dettes, ANJ, surendettement",
     "observationIds": [
-     "historique:o23"
-    ]
-   },
-   {
-    "id": "e51",
-    "trackId": "t34",
-    "start": "2023-03-07",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Perte de 6 kg dans le contexte de l'épisode dépressif.",
-    "observationIds": [
-     "historique:o32"
-    ]
-   },
-   {
-    "id": "e52",
-    "trackId": "t35",
-    "start": "2022-06",
-    "end": "2022-12",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Irritabilité, sommeil de 4 h, anxiété, ruminations sur l'argent, sans idée suicidaire.",
-    "observationIds": [
-     "historique:o21",
-     "historique:o24",
      "historique:o25",
-     "historique:o27"
-    ]
-   },
-   {
-    "id": "e53",
-    "trackId": "t36",
-    "start": "2021-01",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Suivi d'environ deux ans au 17/01/2023 ; consultations régulières, entretiens IDE, hospitalisation proposée puis refusée en juin et octobre 2022.",
-    "observationIds": [
-     "historique:o21",
-     "historique:o23",
-     "historique:o24",
-     "historique:o25",
-     "historique:o27",
-     "historique:o28",
-     "historique:o31",
-     "historique:o32",
-     "historique:o34",
+     "historique:o29",
+     "historique:o30",
      "historique:o37",
-     "historique:o46",
-     "historique:o57"
-    ],
-    "tellings": [
-     {
-      "start": "2021-01",
-      "end": null,
-      "note": "Suivi d'environ deux ans au 17/01/2023 ; consultations régulières, entretiens IDE, hospitalisation proposée puis refusée en juin et octobre 2022.",
-      "observationIds": [
-       "historique:o21",
-       "historique:o23",
-       "historique:o24",
-       "historique:o25",
-       "historique:o27",
-       "historique:o28",
-       "historique:o31",
-       "historique:o32",
-       "historique:o34",
-       "historique:o37"
-      ]
-     },
-     {
-      "start": "2021-01",
-      "end": null,
-      "note": "Suivi depuis janvier 2021 (psychiatre addictologue, IDE, assistante sociale).",
-      "observationIds": [
-       "historique:o46",
-       "historique:o57"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e54",
-    "trackId": "t37",
-    "start": "2022-09-29",
-    "end": "2022-11-21",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Retards, absences, résultats en baisse ; entretien préalable le 29/09/2022 ; licenciement pour insuffisance professionnelle notifié le 21/11/2022.",
-    "observationIds": [
-     "historique:o23",
-     "historique:o24",
-     "historique:o25",
-     "historique:o30",
-     "historique:o46",
-     "historique:o57"
-    ],
-    "tellings": [
-     {
-      "start": "2022-09-29",
-      "end": "2022-11-21",
-      "note": "Retards, absences, résultats en baisse ; entretien préalable le 29/09/2022 ; licenciement pour insuffisance professionnelle notifié le 21/11/2022.",
-      "observationIds": [
-       "historique:o23",
-       "historique:o24",
-       "historique:o25",
-       "historique:o30"
-      ]
-     },
-     {
-      "start": "2022-12",
-      "end": null,
-      "note": "Licencié en décembre 2022 (« 11/2022 » dans une autre observation).",
-      "observationIds": [
-       "historique:o46",
-       "historique:o57"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e55",
-    "trackId": "t38",
-    "start": "2022-10-04",
-    "end": "2022-10-19",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Arrêt de travail de 15 jours accepté.",
-    "observationIds": [
-     "historique:o24"
-    ]
-   },
-   {
-    "id": "e56",
-    "trackId": "t39",
-    "start": "2022-11-21",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Sans emploi après le licenciement ; inscrit à Pôle emploi, ARE ouverte (environ 3 100 €/mois).",
-    "observationIds": [
-     "historique:o25",
-     "historique:o30",
-     "urgences:o1",
      "historique:o39",
-     "historique:o41",
+     "historique:o43",
      "historique:o52",
      "historique:o57",
-     "historique:o59"
+     "historique:o72"
     ],
     "tellings": [
      {
-      "start": "2022-11-21",
+      "start": "2023-01-31",
       "end": null,
-      "note": "Sans emploi après le licenciement ; inscrit à Pôle emploi, ARE ouverte (environ 3 100 €/mois).",
+      "note": "Assistante sociale : orientation en novembre 2022, entretien le 31/01/2023 pour les dettes, ANJ, surendettement",
       "observationIds": [
        "historique:o25",
+       "historique:o29",
        "historique:o30",
-       "urgences:o1"
+       "historique:o37"
       ]
      },
      {
-      "start": "2022-12",
+      "start": "2023-06",
       "end": null,
-      "note": "Recherche d'emploi active, ARE jusqu'à l'été 2025, candidatures sans réponse.",
+      "note": "Assistante sociale : dossier de surendettement et budget.",
       "observationIds": [
        "historique:o39",
-       "historique:o41",
+       "historique:o43",
        "historique:o52",
-       "historique:o57",
-       "historique:o59"
+       "historique:o57"
+      ]
+     },
+     {
+      "start": "2026-06-23",
+      "end": null,
+      "note": "Point annuel : fin du suivi social régulier proposée le 23/06/2026, recontact possible, patient d'accord.",
+      "observationIds": [
+       "historique:o72"
       ]
      }
     ]
    },
    {
-    "id": "e57",
-    "trackId": "t40",
-    "start": "2023-01-31",
+    "id": "e75",
+    "trackId": "t15",
+    "start": "2023-02-14",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Orientation vers l'assistante sociale en novembre 2022 ; premier entretien le 31/01/2023 : droits, dettes, surendettement, ANJ ; mandat Banque de France signé.",
+    "note": "Entretien psychologique du 14/02/2023, psychologue déjà en place en janvier ; hebdomadaire pendant un mois après la sortie",
     "observationIds": [
-     "historique:o25",
      "historique:o29",
-     "historique:o30",
+     "historique:o31",
      "historique:o37"
     ]
    },
    {
-    "id": "e58",
-    "trackId": "t41",
-    "start": "2022-12-10",
-    "end": "2023-07",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Contrôle par la gendarmerie le 10/12/2022 (dépistage salivaire cocaïne positif, alcool 0,6 g/L) ; suspension pour 6 mois, restitution conditionnée à la commission médicale.",
-    "observationIds": [
-     "historique:o26",
-     "historique:o27",
-     "historique:o29",
-     "historique:o30",
-     "urgences:o1",
-     "historique:o39",
-     "historique:o41",
-     "historique:o57"
-    ],
-    "tellings": [
-     {
-      "start": "2022-12-10",
-      "end": null,
-      "note": "Contrôle par la gendarmerie le 10/12/2022 (dépistage salivaire cocaïne positif, alcool 0,6 g/L) ; suspension pour 6 mois, restitution conditionnée à la commission médicale.",
-      "observationIds": [
-       "historique:o26",
-       "historique:o27",
-       "historique:o29",
-       "historique:o30",
-       "urgences:o1"
-      ]
-     },
-     {
-      "start": "2022-12",
-      "end": "2023-07",
-      "note": "Commission médicale le 27/06/2023, permis récupéré début juillet 2023.",
-      "observationIds": [
-       "historique:o39",
-       "historique:o41",
-       "historique:o57"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e59",
-    "trackId": "t1",
-    "start": "2022-12-10",
-    "end": "2023-01",
-    "ongoing": false,
-    "mode": "sevrage",
-    "lossOfControl": false,
-    "note": "Pas de cocaïne depuis le contrôle du 10/12/2022 (abstinence de 10 jours au 20/12) ; reprise après les fêtes.",
-    "observationIds": [
-     "historique:o27",
-     "historique:o29"
-    ]
-   },
-   {
-    "id": "e60",
-    "trackId": "t1",
-    "start": "2023-01",
-    "end": "2023-04-09",
-    "ongoing": false,
-    "mode": "rechute",
-    "lossOfControl": false,
-    "note": "Reprise après les fêtes, 2 à 3 fois par semaine en janvier, 1 à 2 fois en mars, puis 3 soirs sur 7 depuis mars et « presque tous les jours » selon les urgences.",
-    "observationIds": [
-     "historique:o29",
-     "historique:o32",
-     "urgences:o1",
-     "historique:o34"
-    ]
-   },
-   {
-    "id": "e61",
-    "trackId": "t42",
-    "start": "2023-01-20",
-    "end": "2024-01-06",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "L'épouse lui demande de partir, il quitte la maison le 20/01/2023 ; en avril l'épouse ne souhaite pas reprendre la vie commune.",
-    "observationIds": [
-     "historique:o24",
-     "historique:o28",
-     "historique:o29",
-     "urgences:o1",
-     "historique:o37",
-     "historique:o39",
-     "historique:o48",
-     "historique:o57"
-    ],
-    "tellings": [
-     {
-      "start": "2023-01-20",
-      "end": null,
-      "note": "L'épouse lui demande de partir, il quitte la maison le 20/01/2023 ; en avril l'épouse ne souhaite pas reprendre la vie commune.",
-      "observationIds": [
-       "historique:o24",
-       "historique:o28",
-       "historique:o29",
-       "urgences:o1",
-       "historique:o37"
-      ]
-     },
-     {
-      "start": "2023-01",
-      "end": "2024-01-06",
-      "note": "Séparation (« on fait une pause ») sans procédure de divorce ; retour à la maison le 06/01/2024.",
-      "observationIds": [
-       "historique:o39",
-       "historique:o48",
-       "historique:o57"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e62",
-    "trackId": "t43",
-    "start": "2023-01-20",
-    "end": "2023-03-01",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Hébergé chez sa sœur à Eysines après son départ du domicile.",
-    "observationIds": [
-     "historique:o29",
-     "historique:o30",
-     "historique:o62"
-    ],
-    "tellings": [
-     {
-      "start": "2023-01-20",
-      "end": "2023-03-01",
-      "note": "Hébergé chez sa sœur à Eysines après son départ du domicile.",
-      "observationIds": [
-       "historique:o29",
-       "historique:o30"
-      ]
-     },
-     {
-      "start": "2023",
-      "end": null,
-      "note": "Il y a deux ans (07/2025), \"dormait chez sa sœur avec des dettes partout\" ; vit aujourd'hui avec sa famille.",
-      "observationIds": [
-       "historique:o62"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e63",
-    "trackId": "t44",
-    "start": "2023-03-01",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Emménagé dans un studio le 01/03/2023 ; enfants vus un week-end sur deux.",
-    "observationIds": [
-     "historique:o32",
-     "historique:o33",
-     "historique:o37"
-    ]
-   },
-   {
-    "id": "e65",
-    "trackId": "t45",
-    "start": "2023-01",
-    "end": "2023-11",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Tristesse, anhédonie, insomnie, perte d'appétit et de poids, idées de mort passives depuis janvier 2023, d'intensité moyenne en mars ; amélioration partielle à la sortie du 27/04/2023.",
-    "observationIds": [
-     "historique:o29",
-     "historique:o32",
-     "urgences:o1",
-     "historique:o34",
-     "historique:o36",
-     "historique:o37",
-     "historique:o41",
-     "historique:o45",
-     "historique:o46",
-     "historique:o57",
-     "historique:o60",
-     "historique:o68"
-    ],
-    "tellings": [
-     {
-      "start": "2023-01",
-      "end": null,
-      "note": "Tristesse, anhédonie, insomnie, perte d'appétit et de poids, idées de mort passives depuis janvier 2023, d'intensité moyenne en mars ; amélioration partielle à la sortie du 27/04/2023.",
-      "observationIds": [
-       "historique:o29",
-       "historique:o32",
-       "urgences:o1",
-       "historique:o34",
-       "historique:o36",
-       "historique:o37"
-      ]
-     },
-     {
-      "start": "2023-01",
-      "end": "2023-11",
-      "note": "EDC de janvier à novembre 2023 avec crise suicidaire ; thymie normalisée depuis environ un mois en novembre, EDC en rémission.",
-      "observationIds": [
-       "historique:o41",
-       "historique:o45",
-       "historique:o46",
-       "historique:o57"
-      ]
-     },
-     {
-      "start": "2023",
-      "end": null,
-      "note": "EDC 2023 en rémission ; période la plus grave après la révélation de janvier 2023. Thymie euthymique en 05/2025.",
-      "observationIds": [
-       "historique:o60",
-       "historique:o68"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e66",
-    "trackId": "t46",
-    "start": "2023-03-07",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Escitalopram 10 mg/j introduit le 07/03/2023 ; arrêté par le patient environ quinze jours avant le 09/04 (il disait le prendre « régulièrement » le 11/04, arrêt reconnu le 18/04).",
-    "observationIds": [
-     "historique:o32",
-     "historique:o33",
-     "urgences:o1",
-     "historique:o34",
-     "historique:o36"
-    ]
-   },
-   {
-    "id": "e67",
-    "trackId": "t47",
-    "start": "2023-04",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Vente de la maison évoquée lors de l'appel difficile avec l'épouse la veille du passage aux urgences.",
-    "observationIds": [
-     "historique:o34"
-    ]
-   },
-   {
-    "id": "e68",
-    "trackId": "t2",
-    "start": "2023-04-09",
-    "end": null,
-    "ongoing": false,
-    "mode": "intoxication",
-    "lossOfControl": false,
-    "note": "Intoxication aiguë : une bouteille de whisky, alcoolémie 1,92 g/L à 02:30.",
-    "observationIds": [
-     "urgences:o1",
-     "historique:o34",
-     "historique:o36",
-     "historique:o37"
-    ]
-   },
-   {
-    "id": "e69",
-    "trackId": "t1",
-    "start": "2023-04-09",
-    "end": null,
-    "ongoing": false,
-    "mode": "intoxication",
-    "lossOfControl": false,
-    "note": "Environ 2 g de cocaïne sniffée le soir du 08/04/2023, dépistage urinaire positif.",
-    "observationIds": [
-     "urgences:o1",
-     "historique:o34",
-     "historique:o36",
-     "historique:o37"
-    ]
-   },
-   {
-    "id": "e70",
+    "id": "e76",
     "trackId": "t48",
-    "start": "2023-04-09",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Idées suicidaires avec scénario (pont d'Aquitaine, clés du scooter d'un voisin), SMS d'adieu à sa sœur, sans passage à l'acte ; plan de sécurité remis à la sortie.",
-    "observationIds": [
-     "urgences:o1",
-     "historique:o34",
-     "historique:o35",
-     "historique:o36",
-     "historique:o37",
-     "historique:o38",
-     "historique:o57",
-     "historique:o68",
-     "historique:o73"
-    ],
-    "tellings": [
-     {
-      "start": "2023-04-09",
-      "end": null,
-      "note": "Idées suicidaires avec scénario (pont d'Aquitaine, clés du scooter d'un voisin), SMS d'adieu à sa sœur, sans passage à l'acte ; plan de sécurité remis à la sortie.",
-      "observationIds": [
-       "urgences:o1",
-       "historique:o34",
-       "historique:o35",
-       "historique:o36",
-       "historique:o37",
-       "historique:o38",
-       "historique:o57"
-      ]
-     },
-     {
-      "start": "2023-04",
-      "end": null,
-      "note": "Crise suicidaire d'avril 2023 ; pas d'idée suicidaire lors du deuil en 07/2026, \"pas comme en 2023\".",
-      "observationIds": [
-       "historique:o68",
-       "historique:o73"
-      ]
-     }
-    ]
-   },
-   {
-    "id": "e71",
-    "trackId": "t49",
     "start": "2023-04-09",
     "end": "2023-04-10",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Arrivée le 09/04/2023 à 01:40, surveillance UHCD 24 h, sortie le 10/04 vers le domicile de sa sœur.",
+    "note": "Urgences et UHCD pour crise suicidaire et intoxication alcool-cocaïne",
     "observationIds": [
      "urgences:o1",
-     "historique:o34",
-     "historique:o36",
-     "historique:o37"
+     "historique:o34"
     ]
    },
    {
-    "id": "e72",
-    "trackId": "t1",
-    "start": "2023-04-09",
-    "end": null,
-    "ongoing": true,
-    "mode": "sevrage",
-    "lossOfControl": false,
-    "note": "Abstinence de cocaïne depuis le 09/04/2023, maintenue à la sortie du 27/04.",
-    "observationIds": [
-     "historique:o34",
-     "historique:o36",
-     "historique:o37"
-    ]
-   },
-   {
-    "id": "e73",
-    "trackId": "t1",
-    "start": "2023-04-11",
-    "end": "2023-04-27",
-    "ongoing": false,
-    "mode": "craving",
-    "lossOfControl": false,
-    "note": "Craving intense les premiers jours d'hospitalisation (« très envie » le 13/04), en nette baisse à la sortie.",
-    "observationIds": [
-     "historique:o35",
-     "historique:o36",
-     "historique:o37"
-    ]
-   },
-   {
-    "id": "e74",
-    "trackId": "t50",
+    "id": "e77",
+    "trackId": "t49",
     "start": "2023-04-11",
     "end": "2023-04-27",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Entrée directe le 11/04/2023 après la crise suicidaire et l'intoxication cocaïne-alcool ; sortie le 27/04.",
+    "note": "Hospitalisation pour sevrage alcool, arrêt cocaïne et risque suicidaire",
     "observationIds": [
      "historique:o34",
      "historique:o35",
@@ -3410,7 +3384,7 @@
      {
       "start": "2023-04-11",
       "end": "2023-04-27",
-      "note": "Entrée directe le 11/04/2023 après la crise suicidaire et l'intoxication cocaïne-alcool ; sortie le 27/04.",
+      "note": "Hospitalisation pour sevrage alcool, arrêt cocaïne et risque suicidaire",
       "observationIds": [
        "historique:o34",
        "historique:o35",
@@ -3421,16 +3395,16 @@
      {
       "start": "2023-04-11",
       "end": "2023-04-27",
-      "note": "Hospitalisation après la crise suicidaire, avec sevrage hospitalier de l'alcool.",
+      "note": "Hospitalisation après la crise suicidaire.",
       "observationIds": [
-       "historique:o38",
-       "historique:o57"
+       "historique:o57",
+       "historique:o38"
       ]
      },
      {
       "start": "2023-04",
       "end": null,
-      "note": "Hospitalisation d'avril 2023 (patchs de nicotine à l'hôpital en 2023).",
+      "note": "Hospitalisation d'avril 2023 (après la crise suicidaire), durée non précisée ; patchs de nicotine à l'hôpital.",
       "observationIds": [
        "historique:o67",
        "historique:o68"
@@ -3439,171 +3413,358 @@
     ]
    },
    {
-    "id": "e75",
-    "trackId": "t2",
-    "start": "2023-04-11",
-    "end": "2023-04-21",
+    "id": "e78",
+    "trackId": "t50",
+    "start": "2022-06",
+    "end": "2022-11-21",
     "ongoing": false,
-    "mode": "sevrage",
+    "mode": null,
     "lossOfControl": false,
-    "note": "Sevrage de l'alcool sous oxazépam, sans complication, arrêt le 21/04/2023.",
+    "note": "Travail compliqué, objectifs non atteints, absences, retards, convocation puis entretien préalable à licenciement le 29/09/2022",
     "observationIds": [
-     "historique:o34",
-     "historique:o36",
-     "historique:o37",
+     "historique:o21",
+     "historique:o23",
+     "historique:o24"
+    ]
+   },
+   {
+    "id": "e79",
+    "trackId": "t51",
+    "start": "2022-10-04",
+    "end": "2022-10-19",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Arrêt de travail de 15 jours accepté",
+    "observationIds": [
+     "historique:o24"
+    ]
+   },
+   {
+    "id": "e80",
+    "trackId": "t52",
+    "start": "2022-11-21",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Licenciement pour insuffisance professionnelle notifié le 21/11/2022",
+    "observationIds": [
+     "historique:o25",
+     "historique:o30",
+     "historique:o46",
      "historique:o57"
     ],
     "tellings": [
      {
-      "start": "2023-04-11",
-      "end": "2023-04-21",
-      "note": "Sevrage de l'alcool sous oxazépam, sans complication, arrêt le 21/04/2023.",
+      "start": "2022-11-21",
+      "end": null,
+      "note": "Licenciement pour insuffisance professionnelle notifié le 21/11/2022",
       "observationIds": [
-       "historique:o34",
-       "historique:o36",
-       "historique:o37"
+       "historique:o25",
+       "historique:o30"
       ]
      },
      {
-      "start": "2023-04",
-      "end": "2023-04",
-      "note": "Sevrage hospitalier lors de l'hospitalisation d'avril 2023.",
+      "start": "2022-12",
+      "end": null,
+      "note": "Licencié en décembre 2022 (11/2022 dans o47).",
       "observationIds": [
+       "historique:o57",
+       "historique:o46"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e81",
+    "trackId": "t53",
+    "start": "2022-11-21",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Sans emploi, inscrit à Pôle emploi, ARE ouverte",
+    "observationIds": [
+     "historique:o25",
+     "historique:o30",
+     "urgences:o1",
+     "historique:o39",
+     "historique:o52",
+     "historique:o57"
+    ],
+    "tellings": [
+     {
+      "start": "2022-11-21",
+      "end": null,
+      "note": "Sans emploi, inscrit à Pôle emploi, ARE ouverte",
+      "observationIds": [
+       "historique:o25",
+       "historique:o30",
+       "urgences:o1"
+      ]
+     },
+     {
+      "start": "2022-12",
+      "end": null,
+      "note": "ARE jusqu'à l'été 2025, recherche d'emploi, fin des droits en vue.",
+      "observationIds": [
+       "historique:o39",
+       "historique:o52",
        "historique:o57"
       ]
      }
     ]
    },
    {
-    "id": "e76",
-    "trackId": "t51",
-    "start": "2023-04-09",
-    "end": "2023-04-21",
+    "id": "e82",
+    "trackId": "t54",
+    "start": "2022-12-10",
+    "end": "2023-07",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Oxazépam 20 mg aux urgences, puis selon protocole de sevrage en hospitalisation, en décroissance, arrêt le 21/04/2023.",
+    "note": "Contrôle gendarmerie le 10/12/2022 (salivaire cocaïne positif, alcool 0,6 g/L), suspension de 6 mois prévue",
     "observationIds": [
+     "historique:o26",
+     "historique:o27",
      "urgences:o1",
-     "historique:o34",
-     "historique:o35",
-     "historique:o36",
-     "historique:o37"
-    ]
-   },
-   {
-    "id": "e77",
-    "trackId": "t46",
-    "start": "2023-04-18",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Reprise de l'escitalopram à 15 mg/j le 18/04/2023, maintenu à la sortie.",
-    "observationIds": [
-     "historique:o36",
-     "historique:o37"
-    ]
-   },
-   {
-    "id": "e78",
-    "trackId": "t52",
-    "start": "2023-04",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Patch nicotinique 21 mg/24h, bien toléré, prescrit à la sortie.",
-    "observationIds": [
-     "historique:o36",
-     "historique:o37",
-     "historique:o41"
+     "historique:o41",
+     "historique:o57"
     ],
     "tellings": [
      {
-      "start": "2023-04",
+      "start": "2022-12-10",
       "end": null,
-      "note": "Patch nicotinique 21 mg/24h, bien toléré, prescrit à la sortie.",
+      "note": "Contrôle gendarmerie le 10/12/2022 (salivaire cocaïne positif, alcool 0,6 g/L), suspension de 6 mois prévue",
       "observationIds": [
-       "historique:o36",
-       "historique:o37"
+       "historique:o26",
+       "historique:o27",
+       "urgences:o1"
       ]
      },
      {
-      "start": null,
-      "end": null,
-      "note": "Patch arrêté fin juin 2023.",
+      "start": "2022-12",
+      "end": "2023-07",
+      "note": "Permis récupéré début juillet 2023 après avis favorable de la commission médicale.",
       "observationIds": [
-       "historique:o41"
+       "historique:o41",
+       "historique:o57"
       ]
      }
     ]
    },
    {
-    "id": "e80",
-    "trackId": "t53",
-    "start": "2023-04-25",
+    "id": "e83",
+    "trackId": "t55",
+    "start": "2019",
     "end": null,
-    "ongoing": false,
+    "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Entretien avec l'épouse à la demande du patient : elle ne souhaite pas reprendre la vie commune pour l'instant mais « reste là pour les enfants ».",
+    "note": "Crédits renouvelables depuis 2019 à l'insu de l'épouse, prêt personnel de 2021, découvert ; environ 38 000 € recensés hors crédit immobilier, découverts en janvier 2023",
     "observationIds": [
-     "historique:o37"
-    ]
-   },
-   {
-    "id": "e82",
-    "trackId": "t1",
-    "start": "2017",
-    "end": null,
-    "ongoing": false,
-    "mode": "intoxication",
-    "lossOfControl": false,
-    "note": "Nuit de cocaïne suivie d'une douleur thoracique et d'un passage aux urgences en 2017.",
-    "observationIds": [
-     "historique:o49",
-     "historique:o57"
+     "historique:o28",
+     "historique:o29",
+     "historique:o30"
     ]
    },
    {
     "id": "e84",
-    "trackId": "t1",
-    "start": "2020-11",
-    "end": null,
+    "trackId": "t56",
+    "start": "2023-01-20",
+    "end": "2024-01-06",
     "ongoing": false,
-    "mode": "intoxication",
+    "mode": null,
     "lossOfControl": false,
-    "note": "Soirée sous cocaïne, accident de la voiture de fonction en novembre 2020 ; confié à l'assistante sociale puis confirmé au psychiatre.",
+    "note": "Départ du domicile le 20/01/2023 à la demande de l'épouse ; épouse parlait de séparation dès octobre 2022 ; entretien familial le 25/04, pas de reprise de la vie commune",
     "observationIds": [
+     "historique:o24",
+     "historique:o28",
+     "historique:o29",
+     "urgences:o1",
+     "historique:o37",
      "historique:o39",
-     "historique:o41"
+     "historique:o48",
+     "historique:o57"
+    ],
+    "tellings": [
+     {
+      "start": "2023-01-20",
+      "end": null,
+      "note": "Départ du domicile le 20/01/2023 à la demande de l'épouse ; épouse parlait de séparation dès octobre 2022 ; entretien familial le 25/04, pas de reprise de la vie commune",
+      "observationIds": [
+       "historique:o24",
+       "historique:o28",
+       "historique:o29",
+       "urgences:o1",
+       "historique:o37"
+      ]
+     },
+     {
+      "start": "2023-01",
+      "end": "2024-01-06",
+      "note": "Séparation avec pause sans divorce ; retour au domicile le 06/01/2024.",
+      "observationIds": [
+       "historique:o39",
+       "historique:o48",
+       "historique:o57"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e85",
+    "trackId": "t57",
+    "start": "2023-01-20",
+    "end": "2023-03-01",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Hébergé chez sa sœur après le départ du domicile",
+    "observationIds": [
+     "historique:o29",
+     "historique:o30",
+     "historique:o32",
+     "historique:o62"
+    ],
+    "tellings": [
+     {
+      "start": "2023-01-20",
+      "end": "2023-03-01",
+      "note": "Hébergé chez sa sœur après le départ du domicile",
+      "observationIds": [
+       "historique:o29",
+       "historique:o30",
+       "historique:o32"
+      ]
+     },
+     {
+      "start": "2023",
+      "end": null,
+      "note": "Environ deux ans avant 07/2025, il « dormait chez sa sœur avec des dettes partout » ; vit depuis avec sa famille.",
+      "observationIds": [
+       "historique:o62"
+      ]
+     }
     ]
    },
    {
     "id": "e86",
+    "trackId": "t58",
+    "start": "2023-03-01",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Emménagement dans un studio le 01/03/2023 ; enfants vus un week-end sur deux",
+    "observationIds": [
+     "historique:o32",
+     "historique:o33"
+    ]
+   },
+   {
+    "id": "e87",
+    "trackId": "t59",
+    "start": "2023-01-31",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Demande d'interdiction volontaire de jeux remplie le 31/01, en cours d'instruction en mars",
+    "observationIds": [
+     "historique:o29",
+     "historique:o30",
+     "historique:o32",
+     "historique:o38",
+     "historique:o39",
+     "historique:o45"
+    ],
+    "tellings": [
+     {
+      "start": "2023-01-31",
+      "end": null,
+      "note": "Demande d'interdiction volontaire de jeux remplie le 31/01, en cours d'instruction en mars",
+      "observationIds": [
+       "historique:o29",
+       "historique:o30",
+       "historique:o32"
+      ]
+     },
+     {
+      "start": "2023-05-02",
+      "end": null,
+      "note": "Interdiction ANJ effective depuis le 02/05/2023, respectée.",
+      "observationIds": [
+       "historique:o38",
+       "historique:o39",
+       "historique:o45"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e88",
+    "trackId": "t60",
+    "start": "2023-04-08",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Appel difficile avec l'épouse au sujet de la vente de la maison le soir de l'intoxication",
+    "observationIds": [
+     "historique:o34"
+    ]
+   },
+   {
+    "id": "e90",
+    "trackId": "t1",
+    "start": "2014",
+    "end": "2023-04",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": true,
+    "note": "Usage professionnel et solitaire depuis 2014, avec perte de contrôle ; escalade d'avril 2022 à avril 2023 ; dernière consommation le 09/04/2023.",
+    "observationIds": [
+     "historique:o57",
+     "historique:o46"
+    ]
+   },
+   {
+    "id": "e91",
+    "trackId": "t1",
+    "start": "2019-03",
+    "end": "2019-05",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "Cocaïne fumée quelques week-ends au printemps 2019.",
+    "observationIds": [
+     "historique:o57"
+    ]
+   },
+   {
+    "id": "e93",
     "trackId": "t1",
     "start": "2022-04",
     "end": "2023-04",
     "ongoing": false,
     "mode": "usage",
-    "lossOfControl": false,
-    "note": "Nouvelle escalade d'avril 2022 à avril 2023, avec perforation septale (06/2022) ; dernière consommation le 09/04/2023.",
+    "lossOfControl": true,
+    "note": "Nouvelle escalade d'avril 2022 à avril 2023, avec perforation septale en 06/2022.",
     "observationIds": [
-     "historique:o41",
-     "historique:o46",
      "historique:o57"
     ]
    },
    {
-    "id": "e87",
+    "id": "e94",
     "trackId": "t1",
     "start": "2024-12-21",
     "end": null,
     "ongoing": false,
     "mode": "rechute",
-    "lossOfControl": false,
-    "note": "Rechute ponctuelle lors d'une soirée d'anciens collègues, environ 1,5 g avec beaucoup d'alcool ; pas de reprise depuis.",
+    "lossOfControl": true,
+    "note": "Rechute ponctuelle lors d'une soirée d'anciens collègues : environ 1,5 g, beaucoup d'alcool, \"deux traces, et puis toute la nuit\" ; pas de reprise depuis.",
     "observationIds": [
      "historique:o56",
      "historique:o57",
@@ -3613,10 +3774,10 @@
     ]
    },
    {
-    "id": "e88",
+    "id": "e95",
     "trackId": "t1",
     "start": "2024-12-22",
-    "end": "2024-12-29",
+    "end": "2024-12-28",
     "ongoing": false,
     "mode": "craving",
     "lossOfControl": false,
@@ -3626,115 +3787,99 @@
     ]
    },
    {
-    "id": "e91",
-    "trackId": "t2",
-    "start": "2023-04",
-    "end": "2025-01",
-    "ongoing": false,
-    "mode": "usage",
-    "lossOfControl": false,
-    "note": "Consommation modérée de week-end (1 à 3 verres), rien en semaine.",
-    "observationIds": [
-     "historique:o41",
-     "historique:o42",
-     "historique:o45",
-     "historique:o46",
-     "historique:o53",
-     "historique:o54",
-     "historique:o57"
-    ]
-   },
-   {
-    "id": "e92",
-    "trackId": "t2",
-    "start": "2024-12-21",
+    "id": "e98",
+    "trackId": "t5",
+    "start": "2024-12-22",
     "end": null,
     "ongoing": false,
-    "mode": "usage",
+    "mode": "craving",
     "lossOfControl": false,
-    "note": "Beaucoup d'alcool lors de la soirée de la rechute de cocaïne.",
+    "note": "Envie de parier sur le match du lendemain, sans passage à l'acte, pour la première fois depuis longtemps.",
     "observationIds": [
      "historique:o56"
     ]
    },
    {
-    "id": "e93",
+    "id": "e101",
+    "trackId": "t2",
+    "start": "2023-04",
+    "end": "2025-02",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "Consommation modérée de week-end : 1 à 2 verres en 07/2023, 2-3 verres en 11/2023, 2-3 verres le samedi en 06/2024 ; beaucoup d'alcool lors de la rechute du 21/12/2024.",
+    "observationIds": [
+     "historique:o41",
+     "historique:o45",
+     "historique:o53",
+     "historique:o56",
+     "historique:o57"
+    ]
+   },
+   {
+    "id": "e102",
     "trackId": "t2",
     "start": "2025-02",
     "end": null,
     "ongoing": true,
     "mode": "usage",
     "lossOfControl": false,
-    "note": "Usage quotidien depuis début février 2025, 4 à 5 verres par jour (32 verres la semaine précédente), sans signe de dépendance physique ni consommation matinale ; déclencheur : l'ennui.",
+    "note": "Usage quotidien de 4 à 5 verres depuis début février 2025 (32 verres une semaine), sans signe de dépendance physique, déclencheur : ennui et chômage.",
     "observationIds": [
      "historique:o57",
      "historique:o58",
-     "historique:o59",
-     "historique:o60",
-     "historique:o62",
-     "historique:o63",
-     "historique:o65",
-     "historique:o70",
-     "historique:o74"
+     "historique:o59"
     ]
    },
    {
-    "id": "e95",
-    "trackId": "t27",
-    "start": "2024-12",
+    "id": "e103",
+    "trackId": "t3",
+    "start": "2023-07-11",
     "end": null,
-    "ongoing": false,
-    "mode": "craving",
+    "ongoing": true,
+    "mode": "usage",
     "lossOfControl": false,
-    "note": "Envie de parier sur le match du lendemain, sans passage à l'acte.",
+    "note": "Tabac : 5-8 cig/j (07/2023), 8 cig/j (11/2023), 8-10 cig/j (03/2025).",
     "observationIds": [
-     "historique:o56"
-    ]
+     "historique:o41",
+     "historique:o46",
+     "historique:o57"
+    ],
+    "startUnknown": true
    },
    {
-    "id": "e99",
-    "trackId": "t56",
-    "start": "1985",
+    "id": "e106",
+    "trackId": "t62",
+    "start": "2024-01-09",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Symptômes présents avant 12 ans (hétéro-anamnèse maternelle, bulletins scolaires) ; diagnostiqué le 09/01/2024, présentation combinée.",
+    "note": "TDAH de l'adulte, présentation combinée, diagnostiqué en janvier 2024 ; symptômes présents dans l'enfance (avant 12 ans).",
     "observationIds": [
-     "historique:o44",
      "historique:o46",
      "historique:o47",
      "historique:o48",
-     "historique:o57",
      "historique:o60",
      "historique:o62",
      "historique:o68",
      "historique:o74"
     ],
-    "fromAge": {
-     "start": [
-      6,
-      11
-     ],
-     "end": null
-    },
     "tellings": [
      {
-      "start": "1985",
+      "start": "2024-01-09",
       "end": null,
-      "note": "Symptômes présents avant 12 ans (hétéro-anamnèse maternelle, bulletins scolaires) ; diagnostiqué le 09/01/2024, présentation combinée.",
+      "note": "TDAH de l'adulte, présentation combinée, diagnostiqué en janvier 2024 ; symptômes présents dans l'enfance (avant 12 ans).",
       "observationIds": [
-       "historique:o44",
-       "historique:o46",
-       "historique:o47",
        "historique:o48",
-       "historique:o57"
+       "historique:o47",
+       "historique:o46"
       ]
      },
      {
       "start": "2024-01",
       "end": null,
-      "note": "Diagnostic posé en janvier 2024 ; sous méthylphénidate, équilibré en 09/2026.",
+      "note": "Diagnostic de TDAH en janvier 2024 (« soulagement mêlé de colère », relecture moins culpabilisante du parcours scolaire) ; équilibré sous méthylphénidate en 09/2026.",
       "observationIds": [
        "historique:o60",
        "historique:o62",
@@ -3745,67 +3890,48 @@
     ]
    },
    {
-    "id": "e100",
-    "trackId": "t57",
-    "start": "2017",
-    "end": null,
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Passage aux urgences après une nuit de cocaïne, ECG et troponine normaux selon le patient, révélé en 2024.",
-    "observationIds": [
-     "historique:o49",
-     "historique:o57"
-    ]
-   },
-   {
-    "id": "e102",
-    "trackId": "t59",
-    "start": "2025-03",
+    "id": "e110",
+    "trackId": "t65",
+    "start": "2023-09",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "GGT 64 (à 31 un an avant), CDT limite.",
+    "note": "Thérapie de couple en libéral avec l'épouse, en cours d'espacement en 03/2025.",
     "observationIds": [
-     "historique:o58"
+     "historique:o42",
+     "historique:o43",
+     "historique:o57"
     ]
    },
    {
-    "id": "e104",
-    "trackId": "t46",
-    "start": "2023-03",
-    "end": "2025-03",
+    "id": "e111",
+    "trackId": "t66",
+    "start": "2023-11-28",
+    "end": "2024-01-09",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "15 mg poursuivi ; décroissance à 10 mg puis 5 mg à partir de janvier 2025 ; arrêté fin mars 2025 sans syndrome de sevrage.",
+    "note": "Évaluation avec l'interne : ASRS, DIVA 2.0, hétéro-anamnèse maternelle, bulletins scolaires.",
     "observationIds": [
-     "historique:o41",
      "historique:o46",
-     "historique:o50",
-     "historique:o53",
-     "historique:o56",
-     "historique:o57",
-     "historique:o59"
+     "historique:o47",
+     "historique:o48"
     ]
    },
    {
-    "id": "e105",
-    "trackId": "t60",
+    "id": "e115",
+    "trackId": "t68",
     "start": "2024-03-05",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "18 mg le 05/03/2024, 36 mg dès avril 2024, 54 mg depuis septembre 2024 ; bien toléré, ordonnance sécurisée.",
+    "note": "18 mg puis 36 mg (16/04/2024) puis 54 mg (09/2024) ; bien toléré, bilan cardiologique normal.",
     "observationIds": [
      "historique:o50",
      "historique:o51",
-     "historique:o53",
      "historique:o54",
-     "historique:o55",
-     "historique:o56",
      "historique:o57",
      "historique:o60",
      "historique:o61",
@@ -3819,21 +3945,18 @@
      {
       "start": "2024-03-05",
       "end": null,
-      "note": "18 mg le 05/03/2024, 36 mg dès avril 2024, 54 mg depuis septembre 2024 ; bien toléré, ordonnance sécurisée.",
+      "note": "18 mg puis 36 mg (16/04/2024) puis 54 mg (09/2024) ; bien toléré, bilan cardiologique normal.",
       "observationIds": [
        "historique:o50",
        "historique:o51",
-       "historique:o53",
        "historique:o54",
-       "historique:o55",
-       "historique:o56",
        "historique:o57"
       ]
      },
      {
       "start": "2025-05-20",
       "end": null,
-      "note": "Déjà en cours à la première observation (date de début non précisée) ; 54 mg puis diminution à 36 mg/j le 17/03/2026 (\"trop fort l'après-midi\").",
+      "note": "TDAH sous méthylphénidate LP 54 mg, déjà en cours à cette date (début antérieur) ; baisse d'appétit ; diminué à 36 mg/j le 17/03/2026 (« trop fort l'après-midi »), bon équilibre ensuite.",
       "observationIds": [
        "historique:o60",
        "historique:o61",
@@ -3847,14 +3970,14 @@
     ]
    },
    {
-    "id": "e107",
-    "trackId": "t62",
-    "start": "2025-03-25",
+    "id": "e116",
+    "trackId": "t69",
+    "start": "2025-02",
     "end": "2025-08",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "50 mg/j, à prendre une heure avant la situation à risque (approche de réduction).",
+    "note": "Prescrite à la reprise de l'alcool (02/2025), prise « presque tous les jours », nausées la première semaine ; arrêtée par le patient à la mi-août 2025 (« je n'en avais plus besoin »), validé.",
     "observationIds": [
      "historique:o58",
      "historique:o59",
@@ -3865,16 +3988,16 @@
      {
       "start": "2025-03-25",
       "end": null,
-      "note": "50 mg/j, à prendre une heure avant la situation à risque (approche de réduction).",
+      "note": "50 mg/j, une heure avant la situation à risque (approche de réduction).",
       "observationIds": [
-       "historique:o58",
-       "historique:o59"
+       "historique:o59",
+       "historique:o58"
       ]
      },
      {
-      "start": "2025-05-20",
+      "start": "2025-02",
       "end": "2025-08",
-      "note": "Déjà en cours le 20/05/2025 (début non précisé, reprise de l'alcool en 02/2025) ; arrêt à la mi-août 2025 à l'initiative du patient, validé.",
+      "note": "Prescrite à la reprise de l'alcool (02/2025), prise « presque tous les jours », nausées la première semaine ; arrêtée par le patient à la mi-août 2025 (« je n'en avais plus besoin »), validé.",
       "observationIds": [
        "historique:o60",
        "historique:o63"
@@ -3883,47 +4006,127 @@
     ]
    },
    {
-    "id": "e112",
-    "trackId": "t67",
-    "start": "2023-09",
+    "id": "e118",
+    "trackId": "t71",
+    "start": "2017",
     "end": null,
-    "ongoing": true,
+    "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Commencée avec l'épouse chez une conseillère conjugale ; en cours d'espacement en mars 2025.",
+    "note": "Passage aux urgences en 2017 après une nuit de cocaïne, révélé en 2024 ; bilan cardiologique normal en 02/2024.",
     "observationIds": [
-     "historique:o42",
-     "historique:o43",
-     "historique:o45",
-     "historique:o48",
-     "historique:o53",
+     "historique:o49",
+     "historique:o50",
      "historique:o57"
     ]
    },
    {
-    "id": "e113",
-    "trackId": "t68",
-    "start": "2023-11-28",
-    "end": "2024-01-09",
-    "ongoing": false,
+    "id": "e120",
+    "trackId": "t73",
+    "start": "2025-03",
+    "end": null,
+    "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Deux consultations avec l'interne, entretien avec la mère le 12/12/2023 ; diagnostic de TDAH de l'adulte.",
+    "note": "GGT 64 (31 un an avant), CDT limite.",
     "observationIds": [
-     "historique:o46",
-     "historique:o47",
-     "historique:o48"
+     "historique:o58",
+     "historique:o57"
     ]
    },
    {
-    "id": "e115",
-    "trackId": "t70",
+    "id": "e121",
+    "trackId": "t74",
+    "start": "2020-11",
+    "end": null,
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Voiture de fonction contre un muret au retour d'une soirée sous cocaïne, sans blessé ; faussement déclaré comme chevreuil.",
+    "observationIds": [
+     "historique:o39",
+     "historique:o41"
+    ]
+   },
+   {
+    "id": "e122",
+    "trackId": "t75",
+    "start": "1985",
+    "end": "1990",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Père représentant en vins : PMU tous les jours puis casino ; le patient l'accompagnait au PMU enfant ; dettes, huissiers.",
+    "observationIds": [
+     "historique:o44",
+     "historique:o45",
+     "historique:o47",
+     "historique:o68",
+     "historique:o74"
+    ],
+    "fromAge": {
+     "start": [
+      6,
+      11
+     ],
+     "end": null
+    },
+    "tellings": [
+     {
+      "start": "1985",
+      "end": "1990",
+      "note": "Père représentant en vins : PMU tous les jours puis casino ; le patient l'accompagnait au PMU enfant ; dettes, huissiers.",
+      "observationIds": [
+       "historique:o44",
+       "historique:o45",
+       "historique:o47"
+      ]
+     },
+     {
+      "start": "1985",
+      "end": "1990",
+      "note": "Enfant, il accompagnait son père au PMU (« nos moments à nous ») ; reconnaissances de dettes du père des années 1990 retrouvées en 2026.",
+      "observationIds": [
+       "historique:o68",
+       "historique:o74"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "e124",
+    "trackId": "t77",
+    "start": "1985",
+    "end": "1996",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Enfant agité, souvent puni, mots des enseignants dès le CP ; scolarité sauvée au lycée par le sport.",
+    "observationIds": [
+     "historique:o44",
+     "historique:o46",
+     "historique:o47"
+    ],
+    "fromAge": {
+     "start": [
+      6,
+      11
+     ],
+     "end": [
+      12,
+      17
+     ]
+    }
+   },
+   {
+    "id": "e125",
+    "trackId": "t78",
     "start": "1991",
     "end": "1996",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Redoublement de la 5e, renvoi de 3 jours en 4e après une bagarre, punitions fréquentes.",
+    "note": "Redoublement de la 5e.",
     "observationIds": [
      "historique:o44",
      "historique:o46",
@@ -3938,60 +4141,54 @@
     }
    },
    {
-    "id": "e116",
-    "trackId": "t71",
-    "start": "2020-11",
-    "end": null,
+    "id": "e126",
+    "trackId": "t79",
+    "start": "1991",
+    "end": "1996",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Voiture de fonction contre un muret en rentrant d'une soirée, sans blessé ; faussement déclaré comme « chevreuil sur la route » à l'assurance et à l'employeur.",
+    "note": "Renvoi de 3 jours en 4e pour une bagarre.",
     "observationIds": [
-     "historique:o39",
-     "historique:o41"
-    ]
+     "historique:o44",
+     "historique:o46",
+     "historique:o47"
+    ],
+    "fromAge": {
+     "start": [
+      12,
+      17
+     ],
+     "end": null
+    }
    },
    {
-    "id": "e121",
-    "trackId": "t28",
-    "start": "2023-05-02",
+    "id": "e127",
+    "trackId": "t80",
+    "start": "2023-09-12",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Interdiction effective depuis le 02/05/2023, respectée.",
+    "note": "Père malade et loin ; pas revu depuis plusieurs années, ne souhaite pas le revoir.",
     "observationIds": [
-     "historique:o38",
-     "historique:o39",
-     "historique:o45",
-     "historique:o57"
-    ]
+     "historique:o42",
+     "historique:o44"
+    ],
+    "startUnknown": true
    },
    {
-    "id": "e122",
-    "trackId": "t73",
+    "id": "e133",
+    "trackId": "t84",
     "start": "2023-06-08",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Dossier déposé le 08/06/2023, 41 500 € de dettes, déclaré recevable le 14/09/2023.",
+    "note": "Dossier déposé le 08/06/2023, recevable le 14/09/2023 ; plan imposé de 7 ans depuis mars 2024, mensualité 420 €, FICP ; dettes 41 500 €.",
     "observationIds": [
      "historique:o39",
      "historique:o43",
-     "historique:o45"
-    ]
-   },
-   {
-    "id": "e123",
-    "trackId": "t74",
-    "start": "2024-03",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Mesures imposées sur 7 ans (84 mois), mensualité de 420 €, inscription au FICP.",
-    "observationIds": [
      "historique:o52",
      "historique:o57",
      "historique:o62",
@@ -4001,10 +4198,12 @@
     ],
     "tellings": [
      {
-      "start": "2024-03",
+      "start": "2023-06-08",
       "end": null,
-      "note": "Mesures imposées sur 7 ans (84 mois), mensualité de 420 €, inscription au FICP.",
+      "note": "Dossier déposé le 08/06/2023, recevable le 14/09/2023 ; plan imposé de 7 ans depuis mars 2024, mensualité 420 €, FICP ; dettes 41 500 €.",
       "observationIds": [
+       "historique:o39",
+       "historique:o43",
        "historique:o52",
        "historique:o57"
       ]
@@ -4012,7 +4211,7 @@
      {
       "start": "2024-03",
       "end": null,
-      "note": "Plan respecté sans incident, 28 échéances de 420 € réglées en 06/2026 ; demande de solde anticipé envisagée.",
+      "note": "Plan respecté sans incident depuis mars 2024 (28 échéances de 420 € réglées en 06/2026) ; demande de solder plus tôt avec une prime ; pas de nouveau crédit.",
       "observationIds": [
        "historique:o62",
        "historique:o68",
@@ -4023,87 +4222,134 @@
     ]
    },
    {
-    "id": "e124",
-    "trackId": "t75",
-    "start": "2024-01-06",
-    "end": null,
-    "ongoing": true,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Retour à la maison avec l'épouse et les enfants ; budget commun géré par l'épouse.",
-    "observationIds": [
-     "historique:o48",
-     "historique:o52"
-    ]
-   },
-   {
-    "id": "e125",
-    "trackId": "t76",
+    "id": "e134",
+    "trackId": "t85",
     "start": "2024-04",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Formation financée par France Travail, se passe bien en décembre 2024.",
+    "note": "Financée par France Travail, en cours.",
     "observationIds": [
      "historique:o51",
      "historique:o52",
-     "historique:o54",
-     "historique:o55",
-     "historique:o57"
+     "historique:o55"
     ]
    },
    {
-    "id": "e126",
+    "id": "e135",
+    "trackId": "t1",
+    "start": "2021-02",
+    "end": "2023-04",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "Trouble de l'usage de cocaïne sévère, travaillé en psychothérapie les deux premières années du suivi ; abstinent depuis 04/2023.",
+    "observationIds": [
+     "historique:o60",
+     "historique:o68"
+    ]
+   },
+   {
+    "id": "e136",
     "trackId": "t1",
     "start": "2026-07-20",
     "end": null,
     "ongoing": false,
     "mode": "craving",
     "lossOfControl": false,
-    "note": "\"Envie énorme\" de cocaïne le soir des obsèques de son père ; a appelé sa sœur, pas de reprise.",
+    "note": "« Envie énorme » le soir des obsèques de son père ; appelle sa sœur et reste avec elle, pas de reprise.",
     "observationIds": [
      "historique:o73"
     ]
    },
    {
-    "id": "e127",
+    "id": "e137",
+    "trackId": "t2",
+    "start": "2025-02",
+    "end": null,
+    "ongoing": true,
+    "mode": "rechute",
+    "lossOfControl": false,
+    "note": "Reprise de l'alcool depuis 02/2025 (2-3 verres 4 soirs sur 7 en mai 2025, « le dernier produit qui restait », relié à l'ennui) ; réduction nette puis quelques verres le week-end, 2 verres le samedi en 09/2026 ; TU alcool en rémission.",
+    "observationIds": [
+     "historique:o60",
+     "historique:o62",
+     "historique:o63",
+     "historique:o65",
+     "historique:o70",
+     "historique:o74"
+    ]
+   },
+   {
+    "id": "e138",
     "trackId": "t2",
     "start": "2026-07-20",
     "end": null,
     "ongoing": false,
     "mode": "usage",
     "lossOfControl": false,
-    "note": "A bu \"pas mal de whisky\" le soir des obsèques de son père, \"mais pas plus\" ; alcoolisation ponctuelle.",
+    "note": "« Pas mal de whisky » le soir des obsèques de son père, « mais pas plus ».",
     "observationIds": [
      "historique:o73",
      "historique:o74"
     ]
    },
    {
-    "id": "e129",
+    "id": "e139",
+    "trackId": "t5",
+    "start": "2022",
+    "end": "2022",
+    "ongoing": false,
+    "mode": "usage",
+    "lossOfControl": false,
+    "note": "Paris sportifs : il « jouait déjà tous les soirs » à l'époque du groupe de 2022, pariant parfois pendant les pauses ; non dit à l'époque.",
+    "observationIds": [
+     "historique:o66"
+    ]
+   },
+   {
+    "id": "e140",
+    "trackId": "t5",
+    "start": "2025-11",
+    "end": "2025-11",
+    "ongoing": false,
+    "mode": "rechute",
+    "lossOfControl": true,
+    "note": "Rechute brève : paris sur le foot environ 10 jours sur un site étranger non couvert par l'interdiction ANJ (publicité sur un réseau social), perte de 600 € ; arrêt seul après une nuit à « se refaire », dit à son épouse puis spontanément à l'équipe. Pas de jeu depuis, jeu en rémission.",
+    "observationIds": [
+     "historique:o65",
+     "historique:o66",
+     "historique:o68",
+     "historique:o70",
+     "historique:o74"
+    ]
+   },
+   {
+    "id": "e142",
     "trackId": "t3",
     "start": "2026-01-22",
-    "end": null,
+    "end": "2026-01-22",
     "ongoing": false,
     "mode": "rechute",
     "lossOfControl": false,
-    "note": "\"Rechute\" sur la cigarette le 22/01 après arrêt de la varénicline au bout de quatre jours.",
+    "note": "Rechute sur la cigarette le 22/01 après l'arrêt de la varénicline au bout de quatre jours (nausées).",
     "observationIds": [
      "historique:o68",
      "historique:o69"
     ]
    },
    {
-    "id": "e130",
+    "id": "e143",
     "trackId": "t3",
     "start": "2026-02-20",
     "end": null,
     "ongoing": true,
     "mode": "sevrage",
     "lossOfControl": false,
-    "note": "Abstinent depuis le 20/02/2026 sous varénicline puis sans ; CO 2 ppm en 10/2026.",
+    "note": "Arrêt du tabac depuis le 20/02/2026 sous varénicline ; abstinent confirmé en 05, 09 et 10/2026 (CO 2 ppm), très fier ; tabac en sevrage.",
     "observationIds": [
+     "historique:o69",
      "historique:o70",
      "historique:o71",
      "historique:o74",
@@ -4111,31 +4357,14 @@
     ]
    },
    {
-    "id": "e132",
-    "trackId": "t27",
-    "start": "2025-11",
-    "end": "2025-11",
-    "ongoing": false,
-    "mode": "rechute",
-    "lossOfControl": true,
-    "note": "Rechute brève d'environ 10 jours sur un site étranger non couvert par l'interdiction ANJ, perte de 600 € ; arrêt seul après une nuit à \"se refaire\", dit spontanément. Pas de jeu depuis.",
-    "observationIds": [
-     "historique:o65",
-     "historique:o66",
-     "historique:o68",
-     "historique:o70",
-     "historique:o74"
-    ]
-   },
-   {
-    "id": "e138",
-    "trackId": "t79",
+    "id": "e146",
+    "trackId": "t86",
     "start": "2026-01-13",
     "end": "2026-01-17",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Prescrite le 13/01/2026 ; arrêtée au bout de quatre jours à cause de nausées (révélé ensuite).",
+    "note": "Débutée le 13/01/2026, arrêtée au bout de quatre jours (nausées), non dit à l'IDE avant le 17/02.",
     "observationIds": [
      "historique:o67",
      "historique:o68",
@@ -4143,14 +4372,14 @@
     ]
    },
    {
-    "id": "e139",
-    "trackId": "t79",
+    "id": "e147",
+    "trackId": "t86",
     "start": "2026-02-17",
     "end": "2026-04",
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Reprise le 17/02/2026, à prendre au milieu du repas, arrêt fixé au 20/02 ; fin déclarée le 12/05/2026 \"il y a quelques semaines\".",
+    "note": "Reprise le 17/02/2026 (au milieu du repas), poursuite jusqu'à 12 semaines ; terminée « il y a quelques semaines » selon le patient le 12/05/2026.",
     "observationIds": [
      "historique:o69",
      "historique:o70",
@@ -4158,14 +4387,89 @@
     ]
    },
    {
-    "id": "e143",
-    "trackId": "t82",
+    "id": "e152",
+    "trackId": "t35",
+    "start": "2023-04",
+    "end": "2023-04",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Crise suicidaire d'avril 2023, suivie de l'hospitalisation.",
+    "observationIds": [
+     "historique:o68",
+     "historique:o73"
+    ]
+   },
+   {
+    "id": "e153",
+    "trackId": "t88",
+    "start": "2026-07-16",
+    "end": null,
+    "ongoing": true,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Tristesse « mais pas comme en 2023 », pas d'idée suicidaire ; 09/2026 : pas de symptôme dépressif caractérisé, sommeil correct.",
+    "observationIds": [
+     "historique:o73",
+     "historique:o74"
+    ]
+   },
+   {
+    "id": "e154",
+    "trackId": "t89",
+    "start": "2026-01",
+    "end": "2026-09",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Insomnie d'endormissement « depuis l'hiver » (03/2026) ; sommeil correct en 09/2026.",
+    "observationIds": [
+     "historique:o70",
+     "historique:o74"
+    ]
+   },
+   {
+    "id": "e155",
+    "trackId": "t90",
+    "start": "2025-09",
+    "end": "2026-09",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Appétit diminué le midi (09/2025), 74 kg en 12/2025 (-3 kg depuis l'été), 72 kg en 03/2026 (79 kg en 2024), remonté à 75 kg en 09/2026.",
+    "observationIds": [
+     "historique:o63",
+     "historique:o65",
+     "historique:o70",
+     "historique:o74",
+     "historique:o75"
+    ]
+   },
+   {
+    "id": "e156",
+    "trackId": "t91",
+    "start": "2026-02",
+    "end": "2026-07-16",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Père malade (cancer du poumon métastatique, à Pau) ; le patient s'y rend un week-end sur deux ; décès le 16/07/2026.",
+    "observationIds": [
+     "historique:o68",
+     "historique:o70",
+     "historique:o72",
+     "historique:o73"
+    ]
+   },
+   {
+    "id": "e160",
+    "trackId": "t94",
     "start": "2025-12-16",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Installé avec l'éducateur sur téléphone, ordinateur et tablette familiale ; code gardé par l'épouse ; toujours actif en 09/2026.",
+    "note": "Logiciel de blocage des sites de jeux et de paris installé avec l'éducateur sur téléphone, ordinateur et tablette familiale, code gardé par l'épouse ; notifications sportives désactivées ; toujours actif en 09/2026.",
     "observationIds": [
      "historique:o65",
      "historique:o66",
@@ -4173,14 +4477,14 @@
     ]
    },
    {
-    "id": "e144",
-    "trackId": "t83",
+    "id": "e161",
+    "trackId": "t95",
     "start": "2026-01-13",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "Consultations IDE de tabacologie à partir du 13/01/2026, suivi toujours en cours le 13/10/2026.",
+    "note": "Consultations de tabacologie (01/2026, 02/2026, 05/2026 annulée puis reportée, 10/2026) ; CO 18, 16 puis 2 ppm.",
     "observationIds": [
      "historique:o67",
      "historique:o69",
@@ -4189,46 +4493,59 @@
     ]
    },
    {
-    "id": "e148",
-    "trackId": "t87",
+    "id": "e163",
+    "trackId": "t96",
+    "start": "2023-01",
+    "end": "2023-01",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Janvier 2023 : l'épouse révèle le jeu, les dettes et un suivi antérieur ; vécu comme une catastrophe puis une libération, avant la période la plus grave.",
+    "observationIds": [
+     "historique:o68"
+    ]
+   },
+   {
+    "id": "e167",
+    "trackId": "t100",
+    "start": "2025-05",
+    "end": "2025-09-01",
+    "ongoing": false,
+    "mode": null,
+    "lossOfControl": false,
+    "note": "Deux entretiens d'embauche en mai 2025 (un en seconde étape), RDV manqué pour un entretien à Libourne en juin, promesse d'embauche en juillet.",
+    "observationIds": [
+     "historique:o60",
+     "historique:o61",
+     "historique:o62"
+    ]
+   },
+   {
+    "id": "e168",
+    "trackId": "t101",
     "start": "2025-09-01",
     "end": null,
     "ongoing": true,
     "mode": null,
     "lossOfControl": false,
-    "note": "PME de matériel agricole à Libourne, période d'essai de 4 mois validée fin 12/2025 ; promesse d'embauche en 07/2025.",
+    "note": "CDI dans une PME de matériel agricole à Libourne dès le 01/09/2025 ; période d'essai validée fin 12/2025 ; refuse une soirée de bienvenue et un poste itinérant par prudence ; peur de « redevenir le commercial d'avant ».",
     "observationIds": [
-     "historique:o60",
      "historique:o62",
      "historique:o63",
      "historique:o65",
-     "historique:o72"
+     "historique:o72",
+     "historique:o74"
     ]
    },
    {
-    "id": "e150",
-    "trackId": "t89",
-    "start": "2026-03",
-    "end": "2026-07-16",
-    "ongoing": false,
-    "mode": null,
-    "lossOfControl": false,
-    "note": "Père à Pau, cancer du poumon métastatique signalé le 17/03/2026 ; visites un week-end sur deux.",
-    "observationIds": [
-     "historique:o68",
-     "historique:o70",
-     "historique:o72"
-    ]
-   },
-   {
-    "id": "e151",
-    "trackId": "t90",
+    "id": "e169",
+    "trackId": "t102",
     "start": "2026-07-16",
     "end": null,
     "ongoing": false,
     "mode": null,
     "lossOfControl": false,
-    "note": "Décès le 16/07/2026 à Pau, obsèques le 20/07 ; deuil, pas de symptôme dépressif caractérisé en 09/2026.",
+    "note": "Père décédé le 16/07/2026 à Pau ; obsèques le 20/07.",
     "observationIds": [
      "historique:o73",
      "historique:o74"
@@ -4238,11 +4555,11 @@
   "undated": [],
   "consolidation": {
    "lots": 4,
-   "tracksBefore": 90,
-   "tracksAfter": 71,
-   "eventsBefore": 151,
-   "eventsAfter": 111,
-   "discordant": 9
+   "tracksBefore": 102,
+   "tracksAfter": 84,
+   "eventsBefore": 169,
+   "eventsAfter": 130,
+   "discordant": 11
   }
  }
 }

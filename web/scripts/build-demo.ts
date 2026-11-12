@@ -6,7 +6,7 @@
  *
  * Per dossier: its PDFs, and one recording per run (the model's raw answers
  * in call order, cost, duration), replayed by the app instead of the network.
- * The long dossier comes with its own run (--long-run=longs/regroupe1): four
+ * The long dossier comes with its own run (--long-run=longs/regroupe2): four
  * lots and their regroupement, answered from files, hence an estimated cost.
  * Fictional data only: everything here is already public in data/anonymized.
  */
@@ -69,7 +69,7 @@ const scores: { run: string; perDossier: RunScores }[] = existsSync(resolve(FRIS
 
 const arg = (name: string) => process.argv.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
 const runs = (arg("runs") ?? "age1").split(",");
-const longRun = arg("long-run") ?? "longs/regroupe1";
+const longRun = arg("long-run") ?? "longs/regroupe2";
 const longScores = readScores(resolve(FRISE, "rapport-longs.json"), longRun);
 
 rmSync(OUT, { recursive: true, force: true });
