@@ -73,6 +73,8 @@ export function Frise(props: {
   onImportKey?: (files: File[]) => void;
   /** Where the analysis came from, e.g. "Claude Sonnet 5.5, réponses rejouées". */
   source?: string;
+  /** The pseudonymized text of an observation, for an event's card. */
+  sourceText?: (observationId: string) => string | null;
   /** Corrections by hand: the pseudonymized frise, changed. Absent: read only. */
   onChange?: (timeline: Timeline) => void;
 }) {
@@ -209,7 +211,7 @@ export function Frise(props: {
           {timeline.events.length} événements · {datedTracks.size} pistes
           {timeline.undated.length > 0 && ` · ${timeline.undated.length} non datés`}
           {corrections.total > 0 && (
-            <strong className="hand-count" title="Événements ajoutés, modifiés ou supprimés à la main. Ils sont gardés dans l'analyse enregistrée et remis si le dossier est relu.">
+            <strong className="hand-count" title="Événements ajoutés, modifiés ou supprimés à la main. Ils sont gardés dans ce navigateur et dans l'analyse enregistrée, et remis si le dossier est relu ou rouvert.">
               {` · ${corrections.total} correction${corrections.total > 1 ? "s" : ""} à la main`}
             </strong>
           )}
@@ -571,6 +573,7 @@ export function Frise(props: {
           observations={props.observations}
           real={real}
           onOpenSource={props.onOpenSource ? openSource : undefined}
+          sourceText={props.sourceText}
           onChange={props.onChange}
           onClose={() => setEditing(null)}
         />

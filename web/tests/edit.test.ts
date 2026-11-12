@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 import { addEvent, carryCorrections, correctionCount, draftOf, keyEvents, mergeEvents, parseDateInput, removeEvent, setKey, setVerdict, updateEvent } from "../src/notebook/edit";
-import { dateStart, type Timeline, type TimelineEvent } from "../src/notebook/model";
+import { dossierKey, restoreCorrections, storeCorrections } from "../src/app/corrections-store";
+import { dateStart, type Observation, type Timeline, type TimelineEvent } from "../src/notebook/model";
 import { historyShare, splitScale, ticks } from "../src/ui/axis";
 
 const ev = (id: string, trackId: string, start: string, more: Partial<TimelineEvent> = {}): TimelineEvent => ({
@@ -180,5 +181,54 @@ describe("axis in two parts", () => {
   it("thins year labels to what fits", () => {
     expect(ticks(min, cut, 5).map((t) => t.label)).toEqual(["1990", "2000", "2010", "2020"]);
     expect(ticks(cut, max, 14).length).toBeGreaterThan(3); // quarters on a short span
+  });
+});
+
+describe("landmarks never repeat a name", () => {
+  it("shows once a fact read under two headings", () => {
+    const t = frise();
+    t.tracks.push({ id: "t4", kind: "psychiatric", label: "Séparation des parents" });
+    t.events.push(ev("e5", "t4", "1998"));
+    const names = keyEvents(t, dateStart("2023-09"), 10).map((e) => t.tracks.find((x) => x.id === e.trackId)!.label);
+    expect(names.filter((n) => n === "Séparation des parents")).toHaveLength(1);
+  });
+});
+
+describe("corrections kept in the browser", () => {
+  const obs = (id: string, date: string, line: number): Observation => ({ id, doc: "d1", start: { page: 1, line }, end: { page: 1, line: line + 3 }, date, kind: "consultation", authorRole: null, summary: "" });
+  const memory = () => {
+    const m = new Map<string, string>();
+    return { m, getItem: (k: string) => m.get(k) ?? null, setItem: (k: string, v: string) => void m.set(k, v), removeItem: (k: string) => void m.delete(k) };
+  };
+
+  it("keys a dossier by its observations, not by the ids of the session", () => {
+    const a = [obs("doc1:o1", "2023-09-04", 1), obs("doc1:o2", "2023-10-02", 9)];
+    const b = [obs("doc7:o1", "2023-09-04", 1), obs("doc7:o2", "2023-10-02", 9)];
+    expect(dossierKey(a)).toBe(dossierKey(b));
+    expect(dossierKey(a)).not.toBe(dossierKey([a[0]]));
+  });
+
+  it("puts the corrections back on the same dossier opened again, and stores nothing untouched", () => {
+    const store = memory();
+    const observations = [obs("o1", "2023-09-04", 1)];
+    storeCorrections(observations, frise(), store);
+    expect(store.m.size).toBe(0);
+    const mine = removeEvent(setVerdict(frise(), "e1", "ok"), "e3");
+    storeCorrections(observations, mine, store);
+    expect(store.m.size).toBe(1);
+    const back = restoreCorrections(observations, frise(), store);
+    expect(back.events.map((e) => e.id)).toEqual(["e1", "e2", "e4"]);
+    expect(back.events[0].verdict).toBe("ok");
+    // Another dossier is left as read; a correction undone empties the store.
+    expect(restoreCorrections([obs("o1", "2020-01-01", 1)], frise(), store).events).toHaveLength(4);
+    storeCorrections(observations, frise(), store);
+    expect(store.m.size).toBe(0);
+  });
+
+  it("survives a store that holds something else", () => {
+    const store = memory();
+    const observations = [obs("o1", "2023-09-04", 1)];
+    store.setItem(dossierKey(observations), "{not json");
+    expect(restoreCorrections(observations, frise(), store).events).toHaveLength(4);
   });
 });

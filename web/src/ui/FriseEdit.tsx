@@ -26,6 +26,8 @@ export function EventEditor(props: {
   /** Real names are shown on the frise: say that the note is edited under its labels. */
   real: boolean;
   onOpenSource?: (observationId: string) => void;
+  /** The text of an observation as the model read it (pseudonymized). */
+  sourceText?: (observationId: string) => string | null;
   /** Absent: the card only shows the event. */
   onChange?: (t: Timeline) => void;
   onClose: () => void;
@@ -138,8 +140,9 @@ export function EventEditor(props: {
             {event.observationIds.length === 0 && <p className="muted small">Ajouté à la main : aucune observation source.</p>}
             {event.observationIds.map((id) => {
               const o = props.observations.find((x) => x.id === id);
+              const text = props.sourceText?.(id);
               return (
-                <p key={id} className="small">
+                <div key={id} className="small source-block">
                   <button
                     className="link"
                     onClick={() => {
@@ -151,7 +154,13 @@ export function EventEditor(props: {
                     {o?.date ? formatDate(o.date) : "Observation"}
                   </button>{" "}
                   <span className="muted">{o?.summary}</span>
-                </p>
+                  {text && (
+                    <details>
+                      <summary>Lire l'observation (texte pseudonymisé)</summary>
+                      <p className="source-text">{text}</p>
+                    </details>
+                  )}
+                </div>
               );
             })}
             {(event.tellings?.length ?? 0) > 1 && (
