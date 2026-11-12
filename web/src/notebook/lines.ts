@@ -103,3 +103,28 @@ export function linesBetween(
   }
   return out;
 }
+
+/**
+ * Where a span of lines is drawn, page by page: an observation that runs
+ * over several pages is shown on each of them.
+ */
+export function spanBoxes(
+  pages: PageText[],
+  start: { page: number; line: number },
+  end: { page: number; line: number },
+  skip?: Set<string>,
+): Record<number, Rect[]> {
+  const out: Record<number, Rect[]> = {};
+  for (const page of pages) {
+    if (page.page < start.page || page.page > end.page) continue;
+    const boxes = lineBoxes(page);
+    const rects = pageLines(page).flatMap((l, i) => {
+      if (page.page === start.page && l.line < start.line) return [];
+      if (page.page === end.page && l.line > end.line) return [];
+      if (skip && isRepeated(l.text, skip)) return [];
+      return boxes[i] ? [boxes[i]] : [];
+    });
+    if (rects.length) out[page.page] = rects;
+  }
+  return out;
+}
