@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, statSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -101,9 +101,13 @@ test("analyse a verified document into a frise, sending nothing identifying", as
   await expect(page.locator("svg.essentiel .landmark").first()).toBeVisible();
   await page.screenshot({ path: "test-results/essentiel.png" });
   // The short view exports as a picture.
-  const download = page.waitForEvent("download");
+  // Real names are on screen: the export asks first, and names the file accordingly.
+  page.once("dialog", (d) => void d.accept());
+  const download = page.waitForEvent("download", { timeout: 20_000 });
   await page.getByRole("button", { name: "Exporter l'image" }).click();
-  expect((await download).suggestedFilename()).toMatch(/^essentiel-.*\.png$/);
+  const picture = await download;
+  expect(picture.suggestedFilename()).toBe("essentiel-IDENTIFIANT.png");
+  expect(statSync((await picture.path())!).size).toBeGreaterThan(5_000);
 
   // An event added by hand on a line, then merged into its neighbour: four events again.
   await page.locator(".frise").getByRole("tab", { name: "Frise" }).click();
