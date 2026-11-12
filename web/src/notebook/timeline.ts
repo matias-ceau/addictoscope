@@ -92,6 +92,9 @@ export interface TimelineInput {
   birthYear?: number | null;
   /** Characters of observation text per call (default CHARS_PER_CALL). */
   charsPerCall?: number;
+  /** true: each lot after the first is given the frise read so far, and
+   *  closes or corrects its events instead of telling them again (SPEC.md). */
+  carry?: boolean;
   /** false: an event with neither a start nor an age is dropped, as before
    *  such events were placed at their first mention — to replay a recording
    *  made then and rebuild the frise that run produced. */
@@ -145,16 +148,23 @@ export interface PreparedObservations {
   text: Map<string, string>;
 }
 
+/**
+ * The model sees short ids, unique across documents ("o1", "o2"…, in
+ * chronological order): given "historique:o2" and a single document, it often
+ * answered "o2", and every event was then dropped for want of a known source.
+ */
+export function observationShortIds(observations: Observation[]): Pick<PreparedObservations, "sorted" | "realId" | "shortId"> {
+  const sorted = [...observations].sort((a, b) => (a.date ?? "9999").localeCompare(b.date ?? "9999"));
+  const realId = new Map(sorted.map((o, i) => [`o${i + 1}`, o.id]));
+  const shortId = new Map([...realId].map(([short, id]) => [id, short]));
+  return { sorted, realId, shortId };
+}
+
 export function prepareObservations(input: Pick<TimelineInput, "observations" | "pagesByDoc">): PreparedObservations {
   const repeatedByDoc = Object.fromEntries(
     Object.entries(input.pagesByDoc).map(([doc, pages]) => [doc, repeatedLines(pages)]),
   );
-  const sorted = [...input.observations].sort((a, b) => (a.date ?? "9999").localeCompare(b.date ?? "9999"));
-  // The model sees short ids, unique across documents ("o1", "o2"…): given
-  // "historique:o2" and a single document, it often answered "o2", and every
-  // event was then dropped for want of a known source.
-  const realId = new Map(sorted.map((o, i) => [`o${i + 1}`, o.id]));
-  const shortId = new Map([...realId].map(([short, id]) => [id, short]));
+  const { sorted, realId, shortId } = observationShortIds(input.observations);
   const text = new Map(
     sorted.map((o) => [o.id, observationText(o, shortId.get(o.id)!, input.pagesByDoc[o.doc] ?? [], repeatedByDoc[o.doc] ?? new Set())]),
   );
@@ -176,24 +186,102 @@ export function packObservations(obs: Observation[], text: Map<string, string>, 
   return batches;
 }
 
+/** A change to an event of the frise read so far, told by a later lot. */
+export interface EventUpdate {
+  /** "e3": the number the event has in the list given to the model. */
+  id: string;
+  /** null: unchanged. */
+  start: string | null;
+  /** null: no end known. */
+  end: string | null;
+  ongoing: boolean;
+  /** "": unchanged. */
+  note: string;
+  /** Observations of this lot that tell the event again. */
+  observation_ids: string[];
+}
+
+export const CARRY_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  required: ["events", "updates"],
+  properties: {
+    events: TIMELINE_SCHEMA.properties.events,
+    updates: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["id", "start", "end", "ongoing", "note", "observation_ids"],
+        properties: {
+          id: { type: "string", description: "numéro de l'événement déjà relevé : e1, e2…" },
+          start: { type: ["string", "null"], description: "début corrigé ; null si inchangé" },
+          end: { type: ["string", "null"], description: "fin connue après ces observations ; null si aucune" },
+          ongoing: { type: "boolean", description: "toujours en cours à la dernière de ces observations" },
+          note: { type: "string", description: "note corrigée ; chaîne vide si inchangée" },
+          observation_ids: { type: "array", items: { type: "string" } },
+        },
+      },
+    },
+  },
+};
+
+export const CARRY_RULES = `
+
+Le dossier est lu en plusieurs fois. La frise déjà relevée dans les observations précédentes t'est donnée, chaque événement avec un numéro (e1, e2…).
+- events : seulement les événements nouveaux, qui ne figurent pas déjà dans cette frise. Ne répète pas un événement déjà relevé, même raconté autrement.
+- updates : pour un événement déjà relevé que ces observations font évoluer ou contredisent : il s'arrête (end, ongoing = false), il se poursuit alors qu'il était noté terminé, sa date ou sa note était inexacte, ou il est raconté à nouveau (observation_ids). Un événement déjà relevé qui n'est plus mentionné reste tel quel : ne le mets pas dans updates.`;
+
+const period = (e: Pick<RawEvent, "start" | "end" | "ongoing">) =>
+  `${e.start ?? "daté par l'âge"}${e.ongoing ? " → en cours" : e.end ? ` → ${e.end}` : ""}`;
+
+/** What a lot after the first is given: the frise read so far, then its observations. */
+export function carriedMessage(events: RawEvent[], batchText: string): string {
+  const list = events.map((e, i) => `e${i + 1} | ${e.kind} / ${e.label} | ${period(e)} | ${e.note}`).join("\n");
+  return `Frise déjà relevée dans les observations précédentes :\n\n${list}\n\nObservations suivantes (ordre chronologique) :\n\n${batchText}`;
+}
+
+/** The frise read so far, with the changes a later lot tells; unknown numbers and dates that are not dates are left out. */
+export function applyUpdates(events: RawEvent[], updates: EventUpdate[], realId: Map<string, string>): RawEvent[] {
+  const out = events.map((e) => ({ ...e, observation_ids: [...e.observation_ids] }));
+  for (const u of updates ?? []) {
+    const e = out[Number(/^e(\d+)$/.exec(u.id ?? "")?.[1]) - 1];
+    if (!e) continue;
+    if (isPartialDate(u.start)) e.start = u.start;
+    const ended = isPartialDate(u.end);
+    if (ended) e.end = u.end;
+    else if (u.ongoing) e.end = null;
+    e.ongoing = Boolean(u.ongoing) && !ended;
+    if (u.note?.trim()) e.note = u.note.trim();
+    for (const id of u.observation_ids ?? []) {
+      const real = realId.get(id) ?? id;
+      if (!e.observation_ids.includes(real)) e.observation_ids.push(real);
+    }
+  }
+  return out;
+}
+
 /** One reading of the observations by the model: raw events, sources as app ids, not yet assembled. */
 export async function readEvents(input: TimelineInput, prepared = prepareObservations(input)): Promise<RawEvent[]> {
   const batches = packObservations(prepared.sorted, prepared.text, input.charsPerCall);
-  const raw: RawEvent[] = [];
+  let raw: RawEvent[] = [];
   let done = 0;
   for (const batch of batches) {
-    const result = await chatJson<{ events: RawEvent[] }>({
+    // The first lot is read as any lot; the next ones are given what was read before them.
+    const carried = Boolean(input.carry) && raw.length > 0;
+    const result = await chatJson<{ events: RawEvent[]; updates?: EventUpdate[] }>({
       policy: input.policy,
       manifests: [...batch.docs].map((d) => input.manifests[d]),
       messages: [
-        { role: "system", content: TIMELINE_SYSTEM },
-        { role: "user", content: `Observations (ordre chronologique) :\n\n${batch.text}` },
+        { role: "system", content: carried ? TIMELINE_SYSTEM + CARRY_RULES : TIMELINE_SYSTEM },
+        { role: "user", content: carried ? carriedMessage(raw, batch.text) : `Observations (ordre chronologique) :\n\n${batch.text}` },
       ],
       docs: [...batch.docs],
-      schemaName: "frise",
-      schema: TIMELINE_SCHEMA,
+      schemaName: carried ? "frise-suite" : "frise",
+      schema: carried ? CARRY_SCHEMA : TIMELINE_SCHEMA,
       fetchImpl: input.fetchImpl,
     });
+    if (carried) raw = applyUpdates(raw, result.updates ?? [], prepared.realId);
     for (const e of result.events ?? []) {
       raw.push({ ...e, observation_ids: (e.observation_ids ?? []).map((id) => prepared.realId.get(id) ?? id) });
     }

@@ -730,3 +730,24 @@ réponses) : rappel 473/532 (89 % ; 468 avant), antécédents de l'entrée 114/1
 (96 % ; 104 avant), suivi 299/344, révélés tard 60/69 ; 822 → 616 lignes,
 précision borne basse 39 % → 54 % ; coût estimé 0,56 $ par dossier. La
 bibliothèque et la démonstration montrent ce passage.
+
+## Trois façons de lire un long dossier (12/11/2026)
+
+La relecture des frises réelles contre leur texte a montré des erreurs qu'un lot ne peut pas voir : un traitement laissé « en cours » alors qu'il s'arrête dix notes plus loin, un antécédent placé à la date de la note qui le raconte, un médicament seulement demandé noté comme pris. Trois lectures sont comparées à la lecture par lots indépendants suivie du regroupement.
+
+- **Relecture** (`src/notebook/proofread.ts`, `--proofread`) : une fois la frise construite, une demande de plus donne au modèle tous les événements numérotés et tout le texte. Il ne répond que sur ce que le texte contredit : `wrong` (le fait n'existe pas), `fix` (début, fin, « en cours » ou note à reprendre), et ce qui manque. La réponse est appliquée sur le poste : un numéro inconnu est ignoré, une correction qui n'est pas une date est laissée de côté, une fin antérieure au début aussi, et ce qui est ajouté passe par la même validation que tout événement lu. `Timeline.proofreading` garde les comptes (relus, corrigés, retirés, ajoutés) ; la frise d'avant est gardée à côté (`timelineUnchecked`).
+- **Frise transmise** (`carry` dans `TimelineInput`, `--carry`) : le premier lot est lu comme d'habitude ; chaque lot suivant reçoit la frise déjà relevée, numérotée, et répond par les événements nouveaux (`events`) et par les changements à ceux d'avant (`updates` : fin, reprise, date ou note corrigée, observation qui le raconte à nouveau). Pas de regroupement ensuite.
+- **Un seul appel** (`--chars=1000000`) : tout le dossier dans une demande, sans lot ni regroupement.
+
+Les demandes passent par le transport par fichiers comme les autres. Pour la frise transmise, un lot ne peut être demandé qu'une fois le précédent répondu : à chaque tour, seule la première demande en attente de chaque dossier est valable, les suivantes sont à supprimer.
+
+Mesure sur les 6 dossiers longs fictifs (532 événements attendus, demandes répondues par des sous-agents, `scripts/compare_readings.py`, `data/processed/frise/comparaison-lectures.md`) :
+
+| Lecture | Rappel | Événements | Précision (borne basse) | Fin compatible | « En cours » juste | Texte échangé |
+|---|---|---|---|---|---|---|
+| Lots + regroupement | 473 (89 %) | 878 | 54 % | 63 % | 89 % | 1 |
+| Lots + regroupement + relecture | 479 (90 %) | 883 | 54 % | 68 % | 95 % | × 1,3 |
+| Frise transmise | 446 (84 %) | 668 | 67 % | 65 % | 91 % | × 0,8 |
+| Un seul appel | 417 (78 %) | 511 | 82 % | 70 % | 97 % | × 0,4 |
+
+La relecture ne retire rien au rappel et corrige ce qu'elle visait (fins et « en cours »). Plus la lecture est large, moins le modèle relève d'événements : un seul appel perd 11 points de rappel, la frise transmise 5. La lecture par lots suivie d'une relecture reste donc la meilleure ; le défaut de l'application ne change pas tant que la relecture n'y est pas branchée.
