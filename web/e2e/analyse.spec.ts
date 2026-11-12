@@ -35,6 +35,17 @@ function fakeModel(route: Route, sent: string[]) {
       observations.unshift({ start: { page: lines[0].page, line: 1 }, end: { page: end.page, line: end.line }, date: null, kind: "suite", author_role: null, continues_previous: true, summary: "" });
     }
     answer = { observations };
+  } else if (body.response_format.json_schema.name === "relecture") {
+    // The reviewer closes the treatment, drops the life event and adds nothing.
+    const number = (track: string) => text.match(new RegExp(`^(e\\d+) \\| ${track}`, "m"))![1];
+    const last = [...text.matchAll(/^### \S+ — (\S+)/gm)].at(-1)![1];
+    answer = {
+      verdicts: [
+        { id: number("medication / Acamprosate"), verdict: "fix", start: null, end: last, ongoing: false, note: "arrêté à la dernière observation", reason: "arrêt noté" },
+        { id: number("life_event / Travail"), verdict: "wrong", start: null, end: null, ongoing: false, note: "", reason: "seulement envisagé" },
+      ],
+      missing: [],
+    };
   } else {
     const obs = [...text.matchAll(/^### (\S+) — (\S+)/gm)].map((m) => ({ id: m[1], date: m[2] }));
     answer = {
@@ -127,4 +138,28 @@ test("analyse a verified document into a frise, sending nothing identifying", as
   await page.locator(".event-table button.link").first().click();
   await expect(page.locator(".source-highlight").first()).toBeVisible();
   await page.screenshot({ path: "test-results/source-jump.png" });
+});
+
+test("the frise is read again against its text on request", async ({ page }) => {
+  const sent: string[] = [];
+  await page.route("https://openrouter.ai/**", (route) => fakeModel(route, sent));
+  await page.addInitScript(() =>
+    localStorage.setItem("addictoscope.cloud", JSON.stringify({ kind: "openrouter-zdr", apiKey: "sk-test", model: "anthropic/claude-sonnet-5.5" })),
+  );
+  await page.goto("/");
+  await page.locator('input[type="file"]:not([accept=".json,.axkey"])').setInputFiles(resolve(DATA, "synthetique-historique-csapa.pdf"));
+  await expect(page.getByText(/Relu aussi par l'IA locale/)).toBeVisible({ timeout: 90_000 });
+  await page.getByRole("button", { name: "Pseudonymiser ce document" }).click();
+  await expect(page.getByText("Document pseudonymisé et vérifié")).toBeVisible({ timeout: 60_000 });
+  await page.getByRole("button", { name: "Analyser le dossier" }).click();
+  await expect(page.locator(".frise .event")).toHaveCount(4, { timeout: 60_000 });
+
+  await page.getByRole("button", { name: "Relire contre le texte" }).click();
+  await expect(page.getByText("Relue contre le texte : 1 corrigé, 1 retiré, 0 ajouté sur 4.")).toBeVisible({ timeout: 30_000 });
+  await expect(page.locator(".frise .event")).toHaveCount(3);
+  await expect(page.locator(".frise")).toContainText("relue contre le texte (1 corrigés, 1 retirés, 0 ajoutés)");
+  // One more request, with the numbered events and the pseudonymised text, and no name in it.
+  expect(sent).toHaveLength(2);
+  expect(sent[1]).toContain("medication / Acamprosate");
+  expect(sent[1]).not.toMatch(/MARCHAND/i);
 });

@@ -31,6 +31,8 @@ import { ReviewPanel } from "./ReviewPanel";
 import { Sources } from "./Sources";
 import { mergeDetections, reducer, type SourceDocState } from "./state";
 import { SettingsDialog } from "./SettingsDialog";
+import { birthYearFromDetections } from "../notebook/age";
+import { proofreadTimeline } from "../notebook/proofread";
 import { Viewer } from "./Viewer";
 import { Welcome } from "./Welcome";
 
@@ -55,6 +57,8 @@ export function App(props: { library?: LibraryProps } = {}) {
   const [policy, setPolicy] = useState<CloudPolicy>(loadPolicy);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [analysis, setAnalysis] = useState<AnalysisState>({ status: "idle" });
+  const analysisRef = useRef(analysis);
+  analysisRef.current = analysis;
   const [highlight, setHighlight] = useState<{ doc: string; page: number; rects: Record<number, Rect[]>; key: number }>();
   /** The fictional dossier on screen, in the demonstration. */
   const [demo, setDemo] = useState<DemoDossier | null>(null);
@@ -206,6 +210,27 @@ export function App(props: { library?: LibraryProps } = {}) {
       setAnalysis({ status: "error", error: String((err as Error).message ?? err) });
     }
   }, [policy, demo, demoSource]);
+
+  /** Second pass: the frise shown (corrections by hand included) is read again against the whole text. */
+  const proofread = useCallback(async () => {
+    const current = analysisRef.current;
+    if (!current.timeline || !current.observations || policy.kind === "off") return;
+    const docs = stateRef.current.docs.filter((d) => current.docs?.includes(d.id) && d.outPages);
+    setAnalysis((a) => ({ ...a, proofreadingNow: true }));
+    try {
+      const checked = await proofreadTimeline(current.timeline, {
+        observations: current.observations,
+        pagesByDoc: Object.fromEntries(docs.map((d) => [d.id, d.outPages!])),
+        manifests: Object.fromEntries(docs.map((d) => [d.id, d.manifest])),
+        policy,
+        birthYear: birthYearFromDetections(stateRef.current.detections.filter((d) => current.docs?.includes(d.doc))),
+      });
+      setAnalysis((a) => ({ ...a, timeline: checked, proofreadingNow: false }));
+    } catch (err) {
+      // Refused by the guard: the frise stays as it was, and the reason is shown.
+      setAnalysis((a) => ({ ...a, proofreadingNow: false, timeline: a.timeline && { ...a.timeline, proofreading: { checked: a.timeline.events.length, fixed: 0, removed: 0, added: 0, failed: String((err as Error).message ?? err) } } }));
+    }
+  }, [policy]);
 
   // Library: the dossier goes through the local path on its own (every
   // detection accepted, as for the recorded run), then its saved analysis
@@ -498,6 +523,7 @@ export function App(props: { library?: LibraryProps } = {}) {
                   onConfigure={() => setSettingsOpen(true)}
                   onRun={runAnalysis}
                   onShowFrise={() => setMainView("frise")}
+                  onProofread={!replayMode && !analysis.replayed && policyReady(policy) ? proofread : undefined}
                   demo={demo ? { dossier: demo, allVerified, source: demoSource, onSource: setDemoSource } : undefined}
                 />
               }

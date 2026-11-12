@@ -228,6 +228,11 @@ export function Frise(props: {
               {")"}
             </span>
           )}
+          {timeline.proofreading && !timeline.proofreading.failed && (
+            <span title="Chaque événement a été relu contre tout le texte par le modèle">
+              {` · relue contre le texte (${timeline.proofreading.fixed} corrigés, ${timeline.proofreading.removed} retirés, ${timeline.proofreading.added} ajoutés)`}
+            </span>
+          )}
           {timeline.consolidation?.failed && (
             <span className="error-text" title={timeline.consolidation.failed}>
               {` · lu en ${timeline.consolidation.lots} lots, doublons non regroupés (l'appel a échoué)`}

@@ -751,3 +751,5 @@ Mesure sur les 6 dossiers longs fictifs (532 événements attendus, demandes ré
 | Un seul appel | 417 (78 %) | 511 | 82 % | 70 % | 97 % | × 0,4 |
 
 La relecture ne retire rien au rappel et corrige ce qu'elle visait (fins et « en cours »). Plus la lecture est large, moins le modèle relève d'événements : un seul appel perd 11 points de rappel, la frise transmise 5. La lecture par lots suivie d'une relecture reste donc la meilleure ; le défaut de l'application ne change pas tant que la relecture n'y est pas branchée.
+
+Dans l'application, la relecture est une étape à la demande : une fois la frise faite, la carte d'analyse propose « Relire contre le texte ». Une demande de plus part avec les événements numérotés et le texte pseudonymisé, par la même barrière que les autres ; la frise affichée, corrections à la main comprises, est remplacée par la frise relue, et la carte dit ce qui a changé (« 1 corrigé, 1 retiré, 0 ajouté sur 4 »). Le bouton n'existe pas quand rien ne peut partir (aucun modèle réglé, démonstration ou bibliothèque rejouées).
