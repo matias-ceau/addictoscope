@@ -137,6 +137,17 @@ export interface ConsolidationStats {
   failed?: string;
 }
 
+/** What the second pass on a frise changed (proofread.ts). */
+export interface ProofreadingStats {
+  /** Events the reviewer was given. */
+  checked: number;
+  fixed: number;
+  removed: number;
+  added: number;
+  /** The call failed: the frise is the one read, not checked. */
+  failed?: string;
+}
+
 export interface Timeline {
   tracks: Track[];
   events: TimelineEvent[];
@@ -146,6 +157,8 @@ export interface Timeline {
   consensus?: ConsensusStats;
   /** Present when the frise was read in several lots and regrouped. */
   consolidation?: ConsolidationStats;
+  /** Present when the frise was read again against its text. */
+  proofreading?: ProofreadingStats;
   /** Events deleted by hand. */
   removed?: RemovedEvent[];
   /** What the reader found missing, in their own words. */

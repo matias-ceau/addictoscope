@@ -1,0 +1,4645 @@
+{
+  "dossier": "polyconso-precarite",
+  "model": "anthropic/claude-sonnet-5.5",
+  "textOnly": true,
+  "transport": "files",
+  "segmentation": "rules-first",
+  "segmentedBy": {
+    "historique": "rules"
+  },
+  "charsPerCall": 1000000,
+  "ranAt": "2026-11-12T05:53:19.719Z",
+  "review": "automatic detections accepted as they are; the planted identifiers they left are masked by hand",
+  "docs": {
+    "historique": {
+      "pages": 21,
+      "redactions": {
+        "ETABLISSEMENT": 48,
+        "ADRESSE": 48,
+        "TEL": 23,
+        "PATIENT": 76,
+        "DOSSIER": 21,
+        "NAISSANCE": 22,
+        "IPP": 21,
+        "VILLE": 23,
+        "SOIGNANT": 165,
+        "PERSONNE": 54,
+        "PROCHE": 39,
+        "EMAIL": 1
+      },
+      "verified": true,
+      "leaks": 0,
+      "leftByRules": 0,
+      "maskedByHand": 0,
+      "plantedLeft": 0
+    }
+  },
+  "observations": [
+    {
+      "id": "historique:o1",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 13
+      },
+      "end": {
+        "page": 0,
+        "line": 28
+      },
+      "date": "2018-05-22",
+      "kind": "Entretien téléphonique",
+      "authorRole": "IDE",
+      "summary": "Appel de Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o2",
+      "doc": "historique",
+      "start": {
+        "page": 0,
+        "line": 29
+      },
+      "end": {
+        "page": 1,
+        "line": 55
+      },
+      "date": "2018-05-29",
+      "kind": "Observation médicale d'entrée",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o3",
+      "doc": "historique",
+      "start": {
+        "page": 1,
+        "line": 56
+      },
+      "end": {
+        "page": 1,
+        "line": 67
+      },
+      "date": "2018-06-05",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o4",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 13
+      },
+      "end": {
+        "page": 2,
+        "line": 27
+      },
+      "date": "2018-06-12",
+      "kind": "Observation sociale",
+      "authorRole": "Assistante sociale",
+      "summary": "Premier entretien social."
+    },
+    {
+      "id": "historique:o5",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 28
+      },
+      "end": {
+        "page": 2,
+        "line": 42
+      },
+      "date": "2018-06-26",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o6",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 43
+      },
+      "end": {
+        "page": 2,
+        "line": 50
+      },
+      "date": "2018-07-03",
+      "kind": "Observation sociale",
+      "authorRole": "Assistante sociale",
+      "summary": "RDV de suivi. Le bailleur accepte de suspendre la procédure si un plan d'apurement est respecté (100 €/mois en plus du"
+    },
+    {
+      "id": "historique:o7",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 51
+      },
+      "end": {
+        "page": 2,
+        "line": 56
+      },
+      "date": "2018-07-17",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "RDV non honoré. Appel sur le portable : répondeur. Message laissé."
+    },
+    {
+      "id": "historique:o8",
+      "doc": "historique",
+      "start": {
+        "page": 2,
+        "line": 57
+      },
+      "end": {
+        "page": 3,
+        "line": 18
+      },
+      "date": "2018-09-10",
+      "kind": "Observation médicale d'entrée",
+      "authorRole": "Interne",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o9",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 19
+      },
+      "end": {
+        "page": 3,
+        "line": 25
+      },
+      "date": "2018-09-11",
+      "kind": "Observation infirmière",
+      "authorRole": "Infirmier(ère)",
+      "summary": "Nuit agitee jusqu'a 2h. Sueurs, tremblements, anxieuse. Cushman 9 a 23h -> diazepam 20 mg selon protocole. Cushman"
+    },
+    {
+      "id": "historique:o10",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 26
+      },
+      "end": {
+        "page": 3,
+        "line": 37
+      },
+      "date": "2018-09-20",
+      "kind": "Observation médicale de suivi",
+      "authorRole": "Interne",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o11",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 38
+      },
+      "end": {
+        "page": 3,
+        "line": 54
+      },
+      "date": "2018-10-16",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o12",
+      "doc": "historique",
+      "start": {
+        "page": 3,
+        "line": 55
+      },
+      "end": {
+        "page": 3,
+        "line": 73
+      },
+      "date": "2018-11-20",
+      "kind": "Observation ELSA",
+      "authorRole": "IDE ELSA",
+      "summary": "Appel UHCD. Pte [PATIENT]"
+    },
+    {
+      "id": "historique:o13",
+      "doc": "historique",
+      "start": {
+        "page": 4,
+        "line": 13
+      },
+      "end": {
+        "page": 4,
+        "line": 28
+      },
+      "date": "2018-11-27",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o14",
+      "doc": "historique",
+      "start": {
+        "page": 4,
+        "line": 29
+      },
+      "end": {
+        "page": 4,
+        "line": 36
+      },
+      "date": "2018-12-04",
+      "kind": "Entretien téléphonique",
+      "authorRole": "IDE",
+      "summary": "Appel du Dr [SOIGNANT_3]"
+    },
+    {
+      "id": "historique:o15",
+      "doc": "historique",
+      "start": {
+        "page": 4,
+        "line": 37
+      },
+      "end": {
+        "page": 4,
+        "line": 48
+      },
+      "date": "2019-01-15",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "Passage rapide pour l'ordonnance de baclofène (le Dr [SOIGNANT_4]"
+    },
+    {
+      "id": "historique:o16",
+      "doc": "historique",
+      "start": {
+        "page": 4,
+        "line": 49
+      },
+      "end": {
+        "page": 4,
+        "line": 55
+      },
+      "date": "2019-03-12",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "Passage pour le renouvellement du baclofène 60 mg et de la sertraline. Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o17",
+      "doc": "historique",
+      "start": {
+        "page": 4,
+        "line": 56
+      },
+      "end": {
+        "page": 4,
+        "line": 67
+      },
+      "date": "2019-03-19",
+      "kind": "Observation sociale",
+      "authorRole": "Assistante sociale",
+      "summary": "Point sur la procédure d'expulsion."
+    },
+    {
+      "id": "historique:o18",
+      "doc": "historique",
+      "start": {
+        "page": 4,
+        "line": 68
+      },
+      "end": {
+        "page": 5,
+        "line": 20
+      },
+      "date": "2019-04-23",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o19",
+      "doc": "historique",
+      "start": {
+        "page": 5,
+        "line": 21
+      },
+      "end": {
+        "page": 5,
+        "line": 28
+      },
+      "date": "2019-06-04",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "RDV non honoré."
+    },
+    {
+      "id": "historique:o20",
+      "doc": "historique",
+      "start": {
+        "page": 5,
+        "line": 29
+      },
+      "end": {
+        "page": 5,
+        "line": 44
+      },
+      "date": "2019-07-09",
+      "kind": "Observation équipe mobile précarité",
+      "authorRole": "IDE EMPP",
+      "summary": "Rencontre lors de la maraude, quai de Paludate, avec M. [PROCHE_5]"
+    },
+    {
+      "id": "historique:o21",
+      "doc": "historique",
+      "start": {
+        "page": 5,
+        "line": 45
+      },
+      "end": {
+        "page": 5,
+        "line": 59
+      },
+      "date": "2019-09-17",
+      "kind": "Transmission CAARUD",
+      "authorRole": "Éducateur spécialisé",
+      "summary": "Transmission de Mme [PERSONNE_3]"
+    },
+    {
+      "id": "historique:o22",
+      "doc": "historique",
+      "start": {
+        "page": 5,
+        "line": 60
+      },
+      "end": {
+        "page": 5,
+        "line": 71
+      },
+      "date": "2019-11-05",
+      "kind": "Observation équipe mobile précarité",
+      "authorRole": "IDE EMPP",
+      "summary": "Maraude. Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o23",
+      "doc": "historique",
+      "start": {
+        "page": 5,
+        "line": 72
+      },
+      "end": {
+        "page": 6,
+        "line": 16
+      },
+      "date": "2019-12-10",
+      "kind": "Observation équipe mobile précarité",
+      "authorRole": "IDE EMPP",
+      "summary": "Maraude par grand froid. Couple toujours sous le pont, couvertures de survie distribuées. Proposition de mise à l'abri 115"
+    },
+    {
+      "id": "historique:o24",
+      "doc": "historique",
+      "start": {
+        "page": 6,
+        "line": 17
+      },
+      "end": {
+        "page": 6,
+        "line": 35
+      },
+      "date": "2020-01-14",
+      "kind": "Observation ELSA",
+      "authorRole": "IDE ELSA",
+      "summary": "Appel du service de medecine (secteur 3). Pte [PATIENT]"
+    },
+    {
+      "id": "historique:o25",
+      "doc": "historique",
+      "start": {
+        "page": 6,
+        "line": 36
+      },
+      "end": {
+        "page": 6,
+        "line": 46
+      },
+      "date": "2020-01-21",
+      "kind": "Observation ELSA",
+      "authorRole": "IDE ELSA",
+      "summary": "Revue avant sortie, prevue ce jour."
+    },
+    {
+      "id": "historique:o26",
+      "doc": "historique",
+      "start": {
+        "page": 6,
+        "line": 47
+      },
+      "end": {
+        "page": 6,
+        "line": 63
+      },
+      "date": "2020-02-11",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o27",
+      "doc": "historique",
+      "start": {
+        "page": 6,
+        "line": 64
+      },
+      "end": {
+        "page": 6,
+        "line": 74
+      },
+      "date": "2020-05-05",
+      "kind": "Observation équipe mobile précarité",
+      "authorRole": "IDE EMPP",
+      "summary": "Visite à l'hôtel (dispositif 115, confinement) où le couple est hébergé depuis le 20/03."
+    },
+    {
+      "id": "historique:o28",
+      "doc": "historique",
+      "start": {
+        "page": 7,
+        "line": 13
+      },
+      "end": {
+        "page": 7,
+        "line": 20
+      },
+      "date": "2020-07-07",
+      "kind": "Observation équipe mobile précarité",
+      "authorRole": "IDE EMPP",
+      "summary": "Fin du dispositif hôtelier le 30/06 : le couple est retourné dans un squat à Bacalan, puis sous la tente. Pas de place 115"
+    },
+    {
+      "id": "historique:o29",
+      "doc": "historique",
+      "start": {
+        "page": 7,
+        "line": 21
+      },
+      "end": {
+        "page": 7,
+        "line": 34
+      },
+      "date": "2020-09-15",
+      "kind": "Transmission CAARUD",
+      "authorRole": "Éducateur spécialisé",
+      "summary": "Transmission de Mme [PERSONNE_3]"
+    },
+    {
+      "id": "historique:o30",
+      "doc": "historique",
+      "start": {
+        "page": 7,
+        "line": 35
+      },
+      "end": {
+        "page": 7,
+        "line": 41
+      },
+      "date": "2020-10-13",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "RDV non honoré avec le Dr [SOIGNANT_4]"
+    },
+    {
+      "id": "historique:o31",
+      "doc": "historique",
+      "start": {
+        "page": 7,
+        "line": 42
+      },
+      "end": {
+        "page": 7,
+        "line": 65
+      },
+      "date": "2021-01-26",
+      "kind": "Observation équipe mobile précarité",
+      "authorRole": "IDE EMPP",
+      "summary": "Maraude, puis accompagnement de Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o32",
+      "doc": "historique",
+      "start": {
+        "page": 7,
+        "line": 66
+      },
+      "end": {
+        "page": 8,
+        "line": 23
+      },
+      "date": "2021-02-02",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o33",
+      "doc": "historique",
+      "start": {
+        "page": 8,
+        "line": 24
+      },
+      "end": {
+        "page": 8,
+        "line": 32
+      },
+      "date": "2021-03-02",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "RDV non honoré avec le Dr [SOIGNANT_4]"
+    },
+    {
+      "id": "historique:o34",
+      "doc": "historique",
+      "start": {
+        "page": 8,
+        "line": 33
+      },
+      "end": {
+        "page": 8,
+        "line": 51
+      },
+      "date": "2021-03-16",
+      "kind": "Observation sociale",
+      "authorRole": "Assistante sociale",
+      "summary": "Reprise du suivi social, après 18 mois sans contact."
+    },
+    {
+      "id": "historique:o35",
+      "doc": "historique",
+      "start": {
+        "page": 8,
+        "line": 52
+      },
+      "end": {
+        "page": 8,
+        "line": 62
+      },
+      "date": "2021-04-13",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o36",
+      "doc": "historique",
+      "start": {
+        "page": 8,
+        "line": 63
+      },
+      "end": {
+        "page": 9,
+        "line": 35
+      },
+      "date": "2021-06-07",
+      "kind": "Observation médicale d'entrée",
+      "authorRole": "Interne",
+      "summary": "- Interne"
+    },
+    {
+      "id": "historique:o37",
+      "doc": "historique",
+      "start": {
+        "page": 9,
+        "line": 36
+      },
+      "end": {
+        "page": 9,
+        "line": 43
+      },
+      "date": "2021-06-08",
+      "kind": "Observation infirmière",
+      "authorRole": "Infirmier(ère)",
+      "summary": "Nuit difficile. Pte [PATIENT]"
+    },
+    {
+      "id": "historique:o38",
+      "doc": "historique",
+      "start": {
+        "page": 9,
+        "line": 44
+      },
+      "end": {
+        "page": 9,
+        "line": 59
+      },
+      "date": "2021-06-18",
+      "kind": "Observation médicale de suivi",
+      "authorRole": "Interne",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o39",
+      "doc": "historique",
+      "start": {
+        "page": 9,
+        "line": 60
+      },
+      "end": {
+        "page": 10,
+        "line": 16
+      },
+      "date": "2021-07-06",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "Premier RDV IDE depuis la sortie. Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o40",
+      "doc": "historique",
+      "start": {
+        "page": 10,
+        "line": 17
+      },
+      "end": {
+        "page": 10,
+        "line": 29
+      },
+      "date": "2021-08-24",
+      "kind": "Observation ELSA",
+      "authorRole": "IDE ELSA",
+      "summary": "Appel gastro-enterologie. Pte [PATIENT]"
+    },
+    {
+      "id": "historique:o41",
+      "doc": "historique",
+      "start": {
+        "page": 10,
+        "line": 30
+      },
+      "end": {
+        "page": 10,
+        "line": 57
+      },
+      "date": "2021-09-21",
+      "kind": "Transmission CAARUD",
+      "authorRole": "Éducateur spécialisé",
+      "summary": "Entretien avec Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o42",
+      "doc": "historique",
+      "start": {
+        "page": 10,
+        "line": 58
+      },
+      "end": {
+        "page": 10,
+        "line": 75
+      },
+      "date": "2021-10-12",
+      "kind": "Observation psychologue",
+      "authorRole": "Psychologue",
+      "summary": "Premier entretien, à la demande du Dr [SOIGNANT_4]"
+    },
+    {
+      "id": "historique:o43",
+      "doc": "historique",
+      "start": {
+        "page": 11,
+        "line": 13
+      },
+      "end": {
+        "page": 11,
+        "line": 29
+      },
+      "date": "2021-11-09",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o44",
+      "doc": "historique",
+      "start": {
+        "page": 11,
+        "line": 30
+      },
+      "end": {
+        "page": 11,
+        "line": 37
+      },
+      "date": "2022-01-11",
+      "kind": "Transmission CHRS",
+      "authorRole": "Éducateur spécialisé",
+      "summary": "Appel de Mme [PERSONNE_5]"
+    },
+    {
+      "id": "historique:o45",
+      "doc": "historique",
+      "start": {
+        "page": 11,
+        "line": 38
+      },
+      "end": {
+        "page": 11,
+        "line": 60
+      },
+      "date": "2022-01-25",
+      "kind": "Observation sociale",
+      "authorRole": "Assistante sociale",
+      "summary": "Entretien au CSAPA, puis appel à la future curatrice."
+    },
+    {
+      "id": "historique:o46",
+      "doc": "historique",
+      "start": {
+        "page": 11,
+        "line": 61
+      },
+      "end": {
+        "page": 12,
+        "line": 18
+      },
+      "date": "2022-02-22",
+      "kind": "Observation ELSA",
+      "authorRole": "IDE ELSA",
+      "summary": "Appel ortho. Pte [PATIENT]"
+    },
+    {
+      "id": "historique:o47",
+      "doc": "historique",
+      "start": {
+        "page": 12,
+        "line": 19
+      },
+      "end": {
+        "page": 12,
+        "line": 43
+      },
+      "date": "2022-03-15",
+      "kind": "Observation psychologue",
+      "authorRole": "Psychologue",
+      "summary": "Entretien long, Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o48",
+      "doc": "historique",
+      "start": {
+        "page": 12,
+        "line": 44
+      },
+      "end": {
+        "page": 12,
+        "line": 64
+      },
+      "date": "2022-04-05",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o49",
+      "doc": "historique",
+      "start": {
+        "page": 12,
+        "line": 65
+      },
+      "end": {
+        "page": 13,
+        "line": 14
+      },
+      "date": "2022-06-07",
+      "kind": "Entretien téléphonique",
+      "authorRole": "IDE",
+      "summary": "Appel de la pharmacie du quartier Saint-Jean : Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o50",
+      "doc": "historique",
+      "start": {
+        "page": 13,
+        "line": 15
+      },
+      "end": {
+        "page": 13,
+        "line": 37
+      },
+      "date": "2022-09-20",
+      "kind": "Transmission CHRS",
+      "authorRole": "Éducateur spécialisé",
+      "summary": "Entretien éducatif, en lien avec Mme [PERSONNE_5]"
+    },
+    {
+      "id": "historique:o51",
+      "doc": "historique",
+      "start": {
+        "page": 13,
+        "line": 38
+      },
+      "end": {
+        "page": 13,
+        "line": 54
+      },
+      "date": "2022-10-18",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o52",
+      "doc": "historique",
+      "start": {
+        "page": 13,
+        "line": 55
+      },
+      "end": {
+        "page": 13,
+        "line": 66
+      },
+      "date": "2023-01-10",
+      "kind": "Observation psychologue",
+      "authorRole": "Psychologue",
+      "summary": "Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o53",
+      "doc": "historique",
+      "start": {
+        "page": 13,
+        "line": 67
+      },
+      "end": {
+        "page": 13,
+        "line": 75
+      },
+      "date": "2023-02-07",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "Renouvellement du diazépam 10 mg (délivrance hebdomadaire) et de la mirtazapine. Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o54",
+      "doc": "historique",
+      "start": {
+        "page": 14,
+        "line": 13
+      },
+      "end": {
+        "page": 14,
+        "line": 32
+      },
+      "date": "2023-03-14",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o55",
+      "doc": "historique",
+      "start": {
+        "page": 14,
+        "line": 33
+      },
+      "end": {
+        "page": 14,
+        "line": 61
+      },
+      "date": "2023-06-13",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o56",
+      "doc": "historique",
+      "start": {
+        "page": 14,
+        "line": 62
+      },
+      "end": {
+        "page": 15,
+        "line": 23
+      },
+      "date": "2023-09-19",
+      "kind": "Observation sociale",
+      "authorRole": "Assistante sociale",
+      "summary": "Entrée à la pension de famille Les Ajoncs le 01/09/2023 : studio, [ADRESSE]"
+    },
+    {
+      "id": "historique:o57",
+      "doc": "historique",
+      "start": {
+        "page": 15,
+        "line": 24
+      },
+      "end": {
+        "page": 16,
+        "line": 20
+      },
+      "date": "2023-11-07",
+      "kind": "Synthèse annuelle",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o58",
+      "doc": "historique",
+      "start": {
+        "page": 16,
+        "line": 21
+      },
+      "end": {
+        "page": 16,
+        "line": 32
+      },
+      "date": "2024-02-20",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o59",
+      "doc": "historique",
+      "start": {
+        "page": 16,
+        "line": 33
+      },
+      "end": {
+        "page": 16,
+        "line": 50
+      },
+      "date": "2024-05-21",
+      "kind": "Observation éducative",
+      "authorRole": "Éducateur spécialisé",
+      "summary": "Entretien à sa demande, plus tôt que prévu."
+    },
+    {
+      "id": "historique:o60",
+      "doc": "historique",
+      "start": {
+        "page": 16,
+        "line": 51
+      },
+      "end": {
+        "page": 16,
+        "line": 67
+      },
+      "date": "2024-06-04",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o61",
+      "doc": "historique",
+      "start": {
+        "page": 16,
+        "line": 68
+      },
+      "end": {
+        "page": 17,
+        "line": 16
+      },
+      "date": "2024-10-15",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "RDV non honoré. Appel : elle était à l'anniversaire de [PERSONNE_7]"
+    },
+    {
+      "id": "historique:o62",
+      "doc": "historique",
+      "start": {
+        "page": 17,
+        "line": 17
+      },
+      "end": {
+        "page": 17,
+        "line": 30
+      },
+      "date": "2024-12-03",
+      "kind": "Observation psychologue",
+      "authorRole": "Psychologue",
+      "summary": "Séance d'EMDR (cible : la scène de l'escalier en 2005). SUD de 7 à 2 en fin de séance. Les cauchemars de cette scène"
+    },
+    {
+      "id": "historique:o63",
+      "doc": "historique",
+      "start": {
+        "page": 17,
+        "line": 31
+      },
+      "end": {
+        "page": 17,
+        "line": 46
+      },
+      "date": "2025-02-04",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o64",
+      "doc": "historique",
+      "start": {
+        "page": 17,
+        "line": 47
+      },
+      "end": {
+        "page": 17,
+        "line": 65
+      },
+      "date": "2025-02-11",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o65",
+      "doc": "historique",
+      "start": {
+        "page": 17,
+        "line": 66
+      },
+      "end": {
+        "page": 18,
+        "line": 14
+      },
+      "date": "2025-02-18",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "Fin du sevrage ambulatoire, J7 : dernière prise de diazépam (5 mg) ce matin. Aucun signe de sevrage depuis J3,"
+    },
+    {
+      "id": "historique:o66",
+      "doc": "historique",
+      "start": {
+        "page": 18,
+        "line": 15
+      },
+      "end": {
+        "page": 18,
+        "line": 33
+      },
+      "date": "2025-05-13",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o67",
+      "doc": "historique",
+      "start": {
+        "page": 18,
+        "line": 34
+      },
+      "end": {
+        "page": 18,
+        "line": 53
+      },
+      "date": "2025-07-15",
+      "kind": "Entretien téléphonique",
+      "authorRole": "IDE",
+      "summary": "Appel de Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o68",
+      "doc": "historique",
+      "start": {
+        "page": 18,
+        "line": 54
+      },
+      "end": {
+        "page": 18,
+        "line": 68
+      },
+      "date": "2025-08-26",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o69",
+      "doc": "historique",
+      "start": {
+        "page": 18,
+        "line": 69
+      },
+      "end": {
+        "page": 19,
+        "line": 17
+      },
+      "date": "2025-09-23",
+      "kind": "Observation sociale",
+      "authorRole": "Assistante sociale",
+      "summary": "Point avec Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o70",
+      "doc": "historique",
+      "start": {
+        "page": 19,
+        "line": 18
+      },
+      "end": {
+        "page": 19,
+        "line": 42
+      },
+      "date": "2025-11-18",
+      "kind": "Bilan psychologique",
+      "authorRole": "Psychologue",
+      "summary": "Bilan de fin de psychothérapie, à quatre ans du premier entretien (12/10/2021), d'un commun accord."
+    },
+    {
+      "id": "historique:o71",
+      "doc": "historique",
+      "start": {
+        "page": 19,
+        "line": 43
+      },
+      "end": {
+        "page": 19,
+        "line": 52
+      },
+      "date": "2026-01-20",
+      "kind": "Observation IDE",
+      "authorRole": "IDE",
+      "summary": "Renouvellement acamprosate et mirtazapine (ordonnance du Dr [SOIGNANT_4]"
+    },
+    {
+      "id": "historique:o72",
+      "doc": "historique",
+      "start": {
+        "page": 19,
+        "line": 53
+      },
+      "end": {
+        "page": 19,
+        "line": 63
+      },
+      "date": "2026-03-10",
+      "kind": "Entretien téléphonique",
+      "authorRole": "IDE",
+      "summary": "Appel de Mme [PATIENT]"
+    },
+    {
+      "id": "historique:o73",
+      "doc": "historique",
+      "start": {
+        "page": 19,
+        "line": 64
+      },
+      "end": {
+        "page": 20,
+        "line": 28
+      },
+      "date": "2026-04-14",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    },
+    {
+      "id": "historique:o74",
+      "doc": "historique",
+      "start": {
+        "page": 20,
+        "line": 29
+      },
+      "end": {
+        "page": 20,
+        "line": 42
+      },
+      "date": "2026-06-23",
+      "kind": "Observation éducative",
+      "authorRole": "Éducateur spécialisé",
+      "summary": "Entretien éducatif."
+    },
+    {
+      "id": "historique:o75",
+      "doc": "historique",
+      "start": {
+        "page": 20,
+        "line": 43
+      },
+      "end": {
+        "page": 20,
+        "line": 67
+      },
+      "date": "2026-10-13",
+      "kind": "Observation psychiatrique de suivi",
+      "authorRole": "Psychiatre addictologue",
+      "summary": "Observations :"
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "t1",
+        "kind": "substance_use",
+        "label": "Alcool"
+      },
+      {
+        "id": "t2",
+        "kind": "substance_use",
+        "label": "Tabac"
+      },
+      {
+        "id": "t3",
+        "kind": "substance_use",
+        "label": "Cannabis"
+      },
+      {
+        "id": "t4",
+        "kind": "substance_use",
+        "label": "Crack"
+      },
+      {
+        "id": "t5",
+        "kind": "substance_use",
+        "label": "Benzodiazépines"
+      },
+      {
+        "id": "t6",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif"
+      },
+      {
+        "id": "t7",
+        "kind": "psychiatric",
+        "label": "Tentative de suicide (intoxication médicamenteuse volontaire)"
+      },
+      {
+        "id": "t8",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif caractérisé"
+      },
+      {
+        "id": "t9",
+        "kind": "psychiatric",
+        "label": "Épisode dépressif sévère"
+      },
+      {
+        "id": "t10",
+        "kind": "psychiatric",
+        "label": "Trouble de stress post-traumatique"
+      },
+      {
+        "id": "t11",
+        "kind": "somatic",
+        "label": "Appendicectomie"
+      },
+      {
+        "id": "t12",
+        "kind": "somatic",
+        "label": "Traumatisme crânien"
+      },
+      {
+        "id": "t13",
+        "kind": "somatic",
+        "label": "Hépatopathie alcoolique"
+      },
+      {
+        "id": "t14",
+        "kind": "somatic",
+        "label": "Crise convulsive de sevrage"
+      },
+      {
+        "id": "t15",
+        "kind": "somatic",
+        "label": "Delirium tremens"
+      },
+      {
+        "id": "t16",
+        "kind": "somatic",
+        "label": "Plaies infectées des pieds"
+      },
+      {
+        "id": "t17",
+        "kind": "somatic",
+        "label": "Hépatite C"
+      },
+      {
+        "id": "t18",
+        "kind": "somatic",
+        "label": "Pancréatite aiguë"
+      },
+      {
+        "id": "t19",
+        "kind": "somatic",
+        "label": "Polyneuropathie sensitive"
+      },
+      {
+        "id": "t20",
+        "kind": "somatic",
+        "label": "Fracture bimalléolaire cheville gauche"
+      },
+      {
+        "id": "t21",
+        "kind": "medication",
+        "label": "Alprazolam"
+      },
+      {
+        "id": "t22",
+        "kind": "medication",
+        "label": "Paroxétine"
+      },
+      {
+        "id": "t23",
+        "kind": "medication",
+        "label": "Sertraline"
+      },
+      {
+        "id": "t24",
+        "kind": "medication",
+        "label": "Thiamine"
+      },
+      {
+        "id": "t25",
+        "kind": "medication",
+        "label": "Baclofène"
+      },
+      {
+        "id": "t26",
+        "kind": "medication",
+        "label": "Diazépam"
+      },
+      {
+        "id": "t27",
+        "kind": "medication",
+        "label": "Mirtazapine"
+      },
+      {
+        "id": "t28",
+        "kind": "medication",
+        "label": "Acamprosate"
+      },
+      {
+        "id": "t29",
+        "kind": "medication",
+        "label": "Sofosbuvir/velpatasvir"
+      },
+      {
+        "id": "t30",
+        "kind": "medication",
+        "label": "Nalméfène"
+      },
+      {
+        "id": "t31",
+        "kind": "medication",
+        "label": "Substituts nicotiniques"
+      },
+      {
+        "id": "t32",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi en CMP"
+      },
+      {
+        "id": "t33",
+        "kind": "therapeutic_psycho",
+        "label": "Sevrage hospitalier d'alcool (Marmande)"
+      },
+      {
+        "id": "t34",
+        "kind": "therapeutic_psycho",
+        "label": "Sevrage hospitalier (clinique du Lac)"
+      },
+      {
+        "id": "t35",
+        "kind": "therapeutic_psycho",
+        "label": "Suivi CSAPA"
+      },
+      {
+        "id": "t36",
+        "kind": "therapeutic_psycho",
+        "label": "Sevrage hospitalier programmé"
+      },
+      {
+        "id": "t37",
+        "kind": "therapeutic_psycho",
+        "label": "Passage UHCD"
+      },
+      {
+        "id": "t38",
+        "kind": "therapeutic_psycho",
+        "label": "Équipe mobile psychiatrie-précarité (EMPP)"
+      },
+      {
+        "id": "t39",
+        "kind": "therapeutic_psycho",
+        "label": "CAARUD"
+      },
+      {
+        "id": "t40",
+        "kind": "therapeutic_psycho",
+        "label": "Hospitalisation (delirium tremens, réanimation)"
+      },
+      {
+        "id": "t41",
+        "kind": "therapeutic_psycho",
+        "label": "Sevrage hospitalier alcool, BZD et crack"
+      },
+      {
+        "id": "t42",
+        "kind": "therapeutic_psycho",
+        "label": "Psychothérapie"
+      },
+      {
+        "id": "t43",
+        "kind": "therapeutic_psycho",
+        "label": "SSR addictologique des Pins-Gris"
+      },
+      {
+        "id": "t44",
+        "kind": "therapeutic_psycho",
+        "label": "EMDR"
+      },
+      {
+        "id": "t45",
+        "kind": "therapeutic_psycho",
+        "label": "Sevrage ambulatoire"
+      },
+      {
+        "id": "t46",
+        "kind": "life_event",
+        "label": "Naissance à Marmande"
+      },
+      {
+        "id": "t47",
+        "kind": "life_event",
+        "label": "Enfance avec un père alcoolique"
+      },
+      {
+        "id": "t48",
+        "kind": "life_event",
+        "label": "Scolarité"
+      },
+      {
+        "id": "t49",
+        "kind": "life_event",
+        "label": "Décès du père"
+      },
+      {
+        "id": "t50",
+        "kind": "life_event",
+        "label": "Emploi de secrétaire comptable"
+      },
+      {
+        "id": "t51",
+        "kind": "life_event",
+        "label": "Mariage"
+      },
+      {
+        "id": "t52",
+        "kind": "life_event",
+        "label": "Naissance du premier enfant"
+      },
+      {
+        "id": "t53",
+        "kind": "life_event",
+        "label": "Naissance du second enfant"
+      },
+      {
+        "id": "t54",
+        "kind": "life_event",
+        "label": "Violences conjugales"
+      },
+      {
+        "id": "t55",
+        "kind": "life_event",
+        "label": "Séparation d'avec le mari"
+      },
+      {
+        "id": "t56",
+        "kind": "life_event",
+        "label": "Divorce"
+      },
+      {
+        "id": "t57",
+        "kind": "life_event",
+        "label": "Placement des enfants (ASE)"
+      },
+      {
+        "id": "t58",
+        "kind": "life_event",
+        "label": "Installation à Bègles"
+      },
+      {
+        "id": "t59",
+        "kind": "life_event",
+        "label": "Vie de couple avec M. [PROCHE_5]"
+      },
+      {
+        "id": "t60",
+        "kind": "life_event",
+        "label": "Dette locative et procédure d'expulsion"
+      },
+      {
+        "id": "t61",
+        "kind": "life_event",
+        "label": "Sans domicile (canapé, squat, tente)"
+      },
+      {
+        "id": "t62",
+        "kind": "life_event",
+        "label": "Hébergement hôtelier 115"
+      },
+      {
+        "id": "t63",
+        "kind": "life_event",
+        "label": "Garde à vue"
+      },
+      {
+        "id": "t64",
+        "kind": "life_event",
+        "label": "Prostitution pour payer le crack"
+      },
+      {
+        "id": "t65",
+        "kind": "life_event",
+        "label": "Décès du compagnon"
+      },
+      {
+        "id": "t66",
+        "kind": "life_event",
+        "label": "Halte de nuit femmes"
+      },
+      {
+        "id": "t67",
+        "kind": "life_event",
+        "label": "CHRS Le Fanal"
+      },
+      {
+        "id": "t68",
+        "kind": "life_event",
+        "label": "Curatelle renforcée"
+      },
+      {
+        "id": "t69",
+        "kind": "life_event",
+        "label": "Retrouvailles avec sa fille"
+      },
+      {
+        "id": "t70",
+        "kind": "life_event",
+        "label": "Pension de famille Les Ajoncs"
+      },
+      {
+        "id": "t71",
+        "kind": "life_event",
+        "label": "Naissance du petit-fils"
+      },
+      {
+        "id": "t72",
+        "kind": "life_event",
+        "label": "Allocation adulte handicapé"
+      },
+      {
+        "id": "t73",
+        "kind": "life_event",
+        "label": "Décès de la mère"
+      },
+      {
+        "id": "t74",
+        "kind": "life_event",
+        "label": "Reprise de contact avec le fils"
+      },
+      {
+        "id": "t75",
+        "kind": "life_event",
+        "label": "Bénévolat à l'épicerie solidaire"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "trackId": "t1",
+        "start": "1987",
+        "end": "2006",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Premier verre « vers 15 ans » (13 ans selon o8, 14 ans selon o57) aux fêtes de village, premières ivresses ; usage festif de fin de semaine pendant les années de travail et de mariage",
+        "observationIds": [
+          "historique:o2",
+          "historique:o8",
+          "historique:o57"
+        ],
+        "fromAge": {
+          "start": [
+            15,
+            15
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e2",
+        "trackId": "t1",
+        "start": "2006",
+        "end": "2018-09-10",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": true,
+        "note": "Usage quotidien installé à la séparation (alcool du matin) ; perte de contrôle depuis une dizaine d'années (vers 2008) ; environ 2 L de vin/jour, max 3 L",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o8",
+          "historique:o47",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e3",
+        "trackId": "t1",
+        "start": "2018-02",
+        "end": "2018-02",
+        "ongoing": false,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Tentative d'arrêt seule de deux ou trois jours, interrompue par tremblements et angoisse",
+        "observationIds": [
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e4",
+        "trackId": "t1",
+        "start": "2018-10-05",
+        "end": "2021-06-07",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Rechute le 05/10/2018 après la sortie du sevrage, reprise quotidienne (1 L/j puis 2-3 L à deux dans la rue, jusqu'à 2 L/j en 2021)",
+        "observationIds": [
+          "historique:o11",
+          "historique:o13",
+          "historique:o18",
+          "historique:o20",
+          "historique:o26",
+          "historique:o27",
+          "historique:o32",
+          "historique:o36"
+        ]
+      },
+      {
+        "id": "e5",
+        "trackId": "t1",
+        "start": "2018-11-16",
+        "end": "2018-11-18",
+        "ongoing": false,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Arrêt brutal de l'alcool (plus d'argent) et de l'alprazolam suivi d'une crise convulsive de sevrage ; reprise dès le 22/11",
+        "observationIds": [
+          "historique:o12",
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e6",
+        "trackId": "t1",
+        "start": "2020-01-06",
+        "end": "2020-01-10",
+        "ongoing": false,
+        "mode": "sevrage",
+        "lossOfControl": false,
+        "note": "Arrêt contraint de l'alcool (4 jours, plus d'argent) suivi d'un delirium tremens",
+        "observationIds": [
+          "historique:o24",
+          "historique:o26"
+        ]
+      },
+      {
+        "id": "e7",
+        "trackId": "t1",
+        "start": "2021-08",
+        "end": "2021-08",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Reprise cachée de l'alcool au CHRS (environ une bouteille par jour) avec pancréatite aiguë",
+        "observationIds": [
+          "historique:o40",
+          "historique:o41",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e8",
+        "trackId": "t1",
+        "start": "2022-02",
+        "end": "2022-02-19",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Rechute de 10 jours après un appel de sa sœur, alcoolémie 1,9 g/L à la chute dans l'escalier du CHRS",
+        "observationIds": [
+          "historique:o46",
+          "historique:o48",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e9",
+        "trackId": "t1",
+        "start": "2022-12-24",
+        "end": "2022-12-24",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Un verre de champagne le soir du 24/12, craving les jours suivants gérés",
+        "observationIds": [
+          "historique:o52"
+        ]
+      },
+      {
+        "id": "e10",
+        "trackId": "t1",
+        "start": "2023-01",
+        "end": "2023-04-17",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Alcoolisations cachées au CHRS depuis début janvier (1 bouteille de vin/jour), GGT 186 ; abstinente depuis l'entrée en SSR",
+        "observationIds": [
+          "historique:o54",
+          "historique:o55",
+          "historique:o56",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e11",
+        "trackId": "t1",
+        "start": "2024-01",
+        "end": "2025-01",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Deux ou trois verres de vin à table, 2-3 fois par semaine, sans perte de contrôle ; un peu plus le soir en décembre 2024",
+        "observationIds": [
+          "historique:o59",
+          "historique:o60",
+          "historique:o62"
+        ]
+      },
+      {
+        "id": "e12",
+        "trackId": "t1",
+        "start": "2025-01",
+        "end": "2025-02-11",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Rechute depuis mi-janvier après l'anniversaire du décès du compagnon : 1 L/j dès 10h ; abstinente depuis le 11/02/2025",
+        "observationIds": [
+          "historique:o63",
+          "historique:o64",
+          "historique:o66"
+        ]
+      },
+      {
+        "id": "e13",
+        "trackId": "t1",
+        "start": "2026-03-07",
+        "end": "2026-03-07",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Écart isolé pour ses 54 ans (3-4 verres de rosé), sans reprise",
+        "observationIds": [
+          "historique:o72",
+          "historique:o73",
+          "historique:o75"
+        ]
+      },
+      {
+        "id": "e14",
+        "trackId": "t2",
+        "start": "1987",
+        "end": null,
+        "ongoing": true,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Tabac depuis l'âge de 15 ans, 25 cig/j puis 10 avec patch en 2025 et 8 cig/j en 2026 ; Fagerström 7",
+        "observationIds": [
+          "historique:o2",
+          "historique:o66",
+          "historique:o67",
+          "historique:o73",
+          "historique:o75"
+        ],
+        "fromAge": {
+          "start": [
+            15,
+            15
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e15",
+        "trackId": "t3",
+        "start": "1991",
+        "end": "1993",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "« Quelques joints vers 20 ans », jamais régulier",
+        "observationIds": [
+          "historique:o2"
+        ],
+        "fromAge": {
+          "start": [
+            19,
+            21
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e16",
+        "trackId": "t4",
+        "start": "2019-10",
+        "end": "2021-06-07",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Crack fumé depuis octobre 2019 d'après la patiente (2020 selon un courrier), quotidien en 2020-2021 jusqu'à 2 g/j ; arrêté au sevrage de juin 2021",
+        "observationIds": [
+          "historique:o22",
+          "historique:o24",
+          "historique:o26",
+          "historique:o27",
+          "historique:o28",
+          "historique:o29",
+          "historique:o31",
+          "historique:o32",
+          "historique:o36",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e17",
+        "trackId": "t4",
+        "start": "2024-04",
+        "end": "2024-05-05",
+        "ongoing": false,
+        "mode": "rechute",
+        "lossOfControl": false,
+        "note": "Rechute d'environ trois semaines après une rencontre à la gare, arrêtée le 05/05",
+        "observationIds": [
+          "historique:o59",
+          "historique:o60",
+          "historique:o70"
+        ]
+      },
+      {
+        "id": "e18",
+        "trackId": "t5",
+        "start": "2019",
+        "end": "2021-06",
+        "ongoing": false,
+        "mode": "usage",
+        "lossOfControl": false,
+        "note": "Clonazépam de rue 2 à 6 mg/j depuis le printemps 2019 après l'arrêt de l'alprazolam prescrit ; relais par diazépam en juin 2021",
+        "observationIds": [
+          "historique:o20",
+          "historique:o22",
+          "historique:o26",
+          "historique:o32",
+          "historique:o36",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e19",
+        "trackId": "t6",
+        "start": "2016",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Épisode dépressif en 2016 traité par paroxétine",
+        "observationIds": [
+          "historique:o2",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e20",
+        "trackId": "t7",
+        "start": "2007",
+        "end": "2007",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "IMV (paracétamol et anxiolytiques) après la séparation, 2 jours de réanimation à Marmande ; cachée en 2018 et 2021",
+        "observationIds": [
+          "historique:o55",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e21",
+        "trackId": "t8",
+        "start": "2018",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Tristesse depuis l'hiver, HAD dépression 13, épisode d'intensité moyenne ; sertraline",
+        "observationIds": [
+          "historique:o2",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e22",
+        "trackId": "t9",
+        "start": "2021-01-19",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Épisode dépressif caractérisé sévère après le décès du compagnon, idées de mort, mirtazapine ; rémission partielle en 2022",
+        "observationIds": [
+          "historique:o31",
+          "historique:o32",
+          "historique:o48",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e23",
+        "trackId": "t10",
+        "start": "2022-03",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "TSPT lié aux violences conjugales (1996-2006), réactivé par le deuil, PCL-5 52 puis 21 en 2025 ; diagnostic retenu en 2022",
+        "observationIds": [
+          "historique:o47",
+          "historique:o48",
+          "historique:o57",
+          "historique:o70"
+        ]
+      },
+      {
+        "id": "e24",
+        "trackId": "t11",
+        "start": "1984",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Appendicectomie à 12 ans",
+        "observationIds": [
+          "historique:o2"
+        ],
+        "fromAge": {
+          "start": [
+            12,
+            12
+          ],
+          "end": null
+        }
+      },
+      {
+        "id": "e25",
+        "trackId": "t12",
+        "start": "2005",
+        "end": "2005",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Poussée dans l'escalier par son mari, perte de connaissance, 2 jours à l'hôpital de Marmande ; séquelle frontale droite au scanner",
+        "observationIds": [
+          "historique:o46",
+          "historique:o47",
+          "historique:o48",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e26",
+        "trackId": "t13",
+        "start": "2018-06",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Fibroscan F2-F3 (9,8 kPa) en 2018, F3 12,4 kPa en 2021, 6,9 kPa en septembre 2026",
+        "observationIds": [
+          "historique:o5",
+          "historique:o8",
+          "historique:o38",
+          "historique:o60",
+          "historique:o75"
+        ]
+      },
+      {
+        "id": "e27",
+        "trackId": "t14",
+        "start": "2018-11-18",
+        "end": "2018-11-18",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Crise généralisée à domicile, UHCD, sortie contre avis",
+        "observationIds": [
+          "historique:o12",
+          "historique:o13"
+        ]
+      },
+      {
+        "id": "e28",
+        "trackId": "t15",
+        "start": "2020-01-10",
+        "end": "2020-01-21",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hospitalisé après SAMU, réanimation 3 jours puis médecine, dénutrition (47 kg)",
+        "observationIds": [
+          "historique:o24",
+          "historique:o25",
+          "historique:o26"
+        ]
+      },
+      {
+        "id": "e29",
+        "trackId": "t16",
+        "start": "2019-07",
+        "end": "2019-07",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Plaies infectées aux deux pieds, orientation PASS",
+        "observationIds": [
+          "historique:o20"
+        ]
+      },
+      {
+        "id": "e30",
+        "trackId": "t17",
+        "start": "2021-02",
+        "end": "2022-09",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "TROD VHC positif en février 2021, génotype 1a, traité puis guérison virologique en septembre 2022",
+        "observationIds": [
+          "historique:o34",
+          "historique:o35",
+          "historique:o43",
+          "historique:o44",
+          "historique:o51"
+        ]
+      },
+      {
+        "id": "e31",
+        "trackId": "t18",
+        "start": "2021-08-19",
+        "end": "2021-08-27",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Pancréatite aiguë stade C après reprise de l'alcool, hospitalisation en gastro-entérologie",
+        "observationIds": [
+          "historique:o40",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e32",
+        "trackId": "t19",
+        "start": "2021-06",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hypoesthésie des pieds à l'entrée, EMG du 03/11/2021 : polyneuropathie axonale alcoolique et carentielle probable ; paresthésies stables",
+        "observationIds": [
+          "historique:o36",
+          "historique:o48",
+          "historique:o66",
+          "historique:o75"
+        ]
+      },
+      {
+        "id": "e33",
+        "trackId": "t20",
+        "start": "2022-02-19",
+        "end": "2022-04",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Chute dans l'escalier du CHRS, ostéosynthèse le 20/02, botte 6 semaines",
+        "observationIds": [
+          "historique:o46",
+          "historique:o48",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e34",
+        "trackId": "t21",
+        "start": "2015",
+        "end": "2019-04",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Prescrit par le médecin traitant pour l'angoisse (0,5 mg x3) ; arrêté en sevrage 2018, représcrit, perdu à l'expulsion",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o8",
+          "historique:o11",
+          "historique:o12",
+          "historique:o18",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e35",
+        "trackId": "t22",
+        "start": "2016",
+        "end": "2017",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Paroxétine pendant environ un an, arrêtée seule",
+        "observationIds": [
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e36",
+        "trackId": "t23",
+        "start": "2018-05-29",
+        "end": "2019-04",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Sertraline 50 mg débutée le 29/05/2018, perdue à l'expulsion",
+        "observationIds": [
+          "historique:o2",
+          "historique:o3",
+          "historique:o5",
+          "historique:o18",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e37",
+        "trackId": "t24",
+        "start": "2018-05-29",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Thiamine dès le 29/05/2018, dernière mention en 2023",
+        "observationIds": [
+          "historique:o2",
+          "historique:o54"
+        ]
+      },
+      {
+        "id": "e38",
+        "trackId": "t25",
+        "start": "2018-09-20",
+        "end": "2019-04",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Introduit à la sortie du sevrage, titré jusqu'à 60 mg/j, perdu à l'expulsion",
+        "observationIds": [
+          "historique:o10",
+          "historique:o11",
+          "historique:o13",
+          "historique:o18",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e39",
+        "trackId": "t26",
+        "start": "2018-09-10",
+        "end": "2018-09-20",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Protocole de sevrage (Cushman), arrêté à J9",
+        "observationIds": [
+          "historique:o8",
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e40",
+        "trackId": "t26",
+        "start": "2018-11-18",
+        "end": "2018-11-25",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Ordonnance de diazépam 5 jours à la sortie de l'UHCD",
+        "observationIds": [
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e41",
+        "trackId": "t26",
+        "start": "2021-06-07",
+        "end": "2024-02-10",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Relais du sevrage de juin 2021 à 30 mg/j puis dégression lente jusqu'au dernier comprimé le 10/02/2024",
+        "observationIds": [
+          "historique:o36",
+          "historique:o38",
+          "historique:o43",
+          "historique:o48",
+          "historique:o51",
+          "historique:o54",
+          "historique:o55",
+          "historique:o57",
+          "historique:o58"
+        ]
+      },
+      {
+        "id": "e42",
+        "trackId": "t26",
+        "start": "2025-02-11",
+        "end": "2025-02-18",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Protocole de sevrage ambulatoire de 7 jours",
+        "observationIds": [
+          "historique:o64",
+          "historique:o65"
+        ]
+      },
+      {
+        "id": "e43",
+        "trackId": "t27",
+        "start": "2021-02-02",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Mirtazapine 15 mg puis 30 mg, de nouveau 15 mg en 2026",
+        "observationIds": [
+          "historique:o32",
+          "historique:o36",
+          "historique:o73",
+          "historique:o75"
+        ]
+      },
+      {
+        "id": "e44",
+        "trackId": "t28",
+        "start": "2021-06-18",
+        "end": "2022-10",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Acamprosate, arrêté de sa propre initiative début octobre 2022",
+        "observationIds": [
+          "historique:o38",
+          "historique:o51",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e45",
+        "trackId": "t28",
+        "start": "2025-02-18",
+        "end": "2026-10-13",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Réintroduit en fin de sevrage ambulatoire, arrêt décidé le 13/10/2026",
+        "observationIds": [
+          "historique:o65",
+          "historique:o66",
+          "historique:o75"
+        ]
+      },
+      {
+        "id": "e46",
+        "trackId": "t29",
+        "start": "2021-10-18",
+        "end": "2022-01",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Traitement du VHC de 12 semaines, bonne observance",
+        "observationIds": [
+          "historique:o43",
+          "historique:o44"
+        ]
+      },
+      {
+        "id": "e47",
+        "trackId": "t30",
+        "start": "2024-06-04",
+        "end": "2025-01",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Nalméfène à la demande, pris irrégulièrement puis arrêté fin janvier 2025",
+        "observationIds": [
+          "historique:o60",
+          "historique:o63",
+          "historique:o64"
+        ]
+      },
+      {
+        "id": "e48",
+        "trackId": "t31",
+        "start": "2025-05-13",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Patch 21 mg puis 14 mg avec formes orales",
+        "observationIds": [
+          "historique:o66",
+          "historique:o67",
+          "historique:o71",
+          "historique:o75"
+        ]
+      },
+      {
+        "id": "e49",
+        "trackId": "t32",
+        "start": "2007",
+        "end": "2007",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Suivi en CMP quelques mois après l'IMV",
+        "observationIds": [
+          "historique:o55"
+        ]
+      },
+      {
+        "id": "e50",
+        "trackId": "t33",
+        "start": "2009",
+        "end": "2009",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Sevrage d'environ 3 semaines après une alcoolisation massive, précédant le placement des enfants",
+        "observationIds": [
+          "historique:o55",
+          "historique:o57",
+          "historique:o50"
+        ]
+      },
+      {
+        "id": "e51",
+        "trackId": "t34",
+        "start": "2016",
+        "end": "2016",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Une semaine à Bordeaux, rechute en moins d'un mois",
+        "observationIds": [
+          "historique:o2",
+          "historique:o8",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e52",
+        "trackId": "t35",
+        "start": "2018-05-22",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Premier appel le 22/05/2018 adressé par le médecin traitant ; suivi psychiatre, IDE, AS, éducateur",
+        "observationIds": [
+          "historique:o1",
+          "historique:o2",
+          "historique:o57",
+          "historique:o75"
+        ]
+      },
+      {
+        "id": "e53",
+        "trackId": "t36",
+        "start": "2018-09-10",
+        "end": "2018-09-20",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Unité de sevrage, protocole diazépam, sans complication",
+        "observationIds": [
+          "historique:o8",
+          "historique:o9",
+          "historique:o10"
+        ]
+      },
+      {
+        "id": "e54",
+        "trackId": "t37",
+        "start": "2018-11-18",
+        "end": "2018-11-20",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Crise convulsive, sortie contre avis médical",
+        "observationIds": [
+          "historique:o12"
+        ]
+      },
+      {
+        "id": "e55",
+        "trackId": "t38",
+        "start": "2019-07",
+        "end": "2021-02",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Maraudes puis passage quotidien après le décès du compagnon",
+        "observationIds": [
+          "historique:o18",
+          "historique:o20",
+          "historique:o22",
+          "historique:o23",
+          "historique:o26",
+          "historique:o27",
+          "historique:o28",
+          "historique:o31",
+          "historique:o32",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e56",
+        "trackId": "t39",
+        "start": "2019-06",
+        "end": "2024-05",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Fréquente le CAARUD depuis juin 2019, domiciliation postale, réduction des risques ; dernier passage en 2024",
+        "observationIds": [
+          "historique:o21",
+          "historique:o29",
+          "historique:o41",
+          "historique:o59",
+          "historique:o74"
+        ]
+      },
+      {
+        "id": "e57",
+        "trackId": "t40",
+        "start": "2020-01-10",
+        "end": "2020-01-21",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Admission via SAMU, réanimation 3 jours, refuse le SSR",
+        "observationIds": [
+          "historique:o24",
+          "historique:o25",
+          "historique:o26"
+        ]
+      },
+      {
+        "id": "e58",
+        "trackId": "t41",
+        "start": "2021-06-07",
+        "end": "2021-06-18",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Sevrage de 11 jours sans complication, sortie vers le CHRS",
+        "observationIds": [
+          "historique:o36",
+          "historique:o37",
+          "historique:o38"
+        ]
+      },
+      {
+        "id": "e59",
+        "trackId": "t42",
+        "start": "2021-10-12",
+        "end": "2025-11-18",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Entretiens tous les 15 jours, interrompus pendant le SSR, bilan de fin le 18/11/2025",
+        "observationIds": [
+          "historique:o42",
+          "historique:o47",
+          "historique:o70"
+        ]
+      },
+      {
+        "id": "e60",
+        "trackId": "t43",
+        "start": "2023-04-17",
+        "end": "2023-06-09",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Postcure, abstinente pendant le séjour",
+        "observationIds": [
+          "historique:o54",
+          "historique:o55",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e61",
+        "trackId": "t44",
+        "start": "2023-07",
+        "end": "2025-09",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Environ 30 séances, cible la scène de l'escalier de 2005",
+        "observationIds": [
+          "historique:o55",
+          "historique:o57",
+          "historique:o62",
+          "historique:o70"
+        ]
+      },
+      {
+        "id": "e62",
+        "trackId": "t45",
+        "start": "2025-02-11",
+        "end": "2025-02-18",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Sevrage sous diazépam avec passage IDE quotidien, sans complication",
+        "observationIds": [
+          "historique:o63",
+          "historique:o64",
+          "historique:o65"
+        ]
+      },
+      {
+        "id": "e63",
+        "trackId": "t46",
+        "start": "1972",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Née à Marmande, dernière de deux filles",
+        "observationIds": [
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e64",
+        "trackId": "t47",
+        "start": "1978",
+        "end": "1989",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Père ouvrier agricole « gros buveur », disputes le samedi soir, sans violence physique rapportée",
+        "observationIds": [
+          "historique:o2"
+        ],
+        "fromAge": {
+          "start": [
+            6,
+            11
+          ],
+          "end": [
+            12,
+            17
+          ]
+        }
+      },
+      {
+        "id": "e65",
+        "trackId": "t48",
+        "start": "1990",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Bonne élève jusqu'au collège, lycée professionnel, bac pro secrétariat en 1990",
+        "observationIds": [
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e66",
+        "trackId": "t49",
+        "start": "2003",
+        "end": "2003",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Père décédé de cirrhose",
+        "observationIds": [
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e67",
+        "trackId": "t50",
+        "start": "1991",
+        "end": "2014",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Même entreprise de transport pendant 23 ans, licenciée en 2014 pour absences",
+        "observationIds": [
+          "historique:o2",
+          "historique:o45",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e68",
+        "trackId": "t51",
+        "start": "1994",
+        "end": "1994",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Mariage avec le père de ses enfants",
+        "observationIds": [
+          "historique:o2",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e69",
+        "trackId": "t52",
+        "start": "1995",
+        "end": "1995",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Naissance de sa fille",
+        "observationIds": [
+          "historique:o2",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e70",
+        "trackId": "t53",
+        "start": "1998",
+        "end": "1998",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Naissance de son fils",
+        "observationIds": [
+          "historique:o2",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e71",
+        "trackId": "t54",
+        "start": "1996",
+        "end": "2006",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Violences de son mari (insultes, contrôle, coups), souvent devant les enfants ; jamais de plainte",
+        "observationIds": [
+          "historique:o47",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e72",
+        "trackId": "t55",
+        "start": "2006",
+        "end": "2006",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Départ avec les enfants chez sa mère",
+        "observationIds": [
+          "historique:o2",
+          "historique:o47"
+        ]
+      },
+      {
+        "id": "e73",
+        "trackId": "t56",
+        "start": "2008",
+        "end": "2008",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Divorce",
+        "observationIds": [
+          "historique:o47",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e74",
+        "trackId": "t57",
+        "start": "2009",
+        "end": "2012",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Placés en famille d'accueil à Tonneins par le juge, puis chez leur père",
+        "observationIds": [
+          "historique:o50",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e75",
+        "trackId": "t58",
+        "start": "2010",
+        "end": null,
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Appartement HLM à Bègles depuis 2010",
+        "observationIds": [
+          "historique:o2"
+        ]
+      },
+      {
+        "id": "e76",
+        "trackId": "t59",
+        "start": "2017",
+        "end": "2021-01-19",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Rencontré au bar, consommateur d'alcool, vit avec elle depuis 2017",
+        "observationIds": [
+          "historique:o2",
+          "historique:o31"
+        ]
+      },
+      {
+        "id": "e77",
+        "trackId": "t60",
+        "start": "2018-03",
+        "end": "2019-04-16",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Commandement de quitter les lieux en mars 2018, jugement du 18/12/2018, expulsion le 16/04/2019",
+        "observationIds": [
+          "historique:o2",
+          "historique:o4",
+          "historique:o11",
+          "historique:o17",
+          "historique:o18"
+        ]
+      },
+      {
+        "id": "e78",
+        "trackId": "t61",
+        "start": "2019-04-16",
+        "end": "2021-01-26",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Chez un ami, puis tente près de la gare et sous le pont, squat à Bacalan",
+        "observationIds": [
+          "historique:o18",
+          "historique:o20",
+          "historique:o22",
+          "historique:o23",
+          "historique:o28",
+          "historique:o29",
+          "historique:o31"
+        ]
+      },
+      {
+        "id": "e79",
+        "trackId": "t62",
+        "start": "2020-03-20",
+        "end": "2020-06-30",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hôtel pendant le confinement, retour à la rue à la fin du dispositif",
+        "observationIds": [
+          "historique:o27",
+          "historique:o28"
+        ]
+      },
+      {
+        "id": "e80",
+        "trackId": "t63",
+        "start": "2020-08",
+        "end": "2020-08",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Vol de bouteilles dans un supermarché, 24 h, rappel à la loi",
+        "observationIds": [
+          "historique:o29"
+        ]
+      },
+      {
+        "id": "e81",
+        "trackId": "t64",
+        "start": "2020",
+        "end": "2021-01-19",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Deux à trois fois par semaine pendant la période de rue, sauf à l'hôtel ; arrêtée au décès du compagnon",
+        "observationIds": [
+          "historique:o41",
+          "historique:o70"
+        ]
+      },
+      {
+        "id": "e82",
+        "trackId": "t65",
+        "start": "2021-01-19",
+        "end": "2021-01-19",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Retrouvé mort dans la tente, exclue des obsèques",
+        "observationIds": [
+          "historique:o31",
+          "historique:o32"
+        ]
+      },
+      {
+        "id": "e83",
+        "trackId": "t66",
+        "start": "2021-01-26",
+        "end": "2021-06-18",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Hébergement renouvelé de semaine en semaine",
+        "observationIds": [
+          "historique:o31",
+          "historique:o33",
+          "historique:o34",
+          "historique:o36"
+        ]
+      },
+      {
+        "id": "e84",
+        "trackId": "t67",
+        "start": "2021-06-18",
+        "end": "2023-08",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "26 mois de séjour, atelier cuisine et comptabilité",
+        "observationIds": [
+          "historique:o38",
+          "historique:o41",
+          "historique:o44",
+          "historique:o56"
+        ]
+      },
+      {
+        "id": "e85",
+        "trackId": "t68",
+        "start": "2022-01-18",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Curatelle renforcée de 5 ans, échéance janvier 2027, requête d'allègement déposée",
+        "observationIds": [
+          "historique:o34",
+          "historique:o45",
+          "historique:o69",
+          "historique:o75"
+        ]
+      },
+      {
+        "id": "e86",
+        "trackId": "t69",
+        "start": "2022-12-24",
+        "end": "2022-12-24",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Rencontre dans un café à Bordeaux après sa lettre",
+        "observationIds": [
+          "historique:o50",
+          "historique:o52"
+        ]
+      },
+      {
+        "id": "e87",
+        "trackId": "t70",
+        "start": "2023-09-01",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Studio en logement durable à Cenon",
+        "observationIds": [
+          "historique:o56",
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e88",
+        "trackId": "t71",
+        "start": "2023-10-14",
+        "end": "2023-10-14",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Naissance du fils de sa fille",
+        "observationIds": [
+          "historique:o57"
+        ]
+      },
+      {
+        "id": "e89",
+        "trackId": "t72",
+        "start": "2025-06",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "AAH accordée à compter de juin 2025, en remplacement du RSA",
+        "observationIds": [
+          "historique:o68",
+          "historique:o69"
+        ]
+      },
+      {
+        "id": "e90",
+        "trackId": "t73",
+        "start": "2025-07-08",
+        "end": "2025-07-08",
+        "ongoing": false,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Obsèques le 12/07 à Marmande, son fils présent",
+        "observationIds": [
+          "historique:o67",
+          "historique:o68"
+        ]
+      },
+      {
+        "id": "e91",
+        "trackId": "t74",
+        "start": "2025-07-12",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Revu à Agen et à Cenon, appels réguliers",
+        "observationIds": [
+          "historique:o67",
+          "historique:o68",
+          "historique:o74",
+          "historique:o75"
+        ]
+      },
+      {
+        "id": "e92",
+        "trackId": "t75",
+        "start": "2026-05",
+        "end": null,
+        "ongoing": true,
+        "mode": null,
+        "lossOfControl": false,
+        "note": "Deux demi-journées par semaine, projet de chantier d'insertion",
+        "observationIds": [
+          "historique:o74",
+          "historique:o75"
+        ]
+      }
+    ],
+    "undated": []
+  },
+  "elapsedMs": 869,
+  "usage": {
+    "calls": 1,
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "cost": 0,
+    "promptChars": 82547,
+    "answerChars": 26938,
+    "charsBy": {
+      "frise": {
+        "promptChars": 82547,
+        "answerChars": 26938
+      }
+    },
+    "by": {
+      "anthropic/claude-sonnet-5.5 frise": 0
+    }
+  },
+  "rawAnswers": [
+    {
+      "schema": "frise",
+      "content": {
+        "events": [
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": null,
+            "end": "2006",
+            "start_age": 15,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Premier verre « vers 15 ans » (13 ans selon o8, 14 ans selon o57) aux fêtes de village, premières ivresses ; usage festif de fin de semaine pendant les années de travail et de mariage",
+            "observation_ids": [
+              "o2",
+              "o8",
+              "o57"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2006",
+            "end": "2018-09-10",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": true,
+            "note": "Usage quotidien installé à la séparation (alcool du matin) ; perte de contrôle depuis une dizaine d'années (vers 2008) ; environ 2 L de vin/jour, max 3 L",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o8",
+              "o47",
+              "o57"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2018-02",
+            "end": "2018-02",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Tentative d'arrêt seule de deux ou trois jours, interrompue par tremblements et angoisse",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2018-10-05",
+            "end": "2021-06-07",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Rechute le 05/10/2018 après la sortie du sevrage, reprise quotidienne (1 L/j puis 2-3 L à deux dans la rue, jusqu'à 2 L/j en 2021)",
+            "observation_ids": [
+              "o11",
+              "o13",
+              "o18",
+              "o20",
+              "o26",
+              "o27",
+              "o32",
+              "o36"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2018-11-16",
+            "end": "2018-11-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Arrêt brutal de l'alcool (plus d'argent) et de l'alprazolam suivi d'une crise convulsive de sevrage ; reprise dès le 22/11",
+            "observation_ids": [
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2020-01-06",
+            "end": "2020-01-10",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "sevrage",
+            "loss_of_control": false,
+            "note": "Arrêt contraint de l'alcool (4 jours, plus d'argent) suivi d'un delirium tremens",
+            "observation_ids": [
+              "o24",
+              "o26"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2021-08",
+            "end": "2021-08",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Reprise cachée de l'alcool au CHRS (environ une bouteille par jour) avec pancréatite aiguë",
+            "observation_ids": [
+              "o40",
+              "o41",
+              "o57"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2022-02",
+            "end": "2022-02-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Rechute de 10 jours après un appel de sa sœur, alcoolémie 1,9 g/L à la chute dans l'escalier du CHRS",
+            "observation_ids": [
+              "o46",
+              "o48",
+              "o57"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2022-12-24",
+            "end": "2022-12-24",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Un verre de champagne le soir du 24/12, craving les jours suivants gérés",
+            "observation_ids": [
+              "o52"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2023-01",
+            "end": "2023-04-17",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Alcoolisations cachées au CHRS depuis début janvier (1 bouteille de vin/jour), GGT 186 ; abstinente depuis l'entrée en SSR",
+            "observation_ids": [
+              "o54",
+              "o55",
+              "o56",
+              "o57"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2024-01",
+            "end": "2025-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Deux ou trois verres de vin à table, 2-3 fois par semaine, sans perte de contrôle ; un peu plus le soir en décembre 2024",
+            "observation_ids": [
+              "o59",
+              "o60",
+              "o62"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2025-01",
+            "end": "2025-02-11",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Rechute depuis mi-janvier après l'anniversaire du décès du compagnon : 1 L/j dès 10h ; abstinente depuis le 11/02/2025",
+            "observation_ids": [
+              "o63",
+              "o64",
+              "o66"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Alcool",
+            "start": "2026-03-07",
+            "end": "2026-03-07",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Écart isolé pour ses 54 ans (3-4 verres de rosé), sans reprise",
+            "observation_ids": [
+              "o72",
+              "o73",
+              "o75"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Tabac",
+            "start": null,
+            "end": null,
+            "start_age": 15,
+            "end_age": null,
+            "ongoing": true,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Tabac depuis l'âge de 15 ans, 25 cig/j puis 10 avec patch en 2025 et 8 cig/j en 2026 ; Fagerström 7",
+            "observation_ids": [
+              "o2",
+              "o66",
+              "o67",
+              "o73",
+              "o75"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Cannabis",
+            "start": null,
+            "end": null,
+            "start_age": [
+              19,
+              21
+            ],
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "« Quelques joints vers 20 ans », jamais régulier",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Crack",
+            "start": "2019-10",
+            "end": "2021-06-07",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Crack fumé depuis octobre 2019 d'après la patiente (2020 selon un courrier), quotidien en 2020-2021 jusqu'à 2 g/j ; arrêté au sevrage de juin 2021",
+            "observation_ids": [
+              "o22",
+              "o24",
+              "o26",
+              "o27",
+              "o28",
+              "o29",
+              "o31",
+              "o32",
+              "o36",
+              "o57"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Crack",
+            "start": "2024-04",
+            "end": "2024-05-05",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "rechute",
+            "loss_of_control": false,
+            "note": "Rechute d'environ trois semaines après une rencontre à la gare, arrêtée le 05/05",
+            "observation_ids": [
+              "o59",
+              "o60",
+              "o70"
+            ]
+          },
+          {
+            "kind": "substance_use",
+            "label": "Benzodiazépines",
+            "start": "2019",
+            "end": "2021-06",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": "usage",
+            "loss_of_control": false,
+            "note": "Clonazépam de rue 2 à 6 mg/j depuis le printemps 2019 après l'arrêt de l'alprazolam prescrit ; relais par diazépam en juin 2021",
+            "observation_ids": [
+              "o20",
+              "o22",
+              "o26",
+              "o32",
+              "o36",
+              "o57"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif",
+            "start": "2016",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Épisode dépressif en 2016 traité par paroxétine",
+            "observation_ids": [
+              "o2",
+              "o57"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Tentative de suicide (intoxication médicamenteuse volontaire)",
+            "start": "2007",
+            "end": "2007",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "IMV (paracétamol et anxiolytiques) après la séparation, 2 jours de réanimation à Marmande ; cachée en 2018 et 2021",
+            "observation_ids": [
+              "o55",
+              "o57"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif caractérisé",
+            "start": "2018",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Tristesse depuis l'hiver, HAD dépression 13, épisode d'intensité moyenne ; sertraline",
+            "observation_ids": [
+              "o2",
+              "o57"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Épisode dépressif sévère",
+            "start": "2021-01-19",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Épisode dépressif caractérisé sévère après le décès du compagnon, idées de mort, mirtazapine ; rémission partielle en 2022",
+            "observation_ids": [
+              "o31",
+              "o32",
+              "o48",
+              "o57"
+            ]
+          },
+          {
+            "kind": "psychiatric",
+            "label": "Trouble de stress post-traumatique",
+            "start": "2022-03",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "TSPT lié aux violences conjugales (1996-2006), réactivé par le deuil, PCL-5 52 puis 21 en 2025 ; diagnostic retenu en 2022",
+            "observation_ids": [
+              "o47",
+              "o48",
+              "o57",
+              "o70"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Appendicectomie",
+            "start": null,
+            "end": null,
+            "start_age": 12,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Appendicectomie à 12 ans",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Traumatisme crânien",
+            "start": "2005",
+            "end": "2005",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Poussée dans l'escalier par son mari, perte de connaissance, 2 jours à l'hôpital de Marmande ; séquelle frontale droite au scanner",
+            "observation_ids": [
+              "o46",
+              "o47",
+              "o48",
+              "o57"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Hépatopathie alcoolique",
+            "start": "2018-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Fibroscan F2-F3 (9,8 kPa) en 2018, F3 12,4 kPa en 2021, 6,9 kPa en septembre 2026",
+            "observation_ids": [
+              "o5",
+              "o8",
+              "o38",
+              "o60",
+              "o75"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Crise convulsive de sevrage",
+            "start": "2018-11-18",
+            "end": "2018-11-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Crise généralisée à domicile, UHCD, sortie contre avis",
+            "observation_ids": [
+              "o12",
+              "o13"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Delirium tremens",
+            "start": "2020-01-10",
+            "end": "2020-01-21",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hospitalisé après SAMU, réanimation 3 jours puis médecine, dénutrition (47 kg)",
+            "observation_ids": [
+              "o24",
+              "o25",
+              "o26"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Plaies infectées des pieds",
+            "start": "2019-07",
+            "end": "2019-07",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Plaies infectées aux deux pieds, orientation PASS",
+            "observation_ids": [
+              "o20"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Hépatite C",
+            "start": "2021-02",
+            "end": "2022-09",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "TROD VHC positif en février 2021, génotype 1a, traité puis guérison virologique en septembre 2022",
+            "observation_ids": [
+              "o34",
+              "o35",
+              "o43",
+              "o44",
+              "o51"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Pancréatite aiguë",
+            "start": "2021-08-19",
+            "end": "2021-08-27",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Pancréatite aiguë stade C après reprise de l'alcool, hospitalisation en gastro-entérologie",
+            "observation_ids": [
+              "o40",
+              "o57"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Polyneuropathie sensitive",
+            "start": "2021-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hypoesthésie des pieds à l'entrée, EMG du 03/11/2021 : polyneuropathie axonale alcoolique et carentielle probable ; paresthésies stables",
+            "observation_ids": [
+              "o36",
+              "o48",
+              "o66",
+              "o75"
+            ]
+          },
+          {
+            "kind": "somatic",
+            "label": "Fracture bimalléolaire cheville gauche",
+            "start": "2022-02-19",
+            "end": "2022-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Chute dans l'escalier du CHRS, ostéosynthèse le 20/02, botte 6 semaines",
+            "observation_ids": [
+              "o46",
+              "o48",
+              "o57"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Alprazolam",
+            "start": "2015",
+            "end": "2019-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Prescrit par le médecin traitant pour l'angoisse (0,5 mg x3) ; arrêté en sevrage 2018, représcrit, perdu à l'expulsion",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o8",
+              "o11",
+              "o12",
+              "o18",
+              "o57"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Paroxétine",
+            "start": "2016",
+            "end": "2017",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Paroxétine pendant environ un an, arrêtée seule",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Sertraline",
+            "start": "2018-05-29",
+            "end": "2019-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Sertraline 50 mg débutée le 29/05/2018, perdue à l'expulsion",
+            "observation_ids": [
+              "o2",
+              "o3",
+              "o5",
+              "o18",
+              "o57"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Thiamine",
+            "start": "2018-05-29",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Thiamine dès le 29/05/2018, dernière mention en 2023",
+            "observation_ids": [
+              "o2",
+              "o54"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Baclofène",
+            "start": "2018-09-20",
+            "end": "2019-04",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Introduit à la sortie du sevrage, titré jusqu'à 60 mg/j, perdu à l'expulsion",
+            "observation_ids": [
+              "o10",
+              "o11",
+              "o13",
+              "o18",
+              "o57"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Diazépam",
+            "start": "2018-09-10",
+            "end": "2018-09-20",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Protocole de sevrage (Cushman), arrêté à J9",
+            "observation_ids": [
+              "o8",
+              "o10"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Diazépam",
+            "start": "2018-11-18",
+            "end": "2018-11-25",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Ordonnance de diazépam 5 jours à la sortie de l'UHCD",
+            "observation_ids": [
+              "o12"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Diazépam",
+            "start": "2021-06-07",
+            "end": "2024-02-10",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Relais du sevrage de juin 2021 à 30 mg/j puis dégression lente jusqu'au dernier comprimé le 10/02/2024",
+            "observation_ids": [
+              "o36",
+              "o38",
+              "o43",
+              "o48",
+              "o51",
+              "o54",
+              "o55",
+              "o57",
+              "o58"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Diazépam",
+            "start": "2025-02-11",
+            "end": "2025-02-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Protocole de sevrage ambulatoire de 7 jours",
+            "observation_ids": [
+              "o64",
+              "o65"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Mirtazapine",
+            "start": "2021-02-02",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Mirtazapine 15 mg puis 30 mg, de nouveau 15 mg en 2026",
+            "observation_ids": [
+              "o32",
+              "o36",
+              "o73",
+              "o75"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Acamprosate",
+            "start": "2021-06-18",
+            "end": "2022-10",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Acamprosate, arrêté de sa propre initiative début octobre 2022",
+            "observation_ids": [
+              "o38",
+              "o51",
+              "o57"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Acamprosate",
+            "start": "2025-02-18",
+            "end": "2026-10-13",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Réintroduit en fin de sevrage ambulatoire, arrêt décidé le 13/10/2026",
+            "observation_ids": [
+              "o65",
+              "o66",
+              "o75"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Sofosbuvir/velpatasvir",
+            "start": "2021-10-18",
+            "end": "2022-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Traitement du VHC de 12 semaines, bonne observance",
+            "observation_ids": [
+              "o43",
+              "o44"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Nalméfène",
+            "start": "2024-06-04",
+            "end": "2025-01",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Nalméfène à la demande, pris irrégulièrement puis arrêté fin janvier 2025",
+            "observation_ids": [
+              "o60",
+              "o63",
+              "o64"
+            ]
+          },
+          {
+            "kind": "medication",
+            "label": "Substituts nicotiniques",
+            "start": "2025-05-13",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Patch 21 mg puis 14 mg avec formes orales",
+            "observation_ids": [
+              "o66",
+              "o67",
+              "o71",
+              "o75"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi en CMP",
+            "start": "2007",
+            "end": "2007",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Suivi en CMP quelques mois après l'IMV",
+            "observation_ids": [
+              "o55"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Sevrage hospitalier d'alcool (Marmande)",
+            "start": "2009",
+            "end": "2009",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Sevrage d'environ 3 semaines après une alcoolisation massive, précédant le placement des enfants",
+            "observation_ids": [
+              "o55",
+              "o57",
+              "o50"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Sevrage hospitalier (clinique du Lac)",
+            "start": "2016",
+            "end": "2016",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Une semaine à Bordeaux, rechute en moins d'un mois",
+            "observation_ids": [
+              "o2",
+              "o8",
+              "o57"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Suivi CSAPA",
+            "start": "2018-05-22",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Premier appel le 22/05/2018 adressé par le médecin traitant ; suivi psychiatre, IDE, AS, éducateur",
+            "observation_ids": [
+              "o1",
+              "o2",
+              "o57",
+              "o75"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Sevrage hospitalier programmé",
+            "start": "2018-09-10",
+            "end": "2018-09-20",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Unité de sevrage, protocole diazépam, sans complication",
+            "observation_ids": [
+              "o8",
+              "o9",
+              "o10"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Passage UHCD",
+            "start": "2018-11-18",
+            "end": "2018-11-20",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Crise convulsive, sortie contre avis médical",
+            "observation_ids": [
+              "o12"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Équipe mobile psychiatrie-précarité (EMPP)",
+            "start": "2019-07",
+            "end": "2021-02",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Maraudes puis passage quotidien après le décès du compagnon",
+            "observation_ids": [
+              "o18",
+              "o20",
+              "o22",
+              "o23",
+              "o26",
+              "o27",
+              "o28",
+              "o31",
+              "o32",
+              "o57"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "CAARUD",
+            "start": "2019-06",
+            "end": "2024-05",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Fréquente le CAARUD depuis juin 2019, domiciliation postale, réduction des risques ; dernier passage en 2024",
+            "observation_ids": [
+              "o21",
+              "o29",
+              "o41",
+              "o59",
+              "o74"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Hospitalisation (delirium tremens, réanimation)",
+            "start": "2020-01-10",
+            "end": "2020-01-21",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Admission via SAMU, réanimation 3 jours, refuse le SSR",
+            "observation_ids": [
+              "o24",
+              "o25",
+              "o26"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Sevrage hospitalier alcool, BZD et crack",
+            "start": "2021-06-07",
+            "end": "2021-06-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Sevrage de 11 jours sans complication, sortie vers le CHRS",
+            "observation_ids": [
+              "o36",
+              "o37",
+              "o38"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Psychothérapie",
+            "start": "2021-10-12",
+            "end": "2025-11-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Entretiens tous les 15 jours, interrompus pendant le SSR, bilan de fin le 18/11/2025",
+            "observation_ids": [
+              "o42",
+              "o47",
+              "o70"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "SSR addictologique des Pins-Gris",
+            "start": "2023-04-17",
+            "end": "2023-06-09",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Postcure, abstinente pendant le séjour",
+            "observation_ids": [
+              "o54",
+              "o55",
+              "o57"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "EMDR",
+            "start": "2023-07",
+            "end": "2025-09",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Environ 30 séances, cible la scène de l'escalier de 2005",
+            "observation_ids": [
+              "o55",
+              "o57",
+              "o62",
+              "o70"
+            ]
+          },
+          {
+            "kind": "therapeutic_psycho",
+            "label": "Sevrage ambulatoire",
+            "start": "2025-02-11",
+            "end": "2025-02-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Sevrage sous diazépam avec passage IDE quotidien, sans complication",
+            "observation_ids": [
+              "o63",
+              "o64",
+              "o65"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Naissance à Marmande",
+            "start": "1972",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Née à Marmande, dernière de deux filles",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Enfance avec un père alcoolique",
+            "start": null,
+            "end": null,
+            "start_age": "enfance",
+            "end_age": "adolescence",
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Père ouvrier agricole « gros buveur », disputes le samedi soir, sans violence physique rapportée",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Scolarité",
+            "start": "1990",
+            "end": null,
+            "start_age": "adolescence",
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Bonne élève jusqu'au collège, lycée professionnel, bac pro secrétariat en 1990",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Décès du père",
+            "start": "2003",
+            "end": "2003",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Père décédé de cirrhose",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Emploi de secrétaire comptable",
+            "start": "1991",
+            "end": "2014",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Même entreprise de transport pendant 23 ans, licenciée en 2014 pour absences",
+            "observation_ids": [
+              "o2",
+              "o45",
+              "o57"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Mariage",
+            "start": "1994",
+            "end": "1994",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Mariage avec le père de ses enfants",
+            "observation_ids": [
+              "o2",
+              "o57"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Naissance du premier enfant",
+            "start": "1995",
+            "end": "1995",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Naissance de sa fille",
+            "observation_ids": [
+              "o2",
+              "o57"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Naissance du second enfant",
+            "start": "1998",
+            "end": "1998",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Naissance de son fils",
+            "observation_ids": [
+              "o2",
+              "o57"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Violences conjugales",
+            "start": "1996",
+            "end": "2006",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Violences de son mari (insultes, contrôle, coups), souvent devant les enfants ; jamais de plainte",
+            "observation_ids": [
+              "o47",
+              "o57"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Séparation d'avec le mari",
+            "start": "2006",
+            "end": "2006",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Départ avec les enfants chez sa mère",
+            "observation_ids": [
+              "o2",
+              "o47"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Divorce",
+            "start": "2008",
+            "end": "2008",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Divorce",
+            "observation_ids": [
+              "o47",
+              "o57"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Placement des enfants (ASE)",
+            "start": "2009",
+            "end": "2012",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Placés en famille d'accueil à Tonneins par le juge, puis chez leur père",
+            "observation_ids": [
+              "o50",
+              "o57"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Installation à Bègles",
+            "start": "2010",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Appartement HLM à Bègles depuis 2010",
+            "observation_ids": [
+              "o2"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Vie de couple avec M. [PROCHE_5]",
+            "start": "2017",
+            "end": "2021-01-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Rencontré au bar, consommateur d'alcool, vit avec elle depuis 2017",
+            "observation_ids": [
+              "o2",
+              "o31"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Dette locative et procédure d'expulsion",
+            "start": "2018-03",
+            "end": "2019-04-16",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Commandement de quitter les lieux en mars 2018, jugement du 18/12/2018, expulsion le 16/04/2019",
+            "observation_ids": [
+              "o2",
+              "o4",
+              "o11",
+              "o17",
+              "o18"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Sans domicile (canapé, squat, tente)",
+            "start": "2019-04-16",
+            "end": "2021-01-26",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Chez un ami, puis tente près de la gare et sous le pont, squat à Bacalan",
+            "observation_ids": [
+              "o18",
+              "o20",
+              "o22",
+              "o23",
+              "o28",
+              "o29",
+              "o31"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Hébergement hôtelier 115",
+            "start": "2020-03-20",
+            "end": "2020-06-30",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hôtel pendant le confinement, retour à la rue à la fin du dispositif",
+            "observation_ids": [
+              "o27",
+              "o28"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Garde à vue",
+            "start": "2020-08",
+            "end": "2020-08",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Vol de bouteilles dans un supermarché, 24 h, rappel à la loi",
+            "observation_ids": [
+              "o29"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Prostitution pour payer le crack",
+            "start": "2020",
+            "end": "2021-01-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Deux à trois fois par semaine pendant la période de rue, sauf à l'hôtel ; arrêtée au décès du compagnon",
+            "observation_ids": [
+              "o41",
+              "o70"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Décès du compagnon",
+            "start": "2021-01-19",
+            "end": "2021-01-19",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Retrouvé mort dans la tente, exclue des obsèques",
+            "observation_ids": [
+              "o31",
+              "o32"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Halte de nuit femmes",
+            "start": "2021-01-26",
+            "end": "2021-06-18",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Hébergement renouvelé de semaine en semaine",
+            "observation_ids": [
+              "o31",
+              "o33",
+              "o34",
+              "o36"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "CHRS Le Fanal",
+            "start": "2021-06-18",
+            "end": "2023-08",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "26 mois de séjour, atelier cuisine et comptabilité",
+            "observation_ids": [
+              "o38",
+              "o41",
+              "o44",
+              "o56"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Curatelle renforcée",
+            "start": "2022-01-18",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Curatelle renforcée de 5 ans, échéance janvier 2027, requête d'allègement déposée",
+            "observation_ids": [
+              "o34",
+              "o45",
+              "o69",
+              "o75"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Retrouvailles avec sa fille",
+            "start": "2022-12-24",
+            "end": "2022-12-24",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Rencontre dans un café à Bordeaux après sa lettre",
+            "observation_ids": [
+              "o50",
+              "o52"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Pension de famille Les Ajoncs",
+            "start": "2023-09-01",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Studio en logement durable à Cenon",
+            "observation_ids": [
+              "o56",
+              "o57"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Naissance du petit-fils",
+            "start": "2023-10-14",
+            "end": "2023-10-14",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Naissance du fils de sa fille",
+            "observation_ids": [
+              "o57"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Allocation adulte handicapé",
+            "start": "2025-06",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "AAH accordée à compter de juin 2025, en remplacement du RSA",
+            "observation_ids": [
+              "o68",
+              "o69"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Décès de la mère",
+            "start": "2025-07-08",
+            "end": "2025-07-08",
+            "start_age": null,
+            "end_age": null,
+            "ongoing": false,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Obsèques le 12/07 à Marmande, son fils présent",
+            "observation_ids": [
+              "o67",
+              "o68"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Reprise de contact avec le fils",
+            "start": "2025-07-12",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Revu à Agen et à Cenon, appels réguliers",
+            "observation_ids": [
+              "o67",
+              "o68",
+              "o74",
+              "o75"
+            ]
+          },
+          {
+            "kind": "life_event",
+            "label": "Bénévolat à l'épicerie solidaire",
+            "start": "2026-05",
+            "end": null,
+            "start_age": null,
+            "end_age": null,
+            "ongoing": true,
+            "mode": null,
+            "loss_of_control": false,
+            "note": "Deux demi-journées par semaine, projet de chantier d'insertion",
+            "observation_ids": [
+              "o74",
+              "o75"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

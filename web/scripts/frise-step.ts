@@ -6,6 +6,9 @@
  * segmentation of an earlier run (only the frise step then varies).
  * --consolidate: a frise read in several lots is regrouped, as in the app
  * (src/notebook/consolidate.ts); the frise as read is kept beside it.
+ * --carry: each lot after the first is given the frise read so far.
+ * --proofread: the frise is read again against the whole text
+ * (src/notebook/proofread.ts); the frise before that is kept beside it.
  */
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -14,6 +17,7 @@ import type { CloudPolicy } from "../src/cloud/guard";
 import { buildConsensusTimeline, groupEvents, mergeAgreed, type ConsensusStats } from "../src/notebook/consensus";
 import { consolidateTimeline } from "../src/notebook/consolidate";
 import type { Observation, Timeline } from "../src/notebook/model";
+import { proofreadTimeline } from "../src/notebook/proofread";
 import { assembleTimeline, buildTimeline, lastObservationDate, lotCount, observationDates, type RawEvent, type TimelineInput } from "../src/notebook/timeline";
 
 const arg = (name: string) => process.argv.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
@@ -23,6 +27,8 @@ export const ARBITER = arg("arbiter");
 export const CHARS = arg("chars") ? Number(arg("chars")) : undefined;
 export const OBSERVATIONS_FROM = arg("observations-from");
 export const CONSOLIDATE = process.argv.includes("--consolidate");
+export const CARRY = process.argv.includes("--carry");
+export const PROOFREAD = process.argv.includes("--proofread");
 if (READERS.length === 1 || (READERS.length > 0 && !ARBITER)) throw new Error("--readers needs at least two models and --arbiter");
 
 /** Settings to record in the run's JSON. */
@@ -31,6 +37,8 @@ export const friseSettings = () => ({
   ...(CHARS ? { charsPerCall: CHARS } : {}),
   ...(OBSERVATIONS_FROM ? { observationsFrom: OBSERVATIONS_FROM } : {}),
   ...(CONSOLIDATE ? { consolidate: true } : {}),
+  ...(CARRY ? { carry: true } : {}),
+  ...(PROOFREAD ? { proofread: true } : {}),
 });
 
 /** Observations of an earlier run of this dossier, for the documents sent now; null when not asked. */
@@ -47,12 +55,21 @@ export interface FriseResult {
   timeline: Timeline;
   /** --consolidate, several lots: the frise as read, before the regroupement. */
   timelineRead?: Timeline;
+  /** --proofread: the frise before it was read again against the text. */
+  timelineUnchecked?: Timeline;
   consensus?: ConsensusStats;
   /** Consensus: each reader's own frise on the same observations (single-model baselines), and their union without arbiter ("union"). */
   readings?: { model: string; timeline: Timeline }[];
 }
 
 export async function friseStep(input: TimelineInput, policy: Extract<CloudPolicy, { kind: "openrouter-zdr" }>): Promise<FriseResult> {
+  const built = await builtStep(input, policy);
+  if (!PROOFREAD) return built;
+  const checked = await proofreadTimeline(built.timeline, { ...input, policy });
+  return { ...built, timeline: checked, timelineUnchecked: built.timeline };
+}
+
+async function builtStep(input: TimelineInput, policy: Extract<CloudPolicy, { kind: "openrouter-zdr" }>): Promise<FriseResult> {
   const result = await readStep(input, policy);
   const lots = CONSOLIDATE ? lotCount({ ...input, ...(CHARS ? { charsPerCall: CHARS } : {}) }) : 1;
   if (lots < 2) return result;
@@ -61,7 +78,7 @@ export async function friseStep(input: TimelineInput, policy: Extract<CloudPolic
 }
 
 async function readStep(input: TimelineInput, policy: Extract<CloudPolicy, { kind: "openrouter-zdr" }>): Promise<FriseResult> {
-  const withChars = { ...input, policy, ...(CHARS ? { charsPerCall: CHARS } : {}) };
+  const withChars = { ...input, policy, ...(CHARS ? { charsPerCall: CHARS } : {}), ...(CARRY ? { carry: true } : {}) };
   if (!READERS.length) return { timeline: await buildTimeline(withChars) };
   let runs: RawEvent[][] = [];
   const timeline = await buildConsensusTimeline({

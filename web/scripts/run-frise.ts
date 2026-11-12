@@ -195,7 +195,7 @@ async function runDossier(slug: string) {
   }
 
   const birthYear = birthYearFromDetections(detections);
-  const { timeline, timelineRead, consensus, readings } = await friseStep({ observations, pagesByDoc, manifests, policy, fetchImpl, birthYear }, policy);
+  const { timeline, timelineRead, timelineUnchecked, consensus, readings } = await friseStep({ observations, pagesByDoc, manifests, policy, fetchImpl, birthYear }, policy);
   if (consensus) console.log(`  consensus: ${JSON.stringify(consensus)}`);
   if (timeline.consolidation) console.log(`  regroupement: ${JSON.stringify(timeline.consolidation)}`);
   const fromAge = timeline.events.filter((e) => e.fromAge).length;
@@ -203,7 +203,7 @@ async function runDossier(slug: string) {
     `  frise: ${timeline.tracks.length} tracks, ${timeline.events.length} events (${fromAge} dated from an age), ` +
       `${timeline.undated.length} undated; birth year ${birthYear === null ? "unknown" : "known"}`,
   );
-  return { dossier: slug, model, ...(segmentModel ? { segmentModel } : {}), ...(TEXT_ONLY ? { textOnly: true } : {}), ...(transport ? { transport: "files" } : {}), ...(RULES_FIRST && !reused ? { segmentation: "rules-first", segmentedBy } : {}), ...friseSettings(), ranAt: new Date().toISOString(), review: REVIEWER ? "automatic detections accepted as they are; the planted identifiers they left are masked by hand" : "automatic detections accepted as they are", docs, observations, timeline, ...(timelineRead ? { timelineRead } : {}), ...(consensus ? { consensus, readings } : {}) };
+  return { dossier: slug, model, ...(segmentModel ? { segmentModel } : {}), ...(TEXT_ONLY ? { textOnly: true } : {}), ...(transport ? { transport: "files" } : {}), ...(RULES_FIRST && !reused ? { segmentation: "rules-first", segmentedBy } : {}), ...friseSettings(), ranAt: new Date().toISOString(), review: REVIEWER ? "automatic detections accepted as they are; the planted identifiers they left are masked by hand" : "automatic detections accepted as they are", docs, observations, timeline, ...(timelineRead ? { timelineRead } : {}), ...(timelineUnchecked ? { timelineUnchecked } : {}), ...(consensus ? { consensus, readings } : {}) };
 }
 
 mkdirSync(OUT, { recursive: true });
