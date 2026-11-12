@@ -753,3 +753,24 @@ Mesure sur les 6 dossiers longs fictifs (532 événements attendus, demandes ré
 La relecture ne retire rien au rappel et corrige ce qu'elle visait (fins et « en cours »). Plus la lecture est large, moins le modèle relève d'événements : un seul appel perd 11 points de rappel, la frise transmise 5. La lecture par lots suivie d'une relecture reste donc la meilleure ; le défaut de l'application ne change pas tant que la relecture n'y est pas branchée.
 
 Dans l'application, la relecture est une étape à la demande : une fois la frise faite, la carte d'analyse propose « Relire contre le texte ». Une demande de plus part avec les événements numérotés et le texte pseudonymisé, par la même barrière que les autres ; la frise affichée, corrections à la main comprises, est remplacée par la frise relue, et la carte dit ce qui a changé (« 1 corrigé, 1 retiré, 0 ajouté sur 4 »). Le bouton n'existe pas quand rien ne peut partir (aucun modèle réglé, démonstration ou bibliothèque rejouées).
+
+## Sur téléphone : défiler, aller d'une étape à l'autre (12/11/2026)
+
+Défaut signalé par l'utilisateur sur le site publié : sur téléphone, on restait
+bloqué à la relecture. Un doigt posé sur une page traçait un cadre de masquage
+au lieu de faire défiler, le document entier séparait l'utilisateur du bouton
+« Pseudonymiser », et les étapes du haut n'étaient pas des boutons.
+
+- Un doigt sur une page la fait défiler. Un cadre se trace au doigt seulement
+  après « Masquer une zone » (barre du document), un cadre à la fois ; à la
+  souris, tracer reste direct.
+- Chaque étape du parcours est un bouton qui amène à l'endroit où elle se fait
+  (sources, document, liste des éléments, bouton de pseudonymisation, carte
+  d'analyse, frise). Une étape pas encore atteinte amène à ce qui reste à faire.
+- Écran étroit (panneaux empilés) : la page défile d'un seul tenant, le parcours
+  reste en haut sur une ligne, la liste des éléments et le bouton d'action
+  passent avant les pages du document, la frise vient à l'écran dès qu'elle est
+  faite, un dossier s'ouvre en haut de page.
+- Non changé, à décider : un cadre tracé à la main sur des mots ordinaires fait
+  échouer la vérification quand ces mots existent ailleurs dans le document
+  (chaque mot du cadre est cherché partout, comme un nom).

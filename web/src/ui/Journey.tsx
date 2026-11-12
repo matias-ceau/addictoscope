@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 import type { AnalysisState } from "./AnalysisCard";
 import type { SourceDocState } from "./state";
 
@@ -82,26 +84,43 @@ function PlaceIcon({ place }: { place: Place }) {
   );
 }
 
-export function Journey({ steps }: { steps: JourneyStep[] }) {
+export function Journey({ steps, onGo }: { steps: JourneyStep[]; onGo: (id: string) => void }) {
+  const shown = steps.find((s) => s.status === "active") ?? steps.at(-1)!;
+  const ref = useRef<HTMLElement>(null);
+  // Its height, for what sticks or scrolls under it when it stays at the top of a small screen.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const set = () => document.documentElement.style.setProperty("--journey-h", `${el.offsetHeight}px`);
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    set();
+    return () => ro.disconnect();
+  }, []);
   return (
-    <nav className="journey" aria-label="Parcours des données">
+    <nav ref={ref} className="journey" aria-label="Parcours des données">
       <ol>
         {steps.map((s, i) => (
-          <li key={s.id} className={`journey-step ${s.status} place-${s.place}`} title={s.detail} aria-current={s.status === "active" ? "step" : undefined}>
-            <span className="journey-dot" aria-hidden>
-              {s.status === "done" ? "✓" : i + 1}
-            </span>
-            <span className="journey-text">
-              <span className="journey-title">{s.title}</span>
-              <span className="journey-place">
-                <PlaceIcon place={s.place} /> {PLACE_LABEL[s.place]}
+          <li key={s.id} className={`journey-step ${s.status} place-${s.place}`} aria-current={s.status === "active" ? "step" : undefined}>
+            <button type="button" className="journey-go" title={s.detail} onClick={() => onGo(s.id)}>
+              <span className="journey-dot" aria-hidden>
+                {s.status === "done" ? "✓" : i + 1}
               </span>
-            </span>
+              <span className="journey-text">
+                <span className="journey-title">{s.title}</span>
+                <span className="journey-place">
+                  <PlaceIcon place={s.place} /> {PLACE_LABEL[s.place]}
+                </span>
+              </span>
+            </button>
           </li>
         ))}
       </ol>
       <p className="journey-detail">
-        {(steps.find((s) => s.status === "active") ?? steps.at(-1))!.detail}
+        <span className="journey-detail-where">
+          {shown.title} · {PLACE_LABEL[shown.place]} :{" "}
+        </span>
+        {shown.detail}
       </p>
     </nav>
   );
