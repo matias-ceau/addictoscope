@@ -16,11 +16,19 @@ test("a long dossier is read in several lots, then its duplicates are regrouped"
     outbound.push(route.request().url());
     return route.abort();
   });
+  const modelLoads: string[] = [];
+  page.on("request", (r) => {
+    if (r.url().includes("/models/")) modelLoads.push(r.url());
+  });
   await page.goto("/");
   expect(long.docs[0].pages).toBeGreaterThanOrEqual(20);
   await page.getByRole("button", { name: /Dossier long/ }).click();
   await expect(page.getByText("Dossier fictif · démonstration")).toBeVisible();
-  await expect(page.getByText(/Relu aussi par l'IA locale/)).toBeVisible({ timeout: 300_000 });
+  // No waiting in front of someone: the name model's result comes with the
+  // demonstration, the model itself is neither loaded nor run.
+  await expect(page.getByText(/Relu aussi par l'IA locale \(résultat enregistré/)).toBeVisible({ timeout: 15_000 });
+  expect(modelLoads).toEqual([]);
+  await expect(page.locator(".ai-badge").first()).toBeVisible();
   await page.getByRole("button", { name: "Pseudonymiser ce document" }).click();
   await expect(page.getByText("Document pseudonymisé et vérifié")).toBeVisible({ timeout: 60_000 });
 
