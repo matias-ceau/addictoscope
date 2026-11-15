@@ -3,11 +3,14 @@
  * fictional dossiers and recorded model answers, served with the app.
  */
 import type { Recording } from "../cloud/replay";
+import type { NerSpan } from "../pii/ner";
 
 export interface DemoDoc {
   file: string;
   title: string;
   pages: number;
+  /** What the local name model finds in this document, recorded when the bundle was built. */
+  ner?: string;
 }
 
 export interface DemoRecordingInfo {
@@ -47,6 +50,27 @@ export async function demoFiles(d: DemoDossier): Promise<File[]> {
       return new File([await res.arrayBuffer()], doc.file, { type: "application/pdf" });
     }),
   );
+}
+
+/**
+ * The local name model's findings per document (by file name), recorded at
+ * build time. A document without a readable record is simply left out: the
+ * model then runs on it as for any document.
+ */
+export async function demoNer(d: DemoDossier): Promise<Record<string, Record<number, NerSpan[]>>> {
+  const out: Record<string, Record<number, NerSpan[]>> = {};
+  await Promise.all(
+    d.docs.map(async (doc) => {
+      if (!doc.ner) return;
+      try {
+        const res = await fetch(`${base()}${d.slug}/${doc.ner}`);
+        if (res.ok) out[doc.file] = (await res.json()) as Record<number, NerSpan[]>;
+      } catch {
+        // No record: the model runs.
+      }
+    }),
+  );
+  return out;
 }
 
 export async function loadRecording(d: DemoDossier, r: DemoRecordingInfo): Promise<Recording> {

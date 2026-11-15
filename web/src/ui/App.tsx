@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "r
 import { analyse } from "../app/analysis";
 import { restoreCorrections, storeCorrections } from "../app/corrections-store";
 import { carryCorrections } from "../notebook/edit";
-import { demoFiles, loadRecording, type DemoDossier } from "../app/demo";
+import { demoFiles, demoNer, loadRecording, type DemoDossier } from "../app/demo";
 import { loadDossierAnalysis, loadDossierFiles, loadDossierKey, remapAnalysis, type Library, type LibraryDossier } from "../app/library";
 import { clearLedger } from "../cloud/ledger";
 import { modelName } from "../cloud/models";
@@ -21,6 +21,7 @@ import { keyTableFromDetections } from "../core/reidentify";
 import { KeyPrompt } from "./KeyPrompt";
 import { buildManifest } from "../core/verify";
 import { detectCorpus } from "../pii/detect";
+import type { NerSpan } from "../pii/ner";
 import { AnalysisCard, type AnalysisState } from "./AnalysisCard";
 import { DataStatus, Journal } from "./Journal";
 import { Journey, journeySteps } from "./Journey";
@@ -82,7 +83,7 @@ export function App(props: { library?: LibraryProps } = {}) {
   }, []);
 
   const addFiles = useCallback(
-    async (files: File[], opts: { ner?: boolean } = {}): Promise<string[]> => {
+    async (files: File[], opts: { ner?: boolean; recordedNer?: Record<string, Record<number, NerSpan[]>> } = {}): Promise<string[]> => {
       const ids: string[] = [];
       for (const file of files) {
         const id = `doc${++docCounter}`;
@@ -118,6 +119,16 @@ export function App(props: { library?: LibraryProps } = {}) {
             const ner = { status: "skipped" as const, done: 0, total: 0 };
             dispatch({ type: "patch", id, patch: { ner } });
             stateRef.current = reducer(stateRef.current, { type: "patch", id, patch: { ner } });
+            continue;
+          }
+          // Demonstration: what the model finds in this document was recorded
+          // when the bundle was built; shown at once instead of computed again.
+          const recorded = opts.recordedNer?.[file.name];
+          if (recorded) {
+            const ner = { status: "done" as const, done: pages.length, total: pages.length, spans: recorded, recorded: true };
+            dispatch({ type: "patch", id, patch: { ner } });
+            stateRef.current = reducer(stateRef.current, { type: "patch", id, patch: { ner } });
+            redetect();
             continue;
           }
           // Second opinion from the local AI model, in the background: the
@@ -188,7 +199,7 @@ export function App(props: { library?: LibraryProps } = {}) {
         runPolicy,
         (progress) => setAnalysis((a) => ({ ...a, progress })),
         stateRef.current.detections,
-        replay ? replayFetch(replay, 700) : undefined,
+        replay ? replayFetch(replay, 150) : undefined,
         before ? "model" : "rules-first",
         // Regrouped only if that run was.
         replay ? hasConsolidation(replay) : true,
@@ -286,7 +297,8 @@ export function App(props: { library?: LibraryProps } = {}) {
     async (d: DemoDossier) => {
       setDemo(d);
       setDemoSource(d.recordings[0]?.file ?? "live");
-      await addFiles(await demoFiles(d));
+      const [files, recordedNer] = await Promise.all([demoFiles(d), demoNer(d)]);
+      await addFiles(files, { recordedNer });
     },
     [addFiles],
   );

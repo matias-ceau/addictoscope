@@ -8,12 +8,19 @@
  * in call order, cost, duration), replayed by the app instead of the network.
  * The long dossier comes with its own run (--long-run=longs/regroupe2): four
  * lots and their regroupement, answered from files, hence an estimated cost.
+ * Each document also comes with what the local name model finds in it
+ * (<file>.ner.json, computed here with the app's own model and code): the
+ * demonstration shows that result at once instead of running the model
+ * again on the visitor's device, which takes minutes on a phone.
  * Fictional data only: everything here is already public in data/anonymized.
  */
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-import { openPdf } from "../src/core/pdf";
+import { AutoModelForTokenClassification, AutoTokenizer, env } from "@huggingface/transformers";
+
+import { extractPageText, openPdf } from "../src/core/pdf";
+import { nerSpans, type NerSpan } from "../src/pii/ner";
 import { readScores, runCost, type RunScores } from "./library-lib";
 
 const ROOT = resolve(__dirname, "../..");
@@ -72,17 +79,31 @@ const runs = (arg("runs") ?? "age1").split(",");
 const longRun = arg("long-run") ?? "longs/regroupe2";
 const longScores = readScores(resolve(FRISE, "rapport-longs.json"), longRun);
 
+env.localModelPath = resolve(__dirname, "../public/models") + "/";
+env.allowRemoteModels = false;
+const tokenizer = await AutoTokenizer.from_pretrained("Xenova/camembert-ner");
+const model = await AutoModelForTokenClassification.from_pretrained("Xenova/camembert-ner", { dtype: "q8" });
+
 rmSync(OUT, { recursive: true, force: true });
 const index = [];
 for (const d of DEMO) {
   const dir = resolve(ANONYMIZED, d.long ? "dossiers-longs" : "dossiers", d.slug);
   mkdirSync(resolve(OUT, d.slug), { recursive: true });
   const files = readdirSync(dir).filter((f) => f.endsWith(".pdf")).sort();
-  const docs = files.map((f) => {
+  const docs = [];
+  for (const f of files) {
     copyFileSync(resolve(dir, f), resolve(OUT, d.slug, f));
     const stem = f.replace(/\.pdf$/, "");
-    return { file: f, title: DOC_TITLE[stem] ?? stem, pages: openPdf(new Uint8Array(readFileSync(resolve(dir, f)))).countPages() };
-  });
+    const pdf = openPdf(new Uint8Array(readFileSync(resolve(dir, f))));
+    const pages = pdf.countPages();
+    const spans: Record<number, NerSpan[]> = {};
+    for (let i = 0; i < pages; i++) {
+      const page = extractPageText(pdf, i);
+      spans[page.page] = (await nerSpans(page.text, tokenizer, model)).map((s) => ({ ...s, score: Math.round(s.score * 1000) / 1000 }));
+    }
+    writeFileSync(resolve(OUT, d.slug, `${stem}.ner.json`), JSON.stringify(spans) + "\n");
+    docs.push({ file: f, title: DOC_TITLE[stem] ?? stem, pages, ner: `${stem}.ner.json` });
+  }
   const recordings = [];
   for (const run of d.long ? [longRun] : runs) {
     const path = resolve(FRISE, run, `${d.slug}.json`);

@@ -153,6 +153,15 @@ démonstration et de la bibliothèque).
 - Démonstration : un dossier long (`opiaces-parcours`, 26 pages) en tête de
   l'accueil ; l'application refait tout sur le poste et rejoue les quatre
   lots puis le regroupement. Coût affiché « ≈ », estimé.
+- Pas d'attente devant quelqu'un : ce que le modèle local de noms trouve dans
+  chaque document de démonstration est calculé à la construction
+  (`build-demo.ts`, même modèle, même code) et livré avec le dossier
+  (`<document>.ner.json`). L'application l'affiche aussitôt, avec la mention
+  « résultat enregistré pour la démonstration », au lieu de refaire tourner le
+  modèle (plusieurs minutes sur un téléphone pour 26 pages). Sur un document
+  apporté par l'utilisateur, le modèle tourne toujours sur le poste. Les
+  réponses enregistrées de l'analyse sont rejouées avec 0,15 s de pause par
+  demande (0,7 s avant).
 - Bibliothèque : deux groupes, « Dossiers longs (20 à 30 pages) » puis
   « Dossiers courts » ; pages et événements dans la barre latérale ;
   « coût estimé » pour un passage sans appel payant.
