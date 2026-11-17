@@ -142,6 +142,11 @@ export function Welcome(props: {
                 </li>
               ))}
             </ul>
+            <p className="demo-more">
+              <a href="?library=library/library.json">Les 20 dossiers fictifs déjà analysés →</a>
+              {/* Not offered when the tool is already shown inside that presentation. */}
+              {window.self === window.top && <a href="presentation/">Présentation guidée de l'outil →</a>}
+            </p>
           </section>
         )}
       </div>

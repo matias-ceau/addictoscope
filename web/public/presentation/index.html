@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Addictoscope — fil de la démonstration</title>
+<style>
+  :root {
+    --ink: #1d2433; --muted: #5b6475; --line: #e3e6ee; --bg: #f4f5f8; --paper: #ffffff;
+    --accent: #3557c9; --accent-soft: #eef1fb; --ok: #1f6b40; --ok-soft: #e8f4ec; --warn: #b4541a; --warn-soft: #fbefe6;
+    --c1: #2f6fd6; --c2: #e4673a; --c3: #1fa67a; --c4: #e9a100; --c5: #e2719f; --c6: #198a2c;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink);
+    font-family: "Segoe UI", system-ui, -apple-system, "DejaVu Sans", Arial, sans-serif; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  .app { display: grid; grid-template-columns: 400px 1fr; height: 100dvh; }
+  @media (min-width: 861px) { body.showing:not(.wide) .app { grid-template-columns: 320px 1fr; } }
+
+  /* Left: the thread */
+  .rail { display: flex; flex-direction: column; min-height: 0; background: var(--paper); border-right: 1px solid var(--line); }
+  .rail header { padding: 14px 18px 10px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 10px; }
+  .logo { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: var(--accent); color: white; flex: none; }
+  .rail header b { font-size: 16px; }
+  .rail header .clock { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--muted); font-size: 14px; border: 0; background: none; padding: 4px 6px; border-radius: 6px; }
+  .rail header .clock:hover { background: var(--bg); }
+  .dots { display: flex; gap: 4px; padding: 10px 18px 0; }
+  .dots button { flex: 1; height: 6px; border-radius: 3px; border: 0; background: var(--line); padding: 0; }
+  .dots button.done { background: #b9c4ea; }
+  .dots button.on { background: var(--accent); }
+  .step { flex: 1; overflow: auto; padding: 16px 18px 8px; display: none; }
+  .step.on { display: block; }
+  .kicker { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+  .kicker.show { color: var(--ok); }
+  .step h2 { font-size: 23px; line-height: 1.2; margin: 6px 0 12px; letter-spacing: -0.01em; }
+  .step ul, .step ol { margin: 0 0 14px; padding-left: 20px; }
+  .step li { font-size: 16.5px; line-height: 1.4; margin-bottom: 7px; }
+  .step p { font-size: 16.5px; line-height: 1.4; margin: 0 0 12px; }
+  .do { background: var(--ok-soft); border-radius: 12px; padding: 12px 14px 6px; margin-bottom: 14px; }
+  .do .lab, .ask .lab { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+  .do .lab { color: var(--ok); }
+  .do li { font-size: 15.5px; }
+  .do kbd { font: inherit; font-weight: 700; background: white; border: 1px solid #c9dccf; border-radius: 6px; padding: 0 6px; overflow-wrap: anywhere; }
+  details { border: 1px solid var(--line); border-radius: 10px; margin-bottom: 8px; }
+  details summary { cursor: pointer; padding: 9px 12px; font-size: 15px; font-weight: 600; color: var(--muted); }
+  details[open] summary { color: var(--ink); }
+  details p { padding: 0 12px; font-size: 15px; margin-bottom: 10px; }
+  body.plain details, body.plain .do { display: none; }
+  .nav { display: flex; gap: 8px; padding: 10px 18px 14px; border-top: 1px solid var(--line); }
+  .nav button { flex: 1; border: 1px solid var(--line); background: var(--paper); border-radius: 10px; padding: 11px 10px; font-weight: 700; font-size: 15px; }
+  .nav button.next { background: var(--accent); border-color: var(--accent); color: white; flex: 2; }
+  .nav button:disabled { opacity: .35; cursor: default; }
+
+  /* Right: the stage (a visual, or the real site) */
+  .stage { position: relative; min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+  .bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--paper); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .seg { display: inline-flex; background: var(--bg); border-radius: 10px; padding: 3px; gap: 3px; }
+  .seg button { border: 0; background: none; padding: 7px 12px; border-radius: 8px; font-size: 14px; font-weight: 700; color: var(--muted); }
+  .seg button.on { background: white; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+  .bar .link { border: 1px solid var(--line); background: var(--paper); border-radius: 8px; padding: 7px 11px; font-size: 14px; font-weight: 600; text-decoration: none; color: var(--ink); }
+  .bar .where { margin-left: auto; font-size: 13px; color: var(--ok); font-weight: 700; background: var(--ok-soft); border-radius: 999px; padding: 4px 10px; }
+  .bar .where.real { color: var(--warn); background: var(--warn-soft); }
+  .views { position: relative; flex: 1; min-height: 0; }
+  .views > * { position: absolute; inset: 0; }
+  iframe { width: 100%; height: 100%; border: 0; background: white; }
+  .hidden { visibility: hidden; pointer-events: none; }
+  .visual { background: var(--bg); overflow: auto; display: none; padding: clamp(18px, 4vw, 56px); }
+  .visual.on { display: grid; place-items: center; }
+  .visual .in { width: 100%; max-width: 920px; }
+  .visual h1 { font-size: clamp(28px, 4vw, 46px); line-height: 1.12; letter-spacing: -0.015em; margin: 0 0 14px; }
+  .visual .sub { font-size: clamp(17px, 2vw, 22px); color: var(--muted); margin: 0 0 26px; }
+  .quote { font-size: clamp(19px, 2.4vw, 27px); font-style: italic; border-left: 5px solid var(--accent); padding: 6px 0 6px 18px; margin: 0 0 26px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; }
+  .stat { background: var(--paper); border-radius: 16px; padding: 18px 20px; }
+  .stat .big { font-size: clamp(34px, 4.6vw, 56px); font-weight: 800; letter-spacing: -0.02em; line-height: 1; white-space: nowrap; }
+  .stat .big.warn { color: var(--warn); }
+  .stat .label { font-size: 16px; color: var(--muted); margin-top: 8px; line-height: 1.3; }
+  .cap { font-size: 15px; color: var(--muted); margin: 14px 2px 0; line-height: 1.4; }
+  .tracks { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+  .track { background: var(--paper); border-radius: 14px; padding: 14px 16px; border-left: 8px solid var(--c); }
+  .track b { display: block; font-size: 19px; }
+  .track span { font-size: 15.5px; color: var(--muted); line-height: 1.35; display: block; margin-top: 3px; }
+  .three { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  .card { background: var(--paper); border-radius: 16px; padding: 18px 20px; border: 1px solid var(--line); }
+  .card.local { background: var(--ok-soft); border-color: var(--ok); }
+  .card.online { background: var(--accent-soft); border: 2px dashed var(--accent); }
+  .card h3 { margin: 8px 0 6px; font-size: 20px; }
+  .card p { margin: 0; font-size: 16.5px; line-height: 1.4; }
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 13px; font-weight: 700; background: white; }
+  .local .tag { color: var(--ok); } .online .tag { color: var(--accent); }
+  .qs { counter-reset: q; display: grid; gap: 12px; }
+  .qs div { counter-increment: q; background: var(--paper); border-radius: 14px; padding: 16px 18px 16px 62px; font-size: clamp(17px, 2vw, 21px); line-height: 1.35; position: relative; }
+  .qs div::before { content: counter(q); position: absolute; left: 16px; top: 14px; width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: white; font-weight: 800; display: grid; place-items: center; font-size: 17px; }
+  .fallback img { max-width: 100%; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.15); display: block; margin: 0 auto 16px; }
+
+  /* Tool on the whole window */
+  body.wide .app { grid-template-columns: 1fr; }
+  body.wide .rail { display: none; }
+  .pill { display: none; position: fixed; left: 12px; bottom: 12px; z-index: 5; border: 0; border-radius: 999px; background: var(--ink); color: white; padding: 10px 16px; font-weight: 700; font-size: 14px; box-shadow: 0 3px 12px rgba(0,0,0,.3); max-width: calc(100vw - 24px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  body.wide .pill { display: block; }
+
+  /* Phone and narrow tablet: one panel at a time */
+  .tabs { display: none; }
+  @media (max-width: 860px) {
+    .app { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+    .tabs { display: flex; background: var(--paper); border-bottom: 1px solid var(--line); padding: 6px 10px; gap: 6px; }
+    .tabs button { flex: 1; border: 0; background: var(--bg); border-radius: 9px; padding: 10px; font-weight: 700; font-size: 15px; color: var(--muted); }
+    .tabs button.on { background: var(--accent); color: white; }
+    .rail { border-right: 0; }
+    body:not(.tool) .stage .views iframe, body:not(.tool) .bar { display: none; }
+    body:not(.tool) .stage { display: none; }
+    body.tool .rail { display: none; }
+    body.wide .rail { display: none; }
+    body.wide .app { grid-template-columns: 1fr; }
+    .pill { display: none !important; }
+    /* On a phone the visual of a talking step comes under its text. */
+    .step .mobile-visual { display: block; margin: 4px -4px 14px; }
+    .bar .where { margin-left: 0; }
+  }
+  @media (min-width: 861px) { .step .mobile-visual { display: none; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="tabs"><button id="tab-thread" class="on">Fil</button><button id="tab-tool">Outil</button></div>
+
+  <div class="rail">
+    <header>
+      <span class="logo"><svg viewBox="0 0 32 32" width="20" height="20"><path d="M5 22h5l3-9 4 13 3-8h7" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <b>Addictoscope</b>
+      <button class="clock" id="clock" title="Temps écoulé. Cliquer pour remettre à zéro.">0:00</button>
+    </header>
+    <div class="dots" id="dots"></div>
+
+    <section class="step" data-view="v-open" data-title="Ouverture">
+      <div class="kicker">Ouverture · 1 min</div>
+      <h2>Ce que je voudrais vous montrer</h2>
+      <ul>
+        <li>Un outil qui lit un dossier d'addictologie et en tire une frise chronologique</li>
+        <li>Le nom du patient ne quitte pas l'ordinateur</li>
+        <li>Dix minutes de démonstration sur des dossiers inventés, puis vos remarques</li>
+      </ul>
+      <details><summary>D'où vient le travail</summary><p>Mémoire de DFST. La frise est conseillée dans le service, mais personne n'a le temps de relire trois cents pages pour la tracer.</p></details>
+    </section>
+
+    <section class="step" data-view="v-problem" data-title="Le problème">
+      <div class="kicker">Le problème · 2 min</div>
+      <h2>Des dossiers à rallonge, sans vue d'ensemble</h2>
+      <ul>
+        <li>Des dizaines de notes, de plusieurs métiers, qui sortent dans le désordre à l'impression</li>
+        <li>En consultation, le problème du jour passe d'abord</li>
+        <li>Résultat : on reprend un suivi de plusieurs années sans en avoir l'histoire en tête</li>
+      </ul>
+      <details><summary>D'où viennent ces chiffres</summary><p>Les six dossiers réels du service qui ont servi à l'évaluation. Je n'en montre que des comptes ; tout ce qui s'affiche aujourd'hui est inventé.</p></details>
+    </section>
+
+    <section class="step" data-view="v-tracks" data-title="La frise">
+      <div class="kicker">La frise · 2 min</div>
+      <h2>Six lignes sur le même axe du temps</h2>
+      <ul>
+        <li>La frise ne conclut rien : elle met côte à côte ce que le dossier sépare</li>
+        <li>Une rechute, un deuil et l'arrêt d'un traitement la même année : au clinicien d'en faire une hypothèse</li>
+        <li>Le diagnostic lui-même dépend du temps (critères sur 12 mois, rémission précoce ou prolongée)</li>
+      </ul>
+      <details><summary>Si on me demande : pourquoi ces six lignes ?</summary><p>C'est le découpage enseigné dans le service. Tout le reste de la méthode vaut pour une autre discipline, avec d'autres lignes.</p></details>
+    </section>
+
+    <section class="step" data-view="v-chain" data-title="Le secret médical">
+      <div class="kicker">Le secret médical · 2 min</div>
+      <h2>Trois temps, dont un seul en ligne</h2>
+      <ul>
+        <li>Les noms sont retirés sur l'ordinateur, et je relis avant tout envoi</li>
+        <li>S'il reste un nom dans le document, l'envoi est bloqué</li>
+        <li>Les vrais noms sont remis à l'affichage, sur l'ordinateur</li>
+      </ul>
+      <details><summary>Si on me demande : est-ce anonyme ?</summary><p>Non. Sans nom, le texte reste une donnée de santé : les dates et l'histoire restent. D'où un prestataire qui ne conserve rien, et à terme un hébergement agréé dans l'établissement.</p></details>
+      <details><summary>Si on me demande : et si l'outil oublie un nom ?</summary><p>Sur les documents de contrôle, tout ce qui avait été annoté est masqué, mais ces documents ont servi à régler l'outil. La relecture par le clinicien reste obligatoire.</p></details>
+    </section>
+
+    <section class="step" data-view="tool" data-site="demo" data-title="Montrer : retirer les noms">
+      <div class="kicker show">À montrer · 3 min</div>
+      <h2>Un dossier court : retirer les noms</h2>
+      <div class="do"><div class="lab">Dans l'outil</div><ol id="do-pseudo">
+        <li>Carte <kbd>Alcool et dépression</kbd>, puis <kbd>Ouvrir ce dossier →</kbd></li>
+        <li>Montrer les surlignages et la liste <kbd>Éléments identifiants</kbd></li>
+        <li><kbd>Pseudonymiser ce document</kbd>, puis basculer <kbd>Original</kbd> / <kbd>Pseudonymisé</kbd></li>
+        <li>À gauche, <kbd>historique.pdf</kbd>, puis encore <kbd>Pseudonymiser ce document</kbd> (le dossier a deux documents)</li>
+      </ol></div>
+      <ul>
+        <li>En haut de l'écran : ce qui reste sur l'ordinateur, ce qui part en ligne</li>
+        <li>Les noms sont supprimés du document, pas cachés sous un bandeau</li>
+      </ul>
+      <details><summary>À savoir avant qu'on me le fasse remarquer</summary><p>Le courrier porte deux dates qui ne collent pas (« du 05/12/2022 au 16/12/2023 ») : c'est une contradiction placée exprès dans le dossier inventé. La frise ne les montre pas encore.</p></details>
+    </section>
+
+    <section class="step" data-view="tool" data-site="demo" data-title="Montrer : la frise">
+      <div class="kicker show">À montrer · 3 min</div>
+      <h2>Du dossier à la frise</h2>
+      <div class="do"><div class="lab">Dans l'outil</div><ol id="do-frise">
+        <li><kbd>Analyser le dossier (rejoué)</kbd> : réponse enregistrée, rien n'est envoyé</li>
+        <li><kbd>Agrandir</kbd>, puis lire la frise comme en staff</li>
+        <li>Cliquer la barre <kbd>Alcool</kbd> ; dans la fiche, sous « D'où vient cet événement », cliquer la date : la note s'ouvre, surlignée</li>
+        <li>Revenir par <kbd>Frise</kbd> en haut, puis onglet <kbd>Essentiel</kbd> : une dizaine de repères</li>
+        <li><kbd>Journal</kbd> : aucune requête envoyée</li>
+      </ol></div>
+      <ul>
+        <li>Chaque événement renvoie à la note dont il est tiré : tout se vérifie</li>
+      </ul>
+    </section>
+
+    <section class="step" data-view="tool" data-site="library" data-title="Montrer : un dossier long">
+      <div class="kicker show">À montrer · 3 min</div>
+      <h2>Un dossier long : neuf ans de suivi</h2>
+      <div class="do"><div class="lab">Dans l'outil (bibliothèque)</div><ol id="do-long">
+        <li>Dans la liste, <kbd>Opiacés : neuf ans de méthadone</kbd>, puis <kbd>Voir la frise</kbd> et <kbd>Agrandir</kbd></li>
+        <li><kbd>Parcours entier</kbd> : depuis l'adolescence ; <kbd>Suivi seul</kbd> : les neuf ans de suivi</li>
+        <li>Onglet <kbd>Tableau</kbd> : <kbd>Juste</kbd> / <kbd>Faux</kbd> / <kbd>Corriger</kbd> pour chaque événement</li>
+      </ol></div>
+      <ul>
+        <li>C'est le cas qui compte : 20 à 30 pages, des éléments révélés des années plus tard</li>
+        <li>La frise est longue (une centaine de lignes) et se répète encore : c'est une des limites</li>
+      </ul>
+      <details><summary>À éviter ici</summary><p>L'onglet Essentiel de ce dossier ne retient ni la méthadone ni la grossesse : le montrer sur le dossier court. Sur téléphone, l'outil se regarde mieux dans un nouvel onglet.</p></details>
+    </section>
+
+    <section class="step" data-view="v-results" data-title="Ce que ça vaut">
+      <div class="kicker">Ce que ça vaut · 2 min</div>
+      <h2>Près de neuf événements attendus sur dix</h2>
+      <ul>
+        <li>Mesuré sur 20 dossiers inventés, dont on connaît la frise attendue</li>
+        <li>Point faible : les dates de fin, justes deux fois sur trois</li>
+        <li>Sur les vrais dossiers, pas de réponse connue : on ne peut pas noter chaque événement</li>
+      </ul>
+      <details><summary>Si on me demande : et les erreurs ?</summary><p>L'outil propose aussi des événements non attendus : souvent des détails vrais, parfois des doublons. Erreurs typiques : un antécédent daté du jour où on le rapporte, un traitement noté « en cours » alors qu'il s'arrête plus loin.</p></details>
+      <details><summary>Si on me demande : combien ça coûte ?</summary><p>Environ un dollar par dossier avec le modèle retenu. Des modèles dix fois moins chers existent, mais ils retrouvent moins d'événements.</p></details>
+    </section>
+
+    <section class="step" data-view="v-limits" data-title="Limites">
+      <div class="kicker">Limites · 1 min</div>
+      <h2>Une aide à la lecture, pas un résumé qui remplace le dossier</h2>
+      <ul>
+        <li>Évalué sur des dossiers inventés, écrits avec l'aide d'une IA</li>
+        <li>Sur les vrais dossiers, deux lectures n'ont que deux tiers d'événements en commun</li>
+        <li>Aucun clinicien autre que moi n'a encore jugé une frise</li>
+        <li>Les contradictions du dossier ne sont pas encore montrées</li>
+      </ul>
+    </section>
+
+    <section class="step" data-view="v-questions" data-title="Vos remarques">
+      <div class="kicker">Discussion</div>
+      <h2>Ce sur quoi j'aimerais votre avis</h2>
+      <p>Laisser parler. Revenir à l'outil si une question s'y prête.</p>
+      <details><summary>Pour finir</summary><p>L'outil est libre et gratuit, ouvert à l'adresse matias-ceau.github.io/addictoscope avec les dossiers inventés.</p></details>
+    </section>
+
+    <div class="nav"><button id="prev">←</button><button id="hints" title="Masquer ou montrer les aides (touche N)">Aides</button><button id="next" class="next">Suite →</button></div>
+  </div>
+
+  <div class="stage">
+    <div class="bar">
+      <div class="seg" id="seg">
+        <button data-site="demo">Démonstration pas à pas</button>
+        <button data-site="library">Dossiers déjà analysés</button>
+      </div>
+      <button class="link" id="widen" title="L'outil sur toute la fenêtre (touche O)">Outil en grand</button>
+      <a class="link" id="newtab" target="_blank" rel="noopener">Nouvel onglet ↗</a>
+      <button class="link" id="offline" title="Sans réseau : une capture de la frise">Sans réseau</button>
+      <span class="where" id="where">Dossiers inventés</span>
+    </div>
+    <div class="views">
+      <iframe id="frame-demo" class="hidden" title="Addictoscope, démonstration" allow="clipboard-write"></iframe>
+      <iframe id="frame-library" class="hidden" title="Addictoscope, dossiers analysés" allow="clipboard-write"></iframe>
+
+      <div class="visual" id="v-open"><div class="in">
+        <h1>Du dossier patient à la frise chronologique</h1>
+        <p class="sub">Un outil automatique, appliqué à l'addictologie · mémoire de DFST · Matias Ceau</p>
+        <div class="stats">
+          <div class="stat"><div class="big">10 min</div><div class="label">de démonstration, sur des dossiers inventés</div></div>
+          <div class="stat"><div class="big">0</div><div class="label">donnée de patient à l'écran aujourd'hui</div></div>
+        </div>
+      </div></div>
+
+      <div class="visual" id="v-problem"><div class="in">
+        <p class="quote">« Quand le trouble a-t-il commencé ? Quels traitements ont été essayés, et pourquoi arrêtés ? »</p>
+        <div class="stats">
+          <div class="stat"><div class="big">302</div><div class="label">pages</div></div>
+          <div class="stat"><div class="big">559</div><div class="label">notes</div></div>
+          <div class="stat"><div class="big">92</div><div class="label">pages pour le plus long</div></div>
+          <div class="stat"><div class="big">11 ans</div><div class="label">de suivi au plus</div></div>
+        </div>
+        <p class="cap">Six dossiers réels d'addictologie (comptes seulement).</p>
+      </div></div>
+
+      <div class="visual" id="v-tracks"><div class="in">
+        <div class="tracks">
+          <div class="track" style="--c:var(--c1)"><b>Usages et comportements</b><span>substance ou comportement, mode d'usage, perte de contrôle, sevrage, rechute</span></div>
+          <div class="track" style="--c:var(--c2)"><b>Psychopathologie</b><span>épisodes, symptômes, passages à l'acte</span></div>
+          <div class="track" style="--c:var(--c3)"><b>Somatique</b><span>complications, hospitalisations, bilans</span></div>
+          <div class="track" style="--c:var(--c4)"><b>Médicaments</b><span>début, changement de dose, arrêt</span></div>
+          <div class="track" style="--c:var(--c5)"><b>Prises en charge</b><span>sevrages, hospitalisations, suivi, accompagnement social</span></div>
+          <div class="track" style="--c:var(--c6)"><b>Événements de vie</b><span>famille, travail, logement, justice</span></div>
+        </div>
+        <p class="cap">Le parcours d'avant le suivi compte autant que le suivi : la frise commence à l'enfance quand le dossier le raconte.</p>
+      </div></div>
+
+      <div class="visual" id="v-chain"><div class="in">
+        <div class="three">
+          <div class="card local"><span class="tag">Sur l'ordinateur</span><h3>1. Retirer les noms</h3><p>Noms, date de naissance, adresse, téléphone. Le clinicien relit. Chaque nom devient une étiquette : [PATIENT], [SOIGNANT 2]…</p></div>
+          <div class="card online"><span class="tag">En ligne · rien n'est conservé</span><h3>2. Lire le dossier</h3><p>Une IA lit le texte sans nom et relève les événements, chacun avec la note dont il vient.</p></div>
+          <div class="card local"><span class="tag">Sur l'ordinateur</span><h3>3. Afficher la frise</h3><p>Les vrais noms sont remis. Un clic sur un événement ouvre la note d'origine.</p></div>
+        </div>
+        <p class="cap">S'il reste un nom dans le document, l'envoi est bloqué.</p>
+      </div></div>
+
+      <div class="visual" id="v-results"><div class="in">
+        <div class="stats">
+          <div class="stat"><div class="big">89 %</div><div class="label">des événements attendus retrouvés, dossiers longs (473 sur 532)</div></div>
+          <div class="stat"><div class="big">88 %</div><div class="label">dossiers courts (281 sur 320)</div></div>
+          <div class="stat"><div class="big warn">2 sur 3</div><div class="label">dates de fin correctes (63 à 72 %)</div></div>
+          <div class="stat"><div class="big">60/69</div><div class="label">éléments révélés tard retrouvés</div></div>
+        </div>
+        <p class="cap">20 dossiers inventés pour l'évaluation : 14 courts (4 pages) et 6 longs (21 à 26 pages, 6 à 9 ans de suivi). Vrais dossiers : six, 302 pages, sans réponse connue.</p>
+      </div></div>
+
+      <div class="visual" id="v-limits"><div class="in">
+        <div class="three">
+          <div class="card"><h3>Dates de fin</h3><p>Un arrêt de traitement ou une reprise de consommation sont souvent notés en passant, plusieurs notes plus loin.</p></div>
+          <div class="card"><h3>Nuances cliniques</h3><p>Perte de contrôle, frontière entre usage et rechute, changement de forme d'un traitement.</p></div>
+          <div class="card"><h3>Solidité de l'évaluation</h3><p>Dossiers inventés. Sur les vrais, un modèle relit un modèle : cela mesure un accord, pas une exactitude clinique.</p></div>
+        </div>
+        <p class="cap">Une erreur reste possible : le lien vers la note d'origine permet de la vérifier en un clic.</p>
+      </div></div>
+
+      <div class="visual" id="v-questions"><div class="in">
+        <h1 style="font-size:clamp(24px,3vw,34px)">Ce sur quoi j'aimerais votre avis</h1>
+        <div class="qs">
+          <div>Les six lignes : est-ce le bon découpage ? Que manque-t-il à une frise pour qu'elle vous serve ?</div>
+          <div>À quel moment du soin l'utiliseriez-vous : reprise de suivi, synthèse, staff, enseignement ?</div>
+          <div>Comment la faire juger par des cliniciens : quels dossiers, quels critères ?</div>
+          <div>Quelle suite : un essai dans le service, un travail de recherche sur les trajectoires ?</div>
+        </div>
+      </div></div>
+
+      <div class="visual fallback" id="v-offline"><div class="in">
+        <img src="frise-entiere.png" alt="Frise d'un dossier fictif">
+        <p class="cap">Capture d'une frise (dossier inventé « alcool et cirrhose »), à montrer si le site ne s'ouvre pas.</p>
+      </div></div>
+    </div>
+  </div>
+</div>
+<button class="pill" id="pill"></button>
+
+<script>
+  // The real site. ?site=<url> points the two panels at another copy of the application
+  // (for instance the private one served on this computer).
+  const params = new URLSearchParams(location.search);
+  const PUBLIC = "https://matias-ceau.github.io/addictoscope/";
+  // Served from the site itself (…/presentation/), the tool is the one next to this page.
+  const HERE = /^https?:$/.test(location.protocol) && /\/presentation\/(index\.html)?$/.test(location.pathname) ? new URL("../", location.href).href : PUBLIC;
+  const base = (params.get("site") || HERE).replace(/[?#].*$/, "").replace(/\/?$/, "/");
+  const library = params.get("library") || "library/library.json";
+  const urls = { demo: base, library: `${base}?library=${encodeURIComponent(library)}` };
+  const frames = { demo: document.getElementById("frame-demo"), library: document.getElementById("frame-library") };
+  const where = document.getElementById("where");
+  if (base !== HERE) { where.textContent = "Autre copie de l'outil : vérifier ce qui s'affiche"; where.classList.add("real"); }
+
+  const $ = (id) => document.getElementById(id);
+  const steps = [...document.querySelectorAll(".step")];
+  const visuals = [...document.querySelectorAll(".visual")];
+  const dots = $("dots");
+  steps.forEach((s, i) => {
+    const b = document.createElement("button");
+    b.title = s.dataset.title;
+    b.setAttribute("aria-label", `Étape ${i + 1} : ${s.dataset.title}`);
+    b.addEventListener("click", () => show(i));
+    dots.appendChild(b);
+    // On a phone, a talking step carries its visual under the text.
+    const v = s.dataset.view !== "tool" && $(s.dataset.view);
+    if (v) { const c = v.querySelector(".in").cloneNode(true); c.className = "mobile-visual"; s.insertBefore(c, s.querySelector("details")); }
+  });
+
+  let cur = 0, site = "demo", offline = false;
+  function stage() {
+    const view = steps[cur].dataset.view;
+    const tool = view === "tool" || document.body.classList.contains("wide") || document.body.classList.contains("tool");
+    visuals.forEach((v) => v.classList.toggle("on", offline ? v.id === "v-offline" : !tool && v.id === view));
+    for (const k in frames) {
+      const on = tool && !offline && k === site;
+      if (on && !frames[k].src) frames[k].src = urls[k];   // loaded once, then kept: its state survives the steps
+      frames[k].classList.toggle("hidden", !on);
+    }
+    document.querySelectorAll("#seg button").forEach((b) => b.classList.toggle("on", b.dataset.site === site));
+    $("newtab").href = urls[site];
+    $("offline").textContent = offline ? "Revenir au site" : "Sans réseau";
+  }
+  function show(i) {
+    cur = Math.max(0, Math.min(steps.length - 1, i));
+    steps.forEach((s, j) => s.classList.toggle("on", j === cur));
+    [...dots.children].forEach((d, j) => { d.classList.toggle("on", j === cur); d.classList.toggle("done", j < cur); });
+    if (steps[cur].dataset.site) site = steps[cur].dataset.site;
+    $("prev").disabled = cur === 0; $("next").disabled = cur === steps.length - 1;
+    $("pill").textContent = `${cur + 1}/${steps.length} · ${steps[cur].dataset.title} · revenir au fil`;
+    document.body.classList.toggle("showing", steps[cur].dataset.view === "tool");
+    history.replaceState(null, "", `#${cur + 1}`);
+    stage();
+  }
+  function wide(on) { document.body.classList.toggle("wide", on); $("widen").textContent = on ? "Revenir au fil" : "Outil en grand"; stage(); }
+  function phoneTab(tool) {
+    document.body.classList.toggle("tool", tool);
+    $("tab-tool").classList.toggle("on", tool); $("tab-thread").classList.toggle("on", !tool);
+    stage();
+  }
+
+  $("prev").addEventListener("click", () => show(cur - 1));
+  $("next").addEventListener("click", () => show(cur + 1));
+  $("hints").addEventListener("click", () => document.body.classList.toggle("plain"));
+  $("widen").addEventListener("click", () => wide(!document.body.classList.contains("wide")));
+  $("pill").addEventListener("click", () => wide(false));
+  $("offline").addEventListener("click", () => { offline = !offline; stage(); });
+  $("tab-thread").addEventListener("click", () => phoneTab(false));
+  $("tab-tool").addEventListener("click", () => phoneTab(true));
+  document.querySelectorAll("#seg button").forEach((b) => b.addEventListener("click", () => { site = b.dataset.site; offline = false; stage(); }));
+  document.addEventListener("keydown", (e) => {
+    if (e.target.closest("input, textarea, summary") || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (["ArrowRight", "PageDown"].includes(e.key)) { e.preventDefault(); show(cur + 1); }
+    else if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); show(cur - 1); }
+    else if (e.key.toLowerCase() === "o") wide(!document.body.classList.contains("wide"));
+    else if (e.key.toLowerCase() === "n") document.body.classList.toggle("plain");
+    else if (e.key.toLowerCase() === "f") (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen());
+  });
+
+  // Elapsed time, started at the first move.
+  let t0 = null;
+  const clock = $("clock");
+  function tick() { if (t0 === null) return; const s = Math.floor((Date.now() - t0) / 1000); clock.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; }
+  document.addEventListener("click", () => { if (t0 === null) t0 = Date.now(); }, { once: true });
+  clock.addEventListener("click", (e) => { e.stopPropagation(); t0 = Date.now(); tick(); });
+  setInterval(tick, 1000);
+
+  // Warm the site up so the first tool step opens at once.
+  frames.demo.src = urls.demo;
+  show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+</script>
+</body>
+</html>
