@@ -88,6 +88,34 @@ export function birthYearFromDetections(
   return null;
 }
 
+/** Birth date known locally, from the original text of the date of birth
+ *  ("03/04/1961" -> 1961-04-03); null when only the year can be read. */
+export function birthDateOf(text: string): { year: number; month: number; day: number } | null {
+  const m = /(?:^|\D)(\d{1,2})[/.-](\d{1,2})[/.-](\d{4}|\d{2})(?!\d)/.exec(text);
+  if (!m) return null;
+  const day = Number(m[1]);
+  const month = Number(m[2]);
+  if (day < 1 || day > 31 || month < 1 || month > 12) return null;
+  return { year: m[3].length === 4 ? Number(m[3]) : fullYear(Number(m[3])), month, day };
+}
+
+/** Age at an ISO date ("2003", "2003-02", "2003-02-10"). Exact when both the
+ *  day of birth and the day of the event are known; otherwise the difference
+ *  of the years, which is the age reached that year. */
+export function ageAt(iso: string, birthYear: number, birth: { year: number; month: number; day: number } | null): number {
+  const y = Number(iso.slice(0, 4));
+  const full = /^\d{4}-(\d{2})-(\d{2})$/.exec(iso);
+  if (!birth || !full) return y - birthYear;
+  const before = Number(full[1]) < birth.month || (Number(full[1]) === birth.month && Number(full[2]) < birth.day);
+  return y - birth.year - (before ? 1 : 0);
+}
+
+/** Observation identifiers the model sometimes leaves in a note ("(o4)",
+ *  "(o2, o6)") mean nothing to a reader: not shown. */
+export function shownNote(note: string): string {
+  return note.replace(/\s*\(\s*o\d+(?:\s*(?:,|et)\s*o\d+)*\s*\)/g, "").trim();
+}
+
 /** "14 ans", "entre 12 et 17 ans". */
 export function formatAge(a: AgeRange): string {
   return a[0] === a[1] ? `${a[0]} ans` : `entre ${a[0]} et ${a[1]} ans`;

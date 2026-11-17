@@ -113,3 +113,23 @@ describe("two-digit birth years", () => {
     expect(fullYear(27, 2026)).toBe(1927);
   });
 });
+
+describe("ages shown on the landmarks", () => {
+  it("is exact when the day of birth and the day of the event are known", async () => {
+    const { ageAt, birthDateOf } = await import("../src/notebook/age");
+    const birth = birthDateOf("23/05/1987");
+    expect(birth).toEqual({ year: 1987, month: 5, day: 23 });
+    expect(ageAt("2003-02-10", 1987, birth)).toBe(15);
+    expect(ageAt("2003-05-23", 1987, birth)).toBe(16);
+    expect(ageAt("2003", 1987, birth)).toBe(16);
+    expect(ageAt("2003-02-10", 1987, null)).toBe(16);
+    expect(birthDateOf("1987")).toBeNull();
+  });
+
+  it("hides observation identifiers left in a note", async () => {
+    const { shownNote } = await import("../src/notebook/age");
+    expect(shownNote("Reprise après le deuil (o4).")).toBe("Reprise après le deuil.");
+    expect(shownNote("Sevrage (o2, o6) puis suivi")).toBe("Sevrage puis suivi");
+    expect(shownNote("Oxazépam (10 mg)")).toBe("Oxazépam (10 mg)");
+  });
+});

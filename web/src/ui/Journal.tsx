@@ -59,8 +59,8 @@ function EntryCard({ e, realValues, docNames }: { e: OutboundEntry; realValues: 
         <span>{e.docs.map((d) => docNames[d] ?? d).join(", ")}</span>
         {e.bytes > 0 && <span>{size(e.bytes)}</span>}
         <span>{e.images.length} image{e.images.length > 1 ? "s" : ""}</span>
-        {e.endedAt && e.status !== "refused" && <span>{((e.endedAt - e.startedAt) / 1000).toFixed(1)} s</span>}
-        {e.cost !== undefined && <span>{e.cost.toFixed(4)} $</span>}
+        {e.endedAt && e.status !== "refused" && <span>{((e.endedAt - e.startedAt) / 1000).toFixed(1).replace(".", ",")} s</span>}
+        {e.cost !== undefined && <span>{e.cost.toFixed(4).replace(".", ",")} $</span>}
         {e.status === "pending" && <span className="ai-dot" aria-label="en cours" />}
       </div>
       {e.error && <p className="small error-text">{e.error}</p>}

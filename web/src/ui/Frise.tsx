@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import { friseHtml } from "../app/exportFrise";
 import { reidentifyTimeline, type KeyTable } from "../core/reidentify";
-import { formatAge } from "../notebook/age";
+import { birthDateOf, formatAge, shownNote } from "../notebook/age";
 import { correctionCount, keyEvents, setVerdict } from "../notebook/edit";
 import {
   dateEnd,
@@ -154,6 +154,11 @@ export function Frise(props: {
     const label = [...(props.keyTable?.keys() ?? [])].find((k) => /^\[NE\(E\) EN \d{4}\]$/.test(k));
     return label ? Number(/\d{4}/.exec(label)![0]) : null;
   }, [props.keyTable]);
+  const birth = useMemo(() => {
+    const label = [...(props.keyTable?.keys() ?? [])].find((k) => /^\[NE\(E\) EN \d{4}\]$/.test(k));
+    const value = label ? props.keyTable!.get(label) : undefined;
+    return typeof value === "string" ? birthDateOf(value) : null;
+  }, [props.keyTable]);
   const landmarks = useMemo(() => keyEvents(timeline, followUp?.from ?? null), [timeline, followUp]);
 
   // Layout: one section per kind that has tracks, one row per track (tracks
@@ -192,7 +197,7 @@ export function Frise(props: {
         kind: TRACK_KIND_LABEL[kindOf[e.trackId] as TrackKind],
         color: `var(--kind-${kindOf[e.trackId]})`,
         track: trackLabel[e.trackId],
-        note: [e.mode ? MODE_LABEL[e.mode] : "", e.lossOfControl ? "(perte de contrôle)" : "", e.note].filter(Boolean).join(" "),
+        note: [e.mode ? MODE_LABEL[e.mode] : "", e.lossOfControl ? "(perte de contrôle)" : "", shownNote(e.note)].filter(Boolean).join(" "),
       })),
     });
     const url = URL.createObjectURL(new Blob([html], { type: "text/html" }));
@@ -441,7 +446,7 @@ export function Frise(props: {
                     {n}
                   </span>
                 ))}
-                {hover.e.note && <span>{hover.e.note}</span>}
+                {hover.e.note && <span>{shownNote(hover.e.note)}</span>}
                 {hover.e.consensus === "arbitrated" && <span className="muted small">Désaccord entre les lectures, tranché par l'arbitre</span>}
                 {hover.e.consensus === "unarbitrated" && <span className="muted small">Désaccord entre les lectures, non arbitré (gardé tel que lu)</span>}
                 {hover.e.edited && <span className="muted small">{hover.e.edited === "added" ? "Ajouté à la main" : "Corrigé à la main"}</span>}
@@ -457,7 +462,7 @@ export function Frise(props: {
 
         {mode === "short" && timeline.events.length > 0 && (
           <div className="essentiel-wrap">
-            <Essentiel events={landmarks} timeline={timeline} birthYear={birthYear} followUpFrom={followUp?.from ?? null} width={width} onPick={(e) => setEditing({ id: e.id })} />
+            <Essentiel events={landmarks} timeline={timeline} birthYear={birthYear} birth={real ? birth : null} followUpFrom={followUp?.from ?? null} width={width} onPick={(e) => setEditing({ id: e.id })} />
             <p className="legend-note small muted">
               {landmarks.length} repères choisis automatiquement (premiers usages, pertes de contrôle, événements de vie d'avant le suivi, premiers
               soins){birthYear ? "" : " ; âges affichés quand l'année de naissance est connue sur ce poste"}. Cadre pointillé : avant le suivi.
@@ -504,7 +509,7 @@ export function Frise(props: {
                   <td>
                     {e.mode ? <em>{MODE_LABEL[e.mode]} </em> : null}
                     {e.lossOfControl ? <em>(perte de contrôle) </em> : null}
-                    {e.note}
+                    {shownNote(e.note)}
                     {e.edited && <span className="chip chip-warn hand">{e.edited === "added" ? "ajouté à la main" : "corrigé à la main"}</span>}
                   </td>
                   <td>
