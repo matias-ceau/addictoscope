@@ -41,7 +41,7 @@ export interface DemoAnalysis {
   onSource: (source: string) => void;
 }
 
-const dollars = (n: number) => (n < 0.01 ? `${n.toFixed(3)} $` : `${n.toFixed(2)} $`);
+const dollars = (n: number) => `${n.toFixed(n < 0.01 ? 3 : 2).replace(".", ",")} $`;
 
 /** Where the observations were split: said plainly, it decides whether page images left this machine. */
 function segmentationNote(by?: Record<string, "rules" | "model">): string | null {

@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { ageAt, shownNote } from "../notebook/age";
 import { addEvent, draftError, draftOf, mergeEvents, parseDateInput, removeEvent, setKey, updateEvent, type EventDraft } from "../notebook/edit";
 import { dateEnd, dateStart, TRACK_KIND_LABEL, TRACK_KINDS, USAGE_MODES, type Observation, type Timeline, type TimelineEvent, type TrackKind, type UsageMode } from "../notebook/model";
 
@@ -248,6 +249,8 @@ export function Essentiel(props: {
   events: TimelineEvent[];
   timeline: Timeline;
   birthYear: number | null;
+  /** Full date of birth when it is known on this machine: exact ages. */
+  birth?: { year: number; month: number; day: number } | null;
   followUpFrom: number | null;
   width: number;
   onPick: (e: TimelineEvent) => void;
@@ -263,9 +266,11 @@ export function Essentiel(props: {
     const y0 = year(e.start);
     const y1 = e.end ? year(e.end) : null;
     const span = y1 !== null && y1 !== y0;
-    const age = props.birthYear ? (span ? `${y0 - props.birthYear}-${y1! - props.birthYear} ans` : `${y0 - props.birthYear} ans`) : null;
+    const a0 = props.birthYear ? ageAt(e.start, props.birthYear, props.birth ?? null) : 0;
+    const a1 = props.birthYear && e.end ? ageAt(e.end, props.birthYear, props.birth ?? null) : a0;
+    const age = props.birthYear ? (span && a1 !== a0 ? `${a0}-${a1} ans` : `${a0} ans`) : null;
     const title = wrap(track[e.trackId].label + (e.lossOfControl ? " (perte de contrôle)" : ""), perLine, 2);
-    return { e, when: span ? `${y0}-${y1}` : e.ongoing ? `depuis ${formatDate(e.start)}` : formatDate(e.start), age, title, body: same(e.note, track[e.trackId].label) ? [] : wrap(e.note, perLine, 5), before: props.followUpFrom !== null && dateEnd(e.end ?? e.start) < props.followUpFrom };
+    return { e, when: span ? `${y0}-${y1}` : e.ongoing ? `depuis ${formatDate(e.start)}` : formatDate(e.start), age, title, body: same(e.note, track[e.trackId].label) ? [] : wrap(shownNote(e.note), perLine, 5), before: props.followUpFrom !== null && dateEnd(e.end ?? e.start) < props.followUpFrom };
   });
   const rows: (typeof cards)[] = [];
   for (let i = 0; i < cards.length; i += cols) rows.push(cards.slice(i, i + cols));

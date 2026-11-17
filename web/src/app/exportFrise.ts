@@ -30,6 +30,8 @@ svg { display: block; max-width: 100%; height: auto; }
 .lane-line { stroke: var(--line); stroke-width: 1; stroke-dasharray: 2 4; }
 .mark { stroke: var(--viz-surface); stroke-width: 2; paint-order: stroke; } .mark.craving { fill-opacity: 0.45; }
 .mark.approx { fill-opacity: 0.35; stroke-width: 1.5; stroke-dasharray: 4 3; } .mark.early { opacity: 0.35; }
+.history-band { fill: #eef0f5; opacity: 0.55; } .history-cut { stroke: #3557c9; stroke-width: 1.5; stroke-dasharray: 5 4; }
+.history-label { fill: #3557c9; font-size: 11px; font-weight: 700; }
 .loss-marker { fill: var(--text); stroke: var(--viz-surface); stroke-width: 1.5; } .hit { fill: transparent; }
 table { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-top: 20px; }
 th { text-align: left; font-size: 0.76rem; text-transform: uppercase; color: var(--muted); padding: 8px; border-bottom: 1px solid var(--line); }
@@ -38,6 +40,10 @@ td { padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top
 `;
 
 export function friseHtml(p: { title: string; meta: string; identifying: boolean; svg: string; rows: ExportRow[] }): string {
+  // Without a viewBox a frise wider than the page is cut on the right instead of scaled down.
+  const svg = /^<svg\b[^>]*\bviewBox=/.test(p.svg)
+    ? p.svg
+    : p.svg.replace(/^<svg\b([^>]*?)\bwidth="([\d.]+)"([^>]*?)\bheight="([\d.]+)"/, '<svg$1width="$2"$3height="$4" viewBox="0 0 $2 $4"');
   const banner = p.identifying
     ? "Contient des données identifiantes (vrais noms remis localement) : ne pas diffuser."
     : "Pseudonymisé : les personnes apparaissent sous forme d'étiquettes ([PATIENT], [SOIGNANT_2]…).";
@@ -54,7 +60,7 @@ export function friseHtml(p: { title: string; meta: string; identifying: boolean
 <h1>${esc(p.title)}</h1>
 <p class="meta">${esc(p.meta)}</p>
 <div class="banner ${p.identifying ? "real" : "pseudo"}">${esc(banner)}</div>
-${p.svg}
+${svg}
 <table><thead><tr><th>Date</th><th>Piste</th><th>Événement</th></tr></thead><tbody>
 ${rows}
 </tbody></table>
